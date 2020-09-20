@@ -8,7 +8,7 @@ import seedu.address.model.ReadOnlyTutorsPet;
 import seedu.address.model.TutorsPet;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
-import seedu.address.model.student.Phone;
+import seedu.address.model.student.Telegram;
 import seedu.address.model.student.Student;
 import seedu.address.model.tag.Tag;
 
@@ -16,20 +16,19 @@ import seedu.address.model.tag.Tag;
  * Contains utility methods for populating {@code TutorsPet} with sample data.
  */
 public class SampleDataUtil {
-
     public static Student[] getSampleStudents() {
         return new Student[] {
-            new Student(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
+            new Student(new Name("Alex Yeoh"), new Telegram("87438807"), new Email("alexyeoh@example.com"),
                 getTagSet("Average")),
-            new Student(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
+            new Student(new Name("Bernice Yu"), new Telegram("99272758"), new Email("berniceyu@example.com"),
                 getTagSet("Good", "Experienced")),
-            new Student(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
+            new Student(new Name("Charlotte Oliveiro"), new Telegram("93210283"), new Email("charlotte@example.com"),
                 getTagSet("Struggling")),
-            new Student(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
+            new Student(new Name("David Li"), new Telegram("91031282"), new Email("lidavid@example.com"),
                 getTagSet("Weak")),
-            new Student(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
+            new Student(new Name("Irfan Ibrahim"), new Telegram("92492021"), new Email("irfan@example.com"),
                 getTagSet("Struggling")),
-            new Student(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
+            new Student(new Name("Roy Balakrishnan"), new Telegram("92624417"), new Email("royb@example.com"),
                 getTagSet("Average"))
         };
     }

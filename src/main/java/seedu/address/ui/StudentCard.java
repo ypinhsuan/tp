@@ -33,7 +33,7 @@ public class StudentCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label phone;
+    private Label telegram;
     @FXML
     private Label email;
     @FXML
@@ -46,10 +46,17 @@ public class StudentCard extends UiPart<Region> {
         super(FXML);
         this.student = student;
         id.setText(displayedIndex + ". ");
+<<<<<<< HEAD:src/main/java/seedu/address/ui/StudentCard.java
         name.setText(student.getName().fullName);
         phone.setText(student.getPhone().value);
         email.setText(student.getEmail().value);
         student.getTags().stream()
+=======
+        name.setText(person.getName().fullName);
+        telegram.setText(person.getTelegram().value);
+        email.setText(person.getEmail().value);
+        person.getTags().stream()
+>>>>>>> Change occurences of Phone to Telegram:src/main/java/seedu/address/ui/PersonCard.java
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }

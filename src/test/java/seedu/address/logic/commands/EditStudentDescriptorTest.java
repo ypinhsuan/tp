@@ -6,8 +6,13 @@ import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+<<<<<<< HEAD:src/test/java/seedu/address/logic/commands/EditStudentDescriptorTest.java
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_AVERAGE;
+=======
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+>>>>>>> Change occurences of Phone to Telegram:src/test/java/seedu/address/logic/commands/EditPersonDescriptorTest.java
 
 import org.junit.jupiter.api.Test;
 
@@ -39,8 +44,13 @@ public class EditStudentDescriptorTest {
                 new EditStudentDescriptorBuilder(DESC_AMY).withName(VALID_NAME_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
+<<<<<<< HEAD:src/test/java/seedu/address/logic/commands/EditStudentDescriptorTest.java
         // different phone -> returns false
         editedAmy = new EditStudentDescriptorBuilder(DESC_AMY).withPhone(VALID_PHONE_BOB).build();
+=======
+        // different telegram -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withTelegram(VALID_TELEGRAM_BOB).build();
+>>>>>>> Change occurences of Phone to Telegram:src/test/java/seedu/address/logic/commands/EditPersonDescriptorTest.java
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different email -> returns false
