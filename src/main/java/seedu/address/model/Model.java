@@ -35,44 +35,44 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' Tutor's Pet file path.
      */
-    Path getAddressBookFilePath();
+    Path getTutorsPetFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' Tutor's Pet file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setTutorsPetFilePath(Path tutorsPetFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces Tutor's Pet data with the data in {@code tutorsPet}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setTutorsPet(ReadOnlyTutorsPet tutorsPet);
 
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    /** Returns the TutorsPet */
+    ReadOnlyTutorsPet getTutorsPet();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a person with the same identity as {@code person} exists in the Tutor's Pet.
      */
     boolean hasPerson(Person person);
 
     /**
      * Deletes the given person.
-     * The person must exist in the address book.
+     * The person must exist in the Tutor's Pet.
      */
     void deletePerson(Person target);
 
     /**
      * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * {@code person} must not already exist in the Tutor's Pet.
      */
     void addPerson(Person person);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * {@code target} must exist in the Tutor's Pet.
+     * The person identity of {@code editedPerson} must not be the same as another existing person in the Tutor's Pet.
      */
     void setPerson(Person target, Person editedPerson);
 
