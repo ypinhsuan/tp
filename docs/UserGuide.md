@@ -162,7 +162,7 @@ Format: `delete-class INDEX`
 * The index refers to the index number shown in the displayed class list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
-Examples: 
+Examples:
 * `delete-class 2` deletes the 2nd class in the application.
 
 ### Exiting the program : `exit`
@@ -173,7 +173,7 @@ Format: `exit`
 
 ### Saving the data
 
-Tutor's Pet automatically saves your data to your hard disk after any changes are made. 
+Tutor's Pet automatically saves your data to your hard disk after any changes are made.
 There is no need to save manually.
 
 --------------------------------------------------------------------------------------------------------------------
