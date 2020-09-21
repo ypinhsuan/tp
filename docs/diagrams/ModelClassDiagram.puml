@@ -4,7 +4,7 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
-Package Person <<Rectangle>>{
+Package Model <<Rectangle>>{
 Interface ReadOnlyAddressBook <<Interface>>
 Interface Model <<Interface>>
 Interface ObservableList <<Interface>>
