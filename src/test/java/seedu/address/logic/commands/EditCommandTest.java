@@ -57,7 +57,7 @@ public class EditCommandTest {
                 .withTags(VALID_TAG_AVERAGE).build();
 
         EditCommand.EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_TELEGRAM_BOB).withTags(VALID_TAG_AVERAGE).build();
+                .withTelegram(VALID_TELEGRAM_BOB).withTags(VALID_TAG_AVERAGE).build();
         EditCommand editCommand = new EditCommand(indexLastStudent, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent);
