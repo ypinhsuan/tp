@@ -45,14 +45,14 @@ public class JsonTutorsPetStorage implements TutorsPetStorage {
     public Optional<ReadOnlyTutorsPet> readTutorsPet(Path filePath) throws DataConversionException {
         requireNonNull(filePath);
 
-        Optional<JsonSerializableTutorsPet> jsonAddressBook = JsonUtil.readJsonFile(
+        Optional<JsonSerializableTutorsPet> jsonTutorsPet = JsonUtil.readJsonFile(
                 filePath, JsonSerializableTutorsPet.class);
-        if (!jsonAddressBook.isPresent()) {
+        if (!jsonTutorsPet.isPresent()) {
             return Optional.empty();
         }
 
         try {
-            return Optional.of(jsonAddressBook.get().toModelType());
+            return Optional.of(jsonTutorsPet.get().toModelType());
         } catch (IllegalValueException ive) {
             logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
             throw new DataConversionException(ive);
