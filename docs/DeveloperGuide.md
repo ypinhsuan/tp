@@ -251,20 +251,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
  Priority | As a …​ | I want to... | So that I can... |
 | --- | --- | --- | --- |
-| `* * *` | Tutor with many students | Store my student&#39;s contact info/emails | Contact them easily |
+| `* * *` | Tutor with many students | Store my student's contact info/emails | Contact them easily |
 | `* * *` | Tutor with many classes | Create classes | Put my students in the appropriate classes |
 | `* * *` | Tutor with many classes | Insert my students into the appropriate classes | Organise my students via classes
 | `* * *` | New Tutor | View the help menu | Be familiar with app usage |
 | `* * *` | Tutor | Delete student entries | Update my list of students if a student were to drop the module or change tutorial slots |
-| `* *` | Tutor | View my students&#39; test scores easily | Gauge my teaching efficiency |
-| `* *` | Tutor | Mark my student&#39;s attendance and participation | Gauge each student&#39;s participation level |
-| `* *` | Tutor teaching CS modules | View my students&#39; GitHub | Gauge my student&#39;s progress in their coding assignment |
+| `* *` | Tutor | View my students' test scores easily | Gauge my teaching efficiency |
+| `* *` | Tutor | Mark my student's attendance and participation | Gauge each student's participation level |
+| `* *` | Tutor teaching CS modules | View my students' GitHub | Gauge my student's progress in their coding assignment |
 | `* *` | Tutor | View all my lessons | Manage my time more efficiently |
 | `* *` | Tutor | Record my feedback for my students | Give participation points |
 | `* *` | Forgetful Tutor | Track all my tasks | Know which is of greater urgency |
 | `* *` | Busy Tutor | Store zoom links | Retrieve these zoom links for my lessons, consultations, etc. |
 | `* *` | Busy Tutor | Store class rooms | Be reminded of my lesson venues |
-| `* *` | Tutor with many students | Keep notes on each student&#39;s performance | Track their progress over time |
+| `* *` | Tutor with many students | Keep notes on each student's performance | Track their progress over time |
 | `* *` | Careless tutor | Undo my commands | Correct any errors when I input things wrongly |
 | `* *` | Tutor | Set recurring events (eg. lessons for every week) | Avoid typing the same events |
 | `* *` | Tutor | Calculate the mean, median, mode of my students' scores | Gauge the overall performance of my class |
@@ -273,7 +273,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *` | Tutor | Update the information of my students | Update my understanding of the progress of my students |
 | `* *` | Tutor | Categorise my students into how well they are doing | Dedicate more time towards the weaker students |
 | `* *` | Careless Tutor | Redo my undone actions | Easily reverse my accidental undos. |
-| `*` | Caring tutor | Take note of student&#39;s special needs, if any | Cater my teaching toward them |
+| `*` | Caring tutor | Take note of student's special needs, if any | Cater my teaching toward them |
 | `*` | Tutor for many semesters | Archive my past semesters | Avoid cluttering the app |
 | `*` | Tutor | Store teaching feedback given by my tutees | Improve my teaching |
 | `*` | Tutor | Prioritise my tasks | Work on important tasks first |
@@ -282,7 +282,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*` | Forgetful Tutor | Set an alert for task deadlines | Complete my tasks on time |
 | `*` | Forgetful Tutor | Store picture of my students | Easily match their faces to their names |
 | `*` | Tutor with many classes | See all tasks related to a class | Easily tell which task belongs to which class |
-| `*` | Tutor teaching mods that require many written assignments | View my student&#39;s written submissions | Mark/review their homework |
+| `*` | Tutor teaching mods that require many written assignments | View my student's written submissions | Mark/review their homework |
 | `*` | Tutor | Manage my teaching materials | Find them easily |
 | `*` | Tutor | Find free time | Provide consultation for students |
 
