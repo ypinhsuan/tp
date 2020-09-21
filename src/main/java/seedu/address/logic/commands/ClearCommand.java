@@ -6,7 +6,7 @@ import seedu.address.model.Model;
 import seedu.address.model.TutorsPet;
 
 /**
- * Clears the Tutor's Pet.
+ * Clears data in the application.
  */
 public class ClearCommand extends Command {
 

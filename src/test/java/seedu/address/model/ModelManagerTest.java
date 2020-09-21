@@ -95,7 +95,7 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        TutorsPet tutorsPet = new TutorsPetBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        TutorsPet tutorsPet = new TutorsPetBuilder().withStudent(ALICE).withStudent(BENSON).build();
         TutorsPet differentTutorsPet = new TutorsPet();
         UserPrefs userPrefs = new UserPrefs();
 

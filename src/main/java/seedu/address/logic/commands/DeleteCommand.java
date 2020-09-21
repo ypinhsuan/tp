@@ -11,7 +11,7 @@ import seedu.address.model.Model;
 import seedu.address.model.student.Student;
 
 /**
- * Deletes a student identified using it's displayed index from Tutor's Pet.
+ * Deletes a student identified using it's displayed index from the application.
  */
 public class DeleteCommand extends Command {
 

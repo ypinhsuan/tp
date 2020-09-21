@@ -6,7 +6,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 import seedu.address.model.Model;
 
 /**
- * Lists all students in Tutor's Pet to the user.
+ * Lists all students to the user.
  */
 public class ListCommand extends Command {
 
