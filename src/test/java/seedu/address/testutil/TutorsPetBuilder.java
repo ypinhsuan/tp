@@ -6,7 +6,7 @@ import seedu.address.model.student.Student;
 /**
  * A utility class to help with building TutorsPet objects.
  * Example usage: <br>
- *     {@code TutorsPet ab = new TutorsPetBuilder().withPerson("John", "Doe").build();}
+ *     {@code TutorsPet ab = new TutorsPetBuilder().withStudent("John", "Doe").build();}
  */
 public class TutorsPetBuilder {
 
@@ -23,7 +23,7 @@ public class TutorsPetBuilder {
     /**
      * Adds a new {@code Student} to the {@code TutorsPet} that we are building.
      */
-    public TutorsPetBuilder withPerson(Student student) {
+    public TutorsPetBuilder withStudent(Student student) {
         tutorsPet.addStudent(student);
         return this;
     }

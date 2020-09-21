@@ -53,19 +53,19 @@ public interface Model {
     ReadOnlyTutorsPet getTutorsPet();
 
     /**
-     * Returns true if a student with the same identity as {@code student} exists in the Tutor's Pet.
+     * Returns true if a student with the same identity as {@code student} exists in the application.
      */
     boolean hasStudent(Student student);
 
     /**
      * Deletes the given student.
-     * The student must exist in the Tutor's Pet.
+     * The student must exist in the application.
      */
     void deleteStudent(Student target);
 
     /**
      * Adds the given student.
-     * {@code student} must not already exist in the Tutor's Pet.
+     * {@code student} must not already exist in the application.
      */
     void addStudent(Student student);
 

@@ -18,7 +18,7 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student to the Tutor's Pet. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student to the application. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
@@ -34,7 +34,7 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New student added: %1$s";
-    public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in Tutor's Pet";
+    public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists.";
 
     private final Student toAdd;
 

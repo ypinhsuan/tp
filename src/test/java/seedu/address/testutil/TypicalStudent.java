@@ -60,17 +60,17 @@ public class TypicalStudent {
     private TypicalStudent() {} // prevents instantiation
 
     /**
-     * Returns an {@code TutorsPet} with all the typical persons.
+     * Returns an {@code TutorsPet} with all the typical students.
      */
     public static TutorsPet getTypicalTutorsPet() {
         TutorsPet tp = new TutorsPet();
-        for (Student student : getTypicalPersons()) {
+        for (Student student : getTypicalStudents()) {
             tp.addStudent(student);
         }
         return tp;
     }
 
-    public static List<Student> getTypicalPersons() {
+    public static List<Student> getTypicalStudents() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
 }
