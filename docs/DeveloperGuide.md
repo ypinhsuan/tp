@@ -236,42 +236,69 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* has a need to manage students enrolled in classes
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: manage students and classes faster than a typical mouse/GUI driven app
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
-*{More to be added}*
+ Priority | As a …​ | I want to... | So that I can... |
+| --- | --- | --- | --- |
+| `* * *` | Tutor with many students | Store my students' contact info/emails | Contact them easily |
+| `* * *` | Tutor with many classes | Create classes | Put my students in the appropriate classes |
+| `* * *` | Tutor with many classes | Insert my students into the appropriate classes | Organise my students via classes
+| `* * *` | New Tutor | View the help menu | Be familiar with app usage |
+| `* * *` | Tutor | Delete student entries | Update my list of students if a student were to drop the module class |
+| `* *` | Tutor | View my students' test scores easily | Gauge my teaching efficiency |
+| `* *` | Tutor | Mark my student's attendance and participation | Gauge each student's participation level |
+| `* *` | Tutor teaching CS modules | View my students' GitHub | Gauge my student's progress in their coding assignment |
+| `* *` | Tutor | View all my lessons | Manage my time more efficiently |
+| `* *` | Tutor | Record my feedback for my students | Give participation points |
+| `* *` | Forgetful Tutor | Track all my tasks | Know which is of greater urgency |
+| `* *` | Busy Tutor | Store zoom links | Retrieve these zoom links for my lessons, consultations, etc. |
+| `* *` | Busy Tutor | Store class rooms | Be reminded of my lesson venues |
+| `* *` | Tutor with many students | Keep notes on each student's performance | Track their progress over time |
+| `* *` | Careless tutor | Undo my commands | Correct any errors when I input things wrongly |
+| `* *` | Tutor | Set recurring events (eg. lessons for every week) | Avoid typing the same events |
+| `* *` | Tutor | Calculate the mean, median, mode of my students' scores | Gauge the overall performance of my class |
+| `* *` | Tutor | Store the questions asked by students | Provide students with answers immediately, for questions that were asked before |
+| `* *` | Tutor | Be reminded of my lessons | Attend them |
+| `* *` | Tutor | Update the information of my students | Update my understanding of the progress of my students |
+| `* *` | Tutor | Categorise my students into how well they are doing | Dedicate more time towards the weaker students |
+| `* *` | Careless Tutor | Redo my undone actions | Easily reverse my accidental undos. |
+| `*` | Caring tutor | Take note of student's special needs, if any | Cater my teaching toward them |
+| `*` | Tutor for many semesters | Archive my past semesters | Avoid cluttering the app |
+| `*` | Tutor | Store teaching feedback given by my students | Improve my teaching |
+| `*` | Tutor | Prioritise my tasks | Work on important tasks first |
+| `*` | Tutor | Keep track of the hours I have spent teaching/preparing for class | Be aware of how much time I have spent on teaching |
+| `*` | Tutor | Store teaching feedback given by Professors | Improve my teaching |
+| `*` | Forgetful Tutor | Set an alert for task deadlines | Complete my tasks on time |
+| `*` | Forgetful Tutor | Store picture of my students | Easily match their faces to their names |
+| `*` | Tutor with many classes | See all tasks related to a class | Easily tell which task belongs to which class |
+| `*` | Tutor teaching modules that require many written assignments | View my student's written submissions | Mark/review their homework |
+| `*` | Tutor | Manage my teaching materials | Find them easily |
+| `*` | Tutor | Find free time | Provide consultation for students |
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `Tutor's Pet` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC01 - Edit a student**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to list students
+2.  Tutor's Pet shows a list of students
+3.  User requests to edit a specific student in the list
+4.  User provides the parameters that are to be edited
+5.  Tutor's Pet edits the student's information 
 
     Use case ends.
 
@@ -283,7 +310,62 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. Tutor's Pet shows an error message.
+
+      Use case resumes at step 2.
+* 4a. The parameters provided are invalid
+
+    * 4a1. Tutor's Pet shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: UC02 - Delete a student**
+
+**MSS**
+
+1.  User requests to list students
+2.  Tutor's Pet shows a list of students
+3.  User requests to delete a specific student in the list
+4.  Tutor's Pet removes the student from its associated module class
+5.  Tutor's Pet deletes the student  
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. Tutor's Pet shows an error message.
+
+      Use case resumes at step 2.
+* 4a. The student is not in a module class
+
+  Use case skips to step 5.
+
+**Use case: UC03 - Delete a module class**
+
+**MSS**
+
+1.  User requests to list module classes
+2.  Tutor's Pet shows a list of module classes
+3.  User requests to delete a specific module class in the list
+4.  Tutor's Pet deletes the module class
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. Tutor's Pet shows an error message.
 
       Use case resumes at step 2.
 
@@ -292,7 +374,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 1000 students and module classes without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
 *{More to be added}*
@@ -300,7 +382,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Module Class**: A lesson that belongs to a module. For example, CS2103T-tutorial or CS2100-lab 
 
 --------------------------------------------------------------------------------------------------------------------
 
