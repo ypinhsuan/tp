@@ -6,7 +6,7 @@
 ![Ui](docs/images/Ui.png)
 
 Tutor's Pet is a student management application that aims to reduce the workload of tutors. It provides a one stop
- platform for tutors to handle all of their administrative matters.
+platform for tutors to handle all of their administrative matters.
 - Tutor's Pet allows you to keep track of all your classes, students and lessons.
 - Tutor's Pet allows you to mark students' attendance and participation for a particular lesson.
 - Tutor's Pet displays your upcoming lessons so that you will never forget about it again.
