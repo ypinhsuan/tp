@@ -12,5 +12,5 @@ Tutor's Pet is a student management application that aims to reduce the workload
 
 To find out more about Tutor's Pet, visit **[Tutor's Pet Product Website](https://ay2021s1-cs2103t-t10-4.github.io/tp/)**
 
-<h5>Acknowledgements</h5>
+<h4>Acknowledgements</h4>
 This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
