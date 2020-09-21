@@ -251,11 +251,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
  Priority | As a …​ | I want to... | So that I can... |
 | --- | --- | --- | --- |
-| `* * *` | Tutor with many students | Store my student's contact info/emails | Contact them easily |
+| `* * *` | Tutor with many students | Store my students' contact info/emails | Contact them easily |
 | `* * *` | Tutor with many classes | Create classes | Put my students in the appropriate classes |
 | `* * *` | Tutor with many classes | Insert my students into the appropriate classes | Organise my students via classes
 | `* * *` | New Tutor | View the help menu | Be familiar with app usage |
-| `* * *` | Tutor | Delete student entries | Update my list of students if a student were to drop the module or change tutorial slots |
+| `* * *` | Tutor | Delete student entries | Update my list of students if a student were to drop the module class |
 | `* *` | Tutor | View my students' test scores easily | Gauge my teaching efficiency |
 | `* *` | Tutor | Mark my student's attendance and participation | Gauge each student's participation level |
 | `* *` | Tutor teaching CS modules | View my students' GitHub | Gauge my student's progress in their coding assignment |
@@ -275,14 +275,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *` | Careless Tutor | Redo my undone actions | Easily reverse my accidental undos. |
 | `*` | Caring tutor | Take note of student's special needs, if any | Cater my teaching toward them |
 | `*` | Tutor for many semesters | Archive my past semesters | Avoid cluttering the app |
-| `*` | Tutor | Store teaching feedback given by my tutees | Improve my teaching |
+| `*` | Tutor | Store teaching feedback given by my students | Improve my teaching |
 | `*` | Tutor | Prioritise my tasks | Work on important tasks first |
 | `*` | Tutor | Keep track of the hours I have spent teaching/preparing for class | Be aware of how much time I have spent on teaching |
 | `*` | Tutor | Store teaching feedback given by Professors | Improve my teaching |
 | `*` | Forgetful Tutor | Set an alert for task deadlines | Complete my tasks on time |
 | `*` | Forgetful Tutor | Store picture of my students | Easily match their faces to their names |
 | `*` | Tutor with many classes | See all tasks related to a class | Easily tell which task belongs to which class |
-| `*` | Tutor teaching mods that require many written assignments | View my student's written submissions | Mark/review their homework |
+| `*` | Tutor teaching modules that require many written assignments | View my student's written submissions | Mark/review their homework |
 | `*` | Tutor | Manage my teaching materials | Find them easily |
 | `*` | Tutor | Find free time | Provide consultation for students |
 
@@ -298,7 +298,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  Tutor's Pet shows a list of students
 3.  User requests to edit a specific student in the list
 4.  User provides the parameters that are to be edited
-5.  Tutor's Pet edits the student's contact information 
+5.  Tutor's Pet edits the student's information 
 
     Use case ends.
 
