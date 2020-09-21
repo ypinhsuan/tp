@@ -18,7 +18,7 @@ import seedu.address.model.student.Telegram;
 
 public class JsonAdaptedStudentTest {
     private static final String INVALID_NAME = "R@chel";
-    private static final String INVALID_TELEGRAM = "+651234";
+    private static final String INVALID_TELEGRAM = "r@chel";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#Average";
 

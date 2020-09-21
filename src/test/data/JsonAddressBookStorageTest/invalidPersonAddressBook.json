@@ -1,7 +1,7 @@
 {
   "persons": [ {
     "name": "Person with invalid name field: Ha!ns Mu@ster",
-    "telegram": "9482424",
+    "telegram": "hans_m4ster",
     "email": "hans@example.com"
   } ]
 }

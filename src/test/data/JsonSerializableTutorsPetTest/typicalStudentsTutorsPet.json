@@ -2,37 +2,37 @@
   "_comment": "Tutor's Pet save file which contains the same Student values as in TypicalStudents#getTypicalTutorsPet()",
   "students" : [ {
     "name" : "Alice Pauline",
-    "telegram" : "94351253",
+    "telegram" : "4Lice_P",
     "email" : "alice@example.com",
     "tagged" : [ "Average" ]
   }, {
     "name" : "Benson Meier",
-    "telegram" : "98765432",
+    "telegram" : "BeN_10",
     "email" : "johnd@example.com",
     "tagged" : [ "PotentialTA", "Experienced" ]
   }, {
     "name" : "Carl Kurz",
-    "telegram" : "95352563",
+    "telegram" : "cK2zz",
     "email" : "heinz@example.com",
     "tagged" : [ ]
   }, {
     "name" : "Daniel Meier",
-    "telegram" : "87652533",
+    "telegram" : "danielmeier",
     "email" : "cornelia@example.com",
     "tagged" : [ "Weak" ]
   }, {
     "name" : "Elle Meyer",
-    "telegram" : "9482224",
+    "telegram" : "4114_my",
     "email" : "werner@example.com",
     "tagged" : [ ]
   }, {
     "name" : "Fiona Kunz",
-    "telegram" : "9482427",
+    "telegram" : "kunz_F",
     "email" : "lydia@example.com",
     "tagged" : [ ]
   }, {
     "name" : "George Best",
-    "telegram" : "9482442",
+    "telegram" : "dabest",
     "email" : "anna@example.com",
     "tagged" : [ ]
   } ]
