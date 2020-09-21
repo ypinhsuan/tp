@@ -15,6 +15,7 @@ import seedu.address.model.student.Student;
 public class StudentCard extends UiPart<Region> {
 
     private static final String FXML = "StudentListCard.fxml";
+    private static final String TELEGRAM_PREFIX = "@";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -46,17 +47,10 @@ public class StudentCard extends UiPart<Region> {
         super(FXML);
         this.student = student;
         id.setText(displayedIndex + ". ");
-<<<<<<< HEAD:src/main/java/seedu/address/ui/StudentCard.java
         name.setText(student.getName().fullName);
-        phone.setText(student.getPhone().value);
+        telegram.setText(TELEGRAM_PREFIX + student.getTelegram().value);
         email.setText(student.getEmail().value);
         student.getTags().stream()
-=======
-        name.setText(person.getName().fullName);
-        telegram.setText(person.getTelegram().value);
-        email.setText(person.getEmail().value);
-        person.getTags().stream()
->>>>>>> Change occurences of Phone to Telegram:src/main/java/seedu/address/ui/PersonCard.java
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
