@@ -44,7 +44,7 @@ public class TutorsPetTest {
     }
 
     @Test
-    public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
+    public void resetData_withDuplicateStudents_throwsDuplicateStudentException() {
         // Two students with the same identity fields
         Student editedAlice = new StudentBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
@@ -55,23 +55,23 @@ public class TutorsPetTest {
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
+    public void hasStudent_nullStudent_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> tutorsPet.hasStudent(null));
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
+    public void hasStudent_studentNotInTutorsPet_returnsFalse() {
         assertFalse(tutorsPet.hasStudent(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
+    public void hasStudent_studentInTutorsPet_returnsTrue() {
         tutorsPet.addStudent(ALICE);
         assertTrue(tutorsPet.hasStudent(ALICE));
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
+    public void hasStudent_studentWithSameIdentityFieldsInTutorsPet_returnsTrue() {
         tutorsPet.addStudent(ALICE);
         Student editedAlice = new StudentBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
@@ -79,7 +79,7 @@ public class TutorsPetTest {
     }
 
     @Test
-    public void getPersonList_modifyList_throwsUnsupportedOperationException() {
+    public void getStudentList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> tutorsPet.getStudentList().remove(0));
     }
 

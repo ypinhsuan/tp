@@ -26,13 +26,13 @@ import seedu.address.testutil.StudentBuilder;
 public class AddCommandTest {
 
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
+    public void constructor_nullStudent_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddCommand(null));
     }
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+    public void execute_studentAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingStudentAdded modelStub = new ModelStubAcceptingStudentAdded();
         Student validStudent = new StudentBuilder().build();
 
         CommandResult commandResult = new AddCommand(validStudent).execute(modelStub);
@@ -42,10 +42,10 @@ public class AddCommandTest {
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
+    public void execute_duplicateStudent_throwsCommandException() {
         Student validStudent = new StudentBuilder().build();
         AddCommand addCommand = new AddCommand(validStudent);
-        ModelStub modelStub = new ModelStubWithPerson(validStudent);
+        ModelStub modelStub = new ModelStubWithStudent(validStudent);
 
         assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_STUDENT, () -> addCommand.execute(modelStub));
     }
@@ -152,10 +152,10 @@ public class AddCommandTest {
     /**
      * A Model stub that contains a single student.
      */
-    private class ModelStubWithPerson extends ModelStub {
+    private class ModelStubWithStudent extends ModelStub {
         private final Student student;
 
-        ModelStubWithPerson(Student student) {
+        ModelStubWithStudent(Student student) {
             requireNonNull(student);
             this.student = student;
         }
@@ -170,7 +170,7 @@ public class AddCommandTest {
     /**
      * A Model stub that always accept the student being added.
      */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
+    private class ModelStubAcceptingStudentAdded extends ModelStub {
         final ArrayList<Student> studentsAdded = new ArrayList<>();
 
         @Override

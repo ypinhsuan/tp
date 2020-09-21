@@ -1,5 +1,5 @@
 {
-  "_comment": "Tutor's Pet save file which contains the same Person values as in TypicalPersons#getTypicalTutorsPet()",
+  "_comment": "Tutor's Pet save file which contains the same Student values as in TypicalStudents#getTypicalTutorsPet()",
   "students" : [ {
     "name" : "Alice Pauline",
     "phone" : "94351253",
