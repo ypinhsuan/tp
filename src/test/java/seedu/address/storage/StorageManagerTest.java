@@ -2,7 +2,7 @@ package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalStudent.getTypicalTutorsPet;
 
 import java.nio.file.Path;
 
@@ -24,9 +24,9 @@ public class StorageManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonTutorsPetStorage addressBookStorage = new JsonTutorsPetStorage(getTempFilePath("ab"));
+        JsonTutorsPetStorage tutorsPetStorage = new JsonTutorsPetStorage(getTempFilePath("ab"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
-        storageManager = new StorageManager(addressBookStorage, userPrefsStorage);
+        storageManager = new StorageManager(tutorsPetStorage, userPrefsStorage);
     }
 
     private Path getTempFilePath(String fileName) {
@@ -54,14 +54,14 @@ public class StorageManagerTest {
          * {@link JsonTutorsPetStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link JsonTutorsPetStorageTest} class.
          */
-        TutorsPet original = getTypicalAddressBook();
+        TutorsPet original = getTypicalTutorsPet();
         storageManager.saveTutorsPet(original);
         ReadOnlyTutorsPet retrieved = storageManager.readTutorsPet().get();
         assertEquals(original, new TutorsPet(retrieved));
     }
 
     @Test
-    public void getAddressBookFilePath() {
+    public void getTutorsPetFilePath() {
         assertNotNull(storageManager.getTutorsPetFilePath());
     }
 

@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.TutorsPet;
-import seedu.address.testutil.TypicalPersons;
+import seedu.address.testutil.TypicalStudent;
 
 public class JsonSerializableTutorsPetTest {
 
@@ -25,7 +25,7 @@ public class JsonSerializableTutorsPetTest {
         JsonSerializableTutorsPet dataFromFile = JsonUtil.readJsonFile(TYPICAL_PERSONS_FILE,
                 JsonSerializableTutorsPet.class).get();
         TutorsPet tutorsPetFromFile = dataFromFile.toModelType();
-        TutorsPet typicalPersonsTutorsPet = TypicalPersons.getTypicalAddressBook();
+        TutorsPet typicalPersonsTutorsPet = TypicalStudent.getTypicalTutorsPet();
         assertEquals(tutorsPetFromFile, typicalPersonsTutorsPet);
     }
 
@@ -40,7 +40,7 @@ public class JsonSerializableTutorsPetTest {
     public void toModelType_duplicatePersons_throwsIllegalValueException() throws Exception {
         JsonSerializableTutorsPet dataFromFile = JsonUtil.readJsonFile(DUPLICATE_PERSON_FILE,
                 JsonSerializableTutorsPet.class).get();
-        assertThrows(IllegalValueException.class, JsonSerializableTutorsPet.MESSAGE_DUPLICATE_PERSON,
+        assertThrows(IllegalValueException.class, JsonSerializableTutorsPet.MESSAGE_DUPLICATE_STUDENT,
                 dataFromFile::toModelType);
     }
 

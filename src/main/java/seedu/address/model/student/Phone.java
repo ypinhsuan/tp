@@ -1,10 +1,10 @@
-package seedu.address.model.person;
+package seedu.address.model.student;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Person's phone number in the Tutor's Pet.
+ * Represents a Student's phone number in the Tutor's Pet.
  * Guarantees: immutable; is valid as declared in {@link #isValidPhone(String)}
  */
 public class Phone {

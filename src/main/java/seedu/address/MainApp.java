@@ -81,7 +81,7 @@ public class MainApp extends Application {
             if (!tutorsPetOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample TutorsPet");
             }
-            initialData = tutorsPetOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialData = tutorsPetOptional.orElseGet(SampleDataUtil::getSampleTutorsPet);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty TutorsPet");
             initialData = new TutorsPet();

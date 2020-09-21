@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.ReadOnlyTutorsPet;
 import seedu.address.model.TutorsPet;
-import seedu.address.model.person.Person;
+import seedu.address.model.student.Student;
 
 /**
  * An Immutable TutorsPet that is serializable to JSON format.
@@ -19,16 +19,16 @@ import seedu.address.model.person.Person;
 @JsonRootName(value = "tutorspet")
 class JsonSerializableTutorsPet {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+    public static final String MESSAGE_DUPLICATE_STUDENT = "Students list contains duplicate student(s).";
 
-    private final List<JsonAdaptedPerson> persons = new ArrayList<>();
+    private final List<JsonAdaptedStudent> students = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableTutorsPet} with the given persons.
+     * Constructs a {@code JsonSerializableTutorsPet} with the given students.
      */
     @JsonCreator
-    public JsonSerializableTutorsPet(@JsonProperty("persons") List<JsonAdaptedPerson> persons) {
-        this.persons.addAll(persons);
+    public JsonSerializableTutorsPet(@JsonProperty("students") List<JsonAdaptedStudent> students) {
+        this.students.addAll(students);
     }
 
     /**
@@ -37,7 +37,7 @@ class JsonSerializableTutorsPet {
      * @param source future changes to this will not affect the created {@code JsonSerializableTutorsPet}.
      */
     public JsonSerializableTutorsPet(ReadOnlyTutorsPet source) {
-        persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
+        students.addAll(source.getStudentList().stream().map(JsonAdaptedStudent::new).collect(Collectors.toList()));
     }
 
     /**
@@ -47,12 +47,12 @@ class JsonSerializableTutorsPet {
      */
     public TutorsPet toModelType() throws IllegalValueException {
         TutorsPet tutorsPet = new TutorsPet();
-        for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
-            Person person = jsonAdaptedPerson.toModelType();
-            if (tutorsPet.hasPerson(person)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+        for (JsonAdaptedStudent jsonAdaptedStudent : students) {
+            Student student = jsonAdaptedStudent.toModelType();
+            if (tutorsPet.hasStudent(student)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_STUDENT);
             }
-            tutorsPet.addPerson(person);
+            tutorsPet.addStudent(student);
         }
         return tutorsPet;
     }
