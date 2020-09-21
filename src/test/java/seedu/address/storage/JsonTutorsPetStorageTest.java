@@ -26,7 +26,7 @@ public class JsonTutorsPetStorageTest {
     public Path testFolder;
 
     @Test
-    public void readAddressBook_nullFilePath_throwsNullPointerException() {
+    public void readTutorsPet_nullFilePath_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> readTutorsPet(null));
     }
 
@@ -51,17 +51,17 @@ public class JsonTutorsPetStorageTest {
     }
 
     @Test
-    public void readAddressBook_invalidPersonAddressBook_throwDataConversionException() {
-        assertThrows(DataConversionException.class, () -> readTutorsPet("invalidPersonTutorsPet.json"));
+    public void readTutorsPet_invalidStudentTutorsPet_throwDataConversionException() {
+        assertThrows(DataConversionException.class, () -> readTutorsPet("invalidStudentTutorsPet.json"));
     }
 
     @Test
-    public void readTutorsPet_invalidAndValidPersonTutorsPet_throwDataConversionException() {
-        assertThrows(DataConversionException.class, () -> readTutorsPet("invalidAndValidPersonTutorsPet.json"));
+    public void readTutorsPet_invalidAndValidStudentTutorsPet_throwDataConversionException() {
+        assertThrows(DataConversionException.class, () -> readTutorsPet("invalidAndValidStudentTutorsPet.json"));
     }
 
     @Test
-    public void readAndSaveAddressBook_allInOrder_success() throws Exception {
+    public void readAndSaveTutorsPet_allInOrder_success() throws Exception {
         Path filePath = testFolder.resolve("TempTutorsPet.json");
         TutorsPet original = getTypicalTutorsPet();
         JsonTutorsPetStorage jsonTutorsPetStorage = new JsonTutorsPetStorage(filePath);
@@ -87,7 +87,7 @@ public class JsonTutorsPetStorageTest {
     }
 
     @Test
-    public void saveAddressBook_nullAddressBook_throwsNullPointerException() {
+    public void saveTutorsPet_nullTutorsPet_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> saveTutorsPet(null, "SomeFile.json"));
     }
 
@@ -104,7 +104,7 @@ public class JsonTutorsPetStorageTest {
     }
 
     @Test
-    public void saveAddressBook_nullFilePath_throwsNullPointerException() {
+    public void saveTutorsPet_nullFilePath_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> saveTutorsPet(new TutorsPet(), null));
     }
 }
