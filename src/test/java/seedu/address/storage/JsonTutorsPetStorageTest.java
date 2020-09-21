@@ -56,7 +56,7 @@ public class JsonTutorsPetStorageTest {
     }
 
     @Test
-    public void readAddressBook_invalidAndValidPersonAddressBook_throwDataConversionException() {
+    public void readTutorsPet_invalidAndValidPersonTutorsPet_throwDataConversionException() {
         assertThrows(DataConversionException.class, () -> readTutorsPet("invalidAndValidPersonTutorsPet.json"));
     }
 
