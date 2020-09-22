@@ -294,11 +294,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list students
-2.  Tutor's Pet shows a list of students
-3.  User requests to edit a specific student in the list
-4.  User provides the parameters that are to be edited
-5.  Tutor's Pet edits the student's information
+1.  User requests to list students.
+2.  Tutor's Pet shows a list of students.
+3.  User requests to edit a specific student in the list.
+4.  User provides the parameters that are to be edited.
+5.  Tutor's Pet edits the student's information.
 
     Use case ends.
 
@@ -324,11 +324,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list students
-2.  Tutor's Pet shows a list of students
-3.  User requests to delete a specific student in the list
-4.  Tutor's Pet removes the student from its associated class
-5.  Tutor's Pet deletes the student
+1.  User requests to list students.
+2.  Tutor's Pet shows a list of students.
+3.  User requests to delete a specific student in the list.
+4.  Tutor's Pet removes the student from its associated class.
+5.  Tutor's Pet deletes the student.
 
     Use case ends.
 
@@ -352,9 +352,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to add a class
-2. User provides the parameters of the class
-3. Tutor's Pet adds the class
+1. User requests to add a class.
+2. User provides the parameters of the class.
+3. Tutor's Pet adds the class.
 
     Use case ends.
 
@@ -376,11 +376,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list classes
-2.  Tutor's Pet shows a list of classes
-3.  User requests to edit a specific class in the list
-4.  User provides the parameters that are to be edited
-5.  Tutor's Pet edits the class's information
+1.  User requests to list classes.
+2.  Tutor's Pet shows a list of classes.
+3.  User requests to edit a specific class in the list.
+4.  User provides the parameters that are to be edited.
+5.  Tutor's Pet edits the class's information.
 
     Use case ends.
 
@@ -406,10 +406,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list classes
-2.  Tutor's Pet shows a list of classes
-3.  User requests to delete a specific class in the list
-4.  Tutor's Pet deletes the class
+1.  User requests to list classes.
+2.  Tutor's Pet shows a list of classes.
+3.  User requests to delete a specific class in the list.
+4.  Tutor's Pet deletes the class.
 
     Use case ends.
 
@@ -429,12 +429,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list classes
-2.  Tutor's Pet shows a list of classes
-3.  User requests to list students
-4.  Tutor's Pet shows a list of students
-5.  User requests to link a specific student to a specific class in the list
-6.  Tutor's Pet links the specified student to the specified class
+1.  User requests to list classes.
+2.  Tutor's Pet shows a list of classes.
+3.  User requests to list students.
+4.  Tutor's Pet shows a list of students.
+5.  User requests to link a specific student to a specific class in the list.
+6.  Tutor's Pet links the specified student to the specified class.
 
     Use case ends.
 
@@ -458,12 +458,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list classes
-2.  Tutor's Pet shows a list of classes
-3.  User requests to list students
-4.  Tutor's Pet shows a list of students
-5.  User requests to unlink a specific student from a specific class in the list
-6.  Tutor's Pet unlinks the specified student from the specified class
+1.  User requests to list classes.
+2.  Tutor's Pet shows a list of classes.
+3.  User requests to list students.
+4.  Tutor's Pet shows a list of students.
+5.  User requests to unlink a specific student from a specific class in the list.
+6.  Tutor's Pet unlinks the specified student from the specified class.
 
     Use case ends.
 
@@ -482,12 +482,57 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 5a1. Tutor's Pet shows an error message.
 
       Use case resumes at step 4.
-
+      
 * 5b. The specified student is not linked to the specified class.
 
     * 5b1. Tutor's Pet shows an error message.
 
       Use case ends.
+      
+**Use case: UC08 - Add a student**
+
+**MSS**
+
+1.  User requests to add a student.
+2.  User provides the parameters to be added.
+3.  Tutor's Pet adds the student.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The parameters provided are invalid.
+
+    * 2a1. Tutor's Pet shows an error message.
+
+      Use case resumes at step 1.
+      
+**Use case: UC09 - List students**
+
+**MSS**
+
+1.  User requests to list students.
+2.  Tutor's Pet shows a list of students.
+
+    Use case ends.
+
+**Use case: UC010 - List students within a class**
+
+**MSS**
+
+1.  User requests to list students within a class.
+2.  User provides the class name.
+3.  Tutor's Pet shows a list of students in the class.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The class name provided is invalid.
+
+    * 2a1. Tutor's Pet shows an error message.
+
+      Use case resumes at step 1.
 
 *{More to be added}*
 
