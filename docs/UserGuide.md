@@ -27,11 +27,11 @@ If you can type fast, Tutor's pet can get your class management tasks done faste
 
    * **`list`** : Lists all students.
 
-   * **`add`**`n/John Doe t/@johndoe e/johnd@example.com tag/student` : Adds a student named `John Doe` to the application.
+   * **`add-student`**`n/John Doe t/@johndoe e/johnd@example.com tag/student` : Adds a student named `John Doe` to the application.
 
-   * **`delete`**`3` : Deletes the 3rd student shown in the current list.
+   * **`delete-student`**`3` : Deletes the 3rd student shown in the current list.
 
-   * **`clear`** : Deletes all students.
+   * **`clear-student`** : Deletes all students.
 
    * **`exit`** : Exits the app.
 
@@ -46,7 +46,7 @@ If you can type fast, Tutor's pet can get your class management tasks done faste
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g. in `add-student n/NAME`, `NAME` is a parameter which can be used as `add-student n/John Doe`.
 
 * Items in square brackets are optional.<br>
   e.g `n/NAME [tag/TAG]` can be used as `n/John Doe tag/student` or as `n/John Doe`.
@@ -67,19 +67,19 @@ Format: `help`
 
 ### Managing Students
 
-#### Adding a student: `add`
+#### Adding a student: `add-student`
 
 Adds a student to the list of students.
 
-Format: `add n/NAME t/TELEGRAM_HANDLE e/EMAIL [tag/TAG]…​`
+Format: `add-student n/NAME t/TELEGRAM_HANDLE e/EMAIL [tag/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A student can have any number of tags (including 0)
 </div>
 
 Examples:
-* `add n/John Doe t/@johndoe e/johnd@example.com`
-* `add n/Betsy Crowe t/@betsycrowe e/betsycrowe@example.com tag/student`
+* `add-student n/John Doe t/@johndoe e/johnd@example.com`
+* `add-student n/Betsy Crowe t/@betsycrowe e/betsycrowe@example.com tag/student`
 
 #### Listing all students : `list`
 
@@ -87,11 +87,11 @@ Shows a list of all students in the application.
 
 Format: `list`
 
-#### Editing a student : `edit`
+#### Editing a student : `edit-student`
 
 Edits an existing student in the application.
 
-Format: `edit INDEX [n/NAME] [t/TELEGRAM_HANDLE] [e/EMAIL] [tag/TAG]…​`
+Format: `edit-student INDEX [n/NAME] [t/TELEGRAM_HANDLE] [e/EMAIL] [tag/TAG]…​`
 
 * Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -101,14 +101,14 @@ Format: `edit INDEX [n/NAME] [t/TELEGRAM_HANDLE] [e/EMAIL] [tag/TAG]…​`
     specifying any tags after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd student to be `Betsy Crower` and clears all existing tags.
+*  `edit-student 1 t/@johndoe e/johndoe@example.com` Edits the telegram handle and email address of the 1st student to be `@johndoe` and `johndoe@example.com` respectively.
+*  `edit-student 2 n/Betsy Crower t/` Edits the name of the 2nd student to be `Betsy Crower` and clears all existing tags.
 
-#### Locating students by name: `find`
+#### Locating students by name: `find-student`
 
 Finds students whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find-student KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -118,28 +118,28 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+* `find-student John` returns `john` and `John Doe`
+* `find-student alex david` returns `Alex Yeoh`, `David Li`<br>
 
-#### Deleting a student : `delete`
+#### Deleting a student : `delete-student`
 
 Deletes the specified student from the application.
 
-Format: `delete INDEX`
+Format: `delete-student INDEX`
 
 * Deletes the student at the specified `INDEX`.
 * The index refers to the index number shown in the displayed student list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd student in the application.
-* `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
+* `list` followed by `delete-student 2` deletes the 2nd student in the application.
+* `find-student Betsy` followed by `delete-student 1` deletes the 1st student in the results of the `find-student` command.
 
-#### Clearing all students : `clear`
+#### Clearing all students : `clear-student`
 
 Clears all students from the application.
 
-Format: `clear`
+Format: `clear-student`
 
 ### Managing Classes: [coming soon]
 
@@ -174,6 +174,23 @@ Format: `edit-class INDEX n/CLASS_NAME`
 
 Examples:
 *  `edit 1 n/CS2103T Tutorial T10` Edits the class name of the 1st class to be `CS2103T Tutorial T10`.
+
+#### Locating classes by name: `find-class`
+
+Finds classes whose names contain any of the given keywords.
+
+Format: `find-class KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g `cs2103t` will match `CS2103T`
+* The order of the keywords does not matter. e.g. `lab CS2100` will match `CS2100 lab`
+* Only the name is searched.
+* Only full words will be matched e.g. `CS` will not match `CS2100`
+* Students matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `CS2103T lab` will return `CS2103T tut`, `CS2100 lab`
+
+Examples:
+* `find-class CS2100` returns `CS2100 tut` and `CS2100 lab`
+* `find tut CS2030` returns `CS2103T tut`, `CS2030 lab`<br>
 
 #### Deleting a class: `delete-class`
 
@@ -232,15 +249,16 @@ There is no need to save manually.
 
 Action | Format, Examples
 --------|------------------
-**Add Student** | `add n/NAME t/TELEGRAM_HANDLE e/EMAIL [tag/TAG]…​` <br> e.g., `add n/John Doe t/@johndoe e/johnd@example.com tag/student`
+**Add Student** | `add-student n/NAME t/TELEGRAM_HANDLE e/EMAIL [tag/TAG]…​` <br> e.g., `add-student n/John Doe t/@johndoe e/johnd@example.com tag/student`
 **List All Students** | `list`
-**Edit Student** | `edit INDEX [n/NAME] [t/TELEGRAM_HANDLE] [e/EMAIL] [tag/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find Student** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Delete Student** | `delete INDEX`<br> e.g., `delete 3`
-**Clear All Students** | `clear`
+**Edit Student** | `edit-student INDEX [n/NAME] [t/TELEGRAM_HANDLE] [e/EMAIL] [tag/TAG]…​`<br> e.g., `edit-student 2 n/James Lee e/jameslee@example.com`
+**Find Student** | `find-student KEYWORD [MORE_KEYWORDS]`<br> e.g., `find-student James Jake`
+**Delete Student** | `delete-student INDEX`<br> e.g., `delete-student 3`
+**Clear All Students** | `clear-student`
 **Add Class** | `add-class n/CLASS_NAME`<br> e.g., `add-class n/CS2103T Tutorial T10`
 **List Students in a Class** | `list-students c/INDEX`<br> e.g., `list-students c/3`
 **Edit Class** | `edit-class INDEX n/CLASS_NAME` <br> e.g., `edit 1 n/CS2103T Tutorial T10`
+**Find Class** | `find-class KEYWORD [MORE_KEYWORDS]`<br> e.g., `find-class CS2103T`
 **Delete Class** | `delete-class INDEX`<br> e.g., `delete-class 2`
 **Unlink Student From a Class** | `unlink s/STUDENT_INDEX c/CLASS_INDEX` <br> e.g., `unlink s/1 c/2`
 **Clear All Classes** |`clear-class`
