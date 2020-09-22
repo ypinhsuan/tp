@@ -91,7 +91,7 @@ Format: `list`
 
 Edits an existing student in the application.
 
-Format: `edit INDEX n/NAME t/TELEGRAM_HANDLE e/EMAIL [tag/TAG]…​`
+Format: `edit INDEX [n/NAME] [t/TELEGRAM_HANDLE] [e/EMAIL] [tag/TAG]…​`
 
 * Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -156,10 +156,10 @@ Examples:
 
 Shows a list of all students within a particular class in the application.
 
-Format: `list-students /by n/CLASS_NAME`
+Format: `list-students c/CLASS_NAME`
 
 Examples:
-* `list-students /by c/CS2103T Tutorial T10`
+* `list-students c/CS2103T Tutorial T10`
 
 #### Deleting a class: `delete-class`
 
@@ -211,7 +211,7 @@ Action | Format, Examples
 **Delete Student** | `delete INDEX`<br> e.g., `delete 3`
 **Clear All Students** | `clear`
 **Add Class** | `add-class n/CLASS_NAME`<br> e.g., `add-class n/CS2103T Tutorial T10`
-**List Students in Class** | `list-students /by c/CLASS_NAME`<br> e.g., `list-students /by c/CS2103T Tutorial T10`
+**List Students in a Class** | `list-students c/CLASS_NAME`<br> e.g., `list-students c/CS2103T Tutorial T10`
 **Delete Class** | `delete-class INDEX`<br> e.g., `delete-class 2`
 **Clear All Classes** |`clear-class`
 **Help** | `help`
