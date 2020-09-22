@@ -56,10 +56,10 @@ You can reach us at the following emails
 
 ### Yen Pin Hsuan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/ypinhsuan.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/ypinhsuan)]
+[[portfolio](team/ypinhsuan.md)]
 
 * Role: Developer
 * Responsibilities: Documentation, Deliverables and Deadlines
