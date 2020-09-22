@@ -156,10 +156,24 @@ Examples:
 
 Shows a list of all students within a particular class in the application.
 
-Format: `list-students c/CLASS_NAME`
+Format: `list-students c/INDEX`
 
 Examples:
-* `list-students c/CS2103T Tutorial T10`
+* `list-students c/3`
+
+#### Editing a class : `edit-class`
+
+Edits an existing class in the application.
+
+Format: `edit-class INDEX n/CLASS_NAME`
+
+* Edits the class at the specified `INDEX`. 
+* The index refers to the index number shown in the displayed class list. 
+* The index **must be a positive integer** 1, 2, 3, …​
+* A new class name must be provided.
+
+Examples:
+*  `edit 1 n/CS2103T Tutorial T10` Edits the class name of the 1st class to be `CS2103T Tutorial T10`.
 
 #### Locating classes by name: `find-class`
 
@@ -190,6 +204,20 @@ Format: `delete-class INDEX`
 
 Examples:
 * `delete-class 2` deletes the 2nd class in the application.
+
+#### Unlinking a student from a class: `unlink`
+
+Unlinks an existing student from an existing class in the application.
+
+Format: `unlink s/STUDENT_INDEX c/CLASS_INDEX`
+
+* Unlinks the student at the specified `STUDENT_INDEX` from the class at the specified `CLASS_INDEX`. 
+*`STUDENT_INDEX` refers to the index number shown in the displayed student list.
+*`CLASS_INDEX` refers to the index number shown in the displayed class list.
+* The indexes **must be positive integers** 1, 2, 3, …​
+
+Examples:
+*  `unlink s/1 c/2` Unlinks the 1st student from the 2nd class in the respective lists.
 
 #### Clearing all classes : `clear-class`
 
@@ -228,8 +256,10 @@ Action | Format, Examples
 **Delete Student** | `delete-student INDEX`<br> e.g., `delete-student 3`
 **Clear All Students** | `clear-student`
 **Add Class** | `add-class n/CLASS_NAME`<br> e.g., `add-class n/CS2103T Tutorial T10`
-**List Students in a Class** | `list-students c/CLASS_NAME`<br> e.g., `list-students c/CS2103T Tutorial T10`
+**List Students in a Class** | `list-students c/INDEX`<br> e.g., `list-students c/3`
+**Edit Class** | `edit-class INDEX n/CLASS_NAME` <br> e.g., `edit 1 n/CS2103T Tutorial T10`
 **Find Class** | `find-class KEYWORD [MORE_KEYWORDS]`<br> e.g., `find-class CS2103T`
 **Delete Class** | `delete-class INDEX`<br> e.g., `delete-class 2`
+**Unlink Student From a Class** | `unlink s/STUDENT_INDEX c/CLASS_INDEX` <br> e.g., `unlink s/1 c/2`
 **Clear All Classes** |`clear-class`
 **Help** | `help`
