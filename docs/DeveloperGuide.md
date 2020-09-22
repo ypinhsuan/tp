@@ -251,7 +251,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​ | I want to... | So that I can... |
 | --- | --- | --- | --- |
-|`* * *` | Tutor with many students | Store my students' contact info/emails | Contact them easily |
+| `* * *` | Tutor with many students | Store my students' contact info/emails | Contact them easily |
 | `* * *` | Tutor with many classes | Create classes | Put my students in the appropriate classes |
 | `* * *` | Tutor with many classes | Insert my students into the appropriate classes | Organise my students via classes
 | `* * *` | New Tutor | View the help menu | Be familiar with app usage |
