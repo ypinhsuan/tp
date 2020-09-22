@@ -313,7 +313,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. Tutor's Pet shows an error message.
 
       Use case resumes at step 2.
-      
+
 * 4a. The parameters provided are invalid.
 
     * 4a1. Tutor's Pet shows an error message.
@@ -327,7 +327,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  User requests to list students.
 2.  Tutor's Pet shows a list of students.
 3.  User requests to delete a specific student in the list.
-4.  Tutor's Pet removes the student from its associated module class.
+4.  Tutor's Pet removes the student from its associated class.
 5.  Tutor's Pet deletes the student.
 
     Use case ends.
@@ -343,20 +343,44 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. Tutor's Pet shows an error message.
 
       Use case resumes at step 2.
-      
-* 4a. The student is not in a module class.
+
+* 4a. The student is not in a class.
 
   Use case skips to step 5.
-  
-**Use case: UC03 - Edit a module class**
+
+**Use case: UC03 - Add a class**
 
 **MSS**
 
-1.  User requests to list modules.
-2.  Tutor's Pet shows a list of modules.
-3.  User requests to edit a specific module in the list.
+1. User requests to add a class.
+2. User provides the parameters of the class.
+3. Tutor's Pet adds the class.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The parameters provided are invalid.
+
+    * 2a1. Tutor's Pet shows an error message.
+
+      Use case resumes at step 1.
+
+* 3a. The class already exists.
+
+    * 3a1. Tutor's Pet shows an error message.
+
+      Use case resumes at step 1.
+
+**Use case: UC04 - Edit a class**
+
+**MSS**
+
+1.  User requests to list classes.
+2.  Tutor's Pet shows a list of classes.
+3.  User requests to edit a specific class in the list.
 4.  User provides the parameters that are to be edited.
-5.  Tutor's Pet edits the module's information. 
+5.  Tutor's Pet edits the class's information.
 
     Use case ends.
 
@@ -371,21 +395,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. Tutor's Pet shows an error message.
 
       Use case resumes at step 2.
-      
+
 * 4a. The parameters provided are invalid.
 
     * 4a1. Tutor's Pet shows an error message.
 
       Use case resumes at step 2.
 
-**Use case: UC04 - Delete a module class**
+**Use case: UC05 - Delete a class**
 
 **MSS**
 
-1.  User requests to list module classes.
-2.  Tutor's Pet shows a list of module classes.
-3.  User requests to delete a specific module class in the list.
-4.  Tutor's Pet deletes the module class.
+1.  User requests to list classes.
+2.  Tutor's Pet shows a list of classes.
+3.  User requests to delete a specific class in the list.
+4.  Tutor's Pet deletes the class.
 
     Use case ends.
 
@@ -401,16 +425,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: UC05 - Linking a student to a module class**
+**Use case: UC06 - Linking a student to a class**
 
 **MSS**
 
-1.  User requests to list modules.
-2.  Tutor's Pet shows a list of modules.
+1.  User requests to list classes.
+2.  Tutor's Pet shows a list of classes.
 3.  User requests to list students.
 4.  Tutor's Pet shows a list of students.
-5.  User requests to link a specific student to a specific module in the list.
-6.  Tutor's Pet links that student to the specified module class.
+5.  User requests to link a specific student to a specific class in the list.
+6.  Tutor's Pet links the specified student to the specified class.
 
     Use case ends.
 
@@ -419,18 +443,53 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The list is empty.
 
   Use case ends.
-  
+
 * 4a. The list is empty.
 
   Use case ends.
 
-* 5a. The given indexes are invalid.
+* 5a. At least one of the given indexes is invalid.
+
+    * 5a1. Tutor's Pet shows an error message.
+
+      Use case resumes at step 4.
+
+**Use case: UC07 - Unlinking a student from a class**
+
+**MSS**
+
+1.  User requests to list classes.
+2.  Tutor's Pet shows a list of classes.
+3.  User requests to list students.
+4.  Tutor's Pet shows a list of students.
+5.  User requests to unlink a specific student from a specific class in the list.
+6.  Tutor's Pet unlinks the specified student from the specified class.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 4a. The list is empty.
+
+  Use case ends.
+
+* 5a. At least one of the given indexes is invalid.
 
     * 5a1. Tutor's Pet shows an error message.
 
       Use case resumes at step 4.
       
-**Use case: UC06 - Add a student**
+* 5b. The specified student is not linked to the specified class.
+
+    * 5b1. Tutor's Pet shows an error message.
+
+      Use case ends.
+      
+**Use case: UC08 - Add a student**
 
 **MSS**
 
@@ -448,7 +507,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
       
-**Use case: UC07 - List students**
+**Use case: UC09 - List students**
 
 **MSS**
 
@@ -457,7 +516,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Use case: UC08 - List students within a class**
+**Use case: UC010 - List students within a class**
 
 **MSS**
 
@@ -480,7 +539,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 students and module classes without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 1000 students and classes without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
 *{More to be added}*
@@ -488,7 +547,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Module Class**: A lesson that belongs to a module. For example, CS2103T-tutorial or CS2100-lab 
 
 --------------------------------------------------------------------------------------------------------------------
 
