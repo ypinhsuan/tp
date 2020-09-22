@@ -429,6 +429,51 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 5a1. Tutor's Pet shows an error message.
 
       Use case resumes at step 4.
+      
+**Use case: UC06 - Add a student**
+
+**MSS**
+
+1.  User requests to add a student.
+2.  User provides the parameters to be added.
+3.  Tutor's Pet adds the student.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The parameters provided are invalid.
+
+    * 2a1. Tutor's Pet shows an error message.
+
+      Use case resumes at step 1.
+      
+**Use case: UC07 - List students**
+
+**MSS**
+
+1.  User requests to list students.
+2.  Tutor's Pet shows a list of students.
+
+    Use case ends.
+
+**Use case: UC08 - List students within a class**
+
+**MSS**
+
+1.  User requests to list students within a class.
+2.  User provides the class name.
+3.  Tutor's Pet shows a list of students in the class.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The class name provided is invalid.
+
+    * 2a1. Tutor's Pet shows an error message.
+
+      Use case resumes at step 1.
 
 *{More to be added}*
 
