@@ -446,7 +446,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 5a. At least one of the given indexes are invalid.
+* 5a. At least one of the given indexes is invalid.
 
     * 5a1. Tutor's Pet shows an error message.
 
@@ -475,7 +475,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 5a. At least one of the given indexes are invalid.
+* 5a. At least one of the given indexes is invalid.
 
     * 5a1. Tutor's Pet shows an error message.
 
