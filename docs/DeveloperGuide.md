@@ -294,11 +294,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list students
-2.  Tutor's Pet shows a list of students
-3.  User requests to edit a specific student in the list
-4.  User provides the parameters that are to be edited
-5.  Tutor's Pet edits the student's information 
+1.  User requests to list students.
+2.  Tutor's Pet shows a list of students.
+3.  User requests to edit a specific student in the list.
+4.  User provides the parameters that are to be edited.
+5.  Tutor's Pet edits the student's information.
 
     Use case ends.
 
@@ -324,11 +324,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list students
-2.  Tutor's Pet shows a list of students
-3.  User requests to delete a specific student in the list
-4.  Tutor's Pet removes the student from its associated module class
-5.  Tutor's Pet deletes the student  
+1.  User requests to list students.
+2.  Tutor's Pet shows a list of students.
+3.  User requests to delete a specific student in the list.
+4.  Tutor's Pet removes the student from its associated module class.
+5.  Tutor's Pet deletes the student.
 
     Use case ends.
 
@@ -352,11 +352,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list modules
-2.  Tutor's Pet shows a list of modules
-3.  User requests to edit a specific module in the list
-4.  User provides the parameters that are to be edited
-5.  Tutor's Pet edits the module's information 
+1.  User requests to list modules.
+2.  Tutor's Pet shows a list of modules.
+3.  User requests to edit a specific module in the list.
+4.  User provides the parameters that are to be edited.
+5.  Tutor's Pet edits the module's information. 
 
     Use case ends.
 
@@ -382,10 +382,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list module classes
-2.  Tutor's Pet shows a list of module classes
-3.  User requests to delete a specific module class in the list
-4.  Tutor's Pet deletes the module class
+1.  User requests to list module classes.
+2.  Tutor's Pet shows a list of module classes.
+3.  User requests to delete a specific module class in the list.
+4.  Tutor's Pet deletes the module class.
 
     Use case ends.
 
@@ -405,12 +405,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list modules
-2.  Tutor's Pet shows a list of modules
-3.  User requests to list students
-4.  Tutor's Pet shows a list of students
-5.  User requests to link a specific student to a specific module in the list
-6.  Tutor's Pet links that student to the specified module class 
+1.  User requests to list modules.
+2.  Tutor's Pet shows a list of modules.
+3.  User requests to list students.
+4.  Tutor's Pet shows a list of students.
+5.  User requests to link a specific student to a specific module in the list.
+6.  Tutor's Pet links that student to the specified module class.
 
     Use case ends.
 
