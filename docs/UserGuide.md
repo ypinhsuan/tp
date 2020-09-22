@@ -78,7 +78,7 @@ A student can have any number of tags (including 0)
 </div>
 
 Examples:
-* `add n/John Doe t/@johndoe e/johnd@example.com tag/student`
+* `add n/John Doe t/@johndoe e/johnd@example.com`
 * `add n/Betsy Crowe t/@betsycrowe e/betsycrowe@example.com tag/student`
 
 #### Listing all students : `list`
@@ -211,7 +211,7 @@ Action | Format, Examples
 **Delete Student** | `delete INDEX`<br> e.g., `delete 3`
 **Clear All Students** | `clear`
 **Add Class** | `add-class n/CLASS_NAME`<br> e.g., `add-class n/CS2103T Tutorial T10`
-**List Students in Class** | `list students /by n/CLASS_NAME`<br> e.g., `list-students /by n/CS2103T Tutorial T10`
+**List Students in Class** | `list-students /by n/CLASS_NAME`<br> e.g., `list-students /by n/CS2103T Tutorial T10`
 **Delete Class** | `delete-class INDEX`<br> e.g., `delete-class 2`
 **Clear All Classes** |`clear-class`
 **Help** | `help`
