@@ -223,7 +223,7 @@ Action | Format, Examples
 --------|------------------
 **Add Student** | `add-student n/NAME t/TELEGRAM_HANDLE e/EMAIL [tag/TAG]…​` <br> e.g., `add-student n/John Doe t/@johndoe e/johnd@example.com tag/student`
 **List All Students** | `list`
-**Edit Student** | `edit-student INDEX [n/NAME] [t/TELEGRAM_HANDLE] [e/EMAIL] [tag/TAG]…​`<br> e.g.,`edit-student 2 n/James Lee e/jameslee@example.com`
+**Edit Student** | `edit-student INDEX [n/NAME] [t/TELEGRAM_HANDLE] [e/EMAIL] [tag/TAG]…​`<br> e.g., `edit-student 2 n/James Lee e/jameslee@example.com`
 **Find Student** | `find-student KEYWORD [MORE_KEYWORDS]`<br> e.g., `find-student James Jake`
 **Delete Student** | `delete-student INDEX`<br> e.g., `delete-student 3`
 **Clear All Students** | `clear-student`
