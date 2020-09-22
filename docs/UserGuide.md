@@ -156,7 +156,7 @@ Examples:
 
 Shows a list of all students within a particular class in the application.
 
-Format: `list-students c/CLASS_INDEX`
+Format: `list-students c/INDEX`
 
 Examples:
 * `list-students c/3`
@@ -194,7 +194,7 @@ Unlinks an existing student from an existing class in the application.
 
 Format: `unlink s/STUDENT_INDEX c/CLASS_INDEX`
 
-* Unlinks the student at the specified `INDEX` from the class at the specified `INDEX`. 
+* Unlinks the student at the specified `STUDENT_INDEX` from the class at the specified `CLASS_INDEX`. 
 * The index refers to the index number shown in the displayed student list and class list respectively.
 * The indexes **must be positive integers** 1, 2, 3, …​
 
