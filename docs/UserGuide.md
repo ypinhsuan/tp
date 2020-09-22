@@ -195,7 +195,8 @@ Unlinks an existing student from an existing class in the application.
 Format: `unlink s/STUDENT_INDEX c/CLASS_INDEX`
 
 * Unlinks the student at the specified `STUDENT_INDEX` from the class at the specified `CLASS_INDEX`. 
-* The index refers to the index number shown in the displayed student list and class list respectively.
+*`STUDENT_INDEX` refers to the index number shown in the displayed student list.
+*`CLASS_INDEX` refers to the index number shown in the displayed class list.
 * The indexes **must be positive integers** 1, 2, 3, …​
 
 Examples:
