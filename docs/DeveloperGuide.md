@@ -313,6 +313,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. Tutor's Pet shows an error message.
 
       Use case resumes at step 2.
+      
 * 4a. The parameters provided are invalid.
 
     * 4a1. Tutor's Pet shows an error message.
@@ -342,6 +343,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. Tutor's Pet shows an error message.
 
       Use case resumes at step 2.
+      
 * 4a. The student is not in a module class.
 
   Use case skips to step 5.
@@ -375,7 +377,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 4a1. Tutor's Pet shows an error message.
 
       Use case resumes at step 2.
-
 
 **Use case: UC04 - Delete a module class**
 
