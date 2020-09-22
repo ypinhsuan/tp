@@ -238,7 +238,7 @@ Action | Format, Examples
 **Delete Student** | `delete INDEX`<br> e.g., `delete 3`
 **Clear All Students** | `clear`
 **Add Class** | `add-class n/CLASS_NAME`<br> e.g., `add-class n/CS2103T Tutorial T10`
-**List Students in a Class** | `list-students c/INDEX`<br> e.g., `list-students c/CS2103T Tutorial T10`
+**List Students in a Class** | `list-students c/INDEX`<br> e.g., `list-students c/3`
 **Edit Class** | `edit-class INDEX n/CLASS_NAME` <br> e.g., `edit 1 n/CS2103T Tutorial T10`
 **Delete Class** | `delete-class INDEX`<br> e.g., `delete-class 2`
 **Unlink Student From a Class** | `unlink s/STUDENT_INDEX c/CLASS_INDEX` <br> e.g., `unlink s/1 c/2`
