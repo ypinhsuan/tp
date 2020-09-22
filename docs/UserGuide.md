@@ -51,7 +51,7 @@ If you can type fast, Tutor's pet can get your class management tasks done faste
 * Items in square brackets are optional.<br>
   e.g `n/NAME [tag/TAG]` can be used as `n/John Doe tag/student` or as `n/John Doe`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
+* Items with `…​` after them can be used multiple times including zero times.<br>
   e.g. `[tag/TAG]…​` can be used as ` ` (i.e. 0 times), `tag/student`, `tag/TA` etc.
 
 * Parameters can be in any order.<br>
@@ -147,19 +147,19 @@ Format: `clear`
 
 Adds a class to the application.
 
-Format: `add-class [n/CLASS_NAME] [m/MODULE_CODE]`
+Format: `add-class n/CLASS_NAME`
 
 Examples:
-* `add-class n/Tutorial T10 m/CS2013T`
+* `add-class n/CS2103T Tutorial T10`
 
 #### Listing all students within a class : `list-students`
 
 Shows a list of all students within a particular class in the application.
 
-Format: `list-students /by [n/CLASS_NAME] [m/MODULE_CODE]`
+Format: `list-students /by n/CLASS_NAME`
 
 Examples:
-* `list-students /by n/Tutorial T10 m/CS2013T`
+* `list-students /by n/CS2103T Tutorial T10`
 
 #### Deleting a class: `delete-class`
 
@@ -210,8 +210,8 @@ Action | Format, Examples
 **Find Student** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Delete Student** | `delete INDEX`<br> e.g., `delete 3`
 **Clear All Students** | `clear`
-**Add Class** | `add-class n/NAME`<br> e.g., `add-class n/CS2103T Tutorial T10`
-**List Students in Class** | `list students /by [n/CLASS_NAME] [m/MODULE_CODE]`<br> e.g., `list students /by n/Tutorial T10 m/CS2013T`
+**Add Class** | `add-class n/CLASS_NAME`<br> e.g., `add-class n/CS2103T Tutorial T10`
+**List Students in Class** | `list students /by n/CLASS_NAME`<br> e.g., `list-students /by n/CS2103T Tutorial T10`
 **Delete Class** | `delete-class INDEX`<br> e.g., `delete-class 2`
 **Clear All Classes** |`clear-class`
 **Help** | `help`
