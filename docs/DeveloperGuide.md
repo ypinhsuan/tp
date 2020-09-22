@@ -249,9 +249,9 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
- Priority | As a …​ | I want to... | So that I can... |
+| Priority | As a …​ | I want to... | So that I can... |
 | --- | --- | --- | --- |
-| `* * *` | Tutor with many students | Store my students' contact info/emails | Contact them easily |
+|`* * *` | Tutor with many students | Store my students' contact info/emails | Contact them easily |
 | `* * *` | Tutor with many classes | Create classes | Put my students in the appropriate classes |
 | `* * *` | Tutor with many classes | Insert my students into the appropriate classes | Organise my students via classes
 | `* * *` | New Tutor | View the help menu | Be familiar with app usage |
@@ -313,7 +313,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. Tutor's Pet shows an error message.
 
       Use case resumes at step 2.
-* 4a. The parameters provided are invalid
+* 4a. The parameters provided are invalid.
 
     * 4a1. Tutor's Pet shows an error message.
 
@@ -342,7 +342,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. Tutor's Pet shows an error message.
 
       Use case resumes at step 2.
-* 4a. The student is not in a module class
+* 4a. The student is not in a module class.
 
   Use case skips to step 5.
   
@@ -369,6 +369,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. Tutor's Pet shows an error message.
 
       Use case resumes at step 2.
+      
 * 4a. The parameters provided are invalid.
 
     * 4a1. Tutor's Pet shows an error message.
@@ -408,7 +409,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3.  User requests to list students
 4.  Tutor's Pet shows a list of students
 5.  User requests to link a specific student to a specific module in the list
-6.  Tutor's Pet links that student to the specified module class. 
+6.  Tutor's Pet links that student to the specified module class 
 
     Use case ends.
 
