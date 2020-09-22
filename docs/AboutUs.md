@@ -14,15 +14,15 @@ You can reach us at the following emails
 
 ## Project team
 
-### John Doe
+### Samantha Low
 
-<img src="images/johndoe.png" width="200px">
+<img src="./images/samlsm.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/samlsm)]
+[[portfolio](team/samlsm.md)]
 
-* Role: Project Advisor
+* Role: Team Lead
+* Responsibilities: UI
 
 ### Tan Rui Xuan
 
