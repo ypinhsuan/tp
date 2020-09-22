@@ -298,7 +298,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  Tutor's Pet shows a list of students
 3.  User requests to edit a specific student in the list
 4.  User provides the parameters that are to be edited
-5.  Tutor's Pet edits the student's information 
+5.  Tutor's Pet edits the student's information
 
     Use case ends.
 
@@ -313,7 +313,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. Tutor's Pet shows an error message.
 
       Use case resumes at step 2.
-      
+
 * 4a. The parameters provided are invalid.
 
     * 4a1. Tutor's Pet shows an error message.
@@ -328,7 +328,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  Tutor's Pet shows a list of students
 3.  User requests to delete a specific student in the list
 4.  Tutor's Pet removes the student from its associated class
-5.  Tutor's Pet deletes the student  
+5.  Tutor's Pet deletes the student
 
     Use case ends.
 
@@ -343,11 +343,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. Tutor's Pet shows an error message.
 
       Use case resumes at step 2.
-      
+
 * 4a. The student is not in a class.
 
   Use case skips to step 5.
-  
+
 **Use case: UC03 - Add a class**
 
 **MSS**
@@ -361,15 +361,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The parameters provided are invalid.
 
     * 2a1. Tutor's Pet shows an error message.
-    
+
       Use case resumes at step 1.
-     
+
 * 3a. The class already exists.
 
     * 3a1. Tutor's Pet shows an error message.
-    
+
       Use case resumes at step 1.
-  
+
 **Use case: UC04 - Edit a class**
 
 **MSS**
@@ -378,7 +378,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  Tutor's Pet shows a list of classes
 3.  User requests to edit a specific class in the list
 4.  User provides the parameters that are to be edited
-5.  Tutor's Pet edits the class's information 
+5.  Tutor's Pet edits the class's information
 
     Use case ends.
 
@@ -393,7 +393,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. Tutor's Pet shows an error message.
 
       Use case resumes at step 2.
-      
+
 * 4a. The parameters provided are invalid.
 
     * 4a1. Tutor's Pet shows an error message.
@@ -432,7 +432,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3.  User requests to list students
 4.  Tutor's Pet shows a list of students
 5.  User requests to link a specific student to a specific class in the list
-6.  Tutor's Pet links the specified student to the specified class 
+6.  Tutor's Pet links the specified student to the specified class
 
     Use case ends.
 
@@ -441,7 +441,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The list is empty.
 
   Use case ends.
-  
+
 * 4a. The list is empty.
 
   Use case ends.
@@ -451,7 +451,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 5a1. Tutor's Pet shows an error message.
 
       Use case resumes at step 4.
-      
+
 **Use case: UC07 - Unlinking a student from a class**
 
 **MSS**
@@ -461,7 +461,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3.  User requests to list students
 4.  Tutor's Pet shows a list of students
 5.  User requests to unlink a specific student from a specific class in the list
-6.  Tutor's Pet unlinks the specified student from the specified class 
+6.  Tutor's Pet unlinks the specified student from the specified class
 
     Use case ends.
 
@@ -470,7 +470,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The list is empty.
 
   Use case ends.
-  
+
 * 4a. The list is empty.
 
   Use case ends.
@@ -480,11 +480,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 5a1. Tutor's Pet shows an error message.
 
       Use case resumes at step 4.
-      
+
 * 5b. The specified student is not linked to the specified class.
 
     * 5b1. Tutor's Pet shows an error message.
-    
+
       Use case ends.
 
 *{More to be added}*
@@ -499,7 +499,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X 
+* **Mainstream OS**: Windows, Linux, Unix, OS-X
 
 --------------------------------------------------------------------------------------------------------------------
 
