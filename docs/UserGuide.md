@@ -7,10 +7,7 @@ Tutor's Pet is a **desktop application for managing students and classes, optimi
 If you can type fast, Tutor's pet can get your class management tasks done faster than traditional GUI apps.
 
 * Table of Contents
-    * Quick start
-    * Features
-    * FAQ
-    * Command summary
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -30,7 +27,7 @@ If you can type fast, Tutor's pet can get your class management tasks done faste
 
    * **`list`** : Lists all students.
 
-   * **`add`**`add n/John Doe t/@johndoe e/johnd@example.com tag/student` : Adds a student named `John Doe` to the application.
+   * **`add`**` n/John Doe t/@johndoe e/johnd@example.com tag/student` : Adds a student named `John Doe` to the application.
 
    * **`delete`**`3` : Deletes the 3rd student shown in the current list.
 
@@ -52,10 +49,10 @@ If you can type fast, Tutor's pet can get your class management tasks done faste
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/student` or as `n/John Doe`.
+  e.g `n/NAME [tag/TAG]` can be used as `n/John Doe tag/student` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/Experienced`, `t/Average t/Potential TA` etc.
+  e.g. `[tag/TAG]…​` can be used as ` ` (i.e. 0 times), `tag/student`, `tag/TA` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -74,7 +71,7 @@ Format: `help`
 
 Adds a student to the list of students.
 
-Format: `add [n/NAME] [t/TELEGRAM_HANDLE] [e/EMAIL] [tag/TAG...]​`
+Format: `add n/NAME t/TELEGRAM_HANDLE e/EMAIL [tag/TAG]...​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A student can have any number of tags (including 0)
@@ -94,13 +91,13 @@ Format: `list`
 
 Edits an existing student in the application.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX n/NAME t/TELEGRAM_HANDLE e/EMAIL [tag/TAG]...​`
 
 * Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the student will be removed i.e adding of tags is not cumulative.
-* You can remove all the student’s tags by typing `t/` without
+* You can remove all the student’s tags by typing `tag/` without
     specifying any tags after it.
 
 Examples:
@@ -155,14 +152,14 @@ Format: `add-class [n/CLASS_NAME] [m/MODULE_CODE]`
 Examples:
 * `add-class n/Tutorial T10 m/CS2013T`
 
-#### Listing all students within class : `list students`
+#### Listing all students within a class : `list-students`
 
 Shows a list of all students within a particular class in the application.
 
-Format: `list students /by [n/CLASS_NAME] [m/MODULE_CODE]`
+Format: `list-students /by [n/CLASS_NAME] [m/MODULE_CODE]`
 
 Examples:
-* `list students /by n/Tutorial T10 m/CS2013T`
+* `list-students /by n/Tutorial T10 m/CS2013T`
 
 #### Deleting a class: `delete-class`
 
@@ -177,11 +174,11 @@ Format: `delete-class INDEX`
 Examples:
 * `delete-class 2` deletes the 2nd class in the application.
 
-#### Clearing all classes : `clear class`
+#### Clearing all classes : `clear-class`
 
 Clears all classes from the application.
 
-Format: `clear class`
+Format: `clear-class`
 
 ### Exiting the program : `exit`
 
@@ -207,14 +204,14 @@ There is no need to save manually.
 
 Action | Format, Examples
 --------|------------------
-**Add Student** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add Student** | `add n/NAME t/TELEGRAM_HANDLE e/EMAIL [tag/TAG]...​` <br> e.g., `add n/John Doe t/@johndoe e/johnd@example.com tag/student`
 **List All Students** | `list`
-**Edit Student** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Edit Student** | `edit INDEX n/NAME t/TELEGRAM_HANDLE e/EMAIL [tag/TAG]...​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find Student** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Delete Student** | `delete INDEX`<br> e.g., `delete 3`
 **Clear All Students** | `clear`
 **Add Class** | `add-class n/NAME`<br> e.g., `add-class n/CS2103T Tutorial T10`
-**List Students in Class** | `list students /by n/Tutorial T10 m/CS2013T`
+**List Students in Class** | `list students /by [n/CLASS_NAME] [m/MODULE_CODE]`<br> e.g., `list students /by n/Tutorial T10 m/CS2013T`
 **Delete Class** | `delete-class INDEX`<br> e.g., `delete-class 2`
-**Clear All Classes** |`clear class`
+**Clear All Classes** |`clear-class`
 **Help** | `help`
