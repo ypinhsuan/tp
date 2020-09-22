@@ -11,10 +11,10 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Samantha Low
 
-<img src="images/samanthalow.png" width="200px">
+<img src="./images/samlsm.png" width="200px">
 
 [[github](https://github.com/samlsm)]
-[[portfolio](team/samanthalow.md)]
+[[portfolio](team/samlsm.md)]
 
 * Role: Team Lead
 * Responsibilities: UI
