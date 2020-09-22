@@ -27,7 +27,7 @@ If you can type fast, Tutor's pet can get your class management tasks done faste
 
    * **`list`** : Lists all students.
 
-   * **`add`**` n/John Doe t/@johndoe e/johnd@example.com tag/student` : Adds a student named `John Doe` to the application.
+   * **`add`**`n/John Doe t/@johndoe e/johnd@example.com tag/student` : Adds a student named `John Doe` to the application.
 
    * **`delete`**`3` : Deletes the 3rd student shown in the current list.
 
@@ -52,7 +52,7 @@ If you can type fast, Tutor's pet can get your class management tasks done faste
   e.g `n/NAME [tag/TAG]` can be used as `n/John Doe tag/student` or as `n/John Doe`.
 
 * Items with `…​` after them can be used multiple times including zero times.<br>
-  e.g. `[tag/TAG]…​` can be used as ` ` (i.e. 0 times), `tag/student`, `tag/TA` etc.
+  e.g. `[tag/TAG]…​` can be used as ` ` (i.e. 0 times), `tag/student`, `tag/average tag/TA candidate` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -71,7 +71,7 @@ Format: `help`
 
 Adds a student to the list of students.
 
-Format: `add n/NAME t/TELEGRAM_HANDLE e/EMAIL [tag/TAG]...​`
+Format: `add n/NAME t/TELEGRAM_HANDLE e/EMAIL [tag/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A student can have any number of tags (including 0)
@@ -91,7 +91,7 @@ Format: `list`
 
 Edits an existing student in the application.
 
-Format: `edit INDEX n/NAME t/TELEGRAM_HANDLE e/EMAIL [tag/TAG]...​`
+Format: `edit INDEX n/NAME t/TELEGRAM_HANDLE e/EMAIL [tag/TAG]…​`
 
 * Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -159,7 +159,7 @@ Shows a list of all students within a particular class in the application.
 Format: `list-students /by n/CLASS_NAME`
 
 Examples:
-* `list-students /by n/CS2103T Tutorial T10`
+* `list-students /by c/CS2103T Tutorial T10`
 
 #### Deleting a class: `delete-class`
 
@@ -204,14 +204,14 @@ There is no need to save manually.
 
 Action | Format, Examples
 --------|------------------
-**Add Student** | `add n/NAME t/TELEGRAM_HANDLE e/EMAIL [tag/TAG]...​` <br> e.g., `add n/John Doe t/@johndoe e/johnd@example.com tag/student`
+**Add Student** | `add n/NAME t/TELEGRAM_HANDLE e/EMAIL [tag/TAG]…​` <br> e.g., `add n/John Doe t/@johndoe e/johnd@example.com tag/student`
 **List All Students** | `list`
-**Edit Student** | `edit INDEX n/NAME t/TELEGRAM_HANDLE e/EMAIL [tag/TAG]...​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Edit Student** | `edit INDEX [n/NAME] [t/TELEGRAM_HANDLE] [e/EMAIL] [tag/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find Student** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Delete Student** | `delete INDEX`<br> e.g., `delete 3`
 **Clear All Students** | `clear`
 **Add Class** | `add-class n/CLASS_NAME`<br> e.g., `add-class n/CS2103T Tutorial T10`
-**List Students in Class** | `list-students /by n/CLASS_NAME`<br> e.g., `list-students /by n/CS2103T Tutorial T10`
+**List Students in Class** | `list-students /by c/CLASS_NAME`<br> e.g., `list-students /by c/CS2103T Tutorial T10`
 **Delete Class** | `delete-class INDEX`<br> e.g., `delete-class 2`
 **Clear All Classes** |`clear-class`
 **Help** | `help`
