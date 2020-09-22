@@ -5,7 +5,12 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+You can reach us at the following emails 
+* Low Shu Min Samantha - `e0424934@u.nus.edu`
+* Tan Rui Xuan - `e0425237@u.nus.edu`
+* Tan Ying Jie, Dexter - `e0014706@u.nus.edu`
+* Wong Jun Long - `e0415698@u.nus.edu`
+* Yen Pin Hsuan - `e0425443@u.nus.edu`
 
 ## Project team
 
@@ -19,26 +24,36 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Jane Doe
+### Tan Rui Xuan
 
 <img src="images/johndoe.png" width="200px">
 
 [[github](http://github.com/johndoe)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Developer
+* Responsibilities: Testing, Logic
 
-### Johnny Doe
+### Tan Ying Jie, Dexter
 
 <img src="images/johndoe.png" width="200px">
 
 [[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
 
-* Role: Developer
-* Responsibilities: Data
+* Role: Project Advisor
+* Responsibilities: Integration, Model, Git Expert
 
-### Jean Doe
+### Wong Jun Long
+
+<img src="images/junlong4321.png" width="200px">
+
+[[github](http://github.com/junlong4321)]
+[[portfolio](team/junlong4321.md)]
+
+* Role: Developer
+* Responsibilities: Code Quality, Scheduling + Tracking, Storage
+
+### Yen Pin Hsuan
 
 <img src="images/johndoe.png" width="200px">
 
@@ -46,14 +61,4 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: UI
+* Responsibilities: Documentation, Deliverables and Deadlines
