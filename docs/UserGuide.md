@@ -141,69 +141,69 @@ Clears all students from the application.
 
 Format: `clear`
 
-### Managing Module Classes: [coming soon]
+### Managing Classes: [coming soon]
 
-#### Adding a module class: `add-class`
+#### Adding a class: `add-class`
 
-Adds a module class to the application.
+Adds a class to the application.
 
 Format: `add-class c/CLASS_NAME`
 
 Examples:
 * `add-class c/CS2103T Tutorial T10`
 
-#### Listing all students within a module class : `list-students`
+#### Listing all students within a class : `list-students`
 
-Shows a list of all students within a particular module class in the application.
+Shows a list of all students within a particular class in the application.
 
 Format: `list-students c/CLASS_NAME`
 
 Examples:
 * `list-students c/CS2103T Tutorial T10`
 
-#### Editing a module class : `edit-class`
+#### Editing a class : `edit-class`
 
-Edits an existing module class in the application.
+Edits an existing class in the application.
 
 Format: `edit-class INDEX c/CLASS_NAME`
 
-* Edits the module class at the specified `INDEX`. 
-* The index refers to the index number shown in the displayed module class list. 
+* Edits the class at the specified `INDEX`. 
+* The index refers to the index number shown in the displayed class list. 
 * The index **must be a positive integer** 1, 2, 3, …​
-* A new module class name must be provided.
+* A new class name must be provided.
 
 Examples:
-*  `edit 1 c/CS2103T Tutorial T10` Edits the module class name of the 1st module class to be `CS2103T Tutorial T10`.
+*  `edit 1 c/CS2103T Tutorial T10` Edits the class name of the 1st class to be `CS2103T Tutorial T10`.
 
-#### Deleting a module class: `delete-class`
+#### Deleting a class: `delete-class`
 
-Deletes the specified module class from the application.
+Deletes the specified class from the application.
 
 Format: `delete-class INDEX`
 
-* Deletes the module class at the specified `INDEX`.
-* The index refers to the index number shown in the displayed module class list.
+* Deletes the class at the specified `INDEX`.
+* The index refers to the index number shown in the displayed class list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `delete-class 2` deletes the 2nd module class in the application.
+* `delete-class 2` deletes the 2nd class in the application.
 
-#### Unlinking a student from a module class: `unlink`
+#### Unlinking a student from a class: `unlink`
 
-Unlinks an existing student from an existing module class in the application.
+Unlinks an existing student from an existing class in the application.
 
 Format: `unlink s/INDEX c/INDEX`
 
-* Unlinks the student at the specified `INDEX` from the module class at the specified `INDEX`. 
-* The index refers to the index number shown in the displayed student list and module class list respectively.
+* Unlinks the student at the specified `INDEX` from the class at the specified `INDEX`. 
+* The index refers to the index number shown in the displayed student list and class list respectively.
 * The indexes **must be positive integers** 1, 2, 3, …​
 
 Examples:
-*  `unlink s/1 c/2` Unlinks the 1st student from the 2nd module class in the respective lists.
+*  `unlink s/1 c/2` Unlinks the 1st student from the 2nd class in the respective lists.
 
-#### Clearing all module classes : `clear-class`
+#### Clearing all classes : `clear-class`
 
-Clears all module classes from the application.
+Clears all classes from the application.
 
 Format: `clear-class`
 
@@ -237,10 +237,10 @@ Action | Format, Examples
 **Find Student** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Delete Student** | `delete INDEX`<br> e.g., `delete 3`
 **Clear All Students** | `clear`
-**Add Module Class** | `add-class c/CLASS_NAME`<br> e.g., `add-class c/CS2103T Tutorial T10`
-**List Students in a Module Class** | `list-students c/CLASS_NAME`<br> e.g., `list-students c/CS2103T Tutorial T10`
-**Edit Module Class** | `edit-class INDEX c/CLASS_NAME` <br> e.g., `edit 1 c/CS2103T Tutorial T10`
-**Delete Module Class** | `delete-class INDEX`<br> e.g., `delete-class 2`
-**Unlink Student From a Module Class** | `unlink s/INDEX c/INDEX` <br> e.g., `unlink s/1 c/2`
-**Clear All Module Classes** |`clear-class`
+**Add Class** | `add-class c/CLASS_NAME`<br> e.g., `add-class c/CS2103T Tutorial T10`
+**List Students in a Class** | `list-students c/CLASS_NAME`<br> e.g., `list-students c/CS2103T Tutorial T10`
+**Edit Class** | `edit-class INDEX c/CLASS_NAME` <br> e.g., `edit 1 c/CS2103T Tutorial T10`
+**Delete Class** | `delete-class INDEX`<br> e.g., `delete-class 2`
+**Unlink Student From a Class** | `unlink s/INDEX c/INDEX` <br> e.g., `unlink s/1 c/2`
+**Clear All Classes** |`clear-class`
 **Help** | `help`
