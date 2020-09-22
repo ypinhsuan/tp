@@ -180,7 +180,7 @@ Clears all classes from the application.
 
 Format: `clear-class`
 
-#### Linking a student to a module class: `link`
+#### Linking a student to a class: `link`
 
 Links an existing student from an existing class in the application.
 
