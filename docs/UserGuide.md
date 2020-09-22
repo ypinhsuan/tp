@@ -182,7 +182,7 @@ Format: `clear-class`
 
 #### Linking a student to a class: `link`
 
-Links an existing student from an existing class in the application.
+Links an existing student to an existing class in the application.
 
 Format: `link s/STUDENT_INDEX c/CLASS_INDEX`
 
@@ -192,7 +192,8 @@ Format: `link s/STUDENT_INDEX c/CLASS_INDEX`
 * The indexes **must be positive integers** 1, 2, 3, …​
 
 Examples:
-* `link s/1 c/2` links the 1st student to the 1st class in the application.
+* `list` followed by `link s/1 c/2` links the 1st student in the application to the 2nd class in the application.
+* `find Betsy` followed by `link s/1 c/2` links the 1st student in the results of the `find` command to the 2nd class in the application.
 
 ### Exiting the program : `exit`
 
