@@ -165,7 +165,7 @@ Examples:
 
 Edits an existing module class in the application.
 
-Format: `edit-class INDEX [c/CLASS_NAME]`
+Format: `edit-class INDEX c/CLASS_NAME`
 
 * Edits the module class at the specified `INDEX`. 
 * The index refers to the index number shown in the displayed module class list. 
@@ -239,7 +239,7 @@ Action | Format, Examples
 **Clear All Students** | `clear`
 **Add Module Class** | `add-class c/CLASS_NAME`<br> e.g., `add-class c/CS2103T Tutorial T10`
 **List Students in a Module Class** | `list-students c/CLASS_NAME`<br> e.g., `list-students c/CS2103T Tutorial T10`
-**Edit Module Class** | `edit-class INDEX [c/CLASS_NAME]` <br> e.g., `edit 1 c/CS2103T Tutorial T10`
+**Edit Module Class** | `edit-class INDEX c/CLASS_NAME` <br> e.g., `edit 1 c/CS2103T Tutorial T10`
 **Delete Module Class** | `delete-class INDEX`<br> e.g., `delete-class 2`
 **Unlink Student From a Module Class** | `unlink s/INDEX c/INDEX` <br> e.g., `unlink s/1 c/2`
 **Clear All Module Classes** |`clear-class`
