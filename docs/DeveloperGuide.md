@@ -356,6 +356,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. User provides the parameters of the class
 3. Tutor's Pet adds the class
 
+    Use case ends.
+
 **Extensions**
 
 * 2a. The parameters provided are invalid.
