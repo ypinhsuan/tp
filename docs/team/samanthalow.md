@@ -1,6 +1,6 @@
 ---
 layout: page
-title: John Doe's Project Portfolio Page
+title: Samantha Low's Project Portfolio Page
 ---
 
 ## Project: Tutor's Pet
@@ -10,9 +10,11 @@ If you can type fast, Tutor's pet can get your class management tasks done faste
 
 Given below are my contributions to the project.
 
+* **New Feature**:
+
 * **Documentation**:
   * Developer Guide:
-    * Added use case details for `edit class` and `link student to class` feature [\#38]()
+    * Added use case details for `edit module class` and `link student to module class` feature [\#38]()
   * README:
     * Added description of project [\#35]()
     * Designed the UI for the project [\#35]()
