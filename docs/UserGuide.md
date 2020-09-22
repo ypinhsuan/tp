@@ -147,25 +147,25 @@ Format: `clear`
 
 Adds a class to the application.
 
-Format: `add-class c/CLASS_NAME`
+Format: `add-class n/CLASS_NAME`
 
 Examples:
-* `add-class c/CS2103T Tutorial T10`
+* `add-class n/CS2103T Tutorial T10`
 
 #### Listing all students within a class : `list-students`
 
 Shows a list of all students within a particular class in the application.
 
-Format: `list-students c/CLASS_NAME`
+Format: `list-students c/CLASS_INDEX`
 
 Examples:
-* `list-students c/CS2103T Tutorial T10`
+* `list-students c/3`
 
 #### Editing a class : `edit-class`
 
 Edits an existing class in the application.
 
-Format: `edit-class INDEX c/CLASS_NAME`
+Format: `edit-class INDEX n/CLASS_NAME`
 
 * Edits the class at the specified `INDEX`. 
 * The index refers to the index number shown in the displayed class list. 
@@ -173,7 +173,7 @@ Format: `edit-class INDEX c/CLASS_NAME`
 * A new class name must be provided.
 
 Examples:
-*  `edit 1 c/CS2103T Tutorial T10` Edits the class name of the 1st class to be `CS2103T Tutorial T10`.
+*  `edit 1 n/CS2103T Tutorial T10` Edits the class name of the 1st class to be `CS2103T Tutorial T10`.
 
 #### Deleting a class: `delete-class`
 
@@ -192,7 +192,7 @@ Examples:
 
 Unlinks an existing student from an existing class in the application.
 
-Format: `unlink s/INDEX c/INDEX`
+Format: `unlink s/STUDENT_INDEX c/CLASS_INDEX`
 
 * Unlinks the student at the specified `INDEX` from the class at the specified `INDEX`. 
 * The index refers to the index number shown in the displayed student list and class list respectively.
@@ -237,10 +237,10 @@ Action | Format, Examples
 **Find Student** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Delete Student** | `delete INDEX`<br> e.g., `delete 3`
 **Clear All Students** | `clear`
-**Add Class** | `add-class c/CLASS_NAME`<br> e.g., `add-class c/CS2103T Tutorial T10`
-**List Students in a Class** | `list-students c/CLASS_NAME`<br> e.g., `list-students c/CS2103T Tutorial T10`
-**Edit Class** | `edit-class INDEX c/CLASS_NAME` <br> e.g., `edit 1 c/CS2103T Tutorial T10`
+**Add Class** | `add-class n/CLASS_NAME`<br> e.g., `add-class n/CS2103T Tutorial T10`
+**List Students in a Class** | `list-students c/INDEX`<br> e.g., `list-students c/CS2103T Tutorial T10`
+**Edit Class** | `edit-class INDEX n/CLASS_NAME` <br> e.g., `edit 1 n/CS2103T Tutorial T10`
 **Delete Class** | `delete-class INDEX`<br> e.g., `delete-class 2`
-**Unlink Student From a Class** | `unlink s/INDEX c/INDEX` <br> e.g., `unlink s/1 c/2`
+**Unlink Student From a Class** | `unlink s/STUDENT_INDEX c/CLASS_INDEX` <br> e.g., `unlink s/1 c/2`
 **Clear All Classes** |`clear-class`
 **Help** | `help`
