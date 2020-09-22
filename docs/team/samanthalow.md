@@ -14,10 +14,10 @@ Given below are my contributions to the project.
 
 * **Documentation**:
   * Developer Guide:
-    * Added use case details for `edit module class` and `link student to module class` feature [\#38]()
+    * Added use case details for `edit module class` and `link student to module class` feature
   * README:
-    * Added description of project [\#35]()
-    * Designed the UI for the project [\#35]()
+    * Added description of project
+    * Designed the UI for the project
     
 * **Community**:
   * PRs reviewed (with non-trivial review comments):
