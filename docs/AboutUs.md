@@ -26,10 +26,10 @@ You can reach us at the following emails
 
 ### Tan Rui Xuan
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/ruixuantan.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/ruixuantan)]
+[[portfolio](team/ruixuantan.md)]
 
 * Role: Developer
 * Responsibilities: Testing, Logic
