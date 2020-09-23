@@ -18,6 +18,6 @@ Given below are my contributions to the project.
   * README:
     * Added description of project
     * Designed the UI for the project
-    
+
 * **Community**:
   * PRs reviewed (with non-trivial review comments):

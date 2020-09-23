@@ -324,7 +324,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. Tutor's Pet shows an error message.
 
       Use case ends.
-      
+
 **Use case: UC02 - List students**
 
 **MSS**
@@ -372,9 +372,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  User provides the parameters to find student.
 3.  Tutor's Pet finds the student.
 4.  Student is found by Tutor's Pet.
-    
+
     Use case ends.
-    
+
 **Extensions**
 
 * 2a. The parameters provided are invalid.
@@ -382,7 +382,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. Tutor's Pet shows an error message.
 
       Use case ends.
-      
+
 * 3a. Student not found.
 
     * 3a1. Tutor's Pet shows that student is not found.
@@ -506,9 +506,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  User provides the parameters to find class.
 3.  Tutor's Pet finds the class.
 4.  Class is found by Tutor's Pet.
-    
+
     Use case ends.
-    
+
 **Extensions**
 
 * 2a. The parameters provided are invalid.
@@ -516,7 +516,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. Tutor's Pet shows an error message.
 
       Use case ends.
-      
+
 * 3a. Class not found.
 
     * 3a1. Tutor's Pet shows that class is not found.
@@ -545,7 +545,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. Tutor's Pet shows an error message.
 
       Use case resumes at step 2.
-      
+
 **Use case: UC12 - Clear all classes**
 
 **MSS**
@@ -612,7 +612,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 5a1. Tutor's Pet shows an error message.
 
       Use case resumes at step 4.
-      
+
 * 5b. The specified student is not linked to the specified class.
 
     * 5b1. Tutor's Pet shows an error message.
