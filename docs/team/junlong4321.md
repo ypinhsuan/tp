@@ -22,4 +22,4 @@ Given below are my contributions to the project.
     * Consolidated and organised all use cases into a table and also to follow a certain action sequence
 
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): [\#37]()
+  * PRs reviewed (with non-trivial review comments):

@@ -59,7 +59,7 @@ If you can type fast, Tutor's pet can get your class management tasks done faste
 
 </div>
 
-## Command summary
+## Command list
 
 | Action                          | Format, Examples                                                                                                                            |
 |---------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
@@ -80,7 +80,7 @@ If you can type fast, Tutor's pet can get your class management tasks done faste
 | **Unlink Student From A Class** | `unlink s/STUDENT_INDEX c/CLASS_INDEX` <br> e.g., `unlink s/1 c/2`                                                                          |
 | **Exit**                        | `exit`                                                                                                                                      |
 
-### Help : `help`
+### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
 
@@ -88,7 +88,7 @@ Format: `help`
 
 ### Managing Students
 
-#### Add Student : `add-student`
+#### Adding a student : `add-student`
 
 Adds a student to the list of students.
 
@@ -102,13 +102,13 @@ Examples:
 * `add-student n/John Doe t/@johndoe e/johnd@example.com`
 * `add-student n/Betsy Crowe t/@betsycrowe e/betsycrowe@example.com tag/student`
 
-#### List All Students : `list`
+#### List all students : `list`
 
 Shows a list of all students in the application.
 
 Format: `list`
 
-#### Edit Student : `edit-student`
+#### Edit a student : `edit-student`
 
 Edits an existing student in the application.
 
@@ -125,7 +125,7 @@ Examples:
 *  `edit-student 1 t/@johndoe e/johndoe@example.com` Edits the telegram handle and email address of the 1st student to be `@johndoe` and `johndoe@example.com` respectively.
 *  `edit-student 2 n/Betsy Crower t/` Edits the name of the 2nd student to be `Betsy Crower` and clears all existing tags.
 
-#### Find Student : `find-student`
+#### Finding student by name : `find-student`
 
 Finds students whose names contain any of the given keywords.
 
@@ -142,7 +142,7 @@ Examples:
 * `find-student John` returns `john` and `John Doe`
 * `find-student alex david` returns `Alex Yeoh`, `David Li`<br>
 
-#### Delete Student : `delete-student`
+#### Deleting a student : `delete-student`
 
 Deletes the specified student from the application.
 
@@ -156,7 +156,7 @@ Examples:
 * `list` followed by `delete-student 2` deletes the 2nd student in the application.
 * `find-student Betsy` followed by `delete-student 1` deletes the 1st student in the results of the `find-student` command.
 
-#### Clear All Students : `clear-student`
+#### Clear all students : `clear-student`
 
 Clears all students from the application.
 
@@ -164,7 +164,7 @@ Format: `clear-student`
 
 ### Managing Classes : [coming soon]
 
-#### Add Class : `add-class`
+#### Adding a class : `add-class`
 
 Adds a class to the application.
 
@@ -173,7 +173,7 @@ Format: `add-class n/CLASS_NAME`
 Examples:
 * `add-class n/CS2103T Tutorial T10`
 
-#### List Students In A Class : `list-students`
+#### Listing all students within a class : `list-students`
 
 Shows a list of all students within a particular class in the application.
 
@@ -182,7 +182,7 @@ Format: `list-students c/INDEX`
 Examples:
 * `list-students c/3`
 
-#### Edit Class : `edit-class`
+#### Editing a class : `edit-class`
 
 Edits an existing class in the application.
 
@@ -196,7 +196,7 @@ Format: `edit-class INDEX n/CLASS_NAME`
 Examples:
 *  `edit 1 n/CS2103T Tutorial T10` Edits the class name of the 1st class to be `CS2103T Tutorial T10`.
 
-#### Find Class : `find-class`
+#### Finding class by name : `find-class`
 
 Finds classes whose names contain any of the given keywords.
 
@@ -213,7 +213,7 @@ Examples:
 * `find-class CS2100` returns `CS2100 tut` and `CS2100 lab`
 * `find tut CS2030` returns `CS2103T tut`, `CS2030 lab`<br>
 
-#### Delete Class : `delete-class`
+#### Deleting a class : `delete-class`
 
 Deletes the specified class from the application.
 
@@ -226,13 +226,13 @@ Format: `delete-class INDEX`
 Examples:
 * `delete-class 2` deletes the 2nd class in the application.
 
-#### Clear All Classes : `clear-class`
+#### Clear all classes : `clear-class`
 
 Clears all classes from the application.
 
 Format: `clear-class`
 
-#### Linking Student To A Class: `link`
+#### Linking a student to a class : `link`
 
 Links an existing student to an existing class in the application.
 
@@ -247,7 +247,7 @@ Examples:
 * `list` followed by `link s/1 c/2` links the 1st student in the application to the 2nd class in the application.
 * `find Betsy` followed by `link s/1 c/2` links the 1st student in the results of the `find` command to the 2nd class in the application.
 
-#### Unlink Student From A Class : `unlink`
+#### Unlinking a student from a class : `unlink`
 
 Unlinks an existing student from an existing class in the application.
 
@@ -261,7 +261,7 @@ Format: `unlink s/STUDENT_INDEX c/CLASS_INDEX`
 Examples:
 *  `unlink s/1 c/2` Unlinks the 1st student from the 2nd class in the respective lists.
 
-### Exit : `exit`
+### Exiting the program : `exit`
 
 Exits the program.
 

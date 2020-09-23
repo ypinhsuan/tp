@@ -371,7 +371,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  User requests to find a student.
 2.  User provides the parameters to find student.
 3.  Tutor's Pet finds the student.
-4.  Student is found by Tutor's Pet.
+4.  Tutor's Pet displays all matching students found.
 
     Use case ends.
 
@@ -383,9 +383,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-* 3a. Student not found.
+* 3a. No students found.
 
-    * 3a1. Tutor's Pet shows that student is not found.
+    * 3a1. Tutor's Pet displays a message that no students are found.
 
       Use case ends.
 
@@ -505,7 +505,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  User requests to find a class.
 2.  User provides the parameters to find class.
 3.  Tutor's Pet finds the class.
-4.  Class is found by Tutor's Pet.
+4.  Tutor's Pet displays all matching classes found.
 
     Use case ends.
 
@@ -517,9 +517,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-* 3a. Class not found.
+* 3a. No classes found.
 
-    * 3a1. Tutor's Pet shows that class is not found.
+    * 3a1. Tutor's Pet displays a message that no classes are found.
 
       Use case ends.
 
