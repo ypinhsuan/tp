@@ -225,6 +225,21 @@ Clears all classes from the application.
 
 Format: `clear-class`
 
+#### Linking a student to a class: `link`
+
+Links an existing student to an existing class in the application.
+
+Format: `link s/STUDENT_INDEX c/CLASS_INDEX`
+
+* Links the student at the specified `STUDENT_INDEX` to the class at the specified `CLASS_INDEX`.
+* `STUDENT_INDEX` refers to the index number shown in the displayed student list.
+* `CLASS_INDEX` refers to the index number shown in the displayed class list.
+* The indexes **must be positive integers** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `link s/1 c/2` links the 1st student in the application to the 2nd class in the application.
+* `find Betsy` followed by `link s/1 c/2` links the 1st student in the results of the `find` command to the 2nd class in the application.
+
 ### Exiting the program : `exit`
 
 Exits the program.
