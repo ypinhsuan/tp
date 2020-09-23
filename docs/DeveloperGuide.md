@@ -302,8 +302,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | UC10        | Find a class                     |
 | UC11        | Delete a class                   |
 | UC12        | Clear all classes                |
-| UC13        | Linking a student to a class     |
-| UC14        | Unlinking a student from a class |
+| UC13        | Link a student to a class     |
+| UC14        | Unlink a student from a class |
 
 (For all use cases below, the **System** is `Tutor's Pet` and the **Actor** is the `user`, unless specified otherwise)
 
@@ -555,7 +555,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Use case: UC13 - Linking a student to a class**
+**Use case: UC13 - Link a student to a class**
 
 **MSS**
 
@@ -584,7 +584,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 4.
 
-**Use case: UC14 - Unlinking a student from a class**
+**Use case: UC14 - Unlink a student from a class**
 
 **MSS**
 

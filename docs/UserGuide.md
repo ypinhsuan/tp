@@ -59,7 +59,7 @@ If you can type fast, Tutor's pet can get your class management tasks done faste
 
 </div>
 
-## Command list
+## Command overview
 
 | Action                          | Format, Examples                                                                                                                            |
 |---------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
@@ -102,13 +102,13 @@ Examples:
 * `add-student n/John Doe t/@johndoe e/johnd@example.com`
 * `add-student n/Betsy Crowe t/@betsycrowe e/betsycrowe@example.com tag/student`
 
-#### List all students : `list`
+#### Listing all students : `list`
 
 Shows a list of all students in the application.
 
 Format: `list`
 
-#### Edit a student : `edit-student`
+#### Editing a student : `edit-student`
 
 Edits an existing student in the application.
 
@@ -156,7 +156,7 @@ Examples:
 * `list` followed by `delete-student 2` deletes the 2nd student in the application.
 * `find-student Betsy` followed by `delete-student 1` deletes the 1st student in the results of the `find-student` command.
 
-#### Clear all students : `clear-student`
+#### Clearing all students : `clear-student`
 
 Clears all students from the application.
 
@@ -226,7 +226,7 @@ Format: `delete-class INDEX`
 Examples:
 * `delete-class 2` deletes the 2nd class in the application.
 
-#### Clear all classes : `clear-class`
+#### Clearing all classes : `clear-class`
 
 Clears all classes from the application.
 
