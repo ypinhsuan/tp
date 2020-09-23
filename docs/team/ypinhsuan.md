@@ -17,6 +17,6 @@ Given below are my contributions to the project.
     * Added use case details for `add a student`, `list students` and `list students within a class`
   * User Guide:
     * Update commands related to students
-    
+
 * **Community**:
   * PRs reviewed (with non-trivial review comments):
