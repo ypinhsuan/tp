@@ -62,4 +62,4 @@ You can reach us at the following emails
 [[portfolio](team/ypinhsuan.md)]
 
 * Role: Developer
-* Responsibilities: Documentation, Deliverables and Deadlines
+* Responsibilities: Documentation, Deliverables and Deadlines, Logic

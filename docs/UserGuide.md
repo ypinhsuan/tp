@@ -179,6 +179,8 @@ Shows a list of all students within a particular class in the application.
 
 Format: `list-students c/INDEX`
 
+* The index refers to the index number shown in the displayed class list.
+
 Examples:
 * `list-students c/3`
 
