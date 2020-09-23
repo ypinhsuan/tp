@@ -59,7 +59,28 @@ If you can type fast, Tutor's pet can get your class management tasks done faste
 
 </div>
 
-### Viewing help : `help`
+## Command summary
+
+Action | Format, Examples
+--------|------------------
+**Help** | `help`
+**Add Student** | `add-student n/NAME t/TELEGRAM_HANDLE e/EMAIL [tag/TAG]…​` <br> e.g., `add-student n/John Doe t/@johndoe e/johnd@example.com tag/student`
+**List All Students** | `list`
+**Edit Student** | `edit-student INDEX [n/NAME] [t/TELEGRAM_HANDLE] [e/EMAIL] [tag/TAG]…​`<br> e.g., `edit-student 2 n/James Lee e/jameslee@example.com`
+**Find Student** | `find-student KEYWORD [MORE_KEYWORDS]`<br> e.g., `find-student James Jake`
+**Delete Student** | `delete-student INDEX`<br> e.g., `delete-student 3`
+**Clear All Students** | `clear-student`
+**Add Class** | `add-class n/CLASS_NAME`<br> e.g., `add-class n/CS2103T Tutorial T10`
+**List Students In A Class** | `list-students c/INDEX`<br> e.g., `list-students c/3`
+**Edit Class** | `edit-class INDEX n/CLASS_NAME` <br> e.g., `edit 1 n/CS2103T Tutorial T10`
+**Find Class** | `find-class KEYWORD [MORE_KEYWORDS]`<br> e.g., `find-class CS2103T`
+**Delete Class** | `delete-class INDEX`<br> e.g., `delete-class 2`
+**Clear All Classes** |`clear-class`
+**Linking Student To A Class** | ``link s/STUDENT_INDEX c/CLASS_INDEX``<br> e.g., `find Betsy link s/1 c/2`
+**Unlink Student From A Class** | `unlink s/STUDENT_INDEX c/CLASS_INDEX` <br> e.g., `unlink s/1 c/2`
+**Exit** | `exit`
+
+### Help : `help`
 
 Shows a message explaining how to access the help page.
 
@@ -67,7 +88,7 @@ Format: `help`
 
 ### Managing Students
 
-#### Adding a student: `add-student`
+#### Add Student : `add-student`
 
 Adds a student to the list of students.
 
@@ -81,13 +102,13 @@ Examples:
 * `add-student n/John Doe t/@johndoe e/johnd@example.com`
 * `add-student n/Betsy Crowe t/@betsycrowe e/betsycrowe@example.com tag/student`
 
-#### Listing all students : `list`
+#### List All Students : `list`
 
 Shows a list of all students in the application.
 
 Format: `list`
 
-#### Editing a student : `edit-student`
+#### Edit Student : `edit-student`
 
 Edits an existing student in the application.
 
@@ -104,7 +125,7 @@ Examples:
 *  `edit-student 1 t/@johndoe e/johndoe@example.com` Edits the telegram handle and email address of the 1st student to be `@johndoe` and `johndoe@example.com` respectively.
 *  `edit-student 2 n/Betsy Crower t/` Edits the name of the 2nd student to be `Betsy Crower` and clears all existing tags.
 
-#### Locating students by name: `find-student`
+#### Find Student : `find-student`
 
 Finds students whose names contain any of the given keywords.
 
@@ -121,7 +142,7 @@ Examples:
 * `find-student John` returns `john` and `John Doe`
 * `find-student alex david` returns `Alex Yeoh`, `David Li`<br>
 
-#### Deleting a student : `delete-student`
+#### Delete Student : `delete-student`
 
 Deletes the specified student from the application.
 
@@ -135,15 +156,15 @@ Examples:
 * `list` followed by `delete-student 2` deletes the 2nd student in the application.
 * `find-student Betsy` followed by `delete-student 1` deletes the 1st student in the results of the `find-student` command.
 
-#### Clearing all students : `clear-student`
+#### Clear All Students : `clear-student`
 
 Clears all students from the application.
 
 Format: `clear-student`
 
-### Managing Classes: [coming soon]
+### Managing Classes : [coming soon]
 
-#### Adding a class: `add-class`
+#### Add Class : `add-class`
 
 Adds a class to the application.
 
@@ -152,7 +173,7 @@ Format: `add-class n/CLASS_NAME`
 Examples:
 * `add-class n/CS2103T Tutorial T10`
 
-#### Listing all students within a class : `list-students`
+#### List Students In A Class : `list-students`
 
 Shows a list of all students within a particular class in the application.
 
@@ -161,7 +182,7 @@ Format: `list-students c/INDEX`
 Examples:
 * `list-students c/3`
 
-#### Editing a class : `edit-class`
+#### Edit Class : `edit-class`
 
 Edits an existing class in the application.
 
@@ -175,7 +196,7 @@ Format: `edit-class INDEX n/CLASS_NAME`
 Examples:
 *  `edit 1 n/CS2103T Tutorial T10` Edits the class name of the 1st class to be `CS2103T Tutorial T10`.
 
-#### Locating classes by name: `find-class`
+#### Find Class : `find-class`
 
 Finds classes whose names contain any of the given keywords.
 
@@ -192,7 +213,7 @@ Examples:
 * `find-class CS2100` returns `CS2100 tut` and `CS2100 lab`
 * `find tut CS2030` returns `CS2103T tut`, `CS2030 lab`<br>
 
-#### Deleting a class: `delete-class`
+#### Delete Class : `delete-class`
 
 Deletes the specified class from the application.
 
@@ -205,27 +226,13 @@ Format: `delete-class INDEX`
 Examples:
 * `delete-class 2` deletes the 2nd class in the application.
 
-#### Unlinking a student from a class: `unlink`
-
-Unlinks an existing student from an existing class in the application.
-
-Format: `unlink s/STUDENT_INDEX c/CLASS_INDEX`
-
-* Unlinks the student at the specified `STUDENT_INDEX` from the class at the specified `CLASS_INDEX`. 
-*`STUDENT_INDEX` refers to the index number shown in the displayed student list.
-*`CLASS_INDEX` refers to the index number shown in the displayed class list.
-* The indexes **must be positive integers** 1, 2, 3, …​
-
-Examples:
-*  `unlink s/1 c/2` Unlinks the 1st student from the 2nd class in the respective lists.
-
-#### Clearing all classes : `clear-class`
+#### Clear All Classes : `clear-class`
 
 Clears all classes from the application.
 
 Format: `clear-class`
 
-#### Linking a student to a class: `link`
+#### Linking Student To A Class: `link`
 
 Links an existing student to an existing class in the application.
 
@@ -240,7 +247,21 @@ Examples:
 * `list` followed by `link s/1 c/2` links the 1st student in the application to the 2nd class in the application.
 * `find Betsy` followed by `link s/1 c/2` links the 1st student in the results of the `find` command to the 2nd class in the application.
 
-### Exiting the program : `exit`
+#### Unlink Student From A Class : `unlink`
+
+Unlinks an existing student from an existing class in the application.
+
+Format: `unlink s/STUDENT_INDEX c/CLASS_INDEX`
+
+* Unlinks the student at the specified `STUDENT_INDEX` from the class at the specified `CLASS_INDEX`. 
+*`STUDENT_INDEX` refers to the index number shown in the displayed student list.
+*`CLASS_INDEX` refers to the index number shown in the displayed class list.
+* The indexes **must be positive integers** 1, 2, 3, …​
+
+Examples:
+*  `unlink s/1 c/2` Unlinks the 1st student from the 2nd class in the respective lists.
+
+### Exit : `exit`
 
 Exits the program.
 
@@ -259,22 +280,3 @@ There is no need to save manually.
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Tutor's Pet home folder.
 
 --------------------------------------------------------------------------------------------------------------------
-
-## Command summary
-
-Action | Format, Examples
---------|------------------
-**Add Student** | `add-student n/NAME t/TELEGRAM_HANDLE e/EMAIL [tag/TAG]…​` <br> e.g., `add-student n/John Doe t/@johndoe e/johnd@example.com tag/student`
-**List All Students** | `list`
-**Edit Student** | `edit-student INDEX [n/NAME] [t/TELEGRAM_HANDLE] [e/EMAIL] [tag/TAG]…​`<br> e.g., `edit-student 2 n/James Lee e/jameslee@example.com`
-**Find Student** | `find-student KEYWORD [MORE_KEYWORDS]`<br> e.g., `find-student James Jake`
-**Delete Student** | `delete-student INDEX`<br> e.g., `delete-student 3`
-**Clear All Students** | `clear-student`
-**Add Class** | `add-class n/CLASS_NAME`<br> e.g., `add-class n/CS2103T Tutorial T10`
-**List Students in a Class** | `list-students c/INDEX`<br> e.g., `list-students c/3`
-**Edit Class** | `edit-class INDEX n/CLASS_NAME` <br> e.g., `edit 1 n/CS2103T Tutorial T10`
-**Find Class** | `find-class KEYWORD [MORE_KEYWORDS]`<br> e.g., `find-class CS2103T`
-**Delete Class** | `delete-class INDEX`<br> e.g., `delete-class 2`
-**Unlink Student From a Class** | `unlink s/STUDENT_INDEX c/CLASS_INDEX` <br> e.g., `unlink s/1 c/2`
-**Clear All Classes** |`clear-class`
-**Help** | `help`
