@@ -255,7 +255,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *` | Tutor with many classes | Create classes | Put my students in the appropriate classes |
 | `* * *` | Tutor with many classes | Insert my students into the appropriate classes | Organise my students via classes
 | `* * *` | New Tutor | View the help menu | Be familiar with app usage |
-| `* * *` | Tutor | Delete student entries | Update my list of students if a student were to drop the module class |
+| `* * *` | Tutor | Delete student entries | Update my list of students if a student were to drop the class |
 | `* *` | Tutor | View my students' test scores easily | Gauge my teaching efficiency |
 | `* *` | Tutor | Mark my student's attendance and participation | Gauge each student's participation level |
 | `* *` | Tutor teaching CS modules | View my students' GitHub | Gauge my student's progress in their coding assignment |
@@ -377,12 +377,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. The parameters provided are invalid.
-
-    * 2a1. Tutor's Pet shows an error message.
-
-      Use case ends.
-
 * 3a. No students found.
 
     * 3a1. Tutor's Pet displays a message that no students are found.
@@ -455,14 +449,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to list students within a class.
-2.  User provides the class name.
+2.  User specifies the class.
 3.  Tutor's Pet shows a list of students in the class.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The class name provided is invalid.
+* 2a. The given class index is invalid.
 
     * 2a1. Tutor's Pet shows an error message.
 
@@ -510,12 +504,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends.
 
 **Extensions**
-
-* 2a. The parameters provided are invalid.
-
-    * 2a1. Tutor's Pet shows an error message.
-
-      Use case ends.
 
 * 3a. No classes found.
 
