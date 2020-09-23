@@ -288,9 +288,53 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
+| Use Case ID | Description                      |
+|-------------|----------------------------------|
+| UC01        | Add a student                    |
+| UC02        | List students                    |
+| UC03        | Edit a student                   |
+| UC04        | Find a student                   |
+| UC05        | Delete a student                 |
+| UC06        | Clear all students               |
+| UC07        | Add a class                      |
+| UC08        | List students within a class     |
+| UC09        | Edit a class                     |
+| UC10        | Find a class                     |
+| UC11        | Delete a class                   |
+| UC12        | Clear all classes                |
+| UC13        | Linking a student to a class     |
+| UC14        | Unlinking a student from a class |
+
 (For all use cases below, the **System** is `Tutor's Pet` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: UC01 - Edit a student**
+**Use case: UC01 - Add a student**
+
+**MSS**
+
+1.  User requests to add a student.
+2.  User provides the parameters to be added.
+3.  Tutor's Pet adds the student.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The parameters provided are invalid.
+
+    * 2a1. Tutor's Pet shows an error message.
+
+      Use case ends.
+      
+**Use case: UC02 - List students**
+
+**MSS**
+
+1.  User requests to list students.
+2.  Tutor's Pet shows a list of students.
+
+    Use case ends.
+
+**Use case: UC03 - Edit a student**
 
 **MSS**
 
@@ -320,7 +364,32 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: UC02 - Delete a student**
+**Use case: UC04 - Find a student**
+
+**MSS**
+
+1.  User requests to find a student.
+2.  User provides the parameters to find student.
+3.  Tutor's Pet finds the student.
+4.  Student is found by Tutor's Pet.
+    
+    Use case ends.
+    
+**Extensions**
+
+* 2a. The parameters provided are invalid.
+
+    * 2a1. Tutor's Pet shows an error message.
+
+      Use case ends.
+      
+* 3a. Student not found.
+
+    * 3a1. Tutor's Pet shows that student is not found.
+
+      Use case ends.
+
+**Use case: UC05 - Delete a student**
 
 **MSS**
 
@@ -348,7 +417,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case skips to step 5.
 
-**Use case: UC03 - Add a class**
+**Use case: UC06 - Clear all students**
+
+**MSS**
+
+1. User requests to clear all students.
+2. Tutor's Pet clears all students.
+
+    Use case ends.
+
+**Use case: UC07 - Add a class**
 
 **MSS**
 
@@ -372,7 +450,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
 
-**Use case: UC04 - Edit a class**
+**Use case: UC08 - List students within a class**
+
+**MSS**
+
+1.  User requests to list students within a class.
+2.  User provides the class name.
+3.  Tutor's Pet shows a list of students in the class.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The class name provided is invalid.
+
+    * 2a1. Tutor's Pet shows an error message.
+
+      Use case resumes at step 1.
+
+**Use case: UC09 - Edit a class**
 
 **MSS**
 
@@ -402,7 +498,32 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: UC05 - Delete a class**
+**Use case: UC10 - Find a class**
+
+**MSS**
+
+1.  User requests to find a class.
+2.  User provides the parameters to find class.
+3.  Tutor's Pet finds the class.
+4.  Class is found by Tutor's Pet.
+    
+    Use case ends.
+    
+**Extensions**
+
+* 2a. The parameters provided are invalid.
+
+    * 2a1. Tutor's Pet shows an error message.
+
+      Use case ends.
+      
+* 3a. Class not found.
+
+    * 3a1. Tutor's Pet shows that class is not found.
+
+      Use case ends.
+
+**Use case: UC11 - Delete a class**
 
 **MSS**
 
@@ -424,8 +545,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. Tutor's Pet shows an error message.
 
       Use case resumes at step 2.
+      
+**Use case: UC12 - Clear all classes**
 
-**Use case: UC06 - Linking a student to a class**
+**MSS**
+
+1. User requests to clear all classes.
+2. Tutor's Pet clears all classes.
+
+    Use case ends.
+
+**Use case: UC13 - Linking a student to a class**
 
 **MSS**
 
@@ -454,7 +584,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 4.
 
-**Use case: UC07 - Unlinking a student from a class**
+**Use case: UC14 - Unlinking a student from a class**
 
 **MSS**
 
@@ -488,53 +618,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 5b1. Tutor's Pet shows an error message.
 
       Use case ends.
-      
-**Use case: UC08 - Add a student**
-
-**MSS**
-
-1.  User requests to add a student.
-2.  User provides the parameters to be added.
-3.  Tutor's Pet adds the student.
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The parameters provided are invalid.
-
-    * 2a1. Tutor's Pet shows an error message.
-
-      Use case resumes at step 1.
-      
-**Use case: UC09 - List students**
-
-**MSS**
-
-1.  User requests to list students.
-2.  Tutor's Pet shows a list of students.
-
-    Use case ends.
-
-**Use case: UC010 - List students within a class**
-
-**MSS**
-
-1.  User requests to list students within a class.
-2.  User provides the class name.
-3.  Tutor's Pet shows a list of students in the class.
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The class name provided is invalid.
-
-    * 2a1. Tutor's Pet shows an error message.
-
-      Use case resumes at step 1.
-
-*{More to be added}*
 
 ### Non-Functional Requirements
 
