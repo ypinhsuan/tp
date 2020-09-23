@@ -55,7 +55,7 @@ If you can type fast, Tutor's pet can get your class management tasks done faste
   e.g. `[tag/TAG]…​` can be used as ` ` (i.e. 0 times), `tag/student`, `tag/average tag/TA candidate` etc.
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+  e.g. if the command specifies `n/NAME t/TELEGRAM_HANDLE`, `t/TELEGRAM_HANDLE n/NAME` is also acceptable.
 
 </div>
 
@@ -72,11 +72,11 @@ If you can type fast, Tutor's pet can get your class management tasks done faste
 | **Clear All Students**          | `clear-student`                                                                                                                             |
 | **Add Class**                   | `add-class n/CLASS_NAME`<br> e.g., `add-class n/CS2103T Tutorial T10`                                                                       |
 | **List Students In A Class**    | `list-students c/INDEX`<br> e.g., `list-students c/3`                                                                                       |
-| **Edit Class**                  | `edit-class INDEX n/CLASS_NAME` <br> e.g., `edit 1 n/CS2103T Tutorial T10`                                                                  |
+| **Edit Class**                  | `edit-class INDEX n/CLASS_NAME` <br> e.g., `edit-class 1 n/CS2103T Tutorial T10`                                                                  |
 | **Find Class**                  | `find-class KEYWORD [MORE_KEYWORDS]`<br> e.g., `find-class CS2103T`                                                                         |
 | **Delete Class**                | `delete-class INDEX` e.g., `delete-class 2`                                                                                                 |
 | **Clear All Classes**           | `clear-class`                                                                                                                               |
-| **Linking Student To A Class**  | ``link s/STUDENT_INDEX c/CLASS_INDEX``<br> e.g., `find Betsy link s/1 c/2`                                                                  |
+| **Linking Student To A Class**  | ``link s/STUDENT_INDEX c/CLASS_INDEX``<br> e.g., `link s/1 c/2`                                                                  |
 | **Unlink Student From A Class** | `unlink s/STUDENT_INDEX c/CLASS_INDEX` <br> e.g., `unlink s/1 c/2`                                                                          |
 | **Exit**                        | `exit`                                                                                                                                      |
 
@@ -123,7 +123,7 @@ Format: `edit-student INDEX [n/NAME] [t/TELEGRAM_HANDLE] [e/EMAIL] [tag/TAG]…�
 
 Examples:
 *  `edit-student 1 t/@johndoe e/johndoe@example.com` Edits the telegram handle and email address of the 1st student to be `@johndoe` and `johndoe@example.com` respectively.
-*  `edit-student 2 n/Betsy Crower t/` Edits the name of the 2nd student to be `Betsy Crower` and clears all existing tags.
+*  `edit-student 2 n/Betsy Crower tag/` Edits the name of the 2nd student to be `Betsy Crower` and clears all existing tags.
 
 #### Finding student by name : `find-student`
 
@@ -179,6 +179,8 @@ Shows a list of all students within a particular class in the application.
 
 Format: `list-students c/INDEX`
 
+* The index refers to the index number shown in the displayed class list.
+
 Examples:
 * `list-students c/3`
 
@@ -194,7 +196,7 @@ Format: `edit-class INDEX n/CLASS_NAME`
 * A new class name must be provided.
 
 Examples:
-*  `edit 1 n/CS2103T Tutorial T10` Edits the class name of the 1st class to be `CS2103T Tutorial T10`.
+*  `edit-class 1 n/CS2103T Tutorial T10` Edits the class name of the 1st class to be `CS2103T Tutorial T10`.
 
 #### Finding class by name : `find-class`
 
@@ -211,7 +213,7 @@ Format: `find-class KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 * `find-class CS2100` returns `CS2100 tut` and `CS2100 lab`
-* `find tut CS2030` returns `CS2103T tut`, `CS2030 lab`<br>
+* `find-class tut CS2030` returns `CS2103T tut`, `CS2030 lab`<br>
 
 #### Deleting a class : `delete-class`
 
@@ -245,7 +247,7 @@ Format: `link s/STUDENT_INDEX c/CLASS_INDEX`
 
 Examples:
 * `list` followed by `link s/1 c/2` links the 1st student in the application to the 2nd class in the application.
-* `find Betsy` followed by `link s/1 c/2` links the 1st student in the results of the `find` command to the 2nd class in the application.
+* `find-student Betsy` followed by `link s/1 c/2` links the 1st student in the results of the `find-student` command to the 2nd class in the application.
 
 #### Unlinking a student from a class : `unlink`
 
@@ -254,8 +256,8 @@ Unlinks an existing student from an existing class in the application.
 Format: `unlink s/STUDENT_INDEX c/CLASS_INDEX`
 
 * Unlinks the student at the specified `STUDENT_INDEX` from the class at the specified `CLASS_INDEX`.
-*`STUDENT_INDEX` refers to the index number shown in the displayed student list.
-*`CLASS_INDEX` refers to the index number shown in the displayed class list.
+* `STUDENT_INDEX` refers to the index number shown in the displayed student list.
+* `CLASS_INDEX` refers to the index number shown in the displayed class list.
 * The indexes **must be positive integers** 1, 2, 3, …​
 
 Examples:
