@@ -61,24 +61,24 @@ If you can type fast, Tutor's pet can get your class management tasks done faste
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Help** | `help`
-**Add Student** | `add-student n/NAME t/TELEGRAM_HANDLE e/EMAIL [tag/TAG]…​` <br> e.g., `add-student n/John Doe t/@johndoe e/johnd@example.com tag/student`
-**List All Students** | `list`
-**Edit Student** | `edit-student INDEX [n/NAME] [t/TELEGRAM_HANDLE] [e/EMAIL] [tag/TAG]…​`<br> e.g., `edit-student 2 n/James Lee e/jameslee@example.com`
-**Find Student** | `find-student KEYWORD [MORE_KEYWORDS]`<br> e.g., `find-student James Jake`
-**Delete Student** | `delete-student INDEX`<br> e.g., `delete-student 3`
-**Clear All Students** | `clear-student`
-**Add Class** | `add-class n/CLASS_NAME`<br> e.g., `add-class n/CS2103T Tutorial T10`
-**List Students In A Class** | `list-students c/INDEX`<br> e.g., `list-students c/3`
-**Edit Class** | `edit-class INDEX n/CLASS_NAME` <br> e.g., `edit 1 n/CS2103T Tutorial T10`
-**Find Class** | `find-class KEYWORD [MORE_KEYWORDS]`<br> e.g., `find-class CS2103T`
-**Delete Class** | `delete-class INDEX`<br> e.g., `delete-class 2`
-**Clear All Classes** |`clear-class`
-**Linking Student To A Class** | ``link s/STUDENT_INDEX c/CLASS_INDEX``<br> e.g., `find Betsy link s/1 c/2`
-**Unlink Student From A Class** | `unlink s/STUDENT_INDEX c/CLASS_INDEX` <br> e.g., `unlink s/1 c/2`
-**Exit** | `exit`
+| Action                          | Format, Examples                                                                                                                            |
+|---------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
+| **Help**                        | `help`                                                                                                                                      |
+| **Add Student**                 | `add-student n/NAME t/TELEGRAM_HANDLE e/EMAIL [tag/TAG]…​` <br> e.g., `add-student n/John Doe t/@johndoe e/johnd@example.com tag/student`|
+| **List All Students**           | `list`                                                                                                                                      |
+| **Edit Student**                | `edit-student INDEX [n/NAME] [t/TELEGRAM_HANDLE] [e/EMAIL] [tag/TAG]…​`<br> e.g., `edit-student 2 n/James Lee e/jameslee@example.com`    |
+| **Find Student**                | `find-student KEYWORD [MORE_KEYWORDS]`<br> e.g., `find-student James Jake`                                                                  |
+| **Delete Student**              | `delete-student INDEX`<br> e.g., `delete-student 3`                                                                                         |
+| **Clear All Students**          | `clear-student`                                                                                                                             |
+| **Add Class**                   | `add-class n/CLASS_NAME`<br> e.g., `add-class n/CS2103T Tutorial T10`                                                                       |
+| **List Students In A Class**    | `list-students c/INDEX`<br> e.g., `list-students c/3`                                                                                       |
+| **Edit Class**                  | `edit-class INDEX n/CLASS_NAME` <br> e.g., `edit 1 n/CS2103T Tutorial T10`                                                                  |
+| **Find Class**                  | `find-class KEYWORD [MORE_KEYWORDS]`<br> e.g., `find-class CS2103T`                                                                         |
+| **Delete Class**                | `delete-class INDEX` e.g., `delete-class 2`                                                                                                 |
+| **Clear All Classes**           | `clear-class`                                                                                                                               |
+| **Linking Student To A Class**  | ``link s/STUDENT_INDEX c/CLASS_INDEX``<br> e.g., `find Betsy link s/1 c/2`                                                                  |
+| **Unlink Student From A Class** | `unlink s/STUDENT_INDEX c/CLASS_INDEX` <br> e.g., `unlink s/1 c/2`                                                                          |
+| **Exit**                        | `exit`                                                                                                                                      |
 
 ### Help : `help`
 
