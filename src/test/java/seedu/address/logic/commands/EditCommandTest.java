@@ -53,7 +53,7 @@ public class EditCommandTest {
         Student lastStudent = model.getFilteredStudentList().get(indexLastStudent.getZeroBased());
 
         StudentBuilder studentInList = new StudentBuilder(lastStudent);
-        Student editedStudent = studentInList.withName(VALID_NAME_BOB).withPhone(VALID_TELEGRAM_BOB)
+        Student editedStudent = studentInList.withName(VALID_NAME_BOB).withTelegram(VALID_TELEGRAM_BOB)
                 .withTags(VALID_TAG_AVERAGE).build();
 
         EditCommand.EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder().withName(VALID_NAME_BOB)

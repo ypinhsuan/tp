@@ -11,7 +11,6 @@ import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
-<<<<<<< HEAD
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_AVERAGE;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_EXPERIENCED;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
@@ -51,7 +50,7 @@ public class AddCommandParserTest {
         assertParseSuccess(parser, NAME_DESC_AMY + NAME_DESC_BOB + TELEGRAM_DESC_BOB + EMAIL_DESC_BOB
                 + TAG_DESC_EXPERIENCED, new AddCommand(expectedStudent));
 
-        // multiple phones - last phone accepted
+        // multiple telegram - last telegram accepted
         assertParseSuccess(parser, NAME_DESC_BOB + TELEGRAM_DESC_AMY + TELEGRAM_DESC_BOB + EMAIL_DESC_BOB
                 + TAG_DESC_EXPERIENCED, new AddCommand(expectedStudent));
 
@@ -101,7 +100,7 @@ public class AddCommandParserTest {
         assertParseFailure(parser, INVALID_NAME_DESC + TELEGRAM_DESC_BOB + EMAIL_DESC_BOB
                 + TAG_DESC_AVERAGE + TAG_DESC_EXPERIENCED, Name.MESSAGE_CONSTRAINTS);
 
-        // invalid phone
+        // invalid telegram
         assertParseFailure(parser, NAME_DESC_BOB + INVALID_TELEGRAM_DESC + EMAIL_DESC_BOB
                 + TAG_DESC_AVERAGE + TAG_DESC_EXPERIENCED, Telegram.MESSAGE_CONSTRAINTS);
 

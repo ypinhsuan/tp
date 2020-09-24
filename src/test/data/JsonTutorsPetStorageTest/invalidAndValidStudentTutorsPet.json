@@ -1,21 +1,11 @@
 {
-<<<<<<< HEAD:src/test/data/JsonTutorsPetStorageTest/invalidAndValidStudentTutorsPet.json
   "students": [ {
-    "name": "Valid Student",
-    "phone": "9482424",
-    "email": "hans@example.com"
-  }, {
-    "name": "Student With Invalid Phone Field",
-    "phone": "948asdf2424",
-=======
-  "persons": [ {
     "name": "Valid Person",
-    "telegram": "9482424",
+    "telegram": "valid_person",
     "email": "hans@example.com"
   }, {
     "name": "Person With Invalid Telegram Field",
-    "telegram": "948asdf2424",
->>>>>>> Change occurences of Phone to Telegram:src/test/data/JsonAddressBookStorageTest/invalidAndValidPersonAddressBook.json
+    "telegram": "valid-person",
     "email": "hans@example.com"
   } ]
 }

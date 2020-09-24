@@ -56,10 +56,10 @@ public class CommandTestUtil {
 
     static {
         DESC_AMY = new EditStudentDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withPhone(VALID_TELEGRAM_AMY).withEmail(VALID_EMAIL_AMY)
+                .withTelegram(VALID_TELEGRAM_AMY).withEmail(VALID_EMAIL_AMY)
                 .withTags(VALID_TAG_EXPERIENCED).build();
         DESC_BOB = new EditStudentDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_TELEGRAM_BOB).withEmail(VALID_EMAIL_BOB)
+                .withTelegram(VALID_TELEGRAM_BOB).withEmail(VALID_EMAIL_BOB)
                 .withTags(VALID_TAG_AVERAGE, VALID_TAG_EXPERIENCED).build();
     }
 

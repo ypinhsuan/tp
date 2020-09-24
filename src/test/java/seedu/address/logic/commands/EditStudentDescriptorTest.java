@@ -39,7 +39,7 @@ public class EditStudentDescriptorTest {
                 new EditStudentDescriptorBuilder(DESC_AMY).withName(VALID_NAME_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
-        // different phone -> returns false
+        // different telegram -> returns false
         editedAmy = new EditStudentDescriptorBuilder(DESC_AMY).withTelegram(VALID_TELEGRAM_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 

@@ -158,7 +158,7 @@ public class EditCommandParserTest {
         Index targetIndex = INDEX_FIRST_STUDENT;
         String userInput = targetIndex.getOneBased() + TELEGRAM_DESC_AMY + EMAIL_DESC_AMY
                 + TAG_DESC_EXPERIENCED + TELEGRAM_DESC_AMY + EMAIL_DESC_AMY + TAG_DESC_EXPERIENCED
-                + VALID_TELEGRAM_BOB + EMAIL_DESC_BOB + TAG_DESC_AVERAGE;
+                + TELEGRAM_DESC_BOB + EMAIL_DESC_BOB + TAG_DESC_AVERAGE;
 
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder().withTelegram(VALID_TELEGRAM_BOB)
                 .withEmail(VALID_EMAIL_BOB)
