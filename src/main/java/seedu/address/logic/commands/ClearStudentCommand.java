@@ -6,12 +6,12 @@ import seedu.address.model.Model;
 import seedu.address.model.TutorsPet;
 
 /**
- * Clears data in the application.
+ * Clears all students in the student manager.
  */
-public class ClearCommand extends Command {
+public class ClearStudentCommand extends Command {
 
-    public static final String COMMAND_WORD = "clear";
-    public static final String MESSAGE_SUCCESS = "Tutor's Pet has been cleared!";
+    public static final String COMMAND_WORD = "clear-student";
+    public static final String MESSAGE_SUCCESS = "All students in Tutor's Pet has been cleared!";
 
 
     @Override
