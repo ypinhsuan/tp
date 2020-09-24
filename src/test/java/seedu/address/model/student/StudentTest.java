@@ -31,7 +31,8 @@ public class StudentTest {
         assertFalse(ALICE.isSameStudent(null));
 
         // different telegram and email -> returns false
-        Student editedAlice = new StudentBuilder(ALICE).withTelegram(VALID_TELEGRAM_BOB).withEmail(VALID_EMAIL_BOB).build();
+        Student editedAlice = new StudentBuilder(ALICE).withTelegram(VALID_TELEGRAM_BOB)
+                .withEmail(VALID_EMAIL_BOB).build();
         assertFalse(ALICE.isSameStudent(editedAlice));
 
         // different name -> returns false
