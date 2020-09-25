@@ -8,7 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalStudent.CARL;
 import static seedu.address.testutil.TypicalStudent.ELLE;
 import static seedu.address.testutil.TypicalStudent.FIONA;
-import static seedu.address.testutil.TypicalStudent.getTypicalTutorsPet;
+import static seedu.address.testutil.TypicalTutorsPet.getTypicalTutorsPet;
 
 import java.util.Arrays;
 import java.util.Collections;

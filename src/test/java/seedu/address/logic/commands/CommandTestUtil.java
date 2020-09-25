@@ -25,6 +25,8 @@ import seedu.address.testutil.EditStudentDescriptorBuilder;
  */
 public class CommandTestUtil {
 
+    // student-related constants
+
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_PHONE_AMY = "11111111";
@@ -62,6 +64,12 @@ public class CommandTestUtil {
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .withTags(VALID_TAG_AVERAGE, VALID_TAG_EXPERIENCED).build();
     }
+
+    // moduleClass-related constants
+
+    public static final String VALID_NAME_CS2103T_TUTORIAL = "CS2103T Tutorial";
+    public static final String VALID_NAME_CS2101_TUTORIAL = "CS2101 Tutorial";
+    public static final String VALID_NAME_CS2100_TUTORIAL = "CS2100 Tutorial";
 
     /**
      * Executes the given {@code command}, confirms that <br>

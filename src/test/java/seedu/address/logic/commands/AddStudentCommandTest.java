@@ -20,6 +20,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyTutorsPet;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.TutorsPet;
+import seedu.address.model.moduleclass.ModuleClass;
 import seedu.address.model.student.Student;
 import seedu.address.testutil.StudentBuilder;
 
@@ -140,12 +141,42 @@ public class AddStudentCommandTest {
         }
 
         @Override
+        public boolean hasModuleClass(ModuleClass moduleClass) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteModuleClass(ModuleClass target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addModuleClass(ModuleClass moduleClass) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setModuleClass(ModuleClass target, ModuleClass editedModuleClass) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Student> getFilteredStudentList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void updateFilteredStudentList(Predicate<Student> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<ModuleClass> getFilteredModuleClassList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredModuleClassList(Predicate<ModuleClass> predicate) {
             throw new AssertionError("This method should not be called.");
         }
     }

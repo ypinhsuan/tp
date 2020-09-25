@@ -3,34 +3,33 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Objects;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.moduleclass.ModuleClass;
+import seedu.address.model.moduleclass.UniqueModuleClassList;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.UniqueStudentList;
 
 /**
- * Wraps all data at the application level
- * Duplicates are not allowed (by .isSameStudent comparison)
+ * Wraps all data at the application level.
+ * Duplicates are not allowed (by .isSameStudent and .isSameModuleClass comparison).
  */
 public class TutorsPet implements ReadOnlyTutorsPet {
 
     private final UniqueStudentList students;
-
-    /*
-     * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
-     * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
-     *
-     * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
-     *   among constructors.
-     */
-    {
-        students = new UniqueStudentList();
-    }
-
-    public TutorsPet() {}
+    private final UniqueModuleClassList moduleClasses;
 
     /**
-     * Creates a TutorsPet using the Students in the {@code toBeCopied}
+     * Creates a TutorsPet with no existing data.
+     */
+    public TutorsPet() {
+        students = new UniqueStudentList();
+        moduleClasses = new UniqueModuleClassList();
+    }
+
+    /**
+     * Creates a TutorsPet using the Students in the {@code toBeCopied}.
      */
     public TutorsPet(ReadOnlyTutorsPet toBeCopied) {
         this();
@@ -48,12 +47,21 @@ public class TutorsPet implements ReadOnlyTutorsPet {
     }
 
     /**
+     * Replaces the contents of the class list with {@code moduleClasses}.
+     * {@code moduleClasses} must not contain duplicate classes.
+     */
+    public void setModuleClasses(List<ModuleClass> moduleClasses) {
+        this.moduleClasses.setModuleClass(moduleClasses);
+    }
+
+    /**
      * Resets the existing data of this {@code TutorsPet} with {@code newData}.
      */
     public void resetData(ReadOnlyTutorsPet newData) {
         requireNonNull(newData);
 
         setStudents(newData.getStudentList());
+        setModuleClasses(newData.getModuleClassList());
     }
 
     //// student-level operations
@@ -70,8 +78,8 @@ public class TutorsPet implements ReadOnlyTutorsPet {
      * Adds a student to the application.
      * The student must not already exist in the application.
      */
-    public void addStudent(Student p) {
-        students.add(p);
+    public void addStudent(Student student) {
+        students.add(student);
     }
 
     /**
@@ -94,11 +102,49 @@ public class TutorsPet implements ReadOnlyTutorsPet {
         students.remove(key);
     }
 
+    //// moduleClass-level operations
+
+    /**
+     * Returns true if a class with the same identity as {@code moduleClass} exists.
+     */
+    public boolean hasModuleClass(ModuleClass moduleClass) {
+        requireNonNull(moduleClass);
+        return moduleClasses.contains(moduleClass);
+    }
+
+    /**
+     * Adds a class to the application.
+     * The class must not already exist in the application.
+     */
+    public void addModuleClass(ModuleClass moduleClass) {
+        moduleClasses.add(moduleClass);
+    }
+
+    /**
+     * Replaces the given class {@code target} in the list with {@code editedModuleClass}.
+     * {@code target} must exist in the application.
+     * The class identity of {@code editedModuleClass} must not be the same as another existing class in the
+     * application.
+     */
+    public void setModuleClass(ModuleClass target, ModuleClass editedModuleClass) {
+        requireNonNull(editedModuleClass);
+        moduleClasses.setModuleClass(target, editedModuleClass);
+    }
+
+    /**
+     * Removes {@code key} from this {@code TutorsPet}.
+     * {@code key} must exist in the application.
+     */
+    public void removeModuleClass(ModuleClass key) {
+        moduleClasses.remove(key);
+    }
+
     //// util methods
 
     @Override
     public String toString() {
-        return students.asUnmodifiableObservableList().size() + " students";
+        return students.asUnmodifiableObservableList().size() + " students "
+                + moduleClasses.asUnmodifiableObservableList().size() + " classes";
         // TODO: refine later
     }
 
@@ -108,14 +154,20 @@ public class TutorsPet implements ReadOnlyTutorsPet {
     }
 
     @Override
+    public ObservableList<ModuleClass> getModuleClassList() {
+        return moduleClasses.asUnmodifiableObservableList();
+    }
+
+    @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof TutorsPet // instanceof handles nulls
-                && students.equals(((TutorsPet) other).students));
+                && students.equals(((TutorsPet) other).students)
+                && moduleClasses.equals((((TutorsPet) other).moduleClasses)));
     }
 
     @Override
     public int hashCode() {
-        return students.hashCode();
+        return Objects.hash(students, moduleClasses);
     }
 }

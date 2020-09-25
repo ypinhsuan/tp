@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.TutorsPet;
 import seedu.address.model.student.Student;
 
 /**
@@ -62,17 +61,6 @@ public class TypicalStudent {
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
     private TypicalStudent() {} // prevents instantiation
-
-    /**
-     * Returns an {@code TutorsPet} with all the typical students.
-     */
-    public static TutorsPet getTypicalTutorsPet() {
-        TutorsPet tp = new TutorsPet();
-        for (Student student : getTypicalStudents()) {
-            tp.addStudent(student);
-        }
-        return tp;
-    }
 
     public static List<Student> getTypicalStudents() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
