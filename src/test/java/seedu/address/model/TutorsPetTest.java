@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_AVERAGE;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalModuleClass.CS2103T_TUTORIAL;
+import static seedu.address.testutil.TypicalModuleClass.STUDENT_UUID_1;
 import static seedu.address.testutil.TypicalStudent.ALICE;
 import static seedu.address.testutil.TypicalTutorsPet.getTypicalTutorsPet;
 
@@ -20,6 +21,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.moduleclass.ModuleClass;
 import seedu.address.model.moduleclass.exceptions.DuplicateModuleClassException;
+import seedu.address.model.moduleclass.exceptions.ModuleClassNotFoundException;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.exceptions.DuplicateStudentException;
 import seedu.address.testutil.ModuleClassBuilder;
@@ -126,6 +128,58 @@ public class TutorsPetTest {
         tutorsPet.addModuleClass(CS2103T_TUTORIAL);
         ModuleClass editedModuleClass = new ModuleClassBuilder(CS2103T_TUTORIAL).withStudentIds().build();
         assertTrue(tutorsPet.hasModuleClass(editedModuleClass));
+    }
+
+    @Test
+    public void addModuleClass_nullModuleClass_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> tutorsPet.addModuleClass(null));
+    }
+
+    @Test
+    public void addModuleClass_duplicateModuleClassInTutorsPet_throwsDuplicateModuleClassException() {
+        tutorsPet.addModuleClass(CS2103T_TUTORIAL);
+        assertThrows(DuplicateModuleClassException.class, () -> tutorsPet.addModuleClass(CS2103T_TUTORIAL));
+    }
+
+    @Test
+    public void addModuleClass_moduleClassWithSameIdentityFieldsInTutorsPet_throwsDuplicateModuleClassException() {
+        tutorsPet.addModuleClass(CS2103T_TUTORIAL);
+        ModuleClass editedCs2103t = new ModuleClassBuilder(CS2103T_TUTORIAL).withStudentIds(STUDENT_UUID_1).build();
+        assertThrows(DuplicateModuleClassException.class, () -> tutorsPet.addModuleClass(editedCs2103t));
+    }
+
+    @Test
+    public void setModuleClass_nullTargetModuleClass_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> tutorsPet.setModuleClass(null, CS2103T_TUTORIAL));
+    }
+
+    @Test
+    public void setModuleClass_nullEditedModuleClass_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> tutorsPet.setModuleClass(CS2103T_TUTORIAL, null));
+    }
+
+    @Test
+    public void setModuleClass_targetModuleClassNotInTutorsPet_throwsModuleClassNotFoundException() {
+        assertThrows(ModuleClassNotFoundException.class, ()
+            -> tutorsPet.setModuleClass(CS2103T_TUTORIAL, CS2103T_TUTORIAL));
+    }
+
+    @Test
+    public void removeModuleClass_nullModuleClass_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> tutorsPet.removeModuleClass(null));
+    }
+
+    @Test
+    public void removeModuleClass_moduleClassNotInTutorsPet_throwsModuleClassNotFoundException() {
+        assertThrows(ModuleClassNotFoundException.class, () -> tutorsPet.removeModuleClass(CS2103T_TUTORIAL));
+    }
+
+    @Test
+    public void removeModuleClass_moduleClassInTutorsPet_deletesModuleClass() {
+        tutorsPet.addModuleClass(CS2103T_TUTORIAL);
+        tutorsPet.removeModuleClass(CS2103T_TUTORIAL);
+        TutorsPet expectedTutorsPet = new TutorsPet();
+        assertEquals(expectedTutorsPet, tutorsPet);
     }
 
     @Test

@@ -60,7 +60,7 @@ public class UniqueModuleClassListTest {
     public void add_moduleClassWithSameIdentityFieldsInList_throwsDuplicateModuleClassException() {
         uniqueModuleClassList.add(CS2103T_TUTORIAL);
         ModuleClass editedCs2103t = new ModuleClassBuilder(CS2103T_TUTORIAL).withStudentIds(STUDENT_UUID_1).build();
-        assertThrows(DuplicateModuleClassException.class, () -> uniqueModuleClassList.add(CS2103T_TUTORIAL));
+        assertThrows(DuplicateModuleClassException.class, () -> uniqueModuleClassList.add(editedCs2103t));
     }
 
     @Test
