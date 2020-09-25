@@ -66,7 +66,6 @@ class JsonAdaptedStudent {
      * @throws IllegalValueException if there were any data constraints violated in the adapted student.
      */
     public Student toModelType() throws IllegalValueException {
-        System.out.println(name);
         final List<Tag> studentTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tagged) {
             studentTags.add(tag.toModelType());
