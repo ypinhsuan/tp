@@ -21,7 +21,7 @@ public class DeleteStudentCommandParserTest {
     private DeleteStudentCommandParser parser = new DeleteStudentCommandParser();
 
     @Test
-    public void parse_validArgs_returnsDeleteCommand() {
+    public void parse_validArgs_returnsDeleteStudentCommand() {
         assertParseSuccess(parser, "1", new DeleteStudentCommand(INDEX_FIRST_STUDENT));
     }
 

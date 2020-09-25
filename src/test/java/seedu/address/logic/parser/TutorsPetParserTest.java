@@ -34,27 +34,27 @@ public class TutorsPetParserTest {
     private final TutorsPetParser parser = new TutorsPetParser();
 
     @Test
-    public void parseCommand_add() throws Exception {
+    public void parseCommand_addStudent() throws Exception {
         Student student = new StudentBuilder().build();
-        AddStudentCommand command = (AddStudentCommand) parser.parseCommand(StudentUtil.getAddCommand(student));
+        AddStudentCommand command = (AddStudentCommand) parser.parseCommand(StudentUtil.getAddStudentCommand(student));
         assertEquals(new AddStudentCommand(student), command);
     }
 
     @Test
-    public void parseCommand_clear() throws Exception {
+    public void parseCommand_clearStudent() throws Exception {
         assertTrue(parser.parseCommand(ClearStudentCommand.COMMAND_WORD) instanceof ClearStudentCommand);
         assertTrue(parser.parseCommand(ClearStudentCommand.COMMAND_WORD + " 3") instanceof ClearStudentCommand);
     }
 
     @Test
-    public void parseCommand_delete() throws Exception {
+    public void parseCommand_deleteStudent() throws Exception {
         DeleteStudentCommand command = (DeleteStudentCommand) parser.parseCommand(
                 DeleteStudentCommand.COMMAND_WORD + " " + INDEX_FIRST_STUDENT.getOneBased());
         assertEquals(new DeleteStudentCommand(INDEX_FIRST_STUDENT), command);
     }
 
     @Test
-    public void parseCommand_edit() throws Exception {
+    public void parseCommand_editStudent() throws Exception {
         Student student = new StudentBuilder().build();
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder(student).build();
         EditStudentCommand command = (EditStudentCommand) parser.parseCommand(EditStudentCommand.COMMAND_WORD + " "
@@ -69,7 +69,7 @@ public class TutorsPetParserTest {
     }
 
     @Test
-    public void parseCommand_find() throws Exception {
+    public void parseCommand_findStudent() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindStudentCommand command = (FindStudentCommand) parser.parseCommand(
                 FindStudentCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));

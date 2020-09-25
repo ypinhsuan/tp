@@ -11,7 +11,7 @@ import seedu.address.model.TutorsPet;
 public class ClearStudentCommand extends Command {
 
     public static final String COMMAND_WORD = "clear-student";
-    public static final String MESSAGE_SUCCESS = "All students in Tutor's Pet has been cleared!";
+    public static final String MESSAGE_SUCCESS = "All students in Tutor's Pet have been cleared!";
 
 
     @Override

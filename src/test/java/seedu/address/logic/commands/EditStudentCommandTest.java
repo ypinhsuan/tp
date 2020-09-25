@@ -28,7 +28,7 @@ import seedu.address.testutil.StudentBuilder;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
- * EditStudentCommand.
+ * {@code EditStudentCommand}.
  */
 public class EditStudentCommandTest {
 
