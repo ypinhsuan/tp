@@ -5,13 +5,14 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.TutorsPet;
-import seedu.address.testutil.TypicalStudent;
+import seedu.address.testutil.TypicalTutorsPet;
 
 public class JsonSerializableTutorsPetTest {
 
@@ -25,7 +26,11 @@ public class JsonSerializableTutorsPetTest {
         JsonSerializableTutorsPet dataFromFile = JsonUtil.readJsonFile(TYPICAL_STUDENTS_FILE,
                 JsonSerializableTutorsPet.class).get();
         TutorsPet tutorsPetFromFile = dataFromFile.toModelType();
-        TutorsPet typicalStudentsTutorsPet = TypicalStudent.getTypicalTutorsPet();
+        TutorsPet typicalStudentsTutorsPet = TypicalTutorsPet.getTypicalTutorsPet();
+
+        // Workaround as storage functionality for ModuleClasses has not been implemented.
+        typicalStudentsTutorsPet.setModuleClasses(new ArrayList<>());
+
         assertEquals(tutorsPetFromFile, typicalStudentsTutorsPet);
     }
 
