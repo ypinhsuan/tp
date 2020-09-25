@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalModuleClass.CS2103T_TUTORIAL;
 import static seedu.address.testutil.TypicalStudent.ALICE;
 import static seedu.address.testutil.TypicalStudent.BENSON;
 
@@ -89,8 +90,29 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void hasModuleClass_nullModuleClass_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasModuleClass(null));
+    }
+
+    @Test
+    public void hasModuleClass_moduleClassNotInTutorsPet_returnsFalse() {
+        assertFalse(modelManager.hasModuleClass(CS2103T_TUTORIAL));
+    }
+
+    @Test
+    public void hasModuleClass_moduleClassInTutorsPet_returnsTrue() {
+        modelManager.addModuleClass(CS2103T_TUTORIAL);
+        assertTrue(modelManager.hasModuleClass(CS2103T_TUTORIAL));
+    }
+
+    @Test
     public void getFilteredStudentList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredStudentList().remove(0));
+    }
+
+    @Test
+    public void getFilteredModuleClassList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredModuleClassList().remove(0));
     }
 
     @Test
