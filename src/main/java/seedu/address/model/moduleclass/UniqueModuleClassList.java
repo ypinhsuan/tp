@@ -12,12 +12,12 @@ import seedu.address.model.moduleclass.exceptions.DuplicateModuleClassException;
 import seedu.address.model.moduleclass.exceptions.ModuleClassNotFoundException;
 
 /**
- * A list of ModuleClasses that enforces uniqueness between its elements and does not allow nulls.
- * A ModuleClass is considered unique by comparing using {@code ModuleClass#isSameModuleClass(ModuleClass)}.
- * As such, adding and updating of ModuleClass uses ModuleClass#isSameModuleClass(ModuleClass) for equality
- * so as to ensure that the ModuleClass being added or updated is unique in terms of identity in the
- * UniqueModuleClassList. However, the removal of a ModuleClass uses ModuleClass#equals(Object) so as to ensure
- * that the ModuleClass with exactly the same fields will be removed.
+ * A list of {@code ModuleClass} that enforces uniqueness between its elements and does not allow nulls.
+ * A {@code ModuleClass} is considered unique by comparing using {@code ModuleClass#isSameModuleClass(ModuleClass)}.
+ * As such, adding and updating of {@code ModuleClass} uses ModuleClass#isSameModuleClass(ModuleClass) for equality
+ * so as to ensure that the {@code ModuleClass} being added or updated is unique in terms of identity in the
+ * UniqueModuleClassList. However, the removal of a {@code ModuleClass} uses ModuleClass#equals(Object) so as to ensure
+ * that the {@code ModuleClass} with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *
@@ -30,18 +30,23 @@ public class UniqueModuleClassList implements Iterable<ModuleClass> {
             FXCollections.unmodifiableObservableList(internalList);
 
     /**
-     * Returns true if the list contains an equivalent ModuleClass as the given argument.
+     * Returns true if the list contains an equivalent {@code ModuleClass} as the given argument.
+     *
+     * @throws NullPointerException if the given argument is null.
      */
-    public boolean contains(ModuleClass toCheck) {
+    public boolean contains(ModuleClass toCheck) throws NullPointerException {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSameModuleClass);
     }
 
     /**
-     * Adds a ModuleClass to the list.
-     * The ModuleClass must not already exist in the list.
+     * Adds a {@code ModuleClass} to the list.
+     * The {@code ModuleClass} must not already exist in the list.
+     *
+     * @throws NullPointerException if the given argument is null.
+     * @throws DuplicateModuleClassException if the identity of {@code toAdd} already exists in the list.
      */
-    public void add(ModuleClass toAdd) {
+    public void add(ModuleClass toAdd) throws NullPointerException, DuplicateModuleClassException {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
             throw new DuplicateModuleClassException();
@@ -50,12 +55,17 @@ public class UniqueModuleClassList implements Iterable<ModuleClass> {
     }
 
     /**
-     * Replaces the ModuleClass {@code target} in the list with {@code editedModuleClass}.
+     * Replaces the {@code ModuleClass} {@code target} in the list with {@code editedModuleClass}.
      * {@code target} must exist in the list.
-     * The ModuleClass identity of {@code editedModuleClass} must not be the same
-     * as another existing ModuleClass in the list.
+     * The {@code ModuleClass} identity of {@code editedModuleClass} must not be the same
+     * as another existing {@code ModuleClass} in the list.
+     *
+     * @throws NullPointerException if the given argument is null.
+     * @throws ModuleClassNotFoundException if {@code target} does not exist in the list.
+     * @throws DuplicateModuleClassException if the identity of {@code editedModuleClass} already exists in the list.
      */
-    public void setModuleClass(ModuleClass target, ModuleClass editedModuleClass) {
+    public void setModuleClass(ModuleClass target, ModuleClass editedModuleClass)
+            throws NullPointerException, ModuleClassNotFoundException, DuplicateModuleClassException {
         requireAllNonNull(target, editedModuleClass);
 
         int index = internalList.indexOf(target);
@@ -77,9 +87,13 @@ public class UniqueModuleClassList implements Iterable<ModuleClass> {
 
     /**
      * Replaces the contents of this list with {@code moduleClasses}.
-     * {@code moduleClasses} must not contain duplicate ModuleClasses.
+     * {@code moduleClasses} must not contain duplicate {@code ModuleClass}.
+     *
+     * @throws NullPointerException if any of the given arguments are null.
+     * @throws DuplicateModuleClassException if {@code moduleClasses} contains duplicate {@code ModuleClass}.
      */
-    public void setModuleClass(List<ModuleClass> moduleClasses) {
+    public void setModuleClass(List<ModuleClass> moduleClasses)
+            throws NullPointerException, DuplicateModuleClassException {
         requireAllNonNull(moduleClasses);
         if (!moduleClassesAreUnique(moduleClasses)) {
             throw new DuplicateModuleClassException();
@@ -89,10 +103,13 @@ public class UniqueModuleClassList implements Iterable<ModuleClass> {
     }
 
     /**
-     * Removes the equivalent ModuleClass from the list.
-     * The ModuleClass must exist in the list.
+     * Removes the equivalent {@code ModuleClass} from the list.
+     * The {@code ModuleClass} must exist in the list.
+     *
+     * @throws NullPointerException if the given argument is null.
+     * @throws ModuleClassNotFoundException if {@code toRemove} does not exist in the list.
      */
-    public void remove(ModuleClass toRemove) {
+    public void remove(ModuleClass toRemove) throws NullPointerException, ModuleClassNotFoundException {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
             throw new ModuleClassNotFoundException();
@@ -124,7 +141,7 @@ public class UniqueModuleClassList implements Iterable<ModuleClass> {
     }
 
     /**
-     * Returns true if {@code moduleClasses} contains only unique ModuleClasses.
+     * Returns true if {@code moduleClasses} contains only unique {@code ModuleClass}.
      */
     private boolean moduleClassesAreUnique(List<ModuleClass> moduleClasses) {
         for (int i = 0; i < moduleClasses.size() - 1; i++) {
