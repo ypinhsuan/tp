@@ -43,7 +43,7 @@ public class Student {
      * with the same UUID to ensure object immutability.
      */
     public Student(UUID uuid, Name name, Phone phone, Email email, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, tags);
+        requireAllNonNull(uuid, name, phone, email, tags);
         this.uuid = uuid;
         this.name = name;
         this.phone = phone;

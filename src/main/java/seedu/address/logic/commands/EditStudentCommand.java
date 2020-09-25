@@ -90,7 +90,7 @@ public class EditStudentCommand extends Command {
      */
     private static Student createEditedStudent(Student studentToEdit, EditStudentDescriptor editStudentDescriptor) {
         assert studentToEdit != null;
-        UUID updatedUuid = editStudentDescriptor.getUuid().orElse(studentToEdit.getUuid());
+        UUID updatedUuid = studentToEdit.getUuid();
         Name updatedName = editStudentDescriptor.getName().orElse(studentToEdit.getName());
         Phone updatedPhone = editStudentDescriptor.getPhone().orElse(studentToEdit.getPhone());
         Email updatedEmail = editStudentDescriptor.getEmail().orElse(studentToEdit.getEmail());
@@ -122,7 +122,6 @@ public class EditStudentCommand extends Command {
      * corresponding field value of the student.
      */
     public static class EditStudentDescriptor {
-        private UUID uuid;
         private Name name;
         private Phone phone;
         private Email email;
@@ -135,7 +134,6 @@ public class EditStudentCommand extends Command {
          * A defensive copy of {@code tags} is used internally.
          */
         public EditStudentDescriptor(EditStudentDescriptor toCopy) {
-            setUuid(toCopy.uuid);
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
@@ -147,14 +145,6 @@ public class EditStudentCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, phone, email, tags);
-        }
-
-        public void setUuid(UUID uuid) {
-            this.uuid = uuid;
-        }
-
-        public Optional<UUID> getUuid() {
-            return Optional.ofNullable(uuid);
         }
 
         public void setName(Name name) {
