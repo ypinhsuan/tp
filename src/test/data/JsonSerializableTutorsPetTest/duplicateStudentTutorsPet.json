@@ -1,10 +1,12 @@
 {
   "students": [ {
+    "uuid": "48a5bfc5-782a-4861-8b36-9db2833cfd2d",
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "alice@example.com",
     "tagged": [ "Struggling" ]
   }, {
+    "uuid": "f0e9b309-48fc-4142-9f4d-bbb99f3bb3fe",
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "pauline@example.com"

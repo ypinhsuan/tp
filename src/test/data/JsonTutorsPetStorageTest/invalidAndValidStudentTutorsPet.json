@@ -1,9 +1,11 @@
 {
   "students": [ {
+    "uuid": "8b1588b3-ae5e-4dd0-938f-5c3bfac74810",
     "name": "Valid Student",
     "phone": "9482424",
     "email": "hans@example.com"
   }, {
+    "uuid": "56401471-aaf9-4830-be62-a69a2a50c26a",
     "name": "Student With Invalid Phone Field",
     "phone": "948asdf2424",
     "email": "hans@example.com"
