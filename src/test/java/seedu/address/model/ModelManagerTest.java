@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalModuleClass.CS2103T_TUTORIAL;
+import static seedu.address.testutil.TypicalModuleClass.STUDENT_UUID_1;
 import static seedu.address.testutil.TypicalStudent.ALICE;
 import static seedu.address.testutil.TypicalStudent.BENSON;
 
@@ -15,7 +17,11 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.moduleclass.ModuleClass;
+import seedu.address.model.moduleclass.exceptions.DuplicateModuleClassException;
+import seedu.address.model.moduleclass.exceptions.ModuleClassNotFoundException;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
+import seedu.address.testutil.ModuleClassBuilder;
 import seedu.address.testutil.TutorsPetBuilder;
 
 public class ModelManagerTest {
@@ -78,19 +84,92 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasStudent_studentNotInTutorsPet_returnsFalse() {
+    public void hasStudent_studentNotInModelManager_returnsFalse() {
         assertFalse(modelManager.hasStudent(ALICE));
     }
 
     @Test
-    public void hasStudent_studentInTutorsPet_returnsTrue() {
+    public void hasStudent_studentInModelManager_returnsTrue() {
         modelManager.addStudent(ALICE);
         assertTrue(modelManager.hasStudent(ALICE));
     }
 
     @Test
+    public void hasModuleClass_nullModuleClass_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasModuleClass(null));
+    }
+
+    @Test
+    public void hasModuleClass_moduleClassNotInModelManager_returnsFalse() {
+        assertFalse(modelManager.hasModuleClass(CS2103T_TUTORIAL));
+    }
+
+    @Test
+    public void hasModuleClass_moduleClassInModelManager_returnsTrue() {
+        modelManager.addModuleClass(CS2103T_TUTORIAL);
+        assertTrue(modelManager.hasModuleClass(CS2103T_TUTORIAL));
+    }
+
+    @Test
+    public void deleteModuleClass_nullModuleClass_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.deleteModuleClass(null));
+    }
+
+    @Test
+    public void deleteModuleClass_moduleClassNotInModelManager_throwsModuleClassNotFoundException() {
+        assertThrows(ModuleClassNotFoundException.class, () -> modelManager.deleteModuleClass(CS2103T_TUTORIAL));
+    }
+
+    @Test
+    public void deleteModuleClass_moduleClassInModelManager_deletesModuleClass() {
+        modelManager.addModuleClass(CS2103T_TUTORIAL);
+        modelManager.deleteModuleClass(CS2103T_TUTORIAL);
+        Model expectedModelManager = new ModelManager();
+        assertEquals(expectedModelManager, modelManager);
+    }
+
+    @Test
+    public void addModuleClass_nullModuleClass_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.addModuleClass(null));
+    }
+
+    @Test
+    public void addModuleClass_duplicateModuleClassInModelManager_throwsDuplicateModuleClassException() {
+        modelManager.addModuleClass(CS2103T_TUTORIAL);
+        assertThrows(DuplicateModuleClassException.class, () -> modelManager.addModuleClass(CS2103T_TUTORIAL));
+    }
+
+    @Test
+    public void addModuleClass_moduleClassWithSameIdentityFieldsInModelManager_throwsDuplicateModuleClassException() {
+        modelManager.addModuleClass(CS2103T_TUTORIAL);
+        ModuleClass editedCs2103t = new ModuleClassBuilder(CS2103T_TUTORIAL).withStudentIds(STUDENT_UUID_1).build();
+        assertThrows(DuplicateModuleClassException.class, () -> modelManager.addModuleClass(editedCs2103t));
+    }
+
+    @Test
+    public void setModuleClass_nullTargetModuleClass_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setModuleClass(null, CS2103T_TUTORIAL));
+    }
+
+    @Test
+    public void setModuleClass_nullEditedModuleClass_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setModuleClass(CS2103T_TUTORIAL, null));
+    }
+
+    @Test
+    public void setModuleClass_targetModuleClassNotInModelManager_throwsModuleClassNotFoundException() {
+        assertThrows(ModuleClassNotFoundException.class, ()
+            -> modelManager.setModuleClass(CS2103T_TUTORIAL, CS2103T_TUTORIAL));
+    }
+
+    @Test
     public void getFilteredStudentList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredStudentList().remove(0));
+    }
+
+    @Test
+    public void getFilteredModuleClassList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredModuleClassList().remove(0));
     }
 
     @Test

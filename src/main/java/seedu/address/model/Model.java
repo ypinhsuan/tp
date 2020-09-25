@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.moduleclass.ModuleClass;
 import seedu.address.model.student.Student;
 
 /**
@@ -13,6 +14,7 @@ import seedu.address.model.student.Student;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Student> PREDICATE_SHOW_ALL_STUDENTS = unused -> true;
+    Predicate<ModuleClass> PREDICATE_SHOW_ALL_MODULE_CLASS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -77,7 +79,9 @@ public interface Model {
      */
     void setStudent(Student target, Student editedStudent);
 
-    /** Returns an unmodifiable view of the filtered student list */
+    /**
+     * Returns an unmodifiable view of the filtered student list.
+     */
     ObservableList<Student> getFilteredStudentList();
 
     /**
@@ -85,4 +89,40 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredStudentList(Predicate<Student> predicate);
+
+    /**
+     * Returns true if a ModuleClass with the same identity as {@code moduleClass} exists in the application.
+     */
+    boolean hasModuleClass(ModuleClass moduleClass);
+
+    /**
+     * Deletes the given {@code ModuleClass}.
+     * The {@code ModuleClass} must exist in the application.
+     */
+    void deleteModuleClass(ModuleClass target);
+
+    /**
+     * Adds the given {@code ModuleClass}.
+     * {@code moduleClass} must not already exist in the application.
+     */
+    void addModuleClass(ModuleClass moduleClass);
+
+    /**
+     * Replaces the given {@code ModuleClass} {@code target} with {@code editedModuleClass}.
+     * {@code target} must exist in the application.
+     * The {@code ModuleClass} identity of {@code editedModuleClass} must not be the same as another existing
+     * {@code ModuleClass} in the application.
+     */
+    void setModuleClass(ModuleClass target, ModuleClass editedModuleClass);
+
+    /**
+     * Returns an unmodifiable view of the filtered {@code ModuleClass} list.
+     */
+    ObservableList<ModuleClass> getFilteredModuleClassList();
+
+    /**
+     * Updates the filter of the filtered {@code ModuleClass} list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredModuleClassList(Predicate<ModuleClass> predicate);
 }

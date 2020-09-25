@@ -1,10 +1,10 @@
-package seedu.address.model.student;
+package seedu.address.model.components;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Student's name.
+ * Represents a Student's or Class's name.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
 public class Name {
