@@ -12,13 +12,12 @@ import seedu.address.model.student.Student;
 import seedu.address.model.student.UniqueStudentList;
 
 /**
- * Wraps all data at the application level
- * Duplicates are not allowed (by .isSameStudent and .isSameModuleClass comparison)
+ * Wraps all data at the application level.
+ * Duplicates are not allowed (by .isSameStudent and .isSameModuleClass comparison).
  */
 public class TutorsPet implements ReadOnlyTutorsPet {
 
     private final UniqueStudentList students;
-
     private final UniqueModuleClassList moduleClasses;
 
     /**
@@ -103,7 +102,7 @@ public class TutorsPet implements ReadOnlyTutorsPet {
         students.remove(key);
     }
 
-    //// module class-level operations
+    //// moduleClass-level operations
 
     /**
      * Returns true if a class with the same identity as {@code moduleClass} exists.

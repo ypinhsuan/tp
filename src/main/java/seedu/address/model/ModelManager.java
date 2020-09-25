@@ -111,7 +111,6 @@ public class ModelManager implements Model {
     @Override
     public void setStudent(Student target, Student editedStudent) {
         requireAllNonNull(target, editedStudent);
-
         tutorsPet.setStudent(target, editedStudent);
     }
 
@@ -135,7 +134,6 @@ public class ModelManager implements Model {
     @Override
     public void setModuleClass(ModuleClass target, ModuleClass editedModuleClass) {
         requireAllNonNull(target, editedModuleClass);
-
         tutorsPet.setModuleClass(target, editedModuleClass);
     }
 

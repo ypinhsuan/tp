@@ -79,7 +79,9 @@ public interface Model {
      */
     void setStudent(Student target, Student editedStudent);
 
-    /** Returns an unmodifiable view of the filtered student list */
+    /**
+     * Returns an unmodifiable view of the filtered student list.
+     */
     ObservableList<Student> getFilteredStudentList();
 
     /**
@@ -113,7 +115,9 @@ public interface Model {
      */
     void setModuleClass(ModuleClass target, ModuleClass editedModuleClass);
 
-    /** Returns an unmodifiable view of the filtered {@code ModuleClass} list */
+    /**
+     * Returns an unmodifiable view of the filtered {@code ModuleClass} list.
+     */
     ObservableList<ModuleClass> getFilteredModuleClassList();
 
     /**
