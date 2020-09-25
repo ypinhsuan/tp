@@ -90,7 +90,7 @@ public class EditCommand extends Command {
      */
     private static Student createEditedStudent(Student studentToEdit, EditStudentDescriptor editStudentDescriptor) {
         assert studentToEdit != null;
-        UUID updatedUuid = studentToEdit.getUuid();
+        UUID updatedUuid = editStudentDescriptor.getUuid().orElse(studentToEdit.getUuid());
         Name updatedName = editStudentDescriptor.getName().orElse(studentToEdit.getName());
         Phone updatedPhone = editStudentDescriptor.getPhone().orElse(studentToEdit.getPhone());
         Email updatedEmail = editStudentDescriptor.getEmail().orElse(studentToEdit.getEmail());
@@ -151,6 +151,10 @@ public class EditCommand extends Command {
 
         public void setUuid(UUID uuid) {
             this.uuid = uuid;
+        }
+
+        public Optional<UUID> getUuid() {
+            return Optional.ofNullable(uuid);
         }
 
         public void setName(Name name) {
