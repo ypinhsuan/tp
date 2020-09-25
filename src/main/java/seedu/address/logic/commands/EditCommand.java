@@ -12,6 +12,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.UUID;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -89,12 +90,13 @@ public class EditCommand extends Command {
      */
     private static Student createEditedStudent(Student studentToEdit, EditStudentDescriptor editStudentDescriptor) {
         assert studentToEdit != null;
+        UUID updatedUuid = studentToEdit.getUuid();
         Name updatedName = editStudentDescriptor.getName().orElse(studentToEdit.getName());
         Phone updatedPhone = editStudentDescriptor.getPhone().orElse(studentToEdit.getPhone());
         Email updatedEmail = editStudentDescriptor.getEmail().orElse(studentToEdit.getEmail());
         Set<Tag> updatedTags = editStudentDescriptor.getTags().orElse(studentToEdit.getTags());
 
-        return new Student(updatedName, updatedPhone, updatedEmail, updatedTags);
+        return new Student(updatedUuid, updatedName, updatedPhone, updatedEmail, updatedTags);
     }
 
     @Override
@@ -120,6 +122,7 @@ public class EditCommand extends Command {
      * corresponding field value of the student.
      */
     public static class EditStudentDescriptor {
+        private UUID uuid;
         private Name name;
         private Phone phone;
         private Email email;
@@ -132,6 +135,7 @@ public class EditCommand extends Command {
          * A defensive copy of {@code tags} is used internally.
          */
         public EditStudentDescriptor(EditStudentDescriptor toCopy) {
+            setUuid(toCopy.uuid);
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
@@ -143,6 +147,10 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, phone, email, tags);
+        }
+
+        public void setUuid(UUID uuid) {
+            this.uuid = uuid;
         }
 
         public void setName(Name name) {
