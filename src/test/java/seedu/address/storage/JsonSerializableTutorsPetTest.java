@@ -28,7 +28,7 @@ public class JsonSerializableTutorsPetTest {
         TutorsPet tutorsPetFromFile = dataFromFile.toModelType();
         TutorsPet typicalStudentsTutorsPet = TypicalTutorsPet.getTypicalTutorsPet();
 
-        // Workaround as storage functionality for ModuleClasses has not been implemented.
+        // workaround as storage functionality for ModuleClasses has not been implemented
         typicalStudentsTutorsPet.setModuleClasses(new ArrayList<>());
 
         assertEquals(tutorsPetFromFile, typicalStudentsTutorsPet);

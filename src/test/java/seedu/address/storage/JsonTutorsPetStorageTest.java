@@ -66,7 +66,7 @@ public class JsonTutorsPetStorageTest {
         Path filePath = testFolder.resolve("TempTutorsPet.json");
         TutorsPet original = getTypicalTutorsPet();
 
-        // Workaround as storage functionality for ModuleClasses has not been implemented.
+        // workaround as storage functionality for ModuleClasses has not been implemented
         original.setModuleClasses(new ArrayList<>());
 
         JsonTutorsPetStorage jsonTutorsPetStorage = new JsonTutorsPetStorage(filePath);

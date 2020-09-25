@@ -79,8 +79,8 @@ public class TutorsPet implements ReadOnlyTutorsPet {
      * Adds a student to the application.
      * The student must not already exist in the application.
      */
-    public void addStudent(Student s) {
-        students.add(s);
+    public void addStudent(Student student) {
+        students.add(student);
     }
 
     /**

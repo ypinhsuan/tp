@@ -97,7 +97,7 @@ public class TutorsPetTest {
     //// moduleClass-related tests
 
     @Test
-    public void resetData_withDuplicateModuleClass_throwsDuplicateModuleClassException() {
+    public void resetData_withDuplicateModuleClasses_throwsDuplicateModuleClassException() {
         // Two moduleClasses with the same identity fields
         ModuleClass editedCS2103T = new ModuleClassBuilder(CS2103T_TUTORIAL).withStudentIds().build();
         List<Student> defaultStudents = TypicalStudent.getTypicalStudents();

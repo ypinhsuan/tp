@@ -57,7 +57,7 @@ public class StorageManagerTest {
          */
         TutorsPet original = getTypicalTutorsPet();
 
-        // Workaround as storage functionality for ModuleClasses has not been implemented.
+        // workaround as storage functionality for ModuleClasses has not been implemented
         original.setModuleClasses(new ArrayList<>());
 
         storageManager.saveTutorsPet(original);

@@ -25,7 +25,7 @@ import seedu.address.testutil.EditStudentDescriptorBuilder;
  */
 public class CommandTestUtil {
 
-    // Student related constants
+    // student-related constants
 
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
@@ -65,7 +65,7 @@ public class CommandTestUtil {
                 .withTags(VALID_TAG_AVERAGE, VALID_TAG_EXPERIENCED).build();
     }
 
-    // ModuleClass related constants
+    // moduleClass-related constants
 
     public static final String VALID_NAME_CS2103T_TUTORIAL = "CS2103T Tutorial";
     public static final String VALID_NAME_CS2101_TUTORIAL = "CS2101 Tutorial";

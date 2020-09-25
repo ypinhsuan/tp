@@ -14,7 +14,6 @@ public interface ReadOnlyTutorsPet {
      * This list will not contain any duplicate students.
      */
     ObservableList<Student> getStudentList();
-
     ObservableList<ModuleClass> getModuleClassList();
 
 }
