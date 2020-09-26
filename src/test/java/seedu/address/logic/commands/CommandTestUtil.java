@@ -16,8 +16,11 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.TutorsPet;
+import seedu.address.model.moduleclass.ModuleClass;
+import seedu.address.model.moduleclass.NameContainsKeywordPredicate;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
 import seedu.address.model.student.Student;
+import seedu.address.testutil.EditModuleClassDescriptorBuilder;
 import seedu.address.testutil.EditStudentDescriptorBuilder;
 
 /**
@@ -70,6 +73,18 @@ public class CommandTestUtil {
     public static final String VALID_NAME_CS2103T_TUTORIAL = "CS2103T Tutorial";
     public static final String VALID_NAME_CS2101_TUTORIAL = "CS2101 Tutorial";
     public static final String VALID_NAME_CS2100_TUTORIAL = "CS2100 Tutorial";
+    public static final String VALID_NAME_CS2030_TUTORIAL = "CS2030 Tutorial";
+
+    public static final String NAME_DESC_CS2103T_TUTORIAL = " " + PREFIX_NAME + VALID_NAME_CS2103T_TUTORIAL;
+    public static final String NAME_DESC_CS2100_TUTORIAL = " " + PREFIX_NAME + VALID_NAME_CS2100_TUTORIAL;
+
+    public static final EditModuleClassCommand.EditModuleClassDescriptor DESC_CS2100_TUTORIAL;
+    public static final EditModuleClassCommand.EditModuleClassDescriptor DESC_CS2103T_TUTORIAL;
+
+    static {
+        DESC_CS2100_TUTORIAL = new EditModuleClassDescriptorBuilder().withName(VALID_NAME_CS2100_TUTORIAL).build();
+        DESC_CS2103T_TUTORIAL = new EditModuleClassDescriptorBuilder().withName(VALID_NAME_CS2103T_TUTORIAL).build();
+    }
 
     /**
      * Executes the given {@code command}, confirms that <br>
@@ -113,6 +128,7 @@ public class CommandTestUtil {
         assertEquals(expectedTutorsPet, actualModel.getTutorsPet());
         assertEquals(expectedFilteredList, actualModel.getFilteredStudentList());
     }
+
     /**
      * Updates {@code model}'s filtered list to show only the student at the given {@code targetIndex} in the
      * {@code model}'s Tutor's Pet.
@@ -127,4 +143,17 @@ public class CommandTestUtil {
         assertEquals(1, model.getFilteredStudentList().size());
     }
 
+    /**
+     * Updates {@code model}'s filtered list to show only the class at the given {@code targetIndex} in the
+     * {@code model}'s Tutor's Pet.
+     */
+    public static void showModuleClassAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredModuleClassList().size());
+
+        ModuleClass moduleClass = model.getFilteredModuleClassList().get(targetIndex.getZeroBased());
+        final String[] splitName = moduleClass.getName().fullName.split("\\s+");
+        model.updateFilteredModuleClassList(new NameContainsKeywordPredicate(Arrays.asList(splitName[0])));
+
+        assertEquals(1, model.getFilteredModuleClassList().size());
+    }
 }
