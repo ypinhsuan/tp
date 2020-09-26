@@ -20,7 +20,7 @@ public class Student {
     // Identity fields
     private final UUID uuid;
     private final Name name;
-    private final Phone phone;
+    private final Telegram telegram;
     private final Email email;
 
     // Data fields
@@ -30,11 +30,11 @@ public class Student {
      * Every field must be present and not null.
      * Creates a new student with a randomly generated UUID.
      */
-    public Student(Name name, Phone phone, Email email, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, tags);
+    public Student(Name name, Telegram telegram, Email email, Set<Tag> tags) {
+        requireAllNonNull(name, telegram, email, tags);
         this.uuid = UUID.randomUUID();
         this.name = name;
-        this.phone = phone;
+        this.telegram = telegram;
         this.email = email;
         this.tags.addAll(tags);
     }
@@ -43,11 +43,11 @@ public class Student {
      * Overloads student constructor so that we can return a new student
      * with the same UUID to ensure object immutability.
      */
-    public Student(UUID uuid, Name name, Phone phone, Email email, Set<Tag> tags) {
-        requireAllNonNull(uuid, name, phone, email, tags);
+    public Student(UUID uuid, Name name, Telegram telegram, Email email, Set<Tag> tags) {
+        requireAllNonNull(uuid, name, telegram, email, tags);
         this.uuid = uuid;
         this.name = name;
-        this.phone = phone;
+        this.telegram = telegram;
         this.email = email;
         this.tags.addAll(tags);
     }
@@ -60,8 +60,8 @@ public class Student {
         return name;
     }
 
-    public Phone getPhone() {
-        return phone;
+    public Telegram getTelegram() {
+        return telegram;
     }
 
     public Email getEmail() {
@@ -87,7 +87,7 @@ public class Student {
 
         return otherStudent != null
                 && otherStudent.getName().equals(getName())
-                && (otherStudent.getPhone().equals(getPhone()) || otherStudent.getEmail().equals(getEmail()));
+                && (otherStudent.getTelegram().equals(getTelegram()) || otherStudent.getEmail().equals(getEmail()));
     }
 
     /**
@@ -106,7 +106,7 @@ public class Student {
 
         Student otherStudent = (Student) other;
         return otherStudent.getName().equals(getName())
-                && otherStudent.getPhone().equals(getPhone())
+                && otherStudent.getTelegram().equals(getTelegram())
                 && otherStudent.getEmail().equals(getEmail())
                 && otherStudent.getTags().equals(getTags());
     }
@@ -114,15 +114,15 @@ public class Student {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(uuid, name, phone, email, tags);
+        return Objects.hash(uuid, name, telegram, email, tags);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append(" Phone: ")
-                .append(getPhone())
+                .append(" Telegram: ")
+                .append(getTelegram())
                 .append(" Email: ")
                 .append(getEmail())
                 .append(" Tags: ");

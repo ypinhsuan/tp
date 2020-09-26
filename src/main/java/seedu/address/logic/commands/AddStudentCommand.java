@@ -3,8 +3,8 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -20,12 +20,12 @@ public class AddStudentCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student to the student manager. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
-            + PREFIX_PHONE + "PHONE "
+            + PREFIX_TELEGRAM + "TELEGRAM "
             + PREFIX_EMAIL + "EMAIL "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
-            + PREFIX_PHONE + "98765432 "
+            + PREFIX_TELEGRAM + "johnDO3 "
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_TAG + "CS2103 Tutorial "
             + PREFIX_TAG + "Experienced";

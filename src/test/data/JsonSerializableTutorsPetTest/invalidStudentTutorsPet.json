@@ -2,7 +2,7 @@
   "students": [ {
     "uuid": "584346cb-8886-4518-8282-fc6d8f4b7b6a",
     "name": "Hans Muster",
-    "phone": "9482424",
+    "telegram": "hans_m4ster",
     "email": "invalid@email!3e"
   } ]
 }

@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_AVERAGE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showStudentAtIndex;
@@ -54,11 +54,12 @@ public class EditStudentCommandTest {
         Student lastStudent = model.getFilteredStudentList().get(indexLastStudent.getZeroBased());
 
         StudentBuilder studentInList = new StudentBuilder(lastStudent);
-        Student editedStudent = studentInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
+        Student editedStudent = studentInList.withName(VALID_NAME_BOB).withTelegram(VALID_TELEGRAM_BOB)
                 .withTags(VALID_TAG_AVERAGE).build();
 
         EditStudentCommand.EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder()
-                .withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_AVERAGE).build();
+                .withName(VALID_NAME_BOB).withTelegram(VALID_TELEGRAM_BOB)
+                .withTags(VALID_TAG_AVERAGE).build();
         EditStudentCommand editStudentCommand = new EditStudentCommand(indexLastStudent, descriptor);
 
         String expectedMessage = String.format(EditStudentCommand.MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent);

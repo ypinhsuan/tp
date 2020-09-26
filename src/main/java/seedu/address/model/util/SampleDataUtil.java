@@ -8,8 +8,8 @@ import seedu.address.model.ReadOnlyTutorsPet;
 import seedu.address.model.TutorsPet;
 import seedu.address.model.components.Name;
 import seedu.address.model.student.Email;
-import seedu.address.model.student.Phone;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.Telegram;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -19,17 +19,17 @@ public class SampleDataUtil {
 
     public static Student[] getSampleStudents() {
         return new Student[] {
-            new Student(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
+            new Student(new Name("Alex Yeoh"), new Telegram("41ex_Yo"), new Email("alexyeoh@example.com"),
                 getTagSet("Average")),
-            new Student(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
+            new Student(new Name("Bernice Yu"), new Telegram("b3rnice"), new Email("berniceyu@example.com"),
                 getTagSet("Good", "Experienced")),
-            new Student(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
+            new Student(new Name("Charlotte Oliveiro"), new Telegram("C_Ol1ve"), new Email("charlotte@example.com"),
                 getTagSet("Struggling")),
-            new Student(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
+            new Student(new Name("David Li"), new Telegram("li_DAvid"), new Email("lidavid@example.com"),
                 getTagSet("Weak")),
-            new Student(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
+            new Student(new Name("Irfan Ibrahim"), new Telegram("IIbr4hmm"), new Email("irfan@example.com"),
                 getTagSet("Struggling")),
-            new Student(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
+            new Student(new Name("Roy Balakrishnan"), new Telegram("B_Roy"), new Email("royb@example.com"),
                 getTagSet("Average"))
         };
     }

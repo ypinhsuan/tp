@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_AVERAGE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalStudent.ALICE;
 import static seedu.address.testutil.TypicalStudent.BOB;
@@ -30,25 +30,26 @@ public class StudentTest {
         // null -> returns false
         assertFalse(ALICE.isSameStudent(null));
 
-        // different phone and email -> returns false
-        Student editedAlice = new StudentBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).build();
+        // different telegram and email -> returns false
+        Student editedAlice = new StudentBuilder(ALICE).withTelegram(VALID_TELEGRAM_BOB)
+                .withEmail(VALID_EMAIL_BOB).build();
         assertFalse(ALICE.isSameStudent(editedAlice));
 
         // different name -> returns false
         editedAlice = new StudentBuilder(ALICE).withName(VALID_NAME_BOB).build();
         assertFalse(ALICE.isSameStudent(editedAlice));
 
-        // same name, same phone, different attributes -> returns true
+        // same name, same telegram, different attributes -> returns true
         editedAlice = new StudentBuilder(ALICE).withEmail(VALID_EMAIL_BOB)
                 .withTags(VALID_TAG_AVERAGE).build();
         assertTrue(ALICE.isSameStudent(editedAlice));
 
         // same name, same email, different attributes -> returns true
-        editedAlice = new StudentBuilder(ALICE).withPhone(VALID_PHONE_BOB)
+        editedAlice = new StudentBuilder(ALICE).withTelegram(VALID_TELEGRAM_BOB)
                 .withTags(VALID_TAG_AVERAGE).build();
         assertTrue(ALICE.isSameStudent(editedAlice));
 
-        // same name, same phone, same email, different attributes -> returns true
+        // same name, same telegram, same email, different attributes -> returns true
         editedAlice = new StudentBuilder(ALICE).withTags(VALID_TAG_AVERAGE).build();
         assertTrue(ALICE.isSameStudent(editedAlice));
     }
@@ -75,8 +76,8 @@ public class StudentTest {
         Student editedAlice = new StudentBuilder(ALICE).withName(VALID_NAME_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different phone -> returns false
-        editedAlice = new StudentBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
+        // different telegram -> returns false
+        editedAlice = new StudentBuilder(ALICE).withTelegram(VALID_TELEGRAM_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different email -> returns false
