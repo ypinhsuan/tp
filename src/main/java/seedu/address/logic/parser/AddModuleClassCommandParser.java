@@ -16,8 +16,8 @@ import seedu.address.model.moduleclass.ModuleClass;
 public class AddModuleClassCommandParser implements Parser<AddModuleClassCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AddStudentCommand
-     * and returns an AddStudentCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the AddModuleClassCommand
+     * and returns an AddModuleClassCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddModuleClassCommand parse(String args) throws ParseException {
