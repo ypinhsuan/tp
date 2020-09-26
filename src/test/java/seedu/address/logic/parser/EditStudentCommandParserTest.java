@@ -22,9 +22,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_BOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
-import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_STUDENT;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_ITEM;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_ITEM;
 
 import org.junit.jupiter.api.Test;
 
@@ -100,7 +100,7 @@ public class EditStudentCommandParserTest {
 
     @Test
     public void parse_allFieldsSpecified_success() {
-        Index targetIndex = INDEX_SECOND_STUDENT;
+        Index targetIndex = INDEX_SECOND_ITEM;
         String userInput = targetIndex.getOneBased() + TELEGRAM_DESC_BOB + TAG_DESC_AVERAGE
                 + EMAIL_DESC_AMY + NAME_DESC_AMY + TAG_DESC_EXPERIENCED;
 
@@ -114,7 +114,7 @@ public class EditStudentCommandParserTest {
 
     @Test
     public void parse_someFieldsSpecified_success() {
-        Index targetIndex = INDEX_FIRST_STUDENT;
+        Index targetIndex = INDEX_FIRST_ITEM;
         String userInput = targetIndex.getOneBased() + TELEGRAM_DESC_BOB + EMAIL_DESC_AMY;
 
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder().withTelegram(VALID_TELEGRAM_BOB)
@@ -127,7 +127,7 @@ public class EditStudentCommandParserTest {
     @Test
     public void parse_oneFieldSpecified_success() {
         // name
-        Index targetIndex = INDEX_THIRD_STUDENT;
+        Index targetIndex = INDEX_THIRD_ITEM;
         String userInput = targetIndex.getOneBased() + NAME_DESC_AMY;
         EditStudentCommand.EditStudentDescriptor descriptor =
                 new EditStudentDescriptorBuilder().withName(VALID_NAME_AMY).build();
@@ -155,7 +155,7 @@ public class EditStudentCommandParserTest {
 
     @Test
     public void parse_multipleRepeatedFields_acceptsLast() {
-        Index targetIndex = INDEX_FIRST_STUDENT;
+        Index targetIndex = INDEX_FIRST_ITEM;
         String userInput = targetIndex.getOneBased() + TELEGRAM_DESC_AMY + EMAIL_DESC_AMY
                 + TAG_DESC_EXPERIENCED + TELEGRAM_DESC_AMY + EMAIL_DESC_AMY + TAG_DESC_EXPERIENCED
                 + TELEGRAM_DESC_BOB + EMAIL_DESC_BOB + TAG_DESC_AVERAGE;
@@ -172,7 +172,7 @@ public class EditStudentCommandParserTest {
     @Test
     public void parse_invalidValueFollowedByValidValue_success() {
         // no other valid values specified
-        Index targetIndex = INDEX_FIRST_STUDENT;
+        Index targetIndex = INDEX_FIRST_ITEM;
         String userInput = targetIndex.getOneBased() + INVALID_TELEGRAM_DESC + TELEGRAM_DESC_BOB;
         EditStudentCommand.EditStudentDescriptor descriptor =
                 new EditStudentDescriptorBuilder().withTelegram(VALID_TELEGRAM_BOB).build();
@@ -190,7 +190,7 @@ public class EditStudentCommandParserTest {
 
     @Test
     public void parse_resetTags_success() {
-        Index targetIndex = INDEX_THIRD_STUDENT;
+        Index targetIndex = INDEX_THIRD_ITEM;
         String userInput = targetIndex.getOneBased() + TAG_EMPTY;
 
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder().withTags().build();

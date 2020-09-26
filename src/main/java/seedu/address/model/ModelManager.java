@@ -183,7 +183,8 @@ public class ModelManager implements Model {
         ModelManager other = (ModelManager) obj;
         return tutorsPet.equals(other.tutorsPet)
                 && userPrefs.equals(other.userPrefs)
-                && filteredStudents.equals(other.filteredStudents);
+                && filteredStudents.equals(other.filteredStudents)
+                && filteredModuleClasses.equals(other.filteredModuleClasses);
     }
 
 }
