@@ -27,7 +27,7 @@ If you can type fast, Tutor's pet can get your class management tasks done faste
 
    * **`list`** : Lists all students.
 
-   * **`add-student`**`n/John Doe t/@johndoe e/johnd@example.com tag/student` : Adds a student named `John Doe` to the application.
+   * **`add-student`**`n/John Doe t/johndoe e/johnd@example.com tag/student` : Adds a student named `John Doe` to the application.
 
    * **`delete-student`**`3` : Deletes the 3rd student shown in the current list.
 
@@ -55,7 +55,7 @@ If you can type fast, Tutor's pet can get your class management tasks done faste
   e.g. `[tag/TAG]…​` can be used as ` ` (i.e. 0 times), `tag/student`, `tag/average tag/TA candidate` etc.
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME t/TELEGRAM_HANDLE`, `t/TELEGRAM_HANDLE n/NAME` is also acceptable.
+  e.g. if the command specifies `n/NAME t/TELEGRAM_USERNAME`, `t/TELEGRAM_USERNAME n/NAME` is also acceptable.
 
 </div>
 
@@ -64,9 +64,9 @@ If you can type fast, Tutor's pet can get your class management tasks done faste
 | Action                          | Format, Examples                                                                                                                            |
 |---------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
 | **Help**                        | `help`                                                                                                                                      |
-| **Add Student**                 | `add-student n/NAME t/TELEGRAM_HANDLE e/EMAIL [tag/TAG]…​` <br> e.g., `add-student n/John Doe t/@johndoe e/johnd@example.com tag/student`|
+| **Add Student**                 | `add-student n/NAME t/TELEGRAM_USERNAME e/EMAIL [tag/TAG]…​` <br> e.g., `add-student n/John Doe t/johndoe e/johnd@example.com tag/student`|
 | **List All Students**           | `list`                                                                                                                                      |
-| **Edit Student**                | `edit-student INDEX [n/NAME] [t/TELEGRAM_HANDLE] [e/EMAIL] [tag/TAG]…​`<br> e.g., `edit-student 2 n/James Lee e/jameslee@example.com`    |
+| **Edit Student**                | `edit-student INDEX [n/NAME] [t/TELEGRAM_USERNAME] [e/EMAIL] [tag/TAG]…​`<br> e.g., `edit-student 2 n/James Lee e/jameslee@example.com`    |
 | **Find Student**                | `find-student KEYWORD [MORE_KEYWORDS]`<br> e.g., `find-student James Jake`                                                                  |
 | **Delete Student**              | `delete-student INDEX`<br> e.g., `delete-student 3`                                                                                         |
 | **Clear All Students**          | `clear-student`                                                                                                                             |
@@ -92,15 +92,15 @@ Format: `help`
 
 Adds a student to the list of students.
 
-Format: `add-student n/NAME t/TELEGRAM_HANDLE e/EMAIL [tag/TAG]…​`
+Format: `add-student n/NAME t/TELEGRAM_USERNAME e/EMAIL [tag/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A student can have any number of tags (including 0)
 </div>
 
 Examples:
-* `add-student n/John Doe t/@johndoe e/johnd@example.com`
-* `add-student n/Betsy Crowe t/@betsycrowe e/betsycrowe@example.com tag/student`
+* `add-student n/John Doe t/johndoe e/johnd@example.com`
+* `add-student n/Betsy Crowe t/betsycrowe e/betsycrowe@example.com tag/student`
 
 #### Listing all students : `list`
 
@@ -112,7 +112,7 @@ Format: `list`
 
 Edits an existing student in the application.
 
-Format: `edit-student INDEX [n/NAME] [t/TELEGRAM_HANDLE] [e/EMAIL] [tag/TAG]…​`
+Format: `edit-student INDEX [n/NAME] [t/TELEGRAM_USERNAME] [e/EMAIL] [tag/TAG]…​`
 
 * Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -122,7 +122,7 @@ Format: `edit-student INDEX [n/NAME] [t/TELEGRAM_HANDLE] [e/EMAIL] [tag/TAG]…�
     specifying any tags after it.
 
 Examples:
-*  `edit-student 1 t/@johndoe e/johndoe@example.com` Edits the telegram handle and email address of the 1st student to be `@johndoe` and `johndoe@example.com` respectively.
+*  `edit-student 1 t/johndoe e/johndoe@example.com` Edits the telegram username and email address of the 1st student to be `johndoe` and `johndoe@example.com` respectively.
 *  `edit-student 2 n/Betsy Crower tag/` Edits the name of the 2nd student to be `Betsy Crower` and clears all existing tags.
 
 #### Finding student by name : `find-student`
