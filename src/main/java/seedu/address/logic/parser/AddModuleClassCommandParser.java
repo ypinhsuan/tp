@@ -11,7 +11,7 @@ import seedu.address.model.components.Name;
 import seedu.address.model.moduleclass.ModuleClass;
 
 /**
- * Parses input arguments and creates a new AddStudentCommand object
+ * Parses input arguments and creates a new AddModuleClassCommand object.
  */
 public class AddModuleClassCommandParser implements Parser<AddModuleClassCommand> {
 
