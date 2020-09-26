@@ -130,8 +130,8 @@ public class CommandTestUtil {
     }
 
     /**
-     * Updates {@code model}'s filtered list to show only the student at the given {@code targetIndex} in the
-     * {@code model}'s Tutor's Pet.
+     * Updates {@code model}'s {@code filteredStudents} list to show only the student at the given
+     * {@code targetIndex} in the {@code model}'s Tutor's Pet.
      */
     public static void showStudentAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredStudentList().size());
@@ -144,8 +144,8 @@ public class CommandTestUtil {
     }
 
     /**
-     * Updates {@code model}'s filtered list to show only the class at the given {@code targetIndex} in the
-     * {@code model}'s Tutor's Pet.
+     * Updates {@code model}'s {@code filteredModuleClasses} list to show only the ModuleClass at the given
+     * {@code targetIndex} in the {@code model}'s Tutor's Pet.
      */
     public static void showModuleClassAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredModuleClassList().size());
