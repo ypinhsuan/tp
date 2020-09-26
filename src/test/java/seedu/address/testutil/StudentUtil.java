@@ -7,8 +7,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 
 import java.util.Set;
 
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.AddStudentCommand;
+import seedu.address.logic.commands.EditStudentCommand;
 import seedu.address.model.student.Student;
 import seedu.address.model.tag.Tag;
 
@@ -18,10 +18,10 @@ import seedu.address.model.tag.Tag;
 public class StudentUtil {
 
     /**
-     * Returns an add command string for adding the {@code student}.
+     * Returns an add student command string for adding the {@code student}.
      */
-    public static String getAddCommand(Student student) {
-        return AddCommand.COMMAND_WORD + " " + getStudentDetails(student);
+    public static String getAddStudentCommand(Student student) {
+        return AddStudentCommand.COMMAND_WORD + " " + getStudentDetails(student);
     }
 
     /**
@@ -41,7 +41,7 @@ public class StudentUtil {
     /**
      * Returns the part of command string for the given {@code EditStudentDescriptor}'s details.
      */
-    public static String getEditStudentDescriptorDetails(EditCommand.EditStudentDescriptor descriptor) {
+    public static String getEditStudentDescriptorDetails(EditStudentCommand.EditStudentDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getTelegram().ifPresent(telegram -> sb.append(PREFIX_TELEGRAM).append(telegram.value).append(" "));

@@ -25,6 +25,8 @@ import seedu.address.testutil.EditStudentDescriptorBuilder;
  */
 public class CommandTestUtil {
 
+    // student-related constants
+
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_TELEGRAM_AMY = "Amy_B";
@@ -51,8 +53,8 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditCommand.EditStudentDescriptor DESC_AMY;
-    public static final EditCommand.EditStudentDescriptor DESC_BOB;
+    public static final EditStudentCommand.EditStudentDescriptor DESC_AMY;
+    public static final EditStudentCommand.EditStudentDescriptor DESC_BOB;
 
     static {
         DESC_AMY = new EditStudentDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -62,6 +64,12 @@ public class CommandTestUtil {
                 .withTelegram(VALID_TELEGRAM_BOB).withEmail(VALID_EMAIL_BOB)
                 .withTags(VALID_TAG_AVERAGE, VALID_TAG_EXPERIENCED).build();
     }
+
+    // moduleClass-related constants
+
+    public static final String VALID_NAME_CS2103T_TUTORIAL = "CS2103T Tutorial";
+    public static final String VALID_NAME_CS2101_TUTORIAL = "CS2101 Tutorial";
+    public static final String VALID_NAME_CS2100_TUTORIAL = "CS2100 Tutorial";
 
     /**
      * Executes the given {@code command}, confirms that <br>

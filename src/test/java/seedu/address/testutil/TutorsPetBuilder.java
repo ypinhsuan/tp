@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import seedu.address.model.TutorsPet;
+import seedu.address.model.moduleclass.ModuleClass;
 import seedu.address.model.student.Student;
 
 /**
@@ -25,6 +26,14 @@ public class TutorsPetBuilder {
      */
     public TutorsPetBuilder withStudent(Student student) {
         tutorsPet.addStudent(student);
+        return this;
+    }
+
+    /**
+     * Adds a new {@code ModuleClass} to the {@code TutorsPet} that we are building.
+     */
+    public TutorsPetBuilder withModuleClass(ModuleClass moduleClass) {
+        tutorsPet.addModuleClass(moduleClass);
         return this;
     }
 

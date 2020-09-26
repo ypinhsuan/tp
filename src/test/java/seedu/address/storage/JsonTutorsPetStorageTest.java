@@ -6,11 +6,12 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalStudent.ALICE;
 import static seedu.address.testutil.TypicalStudent.HOON;
 import static seedu.address.testutil.TypicalStudent.IDA;
-import static seedu.address.testutil.TypicalStudent.getTypicalTutorsPet;
+import static seedu.address.testutil.TypicalTutorsPet.getTypicalTutorsPet;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -64,6 +65,10 @@ public class JsonTutorsPetStorageTest {
     public void readAndSaveTutorsPet_allInOrder_success() throws Exception {
         Path filePath = testFolder.resolve("TempTutorsPet.json");
         TutorsPet original = getTypicalTutorsPet();
+
+        // workaround as storage functionality for ModuleClasses has not been implemented
+        original.setModuleClasses(new ArrayList<>());
+
         JsonTutorsPetStorage jsonTutorsPetStorage = new JsonTutorsPetStorage(filePath);
 
         // Save in new file and read back

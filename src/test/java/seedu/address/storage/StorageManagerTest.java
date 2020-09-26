@@ -2,9 +2,10 @@ package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static seedu.address.testutil.TypicalStudent.getTypicalTutorsPet;
+import static seedu.address.testutil.TypicalTutorsPet.getTypicalTutorsPet;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -55,6 +56,10 @@ public class StorageManagerTest {
          * More extensive testing of UserPref saving/reading is done in {@link JsonTutorsPetStorageTest} class.
          */
         TutorsPet original = getTypicalTutorsPet();
+
+        // workaround as storage functionality for ModuleClasses has not been implemented
+        original.setModuleClasses(new ArrayList<>());
+
         storageManager.saveTutorsPet(original);
         ReadOnlyTutorsPet retrieved = storageManager.readTutorsPet().get();
         assertEquals(original, new TutorsPet(retrieved));

@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.moduleclass.ModuleClass;
 import seedu.address.model.student.Student;
 
 /**
@@ -22,6 +23,7 @@ public class ModelManager implements Model {
     private final TutorsPet tutorsPet;
     private final UserPrefs userPrefs;
     private final FilteredList<Student> filteredStudents;
+    private final FilteredList<ModuleClass> filteredModuleClasses;
 
     /**
      * Initializes a ModelManager with the given tutorsPet and userPrefs.
@@ -35,6 +37,7 @@ public class ModelManager implements Model {
         this.tutorsPet = new TutorsPet(tutorsPet);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredStudents = new FilteredList<>(this.tutorsPet.getStudentList());
+        filteredModuleClasses = new FilteredList<>(this.tutorsPet.getModuleClassList());
     }
 
     public ModelManager() {
@@ -108,8 +111,30 @@ public class ModelManager implements Model {
     @Override
     public void setStudent(Student target, Student editedStudent) {
         requireAllNonNull(target, editedStudent);
-
         tutorsPet.setStudent(target, editedStudent);
+    }
+
+    @Override
+    public boolean hasModuleClass(ModuleClass moduleClass) {
+        requireNonNull(moduleClass);
+        return tutorsPet.hasModuleClass(moduleClass);
+    }
+
+    @Override
+    public void deleteModuleClass(ModuleClass target) {
+        tutorsPet.removeModuleClass(target);
+    }
+
+    @Override
+    public void addModuleClass(ModuleClass moduleClass) {
+        tutorsPet.addModuleClass(moduleClass);
+        updateFilteredModuleClassList(PREDICATE_SHOW_ALL_MODULE_CLASS);
+    }
+
+    @Override
+    public void setModuleClass(ModuleClass target, ModuleClass editedModuleClass) {
+        requireAllNonNull(target, editedModuleClass);
+        tutorsPet.setModuleClass(target, editedModuleClass);
     }
 
     //=========== Filtered Student List Accessors =============================================================
@@ -127,6 +152,19 @@ public class ModelManager implements Model {
     public void updateFilteredStudentList(Predicate<Student> predicate) {
         requireNonNull(predicate);
         filteredStudents.setPredicate(predicate);
+    }
+
+    //=========== Filtered ModuleClass List Accessors =============================================================
+
+    @Override
+    public ObservableList<ModuleClass> getFilteredModuleClassList() {
+        return filteredModuleClasses;
+    }
+
+    @Override
+    public void updateFilteredModuleClassList(Predicate<ModuleClass> predicate) {
+        requireNonNull(predicate);
+        filteredModuleClasses.setPredicate(predicate);
     }
 
     @Override
