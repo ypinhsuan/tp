@@ -37,7 +37,7 @@ public class JsonAdaptedStudentTest {
     }
 
     @Test
-    public void toModelType_invalidUuid_throwsIllegalValueException() {
+    public void toModelType_nullUuid_throwsIllegalValueException() {
         JsonAdaptedStudent student =
                 new JsonAdaptedStudent(null, VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, "uuid");
