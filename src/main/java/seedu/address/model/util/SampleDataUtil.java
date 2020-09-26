@@ -19,17 +19,17 @@ public class SampleDataUtil {
     public static Student[] getSampleStudents() {
         return new Student[] {
             new Student(new Name("Alex Yeoh"), new Telegram("41ex_Yo"), new Email("alexyeoh@example.com"),
-                getTagSet("friends")),
+                getTagSet("Average")),
             new Student(new Name("Bernice Yu"), new Telegram("b3rnice"), new Email("berniceyu@example.com"),
-                getTagSet("colleagues", "friends")),
+                getTagSet("Good", "Experienced")),
             new Student(new Name("Charlotte Oliveiro"), new Telegram("C_Ol1ve"), new Email("charlotte@example.com"),
-                getTagSet("neighbours")),
+                getTagSet("Struggling")),
             new Student(new Name("David Li"), new Telegram("li_DAvid"), new Email("lidavid@example.com"),
-                getTagSet("family")),
+                getTagSet("Weak")),
             new Student(new Name("Irfan Ibrahim"), new Telegram("IIbr4hmm"), new Email("irfan@example.com"),
-                getTagSet("classmates")),
+                getTagSet("Struggling")),
             new Student(new Name("Roy Balakrishnan"), new Telegram("B_Roy"), new Email("royb@example.com"),
-                getTagSet("colleagues"))
+                getTagSet("Average"))
         };
     }
 

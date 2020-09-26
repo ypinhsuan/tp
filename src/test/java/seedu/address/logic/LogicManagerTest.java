@@ -77,7 +77,7 @@ public class LogicManagerTest {
         StorageManager storage = new StorageManager(tutorsPetStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
 
-        // Execute add command
+        // Execute add student command
         String addStudentCommand = AddStudentCommand.COMMAND_WORD + NAME_DESC_AMY + TELEGRAM_DESC_AMY + EMAIL_DESC_AMY;
         Student expectedStudent = new StudentBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
