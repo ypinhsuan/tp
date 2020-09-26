@@ -25,6 +25,9 @@ import seedu.address.testutil.EditStudentDescriptorBuilder;
  */
 public class CommandTestUtil {
 
+    public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
+    public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
+
     // student-related constants
 
     public static final String VALID_NAME_AMY = "Amy Bee";
@@ -50,9 +53,6 @@ public class CommandTestUtil {
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "good*"; // '*' not allowed in tags
 
-    public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
-    public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
-
     public static final EditStudentCommand.EditStudentDescriptor DESC_AMY;
     public static final EditStudentCommand.EditStudentDescriptor DESC_BOB;
 
@@ -70,6 +70,10 @@ public class CommandTestUtil {
     public static final String VALID_NAME_CS2103T_TUTORIAL = "CS2103T Tutorial";
     public static final String VALID_NAME_CS2101_TUTORIAL = "CS2101 Tutorial";
     public static final String VALID_NAME_CS2100_TUTORIAL = "CS2100 Tutorial";
+
+    public static final String NAME_DESC_CS2103T_TUTORIAL = " " + PREFIX_NAME + VALID_NAME_CS2103T_TUTORIAL;
+    public static final String NAME_DESC_CS2101_TUTORIAL = " " + PREFIX_NAME + VALID_NAME_CS2101_TUTORIAL;
+    public static final String NAME_DESC_CS2100_TUTORIAL = " " + PREFIX_NAME + VALID_NAME_CS2100_TUTORIAL;
 
     /**
      * Executes the given {@code command}, confirms that <br>

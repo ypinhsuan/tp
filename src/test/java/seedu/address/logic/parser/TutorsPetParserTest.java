@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.AddModuleClassCommand;
 import seedu.address.logic.commands.AddStudentCommand;
 import seedu.address.logic.commands.ClearStudentCommand;
 import seedu.address.logic.commands.DeleteStudentCommand;
@@ -23,9 +24,12 @@ import seedu.address.logic.commands.FindStudentCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.moduleclass.ModuleClass;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
 import seedu.address.model.student.Student;
 import seedu.address.testutil.EditStudentDescriptorBuilder;
+import seedu.address.testutil.ModuleClassBuilder;
+import seedu.address.testutil.ModuleClassUtil;
 import seedu.address.testutil.StudentBuilder;
 import seedu.address.testutil.StudentUtil;
 
@@ -60,6 +64,14 @@ public class TutorsPetParserTest {
         EditStudentCommand command = (EditStudentCommand) parser.parseCommand(EditStudentCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_STUDENT.getOneBased() + " " + StudentUtil.getEditStudentDescriptorDetails(descriptor));
         assertEquals(new EditStudentCommand(INDEX_FIRST_STUDENT, descriptor), command);
+    }
+
+    @Test
+    public void parseCommand_addClass() throws Exception {
+        ModuleClass moduleClass = new ModuleClassBuilder().build();
+        AddModuleClassCommand command = (AddModuleClassCommand) parser
+                .parseCommand(ModuleClassUtil.getAddModuleClassCommand(moduleClass));
+        assertEquals(new AddModuleClassCommand(moduleClass), command);
     }
 
     @Test
