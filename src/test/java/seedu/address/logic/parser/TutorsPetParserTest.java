@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.AddModuleClassCommand;
 import seedu.address.logic.commands.AddStudentCommand;
 import seedu.address.logic.commands.ClearStudentCommand;
+import seedu.address.logic.commands.DeleteModuleClassCommand;
 import seedu.address.logic.commands.DeleteStudentCommand;
 import seedu.address.logic.commands.EditModuleClassCommand;
 import seedu.address.logic.commands.EditModuleClassCommand.EditModuleClassDescriptor;
@@ -70,11 +71,18 @@ public class TutorsPetParserTest {
     }
 
     @Test
-    public void parseCommand_addClass() throws Exception {
+    public void parseCommand_addModuleClass() throws Exception {
         ModuleClass moduleClass = new ModuleClassBuilder().build();
         AddModuleClassCommand command = (AddModuleClassCommand) parser
                 .parseCommand(ModuleClassUtil.getAddModuleClassCommand(moduleClass));
         assertEquals(new AddModuleClassCommand(moduleClass), command);
+    }
+
+    @Test
+    public void parseCommand_deleteModuleClass() throws Exception {
+        DeleteModuleClassCommand command = (DeleteModuleClassCommand) parser.parseCommand(
+                DeleteModuleClassCommand.COMMAND_WORD + " " + INDEX_FIRST_ITEM.getOneBased());
+        assertEquals(new DeleteModuleClassCommand(INDEX_FIRST_ITEM), command);
     }
 
     @Test
