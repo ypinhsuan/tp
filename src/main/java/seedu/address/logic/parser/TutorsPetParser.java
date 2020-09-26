@@ -10,6 +10,7 @@ import seedu.address.logic.commands.AddStudentCommand;
 import seedu.address.logic.commands.ClearStudentCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteStudentCommand;
+import seedu.address.logic.commands.EditModuleClassCommand;
 import seedu.address.logic.commands.EditStudentCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindStudentCommand;
@@ -61,6 +62,9 @@ public class TutorsPetParser {
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
+
+        case EditModuleClassCommand.COMMAND_WORD:
+            return new EditModuleClassCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
