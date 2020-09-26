@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.UUID;
 
 import seedu.address.model.components.Name;
 import seedu.address.model.tag.Tag;
@@ -17,6 +18,7 @@ import seedu.address.model.tag.Tag;
 public class Student {
 
     // Identity fields
+    private final UUID uuid;
     private final Name name;
     private final Telegram telegram;
     private final Email email;
@@ -26,13 +28,32 @@ public class Student {
 
     /**
      * Every field must be present and not null.
+     * Creates a new student with a randomly generated UUID.
      */
     public Student(Name name, Telegram telegram, Email email, Set<Tag> tags) {
         requireAllNonNull(name, telegram, email, tags);
+        this.uuid = UUID.randomUUID();
         this.name = name;
         this.telegram = telegram;
         this.email = email;
         this.tags.addAll(tags);
+    }
+
+    /**
+     * Overloads student constructor so that we can return a new student
+     * with the same UUID to ensure object immutability.
+     */
+    public Student(UUID uuid, Name name, Telegram telegram, Email email, Set<Tag> tags) {
+        requireAllNonNull(uuid, name, telegram, email, tags);
+        this.uuid = uuid;
+        this.name = name;
+        this.telegram = telegram;
+        this.email = email;
+        this.tags.addAll(tags);
+    }
+
+    public UUID getUuid() {
+        return uuid;
     }
 
     public Name getName() {
@@ -91,7 +112,7 @@ public class Student {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, telegram, email, tags);
+        return Objects.hash(uuid, name, telegram, email, tags);
     }
 
     @Override

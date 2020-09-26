@@ -12,6 +12,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.UUID;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -89,12 +90,13 @@ public class EditStudentCommand extends Command {
      */
     private static Student createEditedStudent(Student studentToEdit, EditStudentDescriptor editStudentDescriptor) {
         assert studentToEdit != null;
+        UUID updatedUuid = studentToEdit.getUuid();
         Name updatedName = editStudentDescriptor.getName().orElse(studentToEdit.getName());
         Telegram updatedTelegram = editStudentDescriptor.getTelegram().orElse(studentToEdit.getTelegram());
         Email updatedEmail = editStudentDescriptor.getEmail().orElse(studentToEdit.getEmail());
         Set<Tag> updatedTags = editStudentDescriptor.getTags().orElse(studentToEdit.getTags());
 
-        return new Student(updatedName, updatedTelegram, updatedEmail, updatedTags);
+        return new Student(updatedUuid, updatedName, updatedTelegram, updatedEmail, updatedTags);
     }
 
     @Override

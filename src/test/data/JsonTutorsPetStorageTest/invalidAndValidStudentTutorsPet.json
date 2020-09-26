@@ -1,11 +1,13 @@
 {
   "students": [ {
-    "name": "Valid Person",
-    "telegram": "valid_person",
+    "uuid": "8b1588b3-ae5e-4dd0-938f-5c3bfac74810",
+    "name": "Valid Student",
+    "telegram": "valid_student",
     "email": "hans@example.com"
   }, {
-    "name": "Person With Invalid Telegram Field",
-    "telegram": "valid-person",
+    "uuid": "56401471-aaf9-4830-be62-a69a2a50c26a",
+    "name": "Student With Invalid Telegram Field",
+    "telegram": "invalid-student",
     "email": "hans@example.com"
   } ]
 }

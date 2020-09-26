@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -23,6 +24,7 @@ class JsonAdaptedStudent {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Student's %s field is missing!";
 
+    private final String uuid;
     private final String name;
     private final String telegram;
     private final String email;
@@ -32,9 +34,11 @@ class JsonAdaptedStudent {
      * Constructs a {@code JsonAdaptedStudent} with the given student details.
      */
     @JsonCreator
-    public JsonAdaptedStudent(@JsonProperty("name") String name, @JsonProperty("telegram") String telegram,
+    public JsonAdaptedStudent(@JsonProperty("uuid") String uuid, @JsonProperty("name") String name,
+                              @JsonProperty("telegram") String telegram,
                               @JsonProperty("email") String email,
                               @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+        this.uuid = uuid;
         this.name = name;
         this.telegram = telegram;
         this.email = email;
@@ -47,6 +51,7 @@ class JsonAdaptedStudent {
      * Converts a given {@code Student} into this class for Jackson use.
      */
     public JsonAdaptedStudent(Student source) {
+        uuid = source.getUuid().toString();
         name = source.getName().fullName;
         telegram = source.getTelegram().value;
         email = source.getEmail().value;
@@ -65,6 +70,11 @@ class JsonAdaptedStudent {
         for (JsonAdaptedTag tag : tagged) {
             studentTags.add(tag.toModelType());
         }
+
+        if (uuid == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "uuid"));
+        }
+        final UUID modelUuid = UUID.fromString(uuid);
 
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
@@ -92,7 +102,8 @@ class JsonAdaptedStudent {
         final Email modelEmail = new Email(email);
 
         final Set<Tag> modelTags = new HashSet<>(studentTags);
-        return new Student(modelName, modelTelegram, modelEmail, modelTags);
+
+        return new Student(modelUuid, modelName, modelTelegram, modelEmail, modelTags);
     }
 
 }

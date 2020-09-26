@@ -20,22 +20,29 @@ import seedu.address.model.student.Student;
  */
 public class TypicalStudent {
 
-    public static final Student ALICE = new StudentBuilder().withName("Alice Pauline")
+    public static final Student ALICE = new StudentBuilder().withUuid("0c527a3f-8a6f-4c16-b57d-563a9c43cf6b")
+            .withName("Alice Pauline")
             .withEmail("alice@example.com")
             .withTelegram("4Lice_P")
             .withTags("Average").build();
-    public static final Student BENSON = new StudentBuilder().withName("Benson Meier")
+    public static final Student BENSON = new StudentBuilder().withUuid("5c09bbdc-b89c-482a-a4b0-32ede6d679e7")
+            .withName("Benson Meier")
             .withEmail("johnd@example.com").withTelegram("BeN_10")
             .withTags("PotentialTA", "Experienced").build();
-    public static final Student CARL = new StudentBuilder().withName("Carl Kurz").withTelegram("cK2zz")
+    public static final Student CARL = new StudentBuilder().withUuid("62e9abd0-5456-4979-a9cc-8a0818421c2a")
+            .withName("Carl Kurz").withTelegram("cK2zz")
             .withEmail("heinz@example.com").build();
-    public static final Student DANIEL = new StudentBuilder().withName("Daniel Meier").withTelegram("danielmeier")
+    public static final Student DANIEL = new StudentBuilder().withUuid("d3593480-6648-4f7a-afa5-6c1b09b52718")
+            .withName("Daniel Meier").withTelegram("danielmeier")
             .withEmail("cornelia@example.com").withTags("Weak").build();
-    public static final Student ELLE = new StudentBuilder().withName("Elle Meyer").withTelegram("4114_my")
+    public static final Student ELLE = new StudentBuilder().withUuid("abb96663-589f-4553-bc25-fa93fed7459c")
+            .withName("Elle Meyer").withTelegram("4114_my")
             .withEmail("werner@example.com").build();
-    public static final Student FIONA = new StudentBuilder().withName("Fiona Kunz").withTelegram("kunz_F")
+    public static final Student FIONA = new StudentBuilder().withUuid("2be53daa-e18d-4de1-828b-31ad891ff7fc")
+            .withName("Fiona Kunz").withTelegram("kunz_F")
             .withEmail("lydia@example.com").build();
-    public static final Student GEORGE = new StudentBuilder().withName("George Best").withTelegram("dabest")
+    public static final Student GEORGE = new StudentBuilder().withUuid("48a5bfc5-782a-4861-8b36-9db2833cfd2d")
+            .withName("George Best").withTelegram("dabest")
             .withEmail("anna@example.com").build();
 
     // Manually added

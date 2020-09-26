@@ -1,5 +1,6 @@
 {
   "students": [ {
+    "uuid": "d85b5bb5-384e-4295-b96d-1eec530ff1e3",
     "name": "Student with invalid name field: Ha!ns Mu@ster",
     "telegram": "hans_M4STERZ",
     "email": "hans@example.com"
