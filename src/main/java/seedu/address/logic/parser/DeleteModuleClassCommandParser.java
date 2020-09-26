@@ -14,7 +14,7 @@ public class DeleteModuleClassCommandParser implements Parser<DeleteModuleClassC
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteModuleClassCommand
      * and returns a DeleteModuleClassCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     * @throws ParseException if the user input does not conform the expected format.
      */
     public DeleteModuleClassCommand parse(String args) throws ParseException {
         try {
