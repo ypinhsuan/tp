@@ -71,6 +71,9 @@ class JsonAdaptedStudent {
             studentTags.add(tag.toModelType());
         }
 
+        if (uuid == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "uuid"));
+        }
         final UUID modelUuid = UUID.fromString(uuid);
 
         if (name == null) {

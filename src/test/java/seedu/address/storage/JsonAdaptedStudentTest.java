@@ -37,6 +37,14 @@ public class JsonAdaptedStudentTest {
     }
 
     @Test
+    public void toModelType_invalidUuid_throwsIllegalValueException() {
+        JsonAdaptedStudent student =
+                new JsonAdaptedStudent(null, VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_TAGS);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, "uuid");
+        assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
+    }
+
+    @Test
     public void toModelType_invalidName_throwsIllegalValueException() {
         JsonAdaptedStudent student =
                 new JsonAdaptedStudent(VALID_UUID, INVALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_TAGS);
