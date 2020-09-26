@@ -20,7 +20,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.moduleclass.ModuleClass;
 import seedu.address.model.moduleclass.exceptions.DuplicateModuleClassException;
 import seedu.address.model.moduleclass.exceptions.ModuleClassNotFoundException;
-import seedu.address.model.student.NameContainsKeywordsPredicate;
+import seedu.address.model.student.StudentNameContainsKeywordsPredicate;
 import seedu.address.testutil.ModuleClassBuilder;
 import seedu.address.testutil.TutorsPetBuilder;
 
@@ -197,7 +197,7 @@ public class ModelManagerTest {
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
-        modelManager.updateFilteredStudentList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        modelManager.updateFilteredStudentList(new StudentNameContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(tutorsPet, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests

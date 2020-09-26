@@ -17,9 +17,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.TutorsPet;
 import seedu.address.model.moduleclass.ModuleClass;
-import seedu.address.model.moduleclass.NameContainsKeywordPredicate;
-import seedu.address.model.student.NameContainsKeywordsPredicate;
+import seedu.address.model.moduleclass.ModuleNameContainsKeywordsPredicate;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentNameContainsKeywordsPredicate;
 import seedu.address.testutil.EditModuleClassDescriptorBuilder;
 import seedu.address.testutil.EditStudentDescriptorBuilder;
 
@@ -138,7 +138,7 @@ public class CommandTestUtil {
 
         Student student = model.getFilteredStudentList().get(targetIndex.getZeroBased());
         final String[] splitName = student.getName().fullName.split("\\s+");
-        model.updateFilteredStudentList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredStudentList(new StudentNameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredStudentList().size());
     }
@@ -152,7 +152,7 @@ public class CommandTestUtil {
 
         ModuleClass moduleClass = model.getFilteredModuleClassList().get(targetIndex.getZeroBased());
         final String[] splitName = moduleClass.getName().fullName.split("\\s+");
-        model.updateFilteredModuleClassList(new NameContainsKeywordPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredModuleClassList(new ModuleNameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredModuleClassList().size());
     }
