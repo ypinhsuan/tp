@@ -28,6 +28,9 @@ import seedu.address.testutil.EditStudentDescriptorBuilder;
  */
 public class CommandTestUtil {
 
+    public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
+    public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
+
     // student-related constants
 
     public static final String VALID_NAME_AMY = "Amy Bee";
@@ -52,9 +55,6 @@ public class CommandTestUtil {
     public static final String INVALID_TELEGRAM_DESC = " " + PREFIX_TELEGRAM + "91%19"; // '%' not allowed in telegram
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "good*"; // '*' not allowed in tags
-
-    public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
-    public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
     public static final EditStudentCommand.EditStudentDescriptor DESC_AMY;
     public static final EditStudentCommand.EditStudentDescriptor DESC_BOB;

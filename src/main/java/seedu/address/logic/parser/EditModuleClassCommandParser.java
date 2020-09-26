@@ -10,7 +10,7 @@ import seedu.address.logic.commands.EditModuleClassCommand.EditModuleClassDescri
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and create a new EditedModuleClassCommand object.
+ * Parses input arguments and create a new EditModuleClassCommand object.
  */
 public class EditModuleClassCommandParser implements Parser<EditModuleClassCommand> {
 

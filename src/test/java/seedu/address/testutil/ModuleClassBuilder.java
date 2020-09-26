@@ -13,7 +13,7 @@ import seedu.address.model.moduleclass.ModuleClass;
  */
 public class ModuleClassBuilder {
 
-    public static final String DEFAULT_NAME = "CS2103T Tutorial";
+    public static final String DEFAULT_NAME = "CS1101 Tutorial";
 
     private Name name;
     private Set<UUID> studentIds;

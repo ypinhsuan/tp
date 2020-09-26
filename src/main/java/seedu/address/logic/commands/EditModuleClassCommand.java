@@ -77,7 +77,7 @@ public class EditModuleClassCommand extends Command {
      * edited with {@code editModuleClassDescriptor}.
      */
     private static ModuleClass createEditedModuleClass(ModuleClass moduleClassToEdit,
-                                                       EditModuleClassDescriptor editModuleClassDescriptor) {
+        EditModuleClassDescriptor editModuleClassDescriptor) {
         assert moduleClassToEdit != null;
         Name updatedName = editModuleClassDescriptor.getName().orElse(moduleClassToEdit.getName());
         Set<UUID> studentIds = moduleClassToEdit.getStudentIds();
@@ -136,17 +136,17 @@ public class EditModuleClassCommand extends Command {
 
         @Override
         public boolean equals(Object other) {
-            //short circuit if same object
+            // short circuit if same object
             if (other == this) {
                 return true;
             }
 
-            //instanceof handles nulls
+            // instanceof handles nulls
             if (!(other instanceof EditModuleClassDescriptor)) {
                 return false;
             }
 
-            //state check
+            // state check
             EditModuleClassDescriptor e = (EditModuleClassDescriptor) other;
 
             return getName().equals(e.getName());

@@ -8,8 +8,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_CS2030_TUT
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showModuleClassAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MODULE_CLASS;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_MODULE_CLASS;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_ITEM;
 import static seedu.address.testutil.TypicalTutorsPet.getTypicalTutorsPet;
 
 import org.junit.jupiter.api.Test;
@@ -27,7 +27,7 @@ import seedu.address.testutil.ModuleClassBuilder;
 import seedu.address.testutil.TypicalModuleClass;
 
 /**
- * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
+ * Contains integration tests (interaction with the Model) and unit tests for
  * {@code EditModuleClassCommand}.
  */
 public class EditModuleClassCommandTest {
@@ -38,7 +38,7 @@ public class EditModuleClassCommandTest {
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         ModuleClass editedModuleClass = new ModuleClassBuilder(TypicalModuleClass.CS2103T_TUTORIAL).build();
         EditModuleClassDescriptor descriptor = new EditModuleClassDescriptorBuilder(editedModuleClass).build();
-        EditModuleClassCommand editModuleClassCommand = new EditModuleClassCommand(INDEX_FIRST_MODULE_CLASS,
+        EditModuleClassCommand editModuleClassCommand = new EditModuleClassCommand(INDEX_FIRST_ITEM,
                 descriptor);
 
         String expectedMessage = String.format(EditModuleClassCommand.MESSAGE_EDIT_MODULE_CLASS_SUCCESS,
@@ -73,13 +73,13 @@ public class EditModuleClassCommandTest {
 
     @Test
     public void execute_filteredList_success() {
-        showModuleClassAtIndex(model, INDEX_FIRST_MODULE_CLASS);
+        showModuleClassAtIndex(model, INDEX_FIRST_ITEM);
 
         ModuleClass moduleClassInFilteredList =
-                model.getFilteredModuleClassList().get(INDEX_FIRST_MODULE_CLASS.getZeroBased());
+                model.getFilteredModuleClassList().get(INDEX_FIRST_ITEM.getZeroBased());
         ModuleClass editedModuleClass =
                 new ModuleClassBuilder(moduleClassInFilteredList).withName(VALID_NAME_CS2030_TUTORIAL).build();
-        EditModuleClassCommand editModuleClassCommand = new EditModuleClassCommand(INDEX_FIRST_MODULE_CLASS,
+        EditModuleClassCommand editModuleClassCommand = new EditModuleClassCommand(INDEX_FIRST_ITEM,
                 new EditModuleClassDescriptorBuilder().withName(VALID_NAME_CS2030_TUTORIAL).build());
 
         String expectedMessage = String.format(EditModuleClassCommand.MESSAGE_EDIT_MODULE_CLASS_SUCCESS,
@@ -93,9 +93,9 @@ public class EditModuleClassCommandTest {
 
     @Test
     public void execute_duplicateStudentUnfilteredList_failure() {
-        ModuleClass firstModuleClass = model.getFilteredModuleClassList().get(INDEX_FIRST_MODULE_CLASS.getZeroBased());
+        ModuleClass firstModuleClass = model.getFilteredModuleClassList().get(INDEX_FIRST_ITEM.getZeroBased());
         EditModuleClassDescriptor descriptor = new EditModuleClassDescriptorBuilder(firstModuleClass).build();
-        EditModuleClassCommand editModuleClassCommand = new EditModuleClassCommand(INDEX_SECOND_MODULE_CLASS,
+        EditModuleClassCommand editModuleClassCommand = new EditModuleClassCommand(INDEX_SECOND_ITEM,
                 descriptor);
 
         assertCommandFailure(editModuleClassCommand, model, EditModuleClassCommand.MESSAGE_DUPLICATE_MODULE_CLASS);
@@ -103,12 +103,12 @@ public class EditModuleClassCommandTest {
 
     @Test
     public void execute_duplicateStudentFilteredList_failure() {
-        showModuleClassAtIndex(model, INDEX_FIRST_MODULE_CLASS);
+        showModuleClassAtIndex(model, INDEX_FIRST_ITEM);
 
         // edit module class in filtered list into a duplicate in Tutor's Pet
         ModuleClass moduleClassInList = model.getTutorsPet().getModuleClassList()
-                .get(INDEX_SECOND_MODULE_CLASS.getZeroBased());
-        EditModuleClassCommand editModuleClassCommand = new EditModuleClassCommand(INDEX_FIRST_MODULE_CLASS,
+                .get(INDEX_SECOND_ITEM.getZeroBased());
+        EditModuleClassCommand editModuleClassCommand = new EditModuleClassCommand(INDEX_FIRST_ITEM,
                 new EditModuleClassDescriptorBuilder(moduleClassInList).build());
 
         assertCommandFailure(editModuleClassCommand, model, EditModuleClassCommand.MESSAGE_DUPLICATE_MODULE_CLASS);
@@ -130,8 +130,8 @@ public class EditModuleClassCommandTest {
      */
     @Test
     public void execute_invalidStudentIndexFilteredList_failure() {
-        showModuleClassAtIndex(model, INDEX_FIRST_MODULE_CLASS);
-        Index outOfBoundIndex = INDEX_SECOND_MODULE_CLASS;
+        showModuleClassAtIndex(model, INDEX_FIRST_ITEM);
+        Index outOfBoundIndex = INDEX_SECOND_ITEM;
 
         // ensures that outOfBoundIndex is still in bounds of module class list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getTutorsPet().getModuleClassList().size());
@@ -144,12 +144,12 @@ public class EditModuleClassCommandTest {
 
     @Test
     public void equals() {
-        final EditModuleClassCommand standardCommand = new EditModuleClassCommand(INDEX_FIRST_MODULE_CLASS,
+        final EditModuleClassCommand standardCommand = new EditModuleClassCommand(INDEX_FIRST_ITEM,
                 DESC_CS2100_TUTORIAL);
 
         // same value -> return true
         EditModuleClassDescriptor copyDescriptor = new EditModuleClassDescriptor(DESC_CS2100_TUTORIAL);
-        EditModuleClassCommand commandWithSameValue = new EditModuleClassCommand(INDEX_FIRST_MODULE_CLASS,
+        EditModuleClassCommand commandWithSameValue = new EditModuleClassCommand(INDEX_FIRST_ITEM,
                 copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValue));
 
@@ -161,10 +161,10 @@ public class EditModuleClassCommandTest {
 
         // different index -> return false
         assertFalse(standardCommand
-                .equals(new EditModuleClassCommand(INDEX_SECOND_MODULE_CLASS, DESC_CS2100_TUTORIAL)));
+                .equals(new EditModuleClassCommand(INDEX_SECOND_ITEM, DESC_CS2100_TUTORIAL)));
 
         // different descriptor -> return false
         assertFalse(standardCommand
-                .equals(new EditModuleClassCommand(INDEX_FIRST_MODULE_CLASS, DESC_CS2103T_TUTORIAL)));
+                .equals(new EditModuleClassCommand(INDEX_FIRST_ITEM, DESC_CS2103T_TUTORIAL)));
     }
 }

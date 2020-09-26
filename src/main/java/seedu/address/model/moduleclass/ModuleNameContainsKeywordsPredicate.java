@@ -23,10 +23,10 @@ public class ModuleNameContainsKeywordsPredicate implements Predicate<ModuleClas
 
     @Override
     public boolean equals(Object other) {
-        return other == this //short circuit if same object
-            || (other instanceof ModuleNameContainsKeywordsPredicate //handles null)
+        return other == this // short circuit if same object
+            || (other instanceof ModuleNameContainsKeywordsPredicate // instanceOf handles null
             && keywords.equals(((ModuleNameContainsKeywordsPredicate) other)
-                .keywords)); //state check
+                .keywords)); // state check
     }
 
 }

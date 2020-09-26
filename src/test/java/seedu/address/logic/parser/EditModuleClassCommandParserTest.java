@@ -8,8 +8,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_CS2100_TUT
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_CS2103T_TUTORIAL;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MODULE_CLASS;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_MODULE_CLASS;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_ITEM;
 
 import org.junit.jupiter.api.Test;
 
@@ -68,7 +68,7 @@ public class EditModuleClassCommandParserTest {
 
     @Test
     public void parse_allFieldsSpecified_success() {
-        Index targetIndex = INDEX_SECOND_MODULE_CLASS;
+        Index targetIndex = INDEX_SECOND_ITEM;
         String userInput = targetIndex.getOneBased() + NAME_DESC_CS2103T_TUTORIAL;
 
         EditModuleClassDescriptor descriptor =
@@ -80,7 +80,7 @@ public class EditModuleClassCommandParserTest {
 
     @Test
     public void parse_multipleRepeatedFields_acceptsLast() {
-        Index targetIndex = INDEX_FIRST_MODULE_CLASS;
+        Index targetIndex = INDEX_FIRST_ITEM;
         String userInput = targetIndex.getOneBased() + NAME_DESC_CS2100_TUTORIAL + NAME_DESC_CS2103T_TUTORIAL;
 
         EditModuleClassDescriptor descriptor =
@@ -93,7 +93,7 @@ public class EditModuleClassCommandParserTest {
     @Test
     public void parse_invalidValueFollowedByValidValue_success() {
         // no other valid values specified
-        Index targetIndex = INDEX_FIRST_MODULE_CLASS;
+        Index targetIndex = INDEX_FIRST_ITEM;
         String userInput = targetIndex.getOneBased() + INVALID_NAME_DESC + NAME_DESC_CS2103T_TUTORIAL;
         EditModuleClassDescriptor descriptor =
                 new EditModuleClassDescriptorBuilder().withName(VALID_NAME_CS2103T_TUTORIAL).build();

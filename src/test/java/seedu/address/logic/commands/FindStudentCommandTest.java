@@ -75,7 +75,7 @@ public class FindStudentCommandTest {
     }
 
     /**
-     * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
+     * Parses {@code userInput} into a {@code StudentNameContainsKeywordsPredicate}.
      */
     private StudentNameContainsKeywordsPredicate preparePredicate(String userInput) {
         return new StudentNameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));

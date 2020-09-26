@@ -21,7 +21,7 @@ public class EditModuleClassDescriptorBuilder {
     }
 
     /**
-     * Returns an {@code EditModuleClassDescriptor} with fields containing {@code moduleClass}'s details
+     * Returns an {@code EditModuleClassDescriptor} with fields containing {@code moduleClass}'s details.
      */
     public EditModuleClassDescriptorBuilder(ModuleClass moduleClass) {
         descriptor = new EditModuleClassCommand.EditModuleClassDescriptor();
