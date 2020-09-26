@@ -14,7 +14,7 @@ You can reach us at the following emails
 
 ## Project team
 
-### Samantha Low
+### Low Shu Min Samantha
 
 <img src="./images/samlsm.png" width="200px">
 
