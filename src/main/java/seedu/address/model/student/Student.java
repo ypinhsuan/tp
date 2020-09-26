@@ -84,6 +84,7 @@ public class Student {
         if (otherStudent == this) {
             return true;
         }
+
         return otherStudent != null
                 && otherStudent.getName().equals(getName())
                 && (otherStudent.getTelegram().equals(getTelegram()) || otherStudent.getEmail().equals(getEmail()));
@@ -102,6 +103,7 @@ public class Student {
         if (!(other instanceof Student)) {
             return false;
         }
+
         Student otherStudent = (Student) other;
         return otherStudent.getName().equals(getName())
                 && otherStudent.getTelegram().equals(getTelegram())

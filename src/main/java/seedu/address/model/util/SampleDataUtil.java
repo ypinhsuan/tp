@@ -16,6 +16,7 @@ import seedu.address.model.tag.Tag;
  * Contains utility methods for populating {@code TutorsPet} with sample data.
  */
 public class SampleDataUtil {
+
     public static Student[] getSampleStudents() {
         return new Student[] {
             new Student(new Name("Alex Yeoh"), new Telegram("41ex_Yo"), new Email("alexyeoh@example.com"),
