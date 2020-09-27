@@ -108,6 +108,7 @@ public class EditModuleClassCommand extends Command {
      * corresponding field value of the class.
      */
     public static class EditModuleClassDescriptor {
+
         private Name name;
 
         public EditModuleClassDescriptor() {}

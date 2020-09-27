@@ -9,6 +9,7 @@ import seedu.address.commons.util.StringUtil;
  * Tests that a {@code ModuleClass}'s {@code Name} matches any of the keywords given.
  */
 public class ModuleNameContainsKeywordsPredicate implements Predicate<ModuleClass> {
+
     private final List<String> keywords;
 
     public ModuleNameContainsKeywordsPredicate(List<String> keywords) {
@@ -28,5 +29,4 @@ public class ModuleNameContainsKeywordsPredicate implements Predicate<ModuleClas
             && keywords.equals(((ModuleNameContainsKeywordsPredicate) other)
                 .keywords)); // state check
     }
-
 }

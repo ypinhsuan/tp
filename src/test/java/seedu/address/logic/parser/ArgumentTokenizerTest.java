@@ -60,7 +60,6 @@ public class ArgumentTokenizerTest {
 
         // Same string expected as preamble, but leading/trailing spaces should be trimmed
         assertPreamblePresent(argMultimap, argsString.trim());
-
     }
 
     @Test
@@ -76,7 +75,6 @@ public class ArgumentTokenizerTest {
         argMultimap = ArgumentTokenizer.tokenize(argsString, pSlash);
         assertPreambleEmpty(argMultimap);
         assertArgumentPresent(argMultimap, pSlash, "Argument value");
-
     }
 
     @Test
@@ -146,5 +144,4 @@ public class ArgumentTokenizerTest {
         assertNotEquals(aaa, "aaa");
         assertNotEquals(aaa, new Prefix("aab"));
     }
-
 }

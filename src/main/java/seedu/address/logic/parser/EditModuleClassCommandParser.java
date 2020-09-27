@@ -44,5 +44,4 @@ public class EditModuleClassCommandParser implements Parser<EditModuleClassComma
 
         return new EditModuleClassCommand(index, editModuleClassDescriptor);
     }
-
 }

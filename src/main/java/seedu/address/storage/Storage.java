@@ -28,5 +28,4 @@ public interface Storage extends TutorsPetStorage, UserPrefsStorage {
 
     @Override
     void saveTutorsPet(ReadOnlyTutorsPet tutorsPet) throws IOException;
-
 }

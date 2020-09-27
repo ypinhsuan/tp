@@ -76,5 +76,4 @@ public class JsonTutorsPetStorage implements TutorsPetStorage {
         FileUtil.createIfMissing(filePath);
         JsonUtil.saveJsonFile(new JsonSerializableTutorsPet(tutorsPet), filePath);
     }
-
 }

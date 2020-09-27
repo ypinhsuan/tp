@@ -54,5 +54,4 @@ public class ModuleClassBuilder {
     public ModuleClass build() {
         return new ModuleClass(name, studentIds);
     }
-
 }

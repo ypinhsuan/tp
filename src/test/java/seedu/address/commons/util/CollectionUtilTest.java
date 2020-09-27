@@ -13,6 +13,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 public class CollectionUtilTest {
+
     @Test
     public void requireAllNonNullVarargs() {
         // no arguments

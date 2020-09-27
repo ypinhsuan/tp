@@ -191,6 +191,7 @@ public class TutorsPetTest {
      * A stub ReadOnlyTutorsPet whose students list can violate interface constraints.
      */
     private static class TutorsPetStub implements ReadOnlyTutorsPet {
+
         private final ObservableList<Student> students = FXCollections.observableArrayList();
         private final ObservableList<ModuleClass> classes = FXCollections.observableArrayList();
 
@@ -209,5 +210,4 @@ public class TutorsPetTest {
             return classes;
         }
     }
-
 }

@@ -18,6 +18,7 @@ import seedu.address.model.moduleclass.ModuleClass;
 import seedu.address.testutil.ModuleClassBuilder;
 
 public class AddModuleClassCommandParserTest {
+
     private AddModuleClassCommandParser parser = new AddModuleClassCommandParser();
 
     @Test
