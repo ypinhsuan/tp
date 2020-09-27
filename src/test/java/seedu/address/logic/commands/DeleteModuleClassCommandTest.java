@@ -70,6 +70,7 @@ public class DeleteModuleClassCommandTest {
         showModuleClassAtIndex(model, INDEX_FIRST_ITEM);
 
         Index outOfBoundIndex = INDEX_SECOND_ITEM;
+
         // ensures that outOfBoundIndex is still in bounds of Tutor's Pet list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getTutorsPet().getModuleClassList().size());
 
