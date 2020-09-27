@@ -5,7 +5,6 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
@@ -27,9 +26,6 @@ public class JsonSerializableTutorsPetTest {
                 JsonSerializableTutorsPet.class).get();
         TutorsPet tutorsPetFromFile = dataFromFile.toModelType();
         TutorsPet typicalStudentsTutorsPet = TypicalTutorsPet.getTypicalTutorsPet();
-
-        // workaround as storage functionality for ModuleClasses has not been implemented
-        typicalStudentsTutorsPet.setModuleClasses(new ArrayList<>());
 
         assertEquals(tutorsPetFromFile, typicalStudentsTutorsPet);
     }

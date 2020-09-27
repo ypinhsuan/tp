@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.ReadOnlyTutorsPet;
 import seedu.address.model.TutorsPet;
+import seedu.address.model.moduleclass.ModuleClass;
 import seedu.address.model.student.Student;
 
 /**
@@ -20,15 +21,19 @@ import seedu.address.model.student.Student;
 class JsonSerializableTutorsPet {
 
     public static final String MESSAGE_DUPLICATE_STUDENT = "Students list contains duplicate student(s).";
+    public static final String MESSAGE_DUPLICATE_MODULE_CLASS = "Class list contains duplicate student(s).";
 
     private final List<JsonAdaptedStudent> students = new ArrayList<>();
+    private final List<JsonAdaptedModuleClass> classes = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableTutorsPet} with the given students.
+     * Constructs a {@code JsonSerializableTutorsPet} with the given students and classes.
      */
     @JsonCreator
-    public JsonSerializableTutorsPet(@JsonProperty("students") List<JsonAdaptedStudent> students) {
+    public JsonSerializableTutorsPet(@JsonProperty("students") List<JsonAdaptedStudent> students,
+                                     @JsonProperty("classes") List<JsonAdaptedModuleClass> classes) {
         this.students.addAll(students);
+        this.classes.addAll(classes);
     }
 
     /**
@@ -38,6 +43,8 @@ class JsonSerializableTutorsPet {
      */
     public JsonSerializableTutorsPet(ReadOnlyTutorsPet source) {
         students.addAll(source.getStudentList().stream().map(JsonAdaptedStudent::new).collect(Collectors.toList()));
+        classes.addAll(source.getModuleClassList().stream()
+                .map(JsonAdaptedModuleClass::new).collect(Collectors.toList()));
     }
 
     /**
@@ -53,6 +60,13 @@ class JsonSerializableTutorsPet {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_STUDENT);
             }
             tutorsPet.addStudent(student);
+        }
+        for (JsonAdaptedModuleClass jsonAdaptedModuleClass : classes) {
+            ModuleClass moduleClass = jsonAdaptedModuleClass.toModelType();
+            if (tutorsPet.hasModuleClass(moduleClass)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_MODULE_CLASS);
+            }
+            tutorsPet.addModuleClass(moduleClass);
         }
         return tutorsPet;
     }

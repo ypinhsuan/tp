@@ -9,5 +9,6 @@
     "name": "Student With Invalid Telegram Field",
     "telegram": "invalid-student",
     "email": "hans@example.com"
-  } ]
+  } ],
+  "classes" : []
 }

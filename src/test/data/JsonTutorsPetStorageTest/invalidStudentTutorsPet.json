@@ -4,5 +4,6 @@
     "name": "Student with invalid name field: Ha!ns Mu@ster",
     "telegram": "hans_M4STERZ",
     "email": "hans@example.com"
-  } ]
+  } ],
+  "classes" : []
 }

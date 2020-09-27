@@ -42,5 +42,22 @@
     "telegram" : "dabest",
     "email" : "anna@example.com",
     "tagged" : [ ]
-  } ]
+  } ],
+  "classes" : [ {
+    "name" : "CS2103T Tutorial",
+    "studentIds" : [
+      "224bdbab-e1b1-4bb1-b34c-bebe9fb17fbc",
+      "71c0755a-622c-49e8-b938-693a0dd598dc"
+    ]
+  }, {
+    "name" : "CS2100 Tutorial",
+    "studentIds" : [
+
+    ]
+  }, {
+    "name" : "CS2101 Tutorial",
+    "studentIds" : [
+      "224bdbab-e1b1-4bb1-b34c-bebe9fb17fbc"
+    ]
+  }]
 }
