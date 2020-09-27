@@ -80,6 +80,15 @@ public class UniqueModuleClassListTest {
     }
 
     @Test
+    public void setModuleClass_moduleClassWithSameIdentityFieldsInList_throwsDuplicateModuleClassException() {
+        uniqueModuleClassList.add(CS2103T_TUTORIAL);
+        uniqueModuleClassList.add(CS2100_LAB);
+        ModuleClass editedClass = new ModuleClassBuilder(CS2100_LAB).withStudentIds(STUDENT_UUID_1).build();
+        assertThrows(DuplicateModuleClassException.class, () ->
+                uniqueModuleClassList.setModuleClass(CS2103T_TUTORIAL, editedClass));
+    }
+
+    @Test
     public void remove_nullModuleClass_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueModuleClassList.remove(null));
     }
@@ -138,5 +147,29 @@ public class UniqueModuleClassListTest {
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
             -> uniqueModuleClassList.asUnmodifiableObservableList().remove(0));
+    }
+
+    @Test
+    public void equals_true() {
+        uniqueModuleClassList.add(CS2100_LAB);
+
+        // same internal list -> returns true
+        UniqueModuleClassList uniqueModuleClassListCopy = new UniqueModuleClassList();
+        uniqueModuleClassListCopy.add(CS2100_LAB);
+        assertTrue(uniqueModuleClassList.equals(uniqueModuleClassListCopy));
+
+        // same object -> returns true
+        assertTrue(uniqueModuleClassList.equals(uniqueModuleClassList));
+
+        // null -> returns false
+        assertFalse(uniqueModuleClassList.equals(null));
+
+        // different type -> returns false
+        assertFalse(uniqueModuleClassList.equals(5));
+
+        // different internal list -> returns false
+        UniqueModuleClassList otherUniqueModuleClassList = new UniqueModuleClassList();
+        otherUniqueModuleClassList.add(CS2103T_TUTORIAL);
+        assertFalse(uniqueModuleClassList.equals(otherUniqueModuleClassList));
     }
 }

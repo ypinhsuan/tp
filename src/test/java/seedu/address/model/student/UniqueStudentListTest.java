@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_AVERAGE;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalStudent.ALICE;
+import static seedu.address.testutil.TypicalStudent.BENSON;
 import static seedu.address.testutil.TypicalStudent.BOB;
 
 import java.util.Arrays;
@@ -165,5 +166,29 @@ public class UniqueStudentListTest {
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
             -> uniqueStudentList.asUnmodifiableObservableList().remove(0));
+    }
+
+    @Test
+    public void equals_true() {
+        uniqueStudentList.add(ALICE);
+
+        // same internal list -> returns true
+        UniqueStudentList uniqueStudentListCopy = new UniqueStudentList();
+        uniqueStudentListCopy.add(ALICE);
+        assertTrue(uniqueStudentList.equals(uniqueStudentListCopy));
+
+        // same object -> returns true
+        assertTrue(uniqueStudentList.equals(uniqueStudentList));
+
+        // null -> returns false
+        assertFalse(uniqueStudentList.equals(null));
+
+        // different type -> returns false
+        assertFalse(uniqueStudentList.equals(5));
+
+        // different internal list -> returns false
+        UniqueStudentList otherStudentClassList = new UniqueStudentList();
+        otherStudentClassList.add(BENSON);
+        assertFalse(uniqueStudentList.equals(otherStudentClassList));
     }
 }
