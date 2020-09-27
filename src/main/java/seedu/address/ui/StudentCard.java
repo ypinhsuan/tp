@@ -1,6 +1,10 @@
 package seedu.address.ui;
 
+import java.awt.Color;
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
+import java.util.Random;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -8,12 +12,15 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.student.Student;
+import seedu.address.model.tag.Tag;
 
 /**
- * An UI component that displays information of a {@code Student}.
+ * A UI component that displays information of a {@code Student}.
  */
 public class StudentCard extends UiPart<Region> {
 
+    private static final List<Tag> listOfTags = new ArrayList<>();
+    private static final List<Color> listOfColors = new ArrayList<>();
     private static final String FXML = "StudentListCard.fxml";
     private static final String TELEGRAM_PREFIX = "@";
 
@@ -52,7 +59,40 @@ public class StudentCard extends UiPart<Region> {
         email.setText(student.getEmail().value);
         student.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+                .forEach(tag -> tags.getChildren().add(createTag(tag)));
+    }
+
+    /**
+     * Creates a {@code Label} with the given {@code Tag} details.
+     */
+    public Label createTag(Tag tag) {
+        Color color;
+
+        if (listOfTags.contains(tag)) {
+            int ind = listOfTags.indexOf(tag);
+            color = listOfColors.get(ind);
+        } else {
+            int nextInd = listOfTags.size();
+            listOfTags.add(nextInd, tag);
+            color = generateRandomColor();
+            listOfColors.add(nextInd, color);
+        }
+
+        Label label = new Label(tag.tagName);
+        label.setStyle("-fx-background-color: rgb("
+                + color.getRed() + "," + color.getGreen() + ", " + color.getBlue() + ");");
+        return label;
+    }
+
+    /**
+     * Generates a random {@code Color}.
+     */
+    public Color generateRandomColor() {
+        Random randomGenerator = new Random();
+        int red = randomGenerator.nextInt(255);
+        int green = randomGenerator.nextInt(255);
+        int blue = randomGenerator.nextInt(255);
+        return new Color(red, green, blue);
     }
 
     @Override

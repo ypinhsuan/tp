@@ -8,6 +8,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyTutorsPet;
+import seedu.address.model.moduleclass.ModuleClass;
 import seedu.address.model.student.Student;
 
 /**
@@ -34,6 +35,11 @@ public interface Logic {
      * Returns an unmodifiable view of the filtered list of students.
      */
     ObservableList<Student> getFilteredStudentList();
+
+    /**
+     * Returns an unmodifiable view of the filtered list of classes.
+     */
+    ObservableList<ModuleClass> getFilteredModuleClassList();
 
     /**
      * Returns the user prefs' Tutor's Pet file path.
