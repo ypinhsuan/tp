@@ -15,6 +15,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.components.Name;
 
 public class JsonAdaptedModuleClassTest {
+
     private static final String INVALID_NAME = "CS3230@Tutorial";
 
     private static final String VALID_NAME = CS2103T_TUTORIAL.getName().toString();
