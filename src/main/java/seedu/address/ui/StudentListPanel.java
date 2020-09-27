@@ -14,6 +14,7 @@ import seedu.address.model.student.Student;
  * Panel containing the list of students.
  */
 public class StudentListPanel extends UiPart<Region> {
+
     private static final String FXML = "StudentListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(StudentListPanel.class);
 
@@ -33,6 +34,7 @@ public class StudentListPanel extends UiPart<Region> {
      * Custom {@code ListCell} that displays the graphics of a {@code Student} using a {@code StudentCard}.
      */
     class StudentListViewCell extends ListCell<Student> {
+
         @Override
         protected void updateItem(Student student, boolean empty) {
             super.updateItem(student, empty);
@@ -45,5 +47,4 @@ public class StudentListPanel extends UiPart<Region> {
             }
         }
     }
-
 }
