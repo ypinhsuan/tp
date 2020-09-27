@@ -71,18 +71,18 @@ public class CommandTestUtil {
     // moduleClass-related constants
 
     public static final String VALID_NAME_CS2103T_TUTORIAL = "CS2103T Tutorial";
-    public static final String VALID_NAME_CS2101_TUTORIAL = "CS2101 Tutorial";
-    public static final String VALID_NAME_CS2100_TUTORIAL = "CS2100 Tutorial";
+    public static final String VALID_NAME_CS1101S_STUDIO = "CS1101S Studio";
+    public static final String VALID_NAME_CS2100_LAB = "CS2100 Lab";
     public static final String VALID_NAME_CS2030_TUTORIAL = "CS2030 Tutorial";
 
     public static final String NAME_DESC_CS2103T_TUTORIAL = " " + PREFIX_NAME + VALID_NAME_CS2103T_TUTORIAL;
-    public static final String NAME_DESC_CS2100_TUTORIAL = " " + PREFIX_NAME + VALID_NAME_CS2100_TUTORIAL;
+    public static final String NAME_DESC_CS2100_LAB = " " + PREFIX_NAME + VALID_NAME_CS2100_LAB;
 
-    public static final EditModuleClassCommand.EditModuleClassDescriptor DESC_CS2100_TUTORIAL;
+    public static final EditModuleClassCommand.EditModuleClassDescriptor DESC_CS2100_LAB;
     public static final EditModuleClassCommand.EditModuleClassDescriptor DESC_CS2103T_TUTORIAL;
 
     static {
-        DESC_CS2100_TUTORIAL = new EditModuleClassDescriptorBuilder().withName(VALID_NAME_CS2100_TUTORIAL).build();
+        DESC_CS2100_LAB = new EditModuleClassDescriptorBuilder().withName(VALID_NAME_CS2100_LAB).build();
         DESC_CS2103T_TUTORIAL = new EditModuleClassDescriptorBuilder().withName(VALID_NAME_CS2103T_TUTORIAL).build();
     }
 

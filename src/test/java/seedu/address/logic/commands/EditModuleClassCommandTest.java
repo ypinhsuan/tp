@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.DESC_CS2100_TUTORIAL;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_CS2100_LAB;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_CS2103T_TUTORIAL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_CS2030_TUTORIAL;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
@@ -145,10 +145,10 @@ public class EditModuleClassCommandTest {
     @Test
     public void equals() {
         final EditModuleClassCommand standardCommand = new EditModuleClassCommand(INDEX_FIRST_ITEM,
-                DESC_CS2100_TUTORIAL);
+                DESC_CS2100_LAB);
 
         // same value -> return true
-        EditModuleClassDescriptor copyDescriptor = new EditModuleClassDescriptor(DESC_CS2100_TUTORIAL);
+        EditModuleClassDescriptor copyDescriptor = new EditModuleClassDescriptor(DESC_CS2100_LAB);
         EditModuleClassCommand commandWithSameValue = new EditModuleClassCommand(INDEX_FIRST_ITEM,
                 copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValue));
@@ -161,7 +161,7 @@ public class EditModuleClassCommandTest {
 
         // different index -> return false
         assertFalse(standardCommand
-                .equals(new EditModuleClassCommand(INDEX_SECOND_ITEM, DESC_CS2100_TUTORIAL)));
+                .equals(new EditModuleClassCommand(INDEX_SECOND_ITEM, DESC_CS2100_LAB)));
 
         // different descriptor -> return false
         assertFalse(standardCommand

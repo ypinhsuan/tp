@@ -49,16 +49,16 @@ public class AddModuleClassCommandTest {
 
     @Test
     public void equals() {
-        ModuleClass cs1101 = new ModuleClassBuilder().withName("CS1101").build();
+        ModuleClass cs1010 = new ModuleClassBuilder().withName("CS1010").build();
         ModuleClass cs2103 = new ModuleClassBuilder().withName("CS2103").build();
-        AddModuleClassCommand addCs1101Command = new AddModuleClassCommand(cs1101);
+        AddModuleClassCommand addCs1101Command = new AddModuleClassCommand(cs1010);
         AddModuleClassCommand addCs2103Command = new AddModuleClassCommand(cs2103);
 
         // same object -> returns true
         assertTrue(addCs1101Command.equals(addCs1101Command));
 
         // same values -> returns true
-        AddModuleClassCommand addCs1101CommandCopy = new AddModuleClassCommand(cs1101);
+        AddModuleClassCommand addCs1101CommandCopy = new AddModuleClassCommand(cs1010);
         assertTrue(addCs1101Command.equals(addCs1101CommandCopy));
 
         // different types -> returns false

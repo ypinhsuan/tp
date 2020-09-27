@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalModuleClass.CS2100_TUTORIAL;
+import static seedu.address.testutil.TypicalModuleClass.CS2100_LAB;
 import static seedu.address.testutil.TypicalModuleClass.CS2103T_TUTORIAL;
 import static seedu.address.testutil.TypicalModuleClass.STUDENT_UUID_1;
 
@@ -107,7 +107,7 @@ public class UniqueModuleClassListTest {
     public void setModuleClass_uniqueModuleClassList_replacesOwnListWithProvidedUniqueModuleClassList() {
         uniqueModuleClassList.add(CS2103T_TUTORIAL);
         UniqueModuleClassList expectedUniqueModuleClassList = new UniqueModuleClassList();
-        expectedUniqueModuleClassList.add(CS2100_TUTORIAL);
+        expectedUniqueModuleClassList.add(CS2100_LAB);
         uniqueModuleClassList.setModuleClass(expectedUniqueModuleClassList);
         assertEquals(expectedUniqueModuleClassList, uniqueModuleClassList);
     }
@@ -120,10 +120,10 @@ public class UniqueModuleClassListTest {
     @Test
     public void setModuleClass_list_replacesOwnListWithProvidedList() {
         uniqueModuleClassList.add(CS2103T_TUTORIAL);
-        List<ModuleClass> moduleClassList = Collections.singletonList(CS2100_TUTORIAL);
+        List<ModuleClass> moduleClassList = Collections.singletonList(CS2100_LAB);
         uniqueModuleClassList.setModuleClass(moduleClassList);
         UniqueModuleClassList expectedUniqueModuleClassList = new UniqueModuleClassList();
-        expectedUniqueModuleClassList.add(CS2100_TUTORIAL);
+        expectedUniqueModuleClassList.add(CS2100_LAB);
         assertEquals(expectedUniqueModuleClassList, uniqueModuleClassList);
     }
 

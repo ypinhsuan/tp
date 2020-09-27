@@ -3,6 +3,7 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_MODULE_CLASS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalModuleClass.CS2103T_TUTORIAL;
@@ -195,13 +196,21 @@ public class ModelManagerTest {
         // different tutorsPet -> returns false
         assertFalse(modelManager.equals(new ModelManager(differentTutorsPet, userPrefs)));
 
-        // different filteredList -> returns false
+        // different filteredStudentList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredStudentList(new StudentNameContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(tutorsPet, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+
+        // different filteredModuleClassList -> returns false
+        keywords = CS2103T_TUTORIAL.getName().fullName.split("\\s+");
+        modelManager.updateFilteredStudentList(new StudentNameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        assertFalse(modelManager.equals(new ModelManager(tutorsPet, userPrefs)));
+
+        // resets modelManager to initial state for upcoming tests
+        modelManager.updateFilteredModuleClassList(PREDICATE_SHOW_ALL_MODULE_CLASS);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
