@@ -2,6 +2,7 @@ package seedu.address.model.moduleclass;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalModuleClass.CS2100_LAB;
@@ -171,5 +172,31 @@ public class UniqueModuleClassListTest {
         UniqueModuleClassList otherUniqueModuleClassList = new UniqueModuleClassList();
         otherUniqueModuleClassList.add(CS2103T_TUTORIAL);
         assertFalse(uniqueModuleClassList.equals(otherUniqueModuleClassList));
+    }
+
+    @Test
+    public void hashCode_sameContents_sameHashCode() {
+        uniqueModuleClassList.add(CS2100_LAB);
+        UniqueModuleClassList uniqueModuleClassListCopy = new UniqueModuleClassList();
+        uniqueModuleClassListCopy.add(CS2100_LAB);
+        assertNotSame(uniqueModuleClassListCopy, uniqueModuleClassList);
+        assertTrue(uniqueModuleClassList.hashCode() == uniqueModuleClassListCopy.hashCode());
+    }
+
+    @Test
+    public void hashCode_differentContents_differentHashCode() {
+        uniqueModuleClassList.add(CS2100_LAB);
+        UniqueModuleClassList uniqueModuleClassListCopy = new UniqueModuleClassList();
+        uniqueModuleClassListCopy.add(CS2103T_TUTORIAL);
+        assertNotSame(uniqueModuleClassListCopy, uniqueModuleClassList);
+        assertFalse(uniqueModuleClassList.hashCode() == uniqueModuleClassListCopy.hashCode());
+    }
+
+    @Test
+    public void hashCode_changeInContents_differentHashCode() {
+        uniqueModuleClassList.add(CS2100_LAB);
+        int hash = uniqueModuleClassList.hashCode();
+        uniqueModuleClassList.add(CS2103T_TUTORIAL);
+        assertFalse(uniqueModuleClassList.hashCode() == hash);
     }
 }

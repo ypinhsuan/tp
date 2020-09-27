@@ -2,6 +2,7 @@ package seedu.address.model.student;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_AVERAGE;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -190,5 +191,31 @@ public class UniqueStudentListTest {
         UniqueStudentList otherStudentClassList = new UniqueStudentList();
         otherStudentClassList.add(BENSON);
         assertFalse(uniqueStudentList.equals(otherStudentClassList));
+    }
+
+    @Test
+    public void hashCode_sameContents_sameHashCode() {
+        uniqueStudentList.add(ALICE);
+        UniqueStudentList uniqueStudentListCopy = new UniqueStudentList();
+        uniqueStudentListCopy.add(ALICE);
+        assertNotSame(uniqueStudentListCopy, uniqueStudentList);
+        assertTrue(uniqueStudentList.hashCode() == uniqueStudentListCopy.hashCode());
+    }
+
+    @Test
+    public void hashCode_differentContents_differentHashCode() {
+        uniqueStudentList.add(ALICE);
+        UniqueStudentList uniqueStudentListCopy = new UniqueStudentList();
+        uniqueStudentListCopy.add(BENSON);
+        assertNotSame(uniqueStudentListCopy, uniqueStudentList);
+        assertFalse(uniqueStudentList.hashCode() == uniqueStudentListCopy.hashCode());
+    }
+
+    @Test
+    public void hashCode_changeInContents_differentHashCode() {
+        uniqueStudentList.add(ALICE);
+        int hash = uniqueStudentList.hashCode();
+        uniqueStudentList.add(BENSON);
+        assertFalse(uniqueStudentList.hashCode() == hash);
     }
 }
