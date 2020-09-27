@@ -42,5 +42,4 @@ public interface TutorsPetStorage {
      * @see #saveTutorsPet(ReadOnlyTutorsPet)
      */
     void saveTutorsPet(ReadOnlyTutorsPet tutorsPet, Path filePath) throws IOException;
-
 }

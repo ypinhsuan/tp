@@ -29,5 +29,4 @@ public class FindStudentCommandParser implements Parser<FindStudentCommand> {
 
         return new FindStudentCommand(new StudentNameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
     }
-
 }

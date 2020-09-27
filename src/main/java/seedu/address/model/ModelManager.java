@@ -18,6 +18,7 @@ import seedu.address.model.student.Student;
  * Represents the in-memory model of the Tutor's Pet data.
  */
 public class ModelManager implements Model {
+
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final TutorsPet tutorsPet;
@@ -186,5 +187,4 @@ public class ModelManager implements Model {
                 && filteredStudents.equals(other.filteredStudents)
                 && filteredModuleClasses.equals(other.filteredModuleClasses);
     }
-
 }

@@ -49,5 +49,4 @@ public class Telegram {
     public int hashCode() {
         return value.hashCode();
     }
-
 }
