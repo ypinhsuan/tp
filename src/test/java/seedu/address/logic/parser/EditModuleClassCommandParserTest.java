@@ -2,9 +2,9 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_CS2100_TUTORIAL;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_CS2100_LAB;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_CS2103T_TUTORIAL;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_CS2100_TUTORIAL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_CS2100_LAB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_CS2103T_TUTORIAL;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -29,7 +29,7 @@ public class EditModuleClassCommandParserTest {
     @Test
     public void parse_missingParts_failure() {
         // no index specified
-        assertParseFailure(parser, VALID_NAME_CS2100_TUTORIAL, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, VALID_NAME_CS2100_LAB, MESSAGE_INVALID_FORMAT);
 
         // no field specified
         assertParseFailure(parser, "1", EditModuleClassCommand.MESSAGE_NOT_EDITED);
@@ -81,7 +81,7 @@ public class EditModuleClassCommandParserTest {
     @Test
     public void parse_multipleRepeatedFields_acceptsLast() {
         Index targetIndex = INDEX_FIRST_ITEM;
-        String userInput = targetIndex.getOneBased() + NAME_DESC_CS2100_TUTORIAL + NAME_DESC_CS2103T_TUTORIAL;
+        String userInput = targetIndex.getOneBased() + NAME_DESC_CS2100_LAB + NAME_DESC_CS2103T_TUTORIAL;
 
         EditModuleClassDescriptor descriptor =
                 new EditModuleClassDescriptorBuilder().withName(VALID_NAME_CS2103T_TUTORIAL).build();

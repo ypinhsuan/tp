@@ -74,6 +74,7 @@ public class AddStudentCommandTest {
      * A Model stub that contains a single student.
      */
     private class ModelStubWithStudent extends ModelStub {
+
         private final Student student;
 
         ModelStubWithStudent(Student student) {
@@ -92,6 +93,7 @@ public class AddStudentCommandTest {
      * A Model stub that always accepts the student being added.
      */
     private class ModelStubAcceptingStudentAdded extends ModelStub {
+
         final ArrayList<Student> studentsAdded = new ArrayList<>();
 
         @Override
@@ -111,5 +113,4 @@ public class AddStudentCommandTest {
             return new TutorsPet();
         }
     }
-
 }

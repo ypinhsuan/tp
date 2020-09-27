@@ -70,5 +70,4 @@ class JsonSerializableTutorsPet {
         }
         return tutorsPet;
     }
-
 }

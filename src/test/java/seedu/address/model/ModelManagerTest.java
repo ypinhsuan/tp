@@ -3,8 +3,10 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_MODULE_CLASS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalModuleClass.CS2100_LAB;
 import static seedu.address.testutil.TypicalModuleClass.CS2103T_TUTORIAL;
 import static seedu.address.testutil.TypicalModuleClass.STUDENT_UUID_1;
 import static seedu.address.testutil.TypicalStudent.ALICE;
@@ -18,6 +20,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.moduleclass.ModuleClass;
+import seedu.address.model.moduleclass.ModuleNameContainsKeywordsPredicate;
 import seedu.address.model.moduleclass.exceptions.DuplicateModuleClassException;
 import seedu.address.model.moduleclass.exceptions.ModuleClassNotFoundException;
 import seedu.address.model.student.StudentNameContainsKeywordsPredicate;
@@ -174,7 +177,8 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        TutorsPet tutorsPet = new TutorsPetBuilder().withStudent(ALICE).withStudent(BENSON).build();
+        TutorsPet tutorsPet = new TutorsPetBuilder().withStudent(ALICE).withStudent(BENSON)
+                .withModuleClass(CS2103T_TUTORIAL).withModuleClass(CS2100_LAB).build();
         TutorsPet differentTutorsPet = new TutorsPet();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -195,13 +199,21 @@ public class ModelManagerTest {
         // different tutorsPet -> returns false
         assertFalse(modelManager.equals(new ModelManager(differentTutorsPet, userPrefs)));
 
-        // different filteredList -> returns false
+        // different filteredStudentList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredStudentList(new StudentNameContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(tutorsPet, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+
+        // different filteredModuleClassList -> returns false
+        keywords = CS2103T_TUTORIAL.getName().fullName.split("\\s+");
+        modelManager.updateFilteredModuleClassList(new ModuleNameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        assertFalse(modelManager.equals(new ModelManager(tutorsPet, userPrefs)));
+
+        // resets modelManager to initial state for upcoming tests
+        modelManager.updateFilteredModuleClassList(PREDICATE_SHOW_ALL_MODULE_CLASS);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();

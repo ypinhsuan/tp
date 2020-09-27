@@ -28,5 +28,4 @@ public class ClearStudentCommandTest {
 
         assertCommandSuccess(new ClearStudentCommand(), model, ClearStudentCommand.MESSAGE_SUCCESS, expectedModel);
     }
-
 }

@@ -111,6 +111,4 @@ public class ConfigUtilTest {
                                   ? TEST_DATA_FOLDER.resolve(configFileInTestDataFolder)
                                   : null;
     }
-
-
 }

@@ -108,7 +108,5 @@ public class UiPartTest {
             super(fxmlFileName);
             assertEquals(VALID_FILE_ROOT, validFileRoot);
         }
-
     }
-
 }

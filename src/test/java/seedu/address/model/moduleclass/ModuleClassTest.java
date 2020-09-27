@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_CS2100_TUTORIAL;
-import static seedu.address.testutil.TypicalModuleClass.CS2100_TUTORIAL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_CS2100_LAB;
+import static seedu.address.testutil.TypicalModuleClass.CS2100_LAB;
 import static seedu.address.testutil.TypicalModuleClass.CS2103T_TUTORIAL;
 import static seedu.address.testutil.TypicalModuleClass.STUDENT_UUID_1;
 
@@ -24,14 +24,14 @@ public class ModuleClassTest {
 
     @Test
     public void constructor_nameOnly_hasNoStudents() {
-        Name name = new Name(VALID_NAME_CS2100_TUTORIAL);
+        Name name = new Name(VALID_NAME_CS2100_LAB);
         ModuleClass moduleClass = new ModuleClass(name);
         assertEquals(0, moduleClass.getStudentIds().size());
     }
 
     @Test
     public void constructor_withStudents_hasCorrectStudents() {
-        Name name = new Name(VALID_NAME_CS2100_TUTORIAL);
+        Name name = new Name(VALID_NAME_CS2100_LAB);
         Set<UUID> studentIds = new HashSet<>(Collections.singletonList(STUDENT_UUID_1));
         ModuleClass moduleClass = new ModuleClass(name, studentIds);
         assertEquals(studentIds.size(), moduleClass.getStudentIds().size());
@@ -53,7 +53,7 @@ public class ModuleClassTest {
         assertFalse(CS2103T_TUTORIAL.isSameModuleClass(null));
 
         // different name -> returns false
-        ModuleClass editedCs2103t = new ModuleClassBuilder(CS2103T_TUTORIAL).withName(VALID_NAME_CS2100_TUTORIAL)
+        ModuleClass editedCs2103t = new ModuleClassBuilder(CS2103T_TUTORIAL).withName(VALID_NAME_CS2100_LAB)
                 .build();
         assertFalse(CS2103T_TUTORIAL.isSameModuleClass(editedCs2103t));
 
@@ -78,10 +78,10 @@ public class ModuleClassTest {
         assertNotEquals(5, CS2103T_TUTORIAL);
 
         // different moduleClass -> returns false
-        assertNotEquals(CS2100_TUTORIAL, CS2103T_TUTORIAL);
+        assertNotEquals(CS2100_LAB, CS2103T_TUTORIAL);
 
         // different name -> returns false
-        ModuleClass editedCs2103t = new ModuleClassBuilder(CS2103T_TUTORIAL).withName(VALID_NAME_CS2100_TUTORIAL)
+        ModuleClass editedCs2103t = new ModuleClassBuilder(CS2103T_TUTORIAL).withName(VALID_NAME_CS2100_LAB)
                 .build();
         assertNotEquals(editedCs2103t, CS2103T_TUTORIAL);
 

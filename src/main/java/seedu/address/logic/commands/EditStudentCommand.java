@@ -122,6 +122,7 @@ public class EditStudentCommand extends Command {
      * corresponding field value of the student.
      */
     public static class EditStudentDescriptor {
+
         private Name name;
         private Telegram telegram;
         private Email email;

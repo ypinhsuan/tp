@@ -92,5 +92,4 @@ public class StudentBuilder {
     public Student build() {
         return new Student(uuid, name, telegram, email, tags);
     }
-
 }

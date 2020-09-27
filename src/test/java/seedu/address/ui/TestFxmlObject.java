@@ -31,5 +31,4 @@ public class TestFxmlObject {
                 || (other instanceof TestFxmlObject // instanceof handles nulls
                         && text.equals(((TestFxmlObject) other).getText()));
     }
-
 }
