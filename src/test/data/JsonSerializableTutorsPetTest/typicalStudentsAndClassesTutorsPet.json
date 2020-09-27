@@ -46,18 +46,18 @@
   "classes" : [ {
     "name" : "CS2103T Tutorial",
     "studentIds" : [
-      "224bdbab-e1b1-4bb1-b34c-bebe9fb17fbc",
-      "71c0755a-622c-49e8-b938-693a0dd598dc"
+      "0c527a3f-8a6f-4c16-b57d-563a9c43cf6b",
+      "5c09bbdc-b89c-482a-a4b0-32ede6d679e7"
     ]
   }, {
-    "name" : "CS2100 Tutorial",
+    "name" : "CS2100 Lab",
     "studentIds" : [
 
     ]
   }, {
-    "name" : "CS2101 Tutorial",
+    "name" : "CS1101S Studio",
     "studentIds" : [
-      "224bdbab-e1b1-4bb1-b34c-bebe9fb17fbc"
+      "0c527a3f-8a6f-4c16-b57d-563a9c43cf6b"
     ]
   }]
 }
