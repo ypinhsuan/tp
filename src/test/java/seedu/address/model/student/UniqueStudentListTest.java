@@ -169,7 +169,7 @@ public class UniqueStudentListTest {
     }
 
     @Test
-    public void equals_true() {
+    public void equals() {
         uniqueStudentList.add(ALICE);
 
         // same internal list -> returns true

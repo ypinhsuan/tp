@@ -150,7 +150,7 @@ public class UniqueModuleClassListTest {
     }
 
     @Test
-    public void equals_true() {
+    public void equals() {
         uniqueModuleClassList.add(CS2100_LAB);
 
         // same internal list -> returns true
