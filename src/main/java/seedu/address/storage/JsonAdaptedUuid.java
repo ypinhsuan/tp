@@ -11,6 +11,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
  * Jackson-friendly version of {@link java.util.UUID}.
  */
 class JsonAdaptedUuid {
+
     public static final String MESSAGE_NULL_UUID = "UUID is null";
 
     private final String uuid;
