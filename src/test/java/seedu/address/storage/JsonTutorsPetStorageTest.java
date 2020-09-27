@@ -21,6 +21,7 @@ import seedu.address.model.ReadOnlyTutorsPet;
 import seedu.address.model.TutorsPet;
 
 public class JsonTutorsPetStorageTest {
+
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonTutorsPetStorageTest");
 
     @TempDir
@@ -88,7 +89,6 @@ public class JsonTutorsPetStorageTest {
         jsonTutorsPetStorage.saveTutorsPet(original); // file path not specified
         readBack = jsonTutorsPetStorage.readTutorsPet().get(); // file path not specified
         assertEquals(original, new TutorsPet(readBack));
-
     }
 
     @Test

@@ -17,6 +17,7 @@ import seedu.address.model.student.Email;
 import seedu.address.model.student.Telegram;
 
 public class JsonAdaptedStudentTest {
+
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_TELEGRAM = "r@chel";
     private static final String INVALID_EMAIL = "example.com";
@@ -100,5 +101,4 @@ public class JsonAdaptedStudentTest {
                 new JsonAdaptedStudent(VALID_UUID, VALID_NAME, VALID_TELEGRAM, VALID_EMAIL, invalidTags);
         assertThrows(IllegalValueException.class, student::toModelType);
     }
-
 }

@@ -75,6 +75,7 @@ public class AddModuleClassCommandTest {
      * A Model stub that contains a single moduleClass.
      */
     private class ModelStubWithModuleClass extends ModelStub {
+
         private final ModuleClass moduleClass;
 
         ModelStubWithModuleClass(ModuleClass moduleClass) {
@@ -93,6 +94,7 @@ public class AddModuleClassCommandTest {
      * A Model stub that always accepts the moduleClass being added.
      */
     private class ModelStubAcceptingModuleClassAdded extends ModelStub {
+
         final ArrayList<ModuleClass> moduleClassesAdded = new ArrayList<>();
 
         @Override

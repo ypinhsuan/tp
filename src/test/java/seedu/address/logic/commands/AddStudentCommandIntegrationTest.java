@@ -41,5 +41,4 @@ public class AddStudentCommandIntegrationTest {
         Student studentInList = model.getTutorsPet().getStudentList().get(0);
         assertCommandFailure(new AddStudentCommand(studentInList), model, AddStudentCommand.MESSAGE_DUPLICATE_STUDENT);
     }
-
 }

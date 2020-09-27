@@ -32,6 +32,7 @@ import seedu.address.storage.StorageManager;
 import seedu.address.testutil.StudentBuilder;
 
 public class LogicManagerTest {
+
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy exception");
 
     @TempDir
@@ -153,6 +154,7 @@ public class LogicManagerTest {
      * A stub class to throw an {@code IOException} when the save method is called.
      */
     private static class JsonTutorsPetIoExceptionThrowingStub extends JsonTutorsPetStorage {
+
         private JsonTutorsPetIoExceptionThrowingStub(Path filePath) {
             super(filePath);
         }

@@ -36,6 +36,7 @@ import seedu.address.model.tag.Tag;
 import seedu.address.testutil.StudentBuilder;
 
 public class AddStudentCommandParserTest {
+
     private AddStudentCommandParser parser = new AddStudentCommandParser();
 
     @Test

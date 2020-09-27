@@ -37,5 +37,4 @@ public class EditModuleClassDescriptorTest {
                         .build();
         assertFalse(DESC_CS2100_TUTORIAL.equals(editedCs2100Tutorial));
     }
-
 }

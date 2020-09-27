@@ -69,5 +69,4 @@ public class StorageManagerTest {
     public void getTutorsPetFilePath() {
         assertNotNull(storageManager.getTutorsPetFilePath());
     }
-
 }

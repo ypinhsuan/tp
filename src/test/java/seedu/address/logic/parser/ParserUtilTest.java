@@ -20,6 +20,7 @@ import seedu.address.model.student.Telegram;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
+
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_TELEGRAM = "invalid+tElEg4m";
     private static final String INVALID_EMAIL = "example.com";

@@ -48,5 +48,4 @@ public class JsonSerializableTutorsPetTest {
         assertThrows(IllegalValueException.class, JsonSerializableTutorsPet.MESSAGE_DUPLICATE_STUDENT,
                 dataFromFile::toModelType);
     }
-
 }
