@@ -15,5 +15,9 @@ public interface ReadOnlyTutorsPet {
      */
     ObservableList<Student> getStudentList();
 
+    /**
+     * Returns an unmodifiable view of the ModuleClass list.
+     * This list will not contain any duplicate ModuleClasses.
+     */
     ObservableList<ModuleClass> getModuleClassList();
 }

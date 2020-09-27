@@ -379,7 +379,7 @@
       <property name="allowMultipleEmptyLinesInsideClassMembers" value="false"/>
     </module>
 
-    <!-- Checks that every class declaration  is followed by an empty line. -->
+    <!-- Checks that every class declaration is followed by an empty line. -->
     <module name="Regexp">
       <property name="format" value="class .*\{\n(?!\s*\}).+\s*"/>
       <property name="ignoreComments" value="true"/>
