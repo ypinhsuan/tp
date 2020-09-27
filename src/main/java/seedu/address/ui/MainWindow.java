@@ -30,7 +30,7 @@ public class MainWindow extends UiPart<Stage> {
     private Stage primaryStage;
     private Logic logic;
 
-    // Independent Ui parts residing in this Ui container
+    // Independent UI parts residing in this UI container
     private StudentListPanel studentListPanel;
     private ModuleClassListPanel moduleClassListPanel;
     private ResultDisplay resultDisplay;

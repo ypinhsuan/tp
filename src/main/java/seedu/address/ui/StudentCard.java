@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Random;
 
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
@@ -16,7 +15,7 @@ import seedu.address.model.student.Student;
 import seedu.address.model.tag.Tag;
 
 /**
- * An UI component that displays information of a {@code Student}.
+ * A UI component that displays information of a {@code Student}.
  */
 public class StudentCard extends UiPart<Region> {
 
@@ -66,7 +65,7 @@ public class StudentCard extends UiPart<Region> {
     /**
      * Creates a {@code Label} with the given {@code Tag} details.
      */
-    public Node createTag(Tag tag) {
+    public Label createTag(Tag tag) {
         Color color;
 
         if (listOfTags.contains(tag)) {
