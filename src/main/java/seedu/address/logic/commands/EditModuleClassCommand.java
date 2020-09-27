@@ -87,17 +87,17 @@ public class EditModuleClassCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
-        //short circuit if same object
+        // short circuit if same object
         if (other == this) {
             return true;
         }
 
-        //instanceof handles nulls
+        // instanceof handles nulls
         if (!(other instanceof EditModuleClassCommand)) {
             return false;
         }
 
-        //state check
+        // state check
         EditModuleClassCommand e = (EditModuleClassCommand) other;
         return index.equals(e.index)
                 && editModuleClassDescriptor.equals(e.editModuleClassDescriptor);
