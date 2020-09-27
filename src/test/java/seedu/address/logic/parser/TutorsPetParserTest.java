@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.AddModuleClassCommand;
 import seedu.address.logic.commands.AddStudentCommand;
 import seedu.address.logic.commands.ClearStudentCommand;
+import seedu.address.logic.commands.DeleteModuleClassCommand;
 import seedu.address.logic.commands.DeleteStudentCommand;
 import seedu.address.logic.commands.EditModuleClassCommand;
 import seedu.address.logic.commands.EditModuleClassCommand.EditModuleClassDescriptor;
@@ -35,7 +36,6 @@ import seedu.address.testutil.ModuleClassBuilder;
 import seedu.address.testutil.ModuleClassUtil;
 import seedu.address.testutil.StudentBuilder;
 import seedu.address.testutil.StudentUtil;
-import seedu.address.testutil.TypicalIndexes;
 
 public class TutorsPetParserTest {
 
@@ -57,27 +57,32 @@ public class TutorsPetParserTest {
     @Test
     public void parseCommand_deleteStudent() throws Exception {
         DeleteStudentCommand command = (DeleteStudentCommand) parser.parseCommand(
-                DeleteStudentCommand.COMMAND_WORD + " " + TypicalIndexes.INDEX_FIRST_ITEM.getOneBased());
-        assertEquals(new DeleteStudentCommand(TypicalIndexes.INDEX_FIRST_ITEM), command);
+                DeleteStudentCommand.COMMAND_WORD + " " + INDEX_FIRST_ITEM.getOneBased());
+        assertEquals(new DeleteStudentCommand(INDEX_FIRST_ITEM), command);
     }
 
     @Test
     public void parseCommand_editStudent() throws Exception {
         Student student = new StudentBuilder().build();
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder(student).build();
-        EditStudentCommand command = (EditStudentCommand) parser
-                .parseCommand(EditStudentCommand.COMMAND_WORD + " "
-                + TypicalIndexes.INDEX_FIRST_ITEM.getOneBased()
-                + " " + StudentUtil.getEditStudentDescriptorDetails(descriptor));
-        assertEquals(new EditStudentCommand(TypicalIndexes.INDEX_FIRST_ITEM, descriptor), command);
+        EditStudentCommand command = (EditStudentCommand) parser.parseCommand(EditStudentCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_ITEM.getOneBased() + " " + StudentUtil.getEditStudentDescriptorDetails(descriptor));
+        assertEquals(new EditStudentCommand(INDEX_FIRST_ITEM, descriptor), command);
     }
 
     @Test
-    public void parseCommand_addClass() throws Exception {
+    public void parseCommand_addModuleClass() throws Exception {
         ModuleClass moduleClass = new ModuleClassBuilder().build();
         AddModuleClassCommand command = (AddModuleClassCommand) parser
                 .parseCommand(ModuleClassUtil.getAddModuleClassCommand(moduleClass));
         assertEquals(new AddModuleClassCommand(moduleClass), command);
+    }
+
+    @Test
+    public void parseCommand_deleteModuleClass() throws Exception {
+        DeleteModuleClassCommand command = (DeleteModuleClassCommand) parser.parseCommand(
+                DeleteModuleClassCommand.COMMAND_WORD + " " + INDEX_FIRST_ITEM.getOneBased());
+        assertEquals(new DeleteModuleClassCommand(INDEX_FIRST_ITEM), command);
     }
 
     @Test
