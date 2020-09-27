@@ -187,6 +187,41 @@ public class TutorsPetTest {
         assertThrows(UnsupportedOperationException.class, () -> tutorsPet.getModuleClassList().remove(0));
     }
 
+    @Test
+    public void equals() {
+        tutorsPet.resetData(getTypicalTutorsPet());
+
+        // same students and classes -> returns true
+        TutorsPet tutorsPetCopy = new TutorsPet();
+        tutorsPetCopy.resetData(getTypicalTutorsPet());
+        assertTrue(tutorsPet.equals(tutorsPetCopy));
+
+        // same object -> returns true
+        assertTrue(tutorsPet.equals(tutorsPet));
+
+        // null -> returns false
+        assertFalse(tutorsPet.equals(null));
+
+        // different type -> returns false
+        assertFalse(tutorsPet.equals(5));
+
+        // different students -> returns false
+        TutorsPet tutorsPetDifferentStudents = new TutorsPet();
+        tutorsPetDifferentStudents.resetData(getTypicalTutorsPet());
+        Student toRemoveStudent = tutorsPetDifferentStudents.getStudentList().get(0);
+        tutorsPetDifferentStudents.removeStudent(toRemoveStudent);
+        assertTrue(tutorsPet.getModuleClassList().equals(tutorsPetDifferentStudents.getModuleClassList()));
+        assertFalse(tutorsPet.equals(tutorsPetDifferentStudents));
+
+        // different classes -> returns false
+        TutorsPet tutorsPetDifferentClasses = new TutorsPet();
+        tutorsPetDifferentClasses.resetData(getTypicalTutorsPet());
+        ModuleClass toRemoveClass = tutorsPetDifferentStudents.getModuleClassList().get(0);
+        tutorsPetDifferentClasses.removeModuleClass(toRemoveClass);
+        assertTrue(tutorsPet.getStudentList().equals(tutorsPetDifferentClasses.getStudentList()));
+        assertFalse(tutorsPet.equals(tutorsPetDifferentClasses));
+    }
+
     /**
      * A stub ReadOnlyTutorsPet whose students list can violate interface constraints.
      */

@@ -2,9 +2,10 @@ package seedu.address.model.moduleclass;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalModuleClass.CS2100_TUTORIAL;
+import static seedu.address.testutil.TypicalModuleClass.CS2100_LAB;
 import static seedu.address.testutil.TypicalModuleClass.CS2103T_TUTORIAL;
 import static seedu.address.testutil.TypicalModuleClass.STUDENT_UUID_1;
 
@@ -80,6 +81,15 @@ public class UniqueModuleClassListTest {
     }
 
     @Test
+    public void setModuleClass_moduleClassWithSameIdentityFieldsInList_throwsDuplicateModuleClassException() {
+        uniqueModuleClassList.add(CS2103T_TUTORIAL);
+        uniqueModuleClassList.add(CS2100_LAB);
+        ModuleClass editedClass = new ModuleClassBuilder(CS2100_LAB).withStudentIds(STUDENT_UUID_1).build();
+        assertThrows(DuplicateModuleClassException.class, () ->
+                uniqueModuleClassList.setModuleClass(CS2103T_TUTORIAL, editedClass));
+    }
+
+    @Test
     public void remove_nullModuleClass_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueModuleClassList.remove(null));
     }
@@ -107,7 +117,7 @@ public class UniqueModuleClassListTest {
     public void setModuleClass_uniqueModuleClassList_replacesOwnListWithProvidedUniqueModuleClassList() {
         uniqueModuleClassList.add(CS2103T_TUTORIAL);
         UniqueModuleClassList expectedUniqueModuleClassList = new UniqueModuleClassList();
-        expectedUniqueModuleClassList.add(CS2100_TUTORIAL);
+        expectedUniqueModuleClassList.add(CS2100_LAB);
         uniqueModuleClassList.setModuleClass(expectedUniqueModuleClassList);
         assertEquals(expectedUniqueModuleClassList, uniqueModuleClassList);
     }
@@ -120,10 +130,10 @@ public class UniqueModuleClassListTest {
     @Test
     public void setModuleClass_list_replacesOwnListWithProvidedList() {
         uniqueModuleClassList.add(CS2103T_TUTORIAL);
-        List<ModuleClass> moduleClassList = Collections.singletonList(CS2100_TUTORIAL);
+        List<ModuleClass> moduleClassList = Collections.singletonList(CS2100_LAB);
         uniqueModuleClassList.setModuleClass(moduleClassList);
         UniqueModuleClassList expectedUniqueModuleClassList = new UniqueModuleClassList();
-        expectedUniqueModuleClassList.add(CS2100_TUTORIAL);
+        expectedUniqueModuleClassList.add(CS2100_LAB);
         assertEquals(expectedUniqueModuleClassList, uniqueModuleClassList);
     }
 
@@ -138,5 +148,55 @@ public class UniqueModuleClassListTest {
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
             -> uniqueModuleClassList.asUnmodifiableObservableList().remove(0));
+    }
+
+    @Test
+    public void equals() {
+        uniqueModuleClassList.add(CS2100_LAB);
+
+        // same internal list -> returns true
+        UniqueModuleClassList uniqueModuleClassListCopy = new UniqueModuleClassList();
+        uniqueModuleClassListCopy.add(CS2100_LAB);
+        assertTrue(uniqueModuleClassList.equals(uniqueModuleClassListCopy));
+
+        // same object -> returns true
+        assertTrue(uniqueModuleClassList.equals(uniqueModuleClassList));
+
+        // null -> returns false
+        assertFalse(uniqueModuleClassList.equals(null));
+
+        // different type -> returns false
+        assertFalse(uniqueModuleClassList.equals(5));
+
+        // different internal list -> returns false
+        UniqueModuleClassList otherUniqueModuleClassList = new UniqueModuleClassList();
+        otherUniqueModuleClassList.add(CS2103T_TUTORIAL);
+        assertFalse(uniqueModuleClassList.equals(otherUniqueModuleClassList));
+    }
+
+    @Test
+    public void hashCode_sameContents_sameHashCode() {
+        uniqueModuleClassList.add(CS2100_LAB);
+        UniqueModuleClassList uniqueModuleClassListCopy = new UniqueModuleClassList();
+        uniqueModuleClassListCopy.add(CS2100_LAB);
+        assertNotSame(uniqueModuleClassListCopy, uniqueModuleClassList);
+        assertTrue(uniqueModuleClassList.hashCode() == uniqueModuleClassListCopy.hashCode());
+    }
+
+    @Test
+    public void hashCode_differentContents_differentHashCode() {
+        uniqueModuleClassList.add(CS2100_LAB);
+        UniqueModuleClassList uniqueModuleClassListCopy = new UniqueModuleClassList();
+        uniqueModuleClassListCopy.add(CS2103T_TUTORIAL);
+        assertNotSame(uniqueModuleClassListCopy, uniqueModuleClassList);
+        assertFalse(uniqueModuleClassList.hashCode() == uniqueModuleClassListCopy.hashCode());
+    }
+
+    @Test
+    public void hashCode_changeInContents_differentHashCode() {
+        uniqueModuleClassList.add(CS2100_LAB);
+        int hash = uniqueModuleClassList.hashCode();
+        uniqueModuleClassList.add(CS2103T_TUTORIAL);
+        assertFalse(uniqueModuleClassList.hashCode() == hash);
     }
 }

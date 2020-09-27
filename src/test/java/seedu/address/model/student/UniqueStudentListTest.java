@@ -2,10 +2,12 @@ package seedu.address.model.student;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_AVERAGE;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalStudent.ALICE;
+import static seedu.address.testutil.TypicalStudent.BENSON;
 import static seedu.address.testutil.TypicalStudent.BOB;
 
 import java.util.Arrays;
@@ -165,5 +167,55 @@ public class UniqueStudentListTest {
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
             -> uniqueStudentList.asUnmodifiableObservableList().remove(0));
+    }
+
+    @Test
+    public void equals() {
+        uniqueStudentList.add(ALICE);
+
+        // same internal list -> returns true
+        UniqueStudentList uniqueStudentListCopy = new UniqueStudentList();
+        uniqueStudentListCopy.add(ALICE);
+        assertTrue(uniqueStudentList.equals(uniqueStudentListCopy));
+
+        // same object -> returns true
+        assertTrue(uniqueStudentList.equals(uniqueStudentList));
+
+        // null -> returns false
+        assertFalse(uniqueStudentList.equals(null));
+
+        // different type -> returns false
+        assertFalse(uniqueStudentList.equals(5));
+
+        // different internal list -> returns false
+        UniqueStudentList otherStudentClassList = new UniqueStudentList();
+        otherStudentClassList.add(BENSON);
+        assertFalse(uniqueStudentList.equals(otherStudentClassList));
+    }
+
+    @Test
+    public void hashCode_sameContents_sameHashCode() {
+        uniqueStudentList.add(ALICE);
+        UniqueStudentList uniqueStudentListCopy = new UniqueStudentList();
+        uniqueStudentListCopy.add(ALICE);
+        assertNotSame(uniqueStudentListCopy, uniqueStudentList);
+        assertTrue(uniqueStudentList.hashCode() == uniqueStudentListCopy.hashCode());
+    }
+
+    @Test
+    public void hashCode_differentContents_differentHashCode() {
+        uniqueStudentList.add(ALICE);
+        UniqueStudentList uniqueStudentListCopy = new UniqueStudentList();
+        uniqueStudentListCopy.add(BENSON);
+        assertNotSame(uniqueStudentListCopy, uniqueStudentList);
+        assertFalse(uniqueStudentList.hashCode() == uniqueStudentListCopy.hashCode());
+    }
+
+    @Test
+    public void hashCode_changeInContents_differentHashCode() {
+        uniqueStudentList.add(ALICE);
+        int hash = uniqueStudentList.hashCode();
+        uniqueStudentList.add(BENSON);
+        assertFalse(uniqueStudentList.hashCode() == hash);
     }
 }
