@@ -72,5 +72,4 @@ public class JsonAdaptedModuleClass {
 
         return new ModuleClass(modelName, modelUuids);
     }
-
 }

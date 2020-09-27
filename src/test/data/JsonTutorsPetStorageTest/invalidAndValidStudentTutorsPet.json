@@ -10,5 +10,5 @@
     "telegram": "invalid-student",
     "email": "hans@example.com"
   } ],
-  "classes" : []
+  "classes" : [ ]
 }

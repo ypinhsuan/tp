@@ -46,5 +46,4 @@ class JsonAdaptedUuid {
         }
         return UUID.fromString(uuid);
     }
-
 }

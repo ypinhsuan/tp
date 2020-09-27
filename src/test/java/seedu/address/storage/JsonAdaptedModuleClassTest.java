@@ -50,5 +50,4 @@ public class JsonAdaptedModuleClassTest {
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, "studentId");
         assertThrows(IllegalValueException.class, expectedMessage, moduleClass::toModelType);
     }
-
 }

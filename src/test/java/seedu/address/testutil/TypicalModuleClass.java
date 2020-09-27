@@ -13,9 +13,8 @@ import seedu.address.model.moduleclass.ModuleClass;
 
 public class TypicalModuleClass {
 
-    // TODO: Move to TypicalStudents after UUID has been implemented in Student class.
-    public static final UUID STUDENT_UUID_1 = UUID.fromString("224bdbab-e1b1-4bb1-b34c-bebe9fb17fbc");
-    public static final UUID STUDENT_UUID_2 = UUID.fromString("71c0755a-622c-49e8-b938-693a0dd598dc");
+    public static final UUID STUDENT_UUID_1 = UUID.fromString("0c527a3f-8a6f-4c16-b57d-563a9c43cf6b");
+    public static final UUID STUDENT_UUID_2 = UUID.fromString("5c09bbdc-b89c-482a-a4b0-32ede6d679e7");
 
     public static final ModuleClass CS2103T_TUTORIAL = new ModuleClassBuilder()
             .withName(VALID_NAME_CS2103T_TUTORIAL).withStudentIds(STUDENT_UUID_1, STUDENT_UUID_2).build();

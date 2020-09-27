@@ -1,0 +1,15 @@
+{
+  "students" : [ {
+    "uuid": "8b1588b3-ae5e-4dd0-938f-5c3bfac74810",
+    "name": "Valid Student",
+    "telegram": "valid_student",
+    "email": "hans@example.com"
+  } ],
+  "classes" : [ {
+    "name" : "Valid Class",
+    "studentIds" : [ ]
+  }, {
+    "name" : "Invalid_Class",
+    "studentIds" : [ ]
+  }]
+}
