@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
+import seedu.address.model.components.HasName;
 import seedu.address.model.components.Name;
 import seedu.address.model.tag.Tag;
 
@@ -15,7 +16,7 @@ import seedu.address.model.tag.Tag;
  * Represents a Student.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Student {
+public class Student implements HasName {
 
     // Identity fields
     private final UUID uuid;
@@ -56,6 +57,7 @@ public class Student {
         return uuid;
     }
 
+    @Override
     public Name getName() {
         return name;
     }

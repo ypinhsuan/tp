@@ -4,7 +4,8 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.student.StudentNameContainsKeywordsPredicate;
+import seedu.address.model.components.NameContainsKeywordsPredicate;
+import seedu.address.model.student.Student;
 
 /**
  * Finds and lists all students in the student manager whose name contains any of the argument keywords.
@@ -19,9 +20,9 @@ public class FindStudentCommand extends Command {
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " alice bob charlie";
 
-    private final StudentNameContainsKeywordsPredicate predicate;
+    private final NameContainsKeywordsPredicate<Student> predicate;
 
-    public FindStudentCommand(StudentNameContainsKeywordsPredicate predicate) {
+    public FindStudentCommand(NameContainsKeywordsPredicate<Student> predicate) {
         this.predicate = predicate;
     }
 
