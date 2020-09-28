@@ -55,8 +55,8 @@ public class EditModuleClassCommandTest {
         Index indexLastModuleClass = Index.fromOneBased(model.getFilteredModuleClassList().size());
         ModuleClass lastModuleClass = model.getFilteredModuleClassList().get(indexLastModuleClass.getZeroBased());
 
-        ModuleClassBuilder studentInList = new ModuleClassBuilder(lastModuleClass);
-        ModuleClass editedModuleClass = studentInList.withName(VALID_NAME_CS2030_TUTORIAL).build();
+        ModuleClassBuilder moduleClassInList = new ModuleClassBuilder(lastModuleClass);
+        ModuleClass editedModuleClass = moduleClassInList.withName(VALID_NAME_CS2030_TUTORIAL).build();
 
         EditModuleClassDescriptor descriptor = new EditModuleClassDescriptorBuilder()
                 .withName(VALID_NAME_CS2030_TUTORIAL).build();
@@ -92,7 +92,7 @@ public class EditModuleClassCommandTest {
     }
 
     @Test
-    public void execute_duplicateStudentUnfilteredList_failure() {
+    public void execute_duplicateModuleClassUnfilteredList_failure() {
         ModuleClass firstModuleClass = model.getFilteredModuleClassList().get(INDEX_FIRST_ITEM.getZeroBased());
         EditModuleClassDescriptor descriptor = new EditModuleClassDescriptorBuilder(firstModuleClass).build();
         EditModuleClassCommand editModuleClassCommand = new EditModuleClassCommand(INDEX_SECOND_ITEM,
@@ -102,7 +102,7 @@ public class EditModuleClassCommandTest {
     }
 
     @Test
-    public void execute_duplicateStudentFilteredList_failure() {
+    public void execute_duplicateModuleClassFilteredList_failure() {
         showModuleClassAtIndex(model, INDEX_FIRST_ITEM);
 
         // edit module class in filtered list into a duplicate in Tutor's Pet
@@ -115,7 +115,7 @@ public class EditModuleClassCommandTest {
     }
 
     @Test
-    public void execute_invalidStudentIndexUnfilteredList_failure() {
+    public void execute_invalidModuleClassIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredModuleClassList().size() + 1);
         EditModuleClassDescriptor descriptor =
                 new EditModuleClassDescriptorBuilder().withName(VALID_NAME_CS2030_TUTORIAL).build();
@@ -126,14 +126,14 @@ public class EditModuleClassCommandTest {
 
     /**
      * Edit filtered list where index is larger than size of filtered list,
-     * but smaller than size of module class list.
+     * but smaller than size of the class list.
      */
     @Test
-    public void execute_invalidStudentIndexFilteredList_failure() {
+    public void execute_invalidModuleClassIndexFilteredList_failure() {
         showModuleClassAtIndex(model, INDEX_FIRST_ITEM);
         Index outOfBoundIndex = INDEX_SECOND_ITEM;
 
-        // ensures that outOfBoundIndex is still in bounds of module class list
+        // ensures that outOfBoundIndex is still in bounds of class list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getTutorsPet().getModuleClassList().size());
 
         EditModuleClassCommand editModuleClassCommand = new EditModuleClassCommand(outOfBoundIndex,
