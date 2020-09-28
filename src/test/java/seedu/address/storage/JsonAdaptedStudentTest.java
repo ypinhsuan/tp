@@ -2,6 +2,7 @@ package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.storage.JsonAdaptedStudent.MISSING_FIELD_MESSAGE_FORMAT;
+import static seedu.address.storage.JsonAdaptedUuid.MESSAGE_INVALID_UUID;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalStudent.BENSON;
 
@@ -22,6 +23,7 @@ public class JsonAdaptedStudentTest {
     private static final String INVALID_TELEGRAM = "r@chel";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#Average";
+    private static final String INVALID_UUID = "e84b3ff0-7a8a-493c-979a-";
 
     private static final String VALID_UUID = BENSON.getUuid().toString();
     private static final String VALID_NAME = BENSON.getName().toString();
@@ -35,6 +37,14 @@ public class JsonAdaptedStudentTest {
     public void toModelType_validStudentDetails_returnsStudent() throws Exception {
         JsonAdaptedStudent student = new JsonAdaptedStudent(BENSON);
         assertEquals(BENSON, student.toModelType());
+    }
+
+    @Test
+    public void toModelType_invalidUuid_throwsIllegalValueException() {
+        JsonAdaptedStudent student =
+                new JsonAdaptedStudent(INVALID_UUID, VALID_NAME, VALID_TELEGRAM, VALID_EMAIL, VALID_TAGS);
+        String expectedMessage = String.format(MESSAGE_INVALID_UUID);
+        assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
     }
 
     @Test

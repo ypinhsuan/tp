@@ -21,7 +21,7 @@ import seedu.address.model.student.Student;
 class JsonSerializableTutorsPet {
 
     public static final String MESSAGE_DUPLICATE_STUDENT = "Students list contains duplicate student(s).";
-    public static final String MESSAGE_DUPLICATE_MODULE_CLASS = "Class list contains duplicate student(s).";
+    public static final String MESSAGE_DUPLICATE_MODULE_CLASS = "Class list contains duplicate class(es).";
 
     private final List<JsonAdaptedStudent> students = new ArrayList<>();
     private final List<JsonAdaptedModuleClass> classes = new ArrayList<>();
@@ -48,12 +48,11 @@ class JsonSerializableTutorsPet {
     }
 
     /**
-     * Converts this Tutor's Pet into the model's {@code TutorsPet} object.
+     * Converts students into the model's {@code TutorsPet} object.
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
-    public TutorsPet toModelType() throws IllegalValueException {
-        TutorsPet tutorsPet = new TutorsPet();
+    public void studentsToModelType(TutorsPet tutorsPet) throws IllegalValueException {
         for (JsonAdaptedStudent jsonAdaptedStudent : students) {
             Student student = jsonAdaptedStudent.toModelType();
             if (tutorsPet.hasStudent(student)) {
@@ -61,6 +60,14 @@ class JsonSerializableTutorsPet {
             }
             tutorsPet.addStudent(student);
         }
+    }
+
+    /**
+     * Converts classes into the model's {@code TutorsPet} object.
+     *
+     * @throws IllegalValueException if there were any data constraints violated.
+     */
+    public void classesToModelType(TutorsPet tutorsPet) throws IllegalValueException {
         for (JsonAdaptedModuleClass jsonAdaptedModuleClass : classes) {
             ModuleClass moduleClass = jsonAdaptedModuleClass.toModelType();
             if (tutorsPet.hasModuleClass(moduleClass)) {
@@ -68,6 +75,17 @@ class JsonSerializableTutorsPet {
             }
             tutorsPet.addModuleClass(moduleClass);
         }
+    }
+
+    /**
+     * Converts this Tutor's Pet into the model's {@code TutorsPet} object.
+     *
+     * @throws IllegalValueException if there were any data constraints violated.
+     */
+    public TutorsPet toModelType() throws IllegalValueException {
+        TutorsPet tutorsPet = new TutorsPet();
+        this.studentsToModelType(tutorsPet);
+        this.classesToModelType(tutorsPet);
         return tutorsPet;
     }
 }

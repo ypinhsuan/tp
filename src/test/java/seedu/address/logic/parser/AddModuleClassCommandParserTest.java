@@ -23,7 +23,7 @@ public class AddModuleClassCommandParserTest {
 
     @Test
     public void parse_namePresent_success() {
-        ModuleClass expectedModuleClass = new ModuleClassBuilder(CS2103T_TUTORIAL).withStudentIds().build();
+        ModuleClass expectedModuleClass = new ModuleClassBuilder(CS2103T_TUTORIAL).withStudentUuids().build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_CS2103T_TUTORIAL,

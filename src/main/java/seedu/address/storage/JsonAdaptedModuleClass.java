@@ -22,17 +22,17 @@ public class JsonAdaptedModuleClass {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "ModuleClass's %s field is missing!";
 
     private final String name;
-    private final List<JsonAdaptedUuid> studentIds = new ArrayList<>();
+    private final List<JsonAdaptedUuid> studentUuids = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedModuleClass} with the given moduleClass details.
      */
     @JsonCreator
     public JsonAdaptedModuleClass(@JsonProperty("name") String name,
-                                  @JsonProperty("studentIds") List<JsonAdaptedUuid> studentIds) {
+                                  @JsonProperty("studentUuids") List<JsonAdaptedUuid> studentUuids) {
         this.name = name;
-        if (studentIds != null) {
-            this.studentIds.addAll(studentIds);
+        if (studentUuids != null) {
+            this.studentUuids.addAll(studentUuids);
         }
     }
 
@@ -41,23 +41,23 @@ public class JsonAdaptedModuleClass {
      */
     public JsonAdaptedModuleClass(ModuleClass source) {
         name = source.getName().fullName;
-        studentIds.addAll(source.getStudentIds().stream()
+        studentUuids.addAll(source.getStudentUuids().stream()
                .map(JsonAdaptedUuid::new)
                .collect(Collectors.toList()));
     }
 
     /**
-     * Converts this Jackson-friendly adapted moduleClass object into the model's {@code ModuleClass} object.
+     * Converts this Jackson-friendly adapted class object into the model's {@code ModuleClass} object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted moduleClass.
      */
     public ModuleClass toModelType() throws IllegalValueException {
         final List<UUID> moduleClassUuids = new ArrayList<>();
-        for (JsonAdaptedUuid studentId : studentIds) {
-            if (studentId == null) {
-                throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "studentId"));
+        for (JsonAdaptedUuid studentUuid : studentUuids) {
+            if (studentUuid == null) {
+                throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "studentUuid"));
             }
-            moduleClassUuids.add(studentId.toModelType());
+            moduleClassUuids.add(studentUuid.toModelType());
         }
 
         if (name == null) {

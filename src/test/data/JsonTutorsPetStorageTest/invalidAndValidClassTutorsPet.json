@@ -7,9 +7,9 @@
   } ],
   "classes" : [ {
     "name" : "Valid Class",
-    "studentIds" : [ ]
+    "studentUuids" : [ ]
   }, {
     "name" : "Invalid_Class",
-    "studentIds" : [ ]
+    "studentUuids" : [ ]
   }]
 }

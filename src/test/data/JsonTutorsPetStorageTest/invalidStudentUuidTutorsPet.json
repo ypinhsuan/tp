@@ -1,0 +1,9 @@
+{
+  "students": [ {
+    "uuid": "584346cb-8886-4518-8282-",
+    "name": "Hans Muster",
+    "telegram": "hans_m4ster",
+    "email": "hans@example.com"
+  } ],
+  "classes" : [ ]
+}

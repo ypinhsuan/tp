@@ -26,7 +26,7 @@ public class ModuleClassTest {
     public void constructor_nameOnly_hasNoStudents() {
         Name name = new Name(VALID_NAME_CS2100_LAB);
         ModuleClass moduleClass = new ModuleClass(name);
-        assertEquals(0, moduleClass.getStudentIds().size());
+        assertEquals(0, moduleClass.getStudentUuids().size());
     }
 
     @Test
@@ -34,14 +34,14 @@ public class ModuleClassTest {
         Name name = new Name(VALID_NAME_CS2100_LAB);
         Set<UUID> studentIds = new HashSet<>(Collections.singletonList(STUDENT_UUID_1));
         ModuleClass moduleClass = new ModuleClass(name, studentIds);
-        assertEquals(studentIds.size(), moduleClass.getStudentIds().size());
-        assertTrue(moduleClass.getStudentIds().contains(STUDENT_UUID_1));
+        assertEquals(studentIds.size(), moduleClass.getStudentUuids().size());
+        assertTrue(moduleClass.getStudentUuids().contains(STUDENT_UUID_1));
     }
 
     @Test
-    public void getStudentIds_modifyList_throwsUnsupportedOperationException() {
+    public void getStudentUuids_modifyList_throwsUnsupportedOperationException() {
         ModuleClass moduleClass = new ModuleClassBuilder().build();
-        assertThrows(UnsupportedOperationException.class, () -> moduleClass.getStudentIds().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> moduleClass.getStudentUuids().remove(0));
     }
 
     @Test
@@ -58,7 +58,7 @@ public class ModuleClassTest {
         assertFalse(CS2103T_TUTORIAL.isSameModuleClass(editedCs2103t));
 
         // different students -> returns true
-        editedCs2103t = new ModuleClassBuilder(CS2103T_TUTORIAL).withStudentIds(STUDENT_UUID_1).build();
+        editedCs2103t = new ModuleClassBuilder(CS2103T_TUTORIAL).withStudentUuids(STUDENT_UUID_1).build();
         assertTrue(CS2103T_TUTORIAL.isSameModuleClass(editedCs2103t));
     }
 
@@ -86,7 +86,7 @@ public class ModuleClassTest {
         assertNotEquals(editedCs2103t, CS2103T_TUTORIAL);
 
         // different students -> returns false
-        editedCs2103t = new ModuleClassBuilder(CS2103T_TUTORIAL).withStudentIds(STUDENT_UUID_1).build();
+        editedCs2103t = new ModuleClassBuilder(CS2103T_TUTORIAL).withStudentUuids(STUDENT_UUID_1).build();
         assertNotEquals(editedCs2103t, CS2103T_TUTORIAL);
     }
 }

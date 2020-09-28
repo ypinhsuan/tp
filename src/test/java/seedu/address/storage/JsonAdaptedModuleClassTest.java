@@ -17,9 +17,10 @@ import seedu.address.model.components.Name;
 public class JsonAdaptedModuleClassTest {
 
     private static final String INVALID_NAME = "CS3230@Tutorial";
+    private static final String INVALID_STUDENT_UUID = "584346cb-8886-4518-8282";
 
     private static final String VALID_NAME = CS2103T_TUTORIAL.getName().toString();
-    private static final List<JsonAdaptedUuid> VALID_STUDENT_IDS = CS2103T_TUTORIAL.getStudentIds().stream()
+    private static final List<JsonAdaptedUuid> VALID_STUDENT_UUIDS = CS2103T_TUTORIAL.getStudentUuids().stream()
             .map(JsonAdaptedUuid::new)
             .collect(Collectors.toList());
 
@@ -31,24 +32,24 @@ public class JsonAdaptedModuleClassTest {
 
     @Test
     public void toModelType_invalidName_throwsIllegalValueException() {
-        JsonAdaptedModuleClass moduleClass = new JsonAdaptedModuleClass(INVALID_NAME, VALID_STUDENT_IDS);
+        JsonAdaptedModuleClass moduleClass = new JsonAdaptedModuleClass(INVALID_NAME, VALID_STUDENT_UUIDS);
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, moduleClass::toModelType);
     }
 
     @Test
     public void toModelType_nullName_throwsIllegalValueException() {
-        JsonAdaptedModuleClass moduleClass = new JsonAdaptedModuleClass(null, VALID_STUDENT_IDS);
+        JsonAdaptedModuleClass moduleClass = new JsonAdaptedModuleClass(null, VALID_STUDENT_UUIDS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, moduleClass::toModelType);
     }
 
     @Test
-    public void toModelType_nullStudentIds_throwsIllegalValueException() {
-        List<JsonAdaptedUuid> invalidStudentIds = new ArrayList<>(VALID_STUDENT_IDS);
-        invalidStudentIds.add(null);
-        JsonAdaptedModuleClass moduleClass = new JsonAdaptedModuleClass(VALID_NAME, invalidStudentIds);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, "studentId");
+    public void toModelType_nullStudentUuids_throwsIllegalValueException() {
+        List<JsonAdaptedUuid> invalidStudentUuids = new ArrayList<>(VALID_STUDENT_UUIDS);
+        invalidStudentUuids.add(null);
+        JsonAdaptedModuleClass moduleClass = new JsonAdaptedModuleClass(VALID_NAME, invalidStudentUuids);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, "studentUuid");
         assertThrows(IllegalValueException.class, expectedMessage, moduleClass::toModelType);
     }
 }

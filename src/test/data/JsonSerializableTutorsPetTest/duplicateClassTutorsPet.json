@@ -8,9 +8,9 @@
   } ],
   "classes" : [ {
     "name" : "CS2100 Lab",
-    "studentIds" : [ ]
+    "studentUuids" : [ ]
   }, {
     "name" : "CS2100 Lab",
-    "studentIds" : [ ]
+    "studentUuids" : [ ]
   }]
 }

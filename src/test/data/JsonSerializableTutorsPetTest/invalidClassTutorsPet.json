@@ -8,6 +8,6 @@
   } ],
   "classes" : [ {
     "name" : "CS2100 Lab",
-    "studentIds" : [ null ]
+    "studentUuids" : [ null ]
   }]
 }

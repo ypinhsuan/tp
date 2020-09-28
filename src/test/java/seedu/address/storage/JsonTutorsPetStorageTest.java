@@ -63,6 +63,11 @@ public class JsonTutorsPetStorageTest {
     }
 
     @Test
+    public void readTutorsPet_invalidStudentUuidTutorsPet_throwDataConversionException() {
+        assertThrows(DataConversionException.class, () -> readTutorsPet("invalidStudentUuidTutorsPet.json"));
+    }
+
+    @Test
     public void readTutorsPet_invalidClassTutorsPet_throwDataConversionException() {
         assertThrows(DataConversionException.class, () -> readTutorsPet("invalidClassTutorsPet.json"));
     }

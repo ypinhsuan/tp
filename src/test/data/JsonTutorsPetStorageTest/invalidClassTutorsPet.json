@@ -7,6 +7,6 @@
   } ],
   "classes" : [ {
     "name" : "Invalid_Class",
-    "studentIds" : [ ]
+    "studentUuids" : [ ]
   }]
 }

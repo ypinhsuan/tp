@@ -42,7 +42,7 @@ public class UniqueModuleClassListTest {
     @Test
     public void contains_moduleClassWithSameIdentityFieldsInList_returnsTrue() {
         uniqueModuleClassList.add(CS2103T_TUTORIAL);
-        ModuleClass editedCs2103t = new ModuleClassBuilder(CS2103T_TUTORIAL).withStudentIds(STUDENT_UUID_1).build();
+        ModuleClass editedCs2103t = new ModuleClassBuilder(CS2103T_TUTORIAL).withStudentUuids(STUDENT_UUID_1).build();
         assertTrue(uniqueModuleClassList.contains(editedCs2103t));
     }
 
@@ -60,7 +60,7 @@ public class UniqueModuleClassListTest {
     @Test
     public void add_moduleClassWithSameIdentityFieldsInList_throwsDuplicateModuleClassException() {
         uniqueModuleClassList.add(CS2103T_TUTORIAL);
-        ModuleClass editedCs2103t = new ModuleClassBuilder(CS2103T_TUTORIAL).withStudentIds(STUDENT_UUID_1).build();
+        ModuleClass editedCs2103t = new ModuleClassBuilder(CS2103T_TUTORIAL).withStudentUuids(STUDENT_UUID_1).build();
         assertThrows(DuplicateModuleClassException.class, () -> uniqueModuleClassList.add(editedCs2103t));
     }
 
@@ -84,7 +84,7 @@ public class UniqueModuleClassListTest {
     public void setModuleClass_moduleClassWithSameIdentityFieldsInList_throwsDuplicateModuleClassException() {
         uniqueModuleClassList.add(CS2103T_TUTORIAL);
         uniqueModuleClassList.add(CS2100_LAB);
-        ModuleClass editedClass = new ModuleClassBuilder(CS2100_LAB).withStudentIds(STUDENT_UUID_1).build();
+        ModuleClass editedClass = new ModuleClassBuilder(CS2100_LAB).withStudentUuids(STUDENT_UUID_1).build();
         assertThrows(DuplicateModuleClassException.class, () ->
                 uniqueModuleClassList.setModuleClass(CS2103T_TUTORIAL, editedClass));
     }

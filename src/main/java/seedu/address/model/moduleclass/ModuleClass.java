@@ -22,7 +22,7 @@ public class ModuleClass {
     private final Name name;
 
     // Data fields
-    private final Set<UUID> studentIds = new HashSet<>();
+    private final Set<UUID> studentUuids = new HashSet<>();
 
     /**
      * Name must be present and not null.
@@ -35,10 +35,10 @@ public class ModuleClass {
     /**
      * Every field must be present and not null.
      */
-    public ModuleClass(Name name, Set<UUID> studentIds) {
-        requireAllNonNull(name, studentIds);
+    public ModuleClass(Name name, Set<UUID> studentUuids) {
+        requireAllNonNull(name, studentUuids);
         this.name = name;
-        this.studentIds.addAll(studentIds);
+        this.studentUuids.addAll(studentUuids);
     }
 
     public Name getName() {
@@ -49,8 +49,8 @@ public class ModuleClass {
      * Returns an immutable set of student {@code UUID}s, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<UUID> getStudentIds() {
-        return Collections.unmodifiableSet(studentIds);
+    public Set<UUID> getStudentUuids() {
+        return Collections.unmodifiableSet(studentUuids);
     }
 
     /**
@@ -81,12 +81,12 @@ public class ModuleClass {
 
         ModuleClass otherModuleClass = (ModuleClass) other;
         return otherModuleClass.getName().equals(getName())
-                && otherModuleClass.getStudentIds().equals(getStudentIds());
+                && otherModuleClass.getStudentUuids().equals(getStudentUuids());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, studentIds);
+        return Objects.hash(name, studentUuids);
     }
 
     @Override

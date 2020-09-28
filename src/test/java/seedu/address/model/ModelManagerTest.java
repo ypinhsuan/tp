@@ -145,7 +145,7 @@ public class ModelManagerTest {
     @Test
     public void addModuleClass_moduleClassWithSameIdentityFieldsInModelManager_throwsDuplicateModuleClassException() {
         modelManager.addModuleClass(CS2103T_TUTORIAL);
-        ModuleClass editedCs2103t = new ModuleClassBuilder(CS2103T_TUTORIAL).withStudentIds(STUDENT_UUID_1).build();
+        ModuleClass editedCs2103t = new ModuleClassBuilder(CS2103T_TUTORIAL).withStudentUuids(STUDENT_UUID_1).build();
         assertThrows(DuplicateModuleClassException.class, () -> modelManager.addModuleClass(editedCs2103t));
     }
 

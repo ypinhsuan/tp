@@ -45,16 +45,16 @@
   } ],
   "classes" : [ {
     "name" : "CS2103T Tutorial",
-    "studentIds" : [
+    "studentUuids" : [
       "0c527a3f-8a6f-4c16-b57d-563a9c43cf6b",
       "5c09bbdc-b89c-482a-a4b0-32ede6d679e7"
     ]
   }, {
     "name" : "CS2100 Lab",
-    "studentIds" : [ ]
+    "studentUuids" : [ ]
   }, {
     "name" : "CS1101S Studio",
-    "studentIds" : [
+    "studentUuids" : [
       "0c527a3f-8a6f-4c16-b57d-563a9c43cf6b"
     ]
   }]
