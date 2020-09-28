@@ -27,7 +27,7 @@ import seedu.address.logic.commands.FindStudentCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.components.NameContainsKeywordsPredicate;
+import seedu.address.model.components.name.NameContainsKeywordsPredicate;
 import seedu.address.model.moduleclass.ModuleClass;
 import seedu.address.model.student.Student;
 import seedu.address.testutil.EditModuleClassDescriptorBuilder;

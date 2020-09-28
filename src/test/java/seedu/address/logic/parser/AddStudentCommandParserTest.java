@@ -28,7 +28,7 @@ import static seedu.address.testutil.TypicalStudent.BOB;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddStudentCommand;
-import seedu.address.model.components.Name;
+import seedu.address.model.components.name.Name;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.Telegram;

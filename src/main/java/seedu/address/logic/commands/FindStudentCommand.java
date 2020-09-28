@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.components.NameContainsKeywordsPredicate;
+import seedu.address.model.components.name.NameContainsKeywordsPredicate;
 import seedu.address.model.student.Student;
 
 /**

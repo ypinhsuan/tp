@@ -19,7 +19,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.components.NameContainsKeywordsPredicate;
+import seedu.address.model.components.name.NameContainsKeywordsPredicate;
 import seedu.address.model.moduleclass.ModuleClass;
 import seedu.address.model.moduleclass.exceptions.DuplicateModuleClassException;
 import seedu.address.model.moduleclass.exceptions.ModuleClassNotFoundException;

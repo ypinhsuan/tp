@@ -9,8 +9,8 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
-import seedu.address.model.components.HasName;
-import seedu.address.model.components.Name;
+import seedu.address.model.components.name.HasName;
+import seedu.address.model.components.name.Name;
 
 /**
  * Represents a Class.

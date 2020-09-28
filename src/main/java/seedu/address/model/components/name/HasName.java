@@ -1,4 +1,4 @@
-package seedu.address.model.components;
+package seedu.address.model.components.name;
 
 public interface HasName {
 

@@ -1,4 +1,4 @@
-package seedu.address.model.components;
+package seedu.address.model.components.name;
 
 import java.util.List;
 import java.util.function.Predicate;
