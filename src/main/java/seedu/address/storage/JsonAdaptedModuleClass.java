@@ -20,6 +20,7 @@ import seedu.address.model.moduleclass.ModuleClass;
 public class JsonAdaptedModuleClass {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "ModuleClass's %s field is missing!";
+    public static final String INVALID_FIELD_MESSAGE_FORMAT = "ModuleClass's %s field is invalid!";
 
     private final String name;
     private final List<JsonAdaptedUuid> studentUuids = new ArrayList<>();
@@ -56,6 +57,13 @@ public class JsonAdaptedModuleClass {
         for (JsonAdaptedUuid studentUuid : studentUuids) {
             if (studentUuid == null) {
                 throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "studentUuid"));
+            }
+            // catch invalid UUID
+            try {
+                String uuidString = studentUuid.getUuidString();
+                UUID.fromString(uuidString);
+            } catch (IllegalArgumentException e) {
+                throw new IllegalValueException(String.format(INVALID_FIELD_MESSAGE_FORMAT, "studentUuid"));
             }
             moduleClassUuids.add(studentUuid.toModelType());
         }

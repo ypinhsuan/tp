@@ -33,7 +33,7 @@ class JsonAdaptedUuid {
     }
 
     @JsonValue
-    public String getUuid() {
+    public String getUuidString() {
         return uuidString;
     }
 
@@ -47,7 +47,7 @@ class JsonAdaptedUuid {
             throw new IllegalValueException(MESSAGE_NULL_UUID);
         }
 
-        // catch invalid uuid
+        // catch invalid UUID
         UUID uuid;
         try {
             uuid = UUID.fromString(uuidString);
