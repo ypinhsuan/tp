@@ -32,9 +32,9 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditStudentCommand;
 import seedu.address.logic.commands.EditStudentCommand.EditStudentDescriptor;
 import seedu.address.model.components.name.Name;
+import seedu.address.model.components.tag.Tag;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Telegram;
-import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditStudentDescriptorBuilder;
 
 public class EditStudentCommandParserTest {

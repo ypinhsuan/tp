@@ -15,9 +15,9 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.components.name.Name;
+import seedu.address.model.components.tag.Tag;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Telegram;
-import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
 

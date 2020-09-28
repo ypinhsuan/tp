@@ -10,7 +10,7 @@ import java.util.UUID;
 
 import seedu.address.model.components.name.HasName;
 import seedu.address.model.components.name.Name;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.components.tag.Tag;
 
 /**
  * Represents a Student.

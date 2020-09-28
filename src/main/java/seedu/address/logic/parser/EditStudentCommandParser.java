@@ -16,7 +16,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditStudentCommand;
 import seedu.address.logic.commands.EditStudentCommand.EditStudentDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.components.tag.Tag;
 
 /**
  * Parses input arguments and creates a new EditStudentCommand object.

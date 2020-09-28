@@ -29,10 +29,10 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddStudentCommand;
 import seedu.address.model.components.name.Name;
+import seedu.address.model.components.tag.Tag;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.Telegram;
-import seedu.address.model.tag.Tag;
 import seedu.address.testutil.StudentBuilder;
 
 public class AddStudentCommandParserTest {

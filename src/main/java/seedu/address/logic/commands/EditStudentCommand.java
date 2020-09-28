@@ -20,10 +20,10 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.components.name.Name;
+import seedu.address.model.components.tag.Tag;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.Telegram;
-import seedu.address.model.tag.Tag;
 
 /**
  * Edits the details of an existing student.
