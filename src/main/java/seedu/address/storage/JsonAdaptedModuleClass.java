@@ -58,6 +58,7 @@ public class JsonAdaptedModuleClass {
             if (studentUuid == null) {
                 throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "studentUuid"));
             }
+
             // catch invalid UUID
             try {
                 String uuidString = studentUuid.getUuidString();

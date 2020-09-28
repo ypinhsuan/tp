@@ -18,7 +18,7 @@ import seedu.address.model.components.Name;
 public class JsonAdaptedModuleClassTest {
 
     private static final String INVALID_NAME = "CS3230@Tutorial";
-    private static final String INVALID_STUDENT_UUID = "584346cb-8886-4518-8282";
+    private static final String INVALID_STUDENT_UUID = "584346cb-8886-4518-8282-";
 
     private static final String VALID_NAME = CS2103T_TUTORIAL.getName().toString();
     private static final List<JsonAdaptedUuid> VALID_STUDENT_UUIDS = CS2103T_TUTORIAL.getStudentUuids().stream()

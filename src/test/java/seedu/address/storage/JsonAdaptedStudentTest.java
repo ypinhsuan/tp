@@ -23,7 +23,7 @@ public class JsonAdaptedStudentTest {
     private static final String INVALID_TELEGRAM = "r@chel";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#Average";
-    private static final String INVALID_UUID = "e84b3ff0-7a8a-493c-979a-";
+    private static final String INVALID_UUID = "584346cb-8886-4518-8282-";
 
     private static final String VALID_UUID = BENSON.getUuid().toString();
     private static final String VALID_NAME = BENSON.getName().toString();

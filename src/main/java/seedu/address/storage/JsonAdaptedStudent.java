@@ -76,7 +76,7 @@ class JsonAdaptedStudent {
         if (uuid == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "uuid"));
         }
-        // catch invalid uuid
+        // catch invalid UUID
         final UUID modelUuid;
         try {
             modelUuid = UUID.fromString(uuid);
