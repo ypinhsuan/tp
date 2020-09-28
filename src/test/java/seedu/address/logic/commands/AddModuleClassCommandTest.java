@@ -67,7 +67,7 @@ public class AddModuleClassCommandTest {
         // null -> returns false
         assertFalse(addCs1101Command.equals(null));
 
-        // different class -> returns false
+        // different ModuleClass -> returns false
         assertFalse(addCs1101Command.equals(addCs2103Command));
     }
 

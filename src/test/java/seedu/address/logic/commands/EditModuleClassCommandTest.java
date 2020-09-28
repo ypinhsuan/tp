@@ -105,7 +105,7 @@ public class EditModuleClassCommandTest {
     public void execute_duplicateModuleClassFilteredList_failure() {
         showModuleClassAtIndex(model, INDEX_FIRST_ITEM);
 
-        // edit module class in filtered list into a duplicate in Tutor's Pet
+        // edit ModuleClass in filtered list into a duplicate in Tutor's Pet
         ModuleClass moduleClassInList = model.getTutorsPet().getModuleClassList()
                 .get(INDEX_SECOND_ITEM.getZeroBased());
         EditModuleClassCommand editModuleClassCommand = new EditModuleClassCommand(INDEX_FIRST_ITEM,
@@ -133,7 +133,7 @@ public class EditModuleClassCommandTest {
         showModuleClassAtIndex(model, INDEX_FIRST_ITEM);
         Index outOfBoundIndex = INDEX_SECOND_ITEM;
 
-        // ensures that outOfBoundIndex is still in bounds of class list
+        // ensures that outOfBoundIndex is still in bounds of the class list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getTutorsPet().getModuleClassList().size());
 
         EditModuleClassCommand editModuleClassCommand = new EditModuleClassCommand(outOfBoundIndex,
