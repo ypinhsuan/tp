@@ -102,7 +102,7 @@ public class DeleteModuleClassCommandTest {
     }
 
     /**
-     * Updates {@code model}'s {@code filteredModuleClasses} list to show no module classes.
+     * Updates {@code model}'s {@code filteredModuleClasses} list to show no {@code ModuleClass}es.
      */
     private void showNoModuleClass(Model model) {
         model.updateFilteredModuleClassList(p -> false);
