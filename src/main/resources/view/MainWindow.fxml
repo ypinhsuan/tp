@@ -45,7 +45,7 @@
           </padding>
         </StackPane>
 
-        <HBox>
+        <HBox VBox.vgrow="ALWAYS">
           <children>
              <VBox fx:id="moduleClassList" minWidth="300.0" prefWidth="300.0" styleClass="pane-with-border">
                <padding>
