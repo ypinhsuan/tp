@@ -71,6 +71,7 @@ If you can type fast, Tutor's pet can get your class management tasks done faste
 | **Delete Student**              | `delete-student INDEX`<br> e.g., `delete-student 3`                                                                                         |
 | **Clear All Students**          | `clear-student`                                                                                                                             |
 | **Add Class**                   | `add-class n/CLASS_NAME`<br> e.g., `add-class n/CS2103T Tutorial T10`                                                                       |
+| **List All Classes**                   | `list-class`                   |
 | **List Students In A Class**    | `list-students c/INDEX`<br> e.g., `list-students c/3`                                                                                       |
 | **Edit Class**                  | `edit-class INDEX n/CLASS_NAME` <br> e.g., `edit-class 1 n/CS2103T Tutorial T10`                                                                  |
 | **Find Class**                  | `find-class KEYWORD [MORE_KEYWORDS]`<br> e.g., `find-class CS2103T`                                                                         |
@@ -172,6 +173,12 @@ Format: `add-class n/CLASS_NAME`
 
 Examples:
 * `add-class n/CS2103T Tutorial T10`
+
+#### Listing all classes : `list-class`
+
+Shows a list of all classes in the application.
+
+Format: `list-class`
 
 #### Listing all students within a class : `list-students`
 
