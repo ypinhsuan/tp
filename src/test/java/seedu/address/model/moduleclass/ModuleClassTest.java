@@ -2,7 +2,6 @@ package seedu.address.model.moduleclass;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_CS2100_LAB;
@@ -86,27 +85,27 @@ public class ModuleClassTest {
     public void equals() {
         // same values -> returns true
         ModuleClass cs2103tCopy = new ModuleClassBuilder(CS2103T_TUTORIAL).build();
-        assertEquals(cs2103tCopy, CS2103T_TUTORIAL);
+        assertTrue(CS2103T_TUTORIAL.equals(cs2103tCopy));
 
         // same object -> returns true
-        assertEquals(CS2103T_TUTORIAL, CS2103T_TUTORIAL);
+        assertTrue(CS2103T_TUTORIAL.equals(CS2103T_TUTORIAL));
 
         // null -> returns false
-        assertNotEquals(null, CS2103T_TUTORIAL);
+        assertFalse(CS2103T_TUTORIAL.equals(null));
 
         // different type -> returns false
-        assertNotEquals(5, CS2103T_TUTORIAL);
+        assertFalse(CS2103T_TUTORIAL.equals(5));
 
         // different moduleClass -> returns false
-        assertNotEquals(CS2100_LAB, CS2103T_TUTORIAL);
+        assertFalse(CS2103T_TUTORIAL.equals(CS2100_LAB));
 
         // different name -> returns false
         ModuleClass editedCs2103t = new ModuleClassBuilder(CS2103T_TUTORIAL).withName(VALID_NAME_CS2100_LAB)
                 .build();
-        assertNotEquals(editedCs2103t, CS2103T_TUTORIAL);
+        assertFalse(CS2103T_TUTORIAL.equals(editedCs2103t));
 
         // different students -> returns false
         editedCs2103t = new ModuleClassBuilder(CS2103T_TUTORIAL).withStudentUuids(AMY.getUuid()).build();
-        assertNotEquals(editedCs2103t, CS2103T_TUTORIAL);
+        assertFalse(CS2103T_TUTORIAL.equals(editedCs2103t));
     }
 }
