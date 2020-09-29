@@ -19,7 +19,7 @@ public class ModuleClassBuilder {
     private Set<UUID> studentUuids;
 
     /**
-     * Creates a {@code ModuleClassBuilder} with the default details and empty {@code studentIds} list.
+     * Creates a {@code ModuleClassBuilder} with the default {@code Name} and empty {@code studentUuids} list.
      */
     public ModuleClassBuilder() {
         name = new Name(DEFAULT_NAME);

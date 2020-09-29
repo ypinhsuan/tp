@@ -26,7 +26,7 @@ public class JsonAdaptedModuleClass {
     private final List<JsonAdaptedUuid> studentUuids = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonAdaptedModuleClass} with the given moduleClass details.
+     * Constructs a {@code JsonAdaptedModuleClass} with the given class details.
      */
     @JsonCreator
     public JsonAdaptedModuleClass(@JsonProperty("name") String name,
@@ -38,7 +38,7 @@ public class JsonAdaptedModuleClass {
     }
 
     /**
-     * Converts a given {@code ModuleClass} into this class for Jackson use.
+     * Converts a given {@code ModuleClass} into a {@code JsonAdaptedModuleClass} for Jackson use.
      */
     public JsonAdaptedModuleClass(ModuleClass source) {
         name = source.getName().fullName;
@@ -50,7 +50,7 @@ public class JsonAdaptedModuleClass {
     /**
      * Converts this Jackson-friendly adapted class object into the model's {@code ModuleClass} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted moduleClass.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted class.
      */
     public ModuleClass toModelType() throws IllegalValueException {
         final List<UUID> moduleClassUuids = new ArrayList<>();

@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_AVERAGE;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalModuleClass.ALICE_UUID;
 import static seedu.address.testutil.TypicalModuleClass.CS2103T_TUTORIAL;
-import static seedu.address.testutil.TypicalModuleClass.STUDENT_UUID_1;
 import static seedu.address.testutil.TypicalStudent.ALICE;
 import static seedu.address.testutil.TypicalTutorsPet.getTypicalTutorsPet;
 
@@ -144,7 +144,7 @@ public class TutorsPetTest {
     @Test
     public void addModuleClass_moduleClassWithSameIdentityFieldsInTutorsPet_throwsDuplicateModuleClassException() {
         tutorsPet.addModuleClass(CS2103T_TUTORIAL);
-        ModuleClass editedCs2103t = new ModuleClassBuilder(CS2103T_TUTORIAL).withStudentUuids(STUDENT_UUID_1).build();
+        ModuleClass editedCs2103t = new ModuleClassBuilder(CS2103T_TUTORIAL).withStudentUuids(ALICE_UUID).build();
         assertThrows(DuplicateModuleClassException.class, () -> tutorsPet.addModuleClass(editedCs2103t));
     }
 

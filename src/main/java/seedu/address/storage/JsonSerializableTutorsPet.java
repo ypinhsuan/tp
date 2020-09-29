@@ -52,7 +52,7 @@ class JsonSerializableTutorsPet {
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
-    public void studentsToModelType(TutorsPet tutorsPet) throws IllegalValueException {
+    private void studentsToModelType(TutorsPet tutorsPet) throws IllegalValueException {
         for (JsonAdaptedStudent jsonAdaptedStudent : students) {
             Student student = jsonAdaptedStudent.toModelType();
             if (tutorsPet.hasStudent(student)) {
@@ -67,7 +67,7 @@ class JsonSerializableTutorsPet {
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
-    public void classesToModelType(TutorsPet tutorsPet) throws IllegalValueException {
+    private void classesToModelType(TutorsPet tutorsPet) throws IllegalValueException {
         for (JsonAdaptedModuleClass jsonAdaptedModuleClass : classes) {
             ModuleClass moduleClass = jsonAdaptedModuleClass.toModelType();
             if (tutorsPet.hasModuleClass(moduleClass)) {
