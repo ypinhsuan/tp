@@ -23,7 +23,7 @@ public class ModuleClass implements HasName {
     private final Name name;
 
     // data fields
-    private final Set<UUID> studentIds = new HashSet<>();
+    private final Set<UUID> studentUuids = new HashSet<>();
 
     /**
      * Name must be present and not null.
@@ -36,10 +36,10 @@ public class ModuleClass implements HasName {
     /**
      * Every field must be present and not null.
      */
-    public ModuleClass(Name name, Set<UUID> studentIds) {
-        requireAllNonNull(name, studentIds);
+    public ModuleClass(Name name, Set<UUID> studentUuids) {
+        requireAllNonNull(name, studentUuids);
         this.name = name;
-        this.studentIds.addAll(studentIds);
+        this.studentUuids.addAll(studentUuids);
     }
 
     @Override
@@ -51,8 +51,8 @@ public class ModuleClass implements HasName {
      * Returns an immutable set of student {@code UUID}s, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<UUID> getStudentIds() {
-        return Collections.unmodifiableSet(studentIds);
+    public Set<UUID> getStudentUuids() {
+        return Collections.unmodifiableSet(studentUuids);
     }
 
     /**
@@ -83,12 +83,12 @@ public class ModuleClass implements HasName {
 
         ModuleClass otherModuleClass = (ModuleClass) other;
         return otherModuleClass.getName().equals(getName())
-                && otherModuleClass.getStudentIds().equals(getStudentIds());
+                && otherModuleClass.getStudentUuids().equals(getStudentUuids());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, studentIds);
+        return Objects.hash(name, studentUuids);
     }
 
     @Override

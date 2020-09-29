@@ -1,8 +1,9 @@
 {
   "students": [ {
-    "uuid": "d85b5bb5-384e-4295-b96d-1eec530ff1e3",
+    "uuid": "584346cb-8886-4518-8282-fc6d8f4b7b6a",
     "name": "Student with invalid name field: Ha!ns Mu@ster",
     "telegram": "hans_M4STERZ",
     "email": "hans@example.com"
-  } ]
+  } ],
+  "classes" : [ ]
 }

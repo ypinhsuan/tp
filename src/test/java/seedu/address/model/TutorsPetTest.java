@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_AVERAGE;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalModuleClass.ALICE_UUID;
 import static seedu.address.testutil.TypicalModuleClass.CS2103T_TUTORIAL;
-import static seedu.address.testutil.TypicalModuleClass.STUDENT_UUID_1;
 import static seedu.address.testutil.TypicalStudent.ALICE;
 import static seedu.address.testutil.TypicalTutorsPet.getTypicalTutorsPet;
 
@@ -99,7 +99,7 @@ public class TutorsPetTest {
     @Test
     public void resetData_withDuplicateModuleClasses_throwsDuplicateModuleClassException() {
         // Two moduleClasses with the same identity fields
-        ModuleClass editedCS2103T = new ModuleClassBuilder(CS2103T_TUTORIAL).withStudentIds().build();
+        ModuleClass editedCS2103T = new ModuleClassBuilder(CS2103T_TUTORIAL).withStudentUuids().build();
         List<Student> defaultStudents = TypicalStudent.getTypicalStudents();
         List<ModuleClass> newModuleClasses = Arrays.asList(CS2103T_TUTORIAL, editedCS2103T);
         TutorsPetStub newData = new TutorsPetStub(defaultStudents, newModuleClasses);
@@ -126,7 +126,7 @@ public class TutorsPetTest {
     @Test
     public void hasModuleClass_moduleClassWithSameIdentityFieldsInTutorsPet_returnsTrue() {
         tutorsPet.addModuleClass(CS2103T_TUTORIAL);
-        ModuleClass editedModuleClass = new ModuleClassBuilder(CS2103T_TUTORIAL).withStudentIds().build();
+        ModuleClass editedModuleClass = new ModuleClassBuilder(CS2103T_TUTORIAL).withStudentUuids().build();
         assertTrue(tutorsPet.hasModuleClass(editedModuleClass));
     }
 
@@ -144,7 +144,7 @@ public class TutorsPetTest {
     @Test
     public void addModuleClass_moduleClassWithSameIdentityFieldsInTutorsPet_throwsDuplicateModuleClassException() {
         tutorsPet.addModuleClass(CS2103T_TUTORIAL);
-        ModuleClass editedCs2103t = new ModuleClassBuilder(CS2103T_TUTORIAL).withStudentIds(STUDENT_UUID_1).build();
+        ModuleClass editedCs2103t = new ModuleClassBuilder(CS2103T_TUTORIAL).withStudentUuids(ALICE_UUID).build();
         assertThrows(DuplicateModuleClassException.class, () -> tutorsPet.addModuleClass(editedCs2103t));
     }
 

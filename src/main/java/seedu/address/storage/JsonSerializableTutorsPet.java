@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.ReadOnlyTutorsPet;
 import seedu.address.model.TutorsPet;
+import seedu.address.model.moduleclass.ModuleClass;
 import seedu.address.model.student.Student;
 
 /**
@@ -20,15 +21,19 @@ import seedu.address.model.student.Student;
 class JsonSerializableTutorsPet {
 
     public static final String MESSAGE_DUPLICATE_STUDENT = "Students list contains duplicate student(s).";
+    public static final String MESSAGE_DUPLICATE_MODULE_CLASS = "Class list contains duplicate class(es).";
 
     private final List<JsonAdaptedStudent> students = new ArrayList<>();
+    private final List<JsonAdaptedModuleClass> classes = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableTutorsPet} with the given students.
+     * Constructs a {@code JsonSerializableTutorsPet} with the given students and classes.
      */
     @JsonCreator
-    public JsonSerializableTutorsPet(@JsonProperty("students") List<JsonAdaptedStudent> students) {
+    public JsonSerializableTutorsPet(@JsonProperty("students") List<JsonAdaptedStudent> students,
+                                     @JsonProperty("classes") List<JsonAdaptedModuleClass> classes) {
         this.students.addAll(students);
+        this.classes.addAll(classes);
     }
 
     /**
@@ -38,6 +43,38 @@ class JsonSerializableTutorsPet {
      */
     public JsonSerializableTutorsPet(ReadOnlyTutorsPet source) {
         students.addAll(source.getStudentList().stream().map(JsonAdaptedStudent::new).collect(Collectors.toList()));
+        classes.addAll(source.getModuleClassList().stream()
+                .map(JsonAdaptedModuleClass::new).collect(Collectors.toList()));
+    }
+
+    /**
+     * Converts students into the model's {@code TutorsPet} object.
+     *
+     * @throws IllegalValueException if there were any data constraints violated.
+     */
+    private void studentsToModelType(TutorsPet tutorsPet) throws IllegalValueException {
+        for (JsonAdaptedStudent jsonAdaptedStudent : students) {
+            Student student = jsonAdaptedStudent.toModelType();
+            if (tutorsPet.hasStudent(student)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_STUDENT);
+            }
+            tutorsPet.addStudent(student);
+        }
+    }
+
+    /**
+     * Converts classes into the model's {@code TutorsPet} object.
+     *
+     * @throws IllegalValueException if there were any data constraints violated.
+     */
+    private void classesToModelType(TutorsPet tutorsPet) throws IllegalValueException {
+        for (JsonAdaptedModuleClass jsonAdaptedModuleClass : classes) {
+            ModuleClass moduleClass = jsonAdaptedModuleClass.toModelType();
+            if (tutorsPet.hasModuleClass(moduleClass)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_MODULE_CLASS);
+            }
+            tutorsPet.addModuleClass(moduleClass);
+        }
     }
 
     /**
@@ -47,13 +84,8 @@ class JsonSerializableTutorsPet {
      */
     public TutorsPet toModelType() throws IllegalValueException {
         TutorsPet tutorsPet = new TutorsPet();
-        for (JsonAdaptedStudent jsonAdaptedStudent : students) {
-            Student student = jsonAdaptedStudent.toModelType();
-            if (tutorsPet.hasStudent(student)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_STUDENT);
-            }
-            tutorsPet.addStudent(student);
-        }
+        this.studentsToModelType(tutorsPet);
+        this.classesToModelType(tutorsPet);
         return tutorsPet;
     }
 }

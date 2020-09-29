@@ -16,14 +16,14 @@ public class ModuleClassBuilder {
     public static final String DEFAULT_NAME = "CS1101 Tutorial";
 
     private Name name;
-    private Set<UUID> studentIds;
+    private Set<UUID> studentUuids;
 
     /**
-     * Creates a {@code ModuleClassBuilder} with the default details and empty {@code studentIds} list.
+     * Creates a {@code ModuleClassBuilder} with the default {@code Name} and empty {@code studentUuids} list.
      */
     public ModuleClassBuilder() {
         name = new Name(DEFAULT_NAME);
-        studentIds = new HashSet<>();
+        studentUuids = new HashSet<>();
     }
 
     /**
@@ -31,7 +31,7 @@ public class ModuleClassBuilder {
      */
     public ModuleClassBuilder(ModuleClass moduleClassToCopy) {
         name = moduleClassToCopy.getName();
-        studentIds = new HashSet<>(moduleClassToCopy.getStudentIds());
+        studentUuids = new HashSet<>(moduleClassToCopy.getStudentUuids());
     }
 
     /**
@@ -46,12 +46,12 @@ public class ModuleClassBuilder {
      * Sets the {@code Set<UUID>} of the {@code ModuleClass} that we are building.
      * Overwrites any previous content of the {@code Set<UUID>}.
      */
-    public ModuleClassBuilder withStudentIds(UUID ... studentIds) {
-        this.studentIds = new HashSet<>(Arrays.asList(studentIds));
+    public ModuleClassBuilder withStudentUuids(UUID ... studentUuids) {
+        this.studentUuids = new HashSet<>(Arrays.asList(studentUuids));
         return this;
     }
 
     public ModuleClass build() {
-        return new ModuleClass(name, studentIds);
+        return new ModuleClass(name, studentUuids);
     }
 }

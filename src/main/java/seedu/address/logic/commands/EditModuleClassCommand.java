@@ -80,9 +80,9 @@ public class EditModuleClassCommand extends Command {
         EditModuleClassDescriptor editModuleClassDescriptor) {
         assert moduleClassToEdit != null;
         Name updatedName = editModuleClassDescriptor.getName().orElse(moduleClassToEdit.getName());
-        Set<UUID> studentIds = moduleClassToEdit.getStudentIds();
+        Set<UUID> studentUuids = moduleClassToEdit.getStudentUuids();
 
-        return new ModuleClass(updatedName, studentIds);
+        return new ModuleClass(updatedName, studentUuids);
     }
 
     @Override

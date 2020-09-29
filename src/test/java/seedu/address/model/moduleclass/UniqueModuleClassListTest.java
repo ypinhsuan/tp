@@ -5,9 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalModuleClass.ALICE_UUID;
 import static seedu.address.testutil.TypicalModuleClass.CS2100_LAB;
 import static seedu.address.testutil.TypicalModuleClass.CS2103T_TUTORIAL;
-import static seedu.address.testutil.TypicalModuleClass.STUDENT_UUID_1;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -42,7 +42,7 @@ public class UniqueModuleClassListTest {
     @Test
     public void contains_moduleClassWithSameIdentityFieldsInList_returnsTrue() {
         uniqueModuleClassList.add(CS2103T_TUTORIAL);
-        ModuleClass editedCs2103t = new ModuleClassBuilder(CS2103T_TUTORIAL).withStudentIds(STUDENT_UUID_1).build();
+        ModuleClass editedCs2103t = new ModuleClassBuilder(CS2103T_TUTORIAL).withStudentUuids(ALICE_UUID).build();
         assertTrue(uniqueModuleClassList.contains(editedCs2103t));
     }
 
@@ -60,7 +60,7 @@ public class UniqueModuleClassListTest {
     @Test
     public void add_moduleClassWithSameIdentityFieldsInList_throwsDuplicateModuleClassException() {
         uniqueModuleClassList.add(CS2103T_TUTORIAL);
-        ModuleClass editedCs2103t = new ModuleClassBuilder(CS2103T_TUTORIAL).withStudentIds(STUDENT_UUID_1).build();
+        ModuleClass editedCs2103t = new ModuleClassBuilder(CS2103T_TUTORIAL).withStudentUuids(ALICE_UUID).build();
         assertThrows(DuplicateModuleClassException.class, () -> uniqueModuleClassList.add(editedCs2103t));
     }
 
@@ -84,7 +84,7 @@ public class UniqueModuleClassListTest {
     public void setModuleClass_moduleClassWithSameIdentityFieldsInList_throwsDuplicateModuleClassException() {
         uniqueModuleClassList.add(CS2103T_TUTORIAL);
         uniqueModuleClassList.add(CS2100_LAB);
-        ModuleClass editedClass = new ModuleClassBuilder(CS2100_LAB).withStudentIds(STUDENT_UUID_1).build();
+        ModuleClass editedClass = new ModuleClassBuilder(CS2100_LAB).withStudentUuids(ALICE_UUID).build();
         assertThrows(DuplicateModuleClassException.class, () ->
                 uniqueModuleClassList.setModuleClass(CS2103T_TUTORIAL, editedClass));
     }
