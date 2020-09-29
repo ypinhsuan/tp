@@ -1,11 +1,12 @@
 package seedu.address.logic.commands;
 
-import seedu.address.model.Model;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
+import seedu.address.model.Model;
+
 public class ListStudentCommand extends Command {
+
     public static final String COMMAND_WORD = "list-student";
 
     public static final String MESSAGE_SUCCESS = "Listed all students.";
