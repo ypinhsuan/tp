@@ -65,7 +65,7 @@ If you can type fast, Tutor's pet can get your class management tasks done faste
 |---------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
 | **Help**                        | `help`                                                                                                                                      |
 | **Add Student**                 | `add-student n/NAME t/TELEGRAM_USERNAME e/EMAIL [tag/TAG]…​` <br> e.g., `add-student n/John Doe t/johndoe e/johnd@example.com tag/student`|
-| **List All Students**           | `list`                                                                                                                                      |
+| **List All Students**           | `list-student`                                                                                                                              |
 | **Edit Student**                | `edit-student INDEX [n/NAME] [t/TELEGRAM_USERNAME] [e/EMAIL] [tag/TAG]…​`<br> e.g., `edit-student 2 n/James Lee e/jameslee@example.com`    |
 | **Find Student**                | `find-student KEYWORD [MORE_KEYWORDS]`<br> e.g., `find-student James Jake`                                                                  |
 | **Delete Student**              | `delete-student INDEX`<br> e.g., `delete-student 3`                                                                                         |
@@ -103,11 +103,11 @@ Examples:
 * `add-student n/John Doe t/johndoe e/johnd@example.com`
 * `add-student n/Betsy Crowe t/betsycrowe e/betsycrowe@example.com tag/student`
 
-#### Listing all students : `list`
+#### Listing all students : `list-student`
 
 Shows a list of all students in the application.
 
-Format: `list`
+Format: `list-student`
 
 #### Editing a student : `edit-student`
 
