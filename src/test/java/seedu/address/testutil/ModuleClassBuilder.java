@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-import seedu.address.model.components.Name;
+import seedu.address.model.components.name.Name;
 import seedu.address.model.moduleclass.ModuleClass;
 
 /**

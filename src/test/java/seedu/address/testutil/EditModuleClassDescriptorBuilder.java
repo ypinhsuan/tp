@@ -2,7 +2,7 @@ package seedu.address.testutil;
 
 import seedu.address.logic.commands.EditModuleClassCommand;
 import seedu.address.logic.commands.EditModuleClassCommand.EditModuleClassDescriptor;
-import seedu.address.model.components.Name;
+import seedu.address.model.components.name.Name;
 import seedu.address.model.moduleclass.ModuleClass;
 
 /**

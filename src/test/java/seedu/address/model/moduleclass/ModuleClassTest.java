@@ -17,7 +17,7 @@ import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.components.Name;
+import seedu.address.model.components.name.Name;
 import seedu.address.testutil.ModuleClassBuilder;
 
 public class ModuleClassTest {

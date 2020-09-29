@@ -19,11 +19,10 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.components.name.NameContainsKeywordsPredicate;
 import seedu.address.model.moduleclass.ModuleClass;
-import seedu.address.model.moduleclass.ModuleNameContainsKeywordsPredicate;
 import seedu.address.model.moduleclass.exceptions.DuplicateModuleClassException;
 import seedu.address.model.moduleclass.exceptions.ModuleClassNotFoundException;
-import seedu.address.model.student.StudentNameContainsKeywordsPredicate;
 import seedu.address.testutil.ModuleClassBuilder;
 import seedu.address.testutil.TutorsPetBuilder;
 
@@ -201,7 +200,7 @@ public class ModelManagerTest {
 
         // different filteredStudentList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
-        modelManager.updateFilteredStudentList(new StudentNameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        modelManager.updateFilteredStudentList(new NameContainsKeywordsPredicate<>(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(tutorsPet, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
@@ -209,7 +208,7 @@ public class ModelManagerTest {
 
         // different filteredModuleClassList -> returns false
         keywords = CS2103T_TUTORIAL.getName().fullName.split("\\s+");
-        modelManager.updateFilteredModuleClassList(new ModuleNameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        modelManager.updateFilteredModuleClassList(new NameContainsKeywordsPredicate<>(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(tutorsPet, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests

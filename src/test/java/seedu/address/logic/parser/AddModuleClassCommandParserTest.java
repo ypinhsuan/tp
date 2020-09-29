@@ -13,7 +13,7 @@ import static seedu.address.testutil.TypicalModuleClass.CS2103T_TUTORIAL;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddModuleClassCommand;
-import seedu.address.model.components.Name;
+import seedu.address.model.components.name.Name;
 import seedu.address.model.moduleclass.ModuleClass;
 import seedu.address.testutil.ModuleClassBuilder;
 

@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.components.Name;
+import seedu.address.model.components.name.Name;
 
 public class JsonAdaptedModuleClassTest {
 

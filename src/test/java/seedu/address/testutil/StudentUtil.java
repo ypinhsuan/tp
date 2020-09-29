@@ -9,8 +9,8 @@ import java.util.Set;
 
 import seedu.address.logic.commands.AddStudentCommand;
 import seedu.address.logic.commands.EditStudentCommand;
+import seedu.address.model.components.tag.Tag;
 import seedu.address.model.student.Student;
-import seedu.address.model.tag.Tag;
 
 /**
  * A utility class for Student.

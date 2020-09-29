@@ -21,12 +21,12 @@ import seedu.address.testutil.ModuleClassBuilder;
 public class AddModuleClassCommandTest {
 
     @Test
-    public void constructor_nullStudent_throwsNullPointerException() {
+    public void constructor_nullModuleClass_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddModuleClassCommand(null));
     }
 
     @Test
-    public void execute_studentAcceptedByModel_addSuccessful() throws Exception {
+    public void execute_moduleClassAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingModuleClassAdded modelStub = new ModelStubAcceptingModuleClassAdded();
         ModuleClass validModuleClass = new ModuleClassBuilder().build();
 
@@ -38,7 +38,7 @@ public class AddModuleClassCommandTest {
     }
 
     @Test
-    public void execute_duplicateStudent_throwsCommandException() {
+    public void execute_duplicateModuleClass_throwsCommandException() {
         ModuleClass validModuleClass = new ModuleClassBuilder().build();
         AddModuleClassCommand addModuleClassCommand = new AddModuleClassCommand(validModuleClass);
         ModelStubWithModuleClass modelStub = new ModelStubWithModuleClass(validModuleClass);
@@ -67,12 +67,12 @@ public class AddModuleClassCommandTest {
         // null -> returns false
         assertFalse(addCs1101Command.equals(null));
 
-        // different moduleClass -> returns false
+        // different ModuleClass -> returns false
         assertFalse(addCs1101Command.equals(addCs2103Command));
     }
 
     /**
-     * A Model stub that contains a single moduleClass.
+     * A Model stub that contains a single {@code ModuleClass}.
      */
     private class ModelStubWithModuleClass extends ModelStub {
 
@@ -91,7 +91,7 @@ public class AddModuleClassCommandTest {
     }
 
     /**
-     * A Model stub that always accepts the moduleClass being added.
+     * A Model stub that always accepts the {@code ModuleClass} being added.
      */
     private class ModelStubAcceptingModuleClassAdded extends ModelStub {
 

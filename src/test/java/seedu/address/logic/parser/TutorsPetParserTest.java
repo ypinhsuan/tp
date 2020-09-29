@@ -27,9 +27,9 @@ import seedu.address.logic.commands.FindStudentCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.components.name.NameContainsKeywordsPredicate;
 import seedu.address.model.moduleclass.ModuleClass;
 import seedu.address.model.student.Student;
-import seedu.address.model.student.StudentNameContainsKeywordsPredicate;
 import seedu.address.testutil.EditModuleClassDescriptorBuilder;
 import seedu.address.testutil.EditStudentDescriptorBuilder;
 import seedu.address.testutil.ModuleClassBuilder;
@@ -107,7 +107,7 @@ public class TutorsPetParserTest {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindStudentCommand command = (FindStudentCommand) parser.parseCommand(
                 FindStudentCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindStudentCommand(new StudentNameContainsKeywordsPredicate(keywords)), command);
+        assertEquals(new FindStudentCommand(new NameContainsKeywordsPredicate<>(keywords)), command);
     }
 
     @Test
