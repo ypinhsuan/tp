@@ -11,11 +11,15 @@ import java.util.UUID;
 
 import seedu.address.model.components.name.HasName;
 import seedu.address.model.components.name.Name;
+import seedu.address.model.student.Student;
 
 /**
  * Represents a Class.
- * Contains information on the students enrolled in this class identified by their unique ID.
+ * Contains information on the students enrolled in this class identified by their {@code UUID}.
+ * Students must exist in the student manager.
  * Guarantees: details are present and not null, field values are immutable.
+ *
+ * @see Student#getUuid()
  */
 public class ModuleClass implements HasName {
 
@@ -53,6 +57,15 @@ public class ModuleClass implements HasName {
      */
     public Set<UUID> getStudentUuids() {
         return Collections.unmodifiableSet(studentUuids);
+    }
+
+    /**
+     * Returns true if the class contains an equivalent student {@code UUID} as the given argument.
+     *
+     * @throws NullPointerException if the given student {@code UUID} is null.
+     */
+    public boolean hasStudentUuid(UUID toCheck) throws NullPointerException {
+        return studentUuids.stream().anyMatch(toCheck::equals);
     }
 
     /**

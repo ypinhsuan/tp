@@ -6,9 +6,11 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_CS2100_LAB;
-import static seedu.address.testutil.TypicalModuleClass.ALICE_UUID;
 import static seedu.address.testutil.TypicalModuleClass.CS2100_LAB;
 import static seedu.address.testutil.TypicalModuleClass.CS2103T_TUTORIAL;
+import static seedu.address.testutil.TypicalStudent.ALICE;
+import static seedu.address.testutil.TypicalStudent.AMY;
+import static seedu.address.testutil.TypicalStudent.BENSON;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -32,10 +34,28 @@ public class ModuleClassTest {
     @Test
     public void constructor_withStudents_hasCorrectStudents() {
         Name name = new Name(VALID_NAME_CS2100_LAB);
-        Set<UUID> studentIds = new HashSet<>(Collections.singletonList(ALICE_UUID));
-        ModuleClass moduleClass = new ModuleClass(name, studentIds);
-        assertEquals(studentIds.size(), moduleClass.getStudentUuids().size());
-        assertTrue(moduleClass.getStudentUuids().contains(ALICE_UUID));
+        Set<UUID> studentUuids = new HashSet<>(Collections.singletonList(ALICE.getUuid()));
+        ModuleClass moduleClass = new ModuleClass(name, studentUuids);
+        assertEquals(studentUuids.size(), moduleClass.getStudentUuids().size());
+        assertTrue(moduleClass.getStudentUuids().contains(ALICE.getUuid()));
+    }
+
+    @Test
+    public void hasStudentUuid_studentInModuleClass_returnsTrue() {
+        ModuleClass moduleClass = new ModuleClassBuilder().withStudentUuids(ALICE.getUuid(), BENSON.getUuid()).build();
+        assertTrue(moduleClass.hasStudentUuid(ALICE.getUuid()));
+    }
+
+    @Test
+    public void hasStudentUuid_nullUuid_throwsNullPointerException() {
+        ModuleClass moduleClass = new ModuleClassBuilder().build();
+        assertThrows(NullPointerException.class, () -> moduleClass.hasStudentUuid(null));
+    }
+
+    @Test
+    public void hasStudentUuid_studentNotInModuleClass_returnsFalse() {
+        ModuleClass moduleClass = new ModuleClassBuilder().withStudentUuids(ALICE.getUuid()).build();
+        assertFalse(moduleClass.hasStudentUuid(BENSON.getUuid()));
     }
 
     @Test
@@ -58,7 +78,7 @@ public class ModuleClassTest {
         assertFalse(CS2103T_TUTORIAL.isSameModuleClass(editedCs2103t));
 
         // different students -> returns true
-        editedCs2103t = new ModuleClassBuilder(CS2103T_TUTORIAL).withStudentUuids(ALICE_UUID).build();
+        editedCs2103t = new ModuleClassBuilder(CS2103T_TUTORIAL).withStudentUuids(AMY.getUuid()).build();
         assertTrue(CS2103T_TUTORIAL.isSameModuleClass(editedCs2103t));
     }
 
@@ -86,7 +106,7 @@ public class ModuleClassTest {
         assertNotEquals(editedCs2103t, CS2103T_TUTORIAL);
 
         // different students -> returns false
-        editedCs2103t = new ModuleClassBuilder(CS2103T_TUTORIAL).withStudentUuids(ALICE_UUID).build();
+        editedCs2103t = new ModuleClassBuilder(CS2103T_TUTORIAL).withStudentUuids(AMY.getUuid()).build();
         assertNotEquals(editedCs2103t, CS2103T_TUTORIAL);
     }
 }

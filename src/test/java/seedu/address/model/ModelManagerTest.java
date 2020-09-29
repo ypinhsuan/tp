@@ -6,10 +6,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_MODULE_CLASS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalModuleClass.ALICE_UUID;
 import static seedu.address.testutil.TypicalModuleClass.CS2100_LAB;
 import static seedu.address.testutil.TypicalModuleClass.CS2103T_TUTORIAL;
 import static seedu.address.testutil.TypicalStudent.ALICE;
+import static seedu.address.testutil.TypicalStudent.AMY;
 import static seedu.address.testutil.TypicalStudent.BENSON;
 
 import java.nio.file.Path;
@@ -144,7 +144,7 @@ public class ModelManagerTest {
     @Test
     public void addModuleClass_moduleClassWithSameIdentityFieldsInModelManager_throwsDuplicateModuleClassException() {
         modelManager.addModuleClass(CS2103T_TUTORIAL);
-        ModuleClass editedCs2103t = new ModuleClassBuilder(CS2103T_TUTORIAL).withStudentUuids(ALICE_UUID).build();
+        ModuleClass editedCs2103t = new ModuleClassBuilder(CS2103T_TUTORIAL).withStudentUuids(AMY.getUuid()).build();
         assertThrows(DuplicateModuleClassException.class, () -> modelManager.addModuleClass(editedCs2103t));
     }
 
