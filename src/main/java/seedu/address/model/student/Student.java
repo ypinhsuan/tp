@@ -18,13 +18,13 @@ import seedu.address.model.components.tag.Tag;
  */
 public class Student implements HasName {
 
-    // Identity fields
+    // identity fields
     private final UUID uuid;
     private final Name name;
     private final Telegram telegram;
     private final Email email;
 
-    // Data fields
+    // data fields
     private final Set<Tag> tags = new HashSet<>();
 
     /**

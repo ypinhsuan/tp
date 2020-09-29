@@ -35,39 +35,39 @@ public class NameContainsKeywordsPredicateTest {
         // null -> returns false
         assertFalse(firstPredicate.equals(null));
 
-        // different module class -> returns false
+        // different predicate -> returns false
         assertFalse(firstPredicate.equals(secondPredicate));
     }
 
     @Test
     public void test_nameContainsKeywords_returnsTrue() {
-        // One keyword
+        // one keyword
         NameContainsKeywordsPredicate<HasNameStub> predicate =
                 new NameContainsKeywordsPredicate<>(Collections.singletonList(
                 "Valid"));
         assertTrue(predicate.test(new HasNameStub()));
 
-        // Multiple keywords
+        // multiple keywords
         predicate = new NameContainsKeywordsPredicate<>(Arrays.asList("Valid", "Name"));
         assertTrue(predicate.test(new HasNameStub()));
 
-        // Only one matching keyword
+        // only one matching keyword
         predicate = new NameContainsKeywordsPredicate<>(Arrays.asList("Valid", "Invalid"));
         assertTrue(predicate.test(new HasNameStub()));
 
-        // Mixed-case keywords
+        // mixed-case keywords
         predicate = new NameContainsKeywordsPredicate<>(Arrays.asList("Invalid", "nAme"));
         assertTrue(predicate.test(new HasNameStub()));
     }
 
     @Test
     public void test_nameDoesNotContainKeywords_returnsFalse() {
-        // Zero keywords
+        // zero keywords
         NameContainsKeywordsPredicate<HasNameStub> predicate =
                 new NameContainsKeywordsPredicate<>(Collections.emptyList());
         assertFalse(predicate.test(new HasNameStub()));
 
-        // Non-matching keyword
+        // non-matching keyword
         predicate = new NameContainsKeywordsPredicate<>(Arrays.asList("Invalid"));
         assertFalse(predicate.test(new HasNameStub()));
     }

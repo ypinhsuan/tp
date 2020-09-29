@@ -19,10 +19,10 @@ import seedu.address.model.components.name.Name;
  */
 public class ModuleClass implements HasName {
 
-    // Identity fields
+    // identity fields
     private final Name name;
 
-    // Data fields
+    // data fields
     private final Set<UUID> studentIds = new HashSet<>();
 
     /**
