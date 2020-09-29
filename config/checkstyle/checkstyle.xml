@@ -389,7 +389,7 @@
 
     <!-- Checks that every class declaration is followed by an empty line. -->
     <module name="Regexp">
-      <property name="format" value="class .*\{\n(?!\s*\}).+\s*"/>
+      <property name="format" value="class .*\{\r?\n(?!\s*\}).+\s*"/>
       <property name="ignoreComments" value="true"/>
       <property name="illegalPattern" value="true"/>
       <property name="message" value="Missing empty line after class declaration"/>
