@@ -51,6 +51,9 @@ public class TutorsPetParser {
         case AddStudentCommand.COMMAND_WORD:
             return new AddStudentCommandParser().parse(arguments);
 
+        case ListStudentCommand.COMMAND_WORD:
+            return new ListStudentCommand();
+
         case EditStudentCommand.COMMAND_WORD:
             return new EditStudentCommandParser().parse(arguments);
 
@@ -66,17 +69,14 @@ public class TutorsPetParser {
         case AddModuleClassCommand.COMMAND_WORD:
             return new AddModuleClassCommandParser().parse(arguments);
 
-        case DeleteModuleClassCommand.COMMAND_WORD:
-            return new DeleteModuleClassCommandParser().parse(arguments);
-
-        case ListStudentCommand.COMMAND_WORD:
-            return new ListStudentCommand();
-
         case ListModuleClassCommand.COMMAND_WORD:
             return new ListModuleClassCommand();
 
         case EditModuleClassCommand.COMMAND_WORD:
             return new EditModuleClassCommandParser().parse(arguments);
+
+        case DeleteModuleClassCommand.COMMAND_WORD:
+            return new DeleteModuleClassCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
