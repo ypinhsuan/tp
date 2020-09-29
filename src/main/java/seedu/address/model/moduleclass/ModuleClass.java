@@ -9,19 +9,20 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
-import seedu.address.model.components.Name;
+import seedu.address.model.components.name.HasName;
+import seedu.address.model.components.name.Name;
 
 /**
  * Represents a Class.
  * Contains information on the students enrolled in this class identified by their unique ID.
  * Guarantees: details are present and not null, field values are immutable.
  */
-public class ModuleClass {
+public class ModuleClass implements HasName {
 
-    // Identity fields
+    // identity fields
     private final Name name;
 
-    // Data fields
+    // data fields
     private final Set<UUID> studentIds = new HashSet<>();
 
     /**
@@ -41,6 +42,7 @@ public class ModuleClass {
         this.studentIds.addAll(studentIds);
     }
 
+    @Override
     public Name getName() {
         return name;
     }

@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditModuleClassCommand;
 import seedu.address.logic.commands.EditModuleClassCommand.EditModuleClassDescriptor;
-import seedu.address.model.components.Name;
+import seedu.address.model.components.name.Name;
 import seedu.address.testutil.EditModuleClassDescriptorBuilder;
 
 public class EditModuleClassCommandParserTest {

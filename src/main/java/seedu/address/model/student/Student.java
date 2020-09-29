@@ -8,22 +8,23 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
-import seedu.address.model.components.Name;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.components.name.HasName;
+import seedu.address.model.components.name.Name;
+import seedu.address.model.components.tag.Tag;
 
 /**
  * Represents a Student.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Student {
+public class Student implements HasName {
 
-    // Identity fields
+    // identity fields
     private final UUID uuid;
     private final Name name;
     private final Telegram telegram;
     private final Email email;
 
-    // Data fields
+    // data fields
     private final Set<Tag> tags = new HashSet<>();
 
     /**
@@ -56,6 +57,7 @@ public class Student {
         return uuid;
     }
 
+    @Override
     public Name getName() {
         return name;
     }
