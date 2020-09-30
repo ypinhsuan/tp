@@ -23,10 +23,10 @@ public class FindModuleClassCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsFindModuleClassCommand() {
-
-        // no leading and trailing whitespaces
         FindModuleClassCommand expectedFindModuleClassCommand =
                 new FindModuleClassCommand(new NameContainsKeywordsPredicate<>(Arrays.asList("CS1101S", "Tutorial")));
+
+        // no leading and trailing whitespaces
         assertParseSuccess(parser, "CS1101S Tutorial", expectedFindModuleClassCommand);
 
         // multiple whitespaces between keywords
