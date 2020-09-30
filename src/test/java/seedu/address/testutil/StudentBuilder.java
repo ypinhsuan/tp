@@ -16,10 +16,10 @@ import seedu.address.model.util.SampleDataUtil;
  */
 public class StudentBuilder {
 
-    public static final String DEFAULT_UUID = "5d07082f-960a-4a0c-8661-8f1a84cf3f93";
-    public static final String DEFAULT_NAME = "Alice Pauline";
-    public static final String DEFAULT_PHONE = "85355255";
-    public static final String DEFAULT_EMAIL = "alice@gmail.com";
+    public static final String DEFAULT_UUID = "edbf256e-ea32-4853-8591-5df758873b11";
+    public static final String DEFAULT_NAME = "Generated Student";
+    public static final String DEFAULT_TELEGRAM = "generated_student";
+    public static final String DEFAULT_EMAIL = "generated_student@gmail.com";
 
     private UUID uuid;
     private Name name;
@@ -33,7 +33,7 @@ public class StudentBuilder {
     public StudentBuilder() {
         uuid = UUID.fromString(DEFAULT_UUID);
         name = new Name(DEFAULT_NAME);
-        telegram = new Telegram(DEFAULT_PHONE);
+        telegram = new Telegram(DEFAULT_TELEGRAM);
         email = new Email(DEFAULT_EMAIL);
         tags = new HashSet<>();
     }
