@@ -299,13 +299,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | UC07        | Add a class                      |
 | UC08        | List classes                     |
 | UC09        | List students within a class     |
-| UC10        | List students and classes        |
-| UC11        | Edit a class                     |
-| UC12        | Find a class                     |
-| UC13        | Delete a class                   |
-| UC14        | Clear all classes                |
-| UC15        | Link a student to a class     |
-| UC16        | Unlink a student from a class |
+| UC10        | Edit a class                     |
+| UC11        | Find a class                     |
+| UC12        | Delete a class                   |
+| UC13        | Clear all classes                |
+| UC14        | List students and classes        |
+| UC15        | Link a student to a class        |
+| UC16        | Unlink a student from a class    |
 
 (For all use cases below, the **System** is `Tutor's Pet` and the **Actor** is the `user`, unless specified otherwise)
 
@@ -473,16 +473,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
 
-**Use case: UC10 - List students and classes**
-
-**MSS**
-
-1.  User requests to list students and classes.
-2.  Tutor's Pet shows a list of students and a list of classes.
-
-    Use case ends.
-
-**Use case: UC11 - Edit a class**
+**Use case: UC10 - Edit a class**
 
 **MSS**
 
@@ -512,7 +503,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: UC12 - Find a class**
+**Use case: UC11 - Find a class**
 
 **MSS**
 
@@ -531,7 +522,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC13 - Delete a class**
+**Use case: UC12 - Delete a class**
 
 **MSS**
 
@@ -554,12 +545,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: UC14 - Clear all classes**
+**Use case: UC13 - Clear all classes**
 
 **MSS**
 
 1. User requests to clear all classes.
 2. Tutor's Pet clears all classes.
+
+    Use case ends.
+    
+**Use case: UC14 - List students and classes**
+
+**MSS**
+
+1.  User requests to list students and classes.
+2.  Tutor's Pet shows a list of students and a list of classes.
 
     Use case ends.
 

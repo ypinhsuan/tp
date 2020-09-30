@@ -61,26 +61,26 @@ If you can type fast, Tutor's pet can get your class management tasks done faste
 
 ## Command overview
 
-| Action                          | Format, Examples                                                                                                                            |
-|---------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
-| **Help**                        | `help`                                                                                                                                      |
-| **Add Student**                 | `add-student n/NAME t/TELEGRAM_USERNAME e/EMAIL [tag/TAG]…​` <br> e.g., `add-student n/John Doe t/johndoe e/johnd@example.com tag/student`|
-| **List All Students**           | `list-student`                                                                                                                              |
-| **Edit Student**                | `edit-student INDEX [n/NAME] [t/TELEGRAM_USERNAME] [e/EMAIL] [tag/TAG]…​`<br> e.g., `edit-student 2 n/James Lee e/jameslee@example.com`    |
-| **Find Student**                | `find-student KEYWORD [MORE_KEYWORDS]`<br> e.g., `find-student James Jake`                                                                  |
-| **Delete Student**              | `delete-student INDEX`<br> e.g., `delete-student 3`                                                                                         |
-| **Clear All Students**          | `clear-student`                                                                                                                             |
-| **Add Class**                   | `add-class n/CLASS_NAME`<br> e.g., `add-class n/CS2103T Tutorial T10`                                                                       |
-| **List All Classes**                   | `list-class`                   |
-| **List Students In A Class**    | `list-students c/INDEX`<br> e.g., `list-students c/3`                                                                                       |
-| **List All Students And Classes** | `list`
-| **Edit Class**                  | `edit-class INDEX n/CLASS_NAME` <br> e.g., `edit-class 1 n/CS2103T Tutorial T10`                                                                  |
-| **Find Class**                  | `find-class KEYWORD [MORE_KEYWORDS]`<br> e.g., `find-class CS2103T`                                                                         |
-| **Delete Class**                | `delete-class INDEX` e.g., `delete-class 2`                                                                                                 |
-| **Clear All Classes**           | `clear-class`                                                                                                                               |
-| **Linking Student To A Class**  | ``link s/STUDENT_INDEX c/CLASS_INDEX``<br> e.g., `link s/1 c/2`                                                                  |
-| **Unlink Student From A Class** | `unlink s/STUDENT_INDEX c/CLASS_INDEX` <br> e.g., `unlink s/1 c/2`                                                                          |
-| **Exit**                        | `exit`                                                                                                                                      |
+| Action                            | Format, Examples                                                                                                                            |
+|-----------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
+| **Help**                          | `help`                                                                                                                                      |
+| **Add Student**                   | `add-student n/NAME t/TELEGRAM_USERNAME e/EMAIL [tag/TAG]…​` <br> e.g., `add-student n/John Doe t/johndoe e/johnd@example.com tag/student`   |
+| **List All Students**             | `list-student`                                                                                                                              |
+| **Edit Student**                  | `edit-student INDEX [n/NAME] [t/TELEGRAM_USERNAME] [e/EMAIL] [tag/TAG]…​`<br> e.g., `edit-student 2 n/James Lee e/jameslee@example.com`      |
+| **Find Student**                  | `find-student KEYWORD [MORE_KEYWORDS]`<br> e.g., `find-student James Jake`                                                                  |
+| **Delete Student**                | `delete-student INDEX`<br> e.g., `delete-student 3`                                                                                         |
+| **Clear All Students**            | `clear-student`                                                                                                                             |
+| **Add Class**                     | `add-class n/CLASS_NAME`<br> e.g., `add-class n/CS2103T Tutorial T10`                                                                       |
+| **List All Classes**              | `list-class`                                                                                                                                |
+| **List Students In A Class**      | `list-students c/INDEX`<br> e.g., `list-students c/3`                                                                                       |
+| **Edit Class**                    | `edit-class INDEX n/CLASS_NAME` <br> e.g., `edit-class 1 n/CS2103T Tutorial T10`                                                            |
+| **Find Class**                    | `find-class KEYWORD [MORE_KEYWORDS]`<br> e.g., `find-class CS2103T`                                                                         |
+| **Delete Class**                  | `delete-class INDEX` e.g., `delete-class 2`                                                                                                 |
+| **Clear All Classes**             | `clear-class`                                                                                                                               |
+| **List All Students And Classes** | `list`                                                                                                                                      | 
+| **Linking Student To A Class**    | ``link s/STUDENT_INDEX c/CLASS_INDEX``<br> e.g., `link s/1 c/2`                                                                             |
+| **Unlink Student From A Class**   | `unlink s/STUDENT_INDEX c/CLASS_INDEX` <br> e.g., `unlink s/1 c/2`                                                                          |
+| **Exit**                          | `exit`                                                                                                                                      |
 
 ### Viewing help : `help`
 
@@ -164,8 +164,6 @@ Clears all students from the application.
 
 Format: `clear-student`
 
-### Managing Classes : [coming soon]
-
 #### Adding a class : `add-class`
 
 Adds a class to the application.
@@ -191,12 +189,6 @@ Format: `list-students c/INDEX`
 
 Examples:
 * `list-students c/3`
-
-#### Listing all students and classes : `list`
-
-Shows a list of all students and a list of all classes in the application.
-
-Format: `list`
 
 #### Editing a class : `edit-class`
 
@@ -247,6 +239,12 @@ Examples:
 Clears all classes from the application.
 
 Format: `clear-class`
+
+#### Listing all students and classes : `list`
+
+Shows a list of all students and classes in the application.
+
+Format: `list`
 
 #### Linking a student to a class : `link`
 

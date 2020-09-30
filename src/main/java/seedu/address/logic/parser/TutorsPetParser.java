@@ -74,14 +74,14 @@ public class TutorsPetParser {
         case ListModuleClassCommand.COMMAND_WORD:
             return new ListModuleClassCommand();
 
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
-
         case EditModuleClassCommand.COMMAND_WORD:
             return new EditModuleClassCommandParser().parse(arguments);
 
         case DeleteModuleClassCommand.COMMAND_WORD:
             return new DeleteModuleClassCommandParser().parse(arguments);
+
+        case ListCommand.COMMAND_WORD:
+            return new ListCommand();
 
         case LinkCommand.COMMAND_WORD:
             return new LinkCommandParser().parse(arguments);
