@@ -2,7 +2,7 @@ package seedu.address.model.moduleclass;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.testutil.TypicalModuleClass.CS1101S_TUTORIAL;
+import static seedu.address.testutil.TypicalModuleClass.CS1101S_STUDIO;
 import static seedu.address.testutil.TypicalModuleClass.CS2100_LAB;
 import static seedu.address.testutil.TypicalStudent.AMY;
 
@@ -16,11 +16,11 @@ public class SameModuleClassPredicateTest {
     public void test_sameModuleClass_returnsTrue() {
         // same object
         SameModuleClassPredicate predicate =
-                new SameModuleClassPredicate(CS1101S_TUTORIAL);
-        assertTrue(predicate.test(CS1101S_TUTORIAL));
+                new SameModuleClassPredicate(CS1101S_STUDIO);
+        assertTrue(predicate.test(CS1101S_STUDIO));
 
         // same identity different students
-        ModuleClass modifiedCs1101sTutorial = new ModuleClassBuilder(CS1101S_TUTORIAL)
+        ModuleClass modifiedCs1101sTutorial = new ModuleClassBuilder(CS1101S_STUDIO)
                 .withStudentUuids(AMY.getUuid()).build();
         assertTrue(predicate.test(modifiedCs1101sTutorial));
     }
@@ -31,13 +31,13 @@ public class SameModuleClassPredicateTest {
                 new SameModuleClassPredicate(null);
         assertFalse(predicate.test(CS2100_LAB));
 
-        predicate = new SameModuleClassPredicate(CS1101S_TUTORIAL);
+        predicate = new SameModuleClassPredicate(CS1101S_STUDIO);
         assertFalse(predicate.test(CS2100_LAB));
     }
 
     @Test
     public void equals() {
-        ModuleClass firstPredicateModuleClass = CS1101S_TUTORIAL;
+        ModuleClass firstPredicateModuleClass = CS1101S_STUDIO;
         ModuleClass secondPredicateModuleClass = CS2100_LAB;
 
         SameModuleClassPredicate firstPredicate =

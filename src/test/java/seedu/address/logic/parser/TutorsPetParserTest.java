@@ -26,6 +26,7 @@ import seedu.address.logic.commands.EditModuleClassCommand.EditModuleClassDescri
 import seedu.address.logic.commands.EditStudentCommand;
 import seedu.address.logic.commands.EditStudentCommand.EditStudentDescriptor;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FindModuleClassCommand;
 import seedu.address.logic.commands.FindStudentCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.LinkCommand;
@@ -124,6 +125,14 @@ public class TutorsPetParserTest {
         FindStudentCommand command = (FindStudentCommand) parser.parseCommand(
                 FindStudentCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FindStudentCommand(new NameContainsKeywordsPredicate<>(keywords)), command);
+    }
+
+    @Test
+    public void parseCommand_findModuleClass() throws Exception {
+        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        FindModuleClassCommand command = (FindModuleClassCommand) parser.parseCommand(
+                FindModuleClassCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindModuleClassCommand(new NameContainsKeywordsPredicate<>(keywords)), command);
     }
 
     @Test

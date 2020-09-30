@@ -76,6 +76,7 @@ public class CommandTestUtil {
     public static final String VALID_NAME_CS1101S_STUDIO = "CS1101S Studio";
     public static final String VALID_NAME_CS2100_LAB = "CS2100 Lab";
     public static final String VALID_NAME_CS2030_TUTORIAL = "CS2030 Tutorial";
+    public static final String VALID_NAME_CS2100_TUTORIAL = "CS2100 Tutorial";
 
     public static final String NAME_DESC_CS2103T_TUTORIAL = " " + PREFIX_NAME + VALID_NAME_CS2103T_TUTORIAL;
     public static final String NAME_DESC_CS2100_LAB = " " + PREFIX_NAME + VALID_NAME_CS2100_LAB;
