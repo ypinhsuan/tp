@@ -5,9 +5,9 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.layout.Region?>
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <GridPane HBox.hgrow="ALWAYS">
         <columnConstraints>
@@ -24,7 +24,11 @@
                         <Region fx:constant="USE_PREF_SIZE" />
                     </minWidth>
                 </Label>
-                <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
+                <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
+            </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="5">
+                <Label text="No. of Students:" />
+                <Label fx:id="studentCount" text="\$studentCount" />
             </HBox>
         </VBox>
     </GridPane>

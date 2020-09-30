@@ -21,6 +21,8 @@ public class ModuleClassCard extends UiPart<Region> {
     private Label name;
     @FXML
     private Label id;
+    @FXML
+    private Label studentCount;
 
     /**
      * Creates a {@code ModuleCode} with the given {@code ModuleClass} and index to display.
@@ -30,6 +32,7 @@ public class ModuleClassCard extends UiPart<Region> {
         this.moduleClass = moduleClass;
         id.setText(displayedIndex + ". ");
         name.setText(moduleClass.getName().fullName);
+        studentCount.setText(Integer.toString(moduleClass.getStudentUuids().size()));
     }
 
     @Override
