@@ -16,6 +16,7 @@ public class FindModuleClassCommandParser implements Parser<FindModuleClassComma
     /**
      * Parses the given {@code String} of arguments in the context of the FindModuleClassCommand
      * and returns a FindModuleClassCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format.
      */
     public FindModuleClassCommand parse(String args) throws ParseException {

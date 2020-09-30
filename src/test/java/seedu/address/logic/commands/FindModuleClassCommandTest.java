@@ -52,7 +52,7 @@ public class FindModuleClassCommandTest {
         // null -> returns false
         assertFalse(findFirstCommand.equals(null));
 
-        // different class -> returns false
+        // different keyword -> returns false
         assertFalse(findFirstCommand.equals(findSecondCommand));
     }
 

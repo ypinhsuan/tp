@@ -1,6 +1,5 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_CS1101S_STUDIO;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_CS2100_LAB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_CS2100_TUTORIAL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_CS2103T_TUTORIAL;
@@ -22,14 +21,11 @@ public class TypicalModuleClass {
             .withName(VALID_NAME_CS2100_LAB).build();
 
     public static final ModuleClass CS2100_TUTORIAL = new ModuleClassBuilder()
-            .withName(VALID_NAME_CS2100_TUTORIAL).build();
-
-    public static final ModuleClass CS1101S_STUDIO = new ModuleClassBuilder()
-            .withName(VALID_NAME_CS1101S_STUDIO).withStudentUuids(ALICE.getUuid()).build();
+            .withName(VALID_NAME_CS2100_TUTORIAL).withStudentUuids(ALICE.getUuid()).build();
 
     private TypicalModuleClass() {} // prevents instantiation
 
     public static List<ModuleClass> getTypicalModuleClasses() {
-        return new ArrayList<>(Arrays.asList(CS2103T_TUTORIAL, CS2100_LAB, CS1101S_STUDIO, CS2100_TUTORIAL));
+        return new ArrayList<>(Arrays.asList(CS2103T_TUTORIAL, CS2100_LAB, CS2100_TUTORIAL));
     }
 }

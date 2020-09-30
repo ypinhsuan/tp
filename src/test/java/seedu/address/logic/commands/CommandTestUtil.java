@@ -73,7 +73,6 @@ public class CommandTestUtil {
     // moduleClass-related constants
 
     public static final String VALID_NAME_CS2103T_TUTORIAL = "CS2103T Tutorial";
-    public static final String VALID_NAME_CS1101S_STUDIO = "CS1101S Studio";
     public static final String VALID_NAME_CS2100_LAB = "CS2100 Lab";
     public static final String VALID_NAME_CS2030_TUTORIAL = "CS2030 Tutorial";
     public static final String VALID_NAME_CS2100_TUTORIAL = "CS2100 Tutorial";
