@@ -23,7 +23,7 @@ public class TypicalModuleClass {
     public static final ModuleClass CS1101S_TUTORIAL = new ModuleClassBuilder()
             .withName(VALID_NAME_CS1101S_STUDIO).withStudentUuids(ALICE.getUuid()).build();
 
-    private TypicalModuleClass() {} // Prevents instantiation
+    private TypicalModuleClass() {} // prevents instantiation
 
     public static List<ModuleClass> getTypicalModuleClasses() {
         return new ArrayList<>(Arrays.asList(CS2103T_TUTORIAL, CS2100_LAB, CS1101S_TUTORIAL));
