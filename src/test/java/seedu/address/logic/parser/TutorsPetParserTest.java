@@ -57,8 +57,9 @@ public class TutorsPetParserTest {
 
     @Test
     public void parseCommand_listStudent() throws Exception {
-        assertTrue(parser.parseCommand(ListStudentCommand.COMMAND_WORD) instanceof ListStudentCommand);
-        assertTrue(parser.parseCommand(ListStudentCommand.COMMAND_WORD + " 3") instanceof ListStudentCommand);
+        assertEquals(parser.parseCommand(ListStudentCommand.COMMAND_WORD), new ListStudentCommand());
+        assertEquals(parser.parseCommand(ListStudentCommand.COMMAND_WORD + " "
+                + PREFIX_CLASS_INDEX + INDEX_SECOND_ITEM.getOneBased()), new ListStudentCommand(INDEX_SECOND_ITEM));
     }
 
     @Test

@@ -56,7 +56,7 @@ public class TutorsPetParser {
             return new AddStudentCommandParser().parse(arguments);
 
         case ListStudentCommand.COMMAND_WORD:
-            return new ListStudentCommand();
+            return new ListStudentCommandParser().parse(arguments);
 
         case EditStudentCommand.COMMAND_WORD:
             return new EditStudentCommandParser().parse(arguments);
