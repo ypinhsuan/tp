@@ -10,6 +10,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.moduleclass.ModuleClass;
 
+/**
+ * Deletes a class identified using it's displayed index from the application.
+ */
 public class DeleteModuleClassCommand extends Command {
 
     public static final String COMMAND_WORD = "delete-class";
