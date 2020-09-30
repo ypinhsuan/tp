@@ -123,7 +123,7 @@ public class TutorsPetParserTest {
                 DeleteModuleClassCommand.COMMAND_WORD + " " + INDEX_FIRST_ITEM.getOneBased());
         assertEquals(new DeleteModuleClassCommand(INDEX_FIRST_ITEM), command);
     }
-  
+
     @Test
     public void parseCommand_findModuleClass() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
