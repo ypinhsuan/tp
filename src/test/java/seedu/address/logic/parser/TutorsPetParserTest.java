@@ -4,8 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASS_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_ITEM;
 
 import java.util.Arrays;
 import java.util.List;
@@ -25,6 +28,7 @@ import seedu.address.logic.commands.EditStudentCommand.EditStudentDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindStudentCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.LinkCommand;
 import seedu.address.logic.commands.ListModuleClassCommand;
 import seedu.address.logic.commands.ListStudentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -95,6 +99,17 @@ public class TutorsPetParserTest {
                         + INDEX_FIRST_ITEM.getOneBased() + " "
                         + ModuleClassUtil.getEditModuleClassDescriptorDetails(descriptor));
         assertEquals(new EditModuleClassCommand(INDEX_FIRST_ITEM, descriptor), command);
+    }
+
+    @Test
+    public void parseCommand_link() throws Exception {
+        LinkCommand command = new LinkCommand(INDEX_SECOND_ITEM, INDEX_FIRST_ITEM);
+        assertEquals(parser.parseCommand(LinkCommand.COMMAND_WORD + " "
+                + PREFIX_CLASS_INDEX + INDEX_SECOND_ITEM.getOneBased() + " "
+                + PREFIX_STUDENT_INDEX + INDEX_FIRST_ITEM.getOneBased()), command);
+        assertEquals(parser.parseCommand(LinkCommand.COMMAND_WORD + " "
+                + PREFIX_STUDENT_INDEX + INDEX_FIRST_ITEM.getOneBased() + " "
+                + PREFIX_CLASS_INDEX + INDEX_SECOND_ITEM.getOneBased()), command);
     }
 
     @Test

@@ -8,6 +8,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_AVERAGE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_EXPERIENCED;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_UUID_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_UUID_BOB;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -45,20 +47,23 @@ public class TypicalStudent {
             .withName("George Best").withTelegram("dabest")
             .withEmail("anna@example.com").build();
 
-    // Manually added
-    public static final Student HOON = new StudentBuilder().withName("Hoon Meier").withTelegram("8482424")
+    // manually added
+    public static final Student HOON = new StudentBuilder().withUuid("bd4f4c43-35d5-4afc-ab83-88cf20314560")
+            .withName("Hoon Meier").withTelegram("8482424")
             .withEmail("stefan@example.com").build();
-    public static final Student IDA = new StudentBuilder().withName("Ida Mueller").withTelegram("8482131")
+    public static final Student IDA = new StudentBuilder().withUuid("7f551343-cadb-4df3-8b50-76394fe84107")
+            .withName("Ida Mueller").withTelegram("8482131")
             .withEmail("hans@example.com").build();
 
-    // Manually added - Student's details found in {@code CommandTestUtil}
-    public static final Student AMY = new StudentBuilder().withName(VALID_NAME_AMY).withTelegram(VALID_TELEGRAM_AMY)
+    // manually added - student's details found in {@code CommandTestUtil}
+    public static final Student AMY = new StudentBuilder().withUuid(VALID_UUID_AMY)
+            .withName(VALID_NAME_AMY).withTelegram(VALID_TELEGRAM_AMY)
             .withEmail(VALID_EMAIL_AMY).withTags(VALID_TAG_EXPERIENCED).build();
-    public static final Student BOB = new StudentBuilder().withName(VALID_NAME_BOB).withTelegram(VALID_TELEGRAM_BOB)
-            .withEmail(VALID_EMAIL_BOB)
-            .withTags(VALID_TAG_AVERAGE, VALID_TAG_EXPERIENCED).build();
+    public static final Student BOB = new StudentBuilder().withUuid(VALID_UUID_BOB)
+            .withName(VALID_NAME_BOB).withTelegram(VALID_TELEGRAM_BOB)
+            .withEmail(VALID_EMAIL_BOB).withTags(VALID_TAG_AVERAGE, VALID_TAG_EXPERIENCED).build();
 
-    public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
+    public static final String KEYWORD_MATCHING_MEIER = "Meier"; // a keyword that matches MEIER
 
     private TypicalStudent() {} // prevents instantiation
 

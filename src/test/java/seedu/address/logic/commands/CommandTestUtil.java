@@ -21,6 +21,7 @@ import seedu.address.model.moduleclass.ModuleClass;
 import seedu.address.model.student.Student;
 import seedu.address.testutil.EditModuleClassDescriptorBuilder;
 import seedu.address.testutil.EditStudentDescriptorBuilder;
+import seedu.address.testutil.StudentBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -32,6 +33,8 @@ public class CommandTestUtil {
 
     // student-related constants
 
+    public static final String VALID_UUID_AMY = "99fa08df-5cd6-42cd-84dd-3e08cfe74224";
+    public static final String VALID_UUID_BOB = "a3090aa6-6633-43bd-b137-64c514299e59";
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_TELEGRAM_AMY = "Amy_B";
@@ -59,12 +62,12 @@ public class CommandTestUtil {
     public static final EditStudentCommand.EditStudentDescriptor DESC_BOB;
 
     static {
-        DESC_AMY = new EditStudentDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withTelegram(VALID_TELEGRAM_AMY).withEmail(VALID_EMAIL_AMY)
-                .withTags(VALID_TAG_EXPERIENCED).build();
-        DESC_BOB = new EditStudentDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withTelegram(VALID_TELEGRAM_BOB).withEmail(VALID_EMAIL_BOB)
-                .withTags(VALID_TAG_AVERAGE, VALID_TAG_EXPERIENCED).build();
+        DESC_AMY = new EditStudentDescriptorBuilder(new StudentBuilder().withUuid(VALID_UUID_AMY).build())
+                .withName(VALID_NAME_AMY).withTelegram(VALID_TELEGRAM_AMY)
+                .withEmail(VALID_EMAIL_AMY).withTags(VALID_TAG_EXPERIENCED).build();
+        DESC_BOB = new EditStudentDescriptorBuilder(new StudentBuilder().withUuid(VALID_UUID_BOB).build())
+                .withName(VALID_NAME_BOB).withTelegram(VALID_TELEGRAM_BOB)
+                .withEmail(VALID_EMAIL_BOB).withTags(VALID_TAG_AVERAGE, VALID_TAG_EXPERIENCED).build();
     }
 
     // moduleClass-related constants

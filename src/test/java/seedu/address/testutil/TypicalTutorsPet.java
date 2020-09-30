@@ -7,7 +7,7 @@ import seedu.address.model.student.Student;
 public class TypicalTutorsPet {
 
     /**
-     * Returns an {@code TutorsPet} with all the typical students and classes.
+     * Returns a {@code TutorsPet} with all the typical students and classes.
      */
     public static TutorsPet getTypicalTutorsPet() {
         TutorsPet tp = new TutorsPet();
@@ -16,6 +16,20 @@ public class TypicalTutorsPet {
         }
         for (ModuleClass moduleClass : TypicalModuleClass.getTypicalModuleClasses()) {
             tp.addModuleClass(moduleClass);
+        }
+        return tp;
+    }
+
+    /**
+     * Returns a {@code TutorsPet} with no predefined links between typical students and classes.
+     */
+    public static TutorsPet getNoLinkTutorsPet() {
+        TutorsPet tp = new TutorsPet();
+        for (Student student : TypicalStudent.getTypicalStudents()) {
+            tp.addStudent(student);
+        }
+        for (ModuleClass moduleClass : TypicalModuleClass.getTypicalModuleClasses()) {
+            tp.addModuleClass(new ModuleClassBuilder(moduleClass).withStudentUuids().build());
         }
         return tp;
     }
