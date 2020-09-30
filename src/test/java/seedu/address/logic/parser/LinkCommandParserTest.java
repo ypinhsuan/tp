@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_ITEM;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_ITEM;
 
 import org.junit.jupiter.api.Test;
 
@@ -17,6 +18,12 @@ public class LinkCommandParserTest {
     @Test
     public void parse_validArgs_returnsLinkCommand() {
         assertParseSuccess(parser, " c/2 s/1", new LinkCommand(INDEX_SECOND_ITEM, INDEX_FIRST_ITEM));
+
+        // multiple class indexes -> last class index accepted
+        assertParseSuccess(parser, " c/2 s/1 c/3", new LinkCommand(INDEX_THIRD_ITEM, INDEX_FIRST_ITEM));
+
+        // multiple student indexes -> last student accepted
+        assertParseSuccess(parser, " s/1 c/2 s/3", new LinkCommand(INDEX_SECOND_ITEM, INDEX_THIRD_ITEM));
     }
 
     @Test
