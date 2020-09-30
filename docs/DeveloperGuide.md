@@ -303,8 +303,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | UC11        | Find a class                     |
 | UC12        | Delete a class                   |
 | UC13        | Clear all classes                |
-| UC14        | Link a student to a class     |
-| UC15        | Unlink a student from a class |
+| UC14        | List students and classes        |
+| UC15        | Link a student to a class        |
+| UC16        | Unlink a student from a class    |
 
 (For all use cases below, the **System** is `Tutor's Pet` and the **Actor** is the `user`, unless specified otherwise)
 
@@ -552,8 +553,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. Tutor's Pet clears all classes.
 
     Use case ends.
+    
+**Use case: UC14 - List students and classes**
 
-**Use case: UC14 - Link a student to a class**
+**MSS**
+
+1.  User requests to list students and classes.
+2.  Tutor's Pet shows a list of students and a list of classes.
+
+    Use case ends.
+
+**Use case: UC15 - Link a student to a class**
 
 **MSS**
 
@@ -582,7 +592,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 4.
 
-**Use case: UC15 - Unlink a student from a class**
+**Use case: UC16 - Unlink a student from a class**
 
 **MSS**
 

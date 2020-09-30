@@ -30,6 +30,7 @@ import seedu.address.logic.commands.FindModuleClassCommand;
 import seedu.address.logic.commands.FindStudentCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.LinkCommand;
+import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListModuleClassCommand;
 import seedu.address.logic.commands.ListStudentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -55,16 +56,9 @@ public class TutorsPetParserTest {
     }
 
     @Test
-    public void parseCommand_clearStudent() throws Exception {
-        assertTrue(parser.parseCommand(ClearStudentCommand.COMMAND_WORD) instanceof ClearStudentCommand);
-        assertTrue(parser.parseCommand(ClearStudentCommand.COMMAND_WORD + " 3") instanceof ClearStudentCommand);
-    }
-
-    @Test
-    public void parseCommand_deleteStudent() throws Exception {
-        DeleteStudentCommand command = (DeleteStudentCommand) parser.parseCommand(
-                DeleteStudentCommand.COMMAND_WORD + " " + INDEX_FIRST_ITEM.getOneBased());
-        assertEquals(new DeleteStudentCommand(INDEX_FIRST_ITEM), command);
+    public void parseCommand_listStudent() throws Exception {
+        assertTrue(parser.parseCommand(ListStudentCommand.COMMAND_WORD) instanceof ListStudentCommand);
+        assertTrue(parser.parseCommand(ListStudentCommand.COMMAND_WORD + " 3") instanceof ListStudentCommand);
     }
 
     @Test
@@ -77,6 +71,27 @@ public class TutorsPetParserTest {
     }
 
     @Test
+    public void parseCommand_deleteStudent() throws Exception {
+        DeleteStudentCommand command = (DeleteStudentCommand) parser.parseCommand(
+                DeleteStudentCommand.COMMAND_WORD + " " + INDEX_FIRST_ITEM.getOneBased());
+        assertEquals(new DeleteStudentCommand(INDEX_FIRST_ITEM), command);
+    }
+
+    @Test
+    public void parseCommand_clearStudent() throws Exception {
+        assertTrue(parser.parseCommand(ClearStudentCommand.COMMAND_WORD) instanceof ClearStudentCommand);
+        assertTrue(parser.parseCommand(ClearStudentCommand.COMMAND_WORD + " 3") instanceof ClearStudentCommand);
+    }
+
+    @Test
+    public void parseCommand_findStudent() throws Exception {
+        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        FindStudentCommand command = (FindStudentCommand) parser.parseCommand(
+                FindStudentCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindStudentCommand(new NameContainsKeywordsPredicate<>(keywords)), command);
+    }
+
+    @Test
     public void parseCommand_addModuleClass() throws Exception {
         ModuleClass moduleClass = new ModuleClassBuilder().build();
         AddModuleClassCommand command = (AddModuleClassCommand) parser
@@ -85,10 +100,10 @@ public class TutorsPetParserTest {
     }
 
     @Test
-    public void parseCommand_deleteModuleClass() throws Exception {
-        DeleteModuleClassCommand command = (DeleteModuleClassCommand) parser.parseCommand(
-                DeleteModuleClassCommand.COMMAND_WORD + " " + INDEX_FIRST_ITEM.getOneBased());
-        assertEquals(new DeleteModuleClassCommand(INDEX_FIRST_ITEM), command);
+    public void parseCommand_listModuleClass() throws Exception {
+        assertTrue(parser.parseCommand(ListModuleClassCommand.COMMAND_WORD) instanceof ListModuleClassCommand);
+        assertTrue(parser.parseCommand(ListModuleClassCommand.COMMAND_WORD + " 3")
+                instanceof ListModuleClassCommand);
     }
 
     @Test
@@ -100,6 +115,27 @@ public class TutorsPetParserTest {
                         + INDEX_FIRST_ITEM.getOneBased() + " "
                         + ModuleClassUtil.getEditModuleClassDescriptorDetails(descriptor));
         assertEquals(new EditModuleClassCommand(INDEX_FIRST_ITEM, descriptor), command);
+    }
+
+    @Test
+    public void parseCommand_deleteModuleClass() throws Exception {
+        DeleteModuleClassCommand command = (DeleteModuleClassCommand) parser.parseCommand(
+                DeleteModuleClassCommand.COMMAND_WORD + " " + INDEX_FIRST_ITEM.getOneBased());
+        assertEquals(new DeleteModuleClassCommand(INDEX_FIRST_ITEM), command);
+    }
+
+    @Test
+    public void parseCommand_findModuleClass() throws Exception {
+        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        FindModuleClassCommand command = (FindModuleClassCommand) parser.parseCommand(
+                FindModuleClassCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindModuleClassCommand(new NameContainsKeywordsPredicate<>(keywords)), command);
+    }
+
+    @Test
+    public void parseCommand_list() throws Exception {
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
     }
 
     @Test
@@ -120,38 +156,9 @@ public class TutorsPetParserTest {
     }
 
     @Test
-    public void parseCommand_findStudent() throws Exception {
-        List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindStudentCommand command = (FindStudentCommand) parser.parseCommand(
-                FindStudentCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindStudentCommand(new NameContainsKeywordsPredicate<>(keywords)), command);
-    }
-
-    @Test
-    public void parseCommand_findModuleClass() throws Exception {
-        List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindModuleClassCommand command = (FindModuleClassCommand) parser.parseCommand(
-                FindModuleClassCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindModuleClassCommand(new NameContainsKeywordsPredicate<>(keywords)), command);
-    }
-
-    @Test
     public void parseCommand_help() throws Exception {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
-    }
-
-    @Test
-    public void parseCommand_listStudent() throws Exception {
-        assertTrue(parser.parseCommand(ListStudentCommand.COMMAND_WORD) instanceof ListStudentCommand);
-        assertTrue(parser.parseCommand(ListStudentCommand.COMMAND_WORD + " 3") instanceof ListStudentCommand);
-    }
-
-    @Test
-    public void parseCommand_listModuleClass() throws Exception {
-        assertTrue(parser.parseCommand(ListModuleClassCommand.COMMAND_WORD) instanceof ListModuleClassCommand);
-        assertTrue(parser.parseCommand(ListModuleClassCommand.COMMAND_WORD + " 3")
-                instanceof ListModuleClassCommand);
     }
 
     @Test
