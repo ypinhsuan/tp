@@ -2,9 +2,7 @@ package seedu.address.model.util;
 
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 import seedu.address.model.ReadOnlyTutorsPet;
@@ -21,49 +19,41 @@ import seedu.address.model.student.Telegram;
  */
 public class SampleDataUtil {
 
-    private static final List<Student> listOfStudents = getSampleStudents();
-    private static final List<ModuleClass> listOfModuleClass = getSampleModuleClasses();
+    private static final Student ALEX_YEOH = new Student(new Name("Alex Yeoh"), new Telegram("41ex_Yo"),
+            new Email("alexyeoh@example.com"), getTagSet("Average"));
+    private static final Student BERNICE_YU = new Student(new Name("Bernice Yu"), new Telegram("b3rnice"),
+            new Email("berniceyu@example.com"), getTagSet("Good", "Experienced"));
+    private static final Student CHARLOTTE_OLIVEIRO = new Student(new Name("Charlotte Oliveiro"),
+            new Telegram("C_Ol1ve"), new Email("charlotte@example.com"), getTagSet("Struggling"));
+    private static final Student DAVID_LI = new Student(new Name("David Li"), new Telegram("li_DAvid"),
+            new Email("lidavid@example.com"), getTagSet("Weak"));
+    private static final Student IRFAN_IBRAHIM = new Student(new Name("Irfan Ibrahim"), new Telegram("IIbr4hmm"),
+            new Email("irfan@example.com"), getTagSet("Struggling"));
+    private static final Student ROY_BALAKRISHANN = new Student(new Name("Roy Balakrishnan"), new Telegram("B_Roy"),
+            new Email("royb@example.com"), getTagSet("Average"));
 
-    private static List<Student> getSampleStudents() {
-        Student[] students = new Student[] {
-            new Student(new Name("Alex Yeoh"), new Telegram("41ex_Yo"), new Email("alexyeoh@example.com"),
-                getTagSet("Average")),
-            new Student(new Name("Bernice Yu"), new Telegram("b3rnice"), new Email("berniceyu@example.com"),
-                getTagSet("Good", "Experienced")),
-            new Student(new Name("Charlotte Oliveiro"), new Telegram("C_Ol1ve"), new Email("charlotte@example.com"),
-                getTagSet("Struggling")),
-            new Student(new Name("David Li"), new Telegram("li_DAvid"), new Email("lidavid@example.com"),
-                getTagSet("Weak")),
-            new Student(new Name("Irfan Ibrahim"), new Telegram("IIbr4hmm"), new Email("irfan@example.com"),
-                getTagSet("Struggling")),
-            new Student(new Name("Roy Balakrishnan"), new Telegram("B_Roy"), new Email("royb@example.com"),
-                getTagSet("Average"))
-        };
-        return Arrays.asList(students);
+    private static final ModuleClass CS2103T_TUTORIAL = new ModuleClass(new Name("CS2103T Tutorial"),
+            new HashSet<>(Arrays.asList(ALEX_YEOH.getUuid(), BERNICE_YU.getUuid(), CHARLOTTE_OLIVEIRO.getUuid())));
+    private static final ModuleClass CS2100_LAB = new ModuleClass(new Name("CS2100 Lab"),
+            new HashSet<>(Arrays.asList(ALEX_YEOH.getUuid(), DAVID_LI.getUuid())));
+    private static final ModuleClass CS2100_TUTORIAL = new ModuleClass(new Name("CS2100 Tutorial"));
+
+    private static Student[] getSampleStudents() {
+        return new Student[]{ALEX_YEOH, BERNICE_YU, CHARLOTTE_OLIVEIRO, DAVID_LI, IRFAN_IBRAHIM, ROY_BALAKRISHANN};
     }
 
-    private static List<ModuleClass> getSampleModuleClasses() {
-        Set<UUID> studentsInCs2103TTutorial = new HashSet<>(Arrays.asList(listOfStudents.get(0).getUuid(),
-                listOfStudents.get(1).getUuid(), listOfStudents.get(2).getUuid()));
-        Set<UUID> studentsInCs2100Lab = new HashSet<>(Arrays.asList(listOfStudents.get(0).getUuid(),
-                listOfStudents.get(3).getUuid()));
-
-        ModuleClass[] moduleClasses = new ModuleClass[] {
-            new ModuleClass(new Name("CS2103T Tutorial"), studentsInCs2103TTutorial),
-            new ModuleClass(new Name("CS2100 Lab"), studentsInCs2100Lab),
-            new ModuleClass(new Name("CS2101 Tutorial")),
-        };
-        return Arrays.asList(moduleClasses);
+    private static ModuleClass[] getSampleModuleClasses() {
+        return new ModuleClass[]{CS2103T_TUTORIAL, CS2100_LAB, CS2100_TUTORIAL};
     }
 
     public static ReadOnlyTutorsPet getSampleTutorsPet() {
         TutorsPet sampleTp = new TutorsPet();
 
-        for (Student sampleStudent : listOfStudents) {
+        for (Student sampleStudent : getSampleStudents()) {
             sampleTp.addStudent(sampleStudent);
         }
 
-        for (ModuleClass moduleClass : listOfModuleClass) {
+        for (ModuleClass moduleClass : getSampleModuleClasses()) {
             sampleTp.addModuleClass(moduleClass);
         }
 
