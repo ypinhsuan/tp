@@ -17,7 +17,8 @@ import seedu.address.logic.commands.EditStudentCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindStudentCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListModuleClassCommand;
+import seedu.address.logic.commands.ListStudentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -50,6 +51,9 @@ public class TutorsPetParser {
         case AddStudentCommand.COMMAND_WORD:
             return new AddStudentCommandParser().parse(arguments);
 
+        case ListStudentCommand.COMMAND_WORD:
+            return new ListStudentCommand();
+
         case EditStudentCommand.COMMAND_WORD:
             return new EditStudentCommandParser().parse(arguments);
 
@@ -65,14 +69,14 @@ public class TutorsPetParser {
         case AddModuleClassCommand.COMMAND_WORD:
             return new AddModuleClassCommandParser().parse(arguments);
 
-        case DeleteModuleClassCommand.COMMAND_WORD:
-            return new DeleteModuleClassCommandParser().parse(arguments);
-
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+        case ListModuleClassCommand.COMMAND_WORD:
+            return new ListModuleClassCommand();
 
         case EditModuleClassCommand.COMMAND_WORD:
             return new EditModuleClassCommandParser().parse(arguments);
+
+        case DeleteModuleClassCommand.COMMAND_WORD:
+            return new DeleteModuleClassCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

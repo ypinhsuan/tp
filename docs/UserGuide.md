@@ -65,12 +65,13 @@ If you can type fast, Tutor's pet can get your class management tasks done faste
 |---------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
 | **Help**                        | `help`                                                                                                                                      |
 | **Add Student**                 | `add-student n/NAME t/TELEGRAM_USERNAME e/EMAIL [tag/TAG]…​` <br> e.g., `add-student n/John Doe t/johndoe e/johnd@example.com tag/student`|
-| **List All Students**           | `list`                                                                                                                                      |
+| **List All Students**           | `list-student`                                                                                                                              |
 | **Edit Student**                | `edit-student INDEX [n/NAME] [t/TELEGRAM_USERNAME] [e/EMAIL] [tag/TAG]…​`<br> e.g., `edit-student 2 n/James Lee e/jameslee@example.com`    |
 | **Find Student**                | `find-student KEYWORD [MORE_KEYWORDS]`<br> e.g., `find-student James Jake`                                                                  |
 | **Delete Student**              | `delete-student INDEX`<br> e.g., `delete-student 3`                                                                                         |
 | **Clear All Students**          | `clear-student`                                                                                                                             |
 | **Add Class**                   | `add-class n/CLASS_NAME`<br> e.g., `add-class n/CS2103T Tutorial T10`                                                                       |
+| **List All Classes**                   | `list-class`                   |
 | **List Students In A Class**    | `list-students c/INDEX`<br> e.g., `list-students c/3`                                                                                       |
 | **Edit Class**                  | `edit-class INDEX n/CLASS_NAME` <br> e.g., `edit-class 1 n/CS2103T Tutorial T10`                                                                  |
 | **Find Class**                  | `find-class KEYWORD [MORE_KEYWORDS]`<br> e.g., `find-class CS2103T`                                                                         |
@@ -102,11 +103,11 @@ Examples:
 * `add-student n/John Doe t/johndoe e/johnd@example.com`
 * `add-student n/Betsy Crowe t/betsycrowe e/betsycrowe@example.com tag/student`
 
-#### Listing all students : `list`
+#### Listing all students : `list-student`
 
 Shows a list of all students in the application.
 
-Format: `list`
+Format: `list-student`
 
 #### Editing a student : `edit-student`
 
@@ -172,6 +173,12 @@ Format: `add-class n/CLASS_NAME`
 
 Examples:
 * `add-class n/CS2103T Tutorial T10`
+
+#### Listing all classes : `list-class`
+
+Shows a list of all classes in the application.
+
+Format: `list-class`
 
 #### Listing all students within a class : `list-students`
 

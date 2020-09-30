@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showStudentAtIndex;
+import static seedu.address.logic.commands.CommandTestUtil.showModuleClassAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 import static seedu.address.testutil.TypicalTutorsPet.getTypicalTutorsPet;
 
@@ -13,9 +13,9 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 
 /**
- * Contains integration tests (interaction with the Model) and unit tests for ListCommand.
+ * Contains integration tests (interaction with the Model) and unit tests for ListModuleClassCommand.
  */
-public class ListCommandTest {
+public class ListModuleClassCommandTest {
 
     private Model model;
     private Model expectedModel;
@@ -27,13 +27,15 @@ public class ListCommandTest {
     }
 
     @Test
-    public void execute_listIsNotFiltered_showsSameList() {
-        assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
+    public void execute_moduleClassListIsNotFiltered_showsSameList() {
+        assertCommandSuccess(
+                new ListModuleClassCommand(), model, ListModuleClassCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
-    public void execute_listIsFiltered_showsEverything() {
-        showStudentAtIndex(model, INDEX_FIRST_ITEM);
-        assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
+    public void execute_moduleClassListIsFiltered_showsEverything() {
+        showModuleClassAtIndex(model, INDEX_FIRST_ITEM);
+        assertCommandSuccess(
+                new ListModuleClassCommand(), model, ListModuleClassCommand.MESSAGE_SUCCESS, expectedModel);
     }
 }
