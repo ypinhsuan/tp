@@ -49,10 +49,10 @@ public class TypicalStudent {
 
     // manually added
     public static final Student HOON = new StudentBuilder().withUuid("bd4f4c43-35d5-4afc-ab83-88cf20314560")
-            .withName("Hoon Meier").withTelegram("8482424")
+            .withName("Hoon Meier").withTelegram("hoon_meier")
             .withEmail("stefan@example.com").build();
     public static final Student IDA = new StudentBuilder().withUuid("7f551343-cadb-4df3-8b50-76394fe84107")
-            .withName("Ida Mueller").withTelegram("8482131")
+            .withName("Ida Mueller").withTelegram("ida_mueller")
             .withEmail("hans@example.com").build();
 
     // manually added - student's details found in {@code CommandTestUtil}
