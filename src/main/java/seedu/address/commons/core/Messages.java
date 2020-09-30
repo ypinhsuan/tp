@@ -11,4 +11,5 @@ public class Messages {
     public static final String MESSAGE_STUDENTS_LISTED_OVERVIEW = "%1$d students listed!";
 
     public static final String MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX = "The class index provided is invalid";
+    public static final String MESSAGE_MODULE_CLASS_LISTED_OVERVIEW = "%1$d classes listed!";
 }
