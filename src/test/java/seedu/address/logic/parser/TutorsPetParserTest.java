@@ -29,6 +29,7 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindStudentCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.LinkCommand;
+import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListModuleClassCommand;
 import seedu.address.logic.commands.ListStudentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -143,6 +144,12 @@ public class TutorsPetParserTest {
         assertTrue(parser.parseCommand(ListModuleClassCommand.COMMAND_WORD) instanceof ListModuleClassCommand);
         assertTrue(parser.parseCommand(ListModuleClassCommand.COMMAND_WORD + " 3")
                 instanceof ListModuleClassCommand);
+    }
+
+    @Test
+    public void parseCommand_list() throws Exception {
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
     }
 
     @Test
