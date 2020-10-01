@@ -7,7 +7,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
 /**
- * Lists all students (of a class, if specified) to the user.
+ * Lists all students to the user.
  */
 public class ListStudentCommand extends Command {
 

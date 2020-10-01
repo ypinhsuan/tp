@@ -14,6 +14,9 @@ import seedu.address.model.Model;
 import seedu.address.model.moduleclass.ModuleClass;
 import seedu.address.model.student.StudentInUuidCollectionPredicate;
 
+/**
+ * Lists all students of a class to the user.
+ */
 public class ListStudentInClassCommand extends ListStudentCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists students in a class or "
