@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASS_INDEX;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ListStudentCommand;
+import seedu.address.logic.commands.ListStudentInClassCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -30,10 +31,10 @@ public class ListStudentCommandParser implements Parser<ListStudentCommand> {
 
         try {
             Index moduleClassIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_CLASS_INDEX).get());
-            return new ListStudentCommand(moduleClassIndex);
+            return new ListStudentInClassCommand(moduleClassIndex);
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListStudentCommand.MESSAGE_USAGE), pe);
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListStudentInClassCommand.MESSAGE_USAGE), pe);
         }
     }
 }

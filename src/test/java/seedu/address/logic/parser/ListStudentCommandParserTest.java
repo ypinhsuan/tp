@@ -9,6 +9,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_ITEM;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.ListStudentCommand;
+import seedu.address.logic.commands.ListStudentInClassCommand;
 
 public class ListStudentCommandParserTest {
 
@@ -20,15 +21,15 @@ public class ListStudentCommandParserTest {
         assertParseSuccess(parser, " ", new ListStudentCommand());
 
         // class specified
-        assertParseSuccess(parser, " c/2", new ListStudentCommand(INDEX_SECOND_ITEM));
+        assertParseSuccess(parser, " c/2", new ListStudentInClassCommand(INDEX_SECOND_ITEM));
 
         // multiple class indexes specified -> last class index accepted
-        assertParseSuccess(parser, " c/2 c/1", new ListStudentCommand(INDEX_FIRST_ITEM));
+        assertParseSuccess(parser, " c/2 c/1", new ListStudentInClassCommand(INDEX_FIRST_ITEM));
     }
 
     @Test
     public void parse_emptyClassIndex_throwsParseException() {
         assertParseFailure(parser, " c/", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                ListStudentCommand.MESSAGE_USAGE));
+                ListStudentInClassCommand.MESSAGE_USAGE));
     }
 }
