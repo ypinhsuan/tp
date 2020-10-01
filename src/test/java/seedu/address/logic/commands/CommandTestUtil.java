@@ -9,14 +9,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.TutorsPet;
-import seedu.address.model.components.name.NameContainsKeywordsPredicate;
 import seedu.address.model.moduleclass.ModuleClass;
 import seedu.address.model.student.Student;
 import seedu.address.testutil.EditModuleClassDescriptorBuilder;
@@ -139,8 +137,7 @@ public class CommandTestUtil {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredStudentList().size());
 
         Student student = model.getFilteredStudentList().get(targetIndex.getZeroBased());
-        final String[] splitName = student.getName().fullName.split("\\s+");
-        model.updateFilteredStudentList(new NameContainsKeywordsPredicate<>(Arrays.asList(splitName[0])));
+        model.updateFilteredStudentList(toTest -> toTest.equals(student));
 
         assertEquals(1, model.getFilteredStudentList().size());
     }
@@ -153,8 +150,7 @@ public class CommandTestUtil {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredModuleClassList().size());
 
         ModuleClass moduleClass = model.getFilteredModuleClassList().get(targetIndex.getZeroBased());
-        final String[] splitName = moduleClass.getName().fullName.split("\\s+");
-        model.updateFilteredModuleClassList(new NameContainsKeywordsPredicate<>(Arrays.asList(splitName[0])));
+        model.updateFilteredModuleClassList(toTest -> toTest.equals(moduleClass));
 
         assertEquals(1, model.getFilteredModuleClassList().size());
     }

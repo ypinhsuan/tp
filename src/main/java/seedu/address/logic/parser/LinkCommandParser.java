@@ -9,6 +9,9 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.LinkCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+/**
+ * Parses input arguments and creates a new LinkCommandParser object.
+ */
 public class LinkCommandParser implements Parser<LinkCommand> {
 
     /**

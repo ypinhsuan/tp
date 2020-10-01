@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showStudentAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
@@ -27,13 +29,33 @@ public class ListStudentCommandTest {
     }
 
     @Test
-    public void execute_studentListIsNotFiltered_showsSameList() {
-        assertCommandSuccess(new ListStudentCommand(), model, ListStudentCommand.MESSAGE_SUCCESS, expectedModel);
+    public void execute_noIndexStudentListIsNotFiltered_showsSameList() {
+        assertCommandSuccess(new ListStudentCommand(), model,
+                ListStudentCommand.MESSAGE_LIST_ALL_SUCCESS, expectedModel);
     }
 
     @Test
-    public void execute_studentListIsFiltered_showsEverything() {
+    public void execute_noIndexStudentListIsFiltered_showsEverything() {
         showStudentAtIndex(model, INDEX_FIRST_ITEM);
-        assertCommandSuccess(new ListStudentCommand(), model, ListStudentCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ListStudentCommand(), model,
+                ListStudentCommand.MESSAGE_LIST_ALL_SUCCESS, expectedModel);
+    }
+
+    @Test
+    public void equals() {
+        ListStudentCommand listStudentCommand = new ListStudentCommand();
+
+        // ListStudentCommand -> returns true
+        ListStudentCommand listStudentCommandCopy = new ListStudentCommand();
+        assertTrue(listStudentCommand.equals(listStudentCommandCopy));
+
+        // same object -> returns true
+        assertTrue(listStudentCommand.equals(listStudentCommand));
+
+        // null -> returns false
+        assertFalse(listStudentCommand.equals(null));
+
+        // different type -> returns false
+        assertFalse(listStudentCommand.equals(5));
     }
 }
