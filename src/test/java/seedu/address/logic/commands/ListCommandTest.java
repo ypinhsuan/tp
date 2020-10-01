@@ -26,25 +26,25 @@ public class ListCommandTest {
 
     @Test
     public void execute_studentListIsNotFiltered_showsSameList() {
-        assertCommandSuccess(new ListStudentCommand(), model, ListStudentCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
     public void execute_studentListIsFiltered_showsEverything() {
         showStudentAtIndex(model, INDEX_FIRST_ITEM);
-        assertCommandSuccess(new ListStudentCommand(), model, ListStudentCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
     public void execute_moduleClassListIsNotFiltered_showsSameList() {
         assertCommandSuccess(
-                new ListModuleClassCommand(), model, ListModuleClassCommand.MESSAGE_SUCCESS, expectedModel);
+                new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
     public void execute_moduleClassListIsFiltered_showsEverything() {
         showModuleClassAtIndex(model, INDEX_FIRST_ITEM);
         assertCommandSuccess(
-                new ListModuleClassCommand(), model, ListModuleClassCommand.MESSAGE_SUCCESS, expectedModel);
+                new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
     }
 }
