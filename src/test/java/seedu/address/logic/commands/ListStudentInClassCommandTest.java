@@ -64,12 +64,10 @@ public class ListStudentInClassCommandTest {
         showModuleClassAtIndex(expectedModel, INDEX_SECOND_ITEM);
         ListStudentInClassCommand listStudentInClassCommand = new ListStudentInClassCommand(INDEX_FIRST_ITEM);
 
-        ModuleClass specifiedClass = expectedModel.getFilteredModuleClassList().get(INDEX_FIRST_ITEM.getZeroBased());
-        Collection<UUID> expectedStudents = specifiedClass.getStudentUuids();
-        expectedModel.updateFilteredStudentList(new StudentInUuidCollectionPredicate(expectedStudents));
+        ModuleClass selectedClass = showStudentsInModuleClassAtIndex(expectedModel, INDEX_FIRST_ITEM);
 
         assertCommandSuccess(listStudentInClassCommand, model,
-                String.format(ListStudentInClassCommand.MESSAGE_LIST_CLASS_SPECIFIC_SUCCESS, specifiedClass),
+                String.format(ListStudentInClassCommand.MESSAGE_LIST_CLASS_SPECIFIC_SUCCESS, selectedClass),
                 expectedModel);
     }
 
