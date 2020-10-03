@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.model.Model;
-import seedu.address.model.TutorsPet;
 
 /**
  * Clears all students in the student manager.
@@ -16,7 +15,7 @@ public class ClearStudentCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.setTutorsPet(new TutorsPet());
+        model.deleteAllStudents();
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
