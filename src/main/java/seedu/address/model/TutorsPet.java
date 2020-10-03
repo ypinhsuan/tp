@@ -139,6 +139,15 @@ public class TutorsPet implements ReadOnlyTutorsPet {
         moduleClasses.remove(key);
     }
 
+    /**
+     * Removes all {@code Student}s from the application.
+     * Also removes all {@code UUID}s from each {@code ModuleClass}.
+     */
+    public void removeAllStudents() {
+        moduleClasses.removeAllStudentUuids();
+        students.setStudent(new UniqueStudentList());
+    }
+
     //// util methods
 
     @Override

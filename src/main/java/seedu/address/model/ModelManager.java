@@ -116,6 +116,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deleteAllStudents() {
+        tutorsPet.removeAllStudents();
+    }
+
+    @Override
     public boolean hasModuleClass(ModuleClass moduleClass) {
         requireNonNull(moduleClass);
         return tutorsPet.hasModuleClass(moduleClass);

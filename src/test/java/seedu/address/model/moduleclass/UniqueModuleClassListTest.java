@@ -108,6 +108,17 @@ public class UniqueModuleClassListTest {
     }
 
     @Test
+    public void removeAllStudentUuids() {
+        uniqueModuleClassList.add(CS2103T_TUTORIAL);
+        uniqueModuleClassList.add(CS2100_LAB);
+        uniqueModuleClassList.removeAllStudentUuids();
+        UniqueModuleClassList expectedUniqueModuleClassList = new UniqueModuleClassList();
+        expectedUniqueModuleClassList.add(new ModuleClass(CS2103T_TUTORIAL.getName()));
+        expectedUniqueModuleClassList.add(new ModuleClass(CS2100_LAB.getName()));
+        assertEquals(expectedUniqueModuleClassList, uniqueModuleClassList);
+    }
+
+    @Test
     public void setModuleClass_nullUniqueModuleClassList_throwsNullPointerException() {
         assertThrows(NullPointerException.class, ()
             -> uniqueModuleClassList.setModuleClass((UniqueModuleClassList) null));

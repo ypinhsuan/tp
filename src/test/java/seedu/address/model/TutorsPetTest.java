@@ -5,9 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_AVERAGE;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalModuleClass.CS2100_LAB;
 import static seedu.address.testutil.TypicalModuleClass.CS2103T_TUTORIAL;
 import static seedu.address.testutil.TypicalStudent.ALICE;
 import static seedu.address.testutil.TypicalStudent.AMY;
+import static seedu.address.testutil.TypicalStudent.BENSON;
 import static seedu.address.testutil.TypicalTutorsPet.getTypicalTutorsPet;
 
 import java.util.Arrays;
@@ -185,6 +187,21 @@ public class TutorsPetTest {
     @Test
     public void getModuleClassList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> tutorsPet.getModuleClassList().remove(0));
+    }
+
+    @Test
+    public void removeAllStudents() {
+        tutorsPet.addStudent(ALICE);
+        tutorsPet.addStudent(BENSON);
+        tutorsPet.addModuleClass(CS2103T_TUTORIAL);
+        tutorsPet.addModuleClass(CS2100_LAB);
+
+        tutorsPet.removeAllStudents();
+
+        assertFalse(tutorsPet.hasStudent(ALICE));
+        assertFalse(tutorsPet.hasStudent(BENSON));
+        assertTrue(tutorsPet.hasModuleClass(new ModuleClass(CS2103T_TUTORIAL.getName())));
+        assertTrue(tutorsPet.hasModuleClass(new ModuleClass(CS2100_LAB.getName())));
     }
 
     @Test

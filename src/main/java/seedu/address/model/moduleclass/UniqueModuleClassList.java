@@ -3,8 +3,10 @@ package seedu.address.model.moduleclass;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -114,6 +116,15 @@ public class UniqueModuleClassList implements Iterable<ModuleClass> {
         if (!internalList.remove(toRemove)) {
             throw new ModuleClassNotFoundException();
         }
+    }
+
+    /**
+     * Removes all {@code studentUuids} from each and every {@code ModuleClass} in the list.
+     */
+    public void removeAllStudentUuids() {
+        internalList.setAll(internalList.stream()
+                .map(moduleClass -> new ModuleClass(moduleClass.getName()))
+                .collect(Collectors.toList()));
     }
 
     /**

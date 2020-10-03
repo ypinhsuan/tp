@@ -80,6 +80,12 @@ public interface Model {
     void setStudent(Student target, Student editedStudent);
 
     /**
+     * Deletes all {@code Student}s.
+     * Additionally, removes all {@code UUID}s in each {@code ModuleClass}.
+     */
+    void deleteAllStudents();
+
+    /**
      * Returns an unmodifiable view of the filtered student list.
      */
     ObservableList<Student> getFilteredStudentList();
