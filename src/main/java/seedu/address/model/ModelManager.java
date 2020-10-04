@@ -100,7 +100,7 @@ public class ModelManager implements Model {
 
     @Override
     public void deleteStudent(Student target) {
-        tutorsPet.removeStudent(target);
+        tutorsPet.deleteStudent(target);
     }
 
     @Override
@@ -116,6 +116,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deleteAllStudents() {
+        tutorsPet.deleteAllStudents();
+    }
+
+    @Override
     public boolean hasModuleClass(ModuleClass moduleClass) {
         requireNonNull(moduleClass);
         return tutorsPet.hasModuleClass(moduleClass);
@@ -123,7 +128,7 @@ public class ModelManager implements Model {
 
     @Override
     public void deleteModuleClass(ModuleClass target) {
-        tutorsPet.removeModuleClass(target);
+        tutorsPet.deleteModuleClass(target);
     }
 
     @Override

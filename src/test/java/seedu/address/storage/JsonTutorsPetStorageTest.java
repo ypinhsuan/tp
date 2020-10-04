@@ -94,7 +94,7 @@ public class JsonTutorsPetStorageTest {
 
         // Modify data, overwrite exiting file, and read back
         original.addStudent(HOON);
-        original.removeStudent(ALICE);
+        original.deleteStudent(ALICE);
         jsonTutorsPetStorage.saveTutorsPet(original, filePath);
         readBack = jsonTutorsPetStorage.readTutorsPet(filePath).get();
         assertEquals(original, new TutorsPet(readBack));

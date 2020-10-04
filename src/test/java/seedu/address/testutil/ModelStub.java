@@ -77,6 +77,11 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public void deleteAllStudents() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
     public boolean hasModuleClass(ModuleClass moduleClass) {
         throw new AssertionError("This method should not be called.");
     }

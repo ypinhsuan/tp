@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -114,6 +115,15 @@ public class UniqueModuleClassList implements Iterable<ModuleClass> {
         if (!internalList.remove(toRemove)) {
             throw new ModuleClassNotFoundException();
         }
+    }
+
+    /**
+     * Removes all {@code Student UUID}s from every {@code ModuleClass} in the class list.
+     */
+    public void removeAllStudentUuids() {
+        internalList.setAll(internalList.stream()
+                .map(moduleClass -> new ModuleClass(moduleClass.getName()))
+                .collect(Collectors.toList()));
     }
 
     /**

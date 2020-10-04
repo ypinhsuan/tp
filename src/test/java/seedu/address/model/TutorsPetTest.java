@@ -5,9 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_AVERAGE;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalModuleClass.CS2100_LAB;
 import static seedu.address.testutil.TypicalModuleClass.CS2103T_TUTORIAL;
 import static seedu.address.testutil.TypicalStudent.ALICE;
 import static seedu.address.testutil.TypicalStudent.AMY;
+import static seedu.address.testutil.TypicalStudent.BENSON;
 import static seedu.address.testutil.TypicalTutorsPet.getTypicalTutorsPet;
 
 import java.util.Arrays;
@@ -165,19 +167,19 @@ public class TutorsPetTest {
     }
 
     @Test
-    public void removeModuleClass_nullModuleClass_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> tutorsPet.removeModuleClass(null));
+    public void deleteModuleClass_nullModuleClass_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> tutorsPet.deleteModuleClass(null));
     }
 
     @Test
-    public void removeModuleClass_moduleClassNotInTutorsPet_throwsModuleClassNotFoundException() {
-        assertThrows(ModuleClassNotFoundException.class, () -> tutorsPet.removeModuleClass(CS2103T_TUTORIAL));
+    public void deleteModuleClass_moduleClassNotInTutorsPet_throwsModuleClassNotFoundException() {
+        assertThrows(ModuleClassNotFoundException.class, () -> tutorsPet.deleteModuleClass(CS2103T_TUTORIAL));
     }
 
     @Test
-    public void removeModuleClass_moduleClassInTutorsPet_deletesModuleClass() {
+    public void deleteModuleClass_moduleClassInTutorsPet_deletesModuleClass() {
         tutorsPet.addModuleClass(CS2103T_TUTORIAL);
-        tutorsPet.removeModuleClass(CS2103T_TUTORIAL);
+        tutorsPet.deleteModuleClass(CS2103T_TUTORIAL);
         TutorsPet expectedTutorsPet = new TutorsPet();
         assertEquals(expectedTutorsPet, tutorsPet);
     }
@@ -185,6 +187,21 @@ public class TutorsPetTest {
     @Test
     public void getModuleClassList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> tutorsPet.getModuleClassList().remove(0));
+    }
+
+    @Test
+    public void deleteAllStudents() {
+        tutorsPet.addStudent(ALICE);
+        tutorsPet.addStudent(BENSON);
+        tutorsPet.addModuleClass(CS2103T_TUTORIAL);
+        tutorsPet.addModuleClass(CS2100_LAB);
+
+        tutorsPet.deleteAllStudents();
+
+        assertFalse(tutorsPet.hasStudent(ALICE));
+        assertFalse(tutorsPet.hasStudent(BENSON));
+        assertTrue(tutorsPet.hasModuleClass(new ModuleClass(CS2103T_TUTORIAL.getName())));
+        assertTrue(tutorsPet.hasModuleClass(new ModuleClass(CS2100_LAB.getName())));
     }
 
     @Test
@@ -208,16 +225,16 @@ public class TutorsPetTest {
         // different students -> returns false
         TutorsPet tutorsPetDifferentStudents = new TutorsPet();
         tutorsPetDifferentStudents.resetData(getTypicalTutorsPet());
-        Student toRemoveStudent = tutorsPetDifferentStudents.getStudentList().get(0);
-        tutorsPetDifferentStudents.removeStudent(toRemoveStudent);
+        Student toDeleteStudent = tutorsPetDifferentStudents.getStudentList().get(0);
+        tutorsPetDifferentStudents.deleteStudent(toDeleteStudent);
         assertTrue(tutorsPet.getModuleClassList().equals(tutorsPetDifferentStudents.getModuleClassList()));
         assertFalse(tutorsPet.equals(tutorsPetDifferentStudents));
 
         // different classes -> returns false
         TutorsPet tutorsPetDifferentClasses = new TutorsPet();
         tutorsPetDifferentClasses.resetData(getTypicalTutorsPet());
-        ModuleClass toRemoveClass = tutorsPetDifferentStudents.getModuleClassList().get(0);
-        tutorsPetDifferentClasses.removeModuleClass(toRemoveClass);
+        ModuleClass toDeleteClass = tutorsPetDifferentStudents.getModuleClassList().get(0);
+        tutorsPetDifferentClasses.deleteModuleClass(toDeleteClass);
         assertTrue(tutorsPet.getStudentList().equals(tutorsPetDifferentClasses.getStudentList()));
         assertFalse(tutorsPet.equals(tutorsPetDifferentClasses));
     }

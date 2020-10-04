@@ -33,4 +33,15 @@ public class TypicalTutorsPet {
         }
         return tp;
     }
+
+    /**
+     * Returns a {@code TutorsPet} with only typical classes, without students and their uuids.
+     */
+    public static TutorsPet getOnlyModuleClassTutorsPet() {
+        TutorsPet tp = new TutorsPet();
+        for (ModuleClass moduleClass : TypicalModuleClass.getTypicalModuleClasses()) {
+            tp.addModuleClass(new ModuleClassBuilder(moduleClass).withStudentUuids().build());
+        }
+        return tp;
+    }
 }
