@@ -81,7 +81,7 @@ public interface Model {
 
     /**
      * Deletes all {@code Student}s.
-     * Additionally, removes all {@code UUID}s in each {@code ModuleClass}.
+     * Additionally, removes all {@code Student UUID}s in each {@code ModuleClass}.
      */
     void deleteAllStudents();
 

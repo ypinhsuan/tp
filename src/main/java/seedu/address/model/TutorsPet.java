@@ -140,8 +140,8 @@ public class TutorsPet implements ReadOnlyTutorsPet {
     }
 
     /**
-     * Removes all {@code Student}s from the application.
-     * Also removes all {@code UUID}s from each {@code ModuleClass}.
+     * Removes all {@code Student}s from the student manager.
+     * Also removes all {@code Student UUID}s from each {@code ModuleClass}.
      */
     public void removeAllStudents() {
         moduleClasses.removeAllStudentUuids();

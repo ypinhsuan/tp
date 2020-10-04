@@ -118,7 +118,7 @@ public class UniqueModuleClassList implements Iterable<ModuleClass> {
     }
 
     /**
-     * Removes all {@code studentUuids} from each and every {@code ModuleClass} in the list.
+     * Removes all {@code Student UUID}s from every {@code ModuleClass} in the class list.
      */
     public void removeAllStudentUuids() {
         internalList.setAll(internalList.stream()
