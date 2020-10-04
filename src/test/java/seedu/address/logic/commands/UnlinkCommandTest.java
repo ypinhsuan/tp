@@ -45,14 +45,17 @@ public class UnlinkCommandTest {
 
     @Test
     public void execute_unfilteredList_success() {
+        Index moduleClassIndex = INDEX_FIRST_ITEM;
+        Index studentIndex = INDEX_FIRST_ITEM;
+
         // manually unlink first student from first class
-        ModuleClass moduleClass = model.getFilteredModuleClassList().get(INDEX_FIRST_ITEM.getZeroBased());
-        Student student = model.getFilteredStudentList().get(INDEX_FIRST_ITEM.getZeroBased());
+        ModuleClass moduleClass = model.getFilteredModuleClassList().get(moduleClassIndex.getZeroBased());
+        Student student = model.getFilteredStudentList().get(studentIndex.getZeroBased());
         ModuleClass modifiedModuleClass = manualUnlinkStudentFromModuleClass(moduleClass, student);
 
         Model expectedModel = copyModelWithModuleClassAndShowStudents(model, moduleClass, modifiedModuleClass);
 
-        assertCommandSuccess(new UnlinkCommand(INDEX_FIRST_ITEM, INDEX_FIRST_ITEM), model,
+        assertCommandSuccess(new UnlinkCommand(moduleClassIndex, studentIndex), model,
                 String.format(UnlinkCommand.MESSAGE_UNLINK_SUCCESS, student.getName(), modifiedModuleClass),
                 expectedModel);
     }
@@ -62,14 +65,17 @@ public class UnlinkCommandTest {
         showStudentAtIndex(model, INDEX_FIRST_ITEM);
         showModuleClassAtIndex(model, INDEX_THIRD_ITEM);
 
+        Index moduleClassIndex = INDEX_FIRST_ITEM;
+        Index studentIndex = INDEX_FIRST_ITEM;
+
         // manually unlink first student from first class
-        ModuleClass moduleClass = model.getFilteredModuleClassList().get(INDEX_FIRST_ITEM.getZeroBased());
-        Student student = model.getFilteredStudentList().get(INDEX_FIRST_ITEM.getZeroBased());
+        ModuleClass moduleClass = model.getFilteredModuleClassList().get(moduleClassIndex.getZeroBased());
+        Student student = model.getFilteredStudentList().get(studentIndex.getZeroBased());
         ModuleClass modifiedModuleClass = manualUnlinkStudentFromModuleClass(moduleClass, student);
 
         Model expectedModel = copyModelWithModuleClassAndShowStudents(model, moduleClass, modifiedModuleClass);
 
-        assertCommandSuccess(new UnlinkCommand(INDEX_FIRST_ITEM, INDEX_FIRST_ITEM), model,
+        assertCommandSuccess(new UnlinkCommand(moduleClassIndex, studentIndex), model,
                 String.format(UnlinkCommand.MESSAGE_UNLINK_SUCCESS, student.getName(), modifiedModuleClass),
                 expectedModel);
     }
