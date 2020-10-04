@@ -100,7 +100,7 @@ public class ModelManager implements Model {
 
     @Override
     public void deleteStudent(Student target) {
-        tutorsPet.removeStudent(target);
+        tutorsPet.deleteStudent(target);
     }
 
     @Override
@@ -117,7 +117,7 @@ public class ModelManager implements Model {
 
     @Override
     public void deleteAllStudents() {
-        tutorsPet.removeAllStudents();
+        tutorsPet.deleteAllStudents();
     }
 
     @Override
@@ -128,7 +128,7 @@ public class ModelManager implements Model {
 
     @Override
     public void deleteModuleClass(ModuleClass target) {
-        tutorsPet.removeModuleClass(target);
+        tutorsPet.deleteModuleClass(target);
     }
 
     @Override

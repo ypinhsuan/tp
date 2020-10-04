@@ -95,10 +95,10 @@ public class TutorsPet implements ReadOnlyTutorsPet {
     }
 
     /**
-     * Removes {@code key} from this {@code TutorsPet}.
+     * Deletes {@code key} from this {@code TutorsPet}.
      * {@code key} must exist in the application.
      */
-    public void removeStudent(Student key) {
+    public void deleteStudent(Student key) {
         students.remove(key);
     }
 
@@ -132,18 +132,18 @@ public class TutorsPet implements ReadOnlyTutorsPet {
     }
 
     /**
-     * Removes {@code key} from this {@code TutorsPet}.
+     * Deletes {@code key} from this {@code TutorsPet}.
      * {@code key} must exist in the application.
      */
-    public void removeModuleClass(ModuleClass key) {
+    public void deleteModuleClass(ModuleClass key) {
         moduleClasses.remove(key);
     }
 
     /**
-     * Removes all {@code Student}s from the student manager.
-     * Also removes all {@code Student UUID}s from each {@code ModuleClass}.
+     * Deletes all {@code Student}s from the student manager.
+     * Also deletes all {@code Student UUID}s from each {@code ModuleClass}.
      */
-    public void removeAllStudents() {
+    public void deleteAllStudents() {
         moduleClasses.removeAllStudentUuids();
         students.setStudent(new UniqueStudentList());
     }
