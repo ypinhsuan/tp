@@ -19,6 +19,7 @@ public class StudentCard extends UiPart<Region> {
 
     private static final List<Tag> TAG_LIST = new ArrayList<>();
     private static final Colour[] COLOURS = Colour.values();
+    private static int NUMBER_OF_COLOURS = COLOURS.length;
     private static final String FXML = "StudentListCard.fxml";
     private static final String TELEGRAM_PREFIX = "@";
 
@@ -68,10 +69,10 @@ public class StudentCard extends UiPart<Region> {
 
         if (TAG_LIST.contains(tag)) {
             int index = TAG_LIST.indexOf(tag);
-            colour = COLOURS[index % 10];
+            colour = COLOURS[index % NUMBER_OF_COLOURS];
         } else {
             TAG_LIST.add(tag);
-            colour = COLOURS[TAG_LIST.size() % 10];
+            colour = COLOURS[TAG_LIST.size() % NUMBER_OF_COLOURS];
         }
 
         Label label = new Label(tag.tagName);
