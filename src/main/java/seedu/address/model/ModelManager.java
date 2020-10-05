@@ -99,11 +99,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void deleteStudent(Student target) {
-        tutorsPet.deleteStudent(target);
-    }
-
-    @Override
     public void addStudent(Student student) {
         tutorsPet.addStudent(student);
         updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
@@ -113,6 +108,11 @@ public class ModelManager implements Model {
     public void setStudent(Student target, Student editedStudent) {
         requireAllNonNull(target, editedStudent);
         tutorsPet.setStudent(target, editedStudent);
+    }
+
+    @Override
+    public void deleteStudent(Student target) {
+        tutorsPet.deleteStudent(target);
     }
 
     @Override
@@ -127,11 +127,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void deleteModuleClass(ModuleClass target) {
-        tutorsPet.deleteModuleClass(target);
-    }
-
-    @Override
     public void addModuleClass(ModuleClass moduleClass) {
         tutorsPet.addModuleClass(moduleClass);
         updateFilteredModuleClassList(PREDICATE_SHOW_ALL_MODULE_CLASS);
@@ -141,6 +136,16 @@ public class ModelManager implements Model {
     public void setModuleClass(ModuleClass target, ModuleClass editedModuleClass) {
         requireAllNonNull(target, editedModuleClass);
         tutorsPet.setModuleClass(target, editedModuleClass);
+    }
+
+    @Override
+    public void deleteModuleClass(ModuleClass target) {
+        tutorsPet.deleteModuleClass(target);
+    }
+
+    @Override
+    public void deleteAllModuleClasses() {
+        tutorsPet.deleteAllModuleClasses();
     }
 
     //=========== Filtered Student List Accessors =============================================================

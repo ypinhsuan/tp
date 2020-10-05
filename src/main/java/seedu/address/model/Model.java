@@ -122,6 +122,11 @@ public interface Model {
     void setModuleClass(ModuleClass target, ModuleClass editedModuleClass);
 
     /**
+     * Deletes all {@code ModuleClass}es.
+     */
+    void deleteAllModuleClasses();
+
+    /**
      * Returns an unmodifiable view of the filtered {@code ModuleClass} list.
      */
     ObservableList<ModuleClass> getFilteredModuleClassList();

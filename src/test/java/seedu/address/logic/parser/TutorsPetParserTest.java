@@ -18,6 +18,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddModuleClassCommand;
 import seedu.address.logic.commands.AddStudentCommand;
+import seedu.address.logic.commands.ClearModuleClassCommand;
 import seedu.address.logic.commands.ClearStudentCommand;
 import seedu.address.logic.commands.DeleteModuleClassCommand;
 import seedu.address.logic.commands.DeleteStudentCommand;
@@ -126,6 +127,12 @@ public class TutorsPetParserTest {
         DeleteModuleClassCommand command = (DeleteModuleClassCommand) parser.parseCommand(
                 DeleteModuleClassCommand.COMMAND_WORD + " " + INDEX_FIRST_ITEM.getOneBased());
         assertEquals(new DeleteModuleClassCommand(INDEX_FIRST_ITEM), command);
+    }
+
+    @Test
+    public void parseCommand_clearModuleClass() throws Exception {
+        assertTrue(parser.parseCommand(ClearModuleClassCommand.COMMAND_WORD) instanceof ClearModuleClassCommand);
+        assertTrue(parser.parseCommand(ClearModuleClassCommand.COMMAND_WORD + " 3") instanceof ClearModuleClassCommand);
     }
 
     @Test
