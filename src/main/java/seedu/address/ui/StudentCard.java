@@ -1,10 +1,8 @@
 package seedu.address.ui;
 
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Random;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -20,7 +18,8 @@ import seedu.address.model.student.Student;
 public class StudentCard extends UiPart<Region> {
 
     private static final List<Tag> listOfTags = new ArrayList<>();
-    private static final List<Color> listOfColors = new ArrayList<>();
+    private static final Color[] colors = Color.values();
+    private static final int NUMBER_OF_COLORS = colors.length;
     private static final String FXML = "StudentListCard.fxml";
     private static final String TELEGRAM_PREFIX = "@";
 
@@ -69,30 +68,16 @@ public class StudentCard extends UiPart<Region> {
         Color color;
 
         if (listOfTags.contains(tag)) {
-            int ind = listOfTags.indexOf(tag);
-            color = listOfColors.get(ind);
+            int index = listOfTags.indexOf(tag);
+            color = colors[index % NUMBER_OF_COLORS];
         } else {
-            int nextInd = listOfTags.size();
-            listOfTags.add(nextInd, tag);
-            color = generateRandomColor();
-            listOfColors.add(nextInd, color);
+            listOfTags.add(tag);
+            color = colors[listOfTags.size() % NUMBER_OF_COLORS];
         }
 
         Label label = new Label(tag.tagName);
-        label.setStyle("-fx-background-color: rgb("
-                + color.getRed() + "," + color.getGreen() + ", " + color.getBlue() + ");");
+        label.setStyle("-fx-background-color:" + color.getHexValue() + ";");
         return label;
-    }
-
-    /**
-     * Generates a random {@code Color}.
-     */
-    public Color generateRandomColor() {
-        Random randomGenerator = new Random();
-        int red = randomGenerator.nextInt(255);
-        int green = randomGenerator.nextInt(255);
-        int blue = randomGenerator.nextInt(255);
-        return new Color(red, green, blue);
     }
 
     @Override
