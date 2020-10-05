@@ -1,4 +1,5 @@
 {
+  "_comment": "Students have identical UUIDs",
   "students" : [ {
     "uuid" : "0c527a3f-8a6f-4c16-b57d-563a9c43cf6b",
     "name" : "Alice Pauline",
