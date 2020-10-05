@@ -34,6 +34,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListModuleClassCommand;
 import seedu.address.logic.commands.ListStudentCommand;
 import seedu.address.logic.commands.ListStudentInClassCommand;
+import seedu.address.logic.commands.UnlinkCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.components.name.NameContainsKeywordsPredicate;
 import seedu.address.model.moduleclass.ModuleClass;
@@ -139,6 +140,17 @@ public class TutorsPetParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_unlink() throws Exception {
+        UnlinkCommand command = new UnlinkCommand(INDEX_SECOND_ITEM, INDEX_FIRST_ITEM);
+        assertEquals(parser.parseCommand(UnlinkCommand.COMMAND_WORD + " "
+                + PREFIX_CLASS_INDEX + INDEX_SECOND_ITEM.getOneBased() + " "
+                + PREFIX_STUDENT_INDEX + INDEX_FIRST_ITEM.getOneBased()), command);
+        assertEquals(parser.parseCommand(UnlinkCommand.COMMAND_WORD + " "
+                + PREFIX_STUDENT_INDEX + INDEX_FIRST_ITEM.getOneBased() + " "
+                + PREFIX_CLASS_INDEX + INDEX_SECOND_ITEM.getOneBased()), command);
     }
 
     @Test

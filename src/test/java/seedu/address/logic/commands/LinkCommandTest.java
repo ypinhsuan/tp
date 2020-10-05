@@ -6,6 +6,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showModuleClassAtIndex;
 import static seedu.address.logic.commands.CommandTestUtil.showStudentAtIndex;
+import static seedu.address.logic.commands.UnlinkCommandTest.copyModelWithModuleClassAndShowStudents;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_MODULE_CLASS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -46,20 +47,17 @@ public class LinkCommandTest {
 
     @Test
     public void execute_unfilteredList_success() {
+        Index moduleClassIndex = INDEX_FIRST_ITEM;
+        Index studentIndex = INDEX_FIRST_ITEM;
+
         // manually link first class to first student
-        ModuleClass moduleClass = model.getFilteredModuleClassList().get(0);
-        Student student = model.getFilteredStudentList().get(0);
-        Set<UUID> studentUuids = new HashSet<>(moduleClass.getStudentUuids());
-        studentUuids.add(student.getUuid());
-        ModuleClass modifiedModuleClass = new ModuleClass(moduleClass.getName(), studentUuids);
+        ModuleClass moduleClass = model.getFilteredModuleClassList().get(moduleClassIndex.getZeroBased());
+        Student student = model.getFilteredStudentList().get(studentIndex.getZeroBased());
+        ModuleClass modifiedModuleClass = manualLinkStudentToModuleClass(moduleClass, student);
 
-        // set up expected model with linked class and update filtered lists
-        Model expectedModel = new ModelManager(model.getTutorsPet(), new UserPrefs());
-        expectedModel.setModuleClass(moduleClass, modifiedModuleClass);
-        expectedModel.updateFilteredStudentList(s -> studentUuids.contains(s.getUuid()));
-        expectedModel.updateFilteredModuleClassList(c -> c.isSameModuleClass(modifiedModuleClass));
+        Model expectedModel = copyModelWithModuleClassAndShowStudents(model, moduleClass, modifiedModuleClass);
 
-        assertCommandSuccess(new LinkCommand(INDEX_FIRST_ITEM, INDEX_FIRST_ITEM), model,
+        assertCommandSuccess(new LinkCommand(moduleClassIndex, studentIndex), model,
                 String.format(LinkCommand.MESSAGE_LINK_SUCCESS, student.getName(), modifiedModuleClass), expectedModel);
     }
 
@@ -68,27 +66,24 @@ public class LinkCommandTest {
         showStudentAtIndex(model, INDEX_FIRST_ITEM);
         showModuleClassAtIndex(model, INDEX_FIRST_ITEM);
 
+        Index moduleClassIndex = INDEX_FIRST_ITEM;
+        Index studentIndex = INDEX_FIRST_ITEM;
+
         // manually link first class to first student
-        ModuleClass moduleClass = model.getFilteredModuleClassList().get(0);
-        Student student = model.getFilteredStudentList().get(0);
-        Set<UUID> studentUuids = new HashSet<>(moduleClass.getStudentUuids());
-        studentUuids.add(student.getUuid());
-        ModuleClass modifiedModuleClass = new ModuleClass(moduleClass.getName(), studentUuids);
+        ModuleClass moduleClass = model.getFilteredModuleClassList().get(moduleClassIndex.getZeroBased());
+        Student student = model.getFilteredStudentList().get(studentIndex.getZeroBased());
+        ModuleClass modifiedModuleClass = manualLinkStudentToModuleClass(moduleClass, student);
 
-        // set up expected model with linked class and update filtered lists
-        Model expectedModel = new ModelManager(model.getTutorsPet(), new UserPrefs());
-        expectedModel.setModuleClass(moduleClass, modifiedModuleClass);
-        expectedModel.updateFilteredStudentList(s -> studentUuids.contains(s.getUuid()));
-        expectedModel.updateFilteredModuleClassList(c -> c.isSameModuleClass(modifiedModuleClass));
+        Model expectedModel = copyModelWithModuleClassAndShowStudents(model, moduleClass, modifiedModuleClass);
 
-        assertCommandSuccess(new LinkCommand(INDEX_FIRST_ITEM, INDEX_FIRST_ITEM), model,
+        assertCommandSuccess(new LinkCommand(moduleClassIndex, studentIndex), model,
                 String.format(LinkCommand.MESSAGE_LINK_SUCCESS, student.getName(), modifiedModuleClass), expectedModel);
     }
 
     @Test
     public void execute_existingStudent_failure() {
-        ModuleClass moduleClass = model.getFilteredModuleClassList().get(0);
-        Student student = model.getFilteredStudentList().get(0);
+        ModuleClass moduleClass = model.getFilteredModuleClassList().get(INDEX_FIRST_ITEM.getZeroBased());
+        Student student = model.getFilteredStudentList().get(INDEX_FIRST_ITEM.getZeroBased());
         Set<UUID> studentUuids = new HashSet<>(moduleClass.getStudentUuids());
         studentUuids.add(student.getUuid());
         ModuleClass modifiedModuleClass = new ModuleClass(moduleClass.getName(), studentUuids);
@@ -167,5 +162,20 @@ public class LinkCommandTest {
         // different class index -> returns false
         LinkCommand linkCommandDifferentClass = new LinkCommand(INDEX_SECOND_ITEM, INDEX_FIRST_ITEM);
         assertFalse(linkCommand.equals(linkCommandDifferentClass));
+    }
+
+    /**
+     * Returns a new {@code ModuleClass} based on the given {@code moduleClass} but with the specified {@code student}
+     * added.
+     * Requires {@code student} to not have an existing link with {@code moduleClass}.
+     */
+    private static ModuleClass manualLinkStudentToModuleClass(ModuleClass moduleClass, Student student) {
+        Set<UUID> studentUuids = new HashSet<>(moduleClass.getStudentUuids());
+
+        assertFalse(studentUuids.contains(student.getUuid()), "Test precondition error: The selected module class"
+                + " already contains the selected student.");
+
+        studentUuids.add(student.getUuid());
+        return new ModuleClass(moduleClass.getName(), studentUuids);
     }
 }
