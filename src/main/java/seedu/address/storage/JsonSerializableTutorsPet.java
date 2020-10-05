@@ -1,7 +1,10 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -55,7 +58,7 @@ class JsonSerializableTutorsPet {
     private void studentsToModelType(TutorsPet tutorsPet) throws IllegalValueException {
         for (JsonAdaptedStudent jsonAdaptedStudent : students) {
             Student student = jsonAdaptedStudent.toModelType();
-            if (tutorsPet.hasStudent(student)) {
+            if (tutorsPet.hasStudent(student) || tutorsPet.hasStudentUuid(student)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_STUDENT);
             }
             tutorsPet.addStudent(student);
@@ -68,11 +71,27 @@ class JsonSerializableTutorsPet {
      * @throws IllegalValueException if there were any data constraints violated.
      */
     private void classesToModelType(TutorsPet tutorsPet) throws IllegalValueException {
+        // Get all UUIDs under "students" field in tutorspet.json.
+        Set<UUID> uniqueStudentUuids = new HashSet<>();
+        for (JsonAdaptedStudent jsonAdaptedStudent : students) {
+            Student student = jsonAdaptedStudent.toModelType();
+            uniqueStudentUuids.add(student.getUuid());
+        }
+
         for (JsonAdaptedModuleClass jsonAdaptedModuleClass : classes) {
             ModuleClass moduleClass = jsonAdaptedModuleClass.toModelType();
             if (tutorsPet.hasModuleClass(moduleClass)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_MODULE_CLASS);
             }
+
+            // Check that the set of student UUIDs within a class is a subset of that of
+            // all student UUIDs in uniqueStudentUuids. Otherwise something is wrong and
+            // Tutor's Pet will not boot up.
+            Set<UUID> moduleClassStudentUuids = moduleClass.getStudentUuids();
+            if (!uniqueStudentUuids.containsAll(moduleClassStudentUuids)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_MODULE_CLASS);
+            }
+
             tutorsPet.addModuleClass(moduleClass);
         }
     }

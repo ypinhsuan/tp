@@ -93,6 +93,14 @@ public class Student implements HasName {
     }
 
     /**
+     * Returns true if both students have the same UUID.
+     */
+    public boolean hasSameUuid(Student otherStudent) {
+        return otherStudent != null
+                && otherStudent.getUuid().equals(getUuid());
+    }
+
+    /**
      * Returns true if both students have the same identity and data fields.
      * This defines a stronger notion of equality between two students.
      */

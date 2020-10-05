@@ -75,6 +75,14 @@ public class TutorsPet implements ReadOnlyTutorsPet {
     }
 
     /**
+     * Returns true if a student with the same UUID as {@code student}'s UUID exists.
+     */
+    public boolean hasStudentUuid(Student student) {
+        requireNonNull(student);
+        return students.containsUuid(student);
+    }
+
+    /**
      * Adds a student to the application.
      * The student must not already exist in the application.
      */

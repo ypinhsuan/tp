@@ -1,0 +1,65 @@
+{
+  "_comment": "Tutor's Pet save file which contains the same Student values as in TypicalStudents#getTypicalTutorsPet()",
+  "students" : [ {
+    "uuid" : "0c527a3f-8a6f-4c16-b57d-563a9c43cf6b",
+    "name" : "Alice Pauline",
+    "telegram" : "4Lice_P",
+    "email" : "alice@example.com",
+    "tagged" : [ "Average" ]
+  }, {
+    "uuid" : "5c09bbdc-b89c-482a-a4b0-32ede6d679e7",
+    "name" : "Benson Meier",
+    "telegram" : "BeN_10",
+    "email" : "johnd@example.com",
+    "tagged" : [ "PotentialTA", "Experienced" ]
+  }, {
+    "uuid" : "62e9abd0-5456-4979-a9cc-8a0818421c2a",
+    "name" : "Carl Kurz",
+    "telegram" : "cK2zz",
+    "email" : "heinz@example.com",
+    "tagged" : [ ]
+  }, {
+    "uuid" : "d3593480-6648-4f7a-afa5-6c1b09b52718",
+    "name" : "Daniel Meier",
+    "telegram" : "danielmeier",
+    "email" : "cornelia@example.com",
+    "tagged" : [ "Weak" ]
+  }, {
+    "uuid" : "abb96663-589f-4553-bc25-fa93fed7459c",
+    "name" : "Elle Meyer",
+    "telegram" : "4114_my",
+    "email" : "werner@example.com",
+    "tagged" : [ ]
+  }, {
+    "uuid" : "2be53daa-e18d-4de1-828b-31ad891ff7fc",
+    "name" : "Fiona Kunz",
+    "telegram" : "kunz_F",
+    "email" : "lydia@example.com",
+    "tagged" : [ ]
+  }, {
+    "uuid" : "48a5bfc5-782a-4861-8b36-9db2833cfd2d",
+    "name" : "George Best",
+    "telegram" : "dabest",
+    "email" : "anna@example.com",
+    "tagged" : [ ]
+  } ],
+  "classes" : [ {
+    "name" : "CS2103T Tutorial",
+    "studentUuids" : [
+      "0c527a3f-8a6f-4c16-b57d-563a9c43cf6b",
+      "5c09bbdc-b89c-482a-a4b0-32ede6d679e7",
+      "5c09bbdc-b89c-482a-a4b0-32ede6d679e7",
+      "5c09bbdc-b89c-482a-a4b0-32ede6d679e7"
+    ]
+  }, {
+    "name" : "CS2100 Lab",
+    "studentUuids" : [ ]
+  }, {
+    "name" : "CS2100 Tutorial",
+    "studentUuids" : [
+      "0c527a3f-8a6f-4c16-b57d-563a9c43cf6b",
+      "0c527a3f-8a6f-4c16-b57d-563a9c43cf6b",
+      "0c527a3f-8a6f-4c16-b57d-563a9c43cf6b"
+    ]
+  }]
+}

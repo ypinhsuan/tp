@@ -37,6 +37,14 @@ public class UniqueStudentList implements Iterable<Student> {
     }
 
     /**
+     * Returns true if the list contains an equivalent student UUID as that of the given argument's UUID.
+     */
+    public boolean containsUuid(Student toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(toCheck::hasSameUuid);
+    }
+
+    /**
      * Adds a student to the list.
      * The student must not already exist in the list.
      */
