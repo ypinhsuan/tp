@@ -26,7 +26,7 @@ public class ClearModuleClassCommandTest {
         Model model = new ModelManager(getTypicalTutorsPet(), new UserPrefs());
         Model expectedModel = new ModelManager(getOnlyStudentsTutorsPet(), new UserPrefs());
 
-        assertCommandSuccess(new ClearModuleClassCommand(), model,
-                ClearModuleClassCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ClearModuleClassCommand(),
+                model, ClearModuleClassCommand.MESSAGE_SUCCESS, expectedModel);
     }
 }

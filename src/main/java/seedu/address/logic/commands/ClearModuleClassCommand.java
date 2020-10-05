@@ -15,6 +15,7 @@ public class ClearModuleClassCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
+
         model.deleteAllModuleClasses();
         return new CommandResult(MESSAGE_SUCCESS);
     }

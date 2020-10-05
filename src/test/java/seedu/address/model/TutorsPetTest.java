@@ -215,8 +215,8 @@ public class TutorsPetTest {
 
         assertTrue(tutorsPet.hasStudent(ALICE));
         assertTrue(tutorsPet.hasStudent(BENSON));
-        assertFalse(tutorsPet.hasModuleClass(new ModuleClass(CS2103T_TUTORIAL.getName())));
-        assertFalse(tutorsPet.hasModuleClass(new ModuleClass(CS2100_LAB.getName())));
+        assertFalse(tutorsPet.hasModuleClass(CS2103T_TUTORIAL));
+        assertFalse(tutorsPet.hasModuleClass(CS2100_LAB));
     }
 
     @Test

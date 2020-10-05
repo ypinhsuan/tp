@@ -200,8 +200,8 @@ public class ModelManagerTest {
 
         assertTrue(modelManager.hasStudent(ALICE));
         assertTrue(modelManager.hasStudent(BENSON));
-        assertFalse(modelManager.hasModuleClass(new ModuleClass(CS2103T_TUTORIAL.getName())));
-        assertFalse(modelManager.hasModuleClass(new ModuleClass(CS2100_LAB.getName())));
+        assertFalse(modelManager.hasModuleClass(CS2103T_TUTORIAL));
+        assertFalse(modelManager.hasModuleClass(CS2100_LAB));
     }
 
     @Test

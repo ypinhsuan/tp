@@ -160,7 +160,7 @@ public class EditModuleClassCommandTest {
         assertFalse(standardCommand.equals(null));
 
         // different types -> return false
-        assertFalse(standardCommand.equals(new ClearModuleClassCommand()));
+        assertFalse(standardCommand.equals(1));
 
         // different index -> return false
         assertFalse(standardCommand
