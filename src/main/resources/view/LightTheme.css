@@ -1,0 +1,209 @@
+.root {
+    -style-border-color: grey;
+    -style-placeholder-color: #ccccce;
+    -style-pane-background-color: #fefefe;
+    -style-status-bar-color: #3c4147;
+    -style-menu-bar-color: #292e34;
+    -style-background-color: white;
+    -style-text-color: black;
+    -style-font-family: "Segoi UI"
+    -style-inner-shadow: innershadow(three-pass-box, -style-border-color, 10, 0, 0, 0); /* light slate grey */
+}
+
+.background {
+    -fx-background-color: white;
+    background-color: white; /* Used in the default.html file */
+}
+
+.tab-pane {
+    -fx-padding: 0 0 0 1;
+}
+
+.tab-pane .tab-header-area {
+    -fx-padding: 0 0 0 0;
+    -fx-min-height: 0;
+    -fx-max-height: 0;
+}
+
+.split-pane {
+    -fx-border-radius: 1;
+    -fx-border-width: 1;
+    -fx-background-color: white;
+}
+
+.list-view {
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+    -fx-background-color: -style-pane-background-color;
+}
+
+.list-cell {
+    -fx-label-padding: 0 0 0 0;
+    -fx-graphic-text-gap : 0;
+    -fx-padding: 0 0 0 0;
+    -fx-background-color: -style-pane-background-color;
+}
+
+.list-cell:filled:even {
+    -fx-background-color: #f2f2f2; /* reddish grey */
+    -fx-effect: innershadow(three-pass-box, derive(#f2f2f2, -10%) , 4, 0, 0, 0);
+}
+
+.list-cell:filled:odd {
+    -fx-background-color: white;
+    -fx-effect: innershadow(three-pass-box, derive(#f2f2f2, -10%), 4, 0, 0, 0);
+}
+
+.list-cell:filled:selected {
+    -fx-background-color: #be3251;
+}
+
+.list-cell:filled:selected #cardPane {
+    -fx-border-color: #be3251;
+    -fx-text-fill: white;
+}
+
+.cell_big_label {
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 16px;
+    -fx-wrap-text: true;
+}
+
+.cell_small_label {
+    -fx-font-family: -style-font-family;
+    -fx-font-size: 13px;
+    -fx-wrap-text: true;
+}
+
+.pane-with-border {
+     -fx-background-color: #f2f2f2;
+     -fx-border-color: transparent;
+     -fx-border-top-width: 1px;
+}
+
+.status-bar {
+    -fx-background-color: -style-status-bar-color;
+    -fx-effect: dropshadow(three-pass-box, -style-status-bar-color, 6, 0, 0, 0);
+}
+
+.result-display {
+    -fx-border-color: -style-border-color;
+    -fx-background-radius: 2px;
+    -fx-effect: -style-inner-shadow;
+    -fx-font-family: -style-font-family;
+    -fx-font-size: 13pt;
+    -fx-text-fill: derive(-style-text-color, -20%);
+}
+
+.result-display .content {
+    -fx-background-radius: 2px;
+}
+
+.result-display .label {
+    -fx-text-fill: black;
+}
+
+.status-bar .label {
+    -fx-font-family: -style-font-family;
+    -fx-text-fill: white;
+    -fx-padding: 4px;
+    -fx-pref-height: 30px;
+}
+
+.status-bar-with-border {
+    -fx-border-color: -style-status-bar-color;
+    -fx-border-width: 1px;
+}
+
+.menu-bar {
+    -fx-background-color: -style-menu-bar-color;
+    -fx-effect: dropshadow(three-pass-box, -style-menu-bar-color, 10, 0, 0, 0);
+}
+
+.menu-bar .label {
+    -fx-font-size: 14pt;
+    -fx-font-family: -style-font-family;
+    -fx-text-fill: white;
+}
+
+.context-menu {
+    -fx-background-color: -style-menu-bar-color;
+}
+
+.context-menu .label {
+    -fx-font-size: 14pt;
+    -fx-font-family: -style-font-family;
+    -fx-text-fill: white;
+}
+
+.scroll-bar {
+    -fx-background-color: -style-pane-background-color;
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: derive(-style-pane-background-color, -10%);
+    -fx-background-insets: 3;
+}
+
+.scroll-bar .increment-button, .scroll-bar .decrement-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0 0 0 0;
+}
+
+.scroll-bar .increment-arrow, .scroll-bar .decrement-arrow {
+    -fx-shape: " ";
+}
+
+.scroll-bar:vertical .increment-arrow, .scroll-bar:vertical .decrement-arrow {
+    -fx-padding: 1 8 1 8;
+}
+
+.scroll-bar:horizontal .increment-arrow, .scroll-bar:horizontal .decrement-arrow {
+    -fx-padding: 8 1 8 1;
+}
+
+#cardPane {
+    -fx-background-color: transparent;
+    -fx-border-width: 0;
+}
+
+#commandTextField {
+    -fx-background-color: white;
+    -fx-background-insets: 0;
+    -fx-border-color: -style-border-color;
+    -fx-background-radius: 2px;
+    -fx-effect: -style-inner-shadow;
+    -fx-font-family: -style-font-family;
+    -fx-font-size: 13pt;
+    -fx-text-fill: black;
+    -fx-prompt-text-fill: -style-placeholder-color;
+}
+
+#studentListView {
+    -fx-background-color: -style-background-color;
+    -fx-border-color: -style-border-color;
+}
+
+#moduleClassListView {
+    -fx-background-color: -style-background-color;
+    -fx-border-color: -style-border-color;
+}
+
+#resultDisplay .content {
+    -fx-background-color: white;
+    -fx-border-color: transparent;
+}
+
+#tags {
+    -fx-hgap: 7;
+    -fx-vgap: 3;
+}
+
+#tags .label {
+    -fx-text-fill: white;
+    -fx-background-color: #3e7b91;
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 11;
+}

@@ -27,8 +27,8 @@
                 <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
             </HBox>
             <HBox alignment="CENTER_LEFT" spacing="5">
-                <Label text="No. of Students:" />
-                <Label fx:id="studentCount" text="\$studentCount" />
+                <Label text="No. of Students:" styleClass="cell_small_label" />
+                <Label fx:id="studentCount" text="\$studentCount" styleClass="cell_small_label" />
             </HBox>
         </VBox>
     </GridPane>
