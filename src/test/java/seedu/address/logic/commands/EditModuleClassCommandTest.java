@@ -159,6 +159,9 @@ public class EditModuleClassCommandTest {
         // null -> return false
         assertFalse(standardCommand.equals(null));
 
+        // different types -> return false
+        assertFalse(standardCommand.equals(1));
+
         // different index -> return false
         assertFalse(standardCommand
                 .equals(new EditModuleClassCommand(INDEX_SECOND_ITEM, DESC_CS2100_LAB)));

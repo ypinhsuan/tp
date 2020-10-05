@@ -47,11 +47,6 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public void addStudent(Student student) {
-        throw new AssertionError("This method should not be called.");
-    }
-
-    @Override
     public void setTutorsPet(ReadOnlyTutorsPet newData) {
         throw new AssertionError("This method should not be called.");
     }
@@ -67,12 +62,17 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public void deleteStudent(Student target) {
+    public void addStudent(Student student) {
         throw new AssertionError("This method should not be called.");
     }
 
     @Override
     public void setStudent(Student target, Student editedStudent) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void deleteStudent(Student target) {
         throw new AssertionError("This method should not be called.");
     }
 
@@ -87,17 +87,22 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public void deleteModuleClass(ModuleClass target) {
-        throw new AssertionError("This method should not be called.");
-    }
-
-    @Override
     public void addModuleClass(ModuleClass moduleClass) {
         throw new AssertionError("This method should not be called.");
     }
 
     @Override
     public void setModuleClass(ModuleClass target, ModuleClass editedModuleClass) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void deleteModuleClass(ModuleClass target) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void deleteAllModuleClasses() {
         throw new AssertionError("This method should not be called.");
     }
 
