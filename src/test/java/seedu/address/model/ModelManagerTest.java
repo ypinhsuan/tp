@@ -190,6 +190,21 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void deleteAllModuleClasses() {
+        modelManager.addStudent(ALICE);
+        modelManager.addStudent(BENSON);
+        modelManager.addModuleClass(CS2103T_TUTORIAL);
+        modelManager.addModuleClass(CS2100_LAB);
+
+        modelManager.deleteAllModuleClasses();
+
+        assertTrue(modelManager.hasStudent(ALICE));
+        assertTrue(modelManager.hasStudent(BENSON));
+        assertFalse(modelManager.hasModuleClass(new ModuleClass(CS2103T_TUTORIAL.getName())));
+        assertFalse(modelManager.hasModuleClass(new ModuleClass(CS2100_LAB.getName())));
+    }
+
+    @Test
     public void equals() {
         TutorsPet tutorsPet = new TutorsPetBuilder().withStudent(ALICE).withStudent(BENSON)
                 .withModuleClass(CS2103T_TUTORIAL).withModuleClass(CS2100_LAB).build();
