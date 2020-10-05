@@ -17,9 +17,9 @@ import seedu.address.model.student.Student;
  */
 public class StudentCard extends UiPart<Region> {
 
-    private static final List<Tag> TAG_LIST = new ArrayList<>();
-    private static final Colour[] COLOURS = Colour.values();
-    private static int NUMBER_OF_COLOURS = COLOURS.length;
+    private static final List<Tag> listOfTags = new ArrayList<>();
+    private static final Color[] colors = Color.values();
+    private static final int NUMBER_OF_COLOURS = colors.length;
     private static final String FXML = "StudentListCard.fxml";
     private static final String TELEGRAM_PREFIX = "@";
 
@@ -65,18 +65,18 @@ public class StudentCard extends UiPart<Region> {
      * Creates a {@code Label} with the given {@code Tag} details.
      */
     public Label createTag(Tag tag) {
-        Colour colour;
+        Color color;
 
-        if (TAG_LIST.contains(tag)) {
-            int index = TAG_LIST.indexOf(tag);
-            colour = COLOURS[index % NUMBER_OF_COLOURS];
+        if (listOfTags.contains(tag)) {
+            int index = listOfTags.indexOf(tag);
+            color = colors[index % NUMBER_OF_COLOURS];
         } else {
-            TAG_LIST.add(tag);
-            colour = COLOURS[TAG_LIST.size() % NUMBER_OF_COLOURS];
+            listOfTags.add(tag);
+            color = colors[listOfTags.size() % NUMBER_OF_COLOURS];
         }
 
         Label label = new Label(tag.tagName);
-        label.setStyle("-fx-background-color:" + colour.getHexValue() + ";");
+        label.setStyle("-fx-background-color:" + color.getHexValue() + ";");
         return label;
     }
 

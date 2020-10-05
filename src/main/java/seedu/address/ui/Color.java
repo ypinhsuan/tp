@@ -1,9 +1,9 @@
 package seedu.address.ui;
 
 /**
- * Colours that can be used for tag.
+ * Colors that can be used for tag.
  */
-public enum Colour {
+public enum Color {
 
     CYAN("#E0FEFE"),
     VIOLET("#C7CEEA"),
@@ -18,7 +18,7 @@ public enum Colour {
 
     private final String hexValue;
 
-    Colour(String hexValue) {
+    Color(String hexValue) {
         this.hexValue = hexValue;
     }
 
