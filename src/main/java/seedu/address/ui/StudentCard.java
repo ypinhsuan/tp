@@ -1,10 +1,8 @@
 package seedu.address.ui;
 
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Random;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -19,8 +17,8 @@ import seedu.address.model.student.Student;
  */
 public class StudentCard extends UiPart<Region> {
 
-    private static final List<Tag> listOfTags = new ArrayList<>();
-    private static final List<Color> listOfColors = new ArrayList<>();
+    private static final List<Tag> TAG_LIST = new ArrayList<>();
+    private static final Colour[] COLOURS = Colour.values();
     private static final String FXML = "StudentListCard.fxml";
     private static final String TELEGRAM_PREFIX = "@";
 
@@ -66,33 +64,19 @@ public class StudentCard extends UiPart<Region> {
      * Creates a {@code Label} with the given {@code Tag} details.
      */
     public Label createTag(Tag tag) {
-        Color color;
+        Colour colour;
 
-        if (listOfTags.contains(tag)) {
-            int ind = listOfTags.indexOf(tag);
-            color = listOfColors.get(ind);
+        if (TAG_LIST.contains(tag)) {
+            int index = TAG_LIST.indexOf(tag);
+            colour = COLOURS[index % 10];
         } else {
-            int nextInd = listOfTags.size();
-            listOfTags.add(nextInd, tag);
-            color = generateRandomColor();
-            listOfColors.add(nextInd, color);
+            TAG_LIST.add(tag);
+            colour = COLOURS[TAG_LIST.size() % 10];
         }
 
         Label label = new Label(tag.tagName);
-        label.setStyle("-fx-background-color: rgb("
-                + color.getRed() + "," + color.getGreen() + ", " + color.getBlue() + ");");
+        label.setStyle("-fx-background-color:" + colour.getHexValue() + ";");
         return label;
-    }
-
-    /**
-     * Generates a random {@code Color}.
-     */
-    public Color generateRandomColor() {
-        Random randomGenerator = new Random();
-        int red = randomGenerator.nextInt(255);
-        int green = randomGenerator.nextInt(255);
-        int blue = randomGenerator.nextInt(255);
-        return new Color(red, green, blue);
     }
 
     @Override
