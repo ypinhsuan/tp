@@ -44,4 +44,15 @@ public class TypicalTutorsPet {
         }
         return tp;
     }
+
+    /**
+     * Returns a {@code TutorsPet} with only typical students, without classes.
+     */
+    public static TutorsPet getOnlyStudentsTutorsPet() {
+        TutorsPet tp = new TutorsPet();
+        for (Student student : TypicalStudent.getTypicalStudents()) {
+            tp.addStudent(student);
+        }
+        return tp;
+    }
 }
