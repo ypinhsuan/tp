@@ -23,6 +23,7 @@ import seedu.address.model.components.name.NameContainsKeywordsPredicate;
 import seedu.address.model.moduleclass.ModuleClass;
 import seedu.address.model.moduleclass.exceptions.DuplicateModuleClassException;
 import seedu.address.model.moduleclass.exceptions.ModuleClassNotFoundException;
+import seedu.address.model.student.exceptions.StudentNotFoundException;
 import seedu.address.testutil.ModuleClassBuilder;
 import seedu.address.testutil.TutorsPetBuilder;
 
@@ -94,6 +95,30 @@ public class ModelManagerTest {
     public void hasStudent_studentInModelManager_returnsTrue() {
         modelManager.addStudent(ALICE);
         assertTrue(modelManager.hasStudent(ALICE));
+    }
+
+    @Test
+    public void deleteStudent_nullStudent_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.deleteStudent(null));
+    }
+
+    @Test
+    public void deleteStudent_studentNotInModelManager_throwsStudentNotFoundException() {
+        assertThrows(StudentNotFoundException.class, () -> modelManager.deleteStudent(ALICE));
+    }
+
+    @Test
+    public void deleteStudent_studentInModelManager_deletesStudent() {
+        modelManager.addStudent(ALICE);
+        modelManager.addStudent(BENSON);
+        modelManager.addModuleClass(CS2103T_TUTORIAL);
+
+        modelManager.deleteStudent(ALICE);
+        modelManager.deleteStudent(BENSON);
+
+        ModelManager expectedModelManager = new ModelManager();
+        expectedModelManager.addModuleClass(new ModuleClass(CS2103T_TUTORIAL.getName()));
+        assertEquals(expectedModelManager, modelManager);
     }
 
     @Test

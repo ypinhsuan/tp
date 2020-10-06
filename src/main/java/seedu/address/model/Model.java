@@ -61,6 +61,7 @@ public interface Model {
 
     /**
      * Deletes the given student.
+     * Also deletes the {@code Student}'s {@code UUID} in all {@code ModuleClass}es.
      * The student must exist in the application.
      */
     void deleteStudent(Student target);

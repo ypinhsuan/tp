@@ -15,19 +15,25 @@ import static seedu.address.testutil.TypicalTutorsPet.getTypicalTutorsPet;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.moduleclass.ModuleClass;
+import seedu.address.model.moduleclass.UniqueModuleClassList;
 import seedu.address.model.moduleclass.exceptions.DuplicateModuleClassException;
 import seedu.address.model.moduleclass.exceptions.ModuleClassNotFoundException;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.exceptions.DuplicateStudentException;
 import seedu.address.testutil.ModuleClassBuilder;
 import seedu.address.testutil.StudentBuilder;
+import seedu.address.testutil.TutorsPetBuilder;
 import seedu.address.testutil.TypicalModuleClass;
 import seedu.address.testutil.TypicalStudent;
 
@@ -94,6 +100,29 @@ public class TutorsPetTest {
     @Test
     public void getStudentList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> tutorsPet.getStudentList().remove(0));
+    }
+
+    @Test
+    public void deleteStudent_nullStudent_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> tutorsPet.deleteStudent(null));
+    }
+
+    @Test
+    public void deleteStudent_studentInTutorsPet_removesStudentAndUuid() {
+        tutorsPet.addStudent(ALICE);
+        tutorsPet.addStudent(BENSON);
+        tutorsPet.addModuleClass(CS2103T_TUTORIAL);
+
+        tutorsPet.deleteStudent(ALICE);
+
+        // manually remove uuid
+        Set<UUID> modifiedUuids = new HashSet<>(CS2103T_TUTORIAL.getStudentUuids());
+        modifiedUuids.remove(ALICE.getUuid());
+        ModuleClass modifiedTutorial = new ModuleClass(CS2103T_TUTORIAL.getName(), modifiedUuids);
+
+        TutorsPet expectedTutorsPet =
+                new TutorsPetBuilder().withStudent(BENSON).withModuleClass(modifiedTutorial).build();
+        assertEquals(expectedTutorsPet, tutorsPet);
     }
 
     @Test
@@ -242,13 +271,13 @@ public class TutorsPetTest {
         tutorsPetDifferentStudents.resetData(getTypicalTutorsPet());
         Student toDeleteStudent = tutorsPetDifferentStudents.getStudentList().get(0);
         tutorsPetDifferentStudents.deleteStudent(toDeleteStudent);
-        assertTrue(tutorsPet.getModuleClassList().equals(tutorsPetDifferentStudents.getModuleClassList()));
+        assertFalse(tutorsPet.getModuleClassList().equals(tutorsPetDifferentStudents.getModuleClassList()));
         assertFalse(tutorsPet.equals(tutorsPetDifferentStudents));
 
         // different classes -> returns false
         TutorsPet tutorsPetDifferentClasses = new TutorsPet();
         tutorsPetDifferentClasses.resetData(getTypicalTutorsPet());
-        ModuleClass toDeleteClass = tutorsPetDifferentStudents.getModuleClassList().get(0);
+        ModuleClass toDeleteClass = tutorsPetDifferentClasses.getModuleClassList().get(0);
         tutorsPetDifferentClasses.deleteModuleClass(toDeleteClass);
         assertTrue(tutorsPet.getStudentList().equals(tutorsPetDifferentClasses.getStudentList()));
         assertFalse(tutorsPet.equals(tutorsPetDifferentClasses));
