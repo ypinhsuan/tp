@@ -113,7 +113,7 @@ public class TutorsPetTest {
 
         tutorsPet.deleteStudent(ALICE);
 
-        // manually remove uuid
+        // manually remove UUID
         Set<UUID> modifiedUuids = new HashSet<>(CS2103T_TUTORIAL.getStudentUuids());
         modifiedUuids.remove(ALICE.getUuid());
         ModuleClass modifiedTutorial = new ModuleClass(CS2103T_TUTORIAL.getName(), modifiedUuids);

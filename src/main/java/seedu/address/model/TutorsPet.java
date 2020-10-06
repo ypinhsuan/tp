@@ -96,7 +96,7 @@ public class TutorsPet implements ReadOnlyTutorsPet {
 
     /**
      * Deletes {@code key} from this {@code TutorsPet}.
-     * Also deletes the {@code UUID} of {@code Student} from all {@code ModuleClass}es.
+     *  Deletes {@code key} from this {@code TutorsPet} and also the {@code UUID} of {@code Student} from all {@code ModuleClass}es.
      * {@code key} must exist in the application.
      */
     public void deleteStudent(Student key) {
