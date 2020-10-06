@@ -50,6 +50,7 @@ public class ModelManager implements Model {
     @Override
     public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
         requireNonNull(userPrefs);
+
         this.userPrefs.resetData(userPrefs);
     }
 
@@ -66,6 +67,7 @@ public class ModelManager implements Model {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         requireNonNull(guiSettings);
+
         userPrefs.setGuiSettings(guiSettings);
     }
 
@@ -77,6 +79,7 @@ public class ModelManager implements Model {
     @Override
     public void setTutorsPetFilePath(Path tutorsPetFilePath) {
         requireNonNull(tutorsPetFilePath);
+
         userPrefs.setTutorsPetFilePath(tutorsPetFilePath);
     }
 
@@ -95,6 +98,7 @@ public class ModelManager implements Model {
     @Override
     public boolean hasStudent(Student student) {
         requireNonNull(student);
+
         return tutorsPet.hasStudent(student);
     }
 
@@ -107,6 +111,7 @@ public class ModelManager implements Model {
     @Override
     public void setStudent(Student target, Student editedStudent) {
         requireAllNonNull(target, editedStudent);
+
         tutorsPet.setStudent(target, editedStudent);
     }
 
@@ -123,6 +128,7 @@ public class ModelManager implements Model {
     @Override
     public boolean hasModuleClass(ModuleClass moduleClass) {
         requireNonNull(moduleClass);
+
         return tutorsPet.hasModuleClass(moduleClass);
     }
 
@@ -135,6 +141,7 @@ public class ModelManager implements Model {
     @Override
     public void setModuleClass(ModuleClass target, ModuleClass editedModuleClass) {
         requireAllNonNull(target, editedModuleClass);
+
         tutorsPet.setModuleClass(target, editedModuleClass);
     }
 
@@ -162,6 +169,7 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredStudentList(Predicate<Student> predicate) {
         requireNonNull(predicate);
+
         filteredStudents.setPredicate(predicate);
     }
 
@@ -175,6 +183,7 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredModuleClassList(Predicate<ModuleClass> predicate) {
         requireNonNull(predicate);
+
         filteredModuleClasses.setPredicate(predicate);
     }
 

@@ -80,12 +80,14 @@ public class AddModuleClassCommandTest {
 
         ModelStubWithModuleClass(ModuleClass moduleClass) {
             requireNonNull(moduleClass);
+
             this.moduleClass = moduleClass;
         }
 
         @Override
         public boolean hasModuleClass(ModuleClass moduleClass) {
             requireNonNull(moduleClass);
+
             return this.moduleClass.isSameModuleClass(moduleClass);
         }
     }
@@ -100,12 +102,14 @@ public class AddModuleClassCommandTest {
         @Override
         public boolean hasModuleClass(ModuleClass moduleClass) {
             requireNonNull(moduleClass);
+
             return moduleClassesAdded.stream().anyMatch(moduleClass::isSameModuleClass);
         }
 
         @Override
         public void addModuleClass(ModuleClass moduleClass) {
             requireNonNull(moduleClass);
+
             moduleClassesAdded.add(moduleClass);
         }
 

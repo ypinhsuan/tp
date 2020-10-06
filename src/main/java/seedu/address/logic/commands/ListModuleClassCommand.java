@@ -17,6 +17,7 @@ public class ListModuleClassCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
+
         model.updateFilteredModuleClassList(PREDICATE_SHOW_ALL_MODULE_CLASS);
         return new CommandResult(MESSAGE_SUCCESS);
     }

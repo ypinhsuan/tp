@@ -34,6 +34,7 @@ public class ModuleClass implements HasName {
      */
     public ModuleClass(Name name) {
         requireNonNull(name);
+
         this.name = name;
     }
 
@@ -42,6 +43,7 @@ public class ModuleClass implements HasName {
      */
     public ModuleClass(Name name, Set<UUID> studentUuids) {
         requireAllNonNull(name, studentUuids);
+
         this.name = name;
         this.studentUuids.addAll(studentUuids);
     }
