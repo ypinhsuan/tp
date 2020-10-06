@@ -76,7 +76,7 @@ public class JsonSerializableTutorsPetTest {
     }
 
     /**
-     * Prevents Tutor's Pet from booting up if two or more students are found with the same UUID.
+     * Prevents Tutor's Pet from booting up if two or more {@code Student}s are found with the same {@code UUID}.
      */
     @Test
     public void toModelType_duplicateStudentsUuid_throwsIllegalValueException() throws Exception {
@@ -95,7 +95,7 @@ public class JsonSerializableTutorsPetTest {
 
     /**
      * Ensures that Tutor's Pet will not be able to boot up although Java tries
-     * to pad missing UUID digits in broken UUIDs with zeros.
+     * to pad missing {@code UUID} digits in broken {@code UUID}s with zeros.
      */
     @Test
     public void toModelType_invalidStudentUuidInClassFile1_throwsIllegalValueException() throws Exception {
@@ -105,7 +105,7 @@ public class JsonSerializableTutorsPetTest {
     }
 
     /**
-     * Ensures that Tutor's Pet will not be able to boot up given an incomplete UUID.
+     * Ensures that Tutor's Pet will not be able to boot up given an incomplete {@code UUID}.
      * (e.g "0c527a3f-8a6f-4c16-b57d-")
      */
     @Test
@@ -123,8 +123,8 @@ public class JsonSerializableTutorsPetTest {
     }
 
     /**
-     * If Tutor's Pet encounters duplicate student UUIDs in a class, it will not load
-     * duplicate UUIDs into the model. Hence, Tutor's Pet should still boot up successfully.
+     * If Tutor's Pet encounters duplicate {@code Student UUID}s in a class, it will not load
+     * duplicate {@code UUID}s into the model. Hence, Tutor's Pet should still boot up successfully.
      */
     @Test
     public void toModelType_duplicateStudentsInClassFile_success() throws Exception {

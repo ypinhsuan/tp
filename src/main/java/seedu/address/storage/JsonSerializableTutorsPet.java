@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.ReadOnlyTutorsPet;
 import seedu.address.model.TutorsPet;
@@ -25,6 +26,8 @@ class JsonSerializableTutorsPet {
 
     public static final String MESSAGE_DUPLICATE_STUDENT = "Students list contains duplicate student(s).";
     public static final String MESSAGE_DUPLICATE_MODULE_CLASS = "Class list contains duplicate class(es).";
+    public static final String MESSAGE_INVALID_STUDENTS_IN_CLASS =
+            "Some student(s) in class list missing in student list.";
 
     private final List<JsonAdaptedStudent> students = new ArrayList<>();
     private final List<JsonAdaptedModuleClass> classes = new ArrayList<>();
@@ -72,9 +75,9 @@ class JsonSerializableTutorsPet {
      */
     private void classesToModelType(TutorsPet tutorsPet) throws IllegalValueException {
         // Get all UUIDs under "students" field in tutorspet.json.
+        ObservableList<Student> students = tutorsPet.getStudentList();
         Set<UUID> uniqueStudentUuids = new HashSet<>();
-        for (JsonAdaptedStudent jsonAdaptedStudent : students) {
-            Student student = jsonAdaptedStudent.toModelType();
+        for (Student student : students) {
             uniqueStudentUuids.add(student.getUuid());
         }
 
@@ -89,7 +92,7 @@ class JsonSerializableTutorsPet {
             // Tutor's Pet will not boot up.
             Set<UUID> moduleClassStudentUuids = moduleClass.getStudentUuids();
             if (!uniqueStudentUuids.containsAll(moduleClassStudentUuids)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_MODULE_CLASS);
+                throw new IllegalValueException(MESSAGE_INVALID_STUDENTS_IN_CLASS);
             }
 
             tutorsPet.addModuleClass(moduleClass);
