@@ -24,9 +24,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.moduleclass.ModuleClass;
-import seedu.address.model.moduleclass.UniqueModuleClassList;
 import seedu.address.model.moduleclass.exceptions.DuplicateModuleClassException;
 import seedu.address.model.moduleclass.exceptions.ModuleClassNotFoundException;
 import seedu.address.model.student.Student;
