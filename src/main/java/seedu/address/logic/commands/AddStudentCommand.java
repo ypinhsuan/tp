@@ -40,6 +40,7 @@ public class AddStudentCommand extends Command {
      */
     public AddStudentCommand(Student student) {
         requireNonNull(student);
+
         toAdd = student;
     }
 

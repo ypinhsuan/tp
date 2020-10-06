@@ -1,14 +1,14 @@
 {
   "students": [ {
     "uuid": "48a5bfc5-782a-4861-8b36-9db2833cfd2d",
-    "name": "Alice Pauline",
-    "telegram": "4Lice_P",
+    "name": "Duplicate Name",
+    "telegram": "duplicatetelegram",
     "email": "alice@example.com",
     "tagged": [ "Struggling" ]
   }, {
     "uuid": "f0e9b309-48fc-4142-9f4d-bbb99f3bb3fe",
-    "name": "Alice Pauline",
-    "telegram": "4Lice_P",
+    "name": "Duplicate Name",
+    "telegram": "duplicatetelegram",
     "email": "pauline@example.com"
   } ],
   "classes" : [ ]

@@ -1,4 +1,5 @@
 {
+  "_comment": "Java UUID pads 0c527a3f-8a6f-4c16-b57d-43cf6b with 0s to get 0c527a3f-8a6f-4c16-b57d-00000043cf6b, which is an invalid UUID",
   "students" : [ {
     "uuid" : "0c527a3f-8a6f-4c16-b57d-563a9c43cf6b",
     "name" : "Alice Pauline",
@@ -8,9 +9,6 @@
   } ],
   "classes" : [ {
     "name" : "CS2100 Lab",
-    "studentUuids" : [ ]
-  }, {
-    "name" : "CS2100 Lab",
-    "studentUuids" : [ ]
+    "studentUuids" : [ "0c527a3f-8a6f-4c16-b57d-43cf6b" ]
   }]
 }

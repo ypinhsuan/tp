@@ -43,6 +43,7 @@ public class StringUtil {
      */
     public static String getDetails(Throwable t) {
         requireNonNull(t);
+
         StringWriter sw = new StringWriter();
         t.printStackTrace(new PrintWriter(sw));
         return t.getMessage() + "\n" + sw.toString();
