@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalModuleClass.CS2103T_TUTORIAL;
 import static seedu.address.testutil.TypicalStudent.ALICE;
 import static seedu.address.testutil.TypicalStudent.AMY;
 import static seedu.address.testutil.TypicalStudent.BENSON;
+import static seedu.address.testutil.TypicalStudent.GEORGE;
 import static seedu.address.testutil.TypicalTutorsPet.getTypicalTutorsPet;
 
 import java.util.Arrays;
@@ -267,9 +268,8 @@ public class TutorsPetTest {
         // different students -> returns false
         TutorsPet tutorsPetDifferentStudents = new TutorsPet();
         tutorsPetDifferentStudents.resetData(getTypicalTutorsPet());
-        Student toDeleteStudent = tutorsPetDifferentStudents.getStudentList().get(0);
-        tutorsPetDifferentStudents.deleteStudent(toDeleteStudent);
-        assertFalse(tutorsPet.getModuleClassList().equals(tutorsPetDifferentStudents.getModuleClassList()));
+        tutorsPetDifferentStudents.deleteStudent(GEORGE); // GEORGE is not linked to any ModuleClasses.
+        assertTrue(tutorsPet.getModuleClassList().equals(tutorsPetDifferentStudents.getModuleClassList()));
         assertFalse(tutorsPet.equals(tutorsPetDifferentStudents));
 
         // different classes -> returns false
