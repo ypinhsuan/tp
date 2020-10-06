@@ -11,7 +11,10 @@ import static seedu.address.testutil.TypicalStudent.AMY;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
 
@@ -104,6 +107,38 @@ public class UniqueModuleClassListTest {
         uniqueModuleClassList.add(CS2103T_TUTORIAL);
         uniqueModuleClassList.remove(CS2103T_TUTORIAL);
         UniqueModuleClassList expectedUniqueModuleClassList = new UniqueModuleClassList();
+        assertEquals(expectedUniqueModuleClassList, uniqueModuleClassList);
+    }
+
+    @Test
+    public void removeUuid_nullUuid_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueModuleClassList.removeUuid(null));
+    }
+
+    @Test
+    public void removeUuid_existingUuid_updatesModuleClasses() {
+        uniqueModuleClassList.add(CS2103T_TUTORIAL);
+        UUID uuidToRemove = CS2103T_TUTORIAL.getStudentUuids().iterator().next();
+        uniqueModuleClassList.removeUuid(uuidToRemove);
+
+        UniqueModuleClassList expectedUniqueModuleClassList = new UniqueModuleClassList();
+        Set<UUID> modifiedUuids = new HashSet<>(CS2103T_TUTORIAL.getStudentUuids());
+        modifiedUuids.remove(uuidToRemove);
+        ModuleClass modifiedModuleClass = new ModuleClass(CS2103T_TUTORIAL.getName(), modifiedUuids);
+        expectedUniqueModuleClassList.add(modifiedModuleClass);
+
+        assertEquals(expectedUniqueModuleClassList, uniqueModuleClassList);
+    }
+
+    @Test
+    public void removeUuid_nonExistingUuid_sameModuleClasses() {
+        uniqueModuleClassList.add(CS2100_LAB);
+        UUID uuidToRemove = UUID.randomUUID();
+        uniqueModuleClassList.removeUuid(uuidToRemove);
+
+        UniqueModuleClassList expectedUniqueModuleClassList = new UniqueModuleClassList();
+        expectedUniqueModuleClassList.add(CS2100_LAB);
+
         assertEquals(expectedUniqueModuleClassList, uniqueModuleClassList);
     }
 

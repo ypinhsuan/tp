@@ -3,8 +3,11 @@ package seedu.address.model.moduleclass;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
@@ -120,6 +123,21 @@ public class UniqueModuleClassList implements Iterable<ModuleClass> {
         if (!internalList.remove(toRemove)) {
             throw new ModuleClassNotFoundException();
         }
+    }
+
+    /**
+     * Removes the specified {@code UUID} from all {@ModuleClass}es in the class list.
+     */
+    public void removeUuid(UUID uuidToRemove) {
+        requireNonNull(uuidToRemove);
+
+        internalList.setAll(internalList.stream()
+                .map(moduleClass -> {
+                    Set<UUID> modifiedUuids = new HashSet<>(moduleClass.getStudentUuids());
+                    modifiedUuids.remove(uuidToRemove);
+                    return new ModuleClass(moduleClass.getName(), modifiedUuids);
+                })
+                .collect(Collectors.toList()));
     }
 
     /**

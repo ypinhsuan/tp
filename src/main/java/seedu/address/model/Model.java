@@ -60,7 +60,7 @@ public interface Model {
     boolean hasStudent(Student student);
 
     /**
-     * Deletes the given student.
+     * Deletes the given {@code Student} and the {@code Student}'s {@code UUID} in all {@code ModuleClass}es.
      * The student must exist in the application.
      */
     void deleteStudent(Student target);
