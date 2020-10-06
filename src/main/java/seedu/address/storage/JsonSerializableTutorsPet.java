@@ -26,8 +26,7 @@ class JsonSerializableTutorsPet {
 
     public static final String MESSAGE_DUPLICATE_STUDENT = "Students list contains duplicate student(s).";
     public static final String MESSAGE_DUPLICATE_MODULE_CLASS = "Class list contains duplicate class(es).";
-    public static final String MESSAGE_INVALID_STUDENTS_IN_CLASS =
-            "Some student(s) in class list missing in student list.";
+    public static final String MESSAGE_INVALID_STUDENTS_IN_CLASS = "Invalid student(s) found in class(es).";
 
     private final List<JsonAdaptedStudent> students = new ArrayList<>();
     private final List<JsonAdaptedModuleClass> classes = new ArrayList<>();
@@ -88,8 +87,8 @@ class JsonSerializableTutorsPet {
             }
 
             // Check that the set of student UUIDs within a class is a subset of that of
-            // all student UUIDs in uniqueStudentUuids. Otherwise something is wrong and
-            // Tutor's Pet will not boot up.
+            // all student UUIDs in uniqueStudentUuids. Otherwise, Tutor's Pet will not
+            // boot up due to data corruption.
             Set<UUID> moduleClassStudentUuids = moduleClass.getStudentUuids();
             if (!uniqueStudentUuids.containsAll(moduleClassStudentUuids)) {
                 throw new IllegalValueException(MESSAGE_INVALID_STUDENTS_IN_CLASS);
