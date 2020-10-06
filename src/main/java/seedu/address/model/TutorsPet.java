@@ -71,6 +71,7 @@ public class TutorsPet implements ReadOnlyTutorsPet {
      */
     public boolean hasStudent(Student student) {
         requireNonNull(student);
+
         return students.contains(student);
     }
 
@@ -79,6 +80,7 @@ public class TutorsPet implements ReadOnlyTutorsPet {
      */
     public boolean hasStudentUuid(Student student) {
         requireNonNull(student);
+
         return students.containsUuid(student);
     }
 
@@ -126,6 +128,7 @@ public class TutorsPet implements ReadOnlyTutorsPet {
      */
     public boolean hasModuleClass(ModuleClass moduleClass) {
         requireNonNull(moduleClass);
+
         return moduleClasses.contains(moduleClass);
     }
 
@@ -145,6 +148,7 @@ public class TutorsPet implements ReadOnlyTutorsPet {
      */
     public void setModuleClass(ModuleClass target, ModuleClass editedModuleClass) {
         requireNonNull(editedModuleClass);
+
         moduleClasses.setModuleClass(target, editedModuleClass);
     }
 

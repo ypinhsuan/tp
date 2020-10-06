@@ -23,6 +23,7 @@ public class Telegram {
     public Telegram(String telegram) {
         requireNonNull(telegram);
         checkArgument(isValidTelegram(telegram), MESSAGE_CONSTRAINTS);
+
         value = telegram;
     }
 

@@ -54,6 +54,7 @@ public class EditModuleClassCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
         List<ModuleClass> lastShownList = model.getFilteredModuleClassList();
 
         if (index.getZeroBased() >= lastShownList.size()) {

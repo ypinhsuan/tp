@@ -33,6 +33,7 @@ public class UniqueStudentList implements Iterable<Student> {
      */
     public boolean contains(Student toCheck) {
         requireNonNull(toCheck);
+
         return internalList.stream().anyMatch(toCheck::isSameStudent);
     }
 
@@ -41,6 +42,7 @@ public class UniqueStudentList implements Iterable<Student> {
      */
     public boolean containsUuid(Student toCheck) {
         requireNonNull(toCheck);
+
         return internalList.stream().anyMatch(toCheck::hasSameUuid);
     }
 
@@ -50,6 +52,7 @@ public class UniqueStudentList implements Iterable<Student> {
      */
     public void add(Student toAdd) {
         requireNonNull(toAdd);
+
         if (contains(toAdd)) {
             throw new DuplicateStudentException();
         }
@@ -78,6 +81,7 @@ public class UniqueStudentList implements Iterable<Student> {
 
     public void setStudent(UniqueStudentList replacement) {
         requireNonNull(replacement);
+
         internalList.setAll(replacement.internalList);
     }
 
@@ -87,6 +91,7 @@ public class UniqueStudentList implements Iterable<Student> {
      */
     public void setStudent(List<Student> students) {
         requireAllNonNull(students);
+
         if (!studentsAreUnique(students)) {
             throw new DuplicateStudentException();
         }
@@ -100,6 +105,7 @@ public class UniqueStudentList implements Iterable<Student> {
      */
     public void remove(Student toRemove) {
         requireNonNull(toRemove);
+
         if (!internalList.remove(toRemove)) {
             throw new StudentNotFoundException();
         }
