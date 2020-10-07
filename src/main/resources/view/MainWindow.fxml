@@ -29,6 +29,12 @@
           <Menu mnemonicParsing="false" text="File">
             <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
           </Menu>
+          <Menu mnemonicParsing="false" text="Theme">
+            <MenuItem mnemonicParsing="false" onAction="#toggleLightTheme" text="Light" />
+            <MenuItem mnemonicParsing="false" onAction="#toggleAlternateTheme" text="Alternate" />
+            <MenuItem mnemonicParsing="false" onAction="#toggleChocoMintTheme" text="ChocoMint" />
+            <MenuItem mnemonicParsing="false" onAction="#toggleDarkTheme" text="Dark" />
+          </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
           </Menu>
