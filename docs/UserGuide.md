@@ -81,6 +81,7 @@ If you can type fast, Tutor's pet can get your class management tasks done faste
 | **Linking Student To A Class**    | ``link s/STUDENT_INDEX c/CLASS_INDEX``<br> e.g., `link s/1 c/2`                                                                             |
 | **Unlink Student From A Class**   | `unlink s/STUDENT_INDEX c/CLASS_INDEX` <br> e.g., `unlink s/1 c/2`                                                                          |
 | **Exit**                          | `exit`                                                                                                                                      |
+| **Reset**                         | `reset`                                                                                                                                     |
 
 ### Viewing help : `help`
 
@@ -280,6 +281,12 @@ Examples:
 Exits the program.
 
 Format: `exit`
+
+### Resetting the program : `reset`
+
+Resets the program and clears all the data.
+
+Format: `reset`
 
 ### Saving the data
 
