@@ -18,6 +18,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddModuleClassCommand;
 import seedu.address.logic.commands.AddStudentCommand;
+import seedu.address.logic.commands.ClearModuleClassCommand;
 import seedu.address.logic.commands.ClearStudentCommand;
 import seedu.address.logic.commands.DeleteModuleClassCommand;
 import seedu.address.logic.commands.DeleteStudentCommand;
@@ -34,6 +35,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListModuleClassCommand;
 import seedu.address.logic.commands.ListStudentCommand;
 import seedu.address.logic.commands.ListStudentInClassCommand;
+import seedu.address.logic.commands.UnlinkCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.components.name.NameContainsKeywordsPredicate;
 import seedu.address.model.moduleclass.ModuleClass;
@@ -128,6 +130,12 @@ public class TutorsPetParserTest {
     }
 
     @Test
+    public void parseCommand_clearModuleClass() throws Exception {
+        assertTrue(parser.parseCommand(ClearModuleClassCommand.COMMAND_WORD) instanceof ClearModuleClassCommand);
+        assertTrue(parser.parseCommand(ClearModuleClassCommand.COMMAND_WORD + " 3") instanceof ClearModuleClassCommand);
+    }
+
+    @Test
     public void parseCommand_findModuleClass() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindModuleClassCommand command = (FindModuleClassCommand) parser.parseCommand(
@@ -139,6 +147,17 @@ public class TutorsPetParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_unlink() throws Exception {
+        UnlinkCommand command = new UnlinkCommand(INDEX_SECOND_ITEM, INDEX_FIRST_ITEM);
+        assertEquals(parser.parseCommand(UnlinkCommand.COMMAND_WORD + " "
+                + PREFIX_CLASS_INDEX + INDEX_SECOND_ITEM.getOneBased() + " "
+                + PREFIX_STUDENT_INDEX + INDEX_FIRST_ITEM.getOneBased()), command);
+        assertEquals(parser.parseCommand(UnlinkCommand.COMMAND_WORD + " "
+                + PREFIX_STUDENT_INDEX + INDEX_FIRST_ITEM.getOneBased() + " "
+                + PREFIX_CLASS_INDEX + INDEX_SECOND_ITEM.getOneBased()), command);
     }
 
     @Test

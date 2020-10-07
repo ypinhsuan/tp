@@ -79,12 +79,14 @@ public class AddStudentCommandTest {
 
         ModelStubWithStudent(Student student) {
             requireNonNull(student);
+
             this.student = student;
         }
 
         @Override
         public boolean hasStudent(Student student) {
             requireNonNull(student);
+
             return this.student.isSameStudent(student);
         }
     }
@@ -99,12 +101,14 @@ public class AddStudentCommandTest {
         @Override
         public boolean hasStudent(Student student) {
             requireNonNull(student);
+
             return studentsAdded.stream().anyMatch(student::isSameStudent);
         }
 
         @Override
         public void addStudent(Student student) {
             requireNonNull(student);
+
             studentsAdded.add(student);
         }
 

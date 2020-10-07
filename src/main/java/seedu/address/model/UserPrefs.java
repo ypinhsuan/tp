@@ -34,6 +34,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
      */
     public void resetData(ReadOnlyUserPrefs newUserPrefs) {
         requireNonNull(newUserPrefs);
+
         setGuiSettings(newUserPrefs.getGuiSettings());
         setTutorsPetFilePath(newUserPrefs.getTutorsPetFilePath());
     }
@@ -44,6 +45,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     public void setGuiSettings(GuiSettings guiSettings) {
         requireNonNull(guiSettings);
+
         this.guiSettings = guiSettings;
     }
 
@@ -53,6 +55,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     public void setTutorsPetFilePath(Path tutorsPetFilePath) {
         requireNonNull(tutorsPetFilePath);
+
         this.tutorsPetFilePath = tutorsPetFilePath;
     }
 

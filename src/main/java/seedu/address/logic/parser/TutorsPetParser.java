@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.AddModuleClassCommand;
 import seedu.address.logic.commands.AddStudentCommand;
+import seedu.address.logic.commands.ClearModuleClassCommand;
 import seedu.address.logic.commands.ClearStudentCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteModuleClassCommand;
@@ -22,6 +23,7 @@ import seedu.address.logic.commands.LinkCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListModuleClassCommand;
 import seedu.address.logic.commands.ListStudentCommand;
+import seedu.address.logic.commands.UnlinkCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -82,6 +84,9 @@ public class TutorsPetParser {
         case DeleteModuleClassCommand.COMMAND_WORD:
             return new DeleteModuleClassCommandParser().parse(arguments);
 
+        case ClearModuleClassCommand.COMMAND_WORD:
+            return new ClearModuleClassCommand();
+
         case FindModuleClassCommand.COMMAND_WORD:
             return new FindModuleClassCommandParser().parse(arguments);
 
@@ -90,6 +95,9 @@ public class TutorsPetParser {
 
         case LinkCommand.COMMAND_WORD:
             return new LinkCommandParser().parse(arguments);
+
+        case UnlinkCommand.COMMAND_WORD:
+            return new UnlinkCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

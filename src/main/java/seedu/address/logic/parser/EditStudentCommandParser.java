@@ -30,6 +30,7 @@ public class EditStudentCommandParser implements Parser<EditStudentCommand> {
      */
     public EditStudentCommand parse(String args) throws ParseException {
         requireNonNull(args);
+
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_TELEGRAM, PREFIX_EMAIL, PREFIX_TAG);
 

@@ -33,6 +33,7 @@ public class DeleteModuleClassCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
         List<ModuleClass> lastShownList = model.getFilteredModuleClassList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {

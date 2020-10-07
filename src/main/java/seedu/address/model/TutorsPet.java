@@ -71,7 +71,17 @@ public class TutorsPet implements ReadOnlyTutorsPet {
      */
     public boolean hasStudent(Student student) {
         requireNonNull(student);
+
         return students.contains(student);
+    }
+
+    /**
+     * Returns true if a student with the same UUID as {@code student}'s UUID exists.
+     */
+    public boolean hasStudentUuid(Student student) {
+        requireNonNull(student);
+
+        return students.containsUuid(student);
     }
 
     /**
@@ -102,6 +112,15 @@ public class TutorsPet implements ReadOnlyTutorsPet {
         students.remove(key);
     }
 
+    /**
+     * Deletes all {@code Student}s from the student manager.
+     * Also deletes all {@code Student UUID}s from each {@code ModuleClass}.
+     */
+    public void deleteAllStudents() {
+        moduleClasses.removeAllStudentUuids();
+        students.setStudent(new UniqueStudentList());
+    }
+
     //// moduleClass-level operations
 
     /**
@@ -109,6 +128,7 @@ public class TutorsPet implements ReadOnlyTutorsPet {
      */
     public boolean hasModuleClass(ModuleClass moduleClass) {
         requireNonNull(moduleClass);
+
         return moduleClasses.contains(moduleClass);
     }
 
@@ -128,6 +148,7 @@ public class TutorsPet implements ReadOnlyTutorsPet {
      */
     public void setModuleClass(ModuleClass target, ModuleClass editedModuleClass) {
         requireNonNull(editedModuleClass);
+
         moduleClasses.setModuleClass(target, editedModuleClass);
     }
 
@@ -140,12 +161,10 @@ public class TutorsPet implements ReadOnlyTutorsPet {
     }
 
     /**
-     * Deletes all {@code Student}s from the student manager.
-     * Also deletes all {@code Student UUID}s from each {@code ModuleClass}.
+     * Deletes all {@code ModuleClass}es from the student manager.
      */
-    public void deleteAllStudents() {
-        moduleClasses.removeAllStudentUuids();
-        students.setStudent(new UniqueStudentList());
+    public void deleteAllModuleClasses() {
+        moduleClasses.setModuleClass(new UniqueModuleClassList());
     }
 
     //// util methods

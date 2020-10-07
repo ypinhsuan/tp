@@ -30,6 +30,7 @@ public class AddModuleClassCommand extends Command {
      */
     public AddModuleClassCommand(ModuleClass moduleClass) {
         requireNonNull(moduleClass);
+
         toAdd = moduleClass;
     }
 

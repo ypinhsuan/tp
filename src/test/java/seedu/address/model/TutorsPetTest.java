@@ -96,6 +96,21 @@ public class TutorsPetTest {
         assertThrows(UnsupportedOperationException.class, () -> tutorsPet.getStudentList().remove(0));
     }
 
+    @Test
+    public void deleteAllStudents() {
+        tutorsPet.addStudent(ALICE);
+        tutorsPet.addStudent(BENSON);
+        tutorsPet.addModuleClass(CS2103T_TUTORIAL);
+        tutorsPet.addModuleClass(CS2100_LAB);
+
+        tutorsPet.deleteAllStudents();
+
+        assertFalse(tutorsPet.hasStudent(ALICE));
+        assertFalse(tutorsPet.hasStudent(BENSON));
+        assertTrue(tutorsPet.hasModuleClass(new ModuleClass(CS2103T_TUTORIAL.getName())));
+        assertTrue(tutorsPet.hasModuleClass(new ModuleClass(CS2100_LAB.getName())));
+    }
+
     //// moduleClass-related tests
 
     @Test
@@ -190,18 +205,18 @@ public class TutorsPetTest {
     }
 
     @Test
-    public void deleteAllStudents() {
+    public void deleteAllModuleClasses() {
         tutorsPet.addStudent(ALICE);
         tutorsPet.addStudent(BENSON);
         tutorsPet.addModuleClass(CS2103T_TUTORIAL);
         tutorsPet.addModuleClass(CS2100_LAB);
 
-        tutorsPet.deleteAllStudents();
+        tutorsPet.deleteAllModuleClasses();
 
-        assertFalse(tutorsPet.hasStudent(ALICE));
-        assertFalse(tutorsPet.hasStudent(BENSON));
-        assertTrue(tutorsPet.hasModuleClass(new ModuleClass(CS2103T_TUTORIAL.getName())));
-        assertTrue(tutorsPet.hasModuleClass(new ModuleClass(CS2100_LAB.getName())));
+        assertTrue(tutorsPet.hasStudent(ALICE));
+        assertTrue(tutorsPet.hasStudent(BENSON));
+        assertFalse(tutorsPet.hasModuleClass(CS2103T_TUTORIAL));
+        assertFalse(tutorsPet.hasModuleClass(CS2100_LAB));
     }
 
     @Test

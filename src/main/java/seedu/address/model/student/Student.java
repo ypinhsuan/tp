@@ -33,6 +33,7 @@ public class Student implements HasName {
      */
     public Student(Name name, Telegram telegram, Email email, Set<Tag> tags) {
         requireAllNonNull(name, telegram, email, tags);
+
         this.uuid = UUID.randomUUID();
         this.name = name;
         this.telegram = telegram;
@@ -46,6 +47,7 @@ public class Student implements HasName {
      */
     public Student(UUID uuid, Name name, Telegram telegram, Email email, Set<Tag> tags) {
         requireAllNonNull(uuid, name, telegram, email, tags);
+
         this.uuid = uuid;
         this.name = name;
         this.telegram = telegram;
@@ -90,6 +92,14 @@ public class Student implements HasName {
         return otherStudent != null
                 && otherStudent.getName().equals(getName())
                 && (otherStudent.getTelegram().equals(getTelegram()) || otherStudent.getEmail().equals(getEmail()));
+    }
+
+    /**
+     * Returns true if both students have the same UUID.
+     */
+    public boolean hasSameUuid(Student otherStudent) {
+        return otherStudent != null
+                && otherStudent.getUuid().equals(getUuid());
     }
 
     /**

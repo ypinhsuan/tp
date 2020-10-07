@@ -15,6 +15,7 @@ public class ClearStudentCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
+
         model.deleteAllStudents();
         return new CommandResult(MESSAGE_SUCCESS);
     }

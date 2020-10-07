@@ -37,6 +37,7 @@ public class UniqueModuleClassList implements Iterable<ModuleClass> {
      */
     public boolean contains(ModuleClass toCheck) throws NullPointerException {
         requireNonNull(toCheck);
+
         return internalList.stream().anyMatch(toCheck::isSameModuleClass);
     }
 
@@ -49,6 +50,7 @@ public class UniqueModuleClassList implements Iterable<ModuleClass> {
      */
     public void add(ModuleClass toAdd) throws NullPointerException, DuplicateModuleClassException {
         requireNonNull(toAdd);
+
         if (contains(toAdd)) {
             throw new DuplicateModuleClassException();
         }
@@ -83,6 +85,7 @@ public class UniqueModuleClassList implements Iterable<ModuleClass> {
 
     public void setModuleClass(UniqueModuleClassList replacement) {
         requireNonNull(replacement);
+
         internalList.setAll(replacement.internalList);
     }
 
@@ -96,6 +99,7 @@ public class UniqueModuleClassList implements Iterable<ModuleClass> {
     public void setModuleClass(List<ModuleClass> moduleClasses)
             throws NullPointerException, DuplicateModuleClassException {
         requireAllNonNull(moduleClasses);
+
         if (!moduleClassesAreUnique(moduleClasses)) {
             throw new DuplicateModuleClassException();
         }
@@ -112,6 +116,7 @@ public class UniqueModuleClassList implements Iterable<ModuleClass> {
      */
     public void remove(ModuleClass toRemove) throws NullPointerException, ModuleClassNotFoundException {
         requireNonNull(toRemove);
+
         if (!internalList.remove(toRemove)) {
             throw new ModuleClassNotFoundException();
         }
