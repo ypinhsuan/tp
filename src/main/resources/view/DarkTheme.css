@@ -1,17 +1,19 @@
 @import "Base.css";
 
 .root {
-    -style-border-color: grey;
-    -style-placeholder-color: derive(#cecece, -20%);
-    -style-pane-background-color: #1e1e1e;
-    -style-status-bar-color: #1f1f1f;
-    -style-menu-bar-color: #1f1f1f;
     -style-background-color: #1e1e1e;
+    -style-pane-background-color: #1e1e1e;
+    -style-menu-bar-color: #292929;
+    -style-status-bar-color: #292929;
+    -style-border-color: grey;
+
     -style-text-color: #cecece;
+    -style-placeholder-color: derive(#cecece, -20%);
+
     -style-inner-shadow: innershadow(three-pass-box, white, 5, 0, 0, 0);
 
-    -fx-font-family: "Sans serif";
     -fx-background-color: -style-background-color;
+    -fx-font-family: "Sans serif";
 }
 
 .list-cell:filled:even {

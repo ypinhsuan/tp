@@ -164,6 +164,7 @@ public class MainWindow extends UiPart<Stage> {
     private void toggleStylesheet(Stylesheet stylesheet) {
         ObservableList<String> uiStyleSheet = primaryStage.getScene().getStylesheets();
         uiStyleSheet.clear();
+        uiStyleSheet.add(Stylesheet.EXTENSION.getStylesheet());
         uiStyleSheet.add(stylesheet.getStylesheet());
 
     }
