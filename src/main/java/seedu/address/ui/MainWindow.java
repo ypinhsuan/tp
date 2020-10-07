@@ -2,8 +2,11 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.beans.Observable;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -156,6 +159,33 @@ public class MainWindow extends UiPart<Stage> {
 
     void show() {
         primaryStage.show();
+    }
+
+    private void toggleStylesheet(Stylesheet stylesheet) {
+        ObservableList<String> uiStyleSheet = primaryStage.getScene().getStylesheets();
+        uiStyleSheet.clear();
+        uiStyleSheet.add(stylesheet.getStylesheet());
+
+    }
+
+    @FXML
+    public void toggleLightTheme() {
+        toggleStylesheet(Stylesheet.LIGHT);
+    }
+
+    @FXML
+    public void toggleAlternateTheme() {
+        toggleStylesheet(Stylesheet.ALTERNATE);
+    }
+
+    @FXML
+    public void toggleChocoMintTheme() {
+        toggleStylesheet(Stylesheet.CHOCOLATE_MINT);
+    }
+
+    @FXML
+    public void toggleDarkTheme() {
+        toggleStylesheet(Stylesheet.DARK);
     }
 
     /**
