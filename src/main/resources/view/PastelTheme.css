@@ -1,7 +1,6 @@
 @import "Base.css";
 
 .root {
-    -fx-font-family: "Sans serif";
     -style-border-color: #f0e7e3;
     -style-placeholder-color: #ccccce;
     -style-pane-background-color: #fefefe;
@@ -10,6 +9,9 @@
     -style-background-color: white;
     -style-text-color: white;
     -style-inner-shadow: innershadow(three-pass-box, -style-border-color, 5, 0, 0, 0);
+
+    -fx-font-family: "Sans serif";
+    -fx-background-color: -style-background-color;
 }
 
 .list-cell:filled:even {

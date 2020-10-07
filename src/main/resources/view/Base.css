@@ -33,7 +33,7 @@
 }
 
 .pane-with-border {
-     -fx-background-color: #f2f2f2;
+     -fx-background-color: -style-background-color;
      -fx-border-color: transparent;
      -fx-border-top-width: 1px;
 }
@@ -45,18 +45,13 @@
 
 .result-display {
     -fx-border-color: -style-border-color;
-    -fx-background-radius: 2px;
     -fx-effect: -style-inner-shadow;
     -fx-font-size: 13pt;
-    -fx-text-fill: derive(-style-text-color, -20%);
+    -fx-text-fill: derive(-style-text-color, -50%);
 }
 
-.result-display .content {
-    -fx-background-radius: 2px;
-}
-
-.result-display .label {
-    -fx-text-fill: black;
+#resultDisplay .content {
+    -fx-border-width: 0;
 }
 
 .status-bar .label {
@@ -139,11 +134,6 @@
 #moduleClassListView {
     -fx-background-color: -style-background-color;
     -fx-border-color: -style-border-color;
-}
-
-#resultDisplay .content {
-    -fx-background-color: white;
-    -fx-border-color: transparent;
 }
 
 #tags {
