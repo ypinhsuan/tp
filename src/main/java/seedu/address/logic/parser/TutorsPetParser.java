@@ -23,6 +23,7 @@ import seedu.address.logic.commands.LinkCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListModuleClassCommand;
 import seedu.address.logic.commands.ListStudentCommand;
+import seedu.address.logic.commands.ResetCommand;
 import seedu.address.logic.commands.UnlinkCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -104,6 +105,9 @@ public class TutorsPetParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case ResetCommand.COMMAND_WORD:
+            return new ResetCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
