@@ -30,6 +30,10 @@
     -fx-background-color: #be3251;
 }
 
+.list-cell:filled:selected .label {
+    -fx-text-fill: white;
+}
+
 .list-cell:filled:selected #cardPane {
     -fx-border-color: #be3251;
 }
