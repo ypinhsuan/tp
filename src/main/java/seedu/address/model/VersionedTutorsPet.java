@@ -1,5 +1,6 @@
 package seedu.address.model;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
@@ -29,8 +30,12 @@ public class VersionedTutorsPet extends TutorsPet {
 
     /**
      * Saves the current state of the {@code TutorsPet} with the associated {@code commitMessage}.
+     *
+     * @throws NullPointerException if the {@code commitMessage} is null.
      */
-    public void commit(String commitMessage) {
+    public void commit(String commitMessage) throws NullPointerException {
+        requireNonNull(commitMessage);
+
         pruneStates();
         TutorsPetState state = new TutorsPetState(commitMessage, this);
         tutorsPetStateList.add(state);
@@ -90,6 +95,15 @@ public class VersionedTutorsPet extends TutorsPet {
         return statePointer < tutorsPetStateList.size() - 1;
     }
 
+    @Override
+    public boolean equals(Object other) {
+        return other == this
+                || (other instanceof VersionedTutorsPet
+                && ((VersionedTutorsPet) other).statePointer == statePointer
+                && ((VersionedTutorsPet) other).tutorsPetStateList.equals(tutorsPetStateList)
+                && super.equals(other));
+    }
+
     private class TutorsPetState {
 
         private String commitMessage;
@@ -100,6 +114,14 @@ public class VersionedTutorsPet extends TutorsPet {
 
             this.commitMessage = commitMessage;
             this.stateSnapshot = new TutorsPet(stateSnapshot);
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            return other == this
+                    || (other instanceof TutorsPetState // instanceof handles null
+                    && ((TutorsPetState) other).stateSnapshot.equals(stateSnapshot)
+                    && ((TutorsPetState) other).commitMessage.equals(commitMessage));
         }
     }
 }

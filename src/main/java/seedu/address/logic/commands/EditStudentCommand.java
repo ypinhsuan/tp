@@ -82,7 +82,10 @@ public class EditStudentCommand extends Command {
 
         model.setStudent(studentToEdit, editedStudent);
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
-        return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent));
+
+        String message = String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent);
+        model.commit(message);
+        return new CommandResult(message);
     }
 
     /**

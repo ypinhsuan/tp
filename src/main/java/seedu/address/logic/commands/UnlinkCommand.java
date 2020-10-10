@@ -77,7 +77,9 @@ public class UnlinkCommand extends Command {
         model.updateFilteredModuleClassList(new SameModuleClassPredicate(modifiedModuleClass));
         model.updateFilteredStudentList(new StudentInUuidCollectionPredicate(modifiedModuleClass.getStudentUuids()));
 
-        return new CommandResult(String.format(MESSAGE_UNLINK_SUCCESS, studentToUnlink.getName(), moduleClassToUnlink));
+        String message = String.format(MESSAGE_UNLINK_SUCCESS, studentToUnlink.getName(), moduleClassToUnlink);
+        model.commit(message);
+        return new CommandResult(message);
     }
 
     @Override
