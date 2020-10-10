@@ -106,8 +106,8 @@ public class VersionedTutorsPet extends TutorsPet {
 
     @Override
     public boolean equals(Object other) {
-        return other == this
-                || (other instanceof VersionedTutorsPet
+        return other == this // short circuit if same object
+                || (other instanceof VersionedTutorsPet // instanceof handles nulls
                 && ((VersionedTutorsPet) other).statePointer == statePointer
                 && ((VersionedTutorsPet) other).tutorsPetStateList.equals(tutorsPetStateList)
                 && super.equals(other));
@@ -127,8 +127,8 @@ public class VersionedTutorsPet extends TutorsPet {
 
         @Override
         public boolean equals(Object other) {
-            return other == this
-                    || (other instanceof TutorsPetState // instanceof handles null
+            return other == this // short circuit if same object
+                    || (other instanceof TutorsPetState // instanceof handles nulls
                     && ((TutorsPetState) other).stateSnapshot.equals(stateSnapshot)
                     && ((TutorsPetState) other).commitMessage.equals(commitMessage));
         }

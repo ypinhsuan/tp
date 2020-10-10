@@ -32,8 +32,8 @@ public class StateRecords {
 
     @Override
     public boolean equals(Object other) {
-        return other == this
-                || (other instanceof StateRecords
+        return other == this // short circuit if same object
+                || (other instanceof StateRecords // instanceof handles nulls
                 && ((StateRecords) other).getStateRecords().equals(getStateRecords())
                 && ((StateRecords) other).getCurrentIndex() == getCurrentIndex());
     }

@@ -35,10 +35,10 @@ public class ModelManager implements Model {
 
         logger.fine("Initializing with Tutor's Pet: " + tutorsPet + " and user prefs " + userPrefs);
 
-        this.versionedTutorsPet = new VersionedTutorsPet(tutorsPet);
+        versionedTutorsPet = new VersionedTutorsPet(tutorsPet);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredStudents = new FilteredList<>(this.versionedTutorsPet.getStudentList());
-        filteredModuleClasses = new FilteredList<>(this.versionedTutorsPet.getModuleClassList());
+        filteredStudents = new FilteredList<>(versionedTutorsPet.getStudentList());
+        filteredModuleClasses = new FilteredList<>(versionedTutorsPet.getModuleClassList());
     }
 
     public ModelManager() {
@@ -87,7 +87,7 @@ public class ModelManager implements Model {
 
     @Override
     public void setTutorsPet(ReadOnlyTutorsPet tutorsPet) {
-        this.versionedTutorsPet.resetData(tutorsPet);
+        versionedTutorsPet.resetData(tutorsPet);
     }
 
     @Override
