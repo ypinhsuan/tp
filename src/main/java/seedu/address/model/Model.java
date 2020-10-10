@@ -55,6 +55,31 @@ public interface Model {
     ReadOnlyTutorsPet getTutorsPet();
 
     /**
+     * Commits the current Tutor's Pet state with the associated {@code commitMessage}.
+     */
+    void commit(String commitMessage);
+
+    /**
+     * Returns true if there is a {@code Command} that can be undone.
+     */
+    boolean canUndo();
+
+    /**
+     * Undoes the most recent undoable command.
+     */
+    String undo();
+
+    /**
+     * Returns true if there is an undone {@code Command} that can be redone.
+     */
+    boolean canRedo();
+
+    /**
+     * Redoes the most recent undone command.
+     */
+    String redo();
+
+    /**
      * Returns true if a student with the same identity as {@code student} exists in the application.
      */
     boolean hasStudent(Student student);
