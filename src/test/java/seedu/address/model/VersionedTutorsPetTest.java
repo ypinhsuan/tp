@@ -3,9 +3,13 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.model.VersionedTutorsPet.INITIAL_COMMIT_MESSAGE;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalStudent.AMY;
 import static seedu.address.testutil.TypicalTutorsPet.getTypicalTutorsPet;
+
+import java.util.Arrays;
+import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
@@ -96,6 +100,36 @@ public class VersionedTutorsPetTest {
     @Test
     public void redo_noNextState_throwsRedoStateException() {
         assertThrows(RedoStateException.class, () -> versionedTutorsPet.redo());
+    }
+
+    @Test
+    public void viewStateRecords_initialState() {
+        assertEquals(new StateRecords(0, Collections.singletonList(INITIAL_COMMIT_MESSAGE)),
+                versionedTutorsPet.viewStateRecords());
+    }
+
+    @Test
+    public void viewStateRecords_latestState() {
+        versionedTutorsPet.commit(COMMIT_MESSAGE_1);
+        assertEquals(new StateRecords(1, Arrays.asList(INITIAL_COMMIT_MESSAGE, COMMIT_MESSAGE_1)),
+                versionedTutorsPet.viewStateRecords());
+    }
+
+    @Test
+    public void viewStateRecords_earliestState() {
+        versionedTutorsPet.commit(COMMIT_MESSAGE_1);
+        versionedTutorsPet.undo();
+        assertEquals(new StateRecords(0, Arrays.asList(INITIAL_COMMIT_MESSAGE, COMMIT_MESSAGE_1)),
+                versionedTutorsPet.viewStateRecords());
+    }
+
+    @Test
+    public void viewStateRecords_intermediateState() {
+        versionedTutorsPet.commit(COMMIT_MESSAGE_1);
+        versionedTutorsPet.commit(COMMIT_MESSAGE_2);
+        versionedTutorsPet.undo();
+        assertEquals(new StateRecords(1, Arrays.asList(INITIAL_COMMIT_MESSAGE, COMMIT_MESSAGE_1, COMMIT_MESSAGE_2)),
+                versionedTutorsPet.viewStateRecords());
     }
 
     @Test

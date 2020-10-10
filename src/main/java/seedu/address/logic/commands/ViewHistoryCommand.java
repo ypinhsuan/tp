@@ -12,8 +12,8 @@ public class ViewHistoryCommand extends Command {
 
     public static final String COMMAND_WORD = "view-history";
 
-    public static final String MESSAGE_TEMPLATE = "History:\n%s";
-    public static final String MESSAGE_NO_COMMANDS = "There are no recorded commands";
+    public static final String CURRENT_INDICATOR = "> ";
+    public static final String MESSAGE_TEMPLATE = "History:%s";
 
     @Override
     public CommandResult execute(Model model) {
@@ -23,17 +23,15 @@ public class ViewHistoryCommand extends Command {
         int currentStateIndex = stateRecords.getCurrentIndex();
         int stateCount = stateRecords.getStateRecords().size();
 
-        if (stateCount == 0) {
-            return new CommandResult(MESSAGE_NO_COMMANDS);
-        }
+        assert stateCount != 0;
 
         StringBuilder summary = new StringBuilder();
 
         for (int i = stateCount - 1; i >= 0; i--) {
             if (i == currentStateIndex) {
-                summary.append("> " + stateRecords.getStateRecords().get(i) + "\n");
+                summary.append("\n" + CURRENT_INDICATOR + stateRecords.getStateRecords().get(i));
             } else {
-                summary.append(stateRecords.getStateRecords().get(i) + "\n");
+                summary.append("\n" + stateRecords.getStateRecords().get(i));
             }
         }
 

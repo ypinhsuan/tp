@@ -29,4 +29,12 @@ public class StateRecords {
     public List<String> getStateRecords() {
         return stateRecords;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this
+                || (other instanceof StateRecords
+                && ((StateRecords) other).getStateRecords().equals(getStateRecords())
+                && ((StateRecords) other).getCurrentIndex() == getCurrentIndex());
+    }
 }

@@ -12,7 +12,7 @@ import seedu.address.model.exception.UndoStateException;
 
 public class VersionedTutorsPet extends TutorsPet {
 
-    private static final String INITIAL_COMMIT_MESSAGE = "Original State";
+    public static final String INITIAL_COMMIT_MESSAGE = "Loaded save data!";
 
     private List<TutorsPetState> tutorsPetStateList;
     private int statePointer;
@@ -100,8 +100,7 @@ public class VersionedTutorsPet extends TutorsPet {
      * Returns a summary of all {@code Command}s currently recorded by this {@code VersionedTutorsPet}.
      */
     public StateRecords viewStateRecords() {
-        // Does not include the original state since it is not a command executed by the user.
-        return new StateRecords(statePointer - 1, tutorsPetStateList.stream().skip(1).map(state ->
+        return new StateRecords(statePointer, tutorsPetStateList.stream().map(state ->
                 state.commitMessage).collect(Collectors.toUnmodifiableList()));
     }
 

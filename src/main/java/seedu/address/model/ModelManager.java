@@ -96,11 +96,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public StateRecords viewStateRecords() {
-        return versionedTutorsPet.viewStateRecords();
-    }
-
-    @Override
     public void commit(String commitMessage) {
         versionedTutorsPet.commit(commitMessage);
     }
@@ -123,6 +118,11 @@ public class ModelManager implements Model {
     @Override
     public String redo() {
         return versionedTutorsPet.redo();
+    }
+
+    @Override
+    public StateRecords viewStateRecords() {
+        return versionedTutorsPet.viewStateRecords();
     }
 
     @Override
