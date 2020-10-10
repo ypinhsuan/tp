@@ -65,7 +65,7 @@ public interface Model {
     boolean canUndo();
 
     /**
-     * Undoes the most recent undoable command.
+     * Undoes the most recent undoable {@code Command}.
      */
     String undo();
 
@@ -75,9 +75,14 @@ public interface Model {
     boolean canRedo();
 
     /**
-     * Redoes the most recent undone command.
+     * Redoes the most recent undone {@code Command}.
      */
     String redo();
+
+    /**
+     * Returns a summary of all commands currently recorded by this {@code Model}.
+     */
+    StateRecords viewStateRecords();
 
     /**
      * Returns true if a student with the same identity as {@code student} exists in the application.

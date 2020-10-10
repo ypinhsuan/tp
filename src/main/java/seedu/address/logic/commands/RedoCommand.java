@@ -7,6 +7,9 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
+/**
+ * Redoes the most recent undone {@code Command}.
+ */
 public class RedoCommand extends Command {
 
     public static final String COMMAND_WORD = "redo";

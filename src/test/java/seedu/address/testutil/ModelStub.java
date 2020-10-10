@@ -8,6 +8,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyTutorsPet;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.StateRecords;
 import seedu.address.model.moduleclass.ModuleClass;
 import seedu.address.model.student.Student;
 
@@ -78,6 +79,11 @@ public class ModelStub implements Model {
 
     @Override
     public String redo() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public StateRecords viewStateRecords() {
         throw new AssertionError("This method should not be called.");
     }
 

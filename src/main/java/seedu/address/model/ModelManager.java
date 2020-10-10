@@ -96,6 +96,36 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public StateRecords viewStateRecords() {
+        return versionedTutorsPet.viewStateRecords();
+    }
+
+    @Override
+    public void commit(String commitMessage) {
+        versionedTutorsPet.commit(commitMessage);
+    }
+
+    @Override
+    public boolean canUndo() {
+        return versionedTutorsPet.canUndo();
+    }
+
+    @Override
+    public String undo() {
+        return versionedTutorsPet.undo();
+    }
+
+    @Override
+    public boolean canRedo() {
+        return versionedTutorsPet.canRedo();
+    }
+
+    @Override
+    public String redo() {
+        return versionedTutorsPet.redo();
+    }
+
+    @Override
     public boolean hasStudent(Student student) {
         requireNonNull(student);
 
@@ -155,31 +185,6 @@ public class ModelManager implements Model {
     @Override
     public void deleteAllModuleClasses() {
         versionedTutorsPet.deleteAllModuleClasses();
-    }
-
-    @Override
-    public void commit(String commitMessage) {
-        versionedTutorsPet.commit(commitMessage);
-    }
-
-    @Override
-    public boolean canUndo() {
-        return versionedTutorsPet.canUndo();
-    }
-
-    @Override
-    public String undo() {
-        return versionedTutorsPet.undo();
-    }
-
-    @Override
-    public boolean canRedo() {
-        return versionedTutorsPet.canRedo();
-    }
-
-    @Override
-    public String redo() {
-        return versionedTutorsPet.redo();
     }
 
     //=========== Filtered Student List Accessors =============================================================

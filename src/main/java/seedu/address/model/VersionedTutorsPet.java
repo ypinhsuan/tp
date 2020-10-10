@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import seedu.address.model.exception.RedoStateException;
 import seedu.address.model.exception.UndoStateException;
@@ -93,6 +94,15 @@ public class VersionedTutorsPet extends TutorsPet {
      */
     public boolean canRedo() {
         return statePointer < tutorsPetStateList.size() - 1;
+    }
+
+    /**
+     * Returns a summary of all {@code Command}s currently recorded by this {@code VersionedTutorsPet}.
+     */
+    public StateRecords viewStateRecords() {
+        // Does not include the original state since it is not a command executed by the user.
+        return new StateRecords(statePointer - 1, tutorsPetStateList.stream().skip(1).map(state ->
+                state.commitMessage).collect(Collectors.toUnmodifiableList()));
     }
 
     @Override
