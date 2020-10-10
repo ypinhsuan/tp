@@ -46,6 +46,7 @@ public class EditModuleClassCommandTest {
 
         Model expectedModel = new ModelManager(new TutorsPet(model.getTutorsPet()), new UserPrefs());
         expectedModel.setModuleClass(model.getFilteredModuleClassList().get(0), editedModuleClass);
+        expectedModel.commit(expectedMessage);
 
         assertCommandSuccess(editModuleClassCommand, model, expectedMessage, expectedModel);
     }
@@ -67,6 +68,7 @@ public class EditModuleClassCommandTest {
 
         Model expectedModel = new ModelManager(new TutorsPet(model.getTutorsPet()), new UserPrefs());
         expectedModel.setModuleClass(lastModuleClass, editedModuleClass);
+        expectedModel.commit(expectedMessage);
 
         assertCommandSuccess(editModuleClassCommand, model, expectedMessage, expectedModel);
     }
@@ -87,6 +89,7 @@ public class EditModuleClassCommandTest {
 
         Model expectedModel = new ModelManager(new TutorsPet(model.getTutorsPet()), new UserPrefs());
         expectedModel.setModuleClass(model.getFilteredModuleClassList().get(0), editedModuleClass);
+        expectedModel.commit(expectedMessage);
 
         assertCommandSuccess(editModuleClassCommand, model, expectedMessage, expectedModel);
     }

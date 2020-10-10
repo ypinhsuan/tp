@@ -35,6 +35,7 @@ public class DeleteStudentCommandTest {
 
         ModelManager expectedModel = new ModelManager(model.getTutorsPet(), new UserPrefs());
         expectedModel.deleteStudent(studentToDelete);
+        expectedModel.commit(expectedMessage);
 
         assertCommandSuccess(deleteStudentCommand, model, expectedMessage, expectedModel);
     }
@@ -58,6 +59,7 @@ public class DeleteStudentCommandTest {
 
         Model expectedModel = new ModelManager(model.getTutorsPet(), new UserPrefs());
         expectedModel.deleteStudent(studentToDelete);
+        expectedModel.commit(expectedMessage);
         showNoStudent(expectedModel);
 
         assertCommandSuccess(deleteStudentCommand, model, expectedMessage, expectedModel);

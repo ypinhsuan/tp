@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_MODULE_CLASS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
+import static seedu.address.model.VersionedTutorsPetTest.COMMIT_MESSAGE_1;
+import static seedu.address.model.VersionedTutorsPetTest.COMMIT_MESSAGE_2;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalModuleClass.CS2100_LAB;
 import static seedu.address.testutil.TypicalModuleClass.CS2103T_TUTORIAL;
@@ -20,6 +22,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.components.name.NameContainsKeywordsPredicate;
+import seedu.address.model.exception.RedoStateException;
+import seedu.address.model.exception.UndoStateException;
 import seedu.address.model.moduleclass.ModuleClass;
 import seedu.address.model.moduleclass.exceptions.DuplicateModuleClassException;
 import seedu.address.model.moduleclass.exceptions.ModuleClassNotFoundException;
@@ -79,6 +83,83 @@ public class ModelManagerTest {
         Path path = Paths.get("tutors/pet/file/path");
         modelManager.setTutorsPetFilePath(path);
         assertEquals(path, modelManager.getTutorsPetFilePath());
+    }
+
+    @Test
+    public void commit_nullMessage_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.commit(null));
+    }
+
+    @Test
+    public void commit_removesFutureStates() {
+        modelManager.commit(COMMIT_MESSAGE_1);
+        modelManager.undo();
+        assertTrue(modelManager.canRedo());
+        modelManager.commit(COMMIT_MESSAGE_2);
+        assertFalse(modelManager.canRedo());
+    }
+
+    @Test
+    public void canUndo_hasPreviousState_returnsTrue() {
+        modelManager.commit(COMMIT_MESSAGE_1);
+        assertTrue(modelManager.canUndo());
+    }
+
+    @Test
+    public void canUndo_initialState_returnsFalse() {
+        assertFalse(modelManager.canUndo());
+    }
+
+    @Test
+    public void undo_hasPreviousState_returnsCommitMessage() {
+        modelManager.commit(COMMIT_MESSAGE_1);
+        assertEquals(COMMIT_MESSAGE_1, modelManager.undo());
+    }
+
+    @Test
+    public void undo_preservesFutureState() {
+        modelManager.commit(COMMIT_MESSAGE_1);
+        modelManager.undo();
+        assertTrue(modelManager.canRedo());
+    }
+
+    @Test
+    public void undo_initialState_throwsUndoStateException() {
+        assertThrows(UndoStateException.class, () -> modelManager.undo());
+    }
+
+    @Test
+    public void canRedo_hasNextState_returnsTrue() {
+        modelManager.commit(COMMIT_MESSAGE_1);
+        modelManager.undo();
+        assertTrue(modelManager.canRedo());
+    }
+
+    @Test
+    public void canRedo_noNextState_returnsFalse() {
+        assertFalse(modelManager.canRedo());
+    }
+
+    @Test
+    public void redo_hasNextState_returnsCommitMessage() {
+        modelManager.commit(COMMIT_MESSAGE_1);
+        modelManager.undo();
+        assertEquals(COMMIT_MESSAGE_1, modelManager.redo());
+    }
+
+    @Test
+    public void redo_preservesRedoneState() {
+        modelManager.commit(COMMIT_MESSAGE_1);
+        modelManager.commit(COMMIT_MESSAGE_2);
+        assertEquals(COMMIT_MESSAGE_2, modelManager.undo());
+        assertEquals(COMMIT_MESSAGE_2, modelManager.redo());
+        assertTrue(modelManager.canUndo());
+        assertEquals(COMMIT_MESSAGE_2, modelManager.undo());
+    }
+
+    @Test
+    public void redo_noNextState_throwsRedoStateException() {
+        assertThrows(RedoStateException.class, () -> modelManager.redo());
     }
 
     @Test

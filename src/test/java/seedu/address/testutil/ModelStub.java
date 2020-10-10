@@ -57,6 +57,31 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public void commit(String commitMessage) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public boolean canUndo() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public String undo() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public boolean canRedo() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public String redo() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
     public boolean hasStudent(Student student) {
         throw new AssertionError("This method should not be called.");
     }

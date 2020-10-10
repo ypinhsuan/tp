@@ -44,6 +44,7 @@ public class EditStudentCommandTest {
 
         Model expectedModel = new ModelManager(new TutorsPet(model.getTutorsPet()), new UserPrefs());
         expectedModel.setStudent(model.getFilteredStudentList().get(0), editedStudent);
+        expectedModel.commit(expectedMessage);
 
         assertCommandSuccess(editStudentCommand, model, expectedMessage, expectedModel);
     }
@@ -66,6 +67,7 @@ public class EditStudentCommandTest {
 
         Model expectedModel = new ModelManager(new TutorsPet(model.getTutorsPet()), new UserPrefs());
         expectedModel.setStudent(lastStudent, editedStudent);
+        expectedModel.commit(expectedMessage);
 
         assertCommandSuccess(editStudentCommand, model, expectedMessage, expectedModel);
     }
@@ -79,6 +81,7 @@ public class EditStudentCommandTest {
         String expectedMessage = String.format(EditStudentCommand.MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent);
 
         Model expectedModel = new ModelManager(new TutorsPet(model.getTutorsPet()), new UserPrefs());
+        expectedModel.commit(expectedMessage);
 
         assertCommandSuccess(editStudentCommand, model, expectedMessage, expectedModel);
     }
@@ -96,6 +99,7 @@ public class EditStudentCommandTest {
 
         Model expectedModel = new ModelManager(new TutorsPet(model.getTutorsPet()), new UserPrefs());
         expectedModel.setStudent(model.getFilteredStudentList().get(0), editedStudent);
+        expectedModel.commit(expectedMessage);
 
         assertCommandSuccess(editStudentCommand, model, expectedMessage, expectedModel);
     }

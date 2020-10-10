@@ -53,11 +53,12 @@ public class UnlinkCommandTest {
         Student student = model.getFilteredStudentList().get(studentIndex.getZeroBased());
         ModuleClass modifiedModuleClass = manualUnlinkStudentFromModuleClass(moduleClass, student);
 
+        String expectedMessage =
+                String.format(UnlinkCommand.MESSAGE_UNLINK_SUCCESS, student.getName(), modifiedModuleClass);
         Model expectedModel = copyModelWithModuleClassAndShowStudents(model, moduleClass, modifiedModuleClass);
+        expectedModel.commit(expectedMessage);
 
-        assertCommandSuccess(new UnlinkCommand(moduleClassIndex, studentIndex), model,
-                String.format(UnlinkCommand.MESSAGE_UNLINK_SUCCESS, student.getName(), modifiedModuleClass),
-                expectedModel);
+        assertCommandSuccess(new UnlinkCommand(moduleClassIndex, studentIndex), model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -73,11 +74,12 @@ public class UnlinkCommandTest {
         Student student = model.getFilteredStudentList().get(studentIndex.getZeroBased());
         ModuleClass modifiedModuleClass = manualUnlinkStudentFromModuleClass(moduleClass, student);
 
+        String expectedMessage =
+                String.format(UnlinkCommand.MESSAGE_UNLINK_SUCCESS, student.getName(), modifiedModuleClass);
         Model expectedModel = copyModelWithModuleClassAndShowStudents(model, moduleClass, modifiedModuleClass);
+        expectedModel.commit(expectedMessage);
 
-        assertCommandSuccess(new UnlinkCommand(moduleClassIndex, studentIndex), model,
-                String.format(UnlinkCommand.MESSAGE_UNLINK_SUCCESS, student.getName(), modifiedModuleClass),
-                expectedModel);
+        assertCommandSuccess(new UnlinkCommand(moduleClassIndex, studentIndex), model, expectedMessage, expectedModel);
     }
 
     @Test
