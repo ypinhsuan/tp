@@ -1,5 +1,5 @@
 .background {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: #2c2c2e;
     background-color: #383838; /* Used in the default.html file */
 }
 
@@ -89,13 +89,20 @@
 .list-view {
     -fx-background-insets: 0;
     -fx-padding: 0;
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: derive(#1b262c, 20%);
 }
 
 .list-cell {
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
     -fx-padding: 0 0 0 0;
+    -fx-background-insets: 0 0 10 0;
+    -fx-border-radius: 7;
+    -fx-background-radius: 7;
+}
+
+.list-cell:empty {
+    -fx-background-color: derive(#1b262c, 20%);
 }
 
 .list-cell:filled:even {
@@ -141,6 +148,30 @@
      -fx-background-color: derive(#1b262c, 20%);
      -fx-border-color: derive(#1b262c, 10%);
      -fx-border-top-width: 1px;
+}
+
+#moduleClassList {
+    -fx-background-radius: 0 7 7 0;
+    -fx-border-radius: 0 7 7 0;
+    -fx-alignment: center;
+    -fx-border-color: #53687E;
+    -fx-border-width: 1 1 1 8;
+}
+
+#divider {
+    -fx-padding: 0;
+    -fx-background-color: #b7b9bd;
+    -fx-border-color: #b7b9bd;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+#studentList {
+    -fx-background-radius: 7 0 0 7;
+    -fx-border-radius: 7 0 0 7;
+    -fx-alignment: center;
+    -fx-border-color: #53687E;
+    -fx-border-width: 1 8 1 1;
 }
 
 .status-bar {
@@ -283,7 +314,7 @@
 }
 
 .scroll-bar {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: derive(#1b262c, 20%);
 }
 
 .scroll-bar .thumb {
@@ -319,7 +350,7 @@
 }
 
 #commandTextField {
-    -fx-background-color: transparent, #274156, transparent, #274156;
+    -fx-background-color: transparent, derive(#1b262c, 20%), transparent, derive(#1b262c, 20%);
     -fx-background-insets: 0;
     -fx-border-color: #274156 #274156 #ffffff #274156;
     -fx-border-insets: 0;
@@ -334,8 +365,8 @@
 }
 
 #resultDisplay .content {
-    -fx-background-color: transparent, #274156, transparent, #274156;
-    -fx-background-radius: 0;
+    -fx-background-color: transparent, derive(#1b262c, 20%), transparent, derive(#1b262c, 20%);
+    -fx-border-radius: 0;
 }
 
 #tags {
