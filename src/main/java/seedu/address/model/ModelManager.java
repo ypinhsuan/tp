@@ -117,6 +117,8 @@ public class ModelManager implements Model {
 
     @Override
     public void deleteStudent(Student target) {
+        requireNonNull(target);
+
         tutorsPet.deleteStudent(target);
     }
 

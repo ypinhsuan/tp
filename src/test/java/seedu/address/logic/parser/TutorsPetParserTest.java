@@ -35,6 +35,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListModuleClassCommand;
 import seedu.address.logic.commands.ListStudentCommand;
 import seedu.address.logic.commands.ListStudentInClassCommand;
+import seedu.address.logic.commands.ResetCommand;
 import seedu.address.logic.commands.UnlinkCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.components.name.NameContainsKeywordsPredicate;
@@ -49,6 +50,7 @@ import seedu.address.testutil.StudentUtil;
 
 public class TutorsPetParserTest {
 
+    private static final String NON_EMPTY_STRING = " 3";
     private final TutorsPetParser parser = new TutorsPetParser();
 
     @Test
@@ -85,7 +87,8 @@ public class TutorsPetParserTest {
     @Test
     public void parseCommand_clearStudent() throws Exception {
         assertTrue(parser.parseCommand(ClearStudentCommand.COMMAND_WORD) instanceof ClearStudentCommand);
-        assertTrue(parser.parseCommand(ClearStudentCommand.COMMAND_WORD + " 3") instanceof ClearStudentCommand);
+        assertTrue(parser.parseCommand(ClearStudentCommand.COMMAND_WORD + NON_EMPTY_STRING)
+                instanceof ClearStudentCommand);
     }
 
     @Test
@@ -107,7 +110,7 @@ public class TutorsPetParserTest {
     @Test
     public void parseCommand_listModuleClass() throws Exception {
         assertTrue(parser.parseCommand(ListModuleClassCommand.COMMAND_WORD) instanceof ListModuleClassCommand);
-        assertTrue(parser.parseCommand(ListModuleClassCommand.COMMAND_WORD + " 3")
+        assertTrue(parser.parseCommand(ListModuleClassCommand.COMMAND_WORD + NON_EMPTY_STRING)
                 instanceof ListModuleClassCommand);
     }
 
@@ -132,7 +135,8 @@ public class TutorsPetParserTest {
     @Test
     public void parseCommand_clearModuleClass() throws Exception {
         assertTrue(parser.parseCommand(ClearModuleClassCommand.COMMAND_WORD) instanceof ClearModuleClassCommand);
-        assertTrue(parser.parseCommand(ClearModuleClassCommand.COMMAND_WORD + " 3") instanceof ClearModuleClassCommand);
+        assertTrue(parser.parseCommand(ClearModuleClassCommand.COMMAND_WORD + NON_EMPTY_STRING)
+                instanceof ClearModuleClassCommand);
     }
 
     @Test
@@ -146,7 +150,7 @@ public class TutorsPetParserTest {
     @Test
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + NON_EMPTY_STRING) instanceof ListCommand);
     }
 
     @Test
@@ -174,13 +178,19 @@ public class TutorsPetParserTest {
     @Test
     public void parseCommand_exit() throws Exception {
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD) instanceof ExitCommand);
-        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);
+        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + NON_EMPTY_STRING) instanceof ExitCommand);
     }
 
     @Test
     public void parseCommand_help() throws Exception {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
-        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
+        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + NON_EMPTY_STRING) instanceof HelpCommand);
+    }
+
+    @Test
+    public void parseCommand_reset() throws Exception {
+        assertTrue(parser.parseCommand(ResetCommand.COMMAND_WORD) instanceof ResetCommand);
+        assertTrue(parser.parseCommand(ResetCommand.COMMAND_WORD + NON_EMPTY_STRING) instanceof ResetCommand);
     }
 
     @Test

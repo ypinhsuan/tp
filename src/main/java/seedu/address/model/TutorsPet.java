@@ -105,11 +105,15 @@ public class TutorsPet implements ReadOnlyTutorsPet {
     }
 
     /**
-     * Deletes {@code key} from this {@code TutorsPet}.
-     * {@code key} must exist in the application.
+     * Deletes {@code student} from this {@code TutorsPet} and
+     * the {@code UUID} of {@code Student} from all {@code ModuleClass}es.
+     * {@code student} must exist in the application.
      */
-    public void deleteStudent(Student key) {
-        students.remove(key);
+    public void deleteStudent(Student student) {
+        requireNonNull(student);
+
+        moduleClasses.removeUuid(student.getUuid());
+        students.remove(student);
     }
 
     /**
@@ -153,11 +157,11 @@ public class TutorsPet implements ReadOnlyTutorsPet {
     }
 
     /**
-     * Deletes {@code key} from this {@code TutorsPet}.
-     * {@code key} must exist in the application.
+     * Deletes {@code moduleClass} from this {@code TutorsPet}.
+     * {@code moduleClass} must exist in the application.
      */
-    public void deleteModuleClass(ModuleClass key) {
-        moduleClasses.remove(key);
+    public void deleteModuleClass(ModuleClass moduleClass) {
+        moduleClasses.remove(moduleClass);
     }
 
     /**
