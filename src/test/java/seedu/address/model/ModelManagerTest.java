@@ -106,7 +106,7 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void canUndo_initialState_returnsFalse() {
+    public void canUndo_noPreviousState_returnsFalse() {
         assertFalse(modelManager.canUndo());
     }
 
@@ -124,7 +124,7 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void undo_initialState_throwsUndoStateException() {
+    public void undo_noPreviousState_throwsUndoStateException() {
         assertThrows(UndoStateException.class, () -> modelManager.undo());
     }
 

@@ -70,7 +70,6 @@ public class EditModuleClassCommand extends Command {
 
         model.setModuleClass(moduleClassToEdit, editedModuleClass);
         model.updateFilteredModuleClassList(PREDICATE_SHOW_ALL_MODULE_CLASS);
-
         String message = String.format(MESSAGE_EDIT_MODULE_CLASS_SUCCESS, editedModuleClass);
         model.commit(message);
         return new CommandResult(message);

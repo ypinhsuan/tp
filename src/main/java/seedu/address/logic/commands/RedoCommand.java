@@ -15,7 +15,6 @@ public class RedoCommand extends Command {
     public static final String COMMAND_WORD = "redo";
 
     public static final String MESSAGE_SUCCESS = "Successfully redone: %s";
-
     public static final String MESSAGE_NO_PREVIOUS_COMMAND = "There are no commands to redo";
 
     @Override

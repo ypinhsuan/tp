@@ -13,7 +13,7 @@ public class StateRecords {
     private int currentIndex;
 
     /**
-     * Creates a {@code StateRecords} with the specified {@code currentIndex} and {@code stateRecords}
+     * Creates a {@code StateRecords} with the specified {@code currentIndex} and {@code stateRecords}.
      */
     public StateRecords(int currentIndex, List<String> stateRecords) {
         requireAllNonNull(currentIndex, stateRecords);

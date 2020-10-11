@@ -30,18 +30,17 @@ public class VersionedTutorsPetTest {
     }
 
     @Test
-    public void commit_commit_removesFutureStates() {
+    public void commit_removesFutureStates() {
         versionedTutorsPet.commit(COMMIT_MESSAGE_1);
         versionedTutorsPet.undo();
         assertTrue(versionedTutorsPet.canRedo());
-        versionedTutorsPet.commit("State 2");
+        versionedTutorsPet.commit(COMMIT_MESSAGE_2);
         assertFalse(versionedTutorsPet.canRedo());
     }
 
     @Test
     public void canUndo_hasPreviousState_returnsTrue() {
         versionedTutorsPet.commit(COMMIT_MESSAGE_1);
-
         assertTrue(versionedTutorsPet.canUndo());
     }
 
@@ -64,7 +63,7 @@ public class VersionedTutorsPetTest {
     }
 
     @Test
-    public void undo_initialState_throwsUndoStateException() {
+    public void undo_noPreviousState_throwsUndoStateException() {
         assertThrows(UndoStateException.class, () -> versionedTutorsPet.undo());
     }
 

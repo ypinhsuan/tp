@@ -13,6 +13,7 @@ public class ViewHistoryCommand extends Command {
     public static final String COMMAND_WORD = "view-history";
 
     public static final String CURRENT_INDICATOR = "> ";
+
     public static final String MESSAGE_TEMPLATE = "History:%s";
 
     @Override
