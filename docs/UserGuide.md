@@ -77,7 +77,7 @@ If you can type fast, Tutor's pet can get your class management tasks done faste
 | **Find Class**                    | `find-class KEYWORD [MORE_KEYWORDS]`<br> e.g., `find-class CS2103T`                                                                         |
 | **Delete Class**                  | `delete-class INDEX` e.g., `delete-class 2`                                                                                                 |
 | **Clear All Classes**             | `clear-class`                                                                                                                               |
-| **List All Students And Classes** | `list`                                                                                                                                      | 
+| **List All Students And Classes** | `list`                                                                                                                                      |
 | **Linking Student To A Class**    | ``link s/STUDENT_INDEX c/CLASS_INDEX``<br> e.g., `link s/1 c/2`                                                                             |
 | **Unlink Student From A Class**   | `unlink s/STUDENT_INDEX c/CLASS_INDEX` <br> e.g., `unlink s/1 c/2`                                                                          |
 | **Exit**                          | `exit`                                                                                                                                      |
