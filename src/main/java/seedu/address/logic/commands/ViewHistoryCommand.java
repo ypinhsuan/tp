@@ -21,6 +21,12 @@ public class ViewHistoryCommand extends Command {
         requireNonNull(model);
 
         StateRecords stateRecords = model.viewStateRecords();
+        return new CommandResult(createMessage(stateRecords));
+    }
+
+    private String createMessage(StateRecords stateRecords) {
+        assert stateRecords != null;
+
         int currentStateIndex = stateRecords.getCurrentIndex();
         int stateCount = stateRecords.getStateRecords().size();
 
@@ -29,13 +35,12 @@ public class ViewHistoryCommand extends Command {
         StringBuilder summary = new StringBuilder();
 
         for (int i = stateCount - 1; i >= 0; i--) {
+            summary.append("\n");
             if (i == currentStateIndex) {
-                summary.append("\n" + CURRENT_INDICATOR + stateRecords.getStateRecords().get(i));
-            } else {
-                summary.append("\n" + stateRecords.getStateRecords().get(i));
+                summary.append(CURRENT_INDICATOR);
             }
+            summary.append(stateRecords.getStateRecords().get(i));
         }
-
-        return new CommandResult(String.format(MESSAGE_TEMPLATE, summary.toString()));
+        return String.format(MESSAGE_TEMPLATE, summary.toString());
     }
 }
