@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -16,6 +17,8 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.ui.stylesheet.Stylesheet;
+import seedu.address.ui.stylesheet.exceptions.StylesheetException;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -156,6 +159,34 @@ public class MainWindow extends UiPart<Stage> {
 
     void show() {
         primaryStage.show();
+    }
+
+    private void toggleStylesheet(Stylesheet stylesheet) {
+        ObservableList<String> uiStyleSheet = primaryStage.getScene().getStylesheets();
+        uiStyleSheet.clear();
+        try {
+            String switchedStyleSheet = stylesheet.getStylesheet();
+            uiStyleSheet.add(switchedStyleSheet);
+            uiStyleSheet.add(Stylesheet.EXTENSION.getStylesheet());
+            logger.info(Stylesheet.SUCCESS_MESSAGE + stylesheet.toString());
+        } catch (StylesheetException e) {
+            logger.info(e.getMessage());
+        }
+    }
+
+    @FXML
+    public void toggleLightTheme() {
+        toggleStylesheet(Stylesheet.LIGHT);
+    }
+
+    @FXML
+    public void toggleAlternateTheme() {
+        toggleStylesheet(Stylesheet.ALTERNATE);
+    }
+
+    @FXML
+    public void toggleDarkTheme() {
+        toggleStylesheet(Stylesheet.DARK);
     }
 
     /**

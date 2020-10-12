@@ -1,0 +1,64 @@
+@import "Base.css";
+
+.root {
+    -style-background-color: #fefefe;
+    -style-pane-background-color: #fefefe;
+    -style-menu-bar-color: #5898e3;
+    -style-status-bar-color: #5898e3;
+    -style-border-color: grey;
+
+    -style-text-color: #ebeff1;
+    -style-pane-text-color: black;
+    -style-placeholder-color: #ccccce;
+
+    -style-inner-shadow: innershadow(three-pass-box, -style-border-color, 5, 0, 0, 0);
+    -style-pane-shadow: dropshadow(three-pass-box, -style-border-color, 3, 0, 0, 0);
+    -style-list-glow-shadow: dropshadow(three-pass-box, white, 19, 0, 0, 0);
+
+    -fx-background-color: -style-background-color;
+    -fx-font-family: sans-serif;
+}
+
+.list-cell:filled:even {
+    -fx-background-color: #eb764d;
+    -fx-effect: innershadow(three-pass-box, derive(#eb764d, -10%) , 4, 0, 0, 0);
+}
+
+.list-cell:filled:odd {
+    -fx-background-color: #68bfd7;
+    -fx-effect: innershadow(three-pass-box, derive(#68bfd7, -10%), 4, 0, 0, 0);
+}
+
+.list-cell:filled:even:selected {
+    -fx-background-color: #f9e2da;
+}
+
+.list-cell:filled:odd:selected {
+    -fx-background-color: #e1f0fc;
+}
+
+.list-cell:filled:selected .label {
+    -fx-text-fill: -style-pane-text-color;
+}
+
+.list-cell:filled:even:selected #cardPane {
+    -fx-border-color: #f9e2da;
+}
+
+.list-cell:filled:odd:selected #cardPane {
+    -fx-border-color: #e1f0fc;
+}
+
+.cell_big_label {
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 16px;
+    -fx-wrap-text: true;
+    -fx-text-fill: -style-text-color;
+}
+
+.cell_small_label {
+    -fx-font-family: -style-font-family;
+    -fx-font-size: 13px;
+    -fx-wrap-text: true;
+    -fx-text-fill: -style-text-color;
+}

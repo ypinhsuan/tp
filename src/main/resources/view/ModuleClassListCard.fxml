@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<HBox id="cardPane" fx:id="cardPane" xmlns:fx="http://javafx.com/fxml/1">
     <GridPane HBox.hgrow="ALWAYS">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
@@ -27,8 +27,8 @@
                 <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
             </HBox>
             <HBox alignment="CENTER_LEFT" spacing="5">
-                <Label text="No. of Students:" />
-                <Label fx:id="studentCount" text="\$studentCount" />
+                <Label text="No. of Students:" styleClass="cell_small_label" />
+                <Label fx:id="studentCount" text="\$studentCount" styleClass="cell_small_label" />
             </HBox>
         </VBox>
     </GridPane>

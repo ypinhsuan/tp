@@ -553,7 +553,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. Tutor's Pet clears all classes.
 
     Use case ends.
-    
+
 **Use case: UC14 - List students and classes**
 
 **MSS**
