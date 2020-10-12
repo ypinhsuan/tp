@@ -3,22 +3,25 @@
 .root {
     -style-background-color: #1e1e1e;
     -style-pane-background-color: #1e1e1e;
-    -style-menu-bar-color: #292929;
-    -style-status-bar-color: #292929;
-    -style-border-color: grey;
+    -style-menu-bar-color: #3b3b3b;
+    -style-status-bar-color: #3b3b3b;
+    -style-border-color: #545454;
 
     -style-text-color: #cecece;
+    -style-pane-text-color: #cecece;
     -style-placeholder-color: derive(#cecece, -20%);
 
-    -style-inner-shadow: innershadow(three-pass-box, white, 5, 0, 0, 0);
+    -style-inner-shadow: innershadow(three-pass-box, -style-border-color, 5, 0, 0, 0);
+    -style-pane-shadow: dropshadow(three-pass-box, -style-border-color, 3, 0, 0, 0);
+    -style-list-glow-shadow: dropshadow(three-pass-box, #3eb9cfc4, 19, 0, 0, 0);
 
     -fx-background-color: -style-background-color;
-    -fx-font-family: "Sans serif";
+    -fx-font-family: sans-serif;
 }
 
 .list-cell:filled:even {
-    -fx-background-color: #1e1e1e;
-    -fx-effect: innershadow(three-pass-box, derive(#1e1e1e, -10%) , 4, 0, 0, 0);
+    -fx-background-color: #3b3b3b;
+    -fx-effect: innershadow(three-pass-box, derive(#3b3b3b, -10%) , 4, 0, 0, 0);
 }
 
 .list-cell:filled:odd {
@@ -50,7 +53,7 @@
 
 /* Overrides the settings in Base.css. */
 #commandTextField {
-    -fx-background-color: -style-pane-background-color;
+    -fx-background-color: #0d0d0d;
     -fx-text-fill: #ccccce;
 }
 
@@ -60,5 +63,14 @@
 }
 
 #resultDisplay .content {
+    -fx-background-color: #0d0d0d;
+}
+
+.scroll-bar {
+    -fx-background-color: derive(-style-pane-background-color, 30%);
+}
+
+.scroll-bar .thumb {
     -fx-background-color: -style-pane-background-color;
+    -fx-background-insets: 3;
 }

@@ -177,11 +177,6 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     @FXML
-    public void toggleChocoMintTheme() {
-        toggleStylesheet(Stylesheet.CHOCOLATE_MINT);
-    }
-
-    @FXML
     public void toggleDarkTheme() {
         toggleStylesheet(Stylesheet.DARK);
     }

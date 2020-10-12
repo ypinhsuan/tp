@@ -8,12 +8,15 @@
     -style-border-color: grey;
 
     -style-text-color: white;
+    -style-pane-text-color: black;
     -style-placeholder-color: #ccccce;
 
     -style-inner-shadow: innershadow(three-pass-box, -style-border-color, 5, 0, 0, 0);
+    -style-pane-shadow: dropshadow(three-pass-box, -style-border-color, 3, 0, 0, 0);
+    -style-list-glow-shadow: dropshadow(three-pass-box, white, 19, 0, 0, 0);
 
     -fx-background-color: -style-background-color;
-    -fx-font-family: "Sans serif";
+    -fx-font-family: sans-serif;
 }
 
 .list-cell:filled:even {
