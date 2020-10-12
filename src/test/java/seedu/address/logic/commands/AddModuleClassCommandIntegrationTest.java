@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalTutorsPet.getTypicalTutorsPet;
@@ -29,11 +31,13 @@ public class AddModuleClassCommandIntegrationTest {
     public void execute_newModuleClass_success() {
         ModuleClass validModuleClass = new ModuleClassBuilder().build();
 
+        String expectedMessage = String.format(AddModuleClassCommand.MESSAGE_SUCCESS, validModuleClass);
         Model expectedModel = new ModelManager(model.getTutorsPet(), new UserPrefs());
         expectedModel.addModuleClass(validModuleClass);
+        expectedModel.commit(expectedMessage);
 
-        assertCommandSuccess(new AddModuleClassCommand(validModuleClass), model,
-                String.format(AddModuleClassCommand.MESSAGE_SUCCESS, validModuleClass), expectedModel);
+        assertCommandSuccess(new AddModuleClassCommand(validModuleClass), model, expectedMessage, expectedModel);
+        assertTrue(model.canUndo());
     }
 
     @Test
@@ -41,5 +45,6 @@ public class AddModuleClassCommandIntegrationTest {
         ModuleClass moduleClassInList = model.getTutorsPet().getModuleClassList().get(0);
         assertCommandFailure(new AddModuleClassCommand(moduleClassInList), model,
                 AddModuleClassCommand.MESSAGE_DUPLICATE_MODULE_CLASS);
+        assertFalse(model.canUndo());
     }
 }

@@ -17,6 +17,7 @@ public class ClearModuleClassCommand extends Command {
         requireNonNull(model);
 
         model.deleteAllModuleClasses();
+        model.commit(MESSAGE_SUCCESS);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

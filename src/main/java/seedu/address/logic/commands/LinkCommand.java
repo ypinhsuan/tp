@@ -77,7 +77,9 @@ public class LinkCommand extends Command {
         model.updateFilteredModuleClassList(new SameModuleClassPredicate(modifiedModuleClass));
         model.updateFilteredStudentList(new StudentInUuidCollectionPredicate(modifiedModuleClass.getStudentUuids()));
 
-        return new CommandResult(String.format(MESSAGE_LINK_SUCCESS, studentToLink.getName(), moduleClassToLink));
+        String message = String.format(MESSAGE_LINK_SUCCESS, studentToLink.getName(), moduleClassToLink);
+        model.commit(message);
+        return new CommandResult(message);
     }
 
     @Override

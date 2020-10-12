@@ -55,10 +55,12 @@ public class LinkCommandTest {
         Student student = model.getFilteredStudentList().get(studentIndex.getZeroBased());
         ModuleClass modifiedModuleClass = manualLinkStudentToModuleClass(moduleClass, student);
 
+        String expectedMessage =
+                String.format(LinkCommand.MESSAGE_LINK_SUCCESS, student.getName(), modifiedModuleClass);
         Model expectedModel = copyModelWithModuleClassAndShowStudents(model, moduleClass, modifiedModuleClass);
+        expectedModel.commit(expectedMessage);
 
-        assertCommandSuccess(new LinkCommand(moduleClassIndex, studentIndex), model,
-                String.format(LinkCommand.MESSAGE_LINK_SUCCESS, student.getName(), modifiedModuleClass), expectedModel);
+        assertCommandSuccess(new LinkCommand(moduleClassIndex, studentIndex), model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -74,10 +76,12 @@ public class LinkCommandTest {
         Student student = model.getFilteredStudentList().get(studentIndex.getZeroBased());
         ModuleClass modifiedModuleClass = manualLinkStudentToModuleClass(moduleClass, student);
 
+        String expectedMessage =
+                String.format(LinkCommand.MESSAGE_LINK_SUCCESS, student.getName(), modifiedModuleClass);
         Model expectedModel = copyModelWithModuleClassAndShowStudents(model, moduleClass, modifiedModuleClass);
+        expectedModel.commit(expectedMessage);
 
-        assertCommandSuccess(new LinkCommand(moduleClassIndex, studentIndex), model,
-                String.format(LinkCommand.MESSAGE_LINK_SUCCESS, student.getName(), modifiedModuleClass), expectedModel);
+        assertCommandSuccess(new LinkCommand(moduleClassIndex, studentIndex), model, expectedMessage, expectedModel);
     }
 
     @Test

@@ -35,8 +35,11 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListModuleClassCommand;
 import seedu.address.logic.commands.ListStudentCommand;
 import seedu.address.logic.commands.ListStudentInClassCommand;
+import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.ResetCommand;
+import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.UnlinkCommand;
+import seedu.address.logic.commands.ViewHistoryCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.components.name.NameContainsKeywordsPredicate;
 import seedu.address.model.moduleclass.ModuleClass;
@@ -173,6 +176,21 @@ public class TutorsPetParserTest {
         assertEquals(parser.parseCommand(LinkCommand.COMMAND_WORD + " "
                 + PREFIX_STUDENT_INDEX + INDEX_FIRST_ITEM.getOneBased() + " "
                 + PREFIX_CLASS_INDEX + INDEX_SECOND_ITEM.getOneBased()), command);
+    }
+
+    @Test
+    public void parseCommand_undo() throws Exception {
+        assertTrue(parser.parseCommand(UndoCommand.COMMAND_WORD) instanceof UndoCommand);
+    }
+
+    @Test
+    public void parseCommand_redo() throws Exception {
+        assertTrue(parser.parseCommand(RedoCommand.COMMAND_WORD) instanceof RedoCommand);
+    }
+
+    @Test
+    public void parseCommand_viewHistory() throws Exception {
+        assertTrue(parser.parseCommand(ViewHistoryCommand.COMMAND_WORD) instanceof ViewHistoryCommand);
     }
 
     @Test

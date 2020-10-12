@@ -35,6 +35,8 @@ public class AddModuleClassCommandTest {
         assertEquals(String.format(AddModuleClassCommand.MESSAGE_SUCCESS, validModuleClass),
                 commandResult.getFeedbackToUser());
         assertEquals(Collections.singletonList(validModuleClass), modelStub.moduleClassesAdded);
+        assertEquals(Collections.singletonList(String.format(AddModuleClassCommand.MESSAGE_SUCCESS, validModuleClass)),
+                modelStub.commitMessages);
     }
 
     @Test
@@ -98,6 +100,12 @@ public class AddModuleClassCommandTest {
     private class ModelStubAcceptingModuleClassAdded extends ModelStub {
 
         final ArrayList<ModuleClass> moduleClassesAdded = new ArrayList<>();
+        final ArrayList<String> commitMessages = new ArrayList<>();
+
+        @Override
+        public void commit(String commitMessage) {
+            commitMessages.add(commitMessage);
+        }
 
         @Override
         public boolean hasModuleClass(ModuleClass moduleClass) {

@@ -16,6 +16,7 @@ public class ClearStudentCommandTest {
     public void execute_emptyTutorsPet_success() {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
+        expectedModel.commit(ClearStudentCommand.MESSAGE_SUCCESS);
 
         assertCommandSuccess(new ClearStudentCommand(), model, ClearStudentCommand.MESSAGE_SUCCESS, expectedModel);
     }
@@ -23,7 +24,9 @@ public class ClearStudentCommandTest {
     @Test
     public void execute_nonEmptyTutorsPet_success() {
         Model model = new ModelManager(getTypicalTutorsPet(), new UserPrefs());
-        Model expectedModel = new ModelManager(getOnlyModuleClassTutorsPet(), new UserPrefs());
+        Model expectedModel = new ModelManager(getTypicalTutorsPet(), new UserPrefs());
+        expectedModel.setTutorsPet(getOnlyModuleClassTutorsPet());
+        expectedModel.commit(ClearStudentCommand.MESSAGE_SUCCESS);
 
         assertCommandSuccess(new ClearStudentCommand(), model, ClearStudentCommand.MESSAGE_SUCCESS, expectedModel);
     }

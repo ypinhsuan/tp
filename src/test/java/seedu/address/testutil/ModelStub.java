@@ -8,6 +8,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyTutorsPet;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.StateRecords;
 import seedu.address.model.moduleclass.ModuleClass;
 import seedu.address.model.student.Student;
 
@@ -53,6 +54,36 @@ public class ModelStub implements Model {
 
     @Override
     public ReadOnlyTutorsPet getTutorsPet() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void commit(String commitMessage) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public boolean canUndo() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public String undo() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public boolean canRedo() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public String redo() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public StateRecords viewStateRecords() {
         throw new AssertionError("This method should not be called.");
     }
 

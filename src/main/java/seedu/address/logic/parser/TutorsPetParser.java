@@ -23,8 +23,11 @@ import seedu.address.logic.commands.LinkCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListModuleClassCommand;
 import seedu.address.logic.commands.ListStudentCommand;
+import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.ResetCommand;
+import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.UnlinkCommand;
+import seedu.address.logic.commands.ViewHistoryCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -99,6 +102,15 @@ public class TutorsPetParser {
 
         case UnlinkCommand.COMMAND_WORD:
             return new UnlinkCommandParser().parse(arguments);
+
+        case ViewHistoryCommand.COMMAND_WORD:
+            return new ViewHistoryCommand();
+
+        case UndoCommand.COMMAND_WORD:
+            return new UndoCommand();
+
+        case RedoCommand.COMMAND_WORD:
+            return new RedoCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
@@ -33,7 +33,9 @@ public class AddStudentCommandTest {
         CommandResult commandResult = new AddStudentCommand(validStudent).execute(modelStub);
 
         assertEquals(String.format(AddStudentCommand.MESSAGE_SUCCESS, validStudent), commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validStudent), modelStub.studentsAdded);
+        assertEquals(Collections.singletonList(validStudent), modelStub.studentsAdded);
+        assertEquals(Collections.singletonList(String.format(AddStudentCommand.MESSAGE_SUCCESS, validStudent)),
+                modelStub.commitMessages);
     }
 
     @Test
@@ -97,6 +99,12 @@ public class AddStudentCommandTest {
     private class ModelStubAcceptingStudentAdded extends ModelStub {
 
         final ArrayList<Student> studentsAdded = new ArrayList<>();
+        final ArrayList<String> commitMessages = new ArrayList<>();
+
+        @Override
+        public void commit(String commitMessage) {
+            commitMessages.add(commitMessage);
+        }
 
         @Override
         public boolean hasStudent(Student student) {

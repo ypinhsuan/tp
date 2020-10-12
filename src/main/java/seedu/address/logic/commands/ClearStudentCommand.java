@@ -17,6 +17,7 @@ public class ClearStudentCommand extends Command {
         requireNonNull(model);
 
         model.deleteAllStudents();
+        model.commit(MESSAGE_SUCCESS);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

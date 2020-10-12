@@ -36,6 +36,7 @@ public class DeleteModuleClassCommandTest {
 
         ModelManager expectedModel = new ModelManager(model.getTutorsPet(), new UserPrefs());
         expectedModel.deleteModuleClass(moduleClassToDelete);
+        expectedModel.commit(expectedMessage);
 
         assertCommandSuccess(deleteModuleClassCommand, model, expectedMessage, expectedModel);
     }
@@ -60,6 +61,7 @@ public class DeleteModuleClassCommandTest {
 
         Model expectedModel = new ModelManager(model.getTutorsPet(), new UserPrefs());
         expectedModel.deleteModuleClass(moduleClassToDelete);
+        expectedModel.commit(expectedMessage);
         showNoModuleClass(expectedModel);
 
         assertCommandSuccess(deleteModuleClassCommand, model, expectedMessage, expectedModel);

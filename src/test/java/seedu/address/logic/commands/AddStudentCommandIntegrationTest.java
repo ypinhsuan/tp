@@ -29,11 +29,12 @@ public class AddStudentCommandIntegrationTest {
     public void execute_newStudent_success() {
         Student validStudent = new StudentBuilder().build();
 
+        String expectedMessage = String.format(AddStudentCommand.MESSAGE_SUCCESS, validStudent);
         Model expectedModel = new ModelManager(model.getTutorsPet(), new UserPrefs());
         expectedModel.addStudent(validStudent);
+        expectedModel.commit(expectedMessage);
 
-        assertCommandSuccess(new AddStudentCommand(validStudent), model,
-                String.format(AddStudentCommand.MESSAGE_SUCCESS, validStudent), expectedModel);
+        assertCommandSuccess(new AddStudentCommand(validStudent), model, expectedMessage, expectedModel);
     }
 
     @Test

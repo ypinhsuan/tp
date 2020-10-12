@@ -21,7 +21,7 @@ public class ModelManager implements Model {
 
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final TutorsPet tutorsPet;
+    private final VersionedTutorsPet versionedTutorsPet;
     private final UserPrefs userPrefs;
     private final FilteredList<Student> filteredStudents;
     private final FilteredList<ModuleClass> filteredModuleClasses;
@@ -35,10 +35,10 @@ public class ModelManager implements Model {
 
         logger.fine("Initializing with Tutor's Pet: " + tutorsPet + " and user prefs " + userPrefs);
 
-        this.tutorsPet = new TutorsPet(tutorsPet);
+        versionedTutorsPet = new VersionedTutorsPet(tutorsPet);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredStudents = new FilteredList<>(this.tutorsPet.getStudentList());
-        filteredModuleClasses = new FilteredList<>(this.tutorsPet.getModuleClassList());
+        filteredStudents = new FilteredList<>(versionedTutorsPet.getStudentList());
+        filteredModuleClasses = new FilteredList<>(versionedTutorsPet.getModuleClassList());
     }
 
     public ModelManager() {
@@ -87,24 +87,54 @@ public class ModelManager implements Model {
 
     @Override
     public void setTutorsPet(ReadOnlyTutorsPet tutorsPet) {
-        this.tutorsPet.resetData(tutorsPet);
+        versionedTutorsPet.resetData(tutorsPet);
     }
 
     @Override
     public ReadOnlyTutorsPet getTutorsPet() {
-        return tutorsPet;
+        return versionedTutorsPet;
+    }
+
+    @Override
+    public void commit(String commitMessage) {
+        versionedTutorsPet.commit(commitMessage);
+    }
+
+    @Override
+    public boolean canUndo() {
+        return versionedTutorsPet.canUndo();
+    }
+
+    @Override
+    public String undo() {
+        return versionedTutorsPet.undo();
+    }
+
+    @Override
+    public boolean canRedo() {
+        return versionedTutorsPet.canRedo();
+    }
+
+    @Override
+    public String redo() {
+        return versionedTutorsPet.redo();
+    }
+
+    @Override
+    public StateRecords viewStateRecords() {
+        return versionedTutorsPet.viewStateRecords();
     }
 
     @Override
     public boolean hasStudent(Student student) {
         requireNonNull(student);
 
-        return tutorsPet.hasStudent(student);
+        return versionedTutorsPet.hasStudent(student);
     }
 
     @Override
     public void addStudent(Student student) {
-        tutorsPet.addStudent(student);
+        versionedTutorsPet.addStudent(student);
         updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
     }
 
@@ -112,31 +142,31 @@ public class ModelManager implements Model {
     public void setStudent(Student target, Student editedStudent) {
         requireAllNonNull(target, editedStudent);
 
-        tutorsPet.setStudent(target, editedStudent);
+        versionedTutorsPet.setStudent(target, editedStudent);
     }
 
     @Override
     public void deleteStudent(Student target) {
         requireNonNull(target);
 
-        tutorsPet.deleteStudent(target);
+        versionedTutorsPet.deleteStudent(target);
     }
 
     @Override
     public void deleteAllStudents() {
-        tutorsPet.deleteAllStudents();
+        versionedTutorsPet.deleteAllStudents();
     }
 
     @Override
     public boolean hasModuleClass(ModuleClass moduleClass) {
         requireNonNull(moduleClass);
 
-        return tutorsPet.hasModuleClass(moduleClass);
+        return versionedTutorsPet.hasModuleClass(moduleClass);
     }
 
     @Override
     public void addModuleClass(ModuleClass moduleClass) {
-        tutorsPet.addModuleClass(moduleClass);
+        versionedTutorsPet.addModuleClass(moduleClass);
         updateFilteredModuleClassList(PREDICATE_SHOW_ALL_MODULE_CLASS);
     }
 
@@ -144,17 +174,17 @@ public class ModelManager implements Model {
     public void setModuleClass(ModuleClass target, ModuleClass editedModuleClass) {
         requireAllNonNull(target, editedModuleClass);
 
-        tutorsPet.setModuleClass(target, editedModuleClass);
+        versionedTutorsPet.setModuleClass(target, editedModuleClass);
     }
 
     @Override
     public void deleteModuleClass(ModuleClass target) {
-        tutorsPet.deleteModuleClass(target);
+        versionedTutorsPet.deleteModuleClass(target);
     }
 
     @Override
     public void deleteAllModuleClasses() {
-        tutorsPet.deleteAllModuleClasses();
+        versionedTutorsPet.deleteAllModuleClasses();
     }
 
     //=========== Filtered Student List Accessors =============================================================
@@ -203,7 +233,7 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return tutorsPet.equals(other.tutorsPet)
+        return versionedTutorsPet.equals(other.versionedTutorsPet)
                 && userPrefs.equals(other.userPrefs)
                 && filteredStudents.equals(other.filteredStudents)
                 && filteredModuleClasses.equals(other.filteredModuleClasses);

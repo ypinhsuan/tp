@@ -42,7 +42,9 @@ public class DeleteModuleClassCommand extends Command {
 
         ModuleClass moduleClassToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteModuleClass(moduleClassToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_MODULE_CLASS_SUCCESS, moduleClassToDelete));
+        String message = String.format(MESSAGE_DELETE_MODULE_CLASS_SUCCESS, moduleClassToDelete);
+        model.commit(message);
+        return new CommandResult(message);
     }
 
     @Override
