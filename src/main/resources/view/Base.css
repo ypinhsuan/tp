@@ -1,6 +1,6 @@
 .background {
-    -fx-background-color: white;
-    background-color: white; /* Used in the default.html file */
+    -fx-background-color: #2c2c2e;
+    background-color: #383838; /* Used in the default.html file */
 }
 
 .tab-pane {
@@ -29,7 +29,13 @@
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
     -fx-padding: 0 0 0 0;
-    -fx-background-color: -style-pane-background-color;
+    -fx-background-insets: 0 0 10 0;
+    -fx-border-radius: 7;
+    -fx-background-radius: 7;
+}
+
+.list-cell:empty {
+    -fx-background-color:transparent;
 }
 
 .pane-with-border {
@@ -38,23 +44,64 @@
      -fx-border-top-width: 1px;
 }
 
+.list-header .font {
+    /*-fx-font-family: "SansSerif Bold Italic";*/
+    -fx-font-family: Courier;
+    -fx-font-weight: bold;
+    -fx-font-size: 15px;
+    -fx-font-style: italic;
+    -fx-fill: pink;
+}
+
+#moduleClassListHeader {
+    -fx-font-family: "SansSerif";
+    -fx-font-weight: bold;
+    -fx-font-size: 15px;
+    -fx-font-style: italic;
+    -fx-fill: pink;
+}
+
+#moduleClassList {
+    -fx-background-radius: 0 7 7 0;
+    -fx-border-radius: 0 7 7 0;
+    -fx-alignment: center;
+    -fx-border-color: -style-border-color;
+    -fx-border-width: 1 1 1 8;
+    -fx-effect: dropshadow(three-pass-box, #3eb9cfc4, 19, 0, 0, 0);
+}
+
+#divider {
+    -fx-padding: 0;
+    -fx-background-color: #b7b9bd;
+    -fx-border-color: #b7b9bd;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-background-inset: 7;
+}
+
+#studentClassListHeader {
+    -fx-font-family: "SansSerif";
+    -fx-font-weight: bold;
+    -fx-font-size: 15px;
+    -fx-font-style: italic;
+    -fx-fill: pink;
+}
+
+#studentList {
+    -fx-background-radius: 7 0 0 7;
+    -fx-border-radius: 7 0 0 7;
+    -fx-alignment: center;
+    -fx-border-color: -style-border-color;
+    -fx-border-width: 1 8 1 1;
+    -fx-effect: dropshadow(three-pass-box, #3eb9cfc4, 19, 0, 0, 0);
+}
+
 .status-bar {
     -fx-background-color: -style-status-bar-color;
-    -fx-effect: dropshadow(three-pass-box, -style-status-bar-color, 6, 0, 0, 0);
-}
-
-.result-display {
-    -fx-border-color: -style-border-color;
-    -fx-effect: -style-inner-shadow;
-    -fx-font-size: 13pt;
-    -fx-text-fill: derive(-style-text-color, -50%);
-}
-
-#resultDisplay .content {
-    -fx-border-width: 0;
 }
 
 .status-bar .label {
+    -fx-font-family: "Segoe UI Light";
     -fx-text-fill: -style-text-color;
     -fx-padding: 4px;
     -fx-pref-height: 30px;
@@ -65,14 +112,26 @@
     -fx-border-width: 1px;
 }
 
+.result-display {
+    -fx-background-color: -style-border-color;
+    -fx-font-family: "Segoe UI Light";
+    -fx-font-size: 13pt;
+    -fx-text-fill: white;
+}
+
+#resultDisplay .content {
+    -fx-border-width: 0;
+}
+
 .menu-bar {
     -fx-background-color: -style-menu-bar-color;
-    -fx-effect: dropshadow(three-pass-box, -style-menu-bar-color, 10, 0, 0, 0);
 }
 
 .menu-bar .label {
     -fx-font-size: 14pt;
+    -fx-font-family: "Segoe UI Light";
     -fx-text-fill: -style-text-color;
+    -fx-opacity: 0.9;
 }
 
 .context-menu {
@@ -119,22 +178,13 @@
     -fx-background-color: white;
     -fx-background-insets: 0;
     -fx-border-color: -style-border-color;
-    -fx-background-radius: 2px;
-    -fx-effect: -style-inner-shadow;
+    -fx-border-insets: 0;
+    -fx-border-width: 1;
+    -fx-font-family: "Segoe UI Light";
     -fx-font-size: 13pt;
     -fx-text-fill: black;
-    -fx-prompt-text-fill: -style-placeholder-color;
 }
 
-#studentListView {
-    -fx-background-color: -style-background-color;
-    -fx-border-color: -style-border-color;
-}
-
-#moduleClassListView {
-    -fx-background-color: -style-background-color;
-    -fx-border-color: -style-border-color;
-}
 
 #tags {
     -fx-hgap: 7;
