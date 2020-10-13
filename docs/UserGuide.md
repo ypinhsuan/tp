@@ -3,11 +3,13 @@ layout: page
 title: User Guide
 ---
 
-As a Computer Science teaching assistant, the traditional approach of managing students within your class would be to manually record their progress and attendance.
-However, as you will notice after some time, manual students tracking is unnecessarily time-consuming. This is why we have created Tutor's Pet.
+As a Computer Science teaching assistant, the traditional approach of managing students within your class would be to 
+manually record their learning progress and attendance. However, as you will notice after some time, manual students 
+tracking is unnecessarily time-consuming. This is why we have created Tutor's Pet.
 
-Tutor’s Pet is a desktop application that helps Computer Science teaching assistants manage their students. 
-It allows teaching assistants to record the classes that they teach, add students into those classes, and keep track of students’ attendance in those lessons.
+Tutor’s Pet is a desktop application that helps you reduce the amount of time you spend on administrative tasks as a 
+teaching assistant. It allows you to keep track of the students in your classes, and record both their attendance and 
+participation scores.
 
 * Table of Contents
 {:toc}
@@ -83,8 +85,8 @@ It allows teaching assistants to record the classes that they teach, add student
 | **List All Students And Classes** | `list`                                                                                                                                                                    |
 | **Linking Student To A Class**    | `link s/STUDENT_INDEX c/CLASS_INDEX`<br> e.g., `link s/1 c/2`                                                                                                             |
 | **Unlink Student From A Class**   | `unlink s/STUDENT_INDEX c/CLASS_INDEX` <br> e.g., `unlink s/1 c/2`                                                                                                        |
-| **Add Lesson**                    | `add-lesson c/CLASS_INDEX d/DAY st/STARTTIME et/ENDTIME v/VENUE r/NO_OF_TIMES` <br> e.g., `add-lesson c/1 d/MONDAY st/8.00AM et/10.00AM v/COM1 #01-01 r/13`               |
-| **Edit Lesson**                   | `edit-lesson c/CLASS_INDEX l/LESSON_INDEX [d/DAY] [st/STARTTIME] [et/ENDTIME] [v/VENUE]` <br> e.g., `edit-lesson c/1 l/1 d/TUESDAY st/10.00AM et/12.00PM v/COM2 #02-02`   |
+| **Add Lesson**                    | `add-lesson c/CLASS_INDEX d/DAY st/START_TIME et/END_TIME v/VENUE r/NO_OF_TIMES` <br> e.g., `add-lesson c/1 d/MONDAY st/0800 et/1000 v/COM1 #01-01 r/13`                  |
+| **Edit Lesson**                   | `edit-lesson c/CLASS_INDEX l/LESSON_INDEX [d/DAY] [st/START_TIME] [et/END_TIME] [v/VENUE]` <br> e.g., `edit-lesson c/1 l/1 d/TUESDAY st/1000 et/1200 v/COM2 #02-02`       |
 | **Delete Lesson**                 | `delete-lesson c/CLASS_INDEX l/LESSON_INDEX` <br> e.g., `delete-lesson c/1 l/1`                                                                                           |
 | **Add Attendance Record**         | `add-attendance c/CLASS_INDEX l/LESSON_INDEX s/STUDENT_INDEX w/WEEK p/PARTICIPATION_SCORE` <br> e.g., `add-attendance c/1 l/1 s/1 w/1 p/1`                                |
 | **Edit Attendance Record**        | `edit-attendance c/CLASS_INDEX l/LESSON_INDEX s/STUDENT_INDEX w/WEEK p/PARTICIPATION_SCORE` <br> e.g., `edit-attendance c/1 l/1 s/1 w/1 p/10`                             |
@@ -130,7 +132,7 @@ Edits an existing student in the application.
 
 Format: `edit-student INDEX [n/NAME] [t/TELEGRAM_USERNAME] [e/EMAIL] [tag/TAG]…​`
 
-* Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive whole number** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the student will be removed i.e adding of tags is not cumulative.
@@ -166,7 +168,7 @@ Format: `delete-student INDEX`
 
 * Deletes the student at the specified `INDEX`.
 * The index refers to the index number shown in the displayed student list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index **must be a positive whole number** 1, 2, 3, …​
 
 Examples:
 * `list` followed by `delete-student 2` deletes the 2nd student in the application.
@@ -214,7 +216,7 @@ Format: `edit-class INDEX n/CLASS_NAME`
 
 * Edits the class at the specified `INDEX`.
 * The index refers to the index number shown in the displayed class list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index **must be a positive whole number** 1, 2, 3, …​
 * A new class name must be provided.
 
 Examples:
@@ -245,7 +247,7 @@ Format: `delete-class INDEX`
 
 * Deletes the class at the specified `INDEX`.
 * The index refers to the index number shown in the displayed class list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index **must be a positive whole number** 1, 2, 3, …​
 
 Examples:
 * `delete-class 2` deletes the 2nd class in the application.
@@ -271,7 +273,7 @@ Format: `link s/STUDENT_INDEX c/CLASS_INDEX`
 * Links the student at the specified `STUDENT_INDEX` to the class at the specified `CLASS_INDEX`.
 * `STUDENT_INDEX` refers to the index number shown in the displayed student list.
 * `CLASS_INDEX` refers to the index number shown in the displayed class list.
-* The indexes **must be positive integers** 1, 2, 3, …​
+* The indexes **must be positive whole numbers** 1, 2, 3, …​
 
 Examples:
 * `list` followed by `link s/1 c/2` links the 1st student in the application to the 2nd class in the application.
@@ -286,7 +288,7 @@ Format: `unlink s/STUDENT_INDEX c/CLASS_INDEX`
 * Unlinks the student at the specified `STUDENT_INDEX` from the class at the specified `CLASS_INDEX`.
 * `STUDENT_INDEX` refers to the index number shown in the displayed student list.
 * `CLASS_INDEX` refers to the index number shown in the displayed class list.
-* The indexes **must be positive integers** 1, 2, 3, …​
+* The indexes **must be positive whole numbers** 1, 2, 3, …​
 
 Examples:
 *  `unlink s/1 c/2` Unlinks the 1st student from the 2nd class in the respective lists.
@@ -297,23 +299,23 @@ Examples:
 
 Adds a lesson to the application.
 
-Format: `add-lesson c/CLASS_INDEX d/DAY st/STARTTIME et/ENDTIME v/VENUE r/NO_OF_TIMES`
+Format: `add-lesson c/CLASS_INDEX d/DAY st/START_TIME et/END_TIME v/VENUE r/NO_OF_TIMES`
 
 Examples:
-* `add-lesson c/1 d/MONDAY st/8.00AM et/10.00AM v/COM1 #01-01 r/13`
+* `add-lesson c/1 d/MONDAY st/0800 et/1000 v/COM1 #01-01 r/13`
 
 #### Editing a lesson : `edit-lesson`
 
 Edits an existing lesson in the application.
 
-Format: `edit-lesson c/CLASS_INDEX l/LESSON_INDEX [d/DAY] [st/STARTTIME] [et/ENDTIME] [v/VENUE]`
+Format: `edit-lesson c/CLASS_INDEX l/LESSON_INDEX [d/DAY] [st/START_TIME] [et/END_TIME] [v/VENUE]`
 
 * Edits the lesson at the specified `CLASS_INDEX` + `LESSON_INDEX`.
-* The indexes **must be positive integers** 1, 2, 3, …​
+* The indexes **must be positive whole numbers** 1, 2, 3, …​
 * User has to specify at least 1 field (DAY/STARTTIME/ENDTIME/VENUE) to be changed.
 
 Examples:
-*  `edit-lesson c/1 l/1 d/TUESDAY st/10.00AM et/12.00PM v/COM2 #02-02` Edits the 1st lesson of the 1st class to be held on Tuesdays, 10.00AM to 12.00PM at COM2 #02-02.
+*  `edit-lesson c/1 l/1 d/TUESDAY st/1000 et/1200 v/COM2 #02-02` Edits the 1st lesson of the 1st class to be held on Tuesdays, 10.00AM to 12.00PM at COM2 #02-02.
 
 #### Deleting a lesson : `delete-lesson`
 
@@ -322,7 +324,7 @@ Deletes the specified lesson from the application.
 Format: `delete-lesson c/CLASS_INDEX l/LESSON_INDEX`
 
 * Deletes the lesson at the specified `CLASS_INDEX` + `LESSON_INDEX`.
-* The indexes **must be positive integers** 1, 2, 3, …​
+* The indexes **must be positive whole numbers** 1, 2, 3, …​
 
 ### Managing Attendance Records
 
@@ -342,11 +344,11 @@ Edits an existing attendance record in the application.
 Format: `edit-attendance c/CLASS_INDEX l/LESSON_INDEX s/STUDENT_INDEX w/WEEK p/PARTICIPATION_SCORE`
 
 * Edits the participation score of the attendance record at the specified `CLASS_INDEX` + `LESSON_INDEX` + `STUDENT_INDEX` + `WEEK`.
-* The indexes **must be positive integers** 1, 2, 3, …​
-* `PARTICIPATION_SCORE` and `WEEK` must be non-negative integers.
+* The indexes **must be positive whole numbers** 1, 2, 3, …​
+* `PARTICIPATION_SCORE` and `WEEK` must be non-negative whole numbers.
 
 Examples:
-*  `edit-attendance m/1 l/1 s/1 w/1 p/10` Edits the participation score of the 1st student of the 1st lesson of the 1st class to 10 points.
+*  `edit-attendance m/1 l/1 s/1 w/1 p/10` Edits the 1st week's participation score of the 1st student of the 1st lesson of the 1st class to 10 points.
 
 #### Finding attendance record by indexes: `find-attendance`
 
@@ -355,11 +357,11 @@ Finds an attendance record at the specified `CLASS_INDEX` + `LESSON_INDEX` + `ST
 Format: `find-attendance c/CLASS_INDEX l/LESSON_INDEX s/STUDENT_INDEX w/WEEK`
 
 * Finds the attendance record at the specified `CLASS_INDEX` + `LESSON_INDEX` + `STUDENT_INDEX` + `WEEK`.
-* The indexes **must be positive integers** 1, 2, 3, …​
-* `WEEK` must be a non-negative integer.
+* The indexes **must be positive whole numbers** 1, 2, 3, …​
+* `WEEK` must be a non-negative whole number.
 
 Examples:
-* `find-attendance c/1 l/1 s/1 w/1` Finds the attendance record of the 1st student of the 1st lesson of the 1st class.
+* `find-attendance c/1 l/1 s/1 w/1` Finds the 1st week's attendance record of the 1st student of the 1st lesson of the 1st class.
 
 #### Deleting an attendance record : `delete-attendance`
 
@@ -368,11 +370,11 @@ Deletes the specified attendance record from the application.
 Format: `delete-attendance c/CLASS_INDEX l/LESSON_INDEX s/STUDENT_INDEX w/WEEK`
 
 * Deletes the attendance record at the specified `CLASS_INDEX` + `LESSON_INDEX` + `STUDENT_INDEX` + `WEEK`.
-* The indexes **must be positive integer** 1, 2, 3, …​
-* `WEEK` must be a non-negative integer.
+* The indexes **must be positive whole numbers** 1, 2, 3, …​
+* `WEEK` must be a non-negative whole number.
 
 Examples:
-* `delete-attendance c/1 l/1 s/1 w/1` deletes the attendance record of the 1st student of the 1st lesson of the 1st class.
+* `delete-attendance c/1 l/1 s/1 w/1` Deletes the 1st week's attendance record of the 1st student of the 1st lesson of the 1st class.
 
 ### Undo previous command : `undo`
 
@@ -386,9 +388,9 @@ Redo the most recent undo command.
 
 Format : `redo`
 
-### View command history : `view-history`
+### View action history : `view-history`
 
-View a list of undo command that has been executed.
+View a list of actions that can be undone or redone.
 
 Format : `view-history` 
 

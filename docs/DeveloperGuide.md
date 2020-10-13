@@ -288,31 +288,31 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-| Use Case ID | Description                         |
-|-------------|----------------------------------   |
-| UC01        | Add a student                       |
-| UC02        | List students                       |
-| UC03        | Edit a student                      |
-| UC04        | Find a student                      |
-| UC05        | Delete a student                    |
-| UC06        | Clear all students                  |
-| UC07        | Add a class                         |
-| UC08        | List classes                        |
-| UC09        | List students within a class        |
-| UC10        | Edit a class                        |
-| UC11        | Find a class                        |
-| UC12        | Delete a class                      |
-| UC13        | Clear all classes                   |
-| UC14        | List students and classes           |
-| UC15        | Link a student to a class           |
-| UC16        | Unlink a student from a class       |
-| UC17        | Add lesson                          |
-| UC18        | Edit lesson                         |
-| UC19        | Delete lesson                       |
-| UC20        | Add attendance record of student    |
-| UC21        | Edit attendance record of student   |
-| UC22        | Find attendance record of student   |
-| UC23        | Delete attendance record of student |
+| Use Case ID | Description                               |
+|-------------|-------------------------------------------|
+| UC01        | Add a student                             |
+| UC02        | List students                             |
+| UC03        | Edit a student                            |
+| UC04        | Find a student                            |
+| UC05        | Delete a student                          |
+| UC06        | Clear all students                        |
+| UC07        | Add a class                               |
+| UC08        | List classes                              |
+| UC09        | List students within a class              |
+| UC10        | Edit a class                              |
+| UC11        | Find a class                              |
+| UC12        | Delete a class                            |
+| UC13        | Clear all classes                         |
+| UC14        | List students and classes                 |
+| UC15        | Link a student to a class                 |
+| UC16        | Unlink a student from a class             |
+| UC17        | Add a lesson                              |
+| UC18        | Edit a lesson                             |
+| UC19        | Delete a lesson                           |
+| UC20        | Add an attendance record of a student     |
+| UC21        | Edit the attendance record of a student   |
+| UC22        | Find the attendance record of a student   |
+| UC23        | Delete the attendance record of a student |
 (For all use cases below, the **System** is `Tutor's Pet` and the **Actor** is the `user`, unless specified otherwise)
 
 **Use case: UC01 - Add a student**
