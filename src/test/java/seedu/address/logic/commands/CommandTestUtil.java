@@ -15,6 +15,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.TutorsPet;
+import seedu.address.model.lesson.Day;
 import seedu.address.model.moduleclass.ModuleClass;
 import seedu.address.model.student.Student;
 import seedu.address.testutil.EditModuleClassDescriptorBuilder;
@@ -85,6 +86,14 @@ public class CommandTestUtil {
         DESC_CS2100_LAB = new EditModuleClassDescriptorBuilder().withName(VALID_NAME_CS2100_LAB).build();
         DESC_CS2103T_TUTORIAL = new EditModuleClassDescriptorBuilder().withName(VALID_NAME_CS2103T_TUTORIAL).build();
     }
+
+    // lesson-related constants
+
+    public static final String VALID_START_TIME_1400 = "14:00";
+    public static final String VALID_END_TIME_1600 = "16:00";
+    public static final Day VALID_DAY_WED = Day.WEDNESDAY;
+    public static final int VALID_NUMBER_OF_OCCURRENCES_7 = 7;
+    public static final String VALID_VENUE_COM1_B111 = "COM1-B111";
 
     /**
      * Executes the given {@code command}, confirms that <br>
