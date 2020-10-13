@@ -47,7 +47,7 @@ public class Lesson {
         return day;
     }
 
-    public NumberOfOccurrences getNumberOfOccurrence() {
+    public NumberOfOccurrences getNumberOfOccurrences() {
         return numberOfOccurrences;
     }
 
@@ -90,7 +90,7 @@ public class Lesson {
         return otherLesson.getStartTime().equals(getStartTime())
                 && otherLesson.getEndTime().equals(getEndTime())
                 && otherLesson.getDay().equals(getDay())
-                && otherLesson.getNumberOfOccurrence().equals(getNumberOfOccurrence())
+                && otherLesson.getNumberOfOccurrences().equals(getNumberOfOccurrences())
                 && otherLesson.getVenue().equals(getVenue());
     }
 
@@ -104,12 +104,14 @@ public class Lesson {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(day)
-                .append(" Time: ")
+                .append(" ")
                 .append(TIME_FORMATTER.format(getStartTime()))
                 .append(" to ")
                 .append(TIME_FORMATTER.format(getEndTime()))
                 .append(" Venue: ")
-                .append(getVenue());
+                .append(getVenue())
+                .append(" Number of occurrences: ")
+                .append(getNumberOfOccurrences());
         return builder.toString();
     }
 }

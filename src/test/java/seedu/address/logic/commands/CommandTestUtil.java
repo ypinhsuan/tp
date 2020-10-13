@@ -15,6 +15,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.TutorsPet;
+import seedu.address.model.lesson.Day;
 import seedu.address.model.moduleclass.ModuleClass;
 import seedu.address.model.student.Student;
 import seedu.address.testutil.EditModuleClassDescriptorBuilder;
@@ -90,7 +91,7 @@ public class CommandTestUtil {
 
     public static final String VALID_START_TIME_WED_2_TO_4 = "14:00";
     public static final String VALID_END_TIME_WED_2_TO_4 = "16:00";
-    public static final String VALID_DAY_WED_2_TO_4 = "WEDNESDAY";
+    public static final Day VALID_DAY_WED_2_TO_4 = Day.WEDNESDAY;
     public static final int VALID_NUMBER_OF_OCCURRENCES_WED_2_TO_4 = 7;
     public static final String VALID_VENUE_WED_2_TO_4 = "COM1-B111";
 

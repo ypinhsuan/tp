@@ -15,7 +15,7 @@ public class LessonBuilder {
 
     public static final String DEFAULT_START_TIME = "08:00";
     public static final String DEFAULT_END_TIME = "10:00";
-    public static final String DEFAULT_DAY = "TUESDAY";
+    public static final Day DEFAULT_DAY = Day.TUESDAY;
     public static final int DEFAULT_NUMBER_OF_OCCURRENCES = 13;
     public static final String DEFAULT_VENUE = "COM1-0211";
 
@@ -33,7 +33,7 @@ public class LessonBuilder {
     public LessonBuilder() {
         startTime = LocalTime.parse(DEFAULT_START_TIME, TIME_FORMATTER);
         endTime = LocalTime.parse(DEFAULT_END_TIME, TIME_FORMATTER);
-        day = Day.valueOf(DEFAULT_DAY);
+        day = DEFAULT_DAY;
         numberOfOccurrences = new NumberOfOccurrences(DEFAULT_NUMBER_OF_OCCURRENCES);
         venue = new Venue(DEFAULT_VENUE);
     }
@@ -45,7 +45,7 @@ public class LessonBuilder {
         startTime = lessonToCopy.getStartTime();
         endTime = lessonToCopy.getEndTime();
         day = lessonToCopy.getDay();
-        numberOfOccurrences = lessonToCopy.getNumberOfOccurrence();
+        numberOfOccurrences = lessonToCopy.getNumberOfOccurrences();
         venue = lessonToCopy.getVenue();
     }
 
@@ -68,8 +68,8 @@ public class LessonBuilder {
     /**
      * Sets the {@code day} of the {@code Lesson} that we are building.
      */
-    public LessonBuilder withDay(String day) {
-        this.day = Day.valueOf(day);
+    public LessonBuilder withDay(Day day) {
+        this.day = day;
         return this;
     }
 
