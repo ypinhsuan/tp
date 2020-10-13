@@ -17,21 +17,22 @@ public class Lesson {
     private final LocalTime startTime;
     private final LocalTime endTime;
     private final Day day;
-    private final Recurrence recurrence;
-    private final Location location;
+    private final NumberOfOccurrences numberOfOccurrences;
+    private final Venue venue;
 
     /**
      * Every field must be present and not null.
      * Creates a new lesson with the specified parameters.
      */
-    public Lesson(LocalTime startTime, LocalTime endTime, Day day, Recurrence recurrence, Location location) {
-        requireAllNonNull(startTime, endTime, recurrence, location, day);
+    public Lesson(LocalTime startTime, LocalTime endTime, Day day, NumberOfOccurrences numberOfOccurrences,
+                  Venue venue) {
+        requireAllNonNull(startTime, endTime, day, numberOfOccurrences, venue);
 
         this.startTime = startTime;
         this.endTime = endTime;
         this.day = day;
-        this.recurrence = recurrence;
-        this.location = location;
+        this.numberOfOccurrences = numberOfOccurrences;
+        this.venue = venue;
     }
 
     public LocalTime getStartTime() {
@@ -46,18 +47,16 @@ public class Lesson {
         return day;
     }
 
-    public Recurrence getRecurrence() {
-        return recurrence;
+    public NumberOfOccurrences getNumberOfOccurrence() {
+        return numberOfOccurrences;
     }
 
-    public Location getLocation() {
-        return location;
+    public Venue getVenue() {
+        return venue;
     }
-
-
 
     /**
-     * Returns true if both lessons have the same start time, end time, day and location.
+     * Returns true if both lessons have the same start time, end time, day and venue.
      * This defines a weaker notion of equality between two lessons.
      */
     public boolean isSameLesson(Lesson otherLesson) {
@@ -67,13 +66,13 @@ public class Lesson {
 
         return otherLesson != null
                 && otherLesson.getStartTime().equals(getStartTime())
-                && otherLesson.getEndTime().equals(getStartTime())
+                && otherLesson.getEndTime().equals(getEndTime())
                 && otherLesson.getDay().equals(getDay())
-                && otherLesson.getLocation().equals(getLocation());
+                && otherLesson.getVenue().equals(getVenue());
     }
 
     /**
-     * Returns true if both lessons have same start time, end time, day, recurrence and location.
+     * Returns true if both lessons have same start time, end time, day, number of occurrences and venue.
      * This defines a stronger notion of equality between two lessons.
      */
     @Override
@@ -89,16 +88,16 @@ public class Lesson {
         Lesson otherLesson = (Lesson) other;
 
         return otherLesson.getStartTime().equals(getStartTime())
-                && otherLesson.getEndTime().equals(getStartTime())
+                && otherLesson.getEndTime().equals(getEndTime())
                 && otherLesson.getDay().equals(getDay())
-                && otherLesson.getRecurrence().equals(getRecurrence())
-                && otherLesson.getLocation().equals(getLocation());
+                && otherLesson.getNumberOfOccurrence().equals(getNumberOfOccurrence())
+                && otherLesson.getVenue().equals(getVenue());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(startTime, endTime, day, recurrence, location);
+        return Objects.hash(startTime, endTime, day, numberOfOccurrences, venue);
     }
 
     @Override
@@ -109,8 +108,8 @@ public class Lesson {
                 .append(TIME_FORMATTER.format(getStartTime()))
                 .append(" to ")
                 .append(TIME_FORMATTER.format(getEndTime()))
-                .append(" Location: ")
-                .append(getLocation());
+                .append(" Venue: ")
+                .append(getVenue());
         return builder.toString();
     }
 }

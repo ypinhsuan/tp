@@ -86,6 +86,14 @@ public class CommandTestUtil {
         DESC_CS2103T_TUTORIAL = new EditModuleClassDescriptorBuilder().withName(VALID_NAME_CS2103T_TUTORIAL).build();
     }
 
+    // lesson-related constants
+
+    public static final String VALID_START_TIME_WED_2_TO_4 = "14:00";
+    public static final String VALID_END_TIME_WED_2_TO_4 = "16:00";
+    public static final String VALID_DAY_WED_2_TO_4 = "WEDNESDAY";
+    public static final int VALID_NUMBER_OF_OCCURRENCES_WED_2_TO_4 = 7;
+    public static final String VALID_VENUE_WED_2_TO_4 = "COM1-B111";
+
     /**
      * Executes the given {@code command}, confirms that <br>
      * - the returned {@link CommandResult} matches {@code expectedCommandResult} <br>
