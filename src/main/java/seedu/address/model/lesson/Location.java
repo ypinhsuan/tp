@@ -3,6 +3,10 @@ package seedu.address.model.lesson;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents the location of a lesson.
+ * Guarantees: immutable; is valid as declared in {@link #isValidLocation(String)}
+ */
 public class Location {
 
     public static final String MESSAGE_CONSTRAINTS =
@@ -12,6 +16,11 @@ public class Location {
 
     public final String location;
 
+    /**
+     * Constructs a {@code Location}.
+     *
+     * @param location A valid location.
+     */
     public Location(String location) {
         requireNonNull(location);
         checkArgument(isValidLocation(location), MESSAGE_CONSTRAINTS);
@@ -19,6 +28,9 @@ public class Location {
         this.location = location;
     }
 
+    /**
+     * Returns true if the given String is a valid location.
+     */
     public static boolean isValidLocation(String test) {
         return test.matches(VALIDATION_REGEX);
     }
