@@ -3,8 +3,11 @@ layout: page
 title: User Guide
 ---
 
-Tutor's Pet is a **desktop application for managing students and classes, optimised for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
-If you can type fast, Tutor's pet can get your class management tasks done faster than traditional GUI apps.
+As a Computer Science teaching assistant, the traditional approach of managing students within your class would be to manually record their progress and attendance.
+However, as you will notice after some time, manual students tracking is unnecessarily time-consuming. This is why we have created Tutor's Pet.
+
+Tutor’s Pet is a desktop application that helps Computer Science teaching assistants manage their students. 
+It allows teaching assistants to record the classes that they teach, add students into those classes, and keep track of students’ attendance in those lessons.
 
 * Table of Contents
 {:toc}
@@ -61,27 +64,37 @@ If you can type fast, Tutor's pet can get your class management tasks done faste
 
 ## Command overview
 
-| Action                            | Format, Examples                                                                                                                            |
-|-----------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
-| **Help**                          | `help`                                                                                                                                      |
-| **Add Student**                   | `add-student n/NAME t/TELEGRAM_USERNAME e/EMAIL [tag/TAG]…​` <br> e.g., `add-student n/John Doe t/johndoe e/johnd@example.com tag/student`   |
-| **List All Students**             | `list-student`                                                                                                                              |
-| **Edit Student**                  | `edit-student INDEX [n/NAME] [t/TELEGRAM_USERNAME] [e/EMAIL] [tag/TAG]…​`<br> e.g., `edit-student 2 n/James Lee e/jameslee@example.com`      |
-| **Find Student**                  | `find-student KEYWORD [MORE_KEYWORDS]`<br> e.g., `find-student James Jake`                                                                  |
-| **Delete Student**                | `delete-student INDEX`<br> e.g., `delete-student 3`                                                                                         |
-| **Clear All Students**            | `clear-student`                                                                                                                             |
-| **Add Class**                     | `add-class n/CLASS_NAME`<br> e.g., `add-class n/CS2103T Tutorial T10`                                                                       |
-| **List All Classes**              | `list-class`                                                                                                                                |
-| **List Students In A Class**      | `list-students c/INDEX`<br> e.g., `list-students c/3`                                                                                       |
-| **Edit Class**                    | `edit-class INDEX n/CLASS_NAME` <br> e.g., `edit-class 1 n/CS2103T Tutorial T10`                                                            |
-| **Find Class**                    | `find-class KEYWORD [MORE_KEYWORDS]`<br> e.g., `find-class CS2103T`                                                                         |
-| **Delete Class**                  | `delete-class INDEX` e.g., `delete-class 2`                                                                                                 |
-| **Clear All Classes**             | `clear-class`                                                                                                                               |
-| **List All Students And Classes** | `list`                                                                                                                                      |
-| **Linking Student To A Class**    | ``link s/STUDENT_INDEX c/CLASS_INDEX``<br> e.g., `link s/1 c/2`                                                                             |
-| **Unlink Student From A Class**   | `unlink s/STUDENT_INDEX c/CLASS_INDEX` <br> e.g., `unlink s/1 c/2`                                                                          |
-| **Exit**                          | `exit`                                                                                                                                      |
-| **Reset**                         | `reset`                                                                                                                                     |
+| Action                            | Format, Examples                                                                                                                                                          |
+|-----------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Help**                          | `help`                                                                                                                                                                    |
+| **Add Student**                   | `add-student n/NAME t/TELEGRAM_USERNAME e/EMAIL [tag/TAG]…​` <br> e.g., `add-student n/John Doe t/johndoe e/johnd@example.com tag/student`                             |
+| **List All Students**             | `list-student`                                                                                                                                                            |
+| **Edit Student**                  | `edit-student INDEX [n/NAME] [t/TELEGRAM_USERNAME] [e/EMAIL] [tag/TAG]…​`<br> e.g., `edit-student 2 n/James Lee e/jameslee@example.com`                                |
+| **Find Student**                  | `find-student KEYWORD [MORE_KEYWORDS]`<br> e.g., `find-student James Jake`                                                                                                |
+| **Delete Student**                | `delete-student INDEX`<br> e.g., `delete-student 3`                                                                                                                       |
+| **Clear All Students**            | `clear-student`                                                                                                                                                           |
+| **Add Class**                     | `add-class n/CLASS_NAME`<br> e.g., `add-class n/CS2103T Tutorial T10`                                                                                                     |
+| **List All Classes**              | `list-class`                                                                                                                                                              |
+| **List Students In A Class**      | `list-students c/INDEX`<br> e.g., `list-students c/3`                                                                                                                     |
+| **Edit Class**                    | `edit-class INDEX n/CLASS_NAME` <br> e.g., `edit-class 1 n/CS2103T Tutorial T10`                                                                                          |
+| **Find Class**                    | `find-class KEYWORD [MORE_KEYWORDS]`<br> e.g., `find-class CS2103T`                                                                                                       |
+| **Delete Class**                  | `delete-class INDEX` <br> e.g., `delete-class 2`                                                                                                                          |
+| **Clear All Classes**             | `clear-class`                                                                                                                                                             |
+| **List All Students And Classes** | `list`                                                                                                                                                                    |
+| **Linking Student To A Class**    | `link s/STUDENT_INDEX c/CLASS_INDEX`<br> e.g., `link s/1 c/2`                                                                                                             |
+| **Unlink Student From A Class**   | `unlink s/STUDENT_INDEX c/CLASS_INDEX` <br> e.g., `unlink s/1 c/2`                                                                                                        |
+| **Add Lesson**                    | `add-lesson c/CLASS_INDEX d/DAY st/STARTTIME et/ENDTIME v/VENUE r/NO_OF_TIMES` <br> e.g., `add-lesson c/1 d/MONDAY st/8.00AM et/10.00AM v/COM1 #01-01 r/13`               |
+| **Edit Lesson**                   | `edit-lesson c/CLASS_INDEX l/LESSON_INDEX [d/DAY] [st/STARTTIME] [et/ENDTIME] [v/VENUE]` <br> e.g., `edit-lesson c/1 l/1 d/TUESDAY st/10.00AM et/12.00PM v/COM2 #02-02`   |
+| **Delete Lesson**                 | `delete-lesson c/CLASS_INDEX l/LESSON_INDEX` <br> e.g., `delete-lesson c/1 l/1`                                                                                           |
+| **Add Attendance Record**         | `add-attendance c/CLASS_INDEX l/LESSON_INDEX s/STUDENT_INDEX w/WEEK p/PARTICIPATION_SCORE` <br> e.g., `add-attendance c/1 l/1 s/1 w/1 p/1`                                |
+| **Edit Attendance Record**        | `edit-attendance c/CLASS_INDEX l/LESSON_INDEX s/STUDENT_INDEX w/WEEK p/PARTICIPATION_SCORE` <br> e.g., `edit-attendance c/1 l/1 s/1 w/1 p/10`                             |
+| **Find Attendance Record**        | `find-attendance c/CLASS_INDEX l/LESSON_INDEX s/STUDENT_INDEX w/WEEK` <br> e.g., `find-attendance c/1 l/1 s/1 w/1`                                                        |
+| **Delete Attendance Record**      | `delete-attendance c/CLASS_INDEX l/LESSON_INDEX s/STUDENT_INDEX w/WEEK` <br> e.g., `delete-attendance c/1 l/1 s/1 w/1`                                                    |
+| **Undo**                          | `undo`                                                                                                                                                                    |
+| **Redo**                          | `redo`                                                                                                                                                                    |
+| **View Command History**          | `view-history`                                                                                                                                                            |
+| **Exit**                          | `exit`                                                                                                                                                                    |
+| **Reset**                         | `reset`                                                                                                                                                                   |
 
 ### Viewing help : `help`
 
@@ -164,6 +177,8 @@ Examples:
 Clears all students from the application.
 
 Format: `clear-student`
+
+### Managing Classes
 
 #### Adding a class : `add-class`
 
@@ -275,6 +290,107 @@ Format: `unlink s/STUDENT_INDEX c/CLASS_INDEX`
 
 Examples:
 *  `unlink s/1 c/2` Unlinks the 1st student from the 2nd class in the respective lists.
+
+### Managing Lessons
+
+#### Adding a lesson : `add-lesson`
+
+Adds a lesson to the application.
+
+Format: `add-lesson c/CLASS_INDEX d/DAY st/STARTTIME et/ENDTIME v/VENUE r/NO_OF_TIMES`
+
+Examples:
+* `add-lesson c/1 d/MONDAY st/8.00AM et/10.00AM v/COM1 #01-01 r/13`
+
+#### Editing a lesson : `edit-lesson`
+
+Edits an existing lesson in the application.
+
+Format: `edit-lesson c/CLASS_INDEX l/LESSON_INDEX [d/DAY] [st/STARTTIME] [et/ENDTIME] [v/VENUE]`
+
+* Edits the lesson at the specified `CLASS_INDEX` + `LESSON_INDEX`.
+* The indexes **must be positive integers** 1, 2, 3, …​
+* User has to specify at least 1 field (DAY/STARTTIME/ENDTIME/VENUE) to be changed.
+
+Examples:
+*  `edit-lesson c/1 l/1 d/TUESDAY st/10.00AM et/12.00PM v/COM2 #02-02` Edits the 1st lesson of the 1st class to be held on Tuesdays, 10.00AM to 12.00PM at COM2 #02-02.
+
+#### Deleting a lesson : `delete-lesson`
+
+Deletes the specified lesson from the application.
+
+Format: `delete-lesson c/CLASS_INDEX l/LESSON_INDEX`
+
+* Deletes the lesson at the specified `CLASS_INDEX` + `LESSON_INDEX`.
+* The indexes **must be positive integers** 1, 2, 3, …​
+
+### Managing Attendance Records
+
+#### Adding an attendance record : `add-attendance`
+
+Adds an attendance record to the application.
+
+Format: `add-attendance c/CLASS_INDEX l/LESSON_INDEX s/STUDENT_INDEX w/WEEK p/PARTICIPATION_SCORE`
+
+Examples:
+* `add-attendance c/1 l/1 s/1 w/1 p/1`
+
+#### Editing an attendance record : `edit-attendance`
+
+Edits an existing attendance record in the application.
+
+Format: `edit-attendance c/CLASS_INDEX l/LESSON_INDEX s/STUDENT_INDEX w/WEEK p/PARTICIPATION_SCORE`
+
+* Edits the participation score of the attendance record at the specified `CLASS_INDEX` + `LESSON_INDEX` + `STUDENT_INDEX` + `WEEK`.
+* The indexes **must be positive integers** 1, 2, 3, …​
+* `PARTICIPATION_SCORE` and `WEEK` must be non-negative integers.
+
+Examples:
+*  `edit-attendance m/1 l/1 s/1 w/1 p/10` Edits the participation score of the 1st student of the 1st lesson of the 1st class to 10 points.
+
+#### Finding attendance record by indexes: `find-attendance`
+
+Finds an attendance record at the specified `CLASS_INDEX` + `LESSON_INDEX` + `STUDENT_INDEX` + `WEEK`. 
+
+Format: `find-attendance c/CLASS_INDEX l/LESSON_INDEX s/STUDENT_INDEX w/WEEK`
+
+* Finds the attendance record at the specified `CLASS_INDEX` + `LESSON_INDEX` + `STUDENT_INDEX` + `WEEK`.
+* The indexes **must be positive integers** 1, 2, 3, …​
+* `WEEK` must be a non-negative integer.
+
+Examples:
+* `find-attendance c/1 l/1 s/1 w/1` Finds the attendance record of the 1st student of the 1st lesson of the 1st class.
+
+#### Deleting an attendance record : `delete-attendance`
+
+Deletes the specified attendance record from the application.
+
+Format: `delete-attendance c/CLASS_INDEX l/LESSON_INDEX s/STUDENT_INDEX w/WEEK`
+
+* Deletes the attendance record at the specified `CLASS_INDEX` + `LESSON_INDEX` + `STUDENT_INDEX` + `WEEK`.
+* The indexes **must be positive integer** 1, 2, 3, …​
+* `WEEK` must be a non-negative integer.
+
+Examples:
+* `delete-attendance c/1 l/1 s/1 w/1` deletes the attendance record of the 1st student of the 1st lesson of the 1st class.
+
+### Undo previous command : `undo`
+
+Undo most recent command.
+
+Format: `undo`
+
+### Redo an undo : `redo`
+
+Redo the most recent undo command.
+
+Format : `redo`
+
+### View command history : `view-history`
+
+View a list of undo command that has been executed.
+
+Format : `view-history` 
 
 ### Exiting the program : `exit`
 
