@@ -89,11 +89,11 @@ public class CommandTestUtil {
 
     // lesson-related constants
 
-    public static final String VALID_START_TIME_WED_2_TO_4 = "14:00";
-    public static final String VALID_END_TIME_WED_2_TO_4 = "16:00";
-    public static final Day VALID_DAY_WED_2_TO_4 = Day.WEDNESDAY;
-    public static final int VALID_NUMBER_OF_OCCURRENCES_WED_2_TO_4 = 7;
-    public static final String VALID_VENUE_WED_2_TO_4 = "COM1-B111";
+    public static final String VALID_START_TIME_1400 = "14:00";
+    public static final String VALID_END_TIME_1600 = "16:00";
+    public static final Day VALID_DAY_WED = Day.WEDNESDAY;
+    public static final int VALID_NUMBER_OF_OCCURRENCES_7 = 7;
+    public static final String VALID_VENUE_COM1_B111 = "COM1-B111";
 
     /**
      * Executes the given {@code command}, confirms that <br>

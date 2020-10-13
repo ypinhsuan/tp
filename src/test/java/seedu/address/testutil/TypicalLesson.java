@@ -1,5 +1,8 @@
 package seedu.address.testutil;
 
+import static seedu.address.model.lesson.Lesson.TIME_FORMATTER;
+
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -12,18 +15,24 @@ import seedu.address.model.lesson.Lesson;
  */
 public class TypicalLesson {
 
-    public static final Lesson WED_2_TO_4 = new LessonBuilder().withStartTime("14:00").withEndTime("16:00")
+    public static final Lesson LESSON_WED_2_TO_4 = new LessonBuilder()
+            .withStartTime(LocalTime.parse("14:00", TIME_FORMATTER))
+            .withEndTime(LocalTime.parse("16:00", TIME_FORMATTER))
             .withDay(Day.WEDNESDAY).withNumberOfOccurrences(7).withVenue("COM1-B111").build();
 
-    public static final Lesson FRI_8_TO_10 = new LessonBuilder().withStartTime("08:00").withEndTime("10:00")
+    public static final Lesson LESSON_FRI_8_TO_10 = new LessonBuilder()
+            .withStartTime(LocalTime.parse("08:00", TIME_FORMATTER))
+            .withEndTime(LocalTime.parse("10:00", TIME_FORMATTER))
             .withDay(Day.FRIDAY).withNumberOfOccurrences(13).withVenue("S17-0302").build();
 
-    public static final Lesson THU_10_TO_11 = new LessonBuilder().withStartTime("10:00").withEndTime("11:00")
+    public static final Lesson LESSON_THU_10_TO_11 = new LessonBuilder()
+            .withStartTime(LocalTime.parse("10:00", TIME_FORMATTER))
+            .withEndTime(LocalTime.parse("11:00", TIME_FORMATTER))
             .withDay(Day.THURSDAY).withNumberOfOccurrences(10).withVenue("AS6-0211").build();
 
     private TypicalLesson() {} // prevents instantiation
 
     public static List<Lesson> getTypicalLessons() {
-        return new ArrayList<>(Arrays.asList(WED_2_TO_4, FRI_8_TO_10, THU_10_TO_11));
+        return new ArrayList<>(Arrays.asList(LESSON_WED_2_TO_4, LESSON_FRI_8_TO_10, LESSON_THU_10_TO_11));
     }
 }

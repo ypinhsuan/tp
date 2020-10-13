@@ -1,7 +1,8 @@
 package seedu.address.testutil;
 
+import static seedu.address.model.lesson.Lesson.TIME_FORMATTER;
+
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 
 import seedu.address.model.lesson.Day;
 import seedu.address.model.lesson.Lesson;
@@ -18,8 +19,6 @@ public class LessonBuilder {
     public static final Day DEFAULT_DAY = Day.TUESDAY;
     public static final int DEFAULT_NUMBER_OF_OCCURRENCES = 13;
     public static final String DEFAULT_VENUE = "COM1-0211";
-
-    private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
 
     private LocalTime startTime;
     private LocalTime endTime;
@@ -52,16 +51,16 @@ public class LessonBuilder {
     /**
      * Sets the {@code startTime} of the {@code Lesson} that we are building.
      */
-    public LessonBuilder withStartTime(String startTime) {
-        this.startTime = LocalTime.parse(startTime, TIME_FORMATTER);
+    public LessonBuilder withStartTime(LocalTime startTime) {
+        this.startTime = startTime;
         return this;
     }
 
     /**
      * Sets the {@code endTime} of the {@code Lesson} that we are building.
      */
-    public LessonBuilder withEndTime(String endTime) {
-        this.endTime = LocalTime.parse(endTime, TIME_FORMATTER);
+    public LessonBuilder withEndTime(LocalTime endTime) {
+        this.endTime = endTime;
         return this;
     }
 

@@ -8,7 +8,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class NumberOfOccurrences {
 
-    public static final String MESSAGE_CONSTRAINTS = "Number of occurrences should be an integer between 1 and 50.";
+    public static final int LOWER_BOUND = 1;
+    public static final int UPPER_BOUND = 52;
+    public static final String MESSAGE_CONSTRAINTS = String.format("Number of occurrences should be a whole number "
+            + "between %d and %d.", LOWER_BOUND, UPPER_BOUND);
 
     public final int value;
 
@@ -24,10 +27,10 @@ public class NumberOfOccurrences {
     }
 
     /**
-     * Returns true if the given value is between 1 and 50.
+     * Returns true if the given value is between valid range.
      */
     public static boolean isValidNumberOfOccurrences(int value) {
-        return value >= 1 && value <= 50;
+        return value >= LOWER_BOUND && value <= UPPER_BOUND;
     }
 
     @Override

@@ -12,7 +12,7 @@ import java.util.Objects;
  */
 public class Lesson {
 
-    private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
+    public static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
 
     private final LocalTime startTime;
     private final LocalTime endTime;

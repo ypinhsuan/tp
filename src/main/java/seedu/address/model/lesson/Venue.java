@@ -9,9 +9,11 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Venue {
 
-    public static final String MESSAGE_CONSTRAINTS = "Venues should only contain alphanumeric characters, spaces, "
-            + "underscores and hyphens, and it should not be blank";
-    public static final String VALIDATION_REGEX = "[\\w-][\\w- ]*";
+    public static final String SPECIAL_CHARACTERS = "-.~%:/?#[]@!$&'()*+,;=";
+    public static final String MESSAGE_CONSTRAINTS = "Venues should only contain alphanumeric characters, spaces,"
+            + " these special characters, excluding the parentheses, (" + SPECIAL_CHARACTERS + ")"
+            + " and should not be blank.";
+    public static final String VALIDATION_REGEX = "[\\w][\\w-.~%:/?#\\[\\]@!$&'()*+,;= ]*";
 
     public final String venue;
 
