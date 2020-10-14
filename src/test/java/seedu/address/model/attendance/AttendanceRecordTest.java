@@ -2,10 +2,8 @@ package seedu.address.model.attendance;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ATTENDANCE_33;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ATTENDANCE_51;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ATTENDANCE_80;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalAttendanceRecord.RECORD_ALICE_80;
@@ -19,7 +17,6 @@ import java.util.UUID;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.attendance.exceptions.AttendanceNotFoundException;
-import seedu.address.model.attendance.exceptions.DuplicateAttendanceException;
 import seedu.address.testutil.AttendanceRecordBuilder;
 
 public class AttendanceRecordTest {
@@ -56,102 +53,6 @@ public class AttendanceRecordTest {
     @Test
     public void getAttendance_nonExistingUuid_throwsAttendanceNotFoundException() {
         assertThrows(AttendanceNotFoundException.class, () -> attendanceRecord.getAttendance(ALICE.getUuid()));
-    }
-
-    @Test
-    public void getAttendance_existingUuid_success() {
-        AttendanceRecord expectedAttendanceRecord = attendanceRecord
-                .addAttendance(ALICE.getUuid(), new Attendance(VALID_ATTENDANCE_80));
-        assertEquals(new Attendance(VALID_ATTENDANCE_80),
-                expectedAttendanceRecord.getAttendance(ALICE.getUuid()));
-    }
-
-    @Test
-    public void addAttendance_nullUuid_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> attendanceRecord.addAttendance(
-                null, new Attendance(10)));
-    }
-
-    @Test
-    public void addAttendance_nullAttendance_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> attendanceRecord.addAttendance(
-                ALICE.getUuid(), null));
-    }
-
-    @Test
-    public void addAttendance_existingUuid_throwsDuplicateAttendanceException() {
-        AttendanceRecord duplicateAttendanceRecord = attendanceRecord
-                .addAttendance(ALICE.getUuid(), new Attendance(VALID_ATTENDANCE_80));
-        assertThrows(DuplicateAttendanceException.class, () -> duplicateAttendanceRecord.addAttendance(
-                ALICE.getUuid(), new Attendance(VALID_ATTENDANCE_80)));
-    }
-
-    @Test
-    public void addAttendance_nonExistingUuid_success() {
-        AttendanceRecord updatedRecord = attendanceRecord
-                .addAttendance(ALICE.getUuid(), new Attendance(VALID_ATTENDANCE_80));
-
-        AttendanceRecord expectedRecord = new AttendanceRecordBuilder()
-            .withEntry(ALICE.getUuid(), new Attendance(VALID_ATTENDANCE_80)).build();
-        assertEquals(expectedRecord.getAttendanceRecord(), updatedRecord.getAttendanceRecord());
-
-        //check immutability
-        assertNotEquals(attendanceRecord.getAttendanceRecord(), updatedRecord.getAttendanceRecord());
-    }
-
-    @Test
-    public void editAttendance_nullUuid_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> attendanceRecord.editAttendance(null, new Attendance(10)));
-    }
-
-    @Test
-    public void editAttendance_nullAttendance_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> attendanceRecord.editAttendance(ALICE.getUuid(), null));
-    }
-
-    @Test
-    public void editAttendance_nonExistingUuid_throwsAttendanceNotFoundException() {
-        assertThrows(AttendanceNotFoundException.class, () -> attendanceRecord.editAttendance(
-                ALICE.getUuid(), new Attendance(VALID_ATTENDANCE_80)));
-    }
-
-    @Test
-    public void editAttendance_existingUuid_success() {
-        AttendanceRecord updatedRecord = attendanceRecord
-                .addAttendance(ALICE.getUuid(), new Attendance(VALID_ATTENDANCE_80))
-                .editAttendance(ALICE.getUuid(), new Attendance(VALID_ATTENDANCE_33));
-
-        AttendanceRecord expectedRecord = new AttendanceRecordBuilder()
-                .withEntry(ALICE.getUuid(), new Attendance(VALID_ATTENDANCE_33)).build();
-        assertEquals(expectedRecord.getAttendanceRecord(), updatedRecord.getAttendanceRecord());
-
-        //checks immutability
-        assertNotEquals(attendanceRecord.getAttendanceRecord(), updatedRecord.getAttendanceRecord());
-    }
-
-    @Test
-    public void deleteAttendance_nullUuid_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> attendanceRecord.deleteAttendance(null));
-    }
-
-    @Test
-    public void deleteAttendance_nonExistingUuid_throwsAttendanceNotFoundException() {
-        assertThrows(AttendanceNotFoundException.class, () -> attendanceRecord.deleteAttendance(ALICE.getUuid()));
-    }
-
-    @Test
-    public void deleteAttendance_existingUuid_success() {
-        AttendanceRecord updatedRecord = attendanceRecord
-                .addAttendance(ALICE.getUuid(), new Attendance(VALID_ATTENDANCE_80))
-                .addAttendance(BENSON.getUuid(), new Attendance(VALID_ATTENDANCE_51))
-                .deleteAttendance(ALICE.getUuid());
-
-        AttendanceRecord expectedRecord = new AttendanceRecordBuilder()
-                .withEntry(BENSON.getUuid(), new Attendance(VALID_ATTENDANCE_51)).build();
-        assertEquals(expectedRecord.getAttendanceRecord(), updatedRecord.getAttendanceRecord());
-
-        //checks immutability
-        assertNotEquals(attendanceRecord.getAttendanceRecord(), updatedRecord.getAttendanceRecord());
     }
 
     @Test

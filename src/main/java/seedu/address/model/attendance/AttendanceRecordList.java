@@ -1,8 +1,6 @@
 package seedu.address.model.attendance;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.deepCopyList;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -11,7 +9,6 @@ import java.util.Objects;
 import java.util.UUID;
 
 import seedu.address.model.attendance.exceptions.AttendanceNotFoundException;
-import seedu.address.model.attendance.exceptions.DuplicateAttendanceException;
 import seedu.address.model.attendance.exceptions.InvalidWeekException;
 import seedu.address.model.student.Student;
 
@@ -46,8 +43,8 @@ public class AttendanceRecordList {
     /**
      * Returns true if week number is less than the total number of occurrences.
      */
-    private boolean isWeekContained(Week week) {
-        return week.getWeekNumber() <= recordList.size();
+    private boolean isWeekContained(int week) {
+        return week <= recordList.size();
     }
 
     public List<AttendanceRecord> getAttendanceRecordList() {
@@ -55,76 +52,29 @@ public class AttendanceRecordList {
     }
 
     /**
-     * Gets the {@code Attendance} of a {@code Student} in a particular {@code Week}.
+     * Gets the {@code Attendance} of a {@code Student} in a particular {@code week}.
      */
-    public Attendance getAttendance(Student student, Week week)
+    public Attendance getAttendance(Student student, int week)
             throws InvalidWeekException, AttendanceNotFoundException {
-        requireAllNonNull(student, week);
+        requireNonNull(student);
 
         if (!isWeekContained(week)) {
             throw new InvalidWeekException();
         }
 
         UUID studentUuid = student.getUuid();
-        int weekIndex = week.getZeroBasedWeekNumber();
-        return recordList.get(weekIndex).getAttendance(studentUuid);
+        return recordList.get(week).getAttendance(studentUuid);
     }
 
     /**
-     * Adds a {@code Student}'s {@code Attendance} to the specified {@code Week}.
+     * Gets the {@code AttendanceRecord} of a particular {@code week}.
      */
-    public AttendanceRecordList addAttendance(Student student, Week week, Attendance attendance)
-            throws InvalidWeekException, DuplicateAttendanceException {
-        requireAllNonNull(student, week, attendance);
-
+    public AttendanceRecord getAttendanceRecord(int week) throws InvalidWeekException {
         if (!isWeekContained(week)) {
             throw new InvalidWeekException();
         }
 
-        UUID studentUuid = student.getUuid();
-        int weekIndex = week.getZeroBasedWeekNumber();
-        List<AttendanceRecord> updatedRecordList = deepCopyList(recordList, x -> x.deepCopy());
-        AttendanceRecord toAdd = updatedRecordList.get(weekIndex).addAttendance(studentUuid, attendance);
-        updatedRecordList.set(weekIndex, toAdd);
-        return new AttendanceRecordList(updatedRecordList);
-    }
-
-    /**
-     * Edits a {@code Student}'s {@code Attendance} in the specified {@code Week}.
-     */
-    public AttendanceRecordList editAttendance(Student student, Week week, Attendance attendance)
-            throws InvalidWeekException, AttendanceNotFoundException {
-        requireAllNonNull(student, week, attendance);
-
-        if (!isWeekContained(week)) {
-            throw new InvalidWeekException();
-        }
-
-        UUID studentUuid = student.getUuid();
-        int weekIndex = week.getZeroBasedWeekNumber();
-        List<AttendanceRecord> updatedRecordList = deepCopyList(recordList, x -> x.deepCopy());
-        AttendanceRecord toEdit = updatedRecordList.get(weekIndex).editAttendance(studentUuid, attendance);
-        updatedRecordList.set(weekIndex, toEdit);
-        return new AttendanceRecordList(updatedRecordList);
-    }
-
-    /**
-     * Deletes a {@code Student}'s {@code Attendance} in the specified {@code Week}.
-     */
-    public AttendanceRecordList deleteAttendance(Student student, Week week)
-            throws InvalidWeekException, AttendanceNotFoundException {
-        requireAllNonNull(student, week);
-
-        if (!isWeekContained(week)) {
-            throw new InvalidWeekException();
-        }
-
-        UUID studentUuid = student.getUuid();
-        int weekIndex = week.getZeroBasedWeekNumber();
-        List<AttendanceRecord> updatedRecordList = deepCopyList(recordList, x -> x.deepCopy());
-        AttendanceRecord toDelete = updatedRecordList.get(weekIndex).deleteAttendance(studentUuid);
-        updatedRecordList.set(weekIndex, toDelete);
-        return new AttendanceRecordList(updatedRecordList);
+        return recordList.get(week);
     }
 
     @Override

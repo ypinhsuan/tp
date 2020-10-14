@@ -1,6 +1,5 @@
 package seedu.address.model.attendance;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -29,12 +28,6 @@ class WeekTest {
         assertTrue(Week.isValidWeek(Week.LOWER_BOUND));
         assertTrue(Week.isValidWeek(Week.UPPER_BOUND));
         assertTrue(Week.isValidWeek(10));
-    }
-
-    @Test
-    public void getZeroBasedWeekIndex() {
-        Week week = new Week(3);
-        assertEquals(2, week.getZeroBasedWeekNumber());
     }
 
     @Test

@@ -39,10 +39,6 @@ public class Week {
         return week;
     }
 
-    public int getZeroBasedWeekNumber() {
-        return week - 1;
-    }
-
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
