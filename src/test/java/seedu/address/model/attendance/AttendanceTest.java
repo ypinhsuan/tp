@@ -19,13 +19,13 @@ class AttendanceTest {
     @Test
     public void isValidParticipationScore() {
         // invalid weeks
-        assertFalse(Attendance.isValidParticipationScore(Attendance.LOWER_PARTICIPATION_SCORE_BOUND - 1));
-        assertFalse(Attendance.isValidParticipationScore(Attendance.UPPER_PARTICIPATION_SCORE_BOUND + 1));
+        assertFalse(Attendance.isValidParticipationScore(Attendance.LOWER_BOUND - 1));
+        assertFalse(Attendance.isValidParticipationScore(Attendance.UPPER_BOUND + 1));
         assertFalse(Attendance.isValidParticipationScore(-1));
 
         // valid weeks
-        assertTrue(Attendance.isValidParticipationScore(Attendance.LOWER_PARTICIPATION_SCORE_BOUND));
-        assertTrue(Attendance.isValidParticipationScore(Attendance.UPPER_PARTICIPATION_SCORE_BOUND));
+        assertTrue(Attendance.isValidParticipationScore(Attendance.LOWER_BOUND));
+        assertTrue(Attendance.isValidParticipationScore(Attendance.UPPER_BOUND));
         assertTrue(Attendance.isValidParticipationScore(10));
     }
 

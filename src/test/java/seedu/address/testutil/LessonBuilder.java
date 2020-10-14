@@ -6,7 +6,7 @@ import java.time.LocalTime;
 
 import seedu.address.model.lesson.Day;
 import seedu.address.model.lesson.Lesson;
-import seedu.address.model.lesson.NumberOfOccurrences;
+import seedu.address.model.components.occurences.NumberOfOccurrences;
 import seedu.address.model.lesson.Venue;
 
 /**

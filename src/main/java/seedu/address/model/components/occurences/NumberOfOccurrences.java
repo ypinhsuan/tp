@@ -1,4 +1,4 @@
-package seedu.address.model.lesson;
+package seedu.address.model.components.occurences;
 
 import static seedu.address.commons.util.AppUtil.checkArgument;
 

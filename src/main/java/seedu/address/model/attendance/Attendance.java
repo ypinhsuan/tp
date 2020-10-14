@@ -10,10 +10,10 @@ import java.util.Objects;
  */
 public class Attendance {
 
+    public static final int LOWER_BOUND = 0;
+    public static final int UPPER_BOUND = 100;
     public static final String MESSAGE_CONSTRAINTS =
-            "The participation score must be an integer between 0 to 100.";
-    public static final int LOWER_PARTICIPATION_SCORE_BOUND = 0;
-    public static final int UPPER_PARTICIPATION_SCORE_BOUND = 100;
+            String.format("The participation score must be a number between %d to %d.", LOWER_BOUND, UPPER_BOUND);
     private final int participationScore;
 
     /**
@@ -30,8 +30,8 @@ public class Attendance {
      * Returns true if the given score is an integer between 0 and 100.
      */
     public static boolean isValidParticipationScore(int participationScore) {
-        return LOWER_PARTICIPATION_SCORE_BOUND <= participationScore
-                && participationScore <= UPPER_PARTICIPATION_SCORE_BOUND;
+        return LOWER_BOUND <= participationScore
+                && participationScore <= UPPER_BOUND;
     }
 
     public int getParticipationScore() {

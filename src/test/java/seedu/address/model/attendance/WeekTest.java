@@ -19,14 +19,14 @@ class WeekTest {
     @Test
     public void isValidWeek() {
         // invalid weeks
-        assertFalse(Week.isValidWeek(Week.LOWER_WEEK_BOUND - 1));
-        assertFalse(Week.isValidWeek(Week.UPPER_WEEK_BOUND + 1));
+        assertFalse(Week.isValidWeek(Week.LOWER_BOUND - 1));
+        assertFalse(Week.isValidWeek(Week.UPPER_BOUND + 1));
         assertFalse(Week.isValidWeek(-1));
         assertFalse(Week.isValidWeek(0));
 
         // valid weeks
-        assertTrue(Week.isValidWeek(Week.LOWER_WEEK_BOUND));
-        assertTrue(Week.isValidWeek(Week.UPPER_WEEK_BOUND));
+        assertTrue(Week.isValidWeek(Week.LOWER_BOUND));
+        assertTrue(Week.isValidWeek(Week.UPPER_BOUND));
         assertTrue(Week.isValidWeek(10));
     }
 

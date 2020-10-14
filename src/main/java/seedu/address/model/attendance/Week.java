@@ -1,5 +1,7 @@
 package seedu.address.model.attendance;
 
+import seedu.address.model.components.occurences.NumberOfOccurrences;
+
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.Objects;
@@ -10,10 +12,10 @@ import java.util.Objects;
  */
 public class Week {
 
+    public static final int LOWER_BOUND = NumberOfOccurrences.LOWER_BOUND;
+    public static final int UPPER_BOUND = NumberOfOccurrences.UPPER_BOUND;
     public static final String MESSAGE_CONSTRAINTS =
-            "The week number must be an integer between 1 to 50.";
-    public static final int LOWER_WEEK_BOUND = 1;
-    public static final int UPPER_WEEK_BOUND = 50;
+            String.format("The week number must be a number between %d to %d.", LOWER_BOUND, UPPER_BOUND);
     private final int week;
 
     /**
@@ -30,7 +32,7 @@ public class Week {
      * Returns true if the given week is an integer between 1 and 50.
      */
     public static boolean isValidWeek(int week) {
-        return LOWER_WEEK_BOUND <= week && week <= UPPER_WEEK_BOUND;
+        return LOWER_BOUND <= week && week <= UPPER_BOUND;
     }
 
     public int getWeekNumber() {
