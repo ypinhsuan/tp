@@ -313,6 +313,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | UC21        | Edit the attendance record of a student   |
 | UC22        | Find the attendance record of a student   |
 | UC23        | Delete the attendance record of a student |
+
 (For all use cases below, the **System** is `Tutor's Pet` and the **Actor** is the `user`, unless specified otherwise)
 
 **Use case: UC01 - Add a student**
