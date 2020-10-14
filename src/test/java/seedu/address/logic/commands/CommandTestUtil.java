@@ -102,9 +102,6 @@ public class CommandTestUtil {
     public static final int VALID_ATTENDANCE_51 = 51;
     public static final int VALID_ATTENDANCE_80 = 80;
 
-    public static final int INVALID_WEEK_NUMBER = -1;
-    public static final int INVALID_ATTENDANCE_PARTICIPATION = -1;
-
     /**
      * Executes the given {@code command}, confirms that <br>
      * - the returned {@link CommandResult} matches {@code expectedCommandResult} <br>
