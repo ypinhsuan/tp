@@ -124,7 +124,8 @@ public class UniqueModuleClassListTest {
         UniqueModuleClassList expectedUniqueModuleClassList = new UniqueModuleClassList();
         Set<UUID> modifiedUuids = new HashSet<>(CS2103T_TUTORIAL.getStudentUuids());
         modifiedUuids.remove(uuidToRemove);
-        ModuleClass modifiedModuleClass = new ModuleClass(CS2103T_TUTORIAL.getName(), modifiedUuids);
+        ModuleClass modifiedModuleClass = new ModuleClass(CS2103T_TUTORIAL.getName(), modifiedUuids,
+                CS2103T_TUTORIAL.getLessons());
         expectedUniqueModuleClassList.add(modifiedModuleClass);
 
         assertEquals(expectedUniqueModuleClassList, uniqueModuleClassList);
@@ -148,8 +149,8 @@ public class UniqueModuleClassListTest {
         uniqueModuleClassList.add(CS2100_LAB);
         uniqueModuleClassList.removeAllStudentUuids();
         UniqueModuleClassList expectedUniqueModuleClassList = new UniqueModuleClassList();
-        expectedUniqueModuleClassList.add(new ModuleClass(CS2103T_TUTORIAL.getName()));
-        expectedUniqueModuleClassList.add(new ModuleClass(CS2100_LAB.getName()));
+        expectedUniqueModuleClassList.add(new ModuleClassBuilder(CS2103T_TUTORIAL).withStudentUuids().build());
+        expectedUniqueModuleClassList.add(new ModuleClassBuilder(CS2100_LAB).withStudentUuids().build());
         assertEquals(expectedUniqueModuleClassList, uniqueModuleClassList);
     }
 

@@ -184,6 +184,6 @@ public class UnlinkCommandTest {
                         + " does not contain the selected student.");
 
         studentUuids.remove(student.getUuid());
-        return new ModuleClass(moduleClass.getName(), studentUuids);
+        return new ModuleClass(moduleClass.getName(), studentUuids, moduleClass.getLessons());
     }
 }

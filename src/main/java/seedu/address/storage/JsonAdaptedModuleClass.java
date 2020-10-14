@@ -79,6 +79,7 @@ public class JsonAdaptedModuleClass {
 
         final Set<UUID> modelUuids = new HashSet<>(moduleClassUuids);
 
-        return new ModuleClass(modelName, modelUuids);
+        // TODO: Implement storage for Lesson.
+        return new ModuleClass(modelName, modelUuids, new ArrayList<>());
     }
 }

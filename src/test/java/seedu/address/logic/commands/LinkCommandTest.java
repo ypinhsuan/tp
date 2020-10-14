@@ -86,11 +86,15 @@ public class LinkCommandTest {
 
     @Test
     public void execute_existingStudent_failure() {
-        ModuleClass moduleClass = model.getFilteredModuleClassList().get(INDEX_FIRST_ITEM.getZeroBased());
-        Student student = model.getFilteredStudentList().get(INDEX_FIRST_ITEM.getZeroBased());
-        Set<UUID> studentUuids = new HashSet<>(moduleClass.getStudentUuids());
-        studentUuids.add(student.getUuid());
-        ModuleClass modifiedModuleClass = new ModuleClass(moduleClass.getName(), studentUuids);
+        Index moduleClassIndex = INDEX_FIRST_ITEM;
+        Index studentIndex = INDEX_FIRST_ITEM;
+
+        // manually link first class to first student
+        ModuleClass moduleClass = model.getFilteredModuleClassList().get(moduleClassIndex.getZeroBased());
+        Student student = model.getFilteredStudentList().get(studentIndex.getZeroBased());
+        ModuleClass modifiedModuleClass = manualLinkStudentToModuleClass(moduleClass, student);
+
+        // update model with modified class
         model.setModuleClass(moduleClass, modifiedModuleClass);
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         model.updateFilteredModuleClassList(PREDICATE_SHOW_ALL_MODULE_CLASS);
@@ -180,6 +184,6 @@ public class LinkCommandTest {
                 + " already contains the selected student.");
 
         studentUuids.add(student.getUuid());
-        return new ModuleClass(moduleClass.getName(), studentUuids);
+        return new ModuleClass(moduleClass.getName(), studentUuids, moduleClass.getLessons());
     }
 }

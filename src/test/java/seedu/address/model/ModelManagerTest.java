@@ -198,7 +198,7 @@ public class ModelManagerTest {
         modelManager.deleteStudent(BENSON);
 
         ModelManager expectedModelManager = new ModelManager();
-        expectedModelManager.addModuleClass(new ModuleClass(CS2103T_TUTORIAL.getName()));
+        expectedModelManager.addModuleClass(new ModuleClassBuilder(CS2103T_TUTORIAL).withStudentUuids().build());
         assertEquals(expectedModelManager, modelManager);
     }
 

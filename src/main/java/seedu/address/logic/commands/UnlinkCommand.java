@@ -15,6 +15,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.components.name.Name;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.moduleclass.ModuleClass;
 import seedu.address.model.moduleclass.SameModuleClassPredicate;
 import seedu.address.model.student.Student;
@@ -104,6 +105,7 @@ public class UnlinkCommand extends Command {
         Name moduleClassName = moduleClassToUnlink.getName();
         Set<UUID> studentsIds = new HashSet<>(moduleClassToUnlink.getStudentUuids());
         studentsIds.remove(studentUuid);
-        return new ModuleClass(moduleClassName, studentsIds);
+        List<Lesson> lessons = moduleClassToUnlink.getLessons();
+        return new ModuleClass(moduleClassName, studentsIds, lessons);
     }
 }

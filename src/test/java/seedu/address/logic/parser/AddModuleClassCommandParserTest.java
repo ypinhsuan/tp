@@ -6,9 +6,9 @@ import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_CS2100_LAB;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_CS2103T_TUTORIAL;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_CS2100_LAB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_CS2103T_TUTORIAL;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalModuleClass.CS2103T_TUTORIAL;
 
 import org.junit.jupiter.api.Test;
 
@@ -23,7 +23,9 @@ public class AddModuleClassCommandParserTest {
 
     @Test
     public void parse_namePresent_success() {
-        ModuleClass expectedModuleClass = new ModuleClassBuilder(CS2103T_TUTORIAL).withStudentUuids().build();
+        ModuleClass expectedModuleClass = new ModuleClassBuilder()
+                .withName(VALID_NAME_CS2103T_TUTORIAL)
+                .withStudentUuids().withLessons().build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_CS2103T_TUTORIAL,
