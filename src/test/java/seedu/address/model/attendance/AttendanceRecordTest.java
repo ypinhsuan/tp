@@ -14,7 +14,6 @@ import static seedu.address.testutil.TypicalStudent.ALICE;
 import static seedu.address.testutil.TypicalStudent.BENSON;
 
 import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
@@ -92,9 +91,8 @@ public class AttendanceRecordTest {
         AttendanceRecord updatedRecord = attendanceRecord
                 .addAttendance(ALICE.getUuid(), new Attendance(VALID_ATTENDANCE_80));
 
-        Map<UUID, Attendance> map = new HashMap<>();
-        map.put(ALICE.getUuid(), new Attendance(VALID_ATTENDANCE_80));
-        AttendanceRecord expectedRecord = new AttendanceRecord(map);
+        AttendanceRecord expectedRecord = new AttendanceRecordBuilder()
+            .withEntry(ALICE.getUuid(), new Attendance(VALID_ATTENDANCE_80)).build();
         assertEquals(expectedRecord.getAttendanceRecord(), updatedRecord.getAttendanceRecord());
 
         //check immutability
@@ -123,9 +121,8 @@ public class AttendanceRecordTest {
                 .addAttendance(ALICE.getUuid(), new Attendance(VALID_ATTENDANCE_80))
                 .editAttendance(ALICE.getUuid(), new Attendance(VALID_ATTENDANCE_33));
 
-        Map<UUID, Attendance> map = new HashMap<>();
-        map.put(ALICE.getUuid(), new Attendance(VALID_ATTENDANCE_33));
-        AttendanceRecord expectedRecord = new AttendanceRecord(map);
+        AttendanceRecord expectedRecord = new AttendanceRecordBuilder()
+                .withEntry(ALICE.getUuid(), new Attendance(VALID_ATTENDANCE_33)).build();
         assertEquals(expectedRecord.getAttendanceRecord(), updatedRecord.getAttendanceRecord());
 
         //checks immutability
@@ -149,9 +146,8 @@ public class AttendanceRecordTest {
                 .addAttendance(BENSON.getUuid(), new Attendance(VALID_ATTENDANCE_51))
                 .deleteAttendance(ALICE.getUuid());
 
-        Map<UUID, Attendance> map = new HashMap<>();
-        map.put(BENSON.getUuid(), new Attendance(VALID_ATTENDANCE_51));
-        AttendanceRecord expectedRecord = new AttendanceRecord(map);
+        AttendanceRecord expectedRecord = new AttendanceRecordBuilder()
+                .withEntry(BENSON.getUuid(), new Attendance(VALID_ATTENDANCE_51)).build();
         assertEquals(expectedRecord.getAttendanceRecord(), updatedRecord.getAttendanceRecord());
 
         //checks immutability
