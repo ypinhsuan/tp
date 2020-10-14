@@ -3,20 +3,24 @@ package seedu.address.model.moduleclass;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
 import seedu.address.model.components.name.HasName;
 import seedu.address.model.components.name.Name;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.student.Student;
 
 /**
  * Represents a Class.
  * Contains information on the students enrolled in this class identified by their {@code UUID}.
  * Students must exist in the student manager.
+ * Contains {@link Lesson}s (if any).
  * Guarantees: details are present and not null, field values are immutable.
  *
  * @see Student#getUuid()
@@ -28,6 +32,7 @@ public class ModuleClass implements HasName {
 
     // data fields
     private final Set<UUID> studentUuids = new HashSet<>();
+    private final List<Lesson> lessons = new ArrayList<>();
 
     /**
      * Name must be present and not null.
@@ -41,11 +46,12 @@ public class ModuleClass implements HasName {
     /**
      * Every field must be present and not null.
      */
-    public ModuleClass(Name name, Set<UUID> studentUuids) {
-        requireAllNonNull(name, studentUuids);
+    public ModuleClass(Name name, Set<UUID> studentUuids, List<Lesson> lessons) {
+        requireAllNonNull(name, studentUuids, lessons);
 
         this.name = name;
         this.studentUuids.addAll(studentUuids);
+        this.lessons.addAll(lessons);
     }
 
     @Override
@@ -59,6 +65,14 @@ public class ModuleClass implements HasName {
      */
     public Set<UUID> getStudentUuids() {
         return Collections.unmodifiableSet(studentUuids);
+    }
+
+    /**
+     * Returns an immutable ordered list of {@code lessons}, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public List<Lesson> getLessons() {
+        return Collections.unmodifiableList(lessons);
     }
 
     /**
@@ -83,7 +97,7 @@ public class ModuleClass implements HasName {
     }
 
     /**
-     * Returns true if both classes have the same name and students.
+     * Returns true if both classes have the same name, students and lessons.
      * This defines a stronger notion of equality between two classes.
      */
     @Override
@@ -98,12 +112,13 @@ public class ModuleClass implements HasName {
 
         ModuleClass otherModuleClass = (ModuleClass) other;
         return otherModuleClass.getName().equals(getName())
-                && otherModuleClass.getStudentUuids().equals(getStudentUuids());
+                && otherModuleClass.getStudentUuids().equals(getStudentUuids())
+                && otherModuleClass.getLessons().equals(getLessons());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, studentUuids);
+        return Objects.hash(name, studentUuids, lessons);
     }
 
     @Override

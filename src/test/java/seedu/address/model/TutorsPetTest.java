@@ -117,7 +117,8 @@ public class TutorsPetTest {
         // manually remove UUID
         Set<UUID> modifiedUuids = new HashSet<>(CS2103T_TUTORIAL.getStudentUuids());
         modifiedUuids.remove(ALICE.getUuid());
-        ModuleClass modifiedTutorial = new ModuleClass(CS2103T_TUTORIAL.getName(), modifiedUuids);
+        ModuleClass modifiedTutorial = new ModuleClass(CS2103T_TUTORIAL.getName(), modifiedUuids,
+                CS2103T_TUTORIAL.getLessons());
 
         TutorsPet expectedTutorsPet =
                 new TutorsPetBuilder().withStudent(BENSON).withModuleClass(modifiedTutorial).build();

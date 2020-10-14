@@ -3,6 +3,7 @@ package seedu.address.model.moduleclass;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -126,7 +127,7 @@ public class UniqueModuleClassList implements Iterable<ModuleClass> {
     }
 
     /**
-     * Removes the specified {@code UUID} from all {@ModuleClass}es in the class list.
+     * Removes the specified {@code UUID} from all {@code ModuleClass}es in the class list.
      */
     public void removeUuid(UUID uuidToRemove) {
         requireNonNull(uuidToRemove);
@@ -135,7 +136,7 @@ public class UniqueModuleClassList implements Iterable<ModuleClass> {
                 .map(moduleClass -> {
                     Set<UUID> modifiedUuids = new HashSet<>(moduleClass.getStudentUuids());
                     modifiedUuids.remove(uuidToRemove);
-                    return new ModuleClass(moduleClass.getName(), modifiedUuids);
+                    return new ModuleClass(moduleClass.getName(), modifiedUuids, moduleClass.getLessons());
                 })
                 .collect(Collectors.toList()));
     }
@@ -145,7 +146,8 @@ public class UniqueModuleClassList implements Iterable<ModuleClass> {
      */
     public void removeAllStudentUuids() {
         internalList.setAll(internalList.stream()
-                .map(moduleClass -> new ModuleClass(moduleClass.getName()))
+                .map(moduleClass ->
+                        new ModuleClass(moduleClass.getName(), Collections.emptySet(), moduleClass.getLessons()))
                 .collect(Collectors.toList()));
     }
 

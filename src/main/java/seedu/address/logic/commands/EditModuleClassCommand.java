@@ -15,6 +15,7 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.components.name.Name;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.moduleclass.ModuleClass;
 
 /**
@@ -84,8 +85,9 @@ public class EditModuleClassCommand extends Command {
         assert moduleClassToEdit != null;
         Name updatedName = editModuleClassDescriptor.getName().orElse(moduleClassToEdit.getName());
         Set<UUID> studentUuids = moduleClassToEdit.getStudentUuids();
+        List<Lesson> lessons = moduleClassToEdit.getLessons();
 
-        return new ModuleClass(updatedName, studentUuids);
+        return new ModuleClass(updatedName, studentUuids, lessons);
     }
 
     @Override

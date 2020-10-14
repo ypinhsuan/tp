@@ -1,5 +1,6 @@
 package seedu.address.model.util;
 
+import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -9,6 +10,10 @@ import seedu.address.model.ReadOnlyTutorsPet;
 import seedu.address.model.TutorsPet;
 import seedu.address.model.components.name.Name;
 import seedu.address.model.components.tag.Tag;
+import seedu.address.model.lesson.Day;
+import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.NumberOfOccurrences;
+import seedu.address.model.lesson.Venue;
 import seedu.address.model.moduleclass.ModuleClass;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Student;
@@ -32,10 +37,17 @@ public class SampleDataUtil {
     private static final Student ROY_BALAKRISHANN = new Student(new Name("Roy Balakrishnan"), new Telegram("B_Roy"),
             new Email("royb@example.com"), getTagSet("Average"));
 
+    private static final Lesson CS2103T_TUTORIAL_THURSDAY_1000_1100 = new Lesson(LocalTime.of(10, 0),
+            LocalTime.of(11, 0), Day.THURSDAY, new NumberOfOccurrences(10), new Venue("Zoom"));
+    private static final Lesson CS2100_LAB_MONDAY_1400_1500 = new Lesson(LocalTime.of(14, 0),
+            LocalTime.of(15, 0), Day.MONDAY, new NumberOfOccurrences(10), new Venue("Zoom"));
+
     private static final ModuleClass CS2103T_TUTORIAL = new ModuleClass(new Name("CS2103T Tutorial"),
-            new HashSet<>(Arrays.asList(ALEX_YEOH.getUuid(), BERNICE_YU.getUuid(), CHARLOTTE_OLIVEIRO.getUuid())));
+            new HashSet<>(Arrays.asList(ALEX_YEOH.getUuid(), BERNICE_YU.getUuid(), CHARLOTTE_OLIVEIRO.getUuid())),
+            Arrays.asList(CS2103T_TUTORIAL_THURSDAY_1000_1100));
     private static final ModuleClass CS2100_LAB = new ModuleClass(new Name("CS2100 Lab"),
-            new HashSet<>(Arrays.asList(ALEX_YEOH.getUuid(), DAVID_LI.getUuid())));
+            new HashSet<>(Arrays.asList(ALEX_YEOH.getUuid(), DAVID_LI.getUuid())),
+            Arrays.asList(CS2100_LAB_MONDAY_1400_1500));
     private static final ModuleClass CS2100_TUTORIAL = new ModuleClass(new Name("CS2100 Tutorial"));
 
     private static Student[] getSampleStudents() {

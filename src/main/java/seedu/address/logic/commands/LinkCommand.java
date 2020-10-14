@@ -15,6 +15,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.components.name.Name;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.moduleclass.ModuleClass;
 import seedu.address.model.moduleclass.SameModuleClassPredicate;
 import seedu.address.model.student.Student;
@@ -48,7 +49,7 @@ public class LinkCommand extends Command {
      * @param studentIndex in the filtered student list to link.
      */
     public LinkCommand(Index moduleClassIndex, Index studentIndex) {
-        requireAllNonNull(studentIndex, moduleClassIndex);
+        requireAllNonNull(moduleClassIndex, studentIndex);
 
         this.moduleClassIndex = moduleClassIndex;
         this.studentIndex = studentIndex;
@@ -104,6 +105,7 @@ public class LinkCommand extends Command {
         Name moduleClassName = moduleClassToLink.getName();
         Set<UUID> studentsIds = new HashSet<>(moduleClassToLink.getStudentUuids());
         studentsIds.add(studentUuid);
-        return new ModuleClass(moduleClassName, studentsIds);
+        List<Lesson> lessons = moduleClassToLink.getLessons();
+        return new ModuleClass(moduleClassName, studentsIds, lessons);
     }
 }
