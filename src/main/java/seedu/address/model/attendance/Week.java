@@ -1,10 +1,10 @@
 package seedu.address.model.attendance;
 
-import seedu.address.model.lesson.NumberOfOccurrences;
-
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.Objects;
+
+import seedu.address.model.lesson.NumberOfOccurrences;
 
 /**
  * Represents a week number.

@@ -2,7 +2,6 @@ package seedu.address.model.attendance;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.deepCopyList;
-import static seedu.address.commons.util.CollectionUtil.deepCopyMap;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Arrays;

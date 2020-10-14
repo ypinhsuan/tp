@@ -1,35 +1,35 @@
 package seedu.address.model.attendance;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.model.attendance.exceptions.AttendanceNotFoundException;
-import seedu.address.model.attendance.exceptions.DuplicateAttendanceException;
-import seedu.address.model.attendance.exceptions.InvalidWeekException;
-import seedu.address.model.lesson.NumberOfOccurrences;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ATTENDANCE_33;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ATTENDANCE_51;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ATTENDANCE_80;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NUMBER_OF_OCCURRENCES_7;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalStudent.ALICE;
 import static seedu.address.testutil.TypicalAttendanceRecord.RECORD_ALICE_80;
 import static seedu.address.testutil.TypicalAttendanceRecord.RECORD_EMPTY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ATTENDANCE_80;
 import static seedu.address.testutil.TypicalAttendanceRecord.getTypicalAttendanceRecord;
+import static seedu.address.testutil.TypicalStudent.ALICE;
 import static seedu.address.testutil.TypicalStudent.BENSON;
 import static seedu.address.testutil.TypicalStudent.CARL;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.model.attendance.exceptions.AttendanceNotFoundException;
+import seedu.address.model.attendance.exceptions.DuplicateAttendanceException;
+import seedu.address.model.attendance.exceptions.InvalidWeekException;
+import seedu.address.model.lesson.NumberOfOccurrences;
 
 public class AttendanceRecordListTest {
 
-    private static final NumberOfOccurrences numberOfOccurrences
-            = new NumberOfOccurrences(VALID_NUMBER_OF_OCCURRENCES_7);
+    private static final NumberOfOccurrences numberOfOccurrences = new NumberOfOccurrences(
+            VALID_NUMBER_OF_OCCURRENCES_7);
     private static final AttendanceRecordList recordList = new AttendanceRecordList(
             numberOfOccurrences.getNumberOfOccurrences());
     private static final Week VALID_WEEK = new Week(1);
@@ -73,20 +73,20 @@ public class AttendanceRecordListTest {
 
     @Test
     public void addAttendance_nullStudent_throwsNullPointerException() {
-        assertThrows(NullPointerException.class,
-                () -> recordList.addAttendance(null, VALID_WEEK, VALID_ATTENDANCE));
+        assertThrows(NullPointerException.class, () -> recordList.addAttendance(
+                null, VALID_WEEK, VALID_ATTENDANCE));
     }
 
     @Test
     public void addAttendance_nullWeek_throwsNullPointerException() {
-        assertThrows(NullPointerException.class,
-                () -> recordList.addAttendance(ALICE, null, VALID_ATTENDANCE));
+        assertThrows(NullPointerException.class, () -> recordList.addAttendance(
+                ALICE, null, VALID_ATTENDANCE));
     }
 
     @Test
     public void addAttendance_nullAttendance_throwsNullPointerException() {
-        assertThrows(NullPointerException.class,
-                () -> recordList.addAttendance(ALICE, VALID_WEEK, null));
+        assertThrows(NullPointerException.class, () -> recordList.addAttendance(
+                ALICE, VALID_WEEK, null));
     }
 
     @Test
@@ -98,8 +98,8 @@ public class AttendanceRecordListTest {
     @Test
     public void addAttendance_duplicateStudent_throwsDuplicateAttendanceException() {
         AttendanceRecordList attendanceRecordList = createAliceRecordList();
-        assertThrows(DuplicateAttendanceException.class,
-                () -> attendanceRecordList.addAttendance(ALICE, VALID_WEEK, VALID_ATTENDANCE));
+        assertThrows(DuplicateAttendanceException.class, () -> attendanceRecordList.addAttendance(
+                ALICE, VALID_WEEK, VALID_ATTENDANCE));
     }
 
     @Test
@@ -115,26 +115,26 @@ public class AttendanceRecordListTest {
 
     @Test
     public void editAttendance_nullStudent_throwsNullPointerException() {
-        assertThrows(NullPointerException.class,
-                () -> recordList.editAttendance(null, VALID_WEEK, VALID_ATTENDANCE));
+        assertThrows(NullPointerException.class, () -> recordList.editAttendance(
+                null, VALID_WEEK, VALID_ATTENDANCE));
     }
 
     @Test
     public void editAttendance_nullWeek_throwsNullPointerException() {
-        assertThrows(NullPointerException.class,
-                () -> recordList.editAttendance(ALICE, null, VALID_ATTENDANCE));
+        assertThrows(NullPointerException.class, () -> recordList.editAttendance(
+                ALICE, null, VALID_ATTENDANCE));
     }
 
     @Test
     public void editAttendance_nullAttendance_throwsNullPointerException() {
-        assertThrows(NullPointerException.class,
-                () -> recordList.editAttendance(ALICE, VALID_WEEK, null));
+        assertThrows(NullPointerException.class, () -> recordList.editAttendance(
+                ALICE, VALID_WEEK, null));
     }
 
     @Test
     public void editAttendance_nonExistingStudent_throwsAttendanceNotFoundException() {
-        assertThrows(AttendanceNotFoundException.class,
-                () -> recordList.editAttendance(ALICE, VALID_WEEK, VALID_ATTENDANCE));
+        assertThrows(AttendanceNotFoundException.class, () -> recordList.editAttendance(
+                ALICE, VALID_WEEK, VALID_ATTENDANCE));
     }
 
     @Test
@@ -162,8 +162,8 @@ public class AttendanceRecordListTest {
 
     @Test
     public void deleteAttendance_invalidWeek_throwsInvalidWeekException() {
-        assertThrows(InvalidWeekException.class,
-                () -> recordList.deleteAttendance(ALICE, new Week(VALID_NUMBER_OF_OCCURRENCES_7 + 1)));
+        assertThrows(InvalidWeekException.class, () -> recordList.deleteAttendance(
+                ALICE, new Week(VALID_NUMBER_OF_OCCURRENCES_7 + 1)));
     }
 
     @Test

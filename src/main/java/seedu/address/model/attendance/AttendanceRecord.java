@@ -9,7 +9,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
-import java.util.function.UnaryOperator;
 
 import seedu.address.model.attendance.exceptions.AttendanceNotFoundException;
 import seedu.address.model.attendance.exceptions.DuplicateAttendanceException;
@@ -40,6 +39,9 @@ public class AttendanceRecord {
         return Collections.unmodifiableMap(record);
     }
 
+    /**
+     * Returns a deep copied {@code AtendanceRecord}.
+     */
     public AttendanceRecord deepCopy() {
         return new AttendanceRecord(
                 deepCopyMap(record, uuidKey -> uuidKey, value -> value.deepCopy()));

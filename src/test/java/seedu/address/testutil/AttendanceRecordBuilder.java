@@ -1,10 +1,10 @@
 package seedu.address.testutil;
 
-import seedu.address.model.attendance.Attendance;
-import seedu.address.model.attendance.AttendanceRecord;
-
 import java.util.HashMap;
 import java.util.UUID;
+
+import seedu.address.model.attendance.Attendance;
+import seedu.address.model.attendance.AttendanceRecord;
 
 /**
  * A utility class to help with building AttendanceRecord objects.

@@ -18,7 +18,6 @@ import java.util.Map;
 import java.util.Objects;
 
 import org.junit.jupiter.api.Test;
-import seedu.address.model.attendance.Attendance;
 
 public class CollectionUtilTest {
 
@@ -152,7 +151,6 @@ public class CollectionUtilTest {
             assertEquals(mapKeyArray[i], copiedMapKeyArray[i]);
             assertFalse(mapKeyArray[i] == copiedMapKeyArray[i]);
         }
-
     }
 
     /**
@@ -180,6 +178,7 @@ public class CollectionUtilTest {
     }
 
     private class MockTestClass {
+
         private final int x;
         private final String y;
 
