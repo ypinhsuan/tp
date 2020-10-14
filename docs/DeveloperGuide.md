@@ -634,6 +634,155 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+**Use case: UC17 - Add a lesson**
+
+**MSS**
+
+1. User requests to add a lesson.
+2. User provides the parameters of the lesson.
+3. Tutor's Pet adds the lesson.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The parameters provided are invalid.
+
+    * 2a1. Tutor's Pet shows an error message.
+
+      Use case resumes at step 1.
+
+* 3a. The lesson already exists.
+
+    * 3a1. Tutor's Pet shows an error message.
+
+      Use case resumes at step 1.
+
+**Use case: UC18 - Edit a lesson**
+
+**MSS**
+
+1.  User requests to edit a specific lesson.
+2.  User provides the parameters that are to be edited.
+3.  Tutor's Pet edits the lesson's information.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given index is invalid.
+
+    * 1a1. Tutor's Pet shows an error message.
+
+      Use case resumes at step 1.
+
+* 2a. The parameters provided are invalid.
+
+    * 2a1. Tutor's Pet shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: UC19 - Delete a lesson**
+
+**MSS**
+
+1.  User requests to delete a specific lesson.
+2.  Tutor's Pet deletes the lesson.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given index is invalid.
+
+    * 1a1. Tutor's Pet shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: UC20 - Add an attendance record of a student**
+
+**MSS**
+
+1. User requests to add an attendance record of a student.
+2. User provides the parameters of the attendance record.
+3. Tutor's Pet adds the attendance record.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The parameters provided are invalid.
+
+    * 2a1. Tutor's Pet shows an error message.
+
+      Use case resumes at step 1.
+
+* 3a. The attendance record already exists.
+
+    * 3a1. Tutor's Pet shows an error message.
+
+      Use case resumes at step 1.
+
+**Use case: UC21 - Edit the attendance record of a student**
+
+**MSS**
+
+1.  User requests to edit a specific attendance record.
+2.  User provides the parameters that are to be edited.
+3.  Tutor's Pet edits the attendance record's information.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given index is invalid.
+
+    * 1a1. Tutor's Pet shows an error message.
+
+      Use case resumes at step 1.
+
+* 2a. The parameters provided are invalid.
+
+    * 2a1. Tutor's Pet shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: UC22 - Find the attendance record of a student**
+
+**MSS**
+
+1.  User requests to find an attendance record.
+2.  User provides the parameters to find attendance record.
+3.  Tutor's Pet finds the attendance record.
+4.  Tutor's Pet displays matching attendance record found.
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. No attendance records found.
+
+    * 3a1. Tutor's Pet displays a message that no attendance records are found.
+
+      Use case ends.
+
+**Use case: UC23 - Delete the attendance record of a student**
+
+**MSS**
+
+1.  User requests to delete a specific class in the list.
+2.  Tutor's Pet deletes the class.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given index is invalid.
+
+    * 1a1. Tutor's Pet shows an error message.
+
+      Use case resumes at step 1.
+
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
