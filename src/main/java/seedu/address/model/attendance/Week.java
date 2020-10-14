@@ -1,6 +1,6 @@
 package seedu.address.model.attendance;
 
-import seedu.address.model.components.occurences.NumberOfOccurrences;
+import seedu.address.model.lesson.NumberOfOccurrences;
 
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -37,6 +37,10 @@ public class Week {
 
     public int getWeekNumber() {
         return week;
+    }
+
+    public int getZeroBasedWeekNumber() {
+        return week - 1;
     }
 
     @Override

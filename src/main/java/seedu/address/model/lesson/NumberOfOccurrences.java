@@ -1,4 +1,4 @@
-package seedu.address.model.components.occurences;
+package seedu.address.model.lesson;
 
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -31,6 +31,10 @@ public class NumberOfOccurrences {
      */
     public static boolean isValidNumberOfOccurrences(int value) {
         return value >= LOWER_BOUND && value <= UPPER_BOUND;
+    }
+
+    public int getNumberOfOccurrences() {
+        return value;
     }
 
     @Override

@@ -1,11 +1,15 @@
 package seedu.address.model.attendance;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.deepCopyMap;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
+import java.util.function.UnaryOperator;
 
 import seedu.address.model.attendance.exceptions.AttendanceNotFoundException;
 import seedu.address.model.attendance.exceptions.DuplicateAttendanceException;
@@ -16,7 +20,7 @@ import seedu.address.model.attendance.exceptions.DuplicateAttendanceException;
  */
 public class AttendanceRecord {
 
-    private final HashMap<UUID, Attendance> record;
+    private final Map<UUID, Attendance> record;
 
     public AttendanceRecord() {
         this.record = new HashMap<>();
@@ -26,17 +30,28 @@ public class AttendanceRecord {
      * Overloaded constructor method.
      * Requires record to be non null.
      */
-    public AttendanceRecord(HashMap<UUID, Attendance> record) {
+    public AttendanceRecord(Map<UUID, Attendance> record) {
         requireNonNull(record);
 
         this.record = record;
+    }
+
+    public Map<UUID, Attendance> getAttendanceRecord() {
+        return Collections.unmodifiableMap(record);
+    }
+
+    public AttendanceRecord deepCopy() {
+        return new AttendanceRecord(
+                deepCopyMap(record, uuidKey -> uuidKey, value -> value.deepCopy()));
     }
 
     /**
      * Gets the {@code Attendance} of the given {@code UUID}.
      */
     public Attendance getAttendance(UUID uuid) throws AttendanceNotFoundException {
-        if (record.containsKey(uuid)) {
+        requireNonNull(uuid);
+
+        if (!record.containsKey(uuid)) {
             throw new AttendanceNotFoundException();
         }
 
@@ -54,8 +69,10 @@ public class AttendanceRecord {
             throw new DuplicateAttendanceException();
         }
 
-        record.put(uuid, attendance);
-        return new AttendanceRecord(new HashMap<>(record));
+        Map<UUID, Attendance> copiedRecord =
+                deepCopyMap(record, uuidKey -> uuidKey, value -> value.deepCopy());
+        copiedRecord.put(uuid, attendance);
+        return new AttendanceRecord(copiedRecord);
     }
 
     /**
@@ -69,8 +86,10 @@ public class AttendanceRecord {
             throw new AttendanceNotFoundException();
         }
 
-        record.put(uuid, editedAttendance);
-        return new AttendanceRecord(new HashMap<>(record));
+        Map<UUID, Attendance> copiedRecord =
+                deepCopyMap(record, uuidKey -> uuidKey, value -> value.deepCopy());
+        copiedRecord.put(uuid, editedAttendance);
+        return new AttendanceRecord(copiedRecord);
     }
 
     /**
@@ -83,8 +102,10 @@ public class AttendanceRecord {
             throw new AttendanceNotFoundException();
         }
 
-        record.remove(uuid);
-        return new AttendanceRecord(new HashMap<>(record));
+        Map<UUID, Attendance> copiedRecord =
+                deepCopyMap(record, uuidKey -> uuidKey, value -> value.deepCopy());
+        copiedRecord.remove(uuid);
+        return new AttendanceRecord(copiedRecord);
     }
 
     @Override

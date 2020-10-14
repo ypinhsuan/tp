@@ -34,6 +34,10 @@ public class Attendance {
                 && participationScore <= UPPER_BOUND;
     }
 
+    public Attendance deepCopy() {
+        return new Attendance(participationScore);
+    }
+
     public int getParticipationScore() {
         return participationScore;
     }

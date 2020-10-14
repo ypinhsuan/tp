@@ -1,16 +1,24 @@
 package seedu.address.commons.util;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.commons.util.CollectionUtil.deepCopyList;
+import static seedu.address.commons.util.CollectionUtil.deepCopyMap;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 import org.junit.jupiter.api.Test;
+import seedu.address.model.attendance.Attendance;
 
 public class CollectionUtilTest {
 
@@ -83,6 +91,70 @@ public class CollectionUtilTest {
         assertTrue(CollectionUtil.isAnyNonNull(new Object(), null));
     }
 
+    @Test
+    public void testDeepCopyList_primitive() {
+        List<Integer> list = new ArrayList<>(Arrays.asList(1, 2, 3));
+        List<Integer> copiedList = deepCopyList(list, n -> n);
+        for (int i = 0; i < list.size(); i++) {
+            assertEquals(list.get(i), copiedList.get(i));
+        }
+    }
+
+    @Test
+    public void testDeepCopyList_class() {
+        List<MockTestClass> list = new ArrayList<>();
+        list.add(new MockTestClass(1, "1"));
+        list.add(new MockTestClass(2, "2"));
+        list.add(new MockTestClass(3, "3"));
+
+        List<MockTestClass> copiedList = deepCopyList(list, elem -> elem.deepCopy());
+        for (int i = 0; i < list.size(); i++) {
+            assertEquals(list.get(i), copiedList.get(i));
+            assertFalse(list.get(i) == copiedList.get(i));
+        }
+    }
+
+    @Test
+    public void testDeepCopyMap_primitive() {
+        Map<Integer, String> map = new HashMap<>();
+        map.put(1, "1");
+        map.put(2, "2");
+        map.put(3, "3");
+
+        Map<Integer, String> copiedMap = deepCopyMap(map, key -> key, value -> value);
+        for (Integer key: map.keySet()) {
+            assertTrue(copiedMap.containsKey(key));
+            assertEquals(map.get(key), copiedMap.get(key));
+        }
+        for (Integer key: copiedMap.keySet()) {
+            assertTrue(map.containsKey(key));
+        }
+    }
+
+    @Test
+    public void testDeepCopyMap_class() {
+        Map<MockTestClass, MockTestClass> map = new HashMap<>();
+        map.put(new MockTestClass(1, "key1"), new MockTestClass(1, "value1"));
+        map.put(new MockTestClass(2, "key2"), new MockTestClass(2, "value2"));
+        map.put(new MockTestClass(3, "key3"), new MockTestClass(3, "value3"));
+
+        Map<MockTestClass, MockTestClass> copiedMap = deepCopyMap(
+                map, key -> key.deepCopy(), value -> value.deepCopy());
+        for (MockTestClass key: map.keySet()) {
+            assertEquals(map.get(key), copiedMap.get(key));
+            assertFalse(map.get(key) == copiedMap.get(key));
+        }
+
+        MockTestClass[] mapKeyArray = map.keySet().toArray(new MockTestClass[3]);
+        MockTestClass[] copiedMapKeyArray = copiedMap.keySet().toArray(new MockTestClass[3]);
+
+        for (int i = 0; i < mapKeyArray.length; i++) {
+            assertEquals(mapKeyArray[i], copiedMapKeyArray[i]);
+            assertFalse(mapKeyArray[i] == copiedMapKeyArray[i]);
+        }
+
+    }
+
     /**
      * Asserts that {@code CollectionUtil#requireAllNonNull(Object...)} throw {@code NullPointerException}
      * if {@code objects} or any element of {@code objects} is null.
@@ -105,5 +177,32 @@ public class CollectionUtilTest {
 
     private void assertNullPointerExceptionNotThrown(Collection<?> collection) {
         requireAllNonNull(collection);
+    }
+
+    private class MockTestClass {
+        private final int x;
+        private final String y;
+
+        MockTestClass(int x, String y) {
+            this.x = x;
+            this.y = y;
+        }
+
+        MockTestClass deepCopy() {
+            return new MockTestClass(x, y);
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            return other == this // short circuit if same object
+                    || (other instanceof MockTestClass // instanceof handles nulls
+                    && ((MockTestClass) other).x == x
+                    && ((MockTestClass) other).y == y);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(x, y);
+        }
     }
 }

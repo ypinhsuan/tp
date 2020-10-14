@@ -37,6 +37,9 @@ class AttendanceTest {
         // null -> returns false
         assertFalse(ATTENDANCE_ONE.equals(null));
 
+        // different types -> returns false
+        assertFalse(ATTENDANCE_ONE.equals(ATTENDANCE_ONE.getParticipationScore()));
+
         // same participationScore -> returns true
         assertTrue(ATTENDANCE_ONE.equals(new Attendance(ATTENDANCE_ONE.getParticipationScore())));
 

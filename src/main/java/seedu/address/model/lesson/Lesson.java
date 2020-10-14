@@ -1,7 +1,5 @@
 package seedu.address.model.lesson;
 
-import seedu.address.model.components.occurences.NumberOfOccurrences;
-
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalTime;
