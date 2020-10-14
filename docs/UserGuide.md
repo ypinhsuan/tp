@@ -94,7 +94,7 @@ participation scores.
 | **Delete Attendance Record**      | `delete-attendance c/CLASS_INDEX l/LESSON_INDEX s/STUDENT_INDEX w/WEEK` <br> e.g., `delete-attendance c/1 l/1 s/1 w/1`                                                    |
 | **Undo**                          | `undo`                                                                                                                                                                    |
 | **Redo**                          | `redo`                                                                                                                                                                    |
-| **View Command History**          | `view-history`                                                                                                                                                            |
+| **View Action History**           | `view-history`                                                                                                                                                            |
 | **Exit**                          | `exit`                                                                                                                                                                    |
 | **Reset**                         | `reset`                                                                                                                                                                   |
 
@@ -312,7 +312,7 @@ Format: `edit-lesson c/CLASS_INDEX l/LESSON_INDEX [d/DAY] [st/START_TIME] [et/EN
 
 * Edits the lesson at the specified `CLASS_INDEX` + `LESSON_INDEX`.
 * The indexes **must be positive whole numbers** 1, 2, 3, …​
-* User has to specify at least 1 field (DAY/STARTTIME/ENDTIME/VENUE) to be changed.
+* User has to specify at least 1 field (DAY/START_TIME/END_TIME/VENUE) to be changed.
 
 Examples:
 *  `edit-lesson c/1 l/1 d/TUESDAY st/1000 et/1200 v/COM2 #02-02` Edits the 1st lesson of the 1st class to be held on Tuesdays, 10.00AM to 12.00PM at COM2 #02-02.
@@ -345,10 +345,11 @@ Format: `edit-attendance c/CLASS_INDEX l/LESSON_INDEX s/STUDENT_INDEX w/WEEK p/P
 
 * Edits the participation score of the attendance record at the specified `CLASS_INDEX` + `LESSON_INDEX` + `STUDENT_INDEX` + `WEEK`.
 * The indexes **must be positive whole numbers** 1, 2, 3, …​
-* `PARTICIPATION_SCORE` and `WEEK` must be non-negative whole numbers.
+* The `WEEK` must be a positive whole number** 1, 2, 3, …​
+* The `PARTICIPATION_SCORE` **must be a non-negative whole number** 0, 1, 2, …​
 
 Examples:
-*  `edit-attendance m/1 l/1 s/1 w/1 p/10` Edits the 1st week's participation score of the 1st student of the 1st lesson of the 1st class to 10 points.
+*  `edit-attendance c/1 l/1 s/1 w/1 p/10` Edits the 1st week's participation score of the 1st student of the 1st lesson of the 1st class to 10 points.
 
 #### Finding attendance record by indexes: `find-attendance`
 
@@ -358,7 +359,7 @@ Format: `find-attendance c/CLASS_INDEX l/LESSON_INDEX s/STUDENT_INDEX w/WEEK`
 
 * Finds the attendance record at the specified `CLASS_INDEX` + `LESSON_INDEX` + `STUDENT_INDEX` + `WEEK`.
 * The indexes **must be positive whole numbers** 1, 2, 3, …​
-* `WEEK` must be a non-negative whole number.
+* The `WEEK` **must be a positive whole number** 1, 2, 3, …​
 
 Examples:
 * `find-attendance c/1 l/1 s/1 w/1` Finds the 1st week's attendance record of the 1st student of the 1st lesson of the 1st class.
@@ -371,7 +372,7 @@ Format: `delete-attendance c/CLASS_INDEX l/LESSON_INDEX s/STUDENT_INDEX w/WEEK`
 
 * Deletes the attendance record at the specified `CLASS_INDEX` + `LESSON_INDEX` + `STUDENT_INDEX` + `WEEK`.
 * The indexes **must be positive whole numbers** 1, 2, 3, …​
-* `WEEK` must be a non-negative whole number.
+* The `WEEK` **must be a positive whole number** 1, 2, 3, …​
 
 Examples:
 * `delete-attendance c/1 l/1 s/1 w/1` Deletes the 1st week's attendance record of the 1st student of the 1st lesson of the 1st class.
