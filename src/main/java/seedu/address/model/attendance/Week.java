@@ -4,11 +4,13 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.Objects;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.lesson.NumberOfOccurrences;
 
 /**
  * Represents a week number.
- * Guarantees: immutable; is valid as declared in {@link #isValidWeek(int)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidWeek(Index)}
+ * Note that {@code Index} can only accept non negative integers.
  */
 public class Week {
 
@@ -16,34 +18,36 @@ public class Week {
     public static final int UPPER_BOUND = NumberOfOccurrences.UPPER_BOUND;
     public static final String MESSAGE_CONSTRAINTS =
             String.format("The week number must be a number between %d to %d.", LOWER_BOUND, UPPER_BOUND);
-    private final int week;
+    private final Index week;
 
     /**
      * Constructor method.
      * Checks that week is valid.
      */
-    public Week(int week) {
+    public Week(Index week) {
         checkArgument(isValidWeek(week), MESSAGE_CONSTRAINTS);
 
         this.week = week;
     }
 
     /**
-     * Returns true if the given week is an integer between 1 and 50.
+     * Returns true if the given week is an integer between {@link NumberOfOccurrences.LOWER_BOUND}
+     * and {@link NumberOfOccurrences.UPPER_BOUND}.
      */
-    public static boolean isValidWeek(int week) {
-        return LOWER_BOUND <= week && week <= UPPER_BOUND;
+    public static boolean isValidWeek(Index week) {
+        int weekIndex = week.getOneBased();
+        return LOWER_BOUND <= weekIndex && weekIndex <= UPPER_BOUND;
     }
 
-    public int getWeekNumber() {
-        return week;
+    public int getZeroBasedWeekIndex() {
+        return week.getZeroBased();
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Week // instanceof handles nulls
-                && ((Week) other).week == week);
+                && ((Week) other).week.equals(week));
     }
 
     @Override

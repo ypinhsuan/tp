@@ -44,8 +44,8 @@ public class AttendanceRecordList {
      * Returns true if week number is less than the total number of occurrences.
      * Week number should have been zero based.
      */
-    private boolean isWeekContained(int week) {
-        return week < recordList.size();
+    private boolean isWeekContained(Week week) {
+        return week.getZeroBasedWeekIndex() < recordList.size();
     }
 
     public List<AttendanceRecord> getAttendanceRecordList() {
@@ -53,9 +53,9 @@ public class AttendanceRecordList {
     }
 
     /**
-     * Gets the {@code Attendance} of a {@code Student} in a particular {@code week}.
+     * Gets the {@code Attendance} of a {@code Student} in a particular {@code Week}.
      */
-    public Attendance getAttendance(Student student, int week)
+    public Attendance getAttendance(Student student, Week week)
             throws InvalidWeekException, AttendanceNotFoundException {
         requireNonNull(student);
 
@@ -64,18 +64,18 @@ public class AttendanceRecordList {
         }
 
         UUID studentUuid = student.getUuid();
-        return recordList.get(week).getAttendance(studentUuid);
+        return recordList.get(week.getZeroBasedWeekIndex()).getAttendance(studentUuid);
     }
 
     /**
-     * Gets the {@code AttendanceRecord} of a particular {@code week}.
+     * Gets the {@code AttendanceRecord} of a particular {@code Week}.
      */
-    public AttendanceRecord getAttendanceRecord(int week) throws InvalidWeekException {
+    public AttendanceRecord getAttendanceRecord(Week week) throws InvalidWeekException {
         if (!isWeekContained(week)) {
             throw new InvalidWeekException();
         }
 
-        return recordList.get(week);
+        return recordList.get(week.getZeroBasedWeekIndex());
     }
 
     @Override

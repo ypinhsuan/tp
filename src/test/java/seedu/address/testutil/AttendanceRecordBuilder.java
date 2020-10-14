@@ -28,7 +28,7 @@ public class AttendanceRecordBuilder {
     }
 
     /**
-     * Inserts a new {@code UUID} and {@code Attendance} into the {@code AttendanceRecord} we are building;
+     * Inserts a new {@code UUID} and {@code Attendance} into the {@code AttendanceRecord} we are building.
      */
     public AttendanceRecordBuilder withEntry(UUID uuid, Attendance attendance) {
         record.put(uuid, attendance);

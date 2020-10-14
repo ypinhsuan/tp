@@ -17,17 +17,17 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.attendance.exceptions.AttendanceNotFoundException;
 import seedu.address.model.attendance.exceptions.InvalidWeekException;
-import seedu.address.model.lesson.NumberOfOccurrences;
 
 public class AttendanceRecordListTest {
 
-    private static final NumberOfOccurrences numberOfOccurrences = new NumberOfOccurrences(
-            VALID_NUMBER_OF_OCCURRENCES_7);
-    private static final AttendanceRecordList recordList = new AttendanceRecordList(
-            numberOfOccurrences.getNumberOfOccurrences());
-    private static final int VALID_WEEK_NUMBER = 0;
+    private static final AttendanceRecordList recordList =
+            new AttendanceRecordList(VALID_NUMBER_OF_OCCURRENCES_7);
+
+    private static final Week VALID_WEEK = new Week(Index.fromOneBased(1));
+    private static final Week INVALID_WEEK = new Week(Index.fromOneBased(VALID_NUMBER_OF_OCCURRENCES_7 + 1));
 
     @Test
     public void constructor_emptyAttendanceRecordMap() {
@@ -39,37 +39,36 @@ public class AttendanceRecordListTest {
 
     @Test
     public void getAttendance_nullStudent_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> recordList.getAttendance(null, VALID_WEEK_NUMBER));
+        assertThrows(NullPointerException.class, () -> recordList.getAttendance(null, VALID_WEEK));
     }
 
     @Test
     public void getAttendance_invalidWeek_throwsInvalidWeekException() {
         assertThrows(InvalidWeekException.class, () -> recordList.getAttendance(
-                ALICE, VALID_NUMBER_OF_OCCURRENCES_7 + 1));
+                ALICE, INVALID_WEEK));
     }
 
     @Test
     public void getAttendance_nonExistingStudent_throwsAttendanceNotFoundException() {
-        assertThrows(AttendanceNotFoundException.class, () -> recordList.getAttendance(ALICE, VALID_WEEK_NUMBER));
+        assertThrows(AttendanceNotFoundException.class, () -> recordList.getAttendance(ALICE, VALID_WEEK));
     }
 
     @Test
     public void getAttendance_existingStudent_success() {
         AttendanceRecordList attendanceRecordList = createAliceRecordList();
-        Attendance attendance = attendanceRecordList.getAttendance(ALICE, VALID_WEEK_NUMBER);
+        Attendance attendance = attendanceRecordList.getAttendance(ALICE, VALID_WEEK);
         assertEquals(new Attendance(VALID_ATTENDANCE_80), attendance);
     }
 
     @Test
     public void getAttendanceRecord_invalidWeek_throwsInvalidWeekException() {
-        assertThrows(InvalidWeekException.class, () -> recordList.getAttendanceRecord(
-                VALID_NUMBER_OF_OCCURRENCES_7 + 1));
+        assertThrows(InvalidWeekException.class, () -> recordList.getAttendanceRecord(INVALID_WEEK));
     }
 
     @Test
     public void getAttendanceRecord_validWeek_success() {
         AttendanceRecordList attendanceRecordList = createAliceRecordList();
-        AttendanceRecord attendanceRecord = attendanceRecordList.getAttendanceRecord(VALID_WEEK_NUMBER);
+        AttendanceRecord attendanceRecord = attendanceRecordList.getAttendanceRecord(VALID_WEEK);
         assertEquals(RECORD_ALICE_80, attendanceRecord);
     }
 

@@ -6,28 +6,27 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
+
 class WeekTest {
 
-    private static final Week WEEK_ONE = new Week(1);
+    private static final Week WEEK_ONE = new Week(Index.fromOneBased(1));
 
     @Test
     public void constructor_invalidWeek_throwsIllegalArgumentException() {
-        int invalidWeek = 1000;
+        Index invalidWeek = Index.fromOneBased(1000);
         assertThrows(IllegalArgumentException.class, () -> new Week(invalidWeek));
     }
 
     @Test
     public void isValidWeek() {
         // invalid weeks
-        assertFalse(Week.isValidWeek(Week.LOWER_BOUND - 1));
-        assertFalse(Week.isValidWeek(Week.UPPER_BOUND + 1));
-        assertFalse(Week.isValidWeek(-1));
-        assertFalse(Week.isValidWeek(0));
+        assertFalse(Week.isValidWeek(Index.fromOneBased(Week.UPPER_BOUND + 1)));
 
         // valid weeks
-        assertTrue(Week.isValidWeek(Week.LOWER_BOUND));
-        assertTrue(Week.isValidWeek(Week.UPPER_BOUND));
-        assertTrue(Week.isValidWeek(10));
+        assertTrue(Week.isValidWeek(Index.fromOneBased(Week.LOWER_BOUND)));
+        assertTrue(Week.isValidWeek(Index.fromOneBased(Week.UPPER_BOUND)));
+        assertTrue(Week.isValidWeek(Index.fromOneBased(10)));
     }
 
     @Test
@@ -39,12 +38,14 @@ class WeekTest {
         assertFalse(WEEK_ONE.equals(null));
 
         // different type -> returns false
-        assertFalse(WEEK_ONE.equals(WEEK_ONE.getWeekNumber()));
+        assertFalse(WEEK_ONE.equals(WEEK_ONE.getZeroBasedWeekIndex()));
 
         // same week -> returns true
-        assertTrue(WEEK_ONE.equals(new Week(WEEK_ONE.getWeekNumber())));
+        assertTrue(WEEK_ONE.equals(new Week(
+                Index.fromZeroBased(WEEK_ONE.getZeroBasedWeekIndex()))));
 
         // different week -> returns false
-        assertFalse(WEEK_ONE.equals(new Week(WEEK_ONE.getWeekNumber() + 1)));
+        assertFalse(WEEK_ONE.equals(new Week(
+                Index.fromZeroBased(WEEK_ONE.getZeroBasedWeekIndex() + 1))));
     }
 }
