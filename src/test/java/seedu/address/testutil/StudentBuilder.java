@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -35,7 +36,7 @@ public class StudentBuilder {
         name = new Name(DEFAULT_NAME);
         telegram = new Telegram(DEFAULT_TELEGRAM);
         email = new Email(DEFAULT_EMAIL);
-        tags = new HashSet<>();
+        tags = Collections.emptySet();
     }
 
     /**

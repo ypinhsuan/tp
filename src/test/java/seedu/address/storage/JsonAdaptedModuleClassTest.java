@@ -14,6 +14,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.components.name.Name;
+import seedu.address.model.moduleclass.ModuleClass;
+import seedu.address.testutil.ModuleClassBuilder;
 
 public class JsonAdaptedModuleClassTest {
 
@@ -28,7 +30,11 @@ public class JsonAdaptedModuleClassTest {
     @Test
     public void toModelType_validModuleClassDetails_returnsModuleClass() throws Exception {
         JsonAdaptedModuleClass moduleClass = new JsonAdaptedModuleClass(CS2103T_TUTORIAL);
-        assertEquals(CS2103T_TUTORIAL, moduleClass.toModelType());
+
+        // TODO: Remove temporary workaround after lesson storage has been implemented.
+        ModuleClass cs2103tTutorial = new ModuleClassBuilder(CS2103T_TUTORIAL).withLessons().build();
+
+        assertEquals(cs2103tTutorial, moduleClass.toModelType());
     }
 
     @Test

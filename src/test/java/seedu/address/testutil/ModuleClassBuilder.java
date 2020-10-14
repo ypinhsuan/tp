@@ -1,11 +1,14 @@
 package seedu.address.testutil;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
 import seedu.address.model.components.name.Name;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.moduleclass.ModuleClass;
 
 /**
@@ -17,13 +20,16 @@ public class ModuleClassBuilder {
 
     private Name name;
     private Set<UUID> studentUuids;
+    private List<Lesson> lessons;
 
     /**
-     * Creates a {@code ModuleClassBuilder} with the default {@code Name} and empty {@code studentUuids} list.
+     * Creates a {@code ModuleClassBuilder} with the default {@code Name} and
+     * empty {@code studentUuids} and {@code lessons} list.
      */
     public ModuleClassBuilder() {
         name = new Name(DEFAULT_NAME);
-        studentUuids = new HashSet<>();
+        studentUuids = Collections.emptySet();
+        lessons = Collections.emptyList();
     }
 
     /**
@@ -32,6 +38,7 @@ public class ModuleClassBuilder {
     public ModuleClassBuilder(ModuleClass moduleClassToCopy) {
         name = moduleClassToCopy.getName();
         studentUuids = new HashSet<>(moduleClassToCopy.getStudentUuids());
+        lessons = moduleClassToCopy.getLessons();
     }
 
     /**
@@ -46,12 +53,21 @@ public class ModuleClassBuilder {
      * Sets the {@code Set<UUID>} of the {@code ModuleClass} that we are building.
      * Overwrites any previous content of the {@code Set<UUID>}.
      */
-    public ModuleClassBuilder withStudentUuids(UUID ... studentUuids) {
+    public ModuleClassBuilder withStudentUuids(UUID... studentUuids) {
         this.studentUuids = new HashSet<>(Arrays.asList(studentUuids));
         return this;
     }
 
+    /**
+     * Sets the {@code List<Lesson>} of the {@code ModuleClass} that we are building.
+     * Overwrites any previous content of the {@code List<Lesson>}.
+     */
+    public ModuleClassBuilder withLessons(Lesson... lessons) {
+        this.lessons = Arrays.asList(lessons);
+        return this;
+    }
+
     public ModuleClass build() {
-        return new ModuleClass(name, studentUuids);
+        return new ModuleClass(name, studentUuids, lessons);
     }
 }

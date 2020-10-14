@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.TutorsPet;
+import seedu.address.testutil.ModuleClassBuilder;
 import seedu.address.testutil.TypicalTutorsPet;
 
 public class JsonSerializableTutorsPetTest {
@@ -49,7 +50,12 @@ public class JsonSerializableTutorsPetTest {
         TutorsPet tutorsPetFromFile = dataFromFile.toModelType();
         TutorsPet typicalStudentsTutorsPet = TypicalTutorsPet.getTypicalTutorsPet();
 
-        assertEquals(tutorsPetFromFile, typicalStudentsTutorsPet);
+        // TODO: Remove temporary workaround after lesson storage has been implemented.
+        typicalStudentsTutorsPet.getModuleClassList().stream().forEach(moduleClass ->
+                typicalStudentsTutorsPet.setModuleClass(moduleClass,
+                        new ModuleClassBuilder(moduleClass).withLessons().build()));
+
+        assertEquals(typicalStudentsTutorsPet, tutorsPetFromFile);
     }
 
     @Test
@@ -133,6 +139,11 @@ public class JsonSerializableTutorsPetTest {
                 JsonSerializableTutorsPet.class).get();
         TutorsPet tutorsPetFromFile = dataFromFile.toModelType();
         TutorsPet typicalStudentsTutorsPet = TypicalTutorsPet.getTypicalTutorsPet();
+
+        // TODO: Remove temporary workaround after lesson storage has been implemented.
+        typicalStudentsTutorsPet.getModuleClassList().stream().forEach(moduleClass ->
+                typicalStudentsTutorsPet.setModuleClass(moduleClass,
+                        new ModuleClassBuilder(moduleClass).withLessons().build()));
 
         assertEquals(tutorsPetFromFile, typicalStudentsTutorsPet);
     }
