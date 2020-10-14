@@ -680,7 +680,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 2a1. Tutor's Pet shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes at step 1.
 
 **Use case: UC19 - Delete a lesson**
 
@@ -697,7 +697,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 1a1. Tutor's Pet shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes at step 1.
 
 **Use case: UC20 - Add an attendance record of a student**
 
@@ -745,7 +745,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 2a1. Tutor's Pet shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes at step 1.
 
 **Use case: UC22 - Find the attendance record of a student**
 
@@ -770,8 +770,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to delete a specific class in the list.
-2.  Tutor's Pet deletes the class.
+1.  User requests to delete a specific attendance record in the list.
+2.  Tutor's Pet deletes the attendance record.
 
     Use case ends.
 
