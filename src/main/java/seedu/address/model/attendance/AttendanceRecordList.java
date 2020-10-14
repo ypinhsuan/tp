@@ -42,9 +42,10 @@ public class AttendanceRecordList {
 
     /**
      * Returns true if week number is less than the total number of occurrences.
+     * Week number should have been zero based.
      */
     private boolean isWeekContained(int week) {
-        return week <= recordList.size();
+        return week < recordList.size();
     }
 
     public List<AttendanceRecord> getAttendanceRecordList() {

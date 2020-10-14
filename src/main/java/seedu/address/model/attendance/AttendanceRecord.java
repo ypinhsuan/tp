@@ -12,7 +12,7 @@ import seedu.address.model.attendance.exceptions.AttendanceNotFoundException;
 
 /**
  * Represents the attendance of students in a single lesson class.
- * Guarantees Immutability.
+ * Guarantees immutability.
  */
 public class AttendanceRecord {
 
