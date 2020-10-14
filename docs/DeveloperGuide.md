@@ -670,7 +670,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. The given index is invalid.
+* 1a. One or more of the given indexes are invalid.
 
     * 1a1. Tutor's Pet shows an error message.
 
@@ -693,7 +693,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. The given index is invalid.
+* 1a. One or more of the given indexes are invalid.
 
     * 1a1. Tutor's Pet shows an error message.
 
@@ -735,7 +735,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. The given index is invalid.
+* 1a. One or more of the given indexes are invalid.
 
     * 1a1. Tutor's Pet shows an error message.
 
@@ -770,14 +770,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to delete a specific attendance record in the list.
+1.  User requests to delete a specific attendance record.
 2.  Tutor's Pet deletes the attendance record.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The given index is invalid.
+* 1a. One or more of the given indexes are invalid.
 
     * 1a1. Tutor's Pet shows an error message.
 
