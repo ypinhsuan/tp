@@ -11,6 +11,7 @@ import seedu.address.logic.commands.AddStudentCommand;
 import seedu.address.logic.commands.ClearModuleClassCommand;
 import seedu.address.logic.commands.ClearStudentCommand;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.DeleteLessonCommand;
 import seedu.address.logic.commands.DeleteModuleClassCommand;
 import seedu.address.logic.commands.DeleteStudentCommand;
 import seedu.address.logic.commands.EditModuleClassCommand;
@@ -102,6 +103,9 @@ public class TutorsPetParser {
 
         case UnlinkCommand.COMMAND_WORD:
             return new UnlinkCommandParser().parse(arguments);
+
+        case DeleteLessonCommand.COMMAND_WORD:
+            return new DeleteLessonCommandParser().parse(arguments);
 
         case ViewHistoryCommand.COMMAND_WORD:
             return new ViewHistoryCommand();
