@@ -18,12 +18,12 @@ class AttendanceTest {
 
     @Test
     public void isValidParticipationScore() {
-        // invalid weeks
+        // invalid score
         assertFalse(Attendance.isValidParticipationScore(Attendance.LOWER_BOUND - 1));
         assertFalse(Attendance.isValidParticipationScore(Attendance.UPPER_BOUND + 1));
         assertFalse(Attendance.isValidParticipationScore(-1));
 
-        // valid weeks
+        // valid score
         assertTrue(Attendance.isValidParticipationScore(Attendance.LOWER_BOUND));
         assertTrue(Attendance.isValidParticipationScore(Attendance.UPPER_BOUND));
         assertTrue(Attendance.isValidParticipationScore(10));

@@ -15,7 +15,7 @@ import seedu.address.model.student.Student;
 /**
  * Represents the attendance records of a {@code Lesson}.
  * Contains a list of all attendance records.
- * Guarantees immutability.
+ * Guarantees: immutable.
  */
 public class AttendanceRecordList {
 
@@ -42,7 +42,6 @@ public class AttendanceRecordList {
 
     /**
      * Returns true if week number is less than the total number of occurrences.
-     * Week number should have been zero based.
      */
     private boolean isWeekContained(Week week) {
         return week.getZeroBasedWeekIndex() < recordList.size();
@@ -53,7 +52,7 @@ public class AttendanceRecordList {
     }
 
     /**
-     * Gets the {@code Attendance} of a {@code Student} in a particular {@code Week}.
+     * Returns the {@code Attendance} of a {@code Student} in a particular {@code Week}.
      */
     public Attendance getAttendance(Student student, Week week)
             throws InvalidWeekException, AttendanceNotFoundException {
@@ -68,7 +67,7 @@ public class AttendanceRecordList {
     }
 
     /**
-     * Gets the {@code AttendanceRecord} of a particular {@code Week}.
+     * Returns the {@code AttendanceRecord} of a particular {@code Week}.
      */
     public AttendanceRecord getAttendanceRecord(Week week) throws InvalidWeekException {
         if (!isWeekContained(week)) {

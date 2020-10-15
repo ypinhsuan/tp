@@ -14,7 +14,7 @@ class WeekTest {
 
     @Test
     public void constructor_invalidWeek_throwsIllegalArgumentException() {
-        Index invalidWeek = Index.fromOneBased(1000);
+        Index invalidWeek = Index.fromOneBased(Week.UPPER_BOUND + 1);
         assertThrows(IllegalArgumentException.class, () -> new Week(invalidWeek));
     }
 

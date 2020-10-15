@@ -12,7 +12,7 @@ import seedu.address.model.attendance.exceptions.AttendanceNotFoundException;
 
 /**
  * Represents the attendance of students in a single lesson class.
- * Guarantees immutability.
+ * Guarantees: immutable.
  */
 public class AttendanceRecord {
 
@@ -37,7 +37,7 @@ public class AttendanceRecord {
     }
 
     /**
-     * Gets the {@code Attendance} of the given {@code UUID}.
+     * Returns the {@code Attendance} of the given {@code Student UUID}.
      */
     public Attendance getAttendance(UUID uuid) throws AttendanceNotFoundException {
         requireNonNull(uuid);
