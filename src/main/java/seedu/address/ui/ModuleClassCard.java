@@ -1,10 +1,21 @@
 package seedu.address.ui;
 
+import static seedu.address.model.lesson.Lesson.TIME_FORMATTER;
+
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import seedu.address.model.lesson.Day;
+import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.NumberOfOccurrences;
+import seedu.address.model.lesson.Venue;
 import seedu.address.model.moduleclass.ModuleClass;
+
+import java.time.LocalTime;
+import java.util.List;
 
 /**
  * A UI component that displays information of a {@code ModuleClass}.
@@ -17,6 +28,8 @@ public class ModuleClassCard extends UiPart<Region> {
 
     @FXML
     private HBox cardPane;
+    @FXML
+    private VBox vBox;
     @FXML
     private Label name;
     @FXML
@@ -33,6 +46,31 @@ public class ModuleClassCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(moduleClass.getName().fullName);
         studentCount.setText(Integer.toString(moduleClass.getStudentUuids().size()));
+
+        List<Lesson> lessons = moduleClass.getLessons();
+        int index = 1;
+        for (Lesson lesson: lessons) {
+            vBox.getChildren().add(createLessonLabel(index, lesson));
+            index++;
+        }
+    }
+
+    private Label createLessonLabel(int index, Lesson lesson) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(index)
+                .append(". ")
+                .append(lesson.getDay())
+                .append(" ")
+                .append(TIME_FORMATTER.format(lesson.getStartTime()))
+                .append(" to ")
+                .append(TIME_FORMATTER.format(lesson.getEndTime()))
+                .append("\nVenue: ")
+                .append(lesson.getVenue())
+                .append("\nNumber of occurrences: ")
+                .append(lesson.getNumberOfOccurrences());
+        Label label = new Label(builder.toString());
+        label.setPadding(new Insets(0,0,15,0));
+        return label;
     }
 
     @Override
