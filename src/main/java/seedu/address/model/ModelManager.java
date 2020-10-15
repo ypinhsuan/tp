@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.moduleclass.ModuleClass;
 import seedu.address.model.student.Student;
 
@@ -185,6 +186,19 @@ public class ModelManager implements Model {
     @Override
     public void deleteAllModuleClasses() {
         versionedTutorsPet.deleteAllModuleClasses();
+    }
+
+    @Override
+    public boolean hasLesson(Lesson lesson) {
+        requireNonNull(lesson);
+
+        return versionedTutorsPet.hasLesson(lesson);
+    }
+
+    @Override
+    public void addLesson(Lesson lesson) {
+        versionedTutorsPet.addLesson(lesson);
+        updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
     }
 
     //=========== Filtered Student List Accessors =============================================================

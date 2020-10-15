@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.moduleclass.ModuleClass;
 import seedu.address.model.student.Student;
 
@@ -166,4 +167,15 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredModuleClassList(Predicate<ModuleClass> predicate);
+
+    /**
+     * Returns true if a Lesson with the same identity as {@code lesson} exists in the application.
+     */
+    boolean hasLesson(Lesson lesson);
+
+    /**
+     * Adds the given lesson.
+     * {@code lesson} must not already exist in the application.
+     */
+    void addLesson(Lesson lesson);
 }

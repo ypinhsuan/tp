@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Objects;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.UniqueLessonList;
 import seedu.address.model.moduleclass.ModuleClass;
 import seedu.address.model.moduleclass.UniqueModuleClassList;
 import seedu.address.model.student.Student;
@@ -13,12 +15,13 @@ import seedu.address.model.student.UniqueStudentList;
 
 /**
  * Wraps all data at the application level.
- * Duplicates are not allowed (by .isSameStudent and .isSameModuleClass comparison).
+ * Duplicates are not allowed (by .isSameStudent and .isSameModuleClass and .isSameLesson comparison).
  */
 public class TutorsPet implements ReadOnlyTutorsPet {
 
     private final UniqueStudentList students;
     private final UniqueModuleClassList moduleClasses;
+    private final UniqueLessonList lessons;
 
     /**
      * Creates a TutorsPet with no existing data.
@@ -26,6 +29,7 @@ public class TutorsPet implements ReadOnlyTutorsPet {
     public TutorsPet() {
         students = new UniqueStudentList();
         moduleClasses = new UniqueModuleClassList();
+        lessons = new UniqueLessonList();
     }
 
     /**
@@ -169,6 +173,23 @@ public class TutorsPet implements ReadOnlyTutorsPet {
      */
     public void deleteAllModuleClasses() {
         moduleClasses.setModuleClass(new UniqueModuleClassList());
+    }
+
+    /**
+     * Returns true if a lesson with the same identity as {@code lesson} exists.
+     */
+    public boolean hasLesson(Lesson lesson) {
+        requireNonNull(lesson);
+
+        return lessons.contains(lesson);
+    }
+
+    /**
+     * Adds a lesson to the application.
+     * The lesson must not already exist in the application.
+     */
+    public void addLesson(Lesson lesson) {
+        lessons.add(lesson);
     }
 
     //// util methods

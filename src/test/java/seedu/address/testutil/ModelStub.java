@@ -9,6 +9,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyTutorsPet;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.StateRecords;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.moduleclass.ModuleClass;
 import seedu.address.model.student.Student;
 
@@ -134,6 +135,16 @@ public class ModelStub implements Model {
 
     @Override
     public void deleteAllModuleClasses() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public boolean hasLesson(Lesson lesson) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void addLesson(Lesson lesson) {
         throw new AssertionError("This method should not be called.");
     }
 

@@ -2,6 +2,8 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -11,6 +13,9 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.components.name.Name;
 import seedu.address.model.components.tag.Tag;
+import seedu.address.model.lesson.Day;
+import seedu.address.model.lesson.NumberOfOccurrences;
+import seedu.address.model.lesson.Venue;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Telegram;
 
@@ -109,5 +114,84 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String time} into a {@code LocalTime}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code time} is invalid.
+     */
+    public static LocalTime parseTime(String time) throws ParseException {
+        requireNonNull(time);
+
+        String trimmedTime = time.trim();
+        LocalTime parsedTime;
+        try {
+            parsedTime = LocalTime.parse(trimmedTime);
+        } catch (DateTimeParseException e) {
+            throw new ParseException("Time format provided is invalid.");
+        }
+        return parsedTime;
+    }
+
+    /**
+     * Parses a {@code String day} into a {@code Day}.
+     * Leading and trailing whitespaces will be trimmed.
+     * Characters will be capitalized.
+     *
+     * @throws ParseException if the given {@code time} is invalid.
+     */
+    public static Day parseDay(String day) throws ParseException {
+        requireNonNull(day);
+
+        String trimmedDay = day.trim().toUpperCase();
+        Day parsedDay;
+        try {
+            parsedDay = Day.valueOf(trimmedDay);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException("Day format provided is invalid.");
+        }
+        return parsedDay;
+    }
+
+    /**
+     * Parses a {@code String numberOfOccurrences} into a {@code NumberOfOccurrences}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code numberOfOccurrences} is invalid.
+     */
+    public static NumberOfOccurrences parseNumberOfOccurrences(String numberOfOccurrences) throws ParseException {
+        requireNonNull(numberOfOccurrences);
+
+        String trimmedNumberOfOccurrences = numberOfOccurrences.trim();
+        int occurrences;
+
+        try {
+            occurrences = Integer.parseInt(trimmedNumberOfOccurrences);
+        } catch (NumberFormatException e) {
+            throw new ParseException(NumberOfOccurrences.MESSAGE_CONSTRAINTS);
+        }
+
+        if (!NumberOfOccurrences.isValidNumberOfOccurrences(occurrences)) {
+            throw new ParseException(NumberOfOccurrences.MESSAGE_CONSTRAINTS);
+        }
+        return new NumberOfOccurrences(occurrences);
+    }
+
+    /**
+     * Parses a {@code String venue} into a {@code Venue}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code venue} is invalid.
+     */
+    public static Venue parseVenue(String venue) throws ParseException {
+        requireNonNull(venue);
+
+        String trimmedVenue = venue.trim();
+        if (!Venue.isValidVenue(trimmedVenue)) {
+            throw new ParseException(Venue.MESSAGE_CONSTRAINTS);
+        }
+        return new Venue(trimmedVenue);
     }
 }
