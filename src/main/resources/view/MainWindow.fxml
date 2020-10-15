@@ -53,7 +53,7 @@
 
         <HBox VBox.vgrow="ALWAYS">
           <children>
-             <VBox fx:id="moduleClassList" minWidth="365.0" prefWidth="365.0" styleClass="pane-with-border">
+             <VBox fx:id="moduleClassList" minWidth="365.0" prefWidth="365.0" styleClass="pane-with-border" HBox.hgrow="ALWAYS">
                <padding>
                  <Insets bottom="10" left="10" right="10" top="10" />
                </padding>
