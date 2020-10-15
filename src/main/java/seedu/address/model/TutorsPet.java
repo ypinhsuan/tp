@@ -13,7 +13,7 @@ import seedu.address.model.student.UniqueStudentList;
 
 /**
  * Wraps all data at the application level.
- * Duplicates are not allowed (by .isSameStudent and .isSameModuleClass and .isSameLesson comparison).
+ * Duplicates are not allowed (by .isSameStudent and .isSameModuleClass comparison).
  */
 public class TutorsPet implements ReadOnlyTutorsPet {
 

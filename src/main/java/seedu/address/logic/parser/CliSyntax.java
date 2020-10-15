@@ -16,5 +16,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_START_TIME = new Prefix("st");
     public static final Prefix PREFIX_END_TIME = new Prefix("et/");
     public static final Prefix PREFIX_VENUE = new Prefix("v/");
-    public static final Prefix PREFIX_NO_OF_TIMES = new Prefix("r/");
+    public static final Prefix PREFIX_NUMBER_OF_OCCURRENCES = new Prefix("r/");
 }

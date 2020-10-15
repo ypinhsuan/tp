@@ -5,7 +5,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASS_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NO_OF_TIMES;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NUMBER_OF_OCCURRENCES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
 
@@ -35,7 +35,7 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
 
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_CLASS_INDEX, PREFIX_DAY,
-                        PREFIX_START_TIME, PREFIX_END_TIME, PREFIX_VENUE, PREFIX_NO_OF_TIMES);
+                        PREFIX_START_TIME, PREFIX_END_TIME, PREFIX_VENUE, PREFIX_NUMBER_OF_OCCURRENCES);
 
         Index moduleClassIndex;
 
@@ -54,7 +54,7 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
 
         // parse lesson data values
         if (!arePrefixesPresent(argMultimap, PREFIX_DAY,
-                PREFIX_START_TIME, PREFIX_END_TIME, PREFIX_VENUE, PREFIX_NO_OF_TIMES)
+                PREFIX_START_TIME, PREFIX_END_TIME, PREFIX_VENUE, PREFIX_NUMBER_OF_OCCURRENCES)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLessonCommand.MESSAGE_USAGE));
         }
@@ -63,7 +63,7 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
         LocalTime endTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_END_TIME).get());
         Day day = ParserUtil.parseDay(argMultimap.getValue(PREFIX_DAY).get());
         NumberOfOccurrences numberOfOccurrences =
-                ParserUtil.parseNumberOfOccurrences(argMultimap.getValue(PREFIX_NO_OF_TIMES).get());
+                ParserUtil.parseNumberOfOccurrences(argMultimap.getValue(PREFIX_NUMBER_OF_OCCURRENCES).get());
         Venue venue = ParserUtil.parseVenue(argMultimap.getValue(PREFIX_VENUE).get());
 
         Lesson lesson = new Lesson(startTime, endTime, day, numberOfOccurrences, venue);

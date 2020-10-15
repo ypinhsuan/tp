@@ -2,12 +2,21 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASS_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NUMBER_OF_OCCURRENCES;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
+import static seedu.address.model.lesson.Lesson.TIME_FORMATTER;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,10 +25,12 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.TutorsPet;
 import seedu.address.model.lesson.Day;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.moduleclass.ModuleClass;
 import seedu.address.model.student.Student;
 import seedu.address.testutil.EditModuleClassDescriptorBuilder;
 import seedu.address.testutil.EditStudentDescriptorBuilder;
+import seedu.address.testutil.LessonBuilder;
 import seedu.address.testutil.StudentBuilder;
 
 /**
@@ -88,12 +99,21 @@ public class CommandTestUtil {
     }
 
     // lesson-related constants
-
+    // LESSON_WED_2_TO_4
+    public static final String VALID_CLASS_INDEX = "1";
     public static final String VALID_START_TIME_1400 = "14:00";
     public static final String VALID_END_TIME_1600 = "16:00";
     public static final Day VALID_DAY_WED = Day.WEDNESDAY;
     public static final int VALID_NUMBER_OF_OCCURRENCES_7 = 7;
     public static final String VALID_VENUE_COM1_B111 = "COM1-B111";
+
+    public static final String CLASS_INDEX_DESC_LESSON_WED_2_TO_4 = " " + PREFIX_CLASS_INDEX + VALID_CLASS_INDEX;
+    public static final String START_TIME_DESC_LESSON_WED_2_TO_4 = " " + PREFIX_START_TIME + VALID_START_TIME_1400;
+    public static final String END_TIME_DESC_LESSON_WED_2_TO_4 = " " + PREFIX_END_TIME + VALID_END_TIME_1600;
+    public static final String DAY_DESC_LESSON_WED_2_TO_4 = " " + PREFIX_DAY + VALID_DAY_WED;
+    public static final String NUMBER_OF_OCCURRENCES_DESC_LESSON_WED_2_TO_4 =
+            " " + PREFIX_NUMBER_OF_OCCURRENCES + VALID_NUMBER_OF_OCCURRENCES_7;
+    public static final String VENUE_DESC_LESSON_WED_2_TO_4 = " " + PREFIX_VENUE + VALID_VENUE_COM1_B111;
 
     // attendance-related constants
 

@@ -5,7 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASS_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NO_OF_TIMES;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NUMBER_OF_OCCURRENCES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
 
@@ -21,7 +21,6 @@ import seedu.address.model.Model;
 import seedu.address.model.components.name.Name;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.moduleclass.ModuleClass;
-import seedu.address.model.moduleclass.SameModuleClassPredicate;
 
 /**
  * Adds a lesson to the lesson manager.
@@ -37,14 +36,14 @@ public class AddLessonCommand extends Command {
             + PREFIX_START_TIME + "START_TIME "
             + PREFIX_END_TIME + "END_TIME "
             + PREFIX_VENUE + "VENUE "
-            + PREFIX_NO_OF_TIMES + "NO_OF_TIMES\n"
+            + PREFIX_NUMBER_OF_OCCURRENCES + "NO_OF_OCCURRENCES\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_CLASS_INDEX + "1 "
             + PREFIX_DAY + "TUESDAY "
             + PREFIX_START_TIME + "08:00 "
             + PREFIX_END_TIME + "10:00 "
             + PREFIX_VENUE + "COM1-0211 "
-            + PREFIX_NO_OF_TIMES + "13";
+            + PREFIX_NUMBER_OF_OCCURRENCES + "13";
 
     public static final String MESSAGE_SUCCESS = "New lesson added: %1$s";
     public static final String MESSAGE_EXISTING_LESSON = "This lesson already exists";
@@ -76,8 +75,6 @@ public class AddLessonCommand extends Command {
         ModuleClass moduleClassToAddTo = lastShownModuleClassList.get(moduleClassIndex.getZeroBased());
         ModuleClass modifiedModuleClass = createModifiedModuleClass(moduleClassToAddTo, toAdd);
         model.setModuleClass(moduleClassToAddTo, modifiedModuleClass);
-
-        model.updateFilteredModuleClassList(new SameModuleClassPredicate(modifiedModuleClass));
 
         String message = String.format(MESSAGE_SUCCESS, toAdd);
         model.commit(message);

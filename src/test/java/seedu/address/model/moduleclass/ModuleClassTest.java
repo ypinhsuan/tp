@@ -98,6 +98,24 @@ public class ModuleClassTest {
     }
 
     @Test
+    public void hasLesson_lessonInModuleClass_returnsTrue() {
+        ModuleClass moduleClass = new ModuleClassBuilder().withLessons(LESSON_FRI_8_TO_10, LESSON_WED_2_TO_4).build();
+        assertTrue(moduleClass.hasLesson(LESSON_FRI_8_TO_10));
+    }
+
+    @Test
+    public void hasLesson_nullLesson_throwsNullPointerException() {
+        ModuleClass moduleClass = new ModuleClassBuilder().build();
+        assertThrows(NullPointerException.class, () -> moduleClass.hasLesson(null));
+    }
+
+    @Test
+    public void hasLesson_lessonNotInModuleClass_returnsFalse() {
+        ModuleClass moduleClass = new ModuleClassBuilder().withLessons(LESSON_FRI_8_TO_10).build();
+        assertFalse(moduleClass.hasLesson(LESSON_WED_2_TO_4));
+    }
+
+    @Test
     public void getLessons_retainsConstructedOrder() {
         List<Lesson> lessons = Arrays.asList(LESSON_FRI_8_TO_10, LESSON_WED_2_TO_4, LESSON_THU_10_TO_11);
         ModuleClass moduleClass = new ModuleClass(new Name(VALID_NAME_CS2100_LAB),
