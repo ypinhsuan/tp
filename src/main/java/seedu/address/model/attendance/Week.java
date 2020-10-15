@@ -43,6 +43,15 @@ public class Week {
         return week.getZeroBased();
     }
 
+    public int getOneBasedWeekIndex() {
+        return week.getOneBased();
+    }
+
+    @Override
+    public String toString() {
+        return Integer.toString(getOneBasedWeekIndex());
+    }
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

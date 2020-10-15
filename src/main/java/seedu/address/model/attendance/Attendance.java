@@ -39,6 +39,11 @@ public class Attendance {
     }
 
     @Override
+    public String toString() {
+        return Integer.toString(participationScore);
+    }
+
+    @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Attendance // instanceof handles nulls
