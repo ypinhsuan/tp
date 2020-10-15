@@ -2,20 +2,16 @@ package seedu.address.ui;
 
 import static seedu.address.model.lesson.Lesson.TIME_FORMATTER;
 
+import java.util.List;
+
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import seedu.address.model.lesson.Day;
 import seedu.address.model.lesson.Lesson;
-import seedu.address.model.lesson.NumberOfOccurrences;
-import seedu.address.model.lesson.Venue;
 import seedu.address.model.moduleclass.ModuleClass;
-
-import java.time.LocalTime;
-import java.util.List;
 
 /**
  * A UI component that displays information of a {@code ModuleClass}.
@@ -69,7 +65,7 @@ public class ModuleClassCard extends UiPart<Region> {
                 .append("\nNumber of occurrences: ")
                 .append(lesson.getNumberOfOccurrences());
         Label label = new Label(builder.toString());
-        label.setPadding(new Insets(0,0,15,0));
+        label.setPadding(new Insets(0, 0, 15, 0));
         return label;
     }
 
