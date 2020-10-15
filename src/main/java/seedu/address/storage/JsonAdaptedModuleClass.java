@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.components.name.Name;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.moduleclass.ModuleClass;
 
 /**
@@ -21,19 +22,25 @@ public class JsonAdaptedModuleClass {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "ModuleClass's %s field is missing!";
     public static final String INVALID_FIELD_MESSAGE_FORMAT = "ModuleClass's %s field is invalid!";
+    public static final String STUDENT_UUID_FIELD = "student uuid";
 
     private final String name;
     private final List<JsonAdaptedUuid> studentUuids = new ArrayList<>();
+    private final List<JsonAdaptedLesson> lessons = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedModuleClass} with the given class details.
      */
     @JsonCreator
     public JsonAdaptedModuleClass(@JsonProperty("name") String name,
-                                  @JsonProperty("studentUuids") List<JsonAdaptedUuid> studentUuids) {
+                                  @JsonProperty("studentUuids") List<JsonAdaptedUuid> studentUuids,
+                                  @JsonProperty("lessons") List<JsonAdaptedLesson> lessons) {
         this.name = name;
         if (studentUuids != null) {
             this.studentUuids.addAll(studentUuids);
+        }
+        if (lessons != null) {
+            this.lessons.addAll(lessons);
         }
     }
 
@@ -45,6 +52,50 @@ public class JsonAdaptedModuleClass {
         studentUuids.addAll(source.getStudentUuids().stream()
                .map(JsonAdaptedUuid::new)
                .collect(Collectors.toList()));
+        lessons.addAll(source.getLessons().stream()
+                .map(JsonAdaptedLesson::new)
+                .collect(Collectors.toList()));
+    }
+
+    /**
+     * Gets a {@code List} of {@code UUID}s from {@code studentUuids}.
+     *
+     * @throws IllegalValueException if any of the {@code UUID}s are null or invalid.
+     */
+    private List<UUID> getUuidList() throws IllegalValueException {
+        List<UUID> uuidList = new ArrayList<>();
+        for (JsonAdaptedUuid studentUuid : studentUuids) {
+            if (studentUuid == null) {
+                throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, STUDENT_UUID_FIELD));
+            }
+
+            // catch invalid UUID
+            try {
+                String uuidString = studentUuid.getUuidString();
+                UUID.fromString(uuidString);
+            } catch (IllegalArgumentException e) {
+                throw new IllegalValueException(String.format(INVALID_FIELD_MESSAGE_FORMAT, STUDENT_UUID_FIELD));
+            }
+            uuidList.add(studentUuid.toModelType());
+        }
+        return uuidList;
+    }
+
+    /**
+     * Gets a {@code List} of {@code Lesson}s from {@code lessons}.
+     *
+     * @throws IllegalValueException if any of the {@code Lesson}s are null.
+     */
+    private List<Lesson> getLessonList() throws IllegalValueException {
+        List<Lesson> lessonList = new ArrayList<>();
+        for (JsonAdaptedLesson lesson : lessons) {
+            if (lesson == null) {
+                throw new IllegalValueException(
+                        String.format(MISSING_FIELD_MESSAGE_FORMAT, Lesson.class.getSimpleName()));
+            }
+            lessonList.add(lesson.toModelType());
+        }
+        return lessonList;
     }
 
     /**
@@ -53,22 +104,6 @@ public class JsonAdaptedModuleClass {
      * @throws IllegalValueException if there were any data constraints violated in the adapted class.
      */
     public ModuleClass toModelType() throws IllegalValueException {
-        final List<UUID> moduleClassUuids = new ArrayList<>();
-        for (JsonAdaptedUuid studentUuid : studentUuids) {
-            if (studentUuid == null) {
-                throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "studentUuid"));
-            }
-
-            // catch invalid UUID
-            try {
-                String uuidString = studentUuid.getUuidString();
-                UUID.fromString(uuidString);
-            } catch (IllegalArgumentException e) {
-                throw new IllegalValueException(String.format(INVALID_FIELD_MESSAGE_FORMAT, "studentUuid"));
-            }
-            moduleClassUuids.add(studentUuid.toModelType());
-        }
-
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
@@ -77,9 +112,11 @@ public class JsonAdaptedModuleClass {
         }
         final Name modelName = new Name(name);
 
+        List<UUID> moduleClassUuids = getUuidList();
         final Set<UUID> modelUuids = new HashSet<>(moduleClassUuids);
 
-        // TODO: Implement storage for Lesson.
-        return new ModuleClass(modelName, modelUuids, new ArrayList<>());
+        final List<Lesson> lessonList = getLessonList();
+
+        return new ModuleClass(modelName, modelUuids, lessonList);
     }
 }
