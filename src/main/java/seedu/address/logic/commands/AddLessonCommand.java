@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASS_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
@@ -8,9 +9,19 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NO_OF_TIMES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
+
+import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.components.name.Name;
 import seedu.address.model.lesson.Lesson;
+import seedu.address.model.moduleclass.ModuleClass;
+import seedu.address.model.moduleclass.SameModuleClassPredicate;
 
 /**
  * Adds a lesson to the lesson manager.
@@ -35,29 +46,39 @@ public class AddLessonCommand extends Command {
             + PREFIX_VENUE + "COM1-0211 "
             + PREFIX_NO_OF_TIMES + "13";
 
-    public static final String MESSAGE_SUCCESS = "New lesson added: %2$s %3$s %4$s %5$s";
-    public static final String MESSAGE_DUPLICATE_LESSON = "This lesson already exists.";
+    public static final String MESSAGE_SUCCESS = "New lesson added: %1$s";
+    public static final String MESSAGE_EXISTING_LESSON = "This lesson already exists";
 
+    private final Index moduleClassIndex;
     private final Lesson toAdd;
 
     /**
      * Creates an AddLessonCommand to add the specified {@code Lesson}.
      */
-    public AddLessonCommand(Lesson lesson) {
-        requireNonNull(lesson);
+    public AddLessonCommand(Index moduleClassIndex, Lesson lesson) {
+        requireAllNonNull(moduleClassIndex, lesson);
 
         this.toAdd = lesson;
+        this.moduleClassIndex = moduleClassIndex;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasLesson(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_LESSON);
+        List<ModuleClass> lastShownModuleClassList = model.getFilteredModuleClassList();
+
+        if (moduleClassIndex.getZeroBased() >= lastShownModuleClassList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX);
         }
 
-        model.addLesson(toAdd);
+        // add to lesson to moduleClass
+        ModuleClass moduleClassToAddTo = lastShownModuleClassList.get(moduleClassIndex.getZeroBased());
+        ModuleClass modifiedModuleClass = createModifiedModuleClass(moduleClassToAddTo, toAdd);
+        model.setModuleClass(moduleClassToAddTo, modifiedModuleClass);
+
+        model.updateFilteredModuleClassList(new SameModuleClassPredicate(modifiedModuleClass));
+
         String message = String.format(MESSAGE_SUCCESS, toAdd);
         model.commit(message);
         return new CommandResult(message);
@@ -67,6 +88,23 @@ public class AddLessonCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddLessonCommand // instanceof handles nulls
-                && toAdd.equals(((AddLessonCommand) other).toAdd));
+                && moduleClassIndex.equals(((AddLessonCommand) other).moduleClassIndex))
+                && toAdd.equals(((AddLessonCommand) other).toAdd);
+    }
+
+    private static ModuleClass createModifiedModuleClass(ModuleClass moduleClassToAddTo, Lesson lessonToAdd)
+            throws CommandException {
+        assert moduleClassToAddTo != null;
+        assert lessonToAdd != null;
+
+        if (moduleClassToAddTo.hasLesson(lessonToAdd)) {
+            throw new CommandException(MESSAGE_EXISTING_LESSON);
+        }
+
+        Name moduleClassName = moduleClassToAddTo.getName();
+        Set<UUID> studentsIds = moduleClassToAddTo.getStudentUuids();
+        List<Lesson> lessons = new ArrayList<>(moduleClassToAddTo.getLessons());
+        lessons.add(lessonToAdd);
+        return new ModuleClass(moduleClassName, studentsIds, lessons);
     }
 }
