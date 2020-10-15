@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.storage.JsonAdaptedModuleClass.INVALID_FIELD_MESSAGE_FORMAT;
 import static seedu.address.storage.JsonAdaptedModuleClass.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalModuleClass.CS2103T_TUTORIAL;
 import static seedu.address.testutil.TypicalLesson.LESSON_WED_2_TO_4;
+import static seedu.address.testutil.TypicalModuleClass.CS2103T_TUTORIAL;
 
 import java.util.ArrayList;
 import java.util.List;

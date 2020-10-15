@@ -1,14 +1,15 @@
 package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.storage.JsonAdaptedLesson.END_TIME_FIELD;
 import static seedu.address.storage.JsonAdaptedLesson.INVALID_FIELD_MESSAGE_FORMAT;
 import static seedu.address.storage.JsonAdaptedLesson.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.storage.JsonAdaptedLesson.START_TIME_FIELD;
-import static seedu.address.storage.JsonAdaptedLesson.END_TIME_FIELD;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalLesson.LESSON_WED_2_TO_4;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.lesson.Day;
 import seedu.address.model.lesson.NumberOfOccurrences;
@@ -96,6 +97,7 @@ public class JsonAdaptedLessonTest {
         String expectedMessage = Venue.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, lesson::toModelType);
     }
+
     @Test
     public void toModelType_nullVenue_throwsIllegalValueException() {
         JsonAdaptedLesson lesson = new JsonAdaptedLesson(
