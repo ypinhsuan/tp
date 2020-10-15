@@ -1,10 +1,13 @@
 package seedu.address.ui;
 
+import java.util.logging.Logger;
+
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -17,6 +20,8 @@ public class CommandBox extends UiPart<Region> {
     public static final String ERROR_STYLE_CLASS = "error";
     private static final String FXML = "CommandBox.fxml";
     private static final CommandHistory COMMAND_HISTORY = new CommandHistory();
+
+    private final Logger logger = LogsCenter.getLogger(CommandBox.class);
 
     private final CommandExecutor commandExecutor;
 
@@ -36,10 +41,12 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent event) -> {
             switch (event.getCode()) {
             case UP:
+                logger.fine("UP key pressed");
                 recallPreviousCommand();
                 event.consume();
                 break;
             case DOWN:
+                logger.fine("DOWN key pressed");
                 recallNextCommand();
                 event.consume();
                 break;
@@ -55,6 +62,7 @@ public class CommandBox extends UiPart<Region> {
     private void recallPreviousCommand() {
         if (COMMAND_HISTORY.hasPrevious()) {
             commandTextField.setText(COMMAND_HISTORY.getPrevious(commandTextField.getText()));
+            logger.fine("Recalled: " + commandTextField.getText());
             commandTextField.positionCaret(commandTextField.getText().length());
         }
     }
@@ -65,9 +73,11 @@ public class CommandBox extends UiPart<Region> {
     private void recallNextCommand() {
         if (COMMAND_HISTORY.hasNext()) {
             commandTextField.setText(COMMAND_HISTORY.getNext());
+            logger.fine("Recalled: " + commandTextField.getText());
             commandTextField.positionCaret(commandTextField.getText().length());
         } else if (COMMAND_HISTORY.hasCached()) {
             commandTextField.setText(COMMAND_HISTORY.getCached());
+            logger.fine("Retrieved from cache: " + commandTextField.getText());
             commandTextField.positionCaret(commandTextField.getText().length());
         }
     }

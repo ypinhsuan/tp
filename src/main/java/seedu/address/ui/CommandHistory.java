@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 
 /**
  * Represents a stack of commands executed by the user.
@@ -13,6 +16,7 @@ import java.util.Optional;
  */
 public class CommandHistory {
 
+    private final Logger logger = LogsCenter.getLogger(CommandHistory.class);
     private final List<String> history;
     private int pointer;
     private Optional<String> cache;
@@ -33,6 +37,7 @@ public class CommandHistory {
     public void addHistory(String command) {
         requireNonNull(command);
 
+        logger.info("Stored in command recall: " + command);
         history.add(command);
         pointer = history.size();
         cache = Optional.empty();
@@ -86,6 +91,7 @@ public class CommandHistory {
      */
     public String getPrevious(String currentInput) throws IndexOutOfBoundsException {
         if (pointer == history.size()) {
+            logger.fine("Cached: " + currentInput);
             cache = Optional.of(currentInput);
         }
         return history.get(--pointer);
