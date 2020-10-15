@@ -3,7 +3,7 @@ package seedu.address.model.attendance;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ATTENDANCE_80;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PARTICIPATION_SCORE_80;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NUMBER_OF_OCCURRENCES_7;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalAttendanceRecord.RECORD_ALICE_80;
@@ -57,7 +57,7 @@ public class AttendanceRecordListTest {
     public void getAttendance_existingStudent_success() {
         AttendanceRecordList attendanceRecordList = createAliceRecordList();
         Attendance attendance = attendanceRecordList.getAttendance(ALICE, VALID_WEEK);
-        assertEquals(new Attendance(VALID_ATTENDANCE_80), attendance);
+        assertEquals(new Attendance(VALID_PARTICIPATION_SCORE_80), attendance);
     }
 
     @Test

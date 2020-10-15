@@ -97,10 +97,10 @@ public class CommandTestUtil {
 
     // attendance-related constants
 
-    public static final int VALID_WEEK_5 = 5;
-    public static final int VALID_ATTENDANCE_33 = 33;
-    public static final int VALID_ATTENDANCE_51 = 51;
-    public static final int VALID_ATTENDANCE_80 = 80;
+    public static final int VALID_WEEK_VALUE_5 = 5;
+    public static final int VALID_PARTICIPATION_SCORE_33 = 33;
+    public static final int VALID_PARTICIPATION_SCORE_51 = 51;
+    public static final int VALID_PARTICIPATION_SCORE_80 = 80;
 
     /**
      * Executes the given {@code command}, confirms that <br>
