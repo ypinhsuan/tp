@@ -15,7 +15,6 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.ReadOnlyTutorsPet;
 import seedu.address.model.TutorsPet;
-import seedu.address.model.lesson.Lesson;
 import seedu.address.model.moduleclass.ModuleClass;
 import seedu.address.model.student.Student;
 
@@ -27,7 +26,6 @@ class JsonSerializableTutorsPet {
 
     public static final String MESSAGE_DUPLICATE_STUDENT = "Students list contains duplicate student(s).";
     public static final String MESSAGE_DUPLICATE_MODULE_CLASS = "Class list contains duplicate class(es).";
-    public static final String MESSAGE_DUPLICATE_LESSON = "Duplicate lesson(s) detected.";
     public static final String MESSAGE_INVALID_STUDENTS_IN_CLASS = "Invalid student(s) found in class(es).";
 
     private final List<JsonAdaptedStudent> students = new ArrayList<>();
@@ -96,26 +94,7 @@ class JsonSerializableTutorsPet {
                 throw new IllegalValueException(MESSAGE_INVALID_STUDENTS_IN_CLASS);
             }
 
-            checkDuplicateLessons(moduleClass);
-
             tutorsPet.addModuleClass(moduleClass);
-        }
-    }
-
-    /**
-     * Checks for any duplicate {@code Lesson}s within a {@code ModuleClass}.
-     * Duplicates are detected by calling {@code isSameLesson} method in {@code Lesson}.
-     *
-     * @throws IllegalValueException if there are duplicate {@code Lesson}s.
-     */
-    private void checkDuplicateLessons(ModuleClass moduleClass) throws IllegalValueException {
-        List<Lesson> lessonList = moduleClass.getLessons();
-        for (int i = 0; i < lessonList.size(); i++) {
-            for (int j = i + 1; j < lessonList.size(); j++) {
-                if (lessonList.get(i).isSameLesson(lessonList.get(j))) {
-                    throw new IllegalValueException(MESSAGE_DUPLICATE_LESSON);
-                }
-            }
         }
     }
 

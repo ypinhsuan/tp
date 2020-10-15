@@ -131,7 +131,7 @@ public class JsonSerializableTutorsPetTest {
 
     /**
      * If Tutor's Pet encounters duplicate {@code Student UUID}s in a class, it will not load
-     * duplicate {@code UUID}s into the model. Hence, Tutor's Pet should still boot up successfully.
+     * duplicate {@code UUID}s into the model. Tutor's Pet should still boot up successfully.
      */
     @Test
     public void toModelType_duplicateStudentsInClassFile_success() throws Exception {
@@ -150,13 +150,15 @@ public class JsonSerializableTutorsPetTest {
     }
 
     /**
-     * Ensures that Tutor's Pet will not be able to boot up when there are duplicate {@code Lesson}s
+     * If Tutor's Pet encounters duplicate {@code Lesson}s in a class, it will not load
+     * duplicate {@code Lesson}s into the model. Tutor's Pet should still boot up successfully.
      */
     @Test
     public void toModelType_duplicateLesson_throwsIllegalValueException() throws Exception {
         JsonSerializableTutorsPet dataFromFile = JsonUtil.readJsonFile(DUPLICATE_LESSON_FILE,
                 JsonSerializableTutorsPet.class).get();
-        assertThrows(IllegalValueException.class, JsonSerializableTutorsPet.MESSAGE_DUPLICATE_LESSON,
-                dataFromFile::toModelType);
+        TutorsPet tutorsPetFromFile = dataFromFile.toModelType();
+        TutorsPet typicalStudentsTutorsPet = TypicalTutorsPet.getTypicalTutorsPet();
+        assertEquals(tutorsPetFromFile, typicalStudentsTutorsPet);
     }
 }

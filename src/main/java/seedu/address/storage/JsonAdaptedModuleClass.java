@@ -82,18 +82,36 @@ public class JsonAdaptedModuleClass {
     }
 
     /**
+     * Checks if a {@code lesson} already exists in a list.
+     * Duplicates are detected by calling {@code isSameLesson} method in {@code Lesson}.
+     * Returns true if there is a duplicate.
+     */
+    private boolean hasDuplicateLessons(List<Lesson> lessons, Lesson lessonToCheck) {
+        for (Lesson lesson: lessons) {
+            if (lessonToCheck.isSameLesson(lesson)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Gets a {@code List} of {@code Lesson}s from {@code lessons}.
+     * Removes any duplicate {@code Lesson}s, as ascertained by {@code isSameLesson}.
      *
      * @throws IllegalValueException if any of the {@code Lesson}s are null.
      */
-    private List<Lesson> getLessonList() throws IllegalValueException {
+    public List<Lesson> getLessonList() throws IllegalValueException {
         List<Lesson> lessonList = new ArrayList<>();
-        for (JsonAdaptedLesson lesson : lessons) {
-            if (lesson == null) {
+        for (JsonAdaptedLesson jsonLesson : lessons) {
+            if (jsonLesson == null) {
                 throw new IllegalValueException(
                         String.format(MISSING_FIELD_MESSAGE_FORMAT, Lesson.class.getSimpleName()));
             }
-            lessonList.add(lesson.toModelType());
+
+            if (!hasDuplicateLessons(lessonList, jsonLesson.toModelType())) {
+                lessonList.add(jsonLesson.toModelType());
+            }
         }
         return lessonList;
     }
