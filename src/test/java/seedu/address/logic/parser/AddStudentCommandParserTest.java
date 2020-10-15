@@ -97,6 +97,7 @@ public class AddStudentCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
+        // invalid name
         assertParseFailure(parser, INVALID_NAME_DESC + TELEGRAM_DESC_BOB + EMAIL_DESC_BOB
                 + TAG_DESC_AVERAGE + TAG_DESC_EXPERIENCED, Name.MESSAGE_CONSTRAINTS);
 

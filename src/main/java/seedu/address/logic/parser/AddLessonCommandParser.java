@@ -59,12 +59,12 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLessonCommand.MESSAGE_USAGE));
         }
 
+        Day day = ParserUtil.parseDay(argMultimap.getValue(PREFIX_DAY).get());
         LocalTime startTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_START_TIME).get());
         LocalTime endTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_END_TIME).get());
-        Day day = ParserUtil.parseDay(argMultimap.getValue(PREFIX_DAY).get());
+        Venue venue = ParserUtil.parseVenue(argMultimap.getValue(PREFIX_VENUE).get());
         NumberOfOccurrences numberOfOccurrences =
                 ParserUtil.parseNumberOfOccurrences(argMultimap.getValue(PREFIX_NUMBER_OF_OCCURRENCES).get());
-        Venue venue = ParserUtil.parseVenue(argMultimap.getValue(PREFIX_VENUE).get());
 
         Lesson lesson = new Lesson(startTime, endTime, day, numberOfOccurrences, venue);
 

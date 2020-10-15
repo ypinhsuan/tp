@@ -25,6 +25,8 @@ import seedu.address.model.student.Telegram;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_DAY = "Day format provided is invalid.";
+    public static final String MESSAGE_INVALID_TIME = "Time format provided is invalid.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -117,25 +119,6 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String time} into a {@code LocalTime}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code time} is invalid.
-     */
-    public static LocalTime parseTime(String time) throws ParseException {
-        requireNonNull(time);
-
-        String trimmedTime = time.trim();
-        LocalTime parsedTime;
-        try {
-            parsedTime = LocalTime.parse(trimmedTime);
-        } catch (DateTimeParseException e) {
-            throw new ParseException("Time format provided is invalid.");
-        }
-        return parsedTime;
-    }
-
-    /**
      * Parses a {@code String day} into a {@code Day}.
      * Leading and trailing whitespaces will be trimmed.
      * Characters will be capitalized.
@@ -150,9 +133,44 @@ public class ParserUtil {
         try {
             parsedDay = Day.valueOf(trimmedDay);
         } catch (IllegalArgumentException e) {
-            throw new ParseException("Day format provided is invalid.");
+            throw new ParseException(MESSAGE_INVALID_DAY);
         }
         return parsedDay;
+    }
+
+    /**
+     * Parses a {@code String time} into a {@code LocalTime}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code time} is invalid.
+     */
+    public static LocalTime parseTime(String time) throws ParseException {
+        requireNonNull(time);
+
+        String trimmedTime = time.trim();
+        LocalTime parsedTime;
+        try {
+            parsedTime = LocalTime.parse(trimmedTime);
+        } catch (DateTimeParseException e) {
+            throw new ParseException(MESSAGE_INVALID_TIME);
+        }
+        return parsedTime;
+    }
+
+    /**
+     * Parses a {@code String venue} into a {@code Venue}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code venue} is invalid.
+     */
+    public static Venue parseVenue(String venue) throws ParseException {
+        requireNonNull(venue);
+
+        String trimmedVenue = venue.trim();
+        if (!Venue.isValidVenue(trimmedVenue)) {
+            throw new ParseException(Venue.MESSAGE_CONSTRAINTS);
+        }
+        return new Venue(trimmedVenue);
     }
 
     /**
@@ -177,21 +195,5 @@ public class ParserUtil {
             throw new ParseException(NumberOfOccurrences.MESSAGE_CONSTRAINTS);
         }
         return new NumberOfOccurrences(occurrences);
-    }
-
-    /**
-     * Parses a {@code String venue} into a {@code Venue}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code venue} is invalid.
-     */
-    public static Venue parseVenue(String venue) throws ParseException {
-        requireNonNull(venue);
-
-        String trimmedVenue = venue.trim();
-        if (!Venue.isValidVenue(trimmedVenue)) {
-            throw new ParseException(Venue.MESSAGE_CONSTRAINTS);
-        }
-        return new Venue(trimmedVenue);
     }
 }
