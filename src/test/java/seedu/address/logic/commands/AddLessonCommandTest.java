@@ -103,7 +103,7 @@ public class AddLessonCommandTest {
         // null -> returns false
         assertFalse(addLessonCom1Command.equals(null));
 
-        // different student -> returns false
+        // different lessons -> returns false
         assertFalse(addLessonCom1Command.equals(addLessonCom2Command));
     }
 

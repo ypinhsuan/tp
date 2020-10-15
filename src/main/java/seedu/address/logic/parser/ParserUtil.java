@@ -123,7 +123,7 @@ public class ParserUtil {
      * Leading and trailing whitespaces will be trimmed.
      * Characters will be capitalized.
      *
-     * @throws ParseException if the given {@code time} is invalid.
+     * @throws ParseException if the given {@code day} is invalid.
      */
     public static Day parseDay(String day) throws ParseException {
         requireNonNull(day);
