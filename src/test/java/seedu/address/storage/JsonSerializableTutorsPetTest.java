@@ -22,6 +22,8 @@ public class JsonSerializableTutorsPetTest {
             Paths.get("src", "test", "data", "JsonSerializableTutorsPetTest", "Student");
     private static final Path CLASS_TEST_DATA_FOLDER =
             Paths.get("src", "test", "data", "JsonSerializableTutorsPetTest", "Class");
+    private static final Path LESSON_TEST_DATA_FOLDER =
+            Paths.get("src", "test", "data", "JsonSerializableTutorsPetTest", "Lesson");
 
     private static final Path TYPICAL_STUDENTS_AND_CLASSES_FILE =
             TEST_DATA_FOLDER.resolve("typicalStudentsAndClassesTutorsPet.json");
@@ -43,18 +45,17 @@ public class JsonSerializableTutorsPetTest {
     private static final Path DUPLICATE_STUDENT_UUID_IN_CLASS_FILE =
             CLASS_TEST_DATA_FOLDER.resolve("duplicateStudentUuidInClass.json");
 
+    private static final Path DUPLICATE_LESSON_FILE =
+            LESSON_TEST_DATA_FOLDER.resolve("duplicateLessonTutorsPet.json");
+    private static final Path INVALID_LESSON_FILE =
+            LESSON_TEST_DATA_FOLDER.resolve("invalidLessonTutorsPet.json");
+
     @Test
     public void toModelType_typicalStudentsAndClassesFile_success() throws Exception {
         JsonSerializableTutorsPet dataFromFile = JsonUtil.readJsonFile(TYPICAL_STUDENTS_AND_CLASSES_FILE,
                 JsonSerializableTutorsPet.class).get();
         TutorsPet tutorsPetFromFile = dataFromFile.toModelType();
         TutorsPet typicalStudentsTutorsPet = TypicalTutorsPet.getTypicalTutorsPet();
-
-        // TODO: Remove temporary workaround after lesson storage has been implemented.
-        typicalStudentsTutorsPet.getModuleClassList().stream().forEach(moduleClass ->
-                typicalStudentsTutorsPet.setModuleClass(moduleClass,
-                        new ModuleClassBuilder(moduleClass).withLessons().build()));
-
         assertEquals(typicalStudentsTutorsPet, tutorsPetFromFile);
     }
 
@@ -139,12 +140,24 @@ public class JsonSerializableTutorsPetTest {
                 JsonSerializableTutorsPet.class).get();
         TutorsPet tutorsPetFromFile = dataFromFile.toModelType();
         TutorsPet typicalStudentsTutorsPet = TypicalTutorsPet.getTypicalTutorsPet();
-
-        // TODO: Remove temporary workaround after lesson storage has been implemented.
-        typicalStudentsTutorsPet.getModuleClassList().stream().forEach(moduleClass ->
-                typicalStudentsTutorsPet.setModuleClass(moduleClass,
-                        new ModuleClassBuilder(moduleClass).withLessons().build()));
-
         assertEquals(tutorsPetFromFile, typicalStudentsTutorsPet);
+    }
+
+    @Test
+    public void toModelType_invalidLessonFile_throwsIllegalValueException() throws Exception {
+        JsonSerializableTutorsPet dataFromFile = JsonUtil.readJsonFile(INVALID_LESSON_FILE,
+                JsonSerializableTutorsPet.class).get();
+        assertThrows(IllegalValueException.class, dataFromFile::toModelType);
+    }
+
+    /**
+     * Ensures that Tutor's Pet will not be able to boot up when there are duplicate {@code Lesson}s
+     */
+    @Test
+    public void toModelType_duplicateLesson_throwsIllegalValueException() throws Exception {
+        JsonSerializableTutorsPet dataFromFile = JsonUtil.readJsonFile(DUPLICATE_LESSON_FILE,
+                JsonSerializableTutorsPet.class).get();
+        assertThrows(IllegalValueException.class, JsonSerializableTutorsPet.MESSAGE_DUPLICATE_LESSON,
+                dataFromFile::toModelType);
     }
 }

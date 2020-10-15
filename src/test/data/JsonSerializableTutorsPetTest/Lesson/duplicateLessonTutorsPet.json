@@ -1,0 +1,21 @@
+{
+  "_comment" : "Duplicate lessons in CS2100 Lab",
+  "students" : [ ],
+  "classes" : [ {
+    "name" : "CS2100 Lab",
+    "studentUuids" : [ ],
+    "lessons" : [ {
+      "startTime" : "10:00",
+      "endTime" : "11:00",
+      "day" : "THURSDAY",
+      "numberOfOccurrences" : 10,
+      "venue" : "AS6-0211"
+    }, {
+      "startTime" : "10:00",
+      "endTime" : "11:00",
+      "day" : "THURSDAY",
+      "numberOfOccurrences" : 1,
+      "venue" : "AS6-0211"
+    } ]
+  } ]
+}

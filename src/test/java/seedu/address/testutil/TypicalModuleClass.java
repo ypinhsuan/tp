@@ -3,7 +3,9 @@ package seedu.address.testutil;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_CS2100_LAB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_CS2100_TUTORIAL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_CS2103T_TUTORIAL;
+import static seedu.address.testutil.TypicalLesson.LESSON_FRI_8_TO_10;
 import static seedu.address.testutil.TypicalLesson.LESSON_THU_10_TO_11;
+import static seedu.address.testutil.TypicalLesson.ONLINE_LESSON_TUE_1030_1130;
 import static seedu.address.testutil.TypicalStudent.ALICE;
 import static seedu.address.testutil.TypicalStudent.BENSON;
 
@@ -28,7 +30,9 @@ public class TypicalModuleClass {
      * A {@code ModuleClass} for testing with no students and lessons.
      */
     public static final ModuleClass CS2100_LAB = new ModuleClassBuilder()
-            .withName(VALID_NAME_CS2100_LAB).build();
+            .withName(VALID_NAME_CS2100_LAB)
+            .withLessons(LESSON_FRI_8_TO_10, ONLINE_LESSON_TUE_1030_1130)
+            .build();
 
     /**
      * A {@code ModuleClass} for testing with ALICE as student and no lessons.

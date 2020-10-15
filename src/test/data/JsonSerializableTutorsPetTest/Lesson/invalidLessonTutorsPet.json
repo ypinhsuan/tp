@@ -1,0 +1,15 @@
+{
+  "_comment" : "StartTime field is invalid",
+  "students" : [ ],
+  "classes" : [ {
+    "name" : "CS2100 Lab",
+    "studentUuids" : [ ],
+    "lessons" : [ {
+      "startTime" : "1000",
+      "endTime" : "11:00",
+      "day" : "THURSDAY",
+      "numberOfOccurrences" : 10,
+      "venue" : "AS6-0211"
+    } ]
+  } ]
+}
