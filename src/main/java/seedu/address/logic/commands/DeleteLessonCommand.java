@@ -27,8 +27,8 @@ public class DeleteLessonCommand extends Command {
     public static final String COMMAND_WORD = "delete-lesson";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the lesson in a specific module class identified by the "
-            + "index number used in the displayed module class list and lesson list respectively.\n"
+            + ": Deletes the lesson in a specific class identified by the "
+            + "index number used in the displayed class list and lesson list respectively.\n"
             + "Parameters: "
             + PREFIX_CLASS_INDEX + "CLASS_INDEX (must be a positive integer) "
             + PREFIX_LESSON_INDEX + "LESSON_INDEX (must be a positive integer)\n"
