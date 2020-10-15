@@ -95,6 +95,13 @@ public class CommandTestUtil {
     public static final int VALID_NUMBER_OF_OCCURRENCES_7 = 7;
     public static final String VALID_VENUE_COM1_B111 = "COM1-B111";
 
+    // attendance-related constants
+
+    public static final int VALID_WEEK_VALUE_5 = 5;
+    public static final int VALID_PARTICIPATION_SCORE_33 = 33;
+    public static final int VALID_PARTICIPATION_SCORE_51 = 51;
+    public static final int VALID_PARTICIPATION_SCORE_80 = 80;
+
     /**
      * Executes the given {@code command}, confirms that <br>
      * - the returned {@link CommandResult} matches {@code expectedCommandResult} <br>

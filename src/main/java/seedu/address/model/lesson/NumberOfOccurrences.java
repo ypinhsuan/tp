@@ -33,6 +33,10 @@ public class NumberOfOccurrences {
         return value >= LOWER_BOUND && value <= UPPER_BOUND;
     }
 
+    public int getNumberOfOccurrences() {
+        return value;
+    }
+
     @Override
     public String toString() {
         return Integer.toString(value);
