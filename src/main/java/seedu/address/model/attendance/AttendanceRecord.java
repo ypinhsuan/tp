@@ -16,24 +16,24 @@ import seedu.address.model.attendance.exceptions.AttendanceNotFoundException;
  */
 public class AttendanceRecord {
 
-    private final Map<UUID, Attendance> record;
+    private final Map<UUID, Attendance> attendances;
 
     public AttendanceRecord() {
-        this.record = new HashMap<>();
+        this.attendances = new HashMap<>();
     }
 
     /**
      * Overloaded constructor method.
-     * Requires record to be non null.
+     * Requires records to be non null.
      */
-    public AttendanceRecord(Map<UUID, Attendance> record) {
-        requireNonNull(record);
+    public AttendanceRecord(Map<UUID, Attendance> attendances) {
+        requireNonNull(attendances);
 
-        this.record = record;
+        this.attendances = attendances;
     }
 
     public Map<UUID, Attendance> getAttendanceRecord() {
-        return Collections.unmodifiableMap(record);
+        return Collections.unmodifiableMap(attendances);
     }
 
     /**
@@ -42,29 +42,29 @@ public class AttendanceRecord {
     public Attendance getAttendance(UUID uuid) throws AttendanceNotFoundException {
         requireNonNull(uuid);
 
-        if (!record.containsKey(uuid)) {
+        if (!attendances.containsKey(uuid)) {
             throw new AttendanceNotFoundException();
         }
 
-        return record.get(uuid);
+        return attendances.get(uuid);
     }
 
     /**
      * Returns true if the {@code AttendanceRecord} contains the given {@code Student UUID}.
      */
     public boolean hasAttendance(UUID uuid) {
-        return record.containsKey(uuid);
+        return attendances.containsKey(uuid);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AttendanceRecord // instanceof handles nulls
-                && ((AttendanceRecord) other).record.equals(record));
+                && ((AttendanceRecord) other).attendances.equals(attendances));
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(record);
+        return Objects.hash(attendances);
     }
 }

@@ -74,7 +74,7 @@ class JsonAdaptedStudent {
         }
 
         if (uuid == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "uuid"));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "UUID"));
         }
         // catch invalid UUID
         final UUID modelUuid;

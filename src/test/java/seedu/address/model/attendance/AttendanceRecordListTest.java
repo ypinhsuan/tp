@@ -20,11 +20,12 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.attendance.exceptions.AttendanceNotFoundException;
 import seedu.address.model.attendance.exceptions.InvalidWeekException;
+import seedu.address.model.lesson.NumberOfOccurrences;
 
 public class AttendanceRecordListTest {
 
     private static final AttendanceRecordList recordList =
-            new AttendanceRecordList(VALID_NUMBER_OF_OCCURRENCES_7_LESSON_WED_2_TO_4);
+            new AttendanceRecordList(new NumberOfOccurrences(VALID_NUMBER_OF_OCCURRENCES_7_LESSON_WED_2_TO_4));
 
     private static final Week VALID_WEEK = new Week(Index.fromOneBased(1));
     private static final Week INVALID_WEEK =

@@ -16,13 +16,19 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_WEEK;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.TutorsPet;
 import seedu.address.model.attendance.Attendance;
+import seedu.address.model.attendance.AttendanceRecord;
+import seedu.address.model.attendance.AttendanceRecordList;
 import seedu.address.model.attendance.Week;
 import seedu.address.model.lesson.Day;
 import seedu.address.model.moduleclass.ModuleClass;
@@ -61,6 +67,7 @@ public class CommandTestUtil {
     public static final String TAG_DESC_EXPERIENCED = " " + PREFIX_TAG + VALID_TAG_EXPERIENCED;
     public static final String TAG_DESC_AVERAGE = " " + PREFIX_TAG + VALID_TAG_AVERAGE;
 
+    public static final String INVALID_STUDENT_UUID = "584346cb-8886-4518-8282-";
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_TELEGRAM_DESC = " " + PREFIX_TELEGRAM + "91%19"; // '%' not allowed in telegram
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
@@ -144,13 +151,16 @@ public class CommandTestUtil {
 
     // attendance-related constants
 
-    public static final int VALID_WEEK_VALUE_5 = 5;
     public static final int VALID_WEEK_VALUE_3 = 3;
+    public static final int VALID_WEEK_VALUE_5 = 5;
+    public static final Index VALID_WEEK_INDEX_5 = Index.fromOneBased(VALID_WEEK_VALUE_5);
     public static final int VALID_PARTICIPATION_SCORE_33 = 33;
     public static final int VALID_PARTICIPATION_SCORE_51 = 51;
     public static final int VALID_PARTICIPATION_SCORE_80 = 80;
     public static final Week VALID_WEEK = new Week(Index.fromOneBased(1));
     public static final Attendance VALID_ATTENDANCE = new Attendance(VALID_PARTICIPATION_SCORE_80);
+    public static final Attendance VALID_ATTENDANCE_33 = new Attendance(VALID_PARTICIPATION_SCORE_33);
+    public static final Attendance VALID_ATTENDANCE_51 = new Attendance(VALID_PARTICIPATION_SCORE_51);
 
     public static final String PARTICIPATION_SCORE_DESC_80 =
             " " + PREFIX_PARTICIPATION_SCORE + VALID_PARTICIPATION_SCORE_80;
@@ -161,6 +171,19 @@ public class CommandTestUtil {
     public static final String WEEK_DESC_WEEK_VALUE_3 =
             " " + PREFIX_WEEK + VALID_WEEK_VALUE_3;
 
+    public static final AttendanceRecord EMPTY_ATTENDANCE_RECORD = new AttendanceRecord();
+    public static final Map<UUID, Attendance> VALID_ATTENDANCE_LIST = new HashMap<>();
+
+    static {
+        VALID_ATTENDANCE_LIST.put(UUID.fromString(VALID_UUID_AMY), new Attendance(VALID_PARTICIPATION_SCORE_33));
+        VALID_ATTENDANCE_LIST.put(UUID.fromString(VALID_UUID_BOB), new Attendance(VALID_PARTICIPATION_SCORE_51));
+    }
+    public static final AttendanceRecord VALID_ATTENDANCE_RECORD = new AttendanceRecord(VALID_ATTENDANCE_LIST);
+    public static final AttendanceRecordList VALID_ATTENDANCE_RECORD_LIST =
+            new AttendanceRecordList(Arrays.asList(EMPTY_ATTENDANCE_RECORD, VALID_ATTENDANCE_RECORD));
+
+    public static final int INVALID_PARTICIPATION_SCORE_MINUS_1 = -1;
+    public static final int INVALID_PARTICIPATION_SCORE_101 = 101;
     public static final String INVALID_PARTICIPATION_LOWER_BOUND_SCORE_DESC =
             " " + PREFIX_PARTICIPATION_SCORE + "-1";
     public static final String INVALID_PARTICIPATION_UPPER_BOUND_SCORE_DESC =
