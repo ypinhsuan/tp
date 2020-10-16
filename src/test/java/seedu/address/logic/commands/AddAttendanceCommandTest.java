@@ -218,8 +218,8 @@ public class AddAttendanceCommandTest {
     }
 
     /**
-     * Returns a new {@code ModuleClass} based on the given {@code moduleClass} but with the specified {@code lesson}
-     * replaced.
+     * Returns a new {@code ModuleClass} based on the given {@code moduleClass} but with the specified
+     * {@code targetLesson} replaced.
      */
     private static ModuleClass manualReplaceLessonToModuleClass(ModuleClass moduleClass,
                                                                 Lesson targetLesson, Lesson modifiedLesson) {

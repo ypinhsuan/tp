@@ -33,13 +33,14 @@ import seedu.address.model.moduleclass.ModuleClass;
 import seedu.address.model.student.Student;
 
 /**
- * Adds an attendance to the student manager.
+ * Adds a student's attendance to the specified {@code Lesson} in the student manager.
  */
 public class AddAttendanceCommand extends Command {
 
     public static final String COMMAND_WORD = "add-attendance";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an attendance to the student manager. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student's attendance to the specified "
+            + "lesson in the student manager. "
             + "Note: All indexes must be a positive integer.\n"
             + "Parameters: "
             + PREFIX_CLASS_INDEX + "CLASS_INDEX "
@@ -48,9 +49,9 @@ public class AddAttendanceCommand extends Command {
             + PREFIX_WEEK + "WEEK_NUMBER (must be positive integer) "
             + PREFIX_PARTICIPATION_SCORE + "PARTICIPATION_SCORE (must be an integer between 0 and 100)";
 
-    public static final String MESSAGE_SUCCESS = "Successfully added: %1$s attended week %2$s lesson with "
+    public static final String MESSAGE_SUCCESS = "New attendance added: %1$s attended week %2$s lesson with "
             + "participation score of %3$s";
-    public static final String MESSAGE_DUPLICATE_ATTENDANCE = "Attendance has been recorded.";
+    public static final String MESSAGE_DUPLICATE_ATTENDANCE = "Attendance have been recorded previously.";
 
     private final Index moduleCLassIndex;
     private final Index lessonIndex;
