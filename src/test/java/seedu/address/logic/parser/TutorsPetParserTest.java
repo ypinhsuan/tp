@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.AddLessonCommand;
 import seedu.address.logic.commands.AddModuleClassCommand;
 import seedu.address.logic.commands.AddStudentCommand;
 import seedu.address.logic.commands.ClearModuleClassCommand;
@@ -44,10 +45,13 @@ import seedu.address.logic.commands.UnlinkCommand;
 import seedu.address.logic.commands.ViewHistoryCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.components.name.NameContainsKeywordsPredicate;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.moduleclass.ModuleClass;
 import seedu.address.model.student.Student;
 import seedu.address.testutil.EditModuleClassDescriptorBuilder;
 import seedu.address.testutil.EditStudentDescriptorBuilder;
+import seedu.address.testutil.LessonBuilder;
+import seedu.address.testutil.LessonUtil;
 import seedu.address.testutil.ModuleClassBuilder;
 import seedu.address.testutil.ModuleClassUtil;
 import seedu.address.testutil.StudentBuilder;
@@ -156,6 +160,13 @@ public class TutorsPetParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + NON_EMPTY_STRING) instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_addLesson() throws Exception {
+        Lesson lesson = new LessonBuilder().build();
+        AddLessonCommand command = (AddLessonCommand) parser.parseCommand(LessonUtil.getAddLessonCommand(lesson));
+        assertEquals(new AddLessonCommand(INDEX_FIRST_ITEM, lesson), command);
     }
 
     @Test

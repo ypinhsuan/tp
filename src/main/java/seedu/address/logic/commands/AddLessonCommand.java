@@ -23,13 +23,13 @@ import seedu.address.model.lesson.Lesson;
 import seedu.address.model.moduleclass.ModuleClass;
 
 /**
- * Adds a lesson to the lesson manager.
+ * Adds a lesson to the student manager.
  */
 public class AddLessonCommand extends Command {
 
     public static final String COMMAND_WORD = "add-lesson";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a lesson to the lesson manager. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a lesson to the student manager. "
             + "Parameters: "
             + PREFIX_CLASS_INDEX + "CLASS_INDEX (must be a positive integer) "
             + PREFIX_DAY + "DAY "
@@ -71,7 +71,7 @@ public class AddLessonCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX);
         }
 
-        // add to lesson to moduleClass
+        // add lesson to moduleClass
         ModuleClass moduleClassToAddTo = lastShownModuleClassList.get(moduleClassIndex.getZeroBased());
         ModuleClass modifiedModuleClass = createModifiedModuleClass(moduleClassToAddTo, toAdd);
         model.setModuleClass(moduleClassToAddTo, modifiedModuleClass);

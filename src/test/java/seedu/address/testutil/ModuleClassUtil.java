@@ -22,7 +22,9 @@ public class ModuleClassUtil {
      * Returns the part of the command string for the given {@code moduleClass}'s details.
      */
     public static String getModuleDetails(ModuleClass moduleClass) {
-        return PREFIX_NAME + moduleClass.getName().toString();
+        StringBuilder sb = new StringBuilder();
+        sb.append(PREFIX_NAME + moduleClass.getName().toString());
+        return sb.toString();
     }
 
     /**
