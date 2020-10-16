@@ -35,6 +35,13 @@ public class JsonAdaptedLessonTest {
     }
 
     @Test
+    public void toModelType_validIndividualLessonDetails_returnsLesson() throws Exception {
+        JsonAdaptedLesson lesson = new JsonAdaptedLesson(
+                VALID_START_TIME, VALID_END_TIME, VALID_DAY, VALID_NUMBER_OF_OCCURRENCES, VALID_VENUE);
+        assertEquals(LESSON_WED_2_TO_4, lesson.toModelType());
+    }
+
+    @Test
     public void toModelType_invalidStartTime_throwsIllegalValueException() {
         JsonAdaptedLesson lesson = new JsonAdaptedLesson(
                 INVALID_TIME, VALID_END_TIME, VALID_DAY, VALID_NUMBER_OF_OCCURRENCES, VALID_VENUE);

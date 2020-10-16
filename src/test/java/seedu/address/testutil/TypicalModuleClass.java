@@ -27,7 +27,8 @@ public class TypicalModuleClass {
             .build();
 
     /**
-     * A {@code ModuleClass} for testing with no students and lessons.
+     * A {@code ModuleClass} for testing with no students and the following lessons:
+     * LESSON_FRI_8_TO_10 and ONLINE_LESSON_TUE_1030_1130.
      */
     public static final ModuleClass CS2100_LAB = new ModuleClassBuilder()
             .withName(VALID_NAME_CS2100_LAB)

@@ -88,12 +88,7 @@ public class JsonAdaptedModuleClass {
      * Returns true if there is a duplicate.
      */
     private boolean hasDuplicateLessons(List<Lesson> lessons, Lesson lessonToCheck) {
-        for (Lesson lesson: lessons) {
-            if (lessonToCheck.isSameLesson(lesson)) {
-                return true;
-            }
-        }
-        return false;
+        return lessons.stream().anyMatch(lessonToCheck::isSameLesson);
     }
 
     /**

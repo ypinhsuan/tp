@@ -38,6 +38,13 @@ public class JsonAdaptedModuleClassTest {
     }
 
     @Test
+    public void toModelType_validIndividualModuleClassDetails_returnsModuleClass() throws Exception {
+        JsonAdaptedModuleClass moduleClass = new JsonAdaptedModuleClass(
+                VALID_NAME, VALID_STUDENT_UUIDS, VALID_LESSONS);
+        assertEquals(CS2103T_TUTORIAL, moduleClass.toModelType());
+    }
+
+    @Test
     public void toModelType_invalidName_throwsIllegalValueException() {
         JsonAdaptedModuleClass moduleClass = new JsonAdaptedModuleClass(
                 INVALID_NAME, VALID_STUDENT_UUIDS, VALID_LESSONS);

@@ -40,6 +40,13 @@ public class JsonAdaptedStudentTest {
     }
 
     @Test
+    public void toModelType_validIndividualStudentDetails_returnsStudent() throws Exception {
+        JsonAdaptedStudent student = new JsonAdaptedStudent(
+                VALID_UUID, VALID_NAME, VALID_TELEGRAM, VALID_EMAIL, VALID_TAGS);
+        assertEquals(BENSON, student.toModelType());
+    }
+
+    @Test
     public void toModelType_invalidUuid_throwsIllegalValueException() {
         JsonAdaptedStudent student =
                 new JsonAdaptedStudent(INVALID_UUID, VALID_NAME, VALID_TELEGRAM, VALID_EMAIL, VALID_TAGS);

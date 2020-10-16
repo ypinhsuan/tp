@@ -48,6 +48,8 @@ public class JsonSerializableTutorsPetTest {
             LESSON_TEST_DATA_FOLDER.resolve("duplicateLessonTutorsPet.json");
     private static final Path INVALID_LESSON_FILE =
             LESSON_TEST_DATA_FOLDER.resolve("invalidLessonTutorsPet.json");
+    private static final Path NULL_LESSON_FILE =
+            LESSON_TEST_DATA_FOLDER.resolve("nullLessonTutorsPet.json");
 
     @Test
     public void toModelType_typicalStudentsAndClassesFile_success() throws Exception {
@@ -155,6 +157,16 @@ public class JsonSerializableTutorsPetTest {
     @Test
     public void toModelType_duplicateLesson_throwsIllegalValueException() throws Exception {
         JsonSerializableTutorsPet dataFromFile = JsonUtil.readJsonFile(DUPLICATE_LESSON_FILE,
+                JsonSerializableTutorsPet.class).get();
+        assertThrows(IllegalValueException.class, dataFromFile::toModelType);
+    }
+
+    /**
+     * Ensures that Tutor's Pet will not be able to boot up when there exists null {@code Lesson}s.
+     */
+    @Test
+    public void toModelType_nullLesson_throwsIllegalValueException() throws Exception {
+        JsonSerializableTutorsPet dataFromFile = JsonUtil.readJsonFile(NULL_LESSON_FILE,
                 JsonSerializableTutorsPet.class).get();
         assertThrows(IllegalValueException.class, dataFromFile::toModelType);
     }
