@@ -4,9 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PARTICIPATION_SCORE_80;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASS_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PARTICIPATION_SCORE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_WEEK;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_ITEM;
@@ -17,6 +20,7 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.AddAttendanceCommand;
 import seedu.address.logic.commands.AddLessonCommand;
 import seedu.address.logic.commands.AddModuleClassCommand;
 import seedu.address.logic.commands.AddStudentCommand;
@@ -44,6 +48,8 @@ import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.UnlinkCommand;
 import seedu.address.logic.commands.ViewHistoryCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.attendance.Attendance;
+import seedu.address.model.attendance.Week;
 import seedu.address.model.components.name.NameContainsKeywordsPredicate;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.moduleclass.ModuleClass;
@@ -179,6 +185,20 @@ public class TutorsPetParserTest {
         assertEquals(parser.parseCommand(DeleteLessonCommand.COMMAND_WORD + " "
                 + PREFIX_LESSON_INDEX + INDEX_SECOND_ITEM.getOneBased() + " "
                 + PREFIX_CLASS_INDEX + INDEX_FIRST_ITEM.getOneBased()), command);
+    }
+
+    @Test
+    public void parseCommand_addAttendance() throws Exception {
+        Week week = new Week(INDEX_FIRST_ITEM);
+        Attendance attendance = new Attendance(VALID_PARTICIPATION_SCORE_80);
+        AddAttendanceCommand command =
+                new AddAttendanceCommand(INDEX_FIRST_ITEM, INDEX_FIRST_ITEM, INDEX_FIRST_ITEM, week, attendance);
+        assertEquals(parser.parseCommand(AddAttendanceCommand.COMMAND_WORD + " "
+                + PREFIX_CLASS_INDEX + INDEX_FIRST_ITEM.getOneBased() + " "
+                + PREFIX_LESSON_INDEX + INDEX_FIRST_ITEM.getOneBased() + " "
+                + PREFIX_STUDENT_INDEX + INDEX_FIRST_ITEM.getOneBased() + " "
+                + PREFIX_WEEK + INDEX_FIRST_ITEM.getOneBased() + " "
+                + PREFIX_PARTICIPATION_SCORE + "80 "), command);
     }
 
     @Test

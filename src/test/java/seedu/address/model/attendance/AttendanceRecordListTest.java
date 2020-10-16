@@ -74,6 +74,27 @@ public class AttendanceRecordListTest {
     }
 
     @Test
+    public void hasAttendance_nullStudent_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> recordList.hasAttendance(null, VALID_WEEK));
+    }
+
+    @Test
+    public void hasAttendance_invalidWeek_throwsInvalidWeekException() {
+        assertThrows(InvalidWeekException.class, () -> recordList.hasAttendance(ALICE, INVALID_WEEK));
+    }
+
+    @Test
+    public void hasAttendance_existingStudent_returnsTrue() {
+        AttendanceRecordList attendanceRecordList = createAliceRecordList();
+        assertTrue(attendanceRecordList.hasAttendance(ALICE, VALID_WEEK));
+    }
+
+    @Test
+    public void hasAttendance_nonExistingStudent_returnsFalse() {
+        assertFalse(recordList.hasAttendance(ALICE, VALID_WEEK));
+    }
+
+    @Test
     public void equals() {
         AttendanceRecordList attendanceRecordList = new AttendanceRecordList(getTypicalAttendanceRecord());
 

@@ -43,7 +43,7 @@ public class AttendanceRecordList {
     /**
      * Returns true if week number is less than the total number of occurrences.
      */
-    private boolean isWeekContained(Week week) {
+    public boolean isWeekContained(Week week) {
         return week.getZeroBasedWeekIndex() < recordList.size();
     }
 
@@ -75,6 +75,22 @@ public class AttendanceRecordList {
         }
 
         return recordList.get(week.getZeroBasedWeekIndex());
+    }
+
+    /**
+     * Returns true if {@code AttendanceRecordList} contains the {@code Attendance}
+     * of a {@code Student} in a particular {@code Week}.
+     */
+    public boolean hasAttendance(Student student, Week week) throws InvalidWeekException {
+        requireNonNull(student);
+
+        if (!isWeekContained(week)) {
+            throw new InvalidWeekException();
+        }
+
+        AttendanceRecord targetAttendanceWeek = recordList.get(week.getZeroBasedWeekIndex());
+        UUID targetStudentUuid = student.getUuid();
+        return targetAttendanceWeek.hasAttendance(targetStudentUuid);
     }
 
     @Override
