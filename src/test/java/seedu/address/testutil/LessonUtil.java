@@ -17,7 +17,7 @@ import seedu.address.model.lesson.Lesson;
 public class LessonUtil {
 
     /**
-     * Returns an add class command string for adding the {@code lesson}.
+     * Returns an add lesson command string for adding the {@code lesson}.
      */
     public static String getAddLessonCommand(Lesson lesson) {
         return AddLessonCommand.COMMAND_WORD + " "
