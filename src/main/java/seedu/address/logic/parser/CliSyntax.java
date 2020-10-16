@@ -17,4 +17,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_END_TIME = new Prefix("et/");
     public static final Prefix PREFIX_VENUE = new Prefix("v/");
     public static final Prefix PREFIX_NUMBER_OF_OCCURRENCES = new Prefix("r/");
+    public static final Prefix PREFIX_LESSON_INDEX = new Prefix("l/");
 }

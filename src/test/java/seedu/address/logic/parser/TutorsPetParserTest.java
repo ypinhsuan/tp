@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASS_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
@@ -20,6 +21,7 @@ import seedu.address.logic.commands.AddModuleClassCommand;
 import seedu.address.logic.commands.AddStudentCommand;
 import seedu.address.logic.commands.ClearModuleClassCommand;
 import seedu.address.logic.commands.ClearStudentCommand;
+import seedu.address.logic.commands.DeleteLessonCommand;
 import seedu.address.logic.commands.DeleteModuleClassCommand;
 import seedu.address.logic.commands.DeleteStudentCommand;
 import seedu.address.logic.commands.EditModuleClassCommand;
@@ -154,6 +156,17 @@ public class TutorsPetParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + NON_EMPTY_STRING) instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_deleteLesson() throws Exception {
+        DeleteLessonCommand command = new DeleteLessonCommand(INDEX_FIRST_ITEM, INDEX_SECOND_ITEM);
+        assertEquals(parser.parseCommand(DeleteLessonCommand.COMMAND_WORD + " "
+                + PREFIX_CLASS_INDEX + INDEX_FIRST_ITEM.getOneBased() + " "
+                + PREFIX_LESSON_INDEX + INDEX_SECOND_ITEM.getOneBased()), command);
+        assertEquals(parser.parseCommand(DeleteLessonCommand.COMMAND_WORD + " "
+                + PREFIX_LESSON_INDEX + INDEX_SECOND_ITEM.getOneBased() + " "
+                + PREFIX_CLASS_INDEX + INDEX_FIRST_ITEM.getOneBased()), command);
     }
 
     @Test
