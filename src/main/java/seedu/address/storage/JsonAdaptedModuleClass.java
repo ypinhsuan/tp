@@ -22,6 +22,7 @@ public class JsonAdaptedModuleClass {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "ModuleClass's %s field is missing!";
     public static final String INVALID_FIELD_MESSAGE_FORMAT = "ModuleClass's %s field is invalid!";
+    public static final String DUPLICATE_LESSON_MESSAGE = "Class contains duplicate lesson(s).";
     public static final String STUDENT_UUID_FIELD = "student uuid";
 
     private final String name;
@@ -109,7 +110,9 @@ public class JsonAdaptedModuleClass {
                         String.format(MISSING_FIELD_MESSAGE_FORMAT, Lesson.class.getSimpleName()));
             }
 
-            if (!hasDuplicateLessons(lessonList, jsonLesson.toModelType())) {
+            if (hasDuplicateLessons(lessonList, jsonLesson.toModelType())) {
+                throw new IllegalValueException(DUPLICATE_LESSON_MESSAGE);
+            } else {
                 lessonList.add(jsonLesson.toModelType());
             }
         }
