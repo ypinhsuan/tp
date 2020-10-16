@@ -78,9 +78,12 @@ public class LessonBuilder {
 
     /**
      * Sets the {@code numberOfOccurrences} of the {@code Lesson} that we are building.
+     * Resets the {@code attendanceRecordList} of the {@code Lesson} to an empty {@code AttendanceRecordList} with
+     * length matching the given {@code numberOfOccurrences}.
      */
     public LessonBuilder withNumberOfOccurrences(int numberOfOccurrences) {
         this.numberOfOccurrences = new NumberOfOccurrences(numberOfOccurrences);
+        this.attendanceRecordList = new AttendanceRecordList(numberOfOccurrences);
         return this;
     }
 
@@ -94,8 +97,11 @@ public class LessonBuilder {
 
     /**
      * Sets the {@code attendanceRecordList} of the {@code Lesson} that we are building.
+     * Resets the {@code numberOfOccurrences} of the {@code Lesson} to match that of
+     * the given {@code attendanceRecordList}.
      */
     public LessonBuilder withAttendanceRecordList(AttendanceRecordList attendanceRecordList) {
+        this.numberOfOccurrences = new NumberOfOccurrences(attendanceRecordList.getAttendanceRecordList().size());
         this.attendanceRecordList = attendanceRecordList;
         return this;
     }

@@ -11,11 +11,14 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_START_TIME_1400
 import static seedu.address.logic.commands.CommandTestUtil.VALID_UUID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_VENUE_COM1_B111_LESSON_WED_2_TO_4;
 import static seedu.address.model.lesson.Lesson.TIME_FORMATTER;
+import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalLesson.LESSON_FRI_8_TO_10;
 import static seedu.address.testutil.TypicalLesson.LESSON_WED_2_TO_4;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -64,6 +67,14 @@ public class LessonTest {
     }
 
     @Test
+    public void constructor_attendanceRecordListMismatch_throwsAssertionError() {
+        assertThrows(AssertionError.class, () ->
+                new Lesson(VALID_START_TIME, VALID_END_TIME, VALID_DAY_WED_LESSON_WED_2_TO_4,
+                        VALID_NUMBER_OF_OCCURRENCES, VALID_VENUE,
+                        new AttendanceRecordList(VALID_NUMBER_OF_OCCURRENCES.value - 1)));
+    }
+
+    @Test
     public void isSameLesson() {
         // same object -> returns true
         assertTrue(LESSON_FRI_8_TO_10.isSameLesson(LESSON_FRI_8_TO_10));
@@ -98,9 +109,11 @@ public class LessonTest {
                 .withNumberOfOccurrences(VALID_NUMBER_OF_OCCURRENCES_7_LESSON_WED_2_TO_4).build();
         assertTrue(LESSON_FRI_8_TO_10.isSameLesson(editedLesson));
 
-        // different attendance record list -> return true
+        // different attendance record list and same number of occurrences -> return true
+        List<AttendanceRecord> records = new ArrayList<>(Collections.nCopies(13, new AttendanceRecord()));
+        records.set(0, VALID_ATTENDANCE_RECORD);
         editedLesson = new LessonBuilder(LESSON_FRI_8_TO_10)
-                .withAttendanceRecordList(new AttendanceRecordList(VALID_NUMBER_OF_OCCURRENCES_7_LESSON_WED_2_TO_4))
+                .withAttendanceRecordList(new AttendanceRecordList(records))
                 .build();
         assertTrue(LESSON_FRI_8_TO_10.isSameLesson(editedLesson));
     }
@@ -162,9 +175,11 @@ public class LessonTest {
                 .withNumberOfOccurrences(VALID_NUMBER_OF_OCCURRENCES_7_LESSON_WED_2_TO_4).build();
         assertFalse(LESSON_FRI_8_TO_10.equals(editedLesson));
 
-        // different attendance record list -> returns false
+        // different attendance record list and same number of occurrences -> return false
+        List<AttendanceRecord> records = new ArrayList<>(Collections.nCopies(13, new AttendanceRecord()));
+        records.set(0, VALID_ATTENDANCE_RECORD);
         editedLesson = new LessonBuilder(LESSON_FRI_8_TO_10)
-                .withAttendanceRecordList(new AttendanceRecordList(VALID_NUMBER_OF_OCCURRENCES_7_LESSON_WED_2_TO_4))
+                .withAttendanceRecordList(new AttendanceRecordList(records))
                 .build();
         assertFalse(LESSON_FRI_8_TO_10.equals(editedLesson));
     }

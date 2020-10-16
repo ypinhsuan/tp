@@ -50,6 +50,8 @@ public class Lesson {
                   Venue venue, AttendanceRecordList attendanceRecordList) {
         requireAllNonNull(startTime, endTime, day, numberOfOccurrences, venue, attendanceRecordList);
 
+        assert attendanceRecordList.getAttendanceRecordList().size() == numberOfOccurrences.getNumberOfOccurrences();
+
         this.startTime = startTime;
         this.endTime = endTime;
         this.day = day;
