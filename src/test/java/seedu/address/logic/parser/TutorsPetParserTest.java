@@ -165,7 +165,8 @@ public class TutorsPetParserTest {
     @Test
     public void parseCommand_addLesson() throws Exception {
         Lesson lesson = new LessonBuilder().build();
-        AddLessonCommand command = (AddLessonCommand) parser.parseCommand(LessonUtil.getAddLessonCommand(lesson));
+        AddLessonCommand command =
+                (AddLessonCommand) parser.parseCommand(LessonUtil.getAddLessonCommand(INDEX_FIRST_ITEM, lesson));
         assertEquals(new AddLessonCommand(INDEX_FIRST_ITEM, lesson), command);
     }
 

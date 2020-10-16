@@ -6,8 +6,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NUMBER_OF_OCCURRENCES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddLessonCommand;
 import seedu.address.model.lesson.Lesson;
 
@@ -19,9 +19,9 @@ public class LessonUtil {
     /**
      * Returns an add lesson command string for adding the {@code lesson}.
      */
-    public static String getAddLessonCommand(Lesson lesson) {
+    public static String getAddLessonCommand(Index moduleClassIndex, Lesson lesson) {
         return AddLessonCommand.COMMAND_WORD + " "
-                + PREFIX_CLASS_INDEX + INDEX_FIRST_ITEM.getOneBased() + " "
+                + PREFIX_CLASS_INDEX + moduleClassIndex.getOneBased() + " "
                 + getLessonDetails(lesson);
     }
 
