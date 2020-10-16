@@ -40,6 +40,7 @@ public class CommandHistoryTest {
 
     @Test
     public void addHistory_validString_resetsCache() {
+        // setup previous history and cache
         commandHistory.addHistory(PREVIOUS);
         commandHistory.getPrevious(CACHE);
         assertEquals(CACHE, commandHistory.getCached());
@@ -82,6 +83,7 @@ public class CommandHistoryTest {
 
     @Test
     public void getNext_hasNext_returnsNextAndIncrementsPointer() {
+        // setup previous history
         commandHistory.addHistory(COMMAND_1);
         commandHistory.addHistory(COMMAND_2);
         commandHistory.getPrevious(CACHE);
@@ -94,6 +96,7 @@ public class CommandHistoryTest {
 
     @Test
     public void getNext_retainsCache() {
+        // setup previous history
         commandHistory.addHistory(COMMAND_1);
         commandHistory.addHistory(COMMAND_2);
         commandHistory.getPrevious(CACHE);
@@ -110,10 +113,11 @@ public class CommandHistoryTest {
 
     @Test
     public void getCache_hasCache_restoresPointerToAboveStack() {
+        // setup previous history
         commandHistory.addHistory(COMMAND_1);
         commandHistory.getPrevious(CACHE);
-        commandHistory.getCached();
 
+        commandHistory.getCached();
         assertFalse(commandHistory.hasNext());
     }
 }
