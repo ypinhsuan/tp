@@ -59,7 +59,7 @@ public class JsonAdaptedModuleClass {
     }
 
     /**
-     * Gets a {@code List} of {@code UUID}s from {@code studentUuids}.
+     * Converts the contained {@code List<JsonAdaptedUuid> studentUuids} to a {@code List<UUID>}.
      *
      * @throws IllegalValueException if any of the {@code UUID}s are null or invalid.
      */
@@ -97,7 +97,7 @@ public class JsonAdaptedModuleClass {
     }
 
     /**
-     * Gets a {@code List} of {@code Lesson}s from {@code lessons}.
+     * Converts the contained {@code List<JsonAdaptedLesson> lessons} to a {@code List<Lesson>}.
      *
      * @throws IllegalValueException if any of the {@code Lesson}s are null or duplicate.
      */
@@ -132,11 +132,11 @@ public class JsonAdaptedModuleClass {
         }
         final Name modelName = new Name(name);
 
-        List<UUID> moduleClassUuids = getUuidList();
-        final Set<UUID> modelUuids = new HashSet<>(moduleClassUuids);
+        List<UUID> studentUuids = getUuidList();
+        final Set<UUID> studentUuidSet = new HashSet<>(studentUuids);
 
         final List<Lesson> lessonList = getLessonList();
 
-        return new ModuleClass(modelName, modelUuids, lessonList);
+        return new ModuleClass(modelName, studentUuidSet, lessonList);
     }
 }

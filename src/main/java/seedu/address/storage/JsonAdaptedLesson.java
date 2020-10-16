@@ -46,7 +46,7 @@ public class JsonAdaptedLesson {
     }
 
     /**
-     * Converts a given {@code Lesson} into this class for Jackson use.
+     * Converts a given {@code Lesson} into a {@code JsonAdaptedLesson} for Jackson use.
      */
     public JsonAdaptedLesson(Lesson source) {
         startTime = source.getStartTime().toString();
