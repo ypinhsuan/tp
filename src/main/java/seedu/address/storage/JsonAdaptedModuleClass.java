@@ -22,7 +22,7 @@ public class JsonAdaptedModuleClass {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "ModuleClass's %s field is missing!";
     public static final String INVALID_FIELD_MESSAGE_FORMAT = "ModuleClass's %s field is invalid!";
-    public static final String DUPLICATE_LESSON_MESSAGE = "%s contains duplicate lesson(s).";
+    public static final String DUPLICATE_LESSON_MESSAGE_FORMAT = "%s contains duplicate lesson(s).";
     public static final String STUDENT_UUID_FIELD = "student uuid";
 
     private final String name;
@@ -98,9 +98,8 @@ public class JsonAdaptedModuleClass {
 
     /**
      * Gets a {@code List} of {@code Lesson}s from {@code lessons}.
-     * Removes any duplicate {@code Lesson}s, as ascertained by {@code isSameLesson}.
      *
-     * @throws IllegalValueException if any of the {@code Lesson}s are null.
+     * @throws IllegalValueException if any of the {@code Lesson}s are null or duplicate.
      */
     public List<Lesson> getLessonList() throws IllegalValueException {
         List<Lesson> lessonList = new ArrayList<>();
@@ -111,7 +110,7 @@ public class JsonAdaptedModuleClass {
             }
 
             if (hasDuplicateLessons(lessonList, jsonLesson.toModelType())) {
-                throw new IllegalValueException(String.format(DUPLICATE_LESSON_MESSAGE, name));
+                throw new IllegalValueException(String.format(DUPLICATE_LESSON_MESSAGE_FORMAT, name));
             } else {
                 lessonList.add(jsonLesson.toModelType());
             }
