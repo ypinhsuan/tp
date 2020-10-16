@@ -67,8 +67,9 @@ public class CommandTestUtil {
     public static final String TAG_DESC_EXPERIENCED = " " + PREFIX_TAG + VALID_TAG_EXPERIENCED;
     public static final String TAG_DESC_AVERAGE = " " + PREFIX_TAG + VALID_TAG_AVERAGE;
 
+    public static final String INVALID_NAME = "James&";
     public static final String INVALID_STUDENT_UUID = "584346cb-8886-4518-8282-";
-    public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
+    public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + INVALID_NAME; // '&' not allowed in names
     public static final String INVALID_TELEGRAM_DESC = " " + PREFIX_TELEGRAM + "91%19"; // '%' not allowed in telegram
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "good*"; // '*' not allowed in tags

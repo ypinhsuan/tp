@@ -23,7 +23,7 @@ public class JsonAdaptedModuleClassTest {
     private static final String INVALID_STUDENT_UUID = "584346cb-8886-4518-8282-";
     private static final String INVALID_TIME = "1400";
 
-    private static final String VALID_NAME = CS2103T_TUTORIAL.getName().toString();
+    private static final JsonAdaptedName VALID_NAME = new JsonAdaptedName(CS2103T_TUTORIAL.getName().toString());
     private static final List<JsonAdaptedUuid> VALID_STUDENT_UUIDS = CS2103T_TUTORIAL.getStudentUuids().stream()
             .map(JsonAdaptedUuid::new)
             .collect(Collectors.toList());
@@ -46,8 +46,9 @@ public class JsonAdaptedModuleClassTest {
 
     @Test
     public void toModelType_invalidName_throwsIllegalValueException() {
-        JsonAdaptedModuleClass moduleClass = new JsonAdaptedModuleClass(
-                INVALID_NAME, VALID_STUDENT_UUIDS, VALID_LESSONS);
+        JsonAdaptedName invalidName = new JsonAdaptedName(INVALID_NAME);
+        JsonAdaptedModuleClass moduleClass =
+                new JsonAdaptedModuleClass(invalidName, VALID_STUDENT_UUIDS, VALID_LESSONS);
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, moduleClass::toModelType);
     }
@@ -64,10 +65,10 @@ public class JsonAdaptedModuleClassTest {
         List<JsonAdaptedUuid> invalidStudentUuids = new ArrayList<>(VALID_STUDENT_UUIDS);
         JsonAdaptedUuid invalidJsonAdaptedUuid = new JsonAdaptedUuid(INVALID_STUDENT_UUID);
         invalidStudentUuids.add(invalidJsonAdaptedUuid);
-        JsonAdaptedModuleClass moduleClass = new JsonAdaptedModuleClass(
-                VALID_NAME, invalidStudentUuids, VALID_LESSONS);
-        String expectedMessage = String.format(
-                INVALID_FIELD_MESSAGE_FORMAT, JsonAdaptedModuleClass.STUDENT_UUID_FIELD);
+        String expectedMessage = String.format(INVALID_FIELD_MESSAGE_FORMAT, JsonAdaptedModuleClass.STUDENT_UUID_FIELD);
+        JsonAdaptedModuleClass moduleClass = new JsonAdaptedModuleClass(VALID_NAME,
+                invalidStudentUuids,
+                VALID_LESSONS);
         assertThrows(IllegalValueException.class, expectedMessage, moduleClass::toModelType);
     }
 

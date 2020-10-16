@@ -28,7 +28,7 @@ public class JsonAdaptedStudentTest {
     private static final String INVALID_TAG = "#Average";
     private static final String INVALID_UUID = "584346cb-8886-4518-8282-";
 
-    private static final String VALID_NAME = BENSON.getName().toString();
+    private static final JsonAdaptedName VALID_NAME = new JsonAdaptedName(BENSON.getName().toString());
     private static final String VALID_TELEGRAM = BENSON.getTelegram().toString();
     private static final String VALID_EMAIL = BENSON.getEmail().toString();
     private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
@@ -66,8 +66,9 @@ public class JsonAdaptedStudentTest {
 
     @Test
     public void toModelType_invalidName_throwsIllegalValueException() {
+        JsonAdaptedName invalidName = new JsonAdaptedName(INVALID_NAME);
         JsonAdaptedStudent student =
-                new JsonAdaptedStudent(VALID_UUID, INVALID_NAME, VALID_TELEGRAM, VALID_EMAIL, VALID_TAGS);
+                new JsonAdaptedStudent(VALID_UUID, invalidName, VALID_TELEGRAM, VALID_EMAIL, VALID_TAGS);
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
     }

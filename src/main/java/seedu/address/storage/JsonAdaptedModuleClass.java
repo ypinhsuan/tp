@@ -25,7 +25,7 @@ public class JsonAdaptedModuleClass {
     public static final String DUPLICATE_LESSON_MESSAGE_FORMAT = "%s contains duplicate lesson(s).";
     public static final String STUDENT_UUID_FIELD = "student uuid";
 
-    private final String name;
+    private final JsonAdaptedName name;
     private final List<JsonAdaptedUuid> studentUuids = new ArrayList<>();
     private final List<JsonAdaptedLesson> lessons = new ArrayList<>();
 
@@ -33,7 +33,7 @@ public class JsonAdaptedModuleClass {
      * Constructs a {@code JsonAdaptedModuleClass} with the given class details.
      */
     @JsonCreator
-    public JsonAdaptedModuleClass(@JsonProperty("name") String name,
+    public JsonAdaptedModuleClass(@JsonProperty("name") JsonAdaptedName name,
                                   @JsonProperty("studentUuids") List<JsonAdaptedUuid> studentUuids,
                                   @JsonProperty("lessons") List<JsonAdaptedLesson> lessons) {
         this.name = name;
@@ -49,7 +49,7 @@ public class JsonAdaptedModuleClass {
      * Converts a given {@code ModuleClass} into a {@code JsonAdaptedModuleClass} for Jackson use.
      */
     public JsonAdaptedModuleClass(ModuleClass source) {
-        name = source.getName().fullName;
+        name = new JsonAdaptedName(source.getName().fullName);
         studentUuids.addAll(source.getStudentUuids().stream()
                .map(JsonAdaptedUuid::new)
                .collect(Collectors.toList()));
@@ -122,10 +122,8 @@ public class JsonAdaptedModuleClass {
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
-        if (!Name.isValidName(name)) {
-            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
-        }
-        final Name modelName = new Name(name);
+
+        final Name modelName = name.toModelType();
 
         List<UUID> studentUuids = getUuidList();
         final Set<UUID> studentUuidSet = new HashSet<>(studentUuids);
