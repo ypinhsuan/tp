@@ -31,8 +31,13 @@ import seedu.address.model.lesson.NumberOfOccurrences;
 
 class JsonAdaptedAttendanceRecordTest {
 
+    /** A {@code JsonAdaptedAttendanceRecord} for testing representing week 1 and is empty. */
     public static final JsonAdaptedAttendanceRecord EMPTY_JSON_ADAPTED_ATTENDANCE_RECORD_WEEK_ONE =
             new JsonAdaptedAttendanceRecord(new Week(Index.fromOneBased(1)), EMPTY_ATTENDANCE_RECORD);
+    /**
+     * A {@code JsonAdaptedAttendanceRecord} for testing representing week 2
+     * and has two valid {@code JsonAdaptedStudentAttendance}s
+     */
     public static final JsonAdaptedAttendanceRecord VALID_JSON_ADAPTED_ATTENDANCE_RECORD_WEEK_TWO =
             new JsonAdaptedAttendanceRecord(new Week(Index.fromOneBased(2)), VALID_ATTENDANCE_RECORD);
 

@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ATTENDANCE_33;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ATTENDANCE_51;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_UUID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_UUID_BOB;
+import static seedu.address.storage.JsonAdaptedUuidTest.VALID_JSON_ADAPTED_UUID;
 import static seedu.address.storage.attendance.JsonAdaptedAttendanceTest.VALID_JSON_ADAPTED_ATTENDANCE_33;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -19,9 +20,6 @@ import seedu.address.model.attendance.Attendance;
 import seedu.address.storage.JsonAdaptedUuid;
 
 class JsonAdaptedStudentAttendanceTest {
-
-    // TODO: Relocate to JsonAdaptedUuidTest when implemented.
-    public static final JsonAdaptedUuid VALID_JSON_ADAPTED_UUID = new JsonAdaptedUuid(VALID_UUID_AMY);
 
     /** A {@code JsonAdaptedStudentAttendance} for testing with AMY as student and participation score of 80. */
     public static final JsonAdaptedStudentAttendance VALID_JSON_ADAPTED_STUDENT_ATTENDANCE_AMY =

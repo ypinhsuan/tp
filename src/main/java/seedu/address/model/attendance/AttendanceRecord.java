@@ -11,7 +11,7 @@ import java.util.UUID;
 import seedu.address.model.attendance.exceptions.AttendanceNotFoundException;
 
 /**
- * Represents the attendance of students in a single lesson class.
+ * Represents the attendance of students in a single lesson occurrence.
  * Guarantees: immutable.
  */
 public class AttendanceRecord {
@@ -24,7 +24,7 @@ public class AttendanceRecord {
 
     /**
      * Overloaded constructor method.
-     * Requires records to be non null.
+     * Requires {@code attendances} to be non null.
      */
     public AttendanceRecord(Map<UUID, Attendance> attendances) {
         requireNonNull(attendances);
@@ -38,6 +38,8 @@ public class AttendanceRecord {
 
     /**
      * Returns the {@code Attendance} of the given {@code Student UUID}.
+     *
+     * @throws AttendanceNotFoundException if there is no attendance for the give {@code Student UUID}.
      */
     public Attendance getAttendance(UUID uuid) throws AttendanceNotFoundException {
         requireNonNull(uuid);

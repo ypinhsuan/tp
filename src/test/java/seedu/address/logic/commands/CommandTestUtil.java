@@ -179,7 +179,18 @@ public class CommandTestUtil {
         VALID_ATTENDANCE_LIST.put(UUID.fromString(VALID_UUID_AMY), new Attendance(VALID_PARTICIPATION_SCORE_33));
         VALID_ATTENDANCE_LIST.put(UUID.fromString(VALID_UUID_BOB), new Attendance(VALID_PARTICIPATION_SCORE_51));
     }
+
+    /**
+     * A {@code AttendanceRecord} for testing with two {@code Attendance}s:
+     * - AMY with score 33
+     * - BOB with score 51
+     */
     public static final AttendanceRecord VALID_ATTENDANCE_RECORD = new AttendanceRecord(VALID_ATTENDANCE_LIST);
+    /**
+     * A {@code AttendanceRecordList} for testing with two {@code AttendanceRecord}s:
+     * - Week 1: Empty
+     * - Week 2: As defined in {@link CommandTestUtil#VALID_ATTENDANCE_RECORD}.
+     */
     public static final AttendanceRecordList VALID_ATTENDANCE_RECORD_LIST =
             new AttendanceRecordList(Arrays.asList(EMPTY_ATTENDANCE_RECORD, VALID_ATTENDANCE_RECORD));
 

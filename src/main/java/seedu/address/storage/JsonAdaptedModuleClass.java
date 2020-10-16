@@ -20,10 +20,10 @@ import seedu.address.model.moduleclass.ModuleClass;
  */
 public class JsonAdaptedModuleClass {
 
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "ModuleClass's %s field is missing!";
-    public static final String INVALID_FIELD_MESSAGE_FORMAT = "ModuleClass's %s field is invalid!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Class's %s field is missing!";
+    public static final String INVALID_FIELD_MESSAGE_FORMAT = "Class's %s field is invalid!";
     public static final String DUPLICATE_LESSON_MESSAGE_FORMAT = "%s contains duplicate lesson(s).";
-    public static final String STUDENT_UUID_FIELD = "student uuid";
+    public static final String STUDENT_UUID_FIELD = "student UUID";
 
     private final JsonAdaptedName name;
     private final List<JsonAdaptedUuid> studentUuids = new ArrayList<>();

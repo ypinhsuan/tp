@@ -22,6 +22,13 @@ import seedu.address.model.attendance.Week;
 
 class JsonAdaptedAttendanceRecordListTest {
 
+    /**
+     * A {@code JsonAdaptedAttendanceRecordList} for testing with contents as specified in
+     * {@link seedu.address.logic.commands.CommandTestUtil#VALID_ATTENDANCE_RECORD_LIST}.
+     */
+    public static final JsonAdaptedAttendanceRecordList VALID_JSON_ADAPTED_ATTENDANCE_RECORD_LIST =
+            new JsonAdaptedAttendanceRecordList(VALID_ATTENDANCE_RECORD_LIST);
+
     @Test
     public void toModelType_validAttendanceRecordList_returnsAttendanceRecordList() throws Exception {
         JsonAdaptedAttendanceRecordList attendanceRecordList =

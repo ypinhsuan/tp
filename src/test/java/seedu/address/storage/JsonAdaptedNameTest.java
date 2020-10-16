@@ -12,6 +12,7 @@ import seedu.address.model.components.name.Name;
 
 public class JsonAdaptedNameTest {
 
+    /** A {@code JsonAdaptedName} for testing with {@code VALID_NAME_AMY} as name. */
     public static final JsonAdaptedName VALID_JSON_ADAPTED_NAME = new JsonAdaptedName(VALID_NAME_AMY);
 
     @Test
