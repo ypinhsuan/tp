@@ -20,7 +20,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.attendance.Week;
 
-class JsonAdaptedAttendanceRecordListTest {
+public class JsonAdaptedAttendanceRecordListTest {
 
     /**
      * A {@code JsonAdaptedAttendanceRecordList} for testing with contents as specified in

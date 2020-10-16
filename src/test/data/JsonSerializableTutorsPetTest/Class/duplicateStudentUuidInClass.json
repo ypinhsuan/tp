@@ -52,28 +52,127 @@
       "5c09bbdc-b89c-482a-a4b0-32ede6d679e7"
     ],
     "lessons" : [ {
-      "startTime":"10:00",
-      "endTime":"11:00",
-      "day":"THURSDAY",
-      "numberOfOccurrences":10,
-      "venue":"AS6-0211"
-      } ]
+      "startTime" : "10:00",
+      "endTime" : "11:00",
+      "day" : "THURSDAY",
+      "numberOfOccurrences" : 10,
+      "venue" : "AS6-0211",
+      "attendanceRecordList" : {
+        "recordList" : [ {
+          "week" : 1,
+          "records" : [ {
+            "studentUuid" : "0c527a3f-8a6f-4c16-b57d-563a9c43cf6b",
+            "attendance" : 80
+          } ]
+        }, {
+          "week" : 2,
+          "records" : [ {
+            "studentUuid" : "0c527a3f-8a6f-4c16-b57d-563a9c43cf6b",
+            "attendance" : 51
+          }, {
+            "studentUuid" : "5c09bbdc-b89c-482a-a4b0-32ede6d679e7",
+            "attendance" : 33
+          } ]
+        }, {
+          "week" : 3,
+          "records" : [ ]
+        }, {
+          "week" : 4,
+          "records" : [ ]
+        }, {
+          "week" : 5,
+          "records" : [ ]
+        }, {
+          "week" : 6,
+          "records" : [ ]
+        }, {
+          "week" : 7,
+          "records" : [ ]
+        }, {
+          "week" : 8,
+          "records" : [ ]
+        }, {
+          "week" : 9,
+          "records" : [ ]
+        }, {
+          "week" : 10,
+          "records" : [ ]
+        } ]
+      }
+    } ]
   }, {
     "name" : "CS2100 Lab",
     "studentUuids" : [ ],
     "lessons" : [ {
-      "startTime":"08:00",
-      "endTime":"10:00",
-      "day":"FRIDAY",
-      "numberOfOccurrences":13,
-      "venue":"S17-0302"
+      "startTime" : "08:00",
+      "endTime" : "10:00",
+      "day" : "FRIDAY",
+      "numberOfOccurrences" : 13,
+      "venue" : "S17-0302",
+      "attendanceRecordList" : {
+        "recordList" : [ {
+          "week" : 1,
+          "records" : [ {
+            "studentUuid" : "0c527a3f-8a6f-4c16-b57d-563a9c43cf6b",
+            "attendance" : 80
+          } ]
+        }, {
+          "week" : 2,
+          "records" : [ ]
+        }, {
+          "week" : 3,
+          "records" : [ ]
+        }, {
+          "week" : 4,
+          "records" : [ ]
+        }, {
+          "week" : 5,
+          "records" : [ ]
+        }, {
+          "week" : 6,
+          "records" : [ ]
+        }, {
+          "week" : 7,
+          "records" : [ ]
+        }, {
+          "week" : 8,
+          "records" : [ ]
+        }, {
+          "week" : 9,
+          "records" : [ ]
+        }, {
+          "week" : 10,
+          "records" : [ ]
+        }, {
+          "week" : 11,
+          "records" : [ ]
+        }, {
+          "week" : 12,
+          "records" : [ ]
+        }, {
+          "week" : 13,
+          "records" : [ ]
+        } ]
+      }
     }, {
-      "startTime":"10:30",
-      "endTime":"11:30",
-      "day":"TUESDAY",
-      "numberOfOccurrences":3,
-      "venue":"https://zoom/j/95317249?)pwd=Ulld2tWY3MwMkRibjQyUkdZZz09"
-      } ]
+      "startTime" : "10:30",
+      "endTime" : "11:30",
+      "day" : "TUESDAY",
+      "numberOfOccurrences" : 3,
+      "venue" : "https://zoom/j/95317249?)pwd=Ulld2tWY3MwMkRibjQyUkdZZz09",
+      "attendanceRecordList" : {
+        "recordList" : [ {
+          "week" : 1,
+          "records" : [ ]
+        }, {
+          "week" : 2,
+          "records" : [ ]
+        }, {
+          "week" : 3,
+          "records" : [ ]
+        } ]
+      }
+    } ]
   }, {
     "name" : "CS2100 Tutorial",
     "studentUuids" : [

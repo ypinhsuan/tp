@@ -7,11 +7,13 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.attendance.AttendanceRecordList;
 import seedu.address.model.lesson.Day;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.NumberOfOccurrences;
 import seedu.address.model.lesson.Venue;
 import seedu.address.model.lesson.exceptions.InvalidDayException;
+import seedu.address.storage.attendance.JsonAdaptedAttendanceRecordList;
 
 /**
  * Jackson-friendly version of {@link Lesson}.
@@ -28,6 +30,7 @@ public class JsonAdaptedLesson {
     private final String day;
     private final int numberOfOccurrences;
     private final String venue;
+    private final JsonAdaptedAttendanceRecordList attendanceRecordList;
 
     /**
      * Constructs a {@code JsonAdaptedLesson} with the given lesson details.
@@ -37,12 +40,15 @@ public class JsonAdaptedLesson {
                              @JsonProperty("endTime") String endTime,
                              @JsonProperty("day") String day,
                              @JsonProperty("numberOfOccurrences") int numberOfOccurrences,
-                             @JsonProperty("venue") String venue) {
+                             @JsonProperty("venue") String venue,
+                             @JsonProperty("attendanceRecordList")
+                                         JsonAdaptedAttendanceRecordList attendanceRecordList) {
         this.startTime = startTime;
         this.endTime = endTime;
         this.day = day;
         this.numberOfOccurrences = numberOfOccurrences;
         this.venue = venue;
+        this.attendanceRecordList = attendanceRecordList;
     }
 
     /**
@@ -54,6 +60,7 @@ public class JsonAdaptedLesson {
         day = source.getDay().toString();
         numberOfOccurrences = source.getNumberOfOccurrences().value;
         venue = source.getVenue().toString();
+        attendanceRecordList = new JsonAdaptedAttendanceRecordList(source.getAttendanceRecordList());
     }
 
     private LocalTime convertToTime(String time, String errorMsg) throws IllegalValueException {
@@ -105,6 +112,13 @@ public class JsonAdaptedLesson {
         }
         final Venue modelVenue = new Venue(venue);
 
-        return new Lesson(modelStartTime, modelEndTime, modelDay, modelNumberOfOccurrences, modelVenue);
+        if (attendanceRecordList == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    AttendanceRecordList.class.getSimpleName()));
+        }
+        final AttendanceRecordList modelAttendanceRecordList = attendanceRecordList.toModelType();
+
+        return new Lesson(modelStartTime, modelEndTime, modelDay, modelNumberOfOccurrences, modelVenue,
+                modelAttendanceRecordList);
     }
 }

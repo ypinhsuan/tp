@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.attendance.Attendance;
 
-class JsonAdaptedAttendanceTest {
+public class JsonAdaptedAttendanceTest {
 
     /** A {@code JsonAdaptedAttendance} for testing with participation score of 33. */
     public static final JsonAdaptedAttendance VALID_JSON_ADAPTED_ATTENDANCE_33 =

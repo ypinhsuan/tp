@@ -29,7 +29,7 @@ import seedu.address.model.attendance.AttendanceRecord;
 import seedu.address.model.attendance.Week;
 import seedu.address.model.lesson.NumberOfOccurrences;
 
-class JsonAdaptedAttendanceRecordTest {
+public class JsonAdaptedAttendanceRecordTest {
 
     /** A {@code JsonAdaptedAttendanceRecord} for testing representing week 1 and is empty. */
     public static final JsonAdaptedAttendanceRecord EMPTY_JSON_ADAPTED_ATTENDANCE_RECORD_WEEK_ONE =

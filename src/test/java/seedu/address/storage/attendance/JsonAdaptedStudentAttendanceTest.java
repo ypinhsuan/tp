@@ -19,7 +19,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.attendance.Attendance;
 import seedu.address.storage.JsonAdaptedUuid;
 
-class JsonAdaptedStudentAttendanceTest {
+public class JsonAdaptedStudentAttendanceTest {
 
     /** A {@code JsonAdaptedStudentAttendance} for testing with AMY as student and participation score of 80. */
     public static final JsonAdaptedStudentAttendance VALID_JSON_ADAPTED_STUDENT_ATTENDANCE_AMY =

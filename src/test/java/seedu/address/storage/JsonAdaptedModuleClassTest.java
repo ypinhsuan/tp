@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.components.name.Name;
 import seedu.address.model.lesson.Lesson;
+import seedu.address.storage.attendance.JsonAdaptedAttendanceRecordList;
 
 public class JsonAdaptedModuleClassTest {
 
@@ -91,7 +92,8 @@ public class JsonAdaptedModuleClassTest {
                 LESSON_WED_2_TO_4.getEndTime().toString(),
                 LESSON_WED_2_TO_4.getDay().toString(),
                 LESSON_WED_2_TO_4.getNumberOfOccurrences().value,
-                LESSON_WED_2_TO_4.getVenue().toString()
+                LESSON_WED_2_TO_4.getVenue().toString(),
+                new JsonAdaptedAttendanceRecordList(LESSON_WED_2_TO_4.getAttendanceRecordList())
         );
         invalidLessons.add(invalidJsonAdaptedLesson);
         JsonAdaptedModuleClass moduleClass = new JsonAdaptedModuleClass(

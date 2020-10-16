@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NUMBER_OF_OCCURRENCES_7_LESSON_WED_2_TO_4;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PARTICIPATION_SCORE_80;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalAttendanceRecord.RECORD_ALICE_51_BENSON_33;
 import static seedu.address.testutil.TypicalAttendanceRecord.RECORD_ALICE_80;
-import static seedu.address.testutil.TypicalAttendanceRecord.RECORD_BENSON_51_CARL_33;
 import static seedu.address.testutil.TypicalAttendanceRecord.RECORD_EMPTY;
 import static seedu.address.testutil.TypicalAttendanceRecord.getTypicalAttendanceRecord;
 import static seedu.address.testutil.TypicalStudent.ALICE;
@@ -119,7 +119,7 @@ public class AttendanceRecordListTest {
         List<AttendanceRecord> list = new ArrayList<>();
         list.add(RECORD_EMPTY);
         list.add(RECORD_ALICE_80);
-        list.add(RECORD_BENSON_51_CARL_33);
+        list.add(RECORD_ALICE_51_BENSON_33);
         AttendanceRecordList sameSizeAndRecord = new AttendanceRecordList(list);
         assertTrue(attendanceRecordList.equals(sameSizeAndRecord));
 
@@ -136,7 +136,7 @@ public class AttendanceRecordListTest {
         assertFalse(attendanceRecordList.equals(sameSizeDifferentRecord));
 
         //different size, different attendance records -> return false
-        list.add(RECORD_BENSON_51_CARL_33);
+        list.add(RECORD_ALICE_51_BENSON_33);
         AttendanceRecordList differentAttendanceRecordList = new AttendanceRecordList(list);
         assertFalse(attendanceRecordList.equals(differentAttendanceRecordList));
     }
