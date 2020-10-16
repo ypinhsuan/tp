@@ -48,7 +48,8 @@ public class AddAttendanceCommand extends Command {
             + PREFIX_WEEK + "WEEK_NUMBER (must be positive integer) "
             + PREFIX_PARTICIPATION_SCORE + "PARTICIPATION_SCORE (must be an integer between 0 and 100)";
 
-    public static final String MESSAGE_SUCCESS = "Attendance for %1$s has been recorded: %2$s";
+    public static final String MESSAGE_SUCCESS = "Successfully added: %1$s attended week %2$s lesson with "
+            + "participation score of %3$s";
     public static final String MESSAGE_DUPLICATE_ATTENDANCE = "Attendance has been recorded.";
 
     private final Index moduleCLassIndex;
@@ -103,7 +104,7 @@ public class AddAttendanceCommand extends Command {
         ModuleClass modifiedModuleClass = createModifiedModuleClass(targetModuleClass, lessonIndex, modifiedLesson);
         model.setModuleClass(targetModuleClass, modifiedModuleClass);
 
-        String message = String.format(MESSAGE_SUCCESS, targetStudent, toAdd);
+        String message = String.format(MESSAGE_SUCCESS, targetStudent.getName(), week, toAdd);
         model.commit(message);
         return new CommandResult(message);
     }
