@@ -86,7 +86,7 @@ class JsonSerializableTutorsPet {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_MODULE_CLASS);
             }
 
-            // Check that the set of student UUIDs within a class is a subset of that of
+            // Check that the set of student UUIDs within a class is a subset of
             // all student UUIDs in uniqueStudentUuids. Otherwise, Tutor's Pet will not
             // boot up due to data corruption.
             Set<UUID> moduleClassStudentUuids = moduleClass.getStudentUuids();
@@ -105,8 +105,8 @@ class JsonSerializableTutorsPet {
      */
     public TutorsPet toModelType() throws IllegalValueException {
         TutorsPet tutorsPet = new TutorsPet();
-        this.studentsToModelType(tutorsPet);
-        this.classesToModelType(tutorsPet);
+        studentsToModelType(tutorsPet);
+        classesToModelType(tutorsPet);
         return tutorsPet;
     }
 }
