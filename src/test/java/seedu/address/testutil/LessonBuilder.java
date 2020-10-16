@@ -4,6 +4,7 @@ import static seedu.address.model.lesson.Lesson.TIME_FORMATTER;
 
 import java.time.LocalTime;
 
+import seedu.address.model.attendance.AttendanceRecordList;
 import seedu.address.model.lesson.Day;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.NumberOfOccurrences;
@@ -25,6 +26,7 @@ public class LessonBuilder {
     private Day day;
     private NumberOfOccurrences numberOfOccurrences;
     private Venue venue;
+    private AttendanceRecordList attendanceRecordList;
 
     /**
      * Creates a {@code LessonBuilder} with the default details.
@@ -35,6 +37,7 @@ public class LessonBuilder {
         day = DEFAULT_DAY;
         numberOfOccurrences = new NumberOfOccurrences(DEFAULT_NUMBER_OF_OCCURRENCES);
         venue = new Venue(DEFAULT_VENUE);
+        attendanceRecordList = new AttendanceRecordList(numberOfOccurrences.value);
     }
 
     /**
@@ -46,6 +49,7 @@ public class LessonBuilder {
         day = lessonToCopy.getDay();
         numberOfOccurrences = lessonToCopy.getNumberOfOccurrences();
         venue = lessonToCopy.getVenue();
+        attendanceRecordList = lessonToCopy.getAttendanceRecordList();
     }
 
     /**
@@ -88,7 +92,15 @@ public class LessonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code attendanceRecordList} of the {@code Lesson} that we are building.
+     */
+    public LessonBuilder withAttendanceRecordList(AttendanceRecordList attendanceRecordList) {
+        this.attendanceRecordList = attendanceRecordList;
+        return this;
+    }
+
     public Lesson build() {
-        return new Lesson(startTime, endTime, day, numberOfOccurrences, venue);
+        return new Lesson(startTime, endTime, day, numberOfOccurrences, venue, attendanceRecordList);
     }
 }
