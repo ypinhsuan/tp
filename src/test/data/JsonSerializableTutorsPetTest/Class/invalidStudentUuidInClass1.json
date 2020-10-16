@@ -9,6 +9,7 @@
   } ],
   "classes" : [ {
     "name" : "CS2100 Lab",
-    "studentUuids" : [ "0c527a3f-8a6f-4c16-b57d-43cf6b" ]
+    "studentUuids" : [ "0c527a3f-8a6f-4c16-b57d-43cf6b" ],
+    "lessons" : [ ]
   }]
 }

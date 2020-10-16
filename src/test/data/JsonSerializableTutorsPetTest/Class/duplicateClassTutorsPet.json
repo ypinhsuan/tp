@@ -8,9 +8,11 @@
   } ],
   "classes" : [ {
     "name" : "Duplicate CS2100 Lab",
-    "studentUuids" : [ ]
+    "studentUuids" : [ ],
+    "lessons" : [ ]
   }, {
     "name" : "Duplicate CS2100 Lab",
-    "studentUuids" : [ ]
+    "studentUuids" : [ ],
+    "lessons" : [ ]
   }]
 }
