@@ -38,9 +38,10 @@ public class SampleDataUtil {
             new Email("royb@example.com"), getTagSet("Average"));
 
     private static final Lesson CS2103T_TUTORIAL_THURSDAY_1000_1100 = new Lesson(LocalTime.of(10, 0),
-            LocalTime.of(11, 0), Day.THURSDAY, new NumberOfOccurrences(10), new Venue("Zoom"));
+            LocalTime.of(11, 0), Day.THURSDAY, new NumberOfOccurrences(10), new Venue("AS6-0211"));
     private static final Lesson CS2100_LAB_MONDAY_1400_1500 = new Lesson(LocalTime.of(14, 0),
-            LocalTime.of(15, 0), Day.MONDAY, new NumberOfOccurrences(10), new Venue("Zoom"));
+            LocalTime.of(15, 0), Day.MONDAY, new NumberOfOccurrences(10),
+            new Venue("https://zoom/j/95317249?)pwd=Ulld2tWY3MwMkRibjQyUkdZZz09"));
 
     private static final ModuleClass CS2103T_TUTORIAL = new ModuleClass(new Name("CS2103T Tutorial"),
             new HashSet<>(Arrays.asList(ALEX_YEOH.getUuid(), BERNICE_YU.getUuid(), CHARLOTTE_OLIVEIRO.getUuid())),
