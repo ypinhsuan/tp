@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -19,7 +20,8 @@ import seedu.address.model.attendance.Week;
 
 class JsonAdaptedAttendanceRecord {
 
-    public static final String MESSAGE_DUPLICATE_ATTENDANCE = "Duplicate attendance records have been found";
+    public static final String MESSAGE_DUPLICATE_ATTENDANCE = "Attendance record contains duplicate students.";
+    public static final String MESSAGE_INVALID_ATTENDANCE = "Attendance record contains invalid value(s).";
 
     private final int week;
     private final List<JsonAdaptedStudentAttendance> attendances = new ArrayList<>();
@@ -45,6 +47,10 @@ class JsonAdaptedAttendanceRecord {
 
         if (!Week.isValidWeek(Index.fromOneBased(week))) {
             throw new IllegalValueException(Week.MESSAGE_CONSTRAINTS);
+        }
+
+        if (attendances.stream().anyMatch(Objects::isNull)) {
+            throw new IllegalValueException(MESSAGE_INVALID_ATTENDANCE);
         }
 
         // Using a enhanced for-loop instead of streams since map cannot handle checked exceptions nicely.

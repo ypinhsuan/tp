@@ -79,7 +79,7 @@ class JsonAdaptedAttendanceRecordListTest {
     }
 
     @Test
-    public void toModelType_nonconsecutiveWeeksInJsonAttendanceRecordList_throwsIllegalValueException() {
+    public void toModelType_nonconsecutiveWeeksInJsonAdaptedAttendanceRecords_throwsIllegalValueException() {
         JsonAdaptedAttendanceRecord recordWeekThree =
                 new JsonAdaptedAttendanceRecord(new Week(Index.fromOneBased(3)), VALID_ATTENDANCE_RECORD);
         List<JsonAdaptedAttendanceRecord> records =
@@ -87,12 +87,22 @@ class JsonAdaptedAttendanceRecordListTest {
         JsonAdaptedAttendanceRecordList attendanceRecordList =
                 new JsonAdaptedAttendanceRecordList(records);
         assertThrows(IllegalValueException.class,
-                JsonAdaptedAttendanceRecordList.MESSAGE_WEEK_INDEX_MISMATCH,
+                JsonAdaptedAttendanceRecordList.MESSAGE_INVALID_RECORD,
                 attendanceRecordList::toModelType);
     }
 
     @Test
-    public void toModelType_duplicateWeekInJsonAttendanceRecordList_throwsIllegalValueException() {
+    public void toModelType_nullInJsonAdaptedAttendanceRecords_throwsIllegalValueException() {
+        List<JsonAdaptedAttendanceRecord> nullContainingList = Collections.singletonList(null);
+        JsonAdaptedAttendanceRecordList attendanceRecordList =
+                new JsonAdaptedAttendanceRecordList(nullContainingList);
+        assertThrows(IllegalValueException.class,
+                JsonAdaptedAttendanceRecordList.MESSAGE_INVALID_RECORD,
+                attendanceRecordList::toModelType);
+    }
+
+    @Test
+    public void toModelType_duplicateWeekInJsonAdaptedAttendanceRecords_throwsIllegalValueException() {
         JsonAdaptedAttendanceRecord recordWeekOne =
                 new JsonAdaptedAttendanceRecord(new Week(Index.fromOneBased(1)), VALID_ATTENDANCE_RECORD);
         List<JsonAdaptedAttendanceRecord> records = Arrays.asList(EMPTY_JSON_ADAPTED_ATTENDANCE_RECORD_WEEK_ONE,

@@ -113,4 +113,13 @@ class JsonAdaptedAttendanceRecordTest {
                 Week.MESSAGE_CONSTRAINTS,
                 record::toKeyValuePair);
     }
+
+    @Test
+    public void toKeyValuePair_nullInJsonAdaptedStudentAttendances_throwsIllegalValueException() {
+        List<JsonAdaptedStudentAttendance> nullContainingList = Collections.singletonList(null);
+        JsonAdaptedAttendanceRecord record = new JsonAdaptedAttendanceRecord(VALID_WEEK_VALUE_5, nullContainingList);
+        assertThrows(IllegalValueException.class,
+                JsonAdaptedAttendanceRecord.MESSAGE_INVALID_ATTENDANCE,
+                record::toKeyValuePair);
+    }
 }

@@ -20,9 +20,9 @@ import seedu.address.model.attendance.Week;
  */
 public class JsonAdaptedAttendanceRecordList {
 
-    public static final String MESSAGE_DUPLICATE_ATTENDANCE_RECORD = "Duplicate attendance records have been found";
-    public static final String MESSAGE_WEEK_INDEX_MISMATCH = "An invalid week index has been found";
-    public static final String MESSAGE_MISSING_ATTENDANCE_RECORD_LIST = "Attendance data is missing";
+    public static final String MESSAGE_DUPLICATE_ATTENDANCE_RECORD = "Attendance list contains duplicate record(s).";
+    public static final String MESSAGE_INVALID_RECORD = "Attendance list contains invalid record(s).";
+    public static final String MESSAGE_MISSING_ATTENDANCE_RECORD_LIST = "Attendance list data is corrupted.";
 
     private final List<JsonAdaptedAttendanceRecord> recordList = new ArrayList<>();
 
@@ -59,12 +59,16 @@ public class JsonAdaptedAttendanceRecordList {
             throw new IllegalValueException(MESSAGE_MISSING_ATTENDANCE_RECORD_LIST);
         }
 
+        if (recordList.stream().anyMatch(Objects::isNull)) {
+            throw new IllegalValueException(MESSAGE_INVALID_RECORD);
+        }
+
         List<AttendanceRecord> attendanceRecords = new ArrayList<>(Collections.nCopies(recordList.size(), null));
         for (JsonAdaptedAttendanceRecord record : recordList) {
             Pair<Week, AttendanceRecord> pair = record.toKeyValuePair();
 
             if (pair.getKey().getOneBasedWeekIndex() > attendanceRecords.size()) {
-                throw new IllegalValueException(MESSAGE_WEEK_INDEX_MISMATCH);
+                throw new IllegalValueException(MESSAGE_INVALID_RECORD);
             }
             if (attendanceRecords.get(pair.getKey().getZeroBasedWeekIndex()) != null) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_ATTENDANCE_RECORD);
