@@ -11,7 +11,7 @@ public enum Color {
     PINK("#FFD1DC"),
     YELLOW("#FFFFD8"),
     GREEN("#B5EAD7"),
-    RED(" #FF756D"),
+    RED("#FF756D"),
     BLUE("#A9E5FF"),
     PURPLE("#B399D4"),
     BROWN("#E1C6AC");

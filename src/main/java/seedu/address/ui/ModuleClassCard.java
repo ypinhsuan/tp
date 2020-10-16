@@ -66,6 +66,7 @@ public class ModuleClassCard extends UiPart<Region> {
                 .append(lesson.getNumberOfOccurrences());
         Label label = new Label(builder.toString());
         label.setPadding(new Insets(0, 0, 15, 0));
+        label.getStyleClass().add("cell_small_label");
         return label;
     }
 
