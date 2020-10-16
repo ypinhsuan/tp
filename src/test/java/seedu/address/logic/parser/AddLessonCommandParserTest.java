@@ -24,7 +24,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VENUE_DESC_LESSON_FRI
 import static seedu.address.logic.commands.CommandTestUtil.VENUE_DESC_LESSON_WED_2_TO_4;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_DAY;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_TIME;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 import static seedu.address.testutil.TypicalLesson.LESSON_FRI_8_TO_10;
@@ -32,6 +31,7 @@ import static seedu.address.testutil.TypicalLesson.LESSON_FRI_8_TO_10;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddLessonCommand;
+import seedu.address.model.lesson.Day;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.NumberOfOccurrences;
 import seedu.address.model.lesson.Venue;
@@ -157,7 +157,7 @@ public class AddLessonCommandParserTest {
         assertParseFailure(parser, " c/1"
                 + INVALID_DAY_DESC + START_TIME_DESC_LESSON_FRI_8_TO_10
                 + END_TIME_DESC_LESSON_FRI_8_TO_10 + VENUE_DESC_LESSON_FRI_8_TO_10
-                + NUMBER_OF_OCCURRENCES_DESC_LESSON_FRI_8_TO_10, MESSAGE_INVALID_DAY);
+                + NUMBER_OF_OCCURRENCES_DESC_LESSON_FRI_8_TO_10, Day.MESSAGE_CONSTRAINTS);
 
         // invalid start time
         assertParseFailure(parser, " c/1"

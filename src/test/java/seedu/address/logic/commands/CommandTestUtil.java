@@ -23,8 +23,10 @@ import seedu.address.model.TutorsPet;
 import seedu.address.model.lesson.Day;
 import seedu.address.model.moduleclass.ModuleClass;
 import seedu.address.model.student.Student;
+import seedu.address.testutil.EditLessonDescriptorBuilder;
 import seedu.address.testutil.EditModuleClassDescriptorBuilder;
 import seedu.address.testutil.EditStudentDescriptorBuilder;
+import seedu.address.testutil.LessonBuilder;
 import seedu.address.testutil.StudentBuilder;
 
 /**
@@ -137,6 +139,22 @@ public class CommandTestUtil {
     public static final String INVALID_VENUE_DESC = " " + PREFIX_VENUE + "&&&&&&"; // '&&&&&&' is not a venue
     public static final String INVALID_NUMBER_OF_OCCURRENCES_DESC =
             " " + PREFIX_NUMBER_OF_OCCURRENCES + "asd"; // 'asd' is not a number
+
+    public static final EditLessonCommand.EditLessonDescriptor DESC_LESSON_WED_2_TO_4;
+    public static final EditLessonCommand.EditLessonDescriptor DESC_LESSON_FRI_8_TO_10;
+
+    static {
+        DESC_LESSON_WED_2_TO_4 = new EditLessonDescriptorBuilder(new LessonBuilder().build())
+                .withStartTime(VALID_START_TIME_1400_LESSON_WED_2_TO_4)
+                .withEndTime(VALID_END_TIME_1600_LESSON_WED_2_TO_4)
+                .withDay(VALID_DAY_WED_LESSON_WED_2_TO_4.toString())
+                .withVenue(VALID_VENUE_COM1_B111_LESSON_WED_2_TO_4).build();
+        DESC_LESSON_FRI_8_TO_10 = new EditLessonDescriptorBuilder(new LessonBuilder().build())
+                .withStartTime(VALID_START_TIME_0800_LESSON_FRI_8_TO_10)
+                .withEndTime(VALID_END_TIME_1000_LESSON_FRI_8_TO_10)
+                .withDay(VALID_DAY_FRI_LESSON_FRI_8_TO_10.toString())
+                .withVenue(VALID_VENUE_S17_0302_LESSON_FRI_8_TO_10).build();
+    }
 
     // attendance-related constants
 
