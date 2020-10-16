@@ -39,7 +39,7 @@ public class Lesson {
         this.day = day;
         this.numberOfOccurrences = numberOfOccurrences;
         this.venue = venue;
-        this.attendanceRecordList = new AttendanceRecordList(numberOfOccurrences.value);
+        this.attendanceRecordList = new AttendanceRecordList(numberOfOccurrences);
     }
 
     /**

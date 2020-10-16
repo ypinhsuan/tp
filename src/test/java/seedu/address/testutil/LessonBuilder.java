@@ -37,7 +37,7 @@ public class LessonBuilder {
         day = DEFAULT_DAY;
         numberOfOccurrences = new NumberOfOccurrences(DEFAULT_NUMBER_OF_OCCURRENCES);
         venue = new Venue(DEFAULT_VENUE);
-        attendanceRecordList = new AttendanceRecordList(numberOfOccurrences.value);
+        attendanceRecordList = new AttendanceRecordList(numberOfOccurrences);
     }
 
     /**
@@ -83,7 +83,7 @@ public class LessonBuilder {
      */
     public LessonBuilder withNumberOfOccurrences(int numberOfOccurrences) {
         this.numberOfOccurrences = new NumberOfOccurrences(numberOfOccurrences);
-        this.attendanceRecordList = new AttendanceRecordList(numberOfOccurrences);
+        this.attendanceRecordList = new AttendanceRecordList(this.numberOfOccurrences);
         return this;
     }
 
