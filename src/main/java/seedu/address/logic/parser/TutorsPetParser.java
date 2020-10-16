@@ -6,6 +6,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import seedu.address.logic.commands.AddLessonCommand;
 import seedu.address.logic.commands.AddModuleClassCommand;
 import seedu.address.logic.commands.AddStudentCommand;
 import seedu.address.logic.commands.ClearModuleClassCommand;
@@ -103,6 +104,9 @@ public class TutorsPetParser {
 
         case UnlinkCommand.COMMAND_WORD:
             return new UnlinkCommandParser().parse(arguments);
+
+        case AddLessonCommand.COMMAND_WORD:
+            return new AddLessonCommandParser().parse(arguments);
 
         case DeleteLessonCommand.COMMAND_WORD:
             return new DeleteLessonCommandParser().parse(arguments);

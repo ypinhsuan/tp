@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 
+import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -16,6 +17,9 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.components.name.Name;
 import seedu.address.model.components.tag.Tag;
+import seedu.address.model.lesson.Day;
+import seedu.address.model.lesson.NumberOfOccurrences;
+import seedu.address.model.lesson.Venue;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Telegram;
 
@@ -25,12 +29,20 @@ public class ParserUtilTest {
     private static final String INVALID_TELEGRAM = "invalid+tElEg4m";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#Potential TA";
+    private static final String INVALID_DAY = "ASDDAY";
+    private static final String INVALID_TIME = "123412x";
+    private static final String INVALID_VENUE = "&&&&&&";
+    private static final String INVALID_NUMBER_OF_OCCURRENCES = "asd";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_TELEGRAM = "rachelW4lker";
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "Weak";
     private static final String VALID_TAG_2 = "Average";
+    private static final String VALID_DAY = "FRIDAY";
+    private static final String VALID_TIME = "08:00";
+    private static final String VALID_VENUE = "S17-0302";
+    private static final String VALID_NUMBER_OF_OCCURRENCES = "13";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -167,5 +179,100 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseDay_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseDay((String) null));
+    }
+
+    @Test
+    public void parseDay_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDay(INVALID_DAY));
+    }
+
+    @Test
+    public void parseDay_validValueWithoutWhitespace_returnsDay() throws Exception {
+        Day expectedDay = Day.FRIDAY;
+        assertEquals(expectedDay, ParserUtil.parseDay(VALID_DAY));
+    }
+
+    @Test
+    public void parseDay_validValueWithWhitespace_returnsTrimmedDay() throws Exception {
+        String dayWithWhitespace = WHITESPACE + VALID_DAY + WHITESPACE;
+        Day expectedDay = Day.FRIDAY;
+        assertEquals(expectedDay, ParserUtil.parseDay(dayWithWhitespace));
+    }
+
+    @Test
+    public void parseTime_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseTime((String) null));
+    }
+
+    @Test
+    public void parseTime_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTime(INVALID_TIME));
+    }
+
+    @Test
+    public void parseTime_validValueWithoutWhitespace_returnsTime() throws Exception {
+        LocalTime expectedTime = LocalTime.parse(VALID_TIME);
+        assertEquals(expectedTime, ParserUtil.parseTime(VALID_TIME));
+    }
+
+    @Test
+    public void parseTime_validValueWithWhitespace_returnsTrimmedTime() throws Exception {
+        String timeWithWhitespace = WHITESPACE + VALID_TIME + WHITESPACE;
+        LocalTime expectedTime = LocalTime.parse(VALID_TIME);
+        assertEquals(expectedTime, ParserUtil.parseTime(timeWithWhitespace));
+    }
+
+    @Test
+    public void parseVenue_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseVenue((String) null));
+    }
+
+    @Test
+    public void parseVenue_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseVenue(INVALID_VENUE));
+    }
+
+    @Test
+    public void parseVenue_validValueWithoutWhitespace_returnsVenue() throws Exception {
+        Venue expectedVenue = new Venue(VALID_VENUE);
+        assertEquals(expectedVenue, ParserUtil.parseVenue(VALID_VENUE));
+    }
+
+    @Test
+    public void parseVenue_validValueWithWhitespace_returnsTrimmedVenue() throws Exception {
+        String venueWithWhitespace = WHITESPACE + VALID_VENUE + WHITESPACE;
+        Venue expectedVenue = new Venue(VALID_VENUE);
+        assertEquals(expectedVenue, ParserUtil.parseVenue(venueWithWhitespace));
+    }
+
+    @Test
+    public void parseNumberOfOccurrences_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseNumberOfOccurrences((String) null));
+    }
+
+    @Test
+    public void parseNumberOfOccurrences_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseNumberOfOccurrences(INVALID_NUMBER_OF_OCCURRENCES));
+    }
+
+    @Test
+    public void parseNumberOfOccurrences_validValueWithoutWhitespace_returnsNumberOfOccurrences() throws Exception {
+        NumberOfOccurrences expectedNumberOfOccurrences =
+                new NumberOfOccurrences(Integer.parseInt(VALID_NUMBER_OF_OCCURRENCES));
+        assertEquals(expectedNumberOfOccurrences, ParserUtil.parseNumberOfOccurrences(VALID_NUMBER_OF_OCCURRENCES));
+    }
+
+    @Test
+    public void parseNumberOfOccurrences_validValueWithWhitespace_returnsTrimmedNumberOfOccurrences() throws Exception {
+        String numberOfOccurrencesWithWhitespace = WHITESPACE + VALID_NUMBER_OF_OCCURRENCES + WHITESPACE;
+        NumberOfOccurrences expectedNumberOfOccurrences =
+                new NumberOfOccurrences(Integer.parseInt(VALID_NUMBER_OF_OCCURRENCES));
+        assertEquals(expectedNumberOfOccurrences,
+                ParserUtil.parseNumberOfOccurrences(numberOfOccurrencesWithWhitespace));
     }
 }

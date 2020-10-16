@@ -3,7 +3,7 @@ package seedu.address.model.attendance;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NUMBER_OF_OCCURRENCES_7;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NUMBER_OF_OCCURRENCES_7_LESSON_WED_2_TO_4;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PARTICIPATION_SCORE_80;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalAttendanceRecord.RECORD_ALICE_80;
@@ -24,10 +24,11 @@ import seedu.address.model.attendance.exceptions.InvalidWeekException;
 public class AttendanceRecordListTest {
 
     private static final AttendanceRecordList recordList =
-            new AttendanceRecordList(VALID_NUMBER_OF_OCCURRENCES_7);
+            new AttendanceRecordList(VALID_NUMBER_OF_OCCURRENCES_7_LESSON_WED_2_TO_4);
 
     private static final Week VALID_WEEK = new Week(Index.fromOneBased(1));
-    private static final Week INVALID_WEEK = new Week(Index.fromOneBased(VALID_NUMBER_OF_OCCURRENCES_7 + 1));
+    private static final Week INVALID_WEEK =
+            new Week(Index.fromOneBased(VALID_NUMBER_OF_OCCURRENCES_7_LESSON_WED_2_TO_4 + 1));
 
     @Test
     public void constructor_emptyAttendanceRecordMap() {

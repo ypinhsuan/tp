@@ -85,6 +85,15 @@ public class ModuleClass implements HasName {
     }
 
     /**
+     * Returns true if the class contains an equivalent {@code lesson} as the given argument.
+     *
+     * @throws NullPointerException if the given {@code lesson} is null.
+     */
+    public boolean hasLesson(Lesson toCheck) throws NullPointerException {
+        return lessons.stream().anyMatch(toCheck::equals);
+    }
+
+    /**
      * Returns true if both classes have the same name.
      * This defines a weaker notion of equality between two classes.
      */
