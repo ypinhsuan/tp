@@ -1,4 +1,4 @@
-package seedu.address.storage;
+package seedu.address.storage.attendance;
 
 import java.util.ArrayList;
 import java.util.HashMap;

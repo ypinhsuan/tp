@@ -1,4 +1,4 @@
-package seedu.address.storage;
+package seedu.address.storage.attendance;
 
 import java.util.UUID;
 
@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import javafx.util.Pair;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.attendance.Attendance;
+import seedu.address.storage.JsonAdaptedUuid;
 
 /**
  * Jackson-friendly version of a the {@link java.util.UUID} - {@link Attendance} key value pair.

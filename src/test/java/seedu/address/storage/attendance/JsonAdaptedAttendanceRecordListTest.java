@@ -1,12 +1,12 @@
-package seedu.address.storage;
+package seedu.address.storage.attendance;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ATTENDANCE_RECORD;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ATTENDANCE_RECORD_LIST;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_WEEK_VALUE_5;
-import static seedu.address.storage.JsonAdaptedAttendanceRecordTest.EMPTY_JSON_ADAPTED_ATTENDANCE_RECORD_WEEK_ONE;
-import static seedu.address.storage.JsonAdaptedAttendanceRecordTest.VALID_JSON_ADAPTED_ATTENDANCE_RECORD_WEEK_TWO;
-import static seedu.address.storage.JsonAdaptedStudentAttendanceTest.VALID_JSON_ADAPTED_STUDENT_ATTENDANCE_AMY;
+import static seedu.address.storage.attendance.JsonAdaptedAttendanceRecordTest.EMPTY_JSON_ADAPTED_ATTENDANCE_RECORD_WEEK_ONE;
+import static seedu.address.storage.attendance.JsonAdaptedAttendanceRecordTest.VALID_JSON_ADAPTED_ATTENDANCE_RECORD_WEEK_TWO;
+import static seedu.address.storage.attendance.JsonAdaptedStudentAttendanceTest.VALID_JSON_ADAPTED_STUDENT_ATTENDANCE_AMY;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;

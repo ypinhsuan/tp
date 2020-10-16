@@ -1,4 +1,4 @@
-package seedu.address.storage;
+package seedu.address.storage.attendance;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PARTICIPATION_SCORE_101;

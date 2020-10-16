@@ -1,4 +1,4 @@
-package seedu.address.storage;
+package seedu.address.storage.attendance;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PARTICIPATION_SCORE_101;
@@ -7,7 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ATTENDANCE_33;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ATTENDANCE_51;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_UUID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_UUID_BOB;
-import static seedu.address.storage.JsonAdaptedAttendanceTest.VALID_JSON_ADAPTED_ATTENDANCE_33;
+import static seedu.address.storage.attendance.JsonAdaptedAttendanceTest.VALID_JSON_ADAPTED_ATTENDANCE_33;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.UUID;
@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.attendance.Attendance;
+import seedu.address.storage.JsonAdaptedUuid;
 
 class JsonAdaptedStudentAttendanceTest {
 
