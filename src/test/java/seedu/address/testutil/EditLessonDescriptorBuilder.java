@@ -1,11 +1,11 @@
 package seedu.address.testutil;
 
+import java.time.LocalTime;
+
 import seedu.address.logic.commands.EditLessonCommand.EditLessonDescriptor;
 import seedu.address.model.lesson.Day;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.Venue;
-
-import java.time.LocalTime;
 
 /**
  * A utility class to help with building EditLessonDescriptor objects.

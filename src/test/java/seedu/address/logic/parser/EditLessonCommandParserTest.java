@@ -1,59 +1,40 @@
 package seedu.address.logic.parser;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.EditLessonCommand;
-import seedu.address.logic.commands.EditStudentCommand;
-import seedu.address.model.lesson.Day;
-import seedu.address.model.lesson.Venue;
-import seedu.address.testutil.EditLessonDescriptorBuilder;
-import seedu.address.testutil.EditStudentDescriptorBuilder;
-
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.DAY_DESC_LESSON_FRI_8_TO_10;
 import static seedu.address.logic.commands.CommandTestUtil.DAY_DESC_LESSON_WED_2_TO_4;
-import static seedu.address.logic.commands.CommandTestUtil.DESC_LESSON_FRI_8_TO_10;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.END_TIME_DESC_LESSON_FRI_8_TO_10;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DAY_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_END_TIME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_START_TIME_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_TELEGRAM_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_VENUE_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.DAY_DESC_LESSON_FRI_8_TO_10;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_AVERAGE;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_EXPERIENCED;
-import static seedu.address.logic.commands.CommandTestUtil.TELEGRAM_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.START_TIME_DESC_LESSON_FRI_8_TO_10;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DAY_FRI_LESSON_FRI_8_TO_10;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DAY_WED_LESSON_WED_2_TO_4;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_START_TIME_0800_LESSON_FRI_8_TO_10;
-import static seedu.address.logic.commands.CommandTestUtil.START_TIME_DESC_LESSON_FRI_8_TO_10;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_END_TIME_1000_LESSON_FRI_8_TO_10;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_VENUE_S17_0302_LESSON_FRI_8_TO_10;
-import static seedu.address.logic.commands.CommandTestUtil.TELEGRAM_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_START_TIME_0800_LESSON_FRI_8_TO_10;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_AVERAGE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_EXPERIENCED;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_VENUE_COM1_B111_LESSON_WED_2_TO_4;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_VENUE_S17_0302_LESSON_FRI_8_TO_10;
 import static seedu.address.logic.commands.CommandTestUtil.VENUE_DESC_LESSON_FRI_8_TO_10;
 import static seedu.address.logic.commands.CommandTestUtil.VENUE_DESC_LESSON_WED_2_TO_4;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_ITEM;
-import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_ITEM;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.EditLessonCommand;
+import seedu.address.model.lesson.Day;
+import seedu.address.model.lesson.Venue;
+import seedu.address.testutil.EditLessonDescriptorBuilder;
 
 public class EditLessonCommandParserTest {
 
-    private static Index VALID_MODULE_CLASS_INDEX_ONE = INDEX_FIRST_ITEM;
-    private static Index VALID_LESSON_INDEX_TWO = INDEX_SECOND_ITEM;
-    private static String INPUT_PREAMBLE =
+    private static final Index VALID_MODULE_CLASS_INDEX_ONE = INDEX_FIRST_ITEM;
+    private static final Index VALID_LESSON_INDEX_TWO = INDEX_SECOND_ITEM;
+    private static final String INPUT_PREAMBLE =
             " c/" + VALID_MODULE_CLASS_INDEX_ONE.getOneBased() + " l/" + VALID_LESSON_INDEX_TWO.getOneBased();
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditLessonCommand.MESSAGE_USAGE);

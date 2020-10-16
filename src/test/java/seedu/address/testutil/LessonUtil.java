@@ -2,23 +2,15 @@ package seedu.address.testutil;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASS_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NUMBER_OF_OCCURRENCES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddLessonCommand;
 import seedu.address.logic.commands.EditLessonCommand;
-import seedu.address.logic.commands.EditStudentCommand;
-import seedu.address.model.components.tag.Tag;
 import seedu.address.model.lesson.Lesson;
-
-import java.util.Set;
 
 /**
  * A utility class for Lesson.
@@ -52,10 +44,10 @@ public class LessonUtil {
      */
     public static String getEditLessonDescriptorDetails(EditLessonCommand.EditLessonDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
-        descriptor.getStartTime().ifPresent(
-                startTime -> sb.append(PREFIX_START_TIME).append(startTime.toString()).append(" "));
-        descriptor.getEndTime().ifPresent(
-                endTime -> sb.append(PREFIX_END_TIME).append(endTime.toString()).append(" "));
+        descriptor.getStartTime().ifPresent(startTime -> sb.append(PREFIX_START_TIME)
+                .append(startTime.toString()).append(" "));
+        descriptor.getEndTime().ifPresent(endTime -> sb.append(PREFIX_END_TIME)
+                .append(endTime.toString()).append(" "));
         descriptor.getDay().ifPresent(day -> sb.append(PREFIX_DAY).append(day.toString()).append(" "));
         descriptor.getVenue().ifPresent(venue -> sb.append(PREFIX_VENUE).append(venue.toString()).append(" "));
 
