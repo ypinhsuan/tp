@@ -44,7 +44,7 @@ public class Lesson {
 
     /**
      * Every field must be present and not null.
-     * Creates a lesson with the specified parameters.
+     * Creates a new lesson with the specified parameters.
      */
     public Lesson(LocalTime startTime, LocalTime endTime, Day day, NumberOfOccurrences numberOfOccurrences,
                   Venue venue, AttendanceRecordList attendanceRecordList) {
