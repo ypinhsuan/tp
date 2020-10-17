@@ -7,10 +7,13 @@ import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.attendance.Attendance;
+import seedu.address.model.attendance.Week;
 import seedu.address.model.components.name.Name;
 import seedu.address.model.components.tag.Tag;
 import seedu.address.model.lesson.Day;
@@ -27,6 +30,14 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_INVALID_DAY = "Day format provided is invalid.";
     public static final String MESSAGE_INVALID_TIME = "Time format provided is invalid.";
+
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    public static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -195,5 +206,53 @@ public class ParserUtil {
             throw new ParseException(NumberOfOccurrences.MESSAGE_CONSTRAINTS);
         }
         return new NumberOfOccurrences(occurrences);
+    }
+
+    /**
+     * Parses a {@code String week} into a {@code Week}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code week} is invalid.
+     */
+    public static Week parseWeek(String week) throws ParseException {
+        requireNonNull(week);
+
+        String trimmedWeek = week.trim();
+        Index weekIndex;
+
+        try {
+            weekIndex = ParserUtil.parseIndex(trimmedWeek);
+        } catch (ParseException e) {
+            throw new ParseException(Week.MESSAGE_CONSTRAINTS);
+        }
+
+        if (!Week.isValidWeek(weekIndex)) {
+            throw new ParseException(Week.MESSAGE_CONSTRAINTS);
+        }
+        return new Week(weekIndex);
+    }
+
+    /**
+     * Parses a {@code String participationScore} into a {@code int}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code participationScore} is invalid.
+     */
+    public static int parseParticipationScore(String participationScore) throws ParseException {
+        requireNonNull(participationScore);
+
+        String trimmedScore = participationScore.trim();
+        int checkedScore;
+
+        try {
+            checkedScore = Integer.parseInt(trimmedScore);
+        } catch (NumberFormatException e) {
+            throw new ParseException(Attendance.MESSAGE_CONSTRAINTS);
+        }
+
+        if (!Attendance.isValidParticipationScore(checkedScore)) {
+            throw new ParseException(Attendance.MESSAGE_CONSTRAINTS);
+        }
+        return checkedScore;
     }
 }

@@ -7,10 +7,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NUMBER_OF_OCCURRENCES;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PARTICIPATION_SCORE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_WEEK;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -20,6 +22,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.TutorsPet;
+import seedu.address.model.attendance.Attendance;
+import seedu.address.model.attendance.Week;
 import seedu.address.model.lesson.Day;
 import seedu.address.model.moduleclass.ModuleClass;
 import seedu.address.model.student.Student;
@@ -141,9 +145,30 @@ public class CommandTestUtil {
     // attendance-related constants
 
     public static final int VALID_WEEK_VALUE_5 = 5;
+    public static final int VALID_WEEK_VALUE_3 = 3;
     public static final int VALID_PARTICIPATION_SCORE_33 = 33;
     public static final int VALID_PARTICIPATION_SCORE_51 = 51;
     public static final int VALID_PARTICIPATION_SCORE_80 = 80;
+    public static final Week VALID_WEEK = new Week(Index.fromOneBased(1));
+    public static final Attendance VALID_ATTENDANCE = new Attendance(VALID_PARTICIPATION_SCORE_80);
+
+    public static final String PARTICIPATION_SCORE_DESC_80 =
+            " " + PREFIX_PARTICIPATION_SCORE + VALID_PARTICIPATION_SCORE_80;
+    public static final String PARTICIPATION_SCORE_DESC_51 =
+            " " + PREFIX_PARTICIPATION_SCORE + VALID_PARTICIPATION_SCORE_51;
+    public static final String WEEK_DESC_WEEK_VALUE_5 =
+            " " + PREFIX_WEEK + VALID_WEEK_VALUE_5;
+    public static final String WEEK_DESC_WEEK_VALUE_3 =
+            " " + PREFIX_WEEK + VALID_WEEK_VALUE_3;
+
+    public static final String INVALID_PARTICIPATION_LOWER_BOUND_SCORE_DESC =
+            " " + PREFIX_PARTICIPATION_SCORE + "-1";
+    public static final String INVALID_PARTICIPATION_UPPER_BOUND_SCORE_DESC =
+            " " + PREFIX_PARTICIPATION_SCORE + "101";
+    public static final String INVALID_WEEK_LOWER_BOUND_DESC =
+            " " + PREFIX_WEEK + "0";
+    public static final String INVALID_WEEK_UPPER_BOUND_DESC =
+            " " + PREFIX_WEEK + "53";
 
     /**
      * Executes the given {@code command}, confirms that <br>
