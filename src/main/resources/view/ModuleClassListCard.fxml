@@ -34,7 +34,7 @@
                 <padding>
                     <Insets top="10" bottom="5" />
                 </padding>
-                <Label text="Lessons:" styleClass="cell_small_label" />
+                <Label fx:id="lesson" text="Lessons:" styleClass="cell_small_label" />
             </HBox>
         </VBox>
     </GridPane>

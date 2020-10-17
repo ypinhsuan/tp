@@ -32,6 +32,8 @@ public class ModuleClassCard extends UiPart<Region> {
     private Label id;
     @FXML
     private Label studentCount;
+    @FXML
+    private Label lesson;
 
     /**
      * Creates a {@code ModuleCode} with the given {@code ModuleClass} and index to display.
@@ -44,30 +46,36 @@ public class ModuleClassCard extends UiPart<Region> {
         studentCount.setText(Integer.toString(moduleClass.getStudentUuids().size()));
 
         List<Lesson> lessons = moduleClass.getLessons();
-        int index = 1;
-        for (Lesson lesson: lessons) {
-            vBox.getChildren().add(createLessonLabel(index, lesson));
-            index++;
+        if (lessons.size() == 0) {
+            lesson.setText("No lessons");
+        } else {
+            createLessonLabel(lessons);
         }
     }
 
-    private Label createLessonLabel(int index, Lesson lesson) {
-        final StringBuilder builder = new StringBuilder();
-        builder.append(index)
-                .append(". ")
-                .append(lesson.getDay())
-                .append(" ")
-                .append(TIME_FORMATTER.format(lesson.getStartTime()))
-                .append(" to ")
-                .append(TIME_FORMATTER.format(lesson.getEndTime()))
-                .append("\nVenue: ")
-                .append(lesson.getVenue())
-                .append("\nNumber of occurrences: ")
-                .append(lesson.getNumberOfOccurrences());
-        Label label = new Label(builder.toString());
-        label.setPadding(new Insets(0, 0, 15, 0));
-        label.getStyleClass().add("cell_small_label");
-        return label;
+    private void createLessonLabel(List<Lesson> lessons) {
+        int index = 1;
+        for (Lesson lesson: lessons) {
+            final StringBuilder builder = new StringBuilder();
+            builder.append(index)
+                    .append(". ")
+                    .append(lesson.getDay())
+                    .append(" ")
+                    .append(TIME_FORMATTER.format(lesson.getStartTime()))
+                    .append(" to ")
+                    .append(TIME_FORMATTER.format(lesson.getEndTime()))
+                    .append("\nVenue: ")
+                    .append(lesson.getVenue())
+                    .append("\nNumber of occurrences: ")
+                    .append(lesson.getNumberOfOccurrences());
+
+            Label label = new Label(builder.toString());
+            label.setPadding(new Insets(0, 0, 15, 0));
+            label.getStyleClass().add("cell_small_label");
+            vBox.getChildren().add(label);
+
+            index++;
+        }
     }
 
     @Override
