@@ -33,8 +33,10 @@ import seedu.address.model.attendance.Week;
 import seedu.address.model.lesson.Day;
 import seedu.address.model.moduleclass.ModuleClass;
 import seedu.address.model.student.Student;
+import seedu.address.testutil.EditLessonDescriptorBuilder;
 import seedu.address.testutil.EditModuleClassDescriptorBuilder;
 import seedu.address.testutil.EditStudentDescriptorBuilder;
+import seedu.address.testutil.LessonBuilder;
 import seedu.address.testutil.StudentBuilder;
 
 /**
@@ -150,6 +152,22 @@ public class CommandTestUtil {
     public static final String INVALID_NUMBER_OF_OCCURRENCES_DESC =
             " " + PREFIX_NUMBER_OF_OCCURRENCES + "asd"; // 'asd' is not a number
 
+    public static final EditLessonCommand.EditLessonDescriptor DESC_LESSON_WED_2_TO_4;
+    public static final EditLessonCommand.EditLessonDescriptor DESC_LESSON_FRI_8_TO_10;
+
+    static {
+        DESC_LESSON_WED_2_TO_4 = new EditLessonDescriptorBuilder(new LessonBuilder().build())
+                .withStartTime(VALID_START_TIME_1400_LESSON_WED_2_TO_4)
+                .withEndTime(VALID_END_TIME_1600_LESSON_WED_2_TO_4)
+                .withDay(VALID_DAY_WED_LESSON_WED_2_TO_4.toString())
+                .withVenue(VALID_VENUE_COM1_B111_LESSON_WED_2_TO_4).build();
+        DESC_LESSON_FRI_8_TO_10 = new EditLessonDescriptorBuilder(new LessonBuilder().build())
+                .withStartTime(VALID_START_TIME_0800_LESSON_FRI_8_TO_10)
+                .withEndTime(VALID_END_TIME_1000_LESSON_FRI_8_TO_10)
+                .withDay(VALID_DAY_FRI_LESSON_FRI_8_TO_10.toString())
+                .withVenue(VALID_VENUE_S17_0302_LESSON_FRI_8_TO_10).build();
+    }
+
     // attendance-related constants
 
     public static final int VALID_WEEK_VALUE_3 = 3;
@@ -236,17 +254,19 @@ public class CommandTestUtil {
      * Executes the given {@code command}, confirms that <br>
      * - a {@code CommandException} is thrown <br>
      * - the CommandException message matches {@code expectedMessage} <br>
-     * - the Tutor's Pet, filtered student list and selected student in {@code actualModel} remain unchanged
+     * - the Tutor's Pet, filtered student list and filtered module class list in {@code actualModel} remain unchanged
      */
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
         TutorsPet expectedTutorsPet = new TutorsPet(actualModel.getTutorsPet());
-        List<Student> expectedFilteredList = new ArrayList<>(actualModel.getFilteredStudentList());
+        List<Student> expectedFilteredStudentList = new ArrayList<>(actualModel.getFilteredStudentList());
+        List<ModuleClass> expectedFilteredModuleClassList = new ArrayList<>(actualModel.getFilteredModuleClassList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
         assertEquals(expectedTutorsPet, actualModel.getTutorsPet());
-        assertEquals(expectedFilteredList, actualModel.getFilteredStudentList());
+        assertEquals(expectedFilteredStudentList, actualModel.getFilteredStudentList());
+        assertEquals(expectedFilteredModuleClassList, actualModel.getFilteredModuleClassList());
     }
 
     /**

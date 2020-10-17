@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddLessonCommand;
+import seedu.address.logic.commands.EditLessonCommand;
 import seedu.address.model.lesson.Lesson;
 
 /**
@@ -35,6 +36,21 @@ public class LessonUtil {
         sb.append(PREFIX_END_TIME + lesson.getEndTime().toString() + " ");
         sb.append(PREFIX_VENUE + lesson.getVenue().toString() + " ");
         sb.append(PREFIX_NUMBER_OF_OCCURRENCES + lesson.getNumberOfOccurrences().toString() + " ");
+        return sb.toString();
+    }
+
+    /**
+     * Returns the part of command string for the given {@code EditLessonDescriptor}'s details.
+     */
+    public static String getEditLessonDescriptorDetails(EditLessonCommand.EditLessonDescriptor descriptor) {
+        StringBuilder sb = new StringBuilder();
+        descriptor.getStartTime().ifPresent(startTime -> sb.append(PREFIX_START_TIME)
+                .append(startTime.toString()).append(" "));
+        descriptor.getEndTime().ifPresent(endTime -> sb.append(PREFIX_END_TIME)
+                .append(endTime.toString()).append(" "));
+        descriptor.getDay().ifPresent(day -> sb.append(PREFIX_DAY).append(day.toString()).append(" "));
+        descriptor.getVenue().ifPresent(venue -> sb.append(PREFIX_VENUE).append(venue.toString()).append(" "));
+
         return sb.toString();
     }
 }

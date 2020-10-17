@@ -30,6 +30,7 @@ import seedu.address.logic.commands.DeleteAttendanceCommand;
 import seedu.address.logic.commands.DeleteLessonCommand;
 import seedu.address.logic.commands.DeleteModuleClassCommand;
 import seedu.address.logic.commands.DeleteStudentCommand;
+import seedu.address.logic.commands.EditLessonCommand;
 import seedu.address.logic.commands.EditModuleClassCommand;
 import seedu.address.logic.commands.EditModuleClassCommand.EditModuleClassDescriptor;
 import seedu.address.logic.commands.EditStudentCommand;
@@ -55,6 +56,7 @@ import seedu.address.model.components.name.NameContainsKeywordsPredicate;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.moduleclass.ModuleClass;
 import seedu.address.model.student.Student;
+import seedu.address.testutil.EditLessonDescriptorBuilder;
 import seedu.address.testutil.EditModuleClassDescriptorBuilder;
 import seedu.address.testutil.EditStudentDescriptorBuilder;
 import seedu.address.testutil.LessonBuilder;
@@ -177,6 +179,18 @@ public class TutorsPetParserTest {
         AddLessonCommand command =
                 (AddLessonCommand) parser.parseCommand(LessonUtil.getAddLessonCommand(INDEX_FIRST_ITEM, lesson));
         assertEquals(new AddLessonCommand(INDEX_FIRST_ITEM, lesson), command);
+    }
+
+    @Test
+    public void parseCommand_editLesson() throws Exception {
+        Lesson lesson = new LessonBuilder().build();
+        EditLessonCommand.EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder(lesson).build();
+        EditLessonCommand command =
+                (EditLessonCommand) parser.parseCommand(EditLessonCommand.COMMAND_WORD + " "
+                        + PREFIX_CLASS_INDEX + INDEX_FIRST_ITEM.getOneBased() + " "
+                        + PREFIX_LESSON_INDEX + INDEX_SECOND_ITEM.getOneBased() + " "
+                        + LessonUtil.getEditLessonDescriptorDetails(descriptor));
+        assertEquals(new EditLessonCommand(INDEX_FIRST_ITEM, INDEX_SECOND_ITEM, descriptor), command);
     }
 
     @Test

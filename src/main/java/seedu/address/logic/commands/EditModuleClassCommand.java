@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_MODULE_CLASS;
 
@@ -44,9 +45,8 @@ public class EditModuleClassCommand extends Command {
      * @param index of the class in the filtered class list to edit.
      * @param editModuleClassDescriptor details to edit the class with.
      */
-    public EditModuleClassCommand(Index index , EditModuleClassDescriptor editModuleClassDescriptor) {
-        requireNonNull(index);
-        requireNonNull(editModuleClassDescriptor);
+    public EditModuleClassCommand(Index index, EditModuleClassDescriptor editModuleClassDescriptor) {
+        requireAllNonNull(index, editModuleClassDescriptor);
 
         this.index = index;
         this.editModuleClassDescriptor = new EditModuleClassDescriptor(editModuleClassDescriptor);
