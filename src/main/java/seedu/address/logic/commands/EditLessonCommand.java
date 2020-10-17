@@ -39,8 +39,8 @@ public class EditLessonCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Edits the details of the lesson, identified "
-            + "by the index number used in the displayed class list\n"
-            + "and index number in the lesson list. "
+            + "by the index number used in the displayed class list "
+            + "and index number in the lesson list.\n"
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: "
             + PREFIX_CLASS_INDEX + "CLASS_INDEX (must be a positive integer) "
@@ -120,7 +120,7 @@ public class EditLessonCommand extends Command {
     }
 
     /**
-     * Adds all lessons in the target module class to the new module class, other than the lesson to edit.
+     * Adds all lessons in the target module class to the new module class.
      * The {@code editedLesson} is added in place of the {@code lessonToEdit}.
      *
      * @throws CommandException if the {@code editedLesson} already exists.
@@ -130,6 +130,7 @@ public class EditLessonCommand extends Command {
         assert targetModuleClass != null;
         assert lessonToEdit != null;
         assert editedLesson != null;
+        assert targetModuleClass.hasLesson(lessonToEdit);
 
         if (!lessonToEdit.isSameLesson(editedLesson) && targetModuleClass.hasLesson(editedLesson)) {
             throw new CommandException(MESSAGE_DUPLICATE_LESSON);
