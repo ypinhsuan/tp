@@ -51,7 +51,7 @@ public class LessonTest {
         assertEquals(VALID_DAY_WED_LESSON_WED_2_TO_4, lesson.getDay());
         assertEquals(VALID_NUMBER_OF_OCCURRENCES, lesson.getNumberOfOccurrences());
         assertEquals(VALID_VENUE, lesson.getVenue());
-        assertEquals(new AttendanceRecordList(1), lesson.getAttendanceRecordList());
+        assertEquals(new AttendanceRecordList(VALID_NUMBER_OF_OCCURRENCES), lesson.getAttendanceRecordList());
     }
 
     @Test
@@ -71,7 +71,7 @@ public class LessonTest {
         assertThrows(AssertionError.class, () ->
                 new Lesson(VALID_START_TIME, VALID_END_TIME, VALID_DAY_WED_LESSON_WED_2_TO_4,
                         VALID_NUMBER_OF_OCCURRENCES, VALID_VENUE,
-                        new AttendanceRecordList(VALID_NUMBER_OF_OCCURRENCES.value - 1)));
+                        new AttendanceRecordList(new NumberOfOccurrences(VALID_NUMBER_OF_OCCURRENCES.value + 1))));
     }
 
     @Test

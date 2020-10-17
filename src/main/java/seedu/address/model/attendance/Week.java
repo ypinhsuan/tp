@@ -31,8 +31,8 @@ public class Week {
     }
 
     /**
-     * Returns true if the given week is an integer between {@link NumberOfOccurrences.LOWER_BOUND}
-     * and {@link NumberOfOccurrences.UPPER_BOUND}.
+     * Returns true if the given week is an integer between {@link NumberOfOccurrences#LOWER_BOUND}
+     * and {@link NumberOfOccurrences#UPPER_BOUND}.
      */
     public static boolean isValidWeek(Index week) {
         int weekIndex = week.getOneBased();

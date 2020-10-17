@@ -10,11 +10,12 @@ import java.util.UUID;
 
 import seedu.address.model.attendance.exceptions.AttendanceNotFoundException;
 import seedu.address.model.attendance.exceptions.InvalidWeekException;
+import seedu.address.model.lesson.NumberOfOccurrences;
 import seedu.address.model.student.Student;
 
 /**
  * Represents the attendance records of a {@code Lesson}.
- * Contains a list of all attendance records.
+ * Contains an ordered list of all attendance records.
  * Guarantees: immutable.
  */
 public class AttendanceRecordList {
@@ -23,15 +24,15 @@ public class AttendanceRecordList {
 
     /**
      * Constructor method.
-     * Each element in the list is initialized to an empty AttendanceRecord.
+     * Each element in the list is initialized to an empty {@link AttendanceRecord}.
      */
-    public AttendanceRecordList(int numberOfOccurrences) {
-        this.recordList = Collections.nCopies(numberOfOccurrences, new AttendanceRecord());
+    public AttendanceRecordList(NumberOfOccurrences numberOfOccurrences) {
+        this.recordList = Collections.nCopies(numberOfOccurrences.getNumberOfOccurrences(), new AttendanceRecord());
     }
 
     /**
      * Overloaded constructor method.
-     * Requires recordList to be non null. Also converts recordList to fixed size.
+     * Requires {@code recordList} to be non null. Also converts recordList to fixed size.
      */
     public AttendanceRecordList(List<AttendanceRecord> recordList) {
         requireNonNull(recordList);
