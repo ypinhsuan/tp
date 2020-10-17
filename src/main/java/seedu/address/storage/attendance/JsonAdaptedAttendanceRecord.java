@@ -18,6 +18,9 @@ import seedu.address.model.attendance.Attendance;
 import seedu.address.model.attendance.AttendanceRecord;
 import seedu.address.model.attendance.Week;
 
+/**
+ * Jackson-friendly version of {@link AttendanceRecord}.
+ */
 public class JsonAdaptedAttendanceRecord {
 
     public static final String MESSAGE_DUPLICATE_ATTENDANCE = "Attendance record contains duplicate student(s).";
@@ -26,6 +29,9 @@ public class JsonAdaptedAttendanceRecord {
     private final int week;
     private final List<JsonAdaptedStudentAttendance> attendances = new ArrayList<>();
 
+    /**
+     * Constructs a {@code JsonAdaptedAttendanceRecord} with the given details.
+     */
     @JsonCreator
     public JsonAdaptedAttendanceRecord(@JsonProperty("week") int week,
                                        @JsonProperty("records") List<JsonAdaptedStudentAttendance> attendances) {
@@ -35,6 +41,9 @@ public class JsonAdaptedAttendanceRecord {
         }
     }
 
+    /**
+     * Converts a given {@code AttendanceRecord} and its corresponding {@code Week} into this class for Jackson use.
+     */
     public JsonAdaptedAttendanceRecord(Week week, AttendanceRecord source) {
         this.week = week.getOneBasedWeekIndex();
         attendances.addAll(source.getAttendanceRecord().entrySet().stream().map(entry ->
@@ -42,10 +51,16 @@ public class JsonAdaptedAttendanceRecord {
                 .collect(Collectors.toUnmodifiableList()));
     }
 
+    /**
+     * Converts this Jackson-friendly adapted AttendanceRecord to a key value pair object.
+     *
+     * @throws IllegalValueException if there were any data constraints violated in either the adapted week
+     *         or attendances.
+     */
     public Pair<Week, AttendanceRecord> toKeyValuePair() throws IllegalValueException {
         final Map<UUID, Attendance> attendancesMap = new HashMap<>();
 
-        if (!Week.isValidWeek(Index.fromOneBased(week))) {
+        if (!(week > 0) || !Week.isValidWeek(Index.fromOneBased(week))) {
             throw new IllegalValueException(Week.MESSAGE_CONSTRAINTS);
         }
 

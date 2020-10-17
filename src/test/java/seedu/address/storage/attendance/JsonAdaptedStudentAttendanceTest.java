@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ATTENDANCE_33;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ATTENDANCE_51;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_UUID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_UUID_BOB;
+import static seedu.address.storage.JsonAdaptedStudent.STUDENT_UUID_FIELD;
 import static seedu.address.storage.JsonAdaptedUuidTest.VALID_JSON_ADAPTED_UUID;
 import static seedu.address.storage.attendance.JsonAdaptedAttendanceTest.VALID_JSON_ADAPTED_ATTENDANCE_33;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -75,10 +76,10 @@ public class JsonAdaptedStudentAttendanceTest {
 
     @Test
     public void toKeyValuePair_nullJsonAdaptedStudentUuid_throwsIllegalValueException() {
-        String expectedMessage = String.format(JsonAdaptedStudentAttendance.MISSING_FIELD_MESSAGE_FORMAT,
-                UUID.class.getSimpleName());
         JsonAdaptedStudentAttendance studentAttendance =
                 new JsonAdaptedStudentAttendance(null, VALID_JSON_ADAPTED_ATTENDANCE_33);
+        String expectedMessage = String.format(JsonAdaptedStudentAttendance.MISSING_FIELD_MESSAGE_FORMAT,
+                STUDENT_UUID_FIELD);
         assertThrows(IllegalValueException.class, expectedMessage, studentAttendance::toKeyValuePair);
     }
 

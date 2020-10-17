@@ -44,7 +44,7 @@ public class JsonAdaptedStudentAttendance {
      * Converts this Jackson-friendly adapted student-attendance information to a key value pair object.
      *
      * @throws IllegalValueException if there were any data constraints violated in either the adapted student UUID
-     *          or the adapted attendance.
+     *         or the adapted attendance.
      */
     public Pair<UUID, Attendance> toKeyValuePair() throws IllegalValueException {
         if (studentUuid == null) {

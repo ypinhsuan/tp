@@ -118,6 +118,11 @@ public class JsonAdaptedLesson {
         }
         final AttendanceRecordList modelAttendanceRecordList = attendanceRecordList.toModelType();
 
+        if (modelAttendanceRecordList.getAttendanceRecordList().size() != modelNumberOfOccurrences.value) {
+            throw new IllegalValueException(String.format(INVALID_FIELD_MESSAGE_FORMAT,
+                    AttendanceRecordList.class.getSimpleName()));
+        }
+
         return new Lesson(modelStartTime, modelEndTime, modelDay, modelNumberOfOccurrences, modelVenue,
                 modelAttendanceRecordList);
     }
