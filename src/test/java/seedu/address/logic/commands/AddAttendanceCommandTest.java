@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_ITEM;
 import static seedu.address.testutil.TypicalTutorsPet.getTypicalTutorsPet;
 
 import java.util.ArrayList;
@@ -35,7 +36,7 @@ import seedu.address.testutil.LessonBuilder;
  */
 public class AddAttendanceCommandTest {
 
-    private Model model = new ModelManager(getTypicalTutorsPet(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalTutorsPet(), new UserPrefs());
 
     @Test
     public void constructor_nullAttendance_throwsNullPointerException() {
@@ -126,6 +127,17 @@ public class AddAttendanceCommandTest {
                 new AddAttendanceCommand(moduleClassIndex, lessonIndex, studentIndex, VALID_WEEK, VALID_ATTENDANCE);
 
         assertCommandFailure(addAttendanceCommand, model, AddAttendanceCommand.MESSAGE_DUPLICATE_ATTENDANCE);
+    }
+
+    @Test
+    public void execute_studentNotInClass_failure() {
+        Index moduleClassIndex = INDEX_FIRST_ITEM;
+        Index lessonIndex = INDEX_FIRST_ITEM;
+
+        AddAttendanceCommand addAttendanceCommand =
+                new AddAttendanceCommand(moduleClassIndex, lessonIndex, INDEX_THIRD_ITEM, VALID_WEEK, VALID_ATTENDANCE);
+
+        assertCommandFailure(addAttendanceCommand, model, Messages.MESSAGE_INVALID_STUDENT_IN_MODULE_CLASS);
     }
 
     @Test
