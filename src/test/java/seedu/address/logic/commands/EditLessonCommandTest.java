@@ -27,6 +27,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.TutorsPet;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.attendance.AttendanceRecordList;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.moduleclass.ModuleClass;
 import seedu.address.testutil.EditLessonDescriptorBuilder;
@@ -60,9 +61,9 @@ public class EditLessonCommandTest {
                 INDEX_FIRST_ITEM, INDEX_FIRST_ITEM, editLessonDescriptor);
 
         ModuleClass moduleClass = model.getFilteredModuleClassList().get(INDEX_FIRST_ITEM.getZeroBased());
-        int occurrenceInteger = getOccurrenceInteger(moduleClass, INDEX_FIRST_ITEM);
+        AttendanceRecordList attendanceRecordList = getAttendancerecordList(moduleClass, INDEX_FIRST_ITEM);
         Lesson editedLesson = new LessonBuilder(LESSON_FRI_8_TO_10)
-                .withNumberOfOccurrences(occurrenceInteger).build();
+                .withAttendanceRecordList(attendanceRecordList).build();
 
         List<Lesson> editedLessonList = Arrays.asList(editedLesson);
         ModuleClass updatedModuleClass = new ModuleClass(
@@ -88,11 +89,12 @@ public class EditLessonCommandTest {
                 .get(INDEX_FIRST_ITEM.getZeroBased());
         LessonBuilder firstLessonInList = new LessonBuilder(firstModuleClass.getLessons()
                 .get(INDEX_FIRST_ITEM.getZeroBased()));
-        int occurrenceInteger = getOccurrenceInteger(firstModuleClass, INDEX_FIRST_ITEM);
+        AttendanceRecordList attendanceRecordList = getAttendancerecordList(firstModuleClass, INDEX_FIRST_ITEM);
 
         Lesson editedLesson = firstLessonInList
-                .withDay(VALID_DAY_FRI_LESSON_FRI_8_TO_10).withNumberOfOccurrences(occurrenceInteger)
-                .withVenue(VALID_VENUE_S17_0302_LESSON_FRI_8_TO_10).build();
+                .withDay(VALID_DAY_FRI_LESSON_FRI_8_TO_10)
+                .withVenue(VALID_VENUE_S17_0302_LESSON_FRI_8_TO_10)
+                .withAttendanceRecordList(attendanceRecordList).build();
         List<Lesson> editedLessonList = Arrays.asList(editedLesson);
         ModuleClass updatedModuleClass = new ModuleClass(
                 firstModuleClass.getName(), firstModuleClass.getStudentUuids(), editedLessonList);
@@ -132,11 +134,12 @@ public class EditLessonCommandTest {
         ModuleClass moduleClassInFilteredList = model.getFilteredModuleClassList()
                 .get(INDEX_FIRST_ITEM.getZeroBased());
         Lesson lessonToEdit = moduleClassInFilteredList.getLessons().get(INDEX_SECOND_ITEM.getZeroBased());
-        int occurrenceInteger = getOccurrenceInteger(moduleClassInFilteredList, INDEX_SECOND_ITEM);
+        AttendanceRecordList attendanceRecordList =
+                getAttendancerecordList(moduleClassInFilteredList, INDEX_SECOND_ITEM);
 
         Lesson editedLesson = new LessonBuilder(lessonToEdit)
-                .withNumberOfOccurrences(occurrenceInteger)
-                .withVenue(VALID_VENUE_S17_0302_LESSON_FRI_8_TO_10).build();
+                .withVenue(VALID_VENUE_S17_0302_LESSON_FRI_8_TO_10)
+                .withAttendanceRecordList(attendanceRecordList).build();
 
         String expectedMessage = String.format(EditLessonCommand.MESSAGE_EDIT_LESSON_SUCCESS, editedLesson);
 
@@ -239,7 +242,7 @@ public class EditLessonCommandTest {
                 INDEX_FIRST_ITEM, INDEX_FIRST_ITEM, DESC_LESSON_WED_2_TO_4)));
     }
 
-    private int getOccurrenceInteger(ModuleClass moduleClass, Index index) {
-        return moduleClass.getLessons().get(index.getZeroBased()).getNumberOfOccurrences().getNumberOfOccurrences();
+    private AttendanceRecordList getAttendancerecordList(ModuleClass moduleClass, Index index) {
+        return moduleClass.getLessons().get(index.getZeroBased()).getAttendanceRecordList();
     }
 }

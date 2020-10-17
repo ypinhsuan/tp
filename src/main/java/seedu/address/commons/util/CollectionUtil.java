@@ -68,7 +68,7 @@ public class CollectionUtil {
     public static <T, U> Map<T, U> deepCopyMap(
             Map<T, U> map, UnaryOperator<T> deepCopyKey, UnaryOperator<U> deepCopyValue) {
         HashMap<T, U> copyMap = new HashMap<>();
-        for (T key: map.keySet()) {
+        for (T key : map.keySet()) {
             T copiedKey = deepCopyKey.apply(key);
             U copiedValue = deepCopyValue.apply(map.get(key));
             copyMap.put(copiedKey, copiedValue);

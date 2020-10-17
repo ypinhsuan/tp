@@ -95,7 +95,7 @@ public class DeleteLessonCommand extends Command {
         Set<UUID> studentsIds = new HashSet<>(targetModuleClass.getStudentUuids());
         List<Lesson> listOfLessons = targetModuleClass.getLessons();
         List<Lesson> editedListOfLessons = new ArrayList<>();
-        for (Lesson lesson: listOfLessons) {
+        for (Lesson lesson : listOfLessons) {
             if (!lesson.equals(lessonToDelete)) {
                 editedListOfLessons.add(lesson);
             }

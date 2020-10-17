@@ -23,6 +23,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.attendance.AttendanceRecordList;
 import seedu.address.model.components.name.Name;
 import seedu.address.model.lesson.Day;
 import seedu.address.model.lesson.Lesson;
@@ -106,17 +107,20 @@ public class EditLessonCommand extends Command {
     /**
      * Creates and returns a {@code Lesson} with the details of {@code lessonToEdit}
      * edited with {@code editLessonDescriptor}.
+     * {@code NumberOfOccurrences} and {@code AttendanceRecordList} remain unchanged.
      */
     private static Lesson createEditedLesson(
             Lesson lessonToEdit, EditLessonDescriptor editLessonDescriptor) {
         assert lessonToEdit != null;
         LocalTime updatedStartTime = editLessonDescriptor.getStartTime().orElse(lessonToEdit.getStartTime());
         LocalTime updatedEndTime = editLessonDescriptor.getEndTime().orElse(lessonToEdit.getEndTime());
-        NumberOfOccurrences originalNumberOfOccurrences = lessonToEdit.getNumberOfOccurrences();
         Day updatedDay = editLessonDescriptor.getDay().orElse(lessonToEdit.getDay());
         Venue updatedVenue = editLessonDescriptor.getVenue().orElse(lessonToEdit.getVenue());
 
-        return new Lesson(updatedStartTime, updatedEndTime, updatedDay, originalNumberOfOccurrences, updatedVenue);
+        NumberOfOccurrences originalNumberOfOccurrences = lessonToEdit.getNumberOfOccurrences();
+        AttendanceRecordList attendanceRecordList = lessonToEdit.getAttendanceRecordList();
+        return new Lesson(updatedStartTime, updatedEndTime, updatedDay, originalNumberOfOccurrences,
+                updatedVenue, attendanceRecordList);
     }
 
     /**
@@ -140,7 +144,7 @@ public class EditLessonCommand extends Command {
         Set<UUID> studentsIds = new HashSet<>(targetModuleClass.getStudentUuids());
         List<Lesson> listOfLessons = targetModuleClass.getLessons();
         List<Lesson> editedListOfLessons = new ArrayList<>();
-        for (Lesson lesson: listOfLessons) {
+        for (Lesson lesson : listOfLessons) {
             if (lesson.equals(lessonToEdit)) {
                 editedListOfLessons.add(editedLesson);
             } else {
