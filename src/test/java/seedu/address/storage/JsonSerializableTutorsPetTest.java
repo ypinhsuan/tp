@@ -66,10 +66,12 @@ public class JsonSerializableTutorsPetTest {
             ATTENDANCE_TEST_DATA_FOLDER.resolve("invalidParticipationValue.json");
     private static final Path NULL_PARTICIPATION_VALUE_FILE =
             ATTENDANCE_TEST_DATA_FOLDER.resolve("nullParticipationValue.json");
-    private static final Path INVALID_STUDENT_UUID_IN_RECORD_FILE =
-            ATTENDANCE_TEST_DATA_FOLDER.resolve("invalidStudentUuidInRecord.json");
-    private static final Path NULL_STUDENT_UUID_IN_RECORD_FILE =
-            ATTENDANCE_TEST_DATA_FOLDER.resolve("nullStudentUuidInRecord.json");
+    private static final Path INVALID_STUDENT_UUID_IN_STUDENT_ATTENDANCE_FILE =
+            ATTENDANCE_TEST_DATA_FOLDER.resolve("invalidStudentUuidInStudentAttendance.json");
+    private static final Path NULL_STUDENT_UUID_IN_STUDENT_ATTENDANCE_FILE =
+            ATTENDANCE_TEST_DATA_FOLDER.resolve("nullStudentUuidInStudentAttendance.json");
+    private static final Path NULL_STUDENT_ATTENDANCE_FILE =
+            ATTENDANCE_TEST_DATA_FOLDER.resolve("nullStudentAttendance.json");
     private static final Path DUPLICATE_RECORD_FILE =
             ATTENDANCE_TEST_DATA_FOLDER.resolve("duplicateRecord.json");
     private static final Path DUPLICATE_WEEK_FILE =
@@ -237,7 +239,7 @@ public class JsonSerializableTutorsPetTest {
 
     @Test
     public void toModelType_invalidStudentUuidInRecord_throwsIllegalValueException() throws Exception {
-        JsonSerializableTutorsPet dataFromFile = JsonUtil.readJsonFile(INVALID_STUDENT_UUID_IN_RECORD_FILE,
+        JsonSerializableTutorsPet dataFromFile = JsonUtil.readJsonFile(INVALID_STUDENT_UUID_IN_STUDENT_ATTENDANCE_FILE,
                 JsonSerializableTutorsPet.class).get();
         String expectedMessage = String.format(JsonAdaptedStudentAttendance.MISSING_FIELD_MESSAGE_FORMAT,
                 JsonAdaptedStudent.STUDENT_UUID_FIELD);
@@ -246,11 +248,19 @@ public class JsonSerializableTutorsPetTest {
 
     @Test
     public void toModelType_nullStudentUuidInRecord_throwsIllegalValueException() throws Exception {
-        JsonSerializableTutorsPet dataFromFile = JsonUtil.readJsonFile(NULL_STUDENT_UUID_IN_RECORD_FILE,
+        JsonSerializableTutorsPet dataFromFile = JsonUtil.readJsonFile(NULL_STUDENT_UUID_IN_STUDENT_ATTENDANCE_FILE,
                 JsonSerializableTutorsPet.class).get();
         String expectedMessage = String.format(JsonAdaptedStudentAttendance.MISSING_FIELD_MESSAGE_FORMAT,
                 JsonAdaptedStudent.STUDENT_UUID_FIELD);
         assertThrows(IllegalValueException.class, expectedMessage, dataFromFile::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullStudentAttendance_throwsIllegalValueException() throws Exception {
+        JsonSerializableTutorsPet dataFromFile = JsonUtil.readJsonFile(NULL_STUDENT_ATTENDANCE_FILE,
+                JsonSerializableTutorsPet.class).get();
+        assertThrows(IllegalValueException.class, JsonAdaptedAttendanceRecord.MESSAGE_INVALID_ATTENDANCE,
+                dataFromFile::toModelType);
     }
 
     @Test
