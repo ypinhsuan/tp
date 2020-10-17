@@ -117,6 +117,13 @@ public class JsonAdaptedAttendanceRecordTest {
         assertThrows(IllegalValueException.class,
                 Week.MESSAGE_CONSTRAINTS,
                 record::toKeyValuePair);
+
+        JsonAdaptedAttendanceRecord recordWeekZero =
+                new JsonAdaptedAttendanceRecord(NumberOfOccurrences.LOWER_BOUND - 1,
+                        VALID_JSON_ADAPTED_STUDENT_ATTENDANCES);
+        assertThrows(IllegalValueException.class,
+                Week.MESSAGE_CONSTRAINTS,
+                recordWeekZero::toKeyValuePair);
     }
 
     @Test

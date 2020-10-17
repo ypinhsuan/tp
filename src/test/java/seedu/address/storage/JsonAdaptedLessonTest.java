@@ -148,4 +148,15 @@ public class JsonAdaptedLessonTest {
                 String.format(MISSING_FIELD_MESSAGE_FORMAT, AttendanceRecordList.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, lesson::toModelType);
     }
+
+    @Test
+    public void toModelType_mismatchedJsonAdaptedAttendanceRecordList_throwsIllegalValueException() {
+        JsonAdaptedLesson lesson = new JsonAdaptedLesson(
+                VALID_START_TIME, VALID_END_TIME, VALID_DAY, VALID_NUMBER_OF_OCCURRENCES, VALID_VENUE,
+                new JsonAdaptedAttendanceRecordList(new AttendanceRecordList(
+                        new NumberOfOccurrences(VALID_NUMBER_OF_OCCURRENCES - 1))));
+        String expectedMessage =
+                String.format(INVALID_FIELD_MESSAGE_FORMAT, AttendanceRecordList.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, lesson::toModelType);
+    }
 }
