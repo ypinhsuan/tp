@@ -12,6 +12,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PARTICIPATION_S
 import static seedu.address.logic.commands.CommandTestUtil.VALID_WEEK_VALUE_5;
 import static seedu.address.logic.commands.CommandTestUtil.WEEK_DESC_WEEK_VALUE_3;
 import static seedu.address.logic.commands.CommandTestUtil.WEEK_DESC_WEEK_VALUE_5;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PARTICIPATION_SCORE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_WEEK;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
@@ -98,6 +100,31 @@ public class AddAttendanceCommandParserTest {
         // missing participation score prefix
         assertParseFailure(parser, " c/1 l/1 s/1"
                         + WEEK_DESC_WEEK_VALUE_5 + VALID_PARTICIPATION_SCORE_80,
+                expectedMessage);
+
+        // missing class index
+        assertParseFailure(parser, " c/ l/1 s/1"
+                        + WEEK_DESC_WEEK_VALUE_5 + PARTICIPATION_SCORE_DESC_80,
+                expectedMessage);
+
+        // missing lesson index
+        assertParseFailure(parser, " c/1 l/ s/1"
+                        + WEEK_DESC_WEEK_VALUE_5 + PARTICIPATION_SCORE_DESC_80,
+                expectedMessage);
+
+        // missing student index
+        assertParseFailure(parser, " c/1 l/1 s/"
+                        + WEEK_DESC_WEEK_VALUE_5 + PARTICIPATION_SCORE_DESC_80,
+                expectedMessage);
+
+        // missing week value
+        assertParseFailure(parser, " c/1 l/1 s/1"
+                        + PREFIX_WEEK + PARTICIPATION_SCORE_DESC_80,
+                expectedMessage);
+
+        // missing participation score
+        assertParseFailure(parser, " c/1 l/1 s/1"
+                        + WEEK_DESC_WEEK_VALUE_5 + PREFIX_PARTICIPATION_SCORE,
                 expectedMessage);
     }
 
