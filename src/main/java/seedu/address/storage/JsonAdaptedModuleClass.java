@@ -1,5 +1,7 @@
 package seedu.address.storage;
 
+import static seedu.address.storage.JsonAdaptedStudent.STUDENT_UUID_FIELD;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -20,12 +22,12 @@ import seedu.address.model.moduleclass.ModuleClass;
  */
 public class JsonAdaptedModuleClass {
 
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "ModuleClass's %s field is missing!";
-    public static final String INVALID_FIELD_MESSAGE_FORMAT = "ModuleClass's %s field is invalid!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Class' %s field is missing!";
+    public static final String MESSAGE_INVALID_STUDENTS_IN_LESSON = "Invalid student(s) found in lesson(s).";
+    public static final String INVALID_FIELD_MESSAGE_FORMAT = "Class' %s field is invalid!";
     public static final String DUPLICATE_LESSON_MESSAGE_FORMAT = "%s contains duplicate lesson(s).";
-    public static final String STUDENT_UUID_FIELD = "student uuid";
 
-    private final String name;
+    private final JsonAdaptedName name;
     private final List<JsonAdaptedUuid> studentUuids = new ArrayList<>();
     private final List<JsonAdaptedLesson> lessons = new ArrayList<>();
 
@@ -33,7 +35,7 @@ public class JsonAdaptedModuleClass {
      * Constructs a {@code JsonAdaptedModuleClass} with the given class details.
      */
     @JsonCreator
-    public JsonAdaptedModuleClass(@JsonProperty("name") String name,
+    public JsonAdaptedModuleClass(@JsonProperty("name") JsonAdaptedName name,
                                   @JsonProperty("studentUuids") List<JsonAdaptedUuid> studentUuids,
                                   @JsonProperty("lessons") List<JsonAdaptedLesson> lessons) {
         this.name = name;
@@ -49,7 +51,7 @@ public class JsonAdaptedModuleClass {
      * Converts a given {@code ModuleClass} into a {@code JsonAdaptedModuleClass} for Jackson use.
      */
     public JsonAdaptedModuleClass(ModuleClass source) {
-        name = source.getName().fullName;
+        name = new JsonAdaptedName(source.getName().fullName);
         studentUuids.addAll(source.getStudentUuids().stream()
                .map(JsonAdaptedUuid::new)
                .collect(Collectors.toList()));
@@ -96,7 +98,7 @@ public class JsonAdaptedModuleClass {
      *
      * @throws IllegalValueException if any of the {@code Lesson}s are null or duplicate.
      */
-    public List<Lesson> getLessonList() throws IllegalValueException {
+    private List<Lesson> getLessonList() throws IllegalValueException {
         List<Lesson> lessonList = new ArrayList<>();
         for (JsonAdaptedLesson jsonLesson : lessons) {
             if (jsonLesson == null) {
@@ -113,6 +115,19 @@ public class JsonAdaptedModuleClass {
         return lessonList;
     }
 
+    private void validateAttendanceRecords(List<Lesson> lessonList, Set<UUID> studentUuids)
+            throws IllegalValueException {
+        Set<UUID> students = lessonList.stream().flatMap(lesson ->
+                lesson.getAttendanceRecordList().getAttendanceRecordList().stream()
+                        .flatMap(record -> record.getAttendanceRecord().keySet().stream()))
+                .collect(Collectors.toUnmodifiableSet());
+        for (UUID studentUuid : students) {
+            if (!studentUuids.contains(studentUuid)) {
+                throw new IllegalValueException(MESSAGE_INVALID_STUDENTS_IN_LESSON);
+            }
+        }
+    }
+
     /**
      * Converts this Jackson-friendly adapted class object into the model's {@code ModuleClass} object.
      *
@@ -122,15 +137,15 @@ public class JsonAdaptedModuleClass {
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
-        if (!Name.isValidName(name)) {
-            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
-        }
-        final Name modelName = new Name(name);
+
+        final Name modelName = name.toModelType();
 
         List<UUID> studentUuids = getUuidList();
         final Set<UUID> studentUuidSet = new HashSet<>(studentUuids);
 
         final List<Lesson> lessonList = getLessonList();
+
+        validateAttendanceRecords(lessonList, studentUuidSet);
 
         return new ModuleClass(modelName, studentUuidSet, lessonList);
     }

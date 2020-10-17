@@ -8,6 +8,7 @@ import static seedu.address.testutil.TypicalStudent.BENSON;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
@@ -19,14 +20,15 @@ import seedu.address.model.student.Telegram;
 
 public class JsonAdaptedStudentTest {
 
+    public static final String VALID_UUID = BENSON.getUuid().toString();
+
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_TELEGRAM = "r@chel";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#Average";
     private static final String INVALID_UUID = "584346cb-8886-4518-8282-";
 
-    private static final String VALID_UUID = BENSON.getUuid().toString();
-    private static final String VALID_NAME = BENSON.getName().toString();
+    private static final JsonAdaptedName VALID_NAME = new JsonAdaptedName(BENSON.getName().toString());
     private static final String VALID_TELEGRAM = BENSON.getTelegram().toString();
     private static final String VALID_EMAIL = BENSON.getEmail().toString();
     private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
@@ -58,14 +60,15 @@ public class JsonAdaptedStudentTest {
     public void toModelType_nullUuid_throwsIllegalValueException() {
         JsonAdaptedStudent student =
                 new JsonAdaptedStudent(null, VALID_NAME, VALID_TELEGRAM, VALID_EMAIL, VALID_TAGS);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, "uuid");
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, UUID.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
     }
 
     @Test
     public void toModelType_invalidName_throwsIllegalValueException() {
+        JsonAdaptedName invalidName = new JsonAdaptedName(INVALID_NAME);
         JsonAdaptedStudent student =
-                new JsonAdaptedStudent(VALID_UUID, INVALID_NAME, VALID_TELEGRAM, VALID_EMAIL, VALID_TAGS);
+                new JsonAdaptedStudent(VALID_UUID, invalidName, VALID_TELEGRAM, VALID_EMAIL, VALID_TAGS);
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
     }

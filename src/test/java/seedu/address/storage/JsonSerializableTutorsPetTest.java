@@ -1,6 +1,7 @@
 package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.storage.JsonAdaptedLesson.INVALID_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
@@ -11,6 +12,12 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.TutorsPet;
+import seedu.address.model.attendance.Attendance;
+import seedu.address.model.attendance.AttendanceRecordList;
+import seedu.address.model.attendance.Week;
+import seedu.address.storage.attendance.JsonAdaptedAttendanceRecord;
+import seedu.address.storage.attendance.JsonAdaptedAttendanceRecordList;
+import seedu.address.storage.attendance.JsonAdaptedStudentAttendance;
 import seedu.address.testutil.TypicalTutorsPet;
 
 public class JsonSerializableTutorsPetTest {
@@ -23,9 +30,11 @@ public class JsonSerializableTutorsPetTest {
             Paths.get("src", "test", "data", "JsonSerializableTutorsPetTest", "Class");
     private static final Path LESSON_TEST_DATA_FOLDER =
             Paths.get("src", "test", "data", "JsonSerializableTutorsPetTest", "Lesson");
+    private static final Path ATTENDANCE_TEST_DATA_FOLDER =
+            Paths.get("src", "test", "data", "JsonSerializableTutorsPetTest", "Attendance");
 
-    private static final Path TYPICAL_STUDENTS_AND_CLASSES_FILE =
-            TEST_DATA_FOLDER.resolve("typicalStudentsAndClassesTutorsPet.json");
+    private static final Path TYPICAL_TUTORS_PET_FILE =
+            TEST_DATA_FOLDER.resolve("typicalTutorsPet.json");
 
     private static final Path INVALID_STUDENT_FILE = STUDENT_TEST_DATA_FOLDER.resolve("invalidStudentTutorsPet.json");
     private static final Path DUPLICATE_STUDENT_NAME_AND_TELEGRAM_FILE =
@@ -43,6 +52,8 @@ public class JsonSerializableTutorsPetTest {
     private static final Path DUPLICATE_CLASS_FILE = CLASS_TEST_DATA_FOLDER.resolve("duplicateClassTutorsPet.json");
     private static final Path DUPLICATE_STUDENT_UUID_IN_CLASS_FILE =
             CLASS_TEST_DATA_FOLDER.resolve("duplicateStudentUuidInClass.json");
+    private static final Path INVALID_STUDENT_UUID_IN_LESSON_FILE =
+            CLASS_TEST_DATA_FOLDER.resolve("invalidStudentUuidInLesson.json");
 
     private static final Path DUPLICATE_LESSON_FILE =
             LESSON_TEST_DATA_FOLDER.resolve("duplicateLessonTutorsPet.json");
@@ -51,9 +62,40 @@ public class JsonSerializableTutorsPetTest {
     private static final Path NULL_LESSON_FILE =
             LESSON_TEST_DATA_FOLDER.resolve("nullLessonTutorsPet.json");
 
+    private static final Path INVALID_PARTICIPATION_VALUE_FILE =
+            ATTENDANCE_TEST_DATA_FOLDER.resolve("invalidParticipationValue.json");
+    private static final Path NULL_PARTICIPATION_VALUE_FILE =
+            ATTENDANCE_TEST_DATA_FOLDER.resolve("nullParticipationValue.json");
+    private static final Path INVALID_STUDENT_UUID_IN_STUDENT_ATTENDANCE_FILE =
+            ATTENDANCE_TEST_DATA_FOLDER.resolve("invalidStudentUuidInStudentAttendance.json");
+    private static final Path NULL_STUDENT_UUID_IN_STUDENT_ATTENDANCE_FILE =
+            ATTENDANCE_TEST_DATA_FOLDER.resolve("nullStudentUuidInStudentAttendance.json");
+    private static final Path NULL_STUDENT_ATTENDANCE_FILE =
+            ATTENDANCE_TEST_DATA_FOLDER.resolve("nullStudentAttendance.json");
+    private static final Path DUPLICATE_RECORD_FILE =
+            ATTENDANCE_TEST_DATA_FOLDER.resolve("duplicateRecord.json");
+    private static final Path DUPLICATE_WEEK_FILE =
+            ATTENDANCE_TEST_DATA_FOLDER.resolve("duplicateWeek.json");
+    private static final Path INCORRECT_WEEK_FILE =
+            ATTENDANCE_TEST_DATA_FOLDER.resolve("incorrectWeek.json");
+    private static final Path INVALID_WEEK_FILE =
+            ATTENDANCE_TEST_DATA_FOLDER.resolve("invalidWeek.json");
+    private static final Path MISSING_WEEK_FILE =
+            ATTENDANCE_TEST_DATA_FOLDER.resolve("missingWeek.json");
+    private static final Path NULL_WEEK_FILE =
+            ATTENDANCE_TEST_DATA_FOLDER.resolve("nullWeek.json");
+    private static final Path NULL_RECORD_FILE =
+            ATTENDANCE_TEST_DATA_FOLDER.resolve("nullRecord.json");
+    private static final Path NULL_RECORD_LIST_FILE =
+            ATTENDANCE_TEST_DATA_FOLDER.resolve("nullRecordList.json");
+    private static final Path EMPTY_RECORD_LIST_FILE =
+            ATTENDANCE_TEST_DATA_FOLDER.resolve("emptyRecordList.json");
+    private static final Path NULL_ATTENDANCE_RECORD_LIST_FILE =
+            ATTENDANCE_TEST_DATA_FOLDER.resolve("nullAttendanceRecordList.json");
+
     @Test
     public void toModelType_typicalStudentsAndClassesFile_success() throws Exception {
-        JsonSerializableTutorsPet dataFromFile = JsonUtil.readJsonFile(TYPICAL_STUDENTS_AND_CLASSES_FILE,
+        JsonSerializableTutorsPet dataFromFile = JsonUtil.readJsonFile(TYPICAL_TUTORS_PET_FILE,
                 JsonSerializableTutorsPet.class).get();
         TutorsPet tutorsPetFromFile = dataFromFile.toModelType();
         TutorsPet typicalStudentsTutorsPet = TypicalTutorsPet.getTypicalTutorsPet();
@@ -145,6 +187,14 @@ public class JsonSerializableTutorsPetTest {
     }
 
     @Test
+    public void toModelType_invalidStudentUuidInLesson_throwsIllegalValueException() throws Exception {
+        JsonSerializableTutorsPet dataFromFile = JsonUtil.readJsonFile(INVALID_STUDENT_UUID_IN_LESSON_FILE,
+                JsonSerializableTutorsPet.class).get();
+        assertThrows(IllegalValueException.class, JsonAdaptedModuleClass.MESSAGE_INVALID_STUDENTS_IN_LESSON,
+                dataFromFile::toModelType);
+    }
+
+    @Test
     public void toModelType_invalidLessonFile_throwsIllegalValueException() throws Exception {
         JsonSerializableTutorsPet dataFromFile = JsonUtil.readJsonFile(INVALID_LESSON_FILE,
                 JsonSerializableTutorsPet.class).get();
@@ -169,5 +219,129 @@ public class JsonSerializableTutorsPetTest {
         JsonSerializableTutorsPet dataFromFile = JsonUtil.readJsonFile(NULL_LESSON_FILE,
                 JsonSerializableTutorsPet.class).get();
         assertThrows(IllegalValueException.class, dataFromFile::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidParticipationValue_throwsIllegalValueException() throws Exception {
+        JsonSerializableTutorsPet dataFromFile = JsonUtil.readJsonFile(INVALID_PARTICIPATION_VALUE_FILE,
+                JsonSerializableTutorsPet.class).get();
+        assertThrows(IllegalValueException.class, Attendance.MESSAGE_CONSTRAINTS, dataFromFile::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullParticipationValue_throwsIllegalValueException() throws Exception {
+        JsonSerializableTutorsPet dataFromFile = JsonUtil.readJsonFile(NULL_PARTICIPATION_VALUE_FILE,
+                JsonSerializableTutorsPet.class).get();
+        String expectedMessage = String.format(JsonAdaptedStudentAttendance.MISSING_FIELD_MESSAGE_FORMAT,
+                Attendance.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, dataFromFile::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidStudentUuidInRecord_throwsIllegalValueException() throws Exception {
+        JsonSerializableTutorsPet dataFromFile = JsonUtil.readJsonFile(INVALID_STUDENT_UUID_IN_STUDENT_ATTENDANCE_FILE,
+                JsonSerializableTutorsPet.class).get();
+        String expectedMessage = String.format(JsonAdaptedStudentAttendance.MISSING_FIELD_MESSAGE_FORMAT,
+                JsonAdaptedStudent.STUDENT_UUID_FIELD);
+        assertThrows(IllegalValueException.class, JsonAdaptedUuid.MESSAGE_INVALID_UUID, dataFromFile::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullStudentUuidInRecord_throwsIllegalValueException() throws Exception {
+        JsonSerializableTutorsPet dataFromFile = JsonUtil.readJsonFile(NULL_STUDENT_UUID_IN_STUDENT_ATTENDANCE_FILE,
+                JsonSerializableTutorsPet.class).get();
+        String expectedMessage = String.format(JsonAdaptedStudentAttendance.MISSING_FIELD_MESSAGE_FORMAT,
+                JsonAdaptedStudent.STUDENT_UUID_FIELD);
+        assertThrows(IllegalValueException.class, expectedMessage, dataFromFile::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullStudentAttendance_throwsIllegalValueException() throws Exception {
+        JsonSerializableTutorsPet dataFromFile = JsonUtil.readJsonFile(NULL_STUDENT_ATTENDANCE_FILE,
+                JsonSerializableTutorsPet.class).get();
+        assertThrows(IllegalValueException.class, JsonAdaptedAttendanceRecord.MESSAGE_INVALID_ATTENDANCE,
+                dataFromFile::toModelType);
+    }
+
+    @Test
+    public void toModelType_duplicateRecord_throwsIllegalValueException() throws Exception {
+        JsonSerializableTutorsPet dataFromFile = JsonUtil.readJsonFile(DUPLICATE_RECORD_FILE,
+                JsonSerializableTutorsPet.class).get();
+        assertThrows(IllegalValueException.class, JsonAdaptedAttendanceRecord.MESSAGE_DUPLICATE_ATTENDANCE,
+                dataFromFile::toModelType);
+    }
+
+    @Test
+    public void toModelType_duplicateWeek_throwsIllegalValueException() throws Exception {
+        JsonSerializableTutorsPet dataFromFile = JsonUtil.readJsonFile(DUPLICATE_WEEK_FILE,
+                JsonSerializableTutorsPet.class).get();
+        assertThrows(IllegalValueException.class, JsonAdaptedAttendanceRecordList.MESSAGE_DUPLICATE_ATTENDANCE_RECORD,
+                dataFromFile::toModelType);
+    }
+
+    @Test
+    public void toModelType_incorrectWeek_throwsIllegalValueException() throws Exception {
+        JsonSerializableTutorsPet dataFromFile = JsonUtil.readJsonFile(INCORRECT_WEEK_FILE,
+                JsonSerializableTutorsPet.class).get();
+        assertThrows(IllegalValueException.class, JsonAdaptedAttendanceRecordList.MESSAGE_INVALID_RECORD,
+                dataFromFile::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidWeek_throwsIllegalValueException() throws Exception {
+        JsonSerializableTutorsPet dataFromFile = JsonUtil.readJsonFile(INVALID_WEEK_FILE,
+                JsonSerializableTutorsPet.class).get();
+        assertThrows(IllegalValueException.class, Week.MESSAGE_CONSTRAINTS, dataFromFile::toModelType);
+    }
+
+    @Test
+    public void toModelType_missingWeek_throwsIllegalValueException() throws Exception {
+        JsonSerializableTutorsPet dataFromFile = JsonUtil.readJsonFile(MISSING_WEEK_FILE,
+                JsonSerializableTutorsPet.class).get();
+        String expectedMessage = String.format(INVALID_FIELD_MESSAGE_FORMAT,
+                AttendanceRecordList.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage,
+                dataFromFile::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullWeek_throwsIllegalValueException() throws Exception {
+        JsonSerializableTutorsPet dataFromFile = JsonUtil.readJsonFile(NULL_WEEK_FILE,
+                JsonSerializableTutorsPet.class).get();
+        assertThrows(IllegalValueException.class, Week.MESSAGE_CONSTRAINTS,
+                dataFromFile::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullRecord_throwsIllegalValueException() throws Exception {
+        JsonSerializableTutorsPet dataFromFile = JsonUtil.readJsonFile(NULL_RECORD_FILE,
+                JsonSerializableTutorsPet.class).get();
+        assertThrows(IllegalValueException.class, JsonAdaptedAttendanceRecordList.MESSAGE_INVALID_RECORD,
+                dataFromFile::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullRecordList_throwsIllegalValueException() throws Exception {
+        JsonSerializableTutorsPet dataFromFile = JsonUtil.readJsonFile(NULL_RECORD_LIST_FILE,
+                JsonSerializableTutorsPet.class).get();
+        assertThrows(IllegalValueException.class,
+                JsonAdaptedAttendanceRecordList.MESSAGE_MISSING_ATTENDANCE_RECORD_LIST, dataFromFile::toModelType);
+    }
+
+    @Test
+    public void toModelType_emptyRecordList_throwsIllegalValueException() throws Exception {
+        JsonSerializableTutorsPet dataFromFile = JsonUtil.readJsonFile(EMPTY_RECORD_LIST_FILE,
+                JsonSerializableTutorsPet.class).get();
+        assertThrows(IllegalValueException.class,
+                JsonAdaptedAttendanceRecordList.MESSAGE_MISSING_ATTENDANCE_RECORD_LIST, dataFromFile::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullAttendanceRecordList_throwsIllegalValueException() throws Exception {
+        JsonSerializableTutorsPet dataFromFile = JsonUtil.readJsonFile(NULL_ATTENDANCE_RECORD_LIST_FILE,
+                JsonSerializableTutorsPet.class).get();
+        String expectedMessage = String.format(JsonAdaptedLesson.MISSING_FIELD_MESSAGE_FORMAT,
+                AttendanceRecordList.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, dataFromFile::toModelType);
     }
 }
