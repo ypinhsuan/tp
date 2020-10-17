@@ -49,6 +49,13 @@ public class AttendanceRecord {
         return record.get(uuid);
     }
 
+    /**
+     * Returns true if the {@code AttendanceRecord} contains the given {@code Student UUID}.
+     */
+    public boolean hasAttendance(UUID uuid) {
+        return record.containsKey(uuid);
+    }
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
