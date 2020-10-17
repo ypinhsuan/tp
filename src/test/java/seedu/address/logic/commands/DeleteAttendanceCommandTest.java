@@ -40,7 +40,7 @@ public class DeleteAttendanceCommandTest {
     @Test
     public void constructor_nullIndexes_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new DeleteAttendanceCommand(
-                        null, INDEX_FIRST_ITEM, INDEX_FIRST_ITEM, VALID_WEEK_1));
+                null, INDEX_FIRST_ITEM, INDEX_FIRST_ITEM, VALID_WEEK_1));
         assertThrows(NullPointerException.class, () -> new DeleteAttendanceCommand(
                 INDEX_FIRST_ITEM, null, INDEX_FIRST_ITEM, VALID_WEEK_1));
         assertThrows(NullPointerException.class, () -> new DeleteAttendanceCommand(
