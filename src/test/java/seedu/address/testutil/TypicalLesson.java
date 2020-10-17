@@ -5,11 +5,8 @@ import static seedu.address.model.lesson.Lesson.TIME_FORMATTER;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
-import seedu.address.model.attendance.AttendanceRecord;
-import seedu.address.model.attendance.AttendanceRecordList;
 import seedu.address.model.lesson.Day;
 import seedu.address.model.lesson.Lesson;
 
@@ -44,18 +41,5 @@ public class TypicalLesson {
     public static List<Lesson> getTypicalLessons() {
         return new ArrayList<>(Arrays.asList(
                 LESSON_WED_2_TO_4, LESSON_FRI_8_TO_10, LESSON_THU_10_TO_11, ONLINE_LESSON_TUE_1030_1130));
-    }
-
-    /**
-     * Inserts the given {@code records} into the given {@code lesson} and fills subsequent occurrences with empty
-     * {@code AttendanceRecord}s.
-     */
-    public static Lesson insertAttendanceRecords(Lesson lesson, AttendanceRecord... records) {
-        int recurrences = lesson.getNumberOfOccurrences().value;
-        List<AttendanceRecord> recordList = new ArrayList<>(Collections.nCopies(recurrences, new AttendanceRecord()));
-        for (int i = 0; i < records.length; i++) {
-            recordList.set(i, records[i]);
-        }
-        return new LessonBuilder(lesson).withAttendanceRecordList(new AttendanceRecordList(recordList)).build();
     }
 }

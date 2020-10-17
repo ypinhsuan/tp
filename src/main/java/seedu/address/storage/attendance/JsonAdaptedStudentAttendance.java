@@ -1,5 +1,7 @@
 package seedu.address.storage.attendance;
 
+import static seedu.address.storage.JsonAdaptedStudent.STUDENT_UUID_FIELD;
+
 import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -46,7 +48,7 @@ public class JsonAdaptedStudentAttendance {
      */
     public Pair<UUID, Attendance> toKeyValuePair() throws IllegalValueException {
         if (studentUuid == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, UUID.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, STUDENT_UUID_FIELD));
         }
         if (attendance == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,

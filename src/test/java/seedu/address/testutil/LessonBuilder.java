@@ -3,7 +3,11 @@ package seedu.address.testutil;
 import static seedu.address.model.lesson.Lesson.TIME_FORMATTER;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
+import seedu.address.model.attendance.AttendanceRecord;
 import seedu.address.model.attendance.AttendanceRecordList;
 import seedu.address.model.lesson.Day;
 import seedu.address.model.lesson.Lesson;
@@ -108,5 +112,18 @@ public class LessonBuilder {
 
     public Lesson build() {
         return new Lesson(startTime, endTime, day, numberOfOccurrences, venue, attendanceRecordList);
+    }
+
+    /**
+     * Inserts the given {@code records} into the given {@code lesson} and fills subsequent occurrences with empty
+     * {@code AttendanceRecord}s.
+     */
+    public static Lesson insertAttendanceRecords(Lesson lesson, AttendanceRecord... records) {
+        int recurrences = lesson.getNumberOfOccurrences().value;
+        List<AttendanceRecord> recordList = new ArrayList<>(Collections.nCopies(recurrences, new AttendanceRecord()));
+        for (int i = 0; i < records.length; i++) {
+            recordList.set(i, records[i]);
+        }
+        return new LessonBuilder(lesson).withAttendanceRecordList(new AttendanceRecordList(recordList)).build();
     }
 }

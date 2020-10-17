@@ -18,7 +18,7 @@ import seedu.address.model.attendance.Attendance;
 import seedu.address.model.attendance.AttendanceRecord;
 import seedu.address.model.attendance.Week;
 
-class JsonAdaptedAttendanceRecord {
+public class JsonAdaptedAttendanceRecord {
 
     public static final String MESSAGE_DUPLICATE_ATTENDANCE = "Attendance record contains duplicate student(s).";
     public static final String MESSAGE_INVALID_ATTENDANCE = "Attendance record contains invalid value(s).";

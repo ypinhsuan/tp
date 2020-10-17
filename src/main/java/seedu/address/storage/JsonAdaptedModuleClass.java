@@ -1,5 +1,7 @@
 package seedu.address.storage;
 
+import static seedu.address.storage.JsonAdaptedStudent.STUDENT_UUID_FIELD;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -21,9 +23,9 @@ import seedu.address.model.moduleclass.ModuleClass;
 public class JsonAdaptedModuleClass {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Class's %s field is missing!";
+    public static final String MESSAGE_INVALID_STUDENTS_IN_LESSON = "Invalid student(s) found in lesson(s).";
     public static final String INVALID_FIELD_MESSAGE_FORMAT = "Class's %s field is invalid!";
     public static final String DUPLICATE_LESSON_MESSAGE_FORMAT = "%s contains duplicate lesson(s).";
-    public static final String STUDENT_UUID_FIELD = "student UUID";
 
     private final JsonAdaptedName name;
     private final List<JsonAdaptedUuid> studentUuids = new ArrayList<>();
@@ -96,7 +98,7 @@ public class JsonAdaptedModuleClass {
      *
      * @throws IllegalValueException if any of the {@code Lesson}s are null or duplicate.
      */
-    public List<Lesson> getLessonList() throws IllegalValueException {
+    private List<Lesson> getLessonList() throws IllegalValueException {
         List<Lesson> lessonList = new ArrayList<>();
         for (JsonAdaptedLesson jsonLesson : lessons) {
             if (jsonLesson == null) {
@@ -111,6 +113,20 @@ public class JsonAdaptedModuleClass {
             }
         }
         return lessonList;
+    }
+
+    private void validateAttendanceRecords(List<Lesson> lessonList, Set<UUID> studentUuids)
+            throws IllegalValueException {
+        Set<UUID> students = lessonList.stream().flatMap(lesson ->
+                lesson.getAttendanceRecordList().getAttendanceRecordList().stream()
+                        .flatMap(record -> record.getAttendanceRecord().keySet().stream()))
+                .collect(Collectors.toUnmodifiableSet());
+        for (UUID studentUuid : students) {
+            if (!studentUuids.contains(studentUuid)) {
+                System.out.println(studentUuid);
+                throw new IllegalValueException(MESSAGE_INVALID_STUDENTS_IN_LESSON);
+            }
+        }
     }
 
     /**
@@ -129,6 +145,8 @@ public class JsonAdaptedModuleClass {
         final Set<UUID> studentUuidSet = new HashSet<>(studentUuids);
 
         final List<Lesson> lessonList = getLessonList();
+
+        validateAttendanceRecords(lessonList, studentUuidSet);
 
         return new ModuleClass(modelName, studentUuidSet, lessonList);
     }

@@ -25,6 +25,7 @@ import seedu.address.model.student.Telegram;
 public class JsonAdaptedStudent {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Student's %s field is missing!";
+    public static final String STUDENT_UUID_FIELD = "student UUID";
 
     private final String uuid;
     private final JsonAdaptedName name;
