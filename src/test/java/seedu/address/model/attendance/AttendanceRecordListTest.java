@@ -79,6 +79,11 @@ public class AttendanceRecordListTest {
     }
 
     @Test
+    public void hasAttendance_nullWeek_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> recordList.hasAttendance(ALICE, null));
+    }
+
+    @Test
     public void hasAttendance_invalidWeek_throwsInvalidWeekException() {
         assertThrows(InvalidWeekException.class, () -> recordList.hasAttendance(ALICE, INVALID_WEEK));
     }

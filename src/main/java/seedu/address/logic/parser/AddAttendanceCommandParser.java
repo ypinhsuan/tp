@@ -7,8 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PARTICIPATION_SCORE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEEK;
-
-import java.util.stream.Stream;
+import static seedu.address.logic.parser.ParserUtil.arePrefixesPresent;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddAttendanceCommand;
@@ -58,13 +57,5 @@ public class AddAttendanceCommandParser implements Parser<AddAttendanceCommand> 
 
         Attendance attendance = new Attendance(participationScore);
         return new AddAttendanceCommand(moduleClassIndex, lessonIndex, studentIndex, week, attendance);
-    }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }

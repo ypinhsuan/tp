@@ -41,12 +41,12 @@ public class AddAttendanceCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student's attendance to the specified "
             + "lesson in the student manager. "
-            + "Note: All indexes must be a positive integer.\n"
+            + "Note: All indexes must be positive integers.\n"
             + "Parameters: "
             + PREFIX_CLASS_INDEX + "CLASS_INDEX "
             + PREFIX_LESSON_INDEX + "LESSON_INDEX "
             + PREFIX_STUDENT_INDEX + "STUDENT_INDEX "
-            + PREFIX_WEEK + "WEEK_NUMBER (must be positive integer) "
+            + PREFIX_WEEK + "WEEK_NUMBER (must be a positive integer) "
             + PREFIX_PARTICIPATION_SCORE + "PARTICIPATION_SCORE (must be an integer between 0 and 100)";
 
     public static final String MESSAGE_SUCCESS = "New attendance added: %1$s attended week %2$s lesson with "
@@ -88,8 +88,12 @@ public class AddAttendanceCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX);
         }
 
-        ModuleClass targetModuleClass = lastShownModuleClassList.get(moduleCLassIndex.getZeroBased());
         Student targetStudent = lastShownStudentList.get(studentIndex.getZeroBased());
+        ModuleClass targetModuleClass = lastShownModuleClassList.get(moduleCLassIndex.getZeroBased());
+
+        if (!targetModuleClass.hasStudentUuid(targetStudent.getUuid())) {
+            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_IN_MODULE_CLASS);
+        }
 
         if (lessonIndex.getZeroBased() >= targetModuleClass.getLessons().size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
@@ -124,20 +128,22 @@ public class AddAttendanceCommand extends Command {
     private static ModuleClass createModifiedModuleClass(ModuleClass targetModuleClass,
                                                          Index lessonToEditIndex, Lesson lessonToUpdate) {
         assert targetModuleClass != null;
+        assert lessonToEditIndex != null;
         assert lessonToUpdate != null;
 
-        Name name = targetModuleClass.getName();
+        Name moduleClassName = targetModuleClass.getName();
         Set<UUID> studentsIds = targetModuleClass.getStudentUuids();
         List<Lesson> lessons = new ArrayList<>(targetModuleClass.getLessons());
         lessons.set(lessonToEditIndex.getZeroBased(), lessonToUpdate);
 
-        return new ModuleClass(name, studentsIds, lessons);
+        return new ModuleClass(moduleClassName, studentsIds, lessons);
     }
 
     private static Lesson createModifiedLesson (Lesson targetLesson, Student targetStudent,
                                                 Week targetWeek, Attendance attendanceToAdd) throws CommandException {
         assert targetLesson != null;
         assert targetStudent != null;
+        assert targetWeek != null;
         assert attendanceToAdd != null;
 
         if (targetLesson.getAttendanceRecordList().hasAttendance(targetStudent, targetWeek)) {
