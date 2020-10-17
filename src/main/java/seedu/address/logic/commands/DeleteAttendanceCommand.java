@@ -32,10 +32,10 @@ import seedu.address.model.moduleclass.ModuleClass;
 import seedu.address.model.student.Student;
 
 /**
- * Deletes an attendance record of a student for a specific week identified using it's
+ * Deletes an attendance of a student for a specific week identified using it's
  * displayed index in the displayed module class list.
  */
-public class DeleteAttendanceRecordCommand extends Command {
+public class DeleteAttendanceCommand extends Command {
 
     public static final String COMMAND_WORD = "delete-attendance";
 
@@ -68,7 +68,7 @@ public class DeleteAttendanceRecordCommand extends Command {
      * @param studentIndex in the filtered student list.
      * @param week in the specified attendance list to be deleted.
      */
-    public DeleteAttendanceRecordCommand(
+    public DeleteAttendanceCommand(
             Index moduleClassIndex, Index lessonIndex, Index studentIndex, Week week) {
         requireAllNonNull(moduleClassIndex, lessonIndex, studentIndex, week);
 
@@ -118,11 +118,11 @@ public class DeleteAttendanceRecordCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof DeleteAttendanceRecordCommand // instance of handles nulls
-                && moduleClassIndex.equals(((DeleteAttendanceRecordCommand) other).moduleClassIndex)
-                && lessonIndex.equals(((DeleteAttendanceRecordCommand) other).lessonIndex))
-                && studentIndex.equals(((DeleteAttendanceRecordCommand) other).studentIndex)
-                && week.equals(((DeleteAttendanceRecordCommand) other).week);
+                || (other instanceof DeleteAttendanceCommand // instance of handles nulls
+                && moduleClassIndex.equals(((DeleteAttendanceCommand) other).moduleClassIndex)
+                && lessonIndex.equals(((DeleteAttendanceCommand) other).lessonIndex))
+                && studentIndex.equals(((DeleteAttendanceCommand) other).studentIndex)
+                && week.equals(((DeleteAttendanceCommand) other).week);
     }
 
     private static ModuleClass createModifiedModuleClass(ModuleClass targetModuleClass,
@@ -139,7 +139,7 @@ public class DeleteAttendanceRecordCommand extends Command {
     }
 
     private static Lesson createModifiedLesson (
-            Lesson targetLesson, Student targetStudent, Week targetWeek) throws CommandException {
+            Lesson targetLesson, Student targetStudent, Week targetWeek) {
         assert targetLesson != null;
         assert targetStudent != null;
         assert targetWeek != null;
