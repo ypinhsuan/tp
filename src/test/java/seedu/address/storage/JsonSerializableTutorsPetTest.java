@@ -291,8 +291,7 @@ public class JsonSerializableTutorsPetTest {
     public void toModelType_invalidWeek_throwsIllegalValueException() throws Exception {
         JsonSerializableTutorsPet dataFromFile = JsonUtil.readJsonFile(INVALID_WEEK_FILE,
                 JsonSerializableTutorsPet.class).get();
-        assertThrows(IllegalValueException.class, Week.MESSAGE_CONSTRAINTS,
-                dataFromFile::toModelType);
+        assertThrows(IllegalValueException.class, Week.MESSAGE_CONSTRAINTS, dataFromFile::toModelType);
     }
 
     @Test

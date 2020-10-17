@@ -9,7 +9,7 @@ import seedu.address.model.attendance.Attendance;
 /**
  * Jackson-friendly version of {@link Attendance}.
  */
-class JsonAdaptedAttendance {
+public class JsonAdaptedAttendance {
 
     private final int participationScore;
 
