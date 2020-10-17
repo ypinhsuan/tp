@@ -158,7 +158,8 @@ public class CommandTestUtil {
     public static final int VALID_PARTICIPATION_SCORE_33 = 33;
     public static final int VALID_PARTICIPATION_SCORE_51 = 51;
     public static final int VALID_PARTICIPATION_SCORE_80 = 80;
-    public static final Week VALID_WEEK = new Week(Index.fromOneBased(1));
+    public static final Week VALID_WEEK_1 = new Week(Index.fromOneBased(1));
+    public static final Week VALID_WEEK_5 = new Week(Index.fromOneBased(VALID_WEEK_VALUE_5));
     public static final Attendance VALID_ATTENDANCE = new Attendance(VALID_PARTICIPATION_SCORE_80);
     public static final Attendance VALID_ATTENDANCE_33 = new Attendance(VALID_PARTICIPATION_SCORE_33);
     public static final Attendance VALID_ATTENDANCE_51 = new Attendance(VALID_PARTICIPATION_SCORE_51);
