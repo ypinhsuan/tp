@@ -22,9 +22,9 @@ import seedu.address.model.moduleclass.ModuleClass;
  */
 public class JsonAdaptedModuleClass {
 
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Class's %s field is missing!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Class' %s field is missing!";
     public static final String MESSAGE_INVALID_STUDENTS_IN_LESSON = "Invalid student(s) found in lesson(s).";
-    public static final String INVALID_FIELD_MESSAGE_FORMAT = "Class's %s field is invalid!";
+    public static final String INVALID_FIELD_MESSAGE_FORMAT = "Class' %s field is invalid!";
     public static final String DUPLICATE_LESSON_MESSAGE_FORMAT = "%s contains duplicate lesson(s).";
 
     private final JsonAdaptedName name;
@@ -123,7 +123,6 @@ public class JsonAdaptedModuleClass {
                 .collect(Collectors.toUnmodifiableSet());
         for (UUID studentUuid : students) {
             if (!studentUuids.contains(studentUuid)) {
-                System.out.println(studentUuid);
                 throw new IllegalValueException(MESSAGE_INVALID_STUDENTS_IN_LESSON);
             }
         }
