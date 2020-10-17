@@ -28,7 +28,6 @@ import seedu.address.model.student.Telegram;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-    public static final String MESSAGE_INVALID_DAY = "Day format provided is invalid.";
     public static final String MESSAGE_INVALID_TIME = "Time format provided is invalid.";
 
     /**
@@ -144,7 +143,7 @@ public class ParserUtil {
         try {
             parsedDay = Day.valueOf(trimmedDay);
         } catch (IllegalArgumentException e) {
-            throw new ParseException(MESSAGE_INVALID_DAY);
+            throw new ParseException(Day.MESSAGE_CONSTRAINTS);
         }
         return parsedDay;
     }

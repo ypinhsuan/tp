@@ -28,7 +28,8 @@ public class DeleteLessonCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the lesson in a specific class identified by the "
-            + "index number used in the displayed class list and lesson list respectively.\n"
+            + "by the index number used in the displayed class list "
+            + "and index number in the lesson list.\n"
             + "Parameters: "
             + PREFIX_CLASS_INDEX + "CLASS_INDEX (must be a positive integer) "
             + PREFIX_LESSON_INDEX + "LESSON_INDEX (must be a positive integer)\n"
@@ -88,16 +89,18 @@ public class DeleteLessonCommand extends Command {
     private static ModuleClass createModifiedModuleClass(ModuleClass targetModuleClass, Lesson lessonToDelete) {
         assert targetModuleClass != null;
         assert lessonToDelete != null;
+        assert targetModuleClass.hasLesson(lessonToDelete);
 
         Name moduleClassName = targetModuleClass.getName();
         Set<UUID> studentsIds = new HashSet<>(targetModuleClass.getStudentUuids());
         List<Lesson> listOfLessons = targetModuleClass.getLessons();
         List<Lesson> editedListOfLessons = new ArrayList<>();
-        for (Lesson lesson:listOfLessons) {
+        for (Lesson lesson : listOfLessons) {
             if (!lesson.equals(lessonToDelete)) {
                 editedListOfLessons.add(lesson);
             }
         }
+        assert listOfLessons.size() - 1 == editedListOfLessons.size();
         return new ModuleClass(moduleClassName, studentsIds, editedListOfLessons);
     }
 }

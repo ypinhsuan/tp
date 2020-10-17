@@ -18,7 +18,7 @@ public enum Day {
      * @throws InvalidDayException if the {@code String} does not match any of the enum values.
      */
     public static Day createDay(String stringDay) throws InvalidDayException {
-        for (Day day: values()) {
+        for (Day day : values()) {
             if (day.toString().equals(stringDay)) {
                 return day;
             }
