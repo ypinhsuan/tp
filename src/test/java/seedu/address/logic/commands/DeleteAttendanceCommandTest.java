@@ -1,24 +1,29 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ATTENDANCE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_WEEK;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_WEEK_1;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 import static seedu.address.testutil.TypicalTutorsPet.getTypicalTutorsPet;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.attendance.Attendance;
 import seedu.address.model.attendance.AttendanceRecord;
 import seedu.address.model.attendance.AttendanceRecordList;
+import seedu.address.model.attendance.Week;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.moduleclass.ModuleClass;
 import seedu.address.model.student.Student;
@@ -33,21 +38,13 @@ public class DeleteAttendanceCommandTest {
     private Model model = new ModelManager(getTypicalTutorsPet(), new UserPrefs());
 
     @Test
-    public void constructor_nullModuleClassIndex_throwsNullPointerException() {
+    public void constructor_nullIndexes_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new DeleteAttendanceCommand(
-                        null, INDEX_FIRST_ITEM, INDEX_FIRST_ITEM, VALID_WEEK));
-    }
-
-    @Test
-    public void constructor_nullLessonIndex_throwsNullPointerException() {
+                        null, INDEX_FIRST_ITEM, INDEX_FIRST_ITEM, VALID_WEEK_1));
         assertThrows(NullPointerException.class, () -> new DeleteAttendanceCommand(
-                INDEX_FIRST_ITEM, null, INDEX_FIRST_ITEM, VALID_WEEK));
-    }
-
-    @Test
-    public void constructor_nullStudentIndex_throwsNullPointerException() {
+                INDEX_FIRST_ITEM, null, INDEX_FIRST_ITEM, VALID_WEEK_1));
         assertThrows(NullPointerException.class, () -> new DeleteAttendanceCommand(
-                INDEX_FIRST_ITEM, INDEX_FIRST_ITEM, null, VALID_WEEK));
+                INDEX_FIRST_ITEM, INDEX_FIRST_ITEM, null, VALID_WEEK_1));
     }
 
     @Test
@@ -61,34 +58,96 @@ public class DeleteAttendanceCommandTest {
         Index moduleClassIndex = INDEX_FIRST_ITEM;
         Index lessonIndex = INDEX_FIRST_ITEM;
         Index studentIndex = INDEX_FIRST_ITEM;
+        Week targetWeek = VALID_WEEK_1;
 
         ModuleClass moduleClass = model.getFilteredModuleClassList().get(moduleClassIndex.getZeroBased());
         Student student = model.getFilteredStudentList().get(studentIndex.getZeroBased());
         Lesson lesson = moduleClass.getLessons().get(lessonIndex.getZeroBased());
-        AttendanceRecord attendanceRecord = new AttendanceRecord(Map.of(student.getUuid(), VALID_ATTENDANCE));
-        List<AttendanceRecord> attendanceRecords =
+        Map<UUID, Attendance> record = lesson.getAttendanceRecordList()
+                .getAttendanceRecord(targetWeek).getAttendanceRecord();
+        Map<UUID, Attendance> updatedRecord = new HashMap<>(record);
+        // delete week 1 attendance record
+        updatedRecord.remove(student.getUuid());
+        AttendanceRecord updatedAttendanceRecord = new AttendanceRecord(updatedRecord);
+        List<AttendanceRecord> updatedAttendanceRecords =
                 new ArrayList<>(lesson.getAttendanceRecordList().getAttendanceRecordList());
-        attendanceRecords.remove(attendanceRecord);
+        updatedAttendanceRecords.set(targetWeek.getZeroBasedWeekIndex(), updatedAttendanceRecord);
         Lesson modifiedLesson = new LessonBuilder()
                 .withStartTime(lesson.getStartTime())
                 .withEndTime(lesson.getEndTime())
                 .withDay(lesson.getDay())
                 .withVenue(lesson.getVenue().venue)
-                .withAttendanceRecordList(new AttendanceRecordList(attendanceRecords))
+                .withAttendanceRecordList(new AttendanceRecordList(updatedAttendanceRecords))
                 .build();
         ModuleClass modifiedModuleClass = manualReplaceLessonToModuleClass(moduleClass, lesson, modifiedLesson);
 
         String expectedMessage = String.format(
-                DeleteAttendanceCommand.MESSAGE_DELETE_ATTENDANCE_SUCCESS, VALID_WEEK,
+                DeleteAttendanceCommand.MESSAGE_DELETE_ATTENDANCE_SUCCESS, targetWeek,
                 student.getName(), modifiedLesson);
         Model expectedModel = new ModelManager(model.getTutorsPet(), new UserPrefs());
         expectedModel.setModuleClass(moduleClass, modifiedModuleClass);
         expectedModel.commit(expectedMessage);
 
         DeleteAttendanceCommand deleteAttendanceCommand =
-                new DeleteAttendanceCommand(moduleClassIndex, lessonIndex, studentIndex, VALID_WEEK);
+                new DeleteAttendanceCommand(moduleClassIndex, lessonIndex, studentIndex, targetWeek);
 
         assertCommandSuccess(deleteAttendanceCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_invalidModuleClassIndex_failure() {
+        Index moduleClassIndex = Index.fromOneBased(model.getFilteredModuleClassList().size() + 1);
+        Index lessonIndex = INDEX_FIRST_ITEM;
+        Index studentIndex = INDEX_FIRST_ITEM;
+        Week targetWeek = VALID_WEEK_1;
+
+        DeleteAttendanceCommand deleteAttendanceCommand =
+                new DeleteAttendanceCommand(moduleClassIndex, lessonIndex, studentIndex, targetWeek);
+
+        assertCommandFailure(deleteAttendanceCommand, model, Messages.MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_invalidLessonIndex_failure() {
+        Index moduleClassIndex = INDEX_FIRST_ITEM;
+        ModuleClass moduleClass = model.getFilteredModuleClassList().get(moduleClassIndex.getZeroBased());
+        Index lessonIndex = Index.fromOneBased(moduleClass.getLessons().size() + 1);
+        Index studentIndex = INDEX_FIRST_ITEM;
+        Week targetWeek = VALID_WEEK_1;
+
+        DeleteAttendanceCommand deleteAttendanceCommand =
+                new DeleteAttendanceCommand(moduleClassIndex, lessonIndex, studentIndex, targetWeek);
+
+        assertCommandFailure(deleteAttendanceCommand, model, Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_invalidStudentIndex_failure() {
+        Index moduleClassIndex = INDEX_FIRST_ITEM;
+        Index lessonIndex = INDEX_FIRST_ITEM;
+        Index studentIndex = Index.fromOneBased(model.getFilteredStudentList().size() + 1);
+        Week targetWeek = VALID_WEEK_1;
+
+        DeleteAttendanceCommand deleteAttendanceCommand =
+                new DeleteAttendanceCommand(moduleClassIndex, lessonIndex, studentIndex, targetWeek);
+
+        assertCommandFailure(deleteAttendanceCommand, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_invalidWeek_failure() {
+        Index moduleClassIndex = INDEX_FIRST_ITEM;
+        Index lessonIndex = INDEX_FIRST_ITEM;
+        Index studentIndex = INDEX_FIRST_ITEM;
+        ModuleClass moduleClass = model.getFilteredModuleClassList().get(moduleClassIndex.getZeroBased());
+        Lesson lesson = moduleClass.getLessons().get(lessonIndex.getZeroBased());
+        Week targetWeek =
+                new Week(Index.fromOneBased(lesson.getAttendanceRecordList().getAttendanceRecordList().size() + 1));
+
+        DeleteAttendanceCommand deleteAttendanceCommand =
+                new DeleteAttendanceCommand(moduleClassIndex, lessonIndex, studentIndex, targetWeek);
+
+        assertCommandFailure(deleteAttendanceCommand, model, Messages.MESSAGE_INVALID_WEEK);
     }
 
     /**

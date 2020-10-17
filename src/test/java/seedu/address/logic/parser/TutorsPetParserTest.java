@@ -26,6 +26,7 @@ import seedu.address.logic.commands.AddModuleClassCommand;
 import seedu.address.logic.commands.AddStudentCommand;
 import seedu.address.logic.commands.ClearModuleClassCommand;
 import seedu.address.logic.commands.ClearStudentCommand;
+import seedu.address.logic.commands.DeleteAttendanceCommand;
 import seedu.address.logic.commands.DeleteLessonCommand;
 import seedu.address.logic.commands.DeleteModuleClassCommand;
 import seedu.address.logic.commands.DeleteStudentCommand;
@@ -206,6 +207,20 @@ public class TutorsPetParserTest {
                         + PREFIX_STUDENT_INDEX + INDEX_FIRST_ITEM.getOneBased() + " "
                         + PREFIX_WEEK + INDEX_FIRST_ITEM.getOneBased() + " "
                         + PREFIX_PARTICIPATION_SCORE + "80 ");
+        assertEquals(expectedCommand, command);
+    }
+
+    @Test
+    public void parseCommand_deleteAttendance() throws Exception {
+        Week week = new Week(INDEX_FIRST_ITEM);
+        DeleteAttendanceCommand expectedCommand =
+                new DeleteAttendanceCommand(INDEX_FIRST_ITEM, INDEX_FIRST_ITEM, INDEX_FIRST_ITEM, week);
+        DeleteAttendanceCommand command =
+                (DeleteAttendanceCommand) parser.parseCommand(DeleteAttendanceCommand.COMMAND_WORD + " "
+                        + PREFIX_CLASS_INDEX + INDEX_FIRST_ITEM.getOneBased() + " "
+                        + PREFIX_LESSON_INDEX + INDEX_FIRST_ITEM.getOneBased() + " "
+                        + PREFIX_STUDENT_INDEX + INDEX_FIRST_ITEM.getOneBased() + " "
+                        + PREFIX_WEEK + INDEX_FIRST_ITEM.getOneBased());
         assertEquals(expectedCommand, command);
     }
 
