@@ -36,10 +36,9 @@ public class AddAttendanceCommandParser implements Parser<AddAttendanceCommand> 
         Index moduleClassIndex;
         Index lessonIndex;
         Index studentIndex;
-        Week week;
 
-        // parse relevant indexes
-        if (!arePrefixesPresent(argMultimap, PREFIX_CLASS_INDEX, PREFIX_LESSON_INDEX, PREFIX_STUDENT_INDEX, PREFIX_WEEK)
+        if (!arePrefixesPresent(argMultimap, PREFIX_CLASS_INDEX, PREFIX_LESSON_INDEX, PREFIX_STUDENT_INDEX,
+                PREFIX_WEEK, PREFIX_PARTICIPATION_SCORE)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddAttendanceCommand.MESSAGE_USAGE));
         }
@@ -48,29 +47,14 @@ public class AddAttendanceCommandParser implements Parser<AddAttendanceCommand> 
             moduleClassIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_CLASS_INDEX).get());
             lessonIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_LESSON_INDEX).get());
             studentIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_STUDENT_INDEX).get());
-            week = new Week(ParserUtil.parseIndex(argMultimap.getValue(PREFIX_WEEK).get()));
         } catch (ParseException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddAttendanceCommand.MESSAGE_USAGE), pe);
         }
 
-        // parse attendance data values
-        boolean isParticipationScorePresent = argMultimap.getValue(PREFIX_PARTICIPATION_SCORE).isPresent();
-        if (!isParticipationScorePresent) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddAttendanceCommand.MESSAGE_USAGE));
-        }
-
-        int participationScore;
-
-        try {
-            participationScore = Integer.parseInt(argMultimap.getValue(PREFIX_PARTICIPATION_SCORE).get().trim());
-        } catch (NumberFormatException e) {
-            throw new ParseException(Attendance.MESSAGE_CONSTRAINTS);
-        }
-
-        if (!Attendance.isValidParticipationScore(participationScore)) {
-            throw new ParseException(Attendance.MESSAGE_CONSTRAINTS);
-        }
+        Week week = ParserUtil.parseWeek(argMultimap.getValue(PREFIX_WEEK).get());
+        int participationScore =
+                ParserUtil.parseParticipationScore(argMultimap.getValue(PREFIX_PARTICIPATION_SCORE).get());
 
         Attendance attendance = new Attendance(participationScore);
         return new AddAttendanceCommand(moduleClassIndex, lessonIndex, studentIndex, week, attendance);

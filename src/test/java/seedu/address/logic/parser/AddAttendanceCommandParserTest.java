@@ -76,27 +76,27 @@ public class AddAttendanceCommandParserTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddAttendanceCommand.MESSAGE_USAGE);
 
         // missing class prefix
-        assertParseFailure(parser, "1 l/1 s/1"
+        assertParseFailure(parser, " 1 l/1 s/1"
                         + WEEK_DESC_WEEK_VALUE_5 + PARTICIPATION_SCORE_DESC_80,
                 expectedMessage);
 
         // missing lesson prefix
-        assertParseFailure(parser, "c/1 1 s/1"
+        assertParseFailure(parser, " c/1 1 s/1"
                         + WEEK_DESC_WEEK_VALUE_5 + PARTICIPATION_SCORE_DESC_80,
                 expectedMessage);
 
         // missing student prefix
-        assertParseFailure(parser, "c/1 l/1 1"
+        assertParseFailure(parser, " c/1 l/1 1"
                         + WEEK_DESC_WEEK_VALUE_5 + PARTICIPATION_SCORE_DESC_80,
                 expectedMessage);
 
         // missing week prefix
-        assertParseFailure(parser, "c/1 l/1 s/1"
+        assertParseFailure(parser, " c/1 l/1 s/1"
                         + VALID_WEEK_VALUE_5 + PARTICIPATION_SCORE_DESC_80,
                 expectedMessage);
 
         // missing participation score prefix
-        assertParseFailure(parser, "c/1 l/1 s/1"
+        assertParseFailure(parser, " c/1 l/1 s/1"
                         + WEEK_DESC_WEEK_VALUE_5 + VALID_PARTICIPATION_SCORE_80,
                 expectedMessage);
     }
@@ -106,38 +106,38 @@ public class AddAttendanceCommandParserTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddAttendanceCommand.MESSAGE_USAGE);
 
         // invalid class index
-        assertParseFailure(parser, "c/& l/1 s/1"
+        assertParseFailure(parser, " c/& l/1 s/1"
                         + WEEK_DESC_WEEK_VALUE_5 + PARTICIPATION_SCORE_DESC_80,
                 expectedMessage);
 
         // invalid lesson index
-        assertParseFailure(parser, "c/1 l/& s/1"
+        assertParseFailure(parser, " c/1 l/& s/1"
                         + WEEK_DESC_WEEK_VALUE_5 + PARTICIPATION_SCORE_DESC_80,
                 expectedMessage);
 
         // invalid student index
-        assertParseFailure(parser, "c/1 l/1 s/&"
+        assertParseFailure(parser, " c/1 l/1 s/&"
                         + WEEK_DESC_WEEK_VALUE_5 + PARTICIPATION_SCORE_DESC_80,
                 expectedMessage);
 
         // invalid week value - lower-bound
-        assertParseFailure(parser, "c/1 l/1 s/1"
+        assertParseFailure(parser, " c/1 l/1 s/1"
                         + INVALID_WEEK_LOWER_BOUND_DESC + PARTICIPATION_SCORE_DESC_80,
-                expectedMessage);
+                Week.MESSAGE_CONSTRAINTS);
 
         // invalid week value - upper-bound
-        assertParseFailure(parser, "c/1 l/1 s/1"
+        assertParseFailure(parser, " c/1 l/1 s/1"
                         + INVALID_WEEK_UPPER_BOUND_DESC + PARTICIPATION_SCORE_DESC_80,
-                expectedMessage);
+                Week.MESSAGE_CONSTRAINTS);
 
         // invalid participation score - lower-bound
-        assertParseFailure(parser, "c/1 l/1 s/1"
+        assertParseFailure(parser, " c/1 l/1 s/1"
                         + WEEK_DESC_WEEK_VALUE_5 + INVALID_PARTICIPATION_LOWER_BOUND_SCORE_DESC,
-                expectedMessage);
+                Attendance.MESSAGE_CONSTRAINTS);
 
         // invalid participation score - upper-bound
-        assertParseFailure(parser, "c/1 l/1 s/1"
+        assertParseFailure(parser, " c/1 l/1 s/1"
                         + WEEK_DESC_WEEK_VALUE_5 + INVALID_PARTICIPATION_UPPER_BOUND_SCORE_DESC,
-                expectedMessage);
+                Attendance.MESSAGE_CONSTRAINTS);
     }
 }

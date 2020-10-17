@@ -11,6 +11,8 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.attendance.Attendance;
+import seedu.address.model.attendance.Week;
 import seedu.address.model.components.name.Name;
 import seedu.address.model.components.tag.Tag;
 import seedu.address.model.lesson.Day;
@@ -195,5 +197,53 @@ public class ParserUtil {
             throw new ParseException(NumberOfOccurrences.MESSAGE_CONSTRAINTS);
         }
         return new NumberOfOccurrences(occurrences);
+    }
+
+    /**
+     * Parses a {@code String week} into a {@code Week}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code week} is invalid.
+     */
+    public static Week parseWeek(String week) throws ParseException {
+        requireNonNull(week);
+
+        String trimmedWeek = week.trim();
+        Index weekIndex;
+
+        try {
+            weekIndex = ParserUtil.parseIndex(trimmedWeek);
+        } catch (ParseException e) {
+            throw new ParseException(Week.MESSAGE_CONSTRAINTS);
+        }
+
+        if (!Week.isValidWeek(weekIndex)) {
+            throw new ParseException(Week.MESSAGE_CONSTRAINTS);
+        }
+        return new Week(weekIndex);
+    }
+
+    /**
+     * Parses a {@code String participationScore} into a {@code int}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code participationScore} is invalid.
+     */
+    public static int parseParticipationScore(String participationScore) throws ParseException {
+        requireNonNull(participationScore);
+
+        String trimmedScore = participationScore.trim();
+        int checkedScore;
+
+        try {
+            checkedScore = Integer.parseInt(trimmedScore);
+        } catch (NumberFormatException e) {
+            throw new ParseException(Attendance.MESSAGE_CONSTRAINTS);
+        }
+
+        if (!Attendance.isValidParticipationScore(checkedScore)) {
+            throw new ParseException(Attendance.MESSAGE_CONSTRAINTS);
+        }
+        return checkedScore;
     }
 }
