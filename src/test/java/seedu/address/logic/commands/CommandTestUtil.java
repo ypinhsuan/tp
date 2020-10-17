@@ -193,17 +193,19 @@ public class CommandTestUtil {
      * Executes the given {@code command}, confirms that <br>
      * - a {@code CommandException} is thrown <br>
      * - the CommandException message matches {@code expectedMessage} <br>
-     * - the Tutor's Pet, filtered student list and selected student in {@code actualModel} remain unchanged
+     * - the Tutor's Pet, filtered student list and filtered module class list in {@code actualModel} remain unchanged
      */
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
         TutorsPet expectedTutorsPet = new TutorsPet(actualModel.getTutorsPet());
-        List<Student> expectedFilteredList = new ArrayList<>(actualModel.getFilteredStudentList());
+        List<Student> expectedFilteredStudentList = new ArrayList<>(actualModel.getFilteredStudentList());
+        List<ModuleClass> expectedFilteredModuleClassList = new ArrayList<>(actualModel.getFilteredModuleClassList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
         assertEquals(expectedTutorsPet, actualModel.getTutorsPet());
-        assertEquals(expectedFilteredList, actualModel.getFilteredStudentList());
+        assertEquals(expectedFilteredStudentList, actualModel.getFilteredStudentList());
+        assertEquals(expectedFilteredModuleClassList, actualModel.getFilteredModuleClassList());
     }
 
     /**

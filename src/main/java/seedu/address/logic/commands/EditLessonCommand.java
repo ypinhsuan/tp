@@ -131,7 +131,7 @@ public class EditLessonCommand extends Command {
         assert lessonToEdit != null;
         assert editedLesson != null;
 
-        if (targetModuleClass.hasLesson(editedLesson)) {
+        if (!lessonToEdit.isSameLesson(editedLesson) && targetModuleClass.hasLesson(editedLesson)) {
             throw new CommandException(MESSAGE_DUPLICATE_LESSON);
         }
 
