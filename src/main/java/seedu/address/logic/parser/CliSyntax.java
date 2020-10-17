@@ -19,4 +19,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_NUMBER_OF_OCCURRENCES = new Prefix("r/");
     public static final Prefix PREFIX_LESSON_INDEX = new Prefix("l/");
     public static final Prefix PREFIX_WEEK = new Prefix("w/");
+    public static final Prefix PREFIX_PARTICIPATION_SCORE = new Prefix("p/");
 }

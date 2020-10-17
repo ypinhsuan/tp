@@ -15,4 +15,6 @@ public class Messages {
 
     public static final String MESSAGE_INVALID_LESSON_DISPLAYED_INDEX = "The lesson index provided is invalid";
     public static final String MESSAGE_INVALID_WEEK = "The week provided is invalid";
+
+    public static final String MESSAGE_INVALID_STUDENT_IN_MODULE_CLASS = "Student does not exist in class";
 }
