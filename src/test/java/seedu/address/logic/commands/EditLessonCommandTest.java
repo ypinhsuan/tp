@@ -1,7 +1,9 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_LESSON_FRI_8_TO_10;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_LESSON_WED_2_TO_4;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DAY_FRI_LESSON_FRI_8_TO_10;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_VENUE_S17_0302_LESSON_FRI_8_TO_10;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
@@ -197,6 +199,44 @@ public class EditLessonCommandTest {
                 new EditLessonDescriptorBuilder().withVenue(VALID_VENUE_S17_0302_LESSON_FRI_8_TO_10).build());
 
         assertCommandFailure(editLessonCommand, model, Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void equals() {
+        final EditLessonCommand standardCommand = new EditLessonCommand(
+                INDEX_FIRST_ITEM, INDEX_FIRST_ITEM, DESC_LESSON_FRI_8_TO_10);
+
+        // same values -> returns true
+        EditLessonCommand.EditLessonDescriptor copyDescriptor =
+                new EditLessonCommand.EditLessonDescriptor(DESC_LESSON_FRI_8_TO_10);
+        EditLessonCommand commandWithSameValues = new EditLessonCommand(
+                INDEX_FIRST_ITEM, INDEX_FIRST_ITEM, copyDescriptor);
+        assertTrue(standardCommand.equals(commandWithSameValues));
+
+        // same object -> returns true
+        assertTrue(standardCommand.equals(standardCommand));
+
+        // null -> returns false
+        assertFalse(standardCommand.equals(null));
+
+        // different types -> returns false
+        assertFalse(standardCommand.equals(1));
+
+        // different module class index -> returns false
+        assertFalse(standardCommand.equals(new EditLessonCommand(
+                INDEX_SECOND_ITEM, INDEX_FIRST_ITEM, DESC_LESSON_FRI_8_TO_10)));
+
+        // different lesson index -> returns false
+        assertFalse(standardCommand.equals(new EditLessonCommand(
+                INDEX_FIRST_ITEM, INDEX_SECOND_ITEM, DESC_LESSON_FRI_8_TO_10)));
+
+        // different class and lesson index -> returns false
+        assertFalse(standardCommand.equals(new EditLessonCommand(
+                INDEX_SECOND_ITEM, INDEX_SECOND_ITEM, DESC_LESSON_FRI_8_TO_10)));
+
+        // different descriptor -> returns false
+        assertFalse(standardCommand.equals(new EditLessonCommand(
+                INDEX_FIRST_ITEM, INDEX_FIRST_ITEM, DESC_LESSON_WED_2_TO_4)));
     }
 
     private int getOccurrenceInteger(ModuleClass moduleClass, Index index) {
