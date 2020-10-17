@@ -1,5 +1,5 @@
 {
-  "_comment" : "Tutor's Pet save file which contains the same Student values as in TypicalStudents#getTypicalTutorsPet()",
+  "_comment" : "Lesson contains a student who is not enrolled in the class",
   "students" : [ {
     "uuid" : "0c527a3f-8a6f-4c16-b57d-563a9c43cf6b",
     "name" : "Alice Pauline",
@@ -53,28 +53,26 @@
       "startTime" : "10:00",
       "endTime" : "11:00",
       "day" : "THURSDAY",
-      "numberOfOccurrences" : 10,
-      "venue" : "AS6-0211"
+      "numberOfOccurrences" : 2,
+      "venue" : "AS6-0211",
+      "attendanceRecordList" : {
+        "recordList" : [ {
+          "week" : 1,
+          "records" : [ {
+            "studentUuid" : "0c527a3f-8a6f-4c16-b57d-563a9c43cf6b",
+            "attendance" : 80
+          } ]
+        }, {
+          "week" : 2,
+          "records" : [ {
+            "studentUuid" : "62e9abd0-5456-4979-a9cc-8a0818421c2a",
+            "attendance" : 51
+          }, {
+            "studentUuid" : "5c09bbdc-b89c-482a-a4b0-32ede6d679e7",
+            "attendance" : 33
+          } ]
+        } ]
+      }
     } ]
-  }, {
-    "name" : "CS2100 Lab",
-    "studentUuids" : [ ],
-      "lessons" : [ {
-        "startTime" : "08:00",
-        "endTime" : "10:00",
-        "day" : "FRIDAY",
-        "numberOfOccurrences" : 13,
-        "venue" : "S17-0302"
-      }, {
-        "startTime" : "10:30",
-        "endTime" : "11:30",
-        "day" : "TUESDAY",
-        "numberOfOccurrences" : 3,
-        "venue" : "https://zoom/j/95317249?)pwd=Ulld2tWY3MwMkRibjQyUkdZZz09"
-      } ]
-  }, {
-    "name" : "CS2100 Tutorial",
-    "studentUuids" : [ "0c527a3f-8a6f-4c16-b57d-563a9c43cf6b" ],
-    "lessons" : [ ]
   } ]
 }

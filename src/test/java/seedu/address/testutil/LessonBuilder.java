@@ -3,7 +3,12 @@ package seedu.address.testutil;
 import static seedu.address.model.lesson.Lesson.TIME_FORMATTER;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
+import seedu.address.model.attendance.AttendanceRecord;
+import seedu.address.model.attendance.AttendanceRecordList;
 import seedu.address.model.lesson.Day;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.NumberOfOccurrences;
@@ -25,6 +30,7 @@ public class LessonBuilder {
     private Day day;
     private NumberOfOccurrences numberOfOccurrences;
     private Venue venue;
+    private AttendanceRecordList attendanceRecordList;
 
     /**
      * Creates a {@code LessonBuilder} with the default details.
@@ -35,6 +41,7 @@ public class LessonBuilder {
         day = DEFAULT_DAY;
         numberOfOccurrences = new NumberOfOccurrences(DEFAULT_NUMBER_OF_OCCURRENCES);
         venue = new Venue(DEFAULT_VENUE);
+        attendanceRecordList = new AttendanceRecordList(numberOfOccurrences);
     }
 
     /**
@@ -46,6 +53,7 @@ public class LessonBuilder {
         day = lessonToCopy.getDay();
         numberOfOccurrences = lessonToCopy.getNumberOfOccurrences();
         venue = lessonToCopy.getVenue();
+        attendanceRecordList = lessonToCopy.getAttendanceRecordList();
     }
 
     /**
@@ -74,9 +82,12 @@ public class LessonBuilder {
 
     /**
      * Sets the {@code numberOfOccurrences} of the {@code Lesson} that we are building.
+     * Resets the {@code attendanceRecordList} of the {@code Lesson} to an empty {@code AttendanceRecordList} with
+     * length matching the given {@code numberOfOccurrences}.
      */
     public LessonBuilder withNumberOfOccurrences(int numberOfOccurrences) {
         this.numberOfOccurrences = new NumberOfOccurrences(numberOfOccurrences);
+        this.attendanceRecordList = new AttendanceRecordList(this.numberOfOccurrences);
         return this;
     }
 
@@ -88,7 +99,31 @@ public class LessonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code attendanceRecordList} of the {@code Lesson} that we are building.
+     * Resets the {@code numberOfOccurrences} of the {@code Lesson} to match that of
+     * the given {@code attendanceRecordList}.
+     */
+    public LessonBuilder withAttendanceRecordList(AttendanceRecordList attendanceRecordList) {
+        this.numberOfOccurrences = new NumberOfOccurrences(attendanceRecordList.getAttendanceRecordList().size());
+        this.attendanceRecordList = attendanceRecordList;
+        return this;
+    }
+
     public Lesson build() {
-        return new Lesson(startTime, endTime, day, numberOfOccurrences, venue);
+        return new Lesson(startTime, endTime, day, numberOfOccurrences, venue, attendanceRecordList);
+    }
+
+    /**
+     * Inserts the given {@code records} into the given {@code lesson} and fills subsequent occurrences with empty
+     * {@code AttendanceRecord}s.
+     */
+    public static Lesson insertAttendanceRecords(Lesson lesson, AttendanceRecord... records) {
+        int recurrences = lesson.getNumberOfOccurrences().value;
+        List<AttendanceRecord> recordList = new ArrayList<>(Collections.nCopies(recurrences, new AttendanceRecord()));
+        for (int i = 0; i < records.length; i++) {
+            recordList.set(i, records[i]);
+        }
+        return new LessonBuilder(lesson).withAttendanceRecordList(new AttendanceRecordList(recordList)).build();
     }
 }

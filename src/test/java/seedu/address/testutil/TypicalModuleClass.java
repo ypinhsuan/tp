@@ -3,6 +3,9 @@ package seedu.address.testutil;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_CS2100_LAB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_CS2100_TUTORIAL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_CS2103T_TUTORIAL;
+import static seedu.address.testutil.LessonBuilder.insertAttendanceRecords;
+import static seedu.address.testutil.TypicalAttendanceRecord.RECORD_ALICE_51_BENSON_33;
+import static seedu.address.testutil.TypicalAttendanceRecord.RECORD_ALICE_80;
 import static seedu.address.testutil.TypicalLesson.LESSON_FRI_8_TO_10;
 import static seedu.address.testutil.TypicalLesson.LESSON_THU_10_TO_11;
 import static seedu.address.testutil.TypicalLesson.ONLINE_LESSON_TUE_1030_1130;
@@ -23,7 +26,7 @@ public class TypicalModuleClass {
     public static final ModuleClass CS2103T_TUTORIAL = new ModuleClassBuilder()
             .withName(VALID_NAME_CS2103T_TUTORIAL)
             .withStudentUuids(ALICE.getUuid(), BENSON.getUuid())
-            .withLessons(LESSON_THU_10_TO_11)
+            .withLessons(insertAttendanceRecords(LESSON_THU_10_TO_11, RECORD_ALICE_80, RECORD_ALICE_51_BENSON_33))
             .build();
 
     /**

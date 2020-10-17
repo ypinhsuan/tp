@@ -6,6 +6,8 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
+import seedu.address.model.attendance.AttendanceRecordList;
+
 /**
  * Represents a Lesson.
  * Guarantees: details are present and not null, field values are validated, immutable.
@@ -14,11 +16,15 @@ public class Lesson {
 
     public static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
 
+    // identity fields
     private final LocalTime startTime;
     private final LocalTime endTime;
     private final Day day;
-    private final NumberOfOccurrences numberOfOccurrences;
     private final Venue venue;
+
+    // data fields
+    private final NumberOfOccurrences numberOfOccurrences;
+    private final AttendanceRecordList attendanceRecordList;
 
     /**
      * Every field must be present and not null.
@@ -33,6 +39,25 @@ public class Lesson {
         this.day = day;
         this.numberOfOccurrences = numberOfOccurrences;
         this.venue = venue;
+        this.attendanceRecordList = new AttendanceRecordList(numberOfOccurrences);
+    }
+
+    /**
+     * Every field must be present and not null.
+     * Creates a new lesson with the specified parameters.
+     */
+    public Lesson(LocalTime startTime, LocalTime endTime, Day day, NumberOfOccurrences numberOfOccurrences,
+                  Venue venue, AttendanceRecordList attendanceRecordList) {
+        requireAllNonNull(startTime, endTime, day, numberOfOccurrences, venue, attendanceRecordList);
+
+        assert attendanceRecordList.getAttendanceRecordList().size() == numberOfOccurrences.getNumberOfOccurrences();
+
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.day = day;
+        this.numberOfOccurrences = numberOfOccurrences;
+        this.venue = venue;
+        this.attendanceRecordList = attendanceRecordList;
     }
 
     public LocalTime getStartTime() {
@@ -53,6 +78,10 @@ public class Lesson {
 
     public Venue getVenue() {
         return venue;
+    }
+
+    public AttendanceRecordList getAttendanceRecordList() {
+        return attendanceRecordList;
     }
 
     /**
@@ -91,13 +120,14 @@ public class Lesson {
                 && otherLesson.getEndTime().equals(getEndTime())
                 && otherLesson.getDay().equals(getDay())
                 && otherLesson.getNumberOfOccurrences().equals(getNumberOfOccurrences())
-                && otherLesson.getVenue().equals(getVenue());
+                && otherLesson.getVenue().equals(getVenue())
+                && otherLesson.getAttendanceRecordList().equals(getAttendanceRecordList());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(startTime, endTime, day, numberOfOccurrences, venue);
+        return Objects.hash(startTime, endTime, day, numberOfOccurrences, venue, attendanceRecordList);
     }
 
     @Override

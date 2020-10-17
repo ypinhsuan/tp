@@ -1,0 +1,32 @@
+{
+  "_comment" : "Record list contains a null value",
+  "students" : [ {
+    "uuid" : "0c527a3f-8a6f-4c16-b57d-563a9c43cf6b",
+    "name" : "Alice Pauline",
+    "telegram" : "4Lice_P",
+    "email" : "alice@example.com",
+    "tagged" : [ "Average" ]
+  } ],
+  "classes" : [ {
+    "name" : "CS2103T Tutorial",
+    "studentUuids" : [
+      "0c527a3f-8a6f-4c16-b57d-563a9c43cf6b"
+    ],
+    "lessons" : [ {
+      "startTime" : "10:00",
+      "endTime" : "11:00",
+      "day" : "THURSDAY",
+      "numberOfOccurrences" : 1,
+      "venue" : "AS6-0211",
+      "attendanceRecordList" : {
+        "recordList" : [ {
+          "week" : 1,
+          "records" : [ {
+            "studentUuid" : "0c527a3f-8a6f-4c16-b57d-563a9c43cf6b",
+            "attendance" : 80
+          } ]
+        }, null ]
+      }
+    } ]
+  } ]
+}

@@ -22,12 +22,13 @@ import seedu.address.model.student.Telegram;
 /**
  * Jackson-friendly version of {@link Student}.
  */
-class JsonAdaptedStudent {
+public class JsonAdaptedStudent {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Student's %s field is missing!";
+    public static final String STUDENT_UUID_FIELD = "student UUID";
 
     private final String uuid;
-    private final String name;
+    private final JsonAdaptedName name;
     private final String telegram;
     private final String email;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
@@ -36,7 +37,8 @@ class JsonAdaptedStudent {
      * Constructs a {@code JsonAdaptedStudent} with the given student details.
      */
     @JsonCreator
-    public JsonAdaptedStudent(@JsonProperty("uuid") String uuid, @JsonProperty("name") String name,
+    public JsonAdaptedStudent(@JsonProperty("uuid") String uuid,
+                              @JsonProperty("name") JsonAdaptedName name,
                               @JsonProperty("telegram") String telegram,
                               @JsonProperty("email") String email,
                               @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
@@ -54,7 +56,7 @@ class JsonAdaptedStudent {
      */
     public JsonAdaptedStudent(Student source) {
         uuid = source.getUuid().toString();
-        name = source.getName().fullName;
+        name = new JsonAdaptedName(source.getName());
         telegram = source.getTelegram().value;
         email = source.getEmail().value;
         tagged.addAll(source.getTags().stream()
@@ -74,7 +76,7 @@ class JsonAdaptedStudent {
         }
 
         if (uuid == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "uuid"));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "UUID"));
         }
         // catch invalid UUID
         final UUID modelUuid;
@@ -87,10 +89,8 @@ class JsonAdaptedStudent {
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
-        if (!Name.isValidName(name)) {
-            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
-        }
-        final Name modelName = new Name(name);
+
+        final Name modelName = name.toModelType();
 
         if (telegram == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,

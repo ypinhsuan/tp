@@ -56,6 +56,26 @@ public class AttendanceRecordTest {
     }
 
     @Test
+    public void hasAttendance_attendanceInAttendanceRecord_returnsTrue() {
+        HashMap<UUID, Attendance> records = new HashMap<>();
+        UUID studentUuid = ALICE.getUuid();
+        Attendance attendance = new Attendance(VALID_PARTICIPATION_SCORE_33);
+        records.put(studentUuid, attendance);
+        AttendanceRecord attendanceRecord = new AttendanceRecord(records);
+        assertTrue(attendanceRecord.hasAttendance(ALICE.getUuid()));
+    }
+
+    @Test
+    public void hasAttendance_attendanceNotInAttendanceRecord_returnsFalse() {
+        HashMap<UUID, Attendance> records = new HashMap<>();
+        UUID studentUuid = ALICE.getUuid();
+        Attendance attendance = new Attendance(VALID_PARTICIPATION_SCORE_33);
+        records.put(studentUuid, attendance);
+        AttendanceRecord attendanceRecord = new AttendanceRecord(records);
+        assertFalse(attendanceRecord.hasAttendance(BENSON.getUuid()));
+    }
+
+    @Test
     public void equals() {
         // same object -> returns true
         assertTrue(RECORD_ALICE_80.equals(RECORD_ALICE_80));

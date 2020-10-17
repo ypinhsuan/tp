@@ -1,13 +1,20 @@
 package seedu.address.model.util;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.model.ReadOnlyTutorsPet;
 import seedu.address.model.TutorsPet;
+import seedu.address.model.attendance.Attendance;
+import seedu.address.model.attendance.AttendanceRecord;
+import seedu.address.model.attendance.AttendanceRecordList;
 import seedu.address.model.components.name.Name;
 import seedu.address.model.components.tag.Tag;
 import seedu.address.model.lesson.Day;
@@ -37,8 +44,28 @@ public class SampleDataUtil {
     private static final Student ROY_BALAKRISHANN = new Student(new Name("Roy Balakrishnan"), new Telegram("B_Roy"),
             new Email("royb@example.com"), getTagSet("Average"));
 
+    private static final Attendance ATTENDANCE_SCORE_35 = new Attendance(35);
+    private static final Attendance ATTENDANCE_SCORE_80 = new Attendance(80);
+
+    private static final AttendanceRecord CS2103T_TUTORIAL_WEEK_ONE_ATTENDANCE =
+            new AttendanceRecord(Map.of(ALEX_YEOH.getUuid(), ATTENDANCE_SCORE_35,
+                    CHARLOTTE_OLIVEIRO.getUuid(), ATTENDANCE_SCORE_80));
+    private static final AttendanceRecord CS2103T_TUTORIAL_WEEK_TWO_ATTENDANCE =
+            new AttendanceRecord(Map.of(ALEX_YEOH.getUuid(), ATTENDANCE_SCORE_80));
+    private static final List<AttendanceRecord> cs2103tAttendanceList =
+            new ArrayList<>(Collections.nCopies(10, new AttendanceRecord()));
+
+    static {
+        cs2103tAttendanceList.set(0, CS2103T_TUTORIAL_WEEK_ONE_ATTENDANCE);
+        cs2103tAttendanceList.set(1, CS2103T_TUTORIAL_WEEK_TWO_ATTENDANCE);
+    }
+
+    private static final AttendanceRecordList CS2103T_TUTORIAL_ATTENDANCE =
+            new AttendanceRecordList(cs2103tAttendanceList);
+
     private static final Lesson CS2103T_TUTORIAL_THURSDAY_1000_1100 = new Lesson(LocalTime.of(10, 0),
-            LocalTime.of(11, 0), Day.THURSDAY, new NumberOfOccurrences(10), new Venue("AS6-0211"));
+            LocalTime.of(11, 0), Day.THURSDAY, new NumberOfOccurrences(10), new Venue("AS6-0211"),
+            CS2103T_TUTORIAL_ATTENDANCE);
     private static final Lesson CS2100_LAB_MONDAY_1400_1500 = new Lesson(LocalTime.of(14, 0),
             LocalTime.of(15, 0), Day.MONDAY, new NumberOfOccurrences(10),
             new Venue("https://zoom/j/95317249?)pwd=Ulld2tWY3MwMkRibjQyUkdZZz09"));

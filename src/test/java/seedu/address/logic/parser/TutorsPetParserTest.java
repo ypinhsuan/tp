@@ -4,9 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PARTICIPATION_SCORE_80;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASS_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PARTICIPATION_SCORE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_WEEK;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_ITEM;
@@ -17,6 +20,7 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.AddAttendanceCommand;
 import seedu.address.logic.commands.AddLessonCommand;
 import seedu.address.logic.commands.AddModuleClassCommand;
 import seedu.address.logic.commands.AddStudentCommand;
@@ -45,6 +49,8 @@ import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.UnlinkCommand;
 import seedu.address.logic.commands.ViewHistoryCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.attendance.Attendance;
+import seedu.address.model.attendance.Week;
 import seedu.address.model.components.name.NameContainsKeywordsPredicate;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.moduleclass.ModuleClass;
@@ -73,10 +79,12 @@ public class TutorsPetParserTest {
 
     @Test
     public void parseCommand_listStudent() throws Exception {
-        assertEquals(parser.parseCommand(ListStudentCommand.COMMAND_WORD), new ListStudentCommand());
-        assertEquals(parser.parseCommand(ListStudentCommand.COMMAND_WORD + " "
-                + PREFIX_CLASS_INDEX + INDEX_SECOND_ITEM.getOneBased()),
-                new ListStudentInClassCommand(INDEX_SECOND_ITEM));
+        ListStudentCommand command = (ListStudentCommand) parser.parseCommand(ListStudentCommand.COMMAND_WORD);
+        ListStudentCommand altCommand =
+                (ListStudentCommand) parser.parseCommand(ListStudentCommand.COMMAND_WORD
+                        + " " + PREFIX_CLASS_INDEX + INDEX_SECOND_ITEM.getOneBased());
+        assertEquals(new ListStudentCommand(), command);
+        assertEquals(new ListStudentInClassCommand(INDEX_SECOND_ITEM), altCommand);
     }
 
     @Test
@@ -186,35 +194,59 @@ public class TutorsPetParserTest {
 
     @Test
     public void parseCommand_deleteLesson() throws Exception {
-        DeleteLessonCommand command = new DeleteLessonCommand(INDEX_FIRST_ITEM, INDEX_SECOND_ITEM);
-        assertEquals(parser.parseCommand(DeleteLessonCommand.COMMAND_WORD + " "
-                + PREFIX_CLASS_INDEX + INDEX_FIRST_ITEM.getOneBased() + " "
-                + PREFIX_LESSON_INDEX + INDEX_SECOND_ITEM.getOneBased()), command);
-        assertEquals(parser.parseCommand(DeleteLessonCommand.COMMAND_WORD + " "
-                + PREFIX_LESSON_INDEX + INDEX_SECOND_ITEM.getOneBased() + " "
-                + PREFIX_CLASS_INDEX + INDEX_FIRST_ITEM.getOneBased()), command);
+        DeleteLessonCommand expectedCommand = new DeleteLessonCommand(INDEX_FIRST_ITEM, INDEX_SECOND_ITEM);
+        DeleteLessonCommand command =
+                (DeleteLessonCommand) parser.parseCommand(DeleteLessonCommand.COMMAND_WORD + " "
+                        + PREFIX_CLASS_INDEX + INDEX_FIRST_ITEM.getOneBased() + " "
+                        + PREFIX_LESSON_INDEX + INDEX_SECOND_ITEM.getOneBased());
+        DeleteLessonCommand altCommand =
+                (DeleteLessonCommand) parser.parseCommand(DeleteLessonCommand.COMMAND_WORD + " "
+                        + PREFIX_LESSON_INDEX + INDEX_SECOND_ITEM.getOneBased() + " "
+                        + PREFIX_CLASS_INDEX + INDEX_FIRST_ITEM.getOneBased());
+        assertEquals(expectedCommand, command);
+        assertEquals(expectedCommand, altCommand);
+    }
+
+    @Test
+    public void parseCommand_addAttendance() throws Exception {
+        Week week = new Week(INDEX_FIRST_ITEM);
+        Attendance attendance = new Attendance(VALID_PARTICIPATION_SCORE_80);
+        AddAttendanceCommand expectedCommand =
+                new AddAttendanceCommand(INDEX_FIRST_ITEM, INDEX_FIRST_ITEM, INDEX_FIRST_ITEM, week, attendance);
+        AddAttendanceCommand command =
+                (AddAttendanceCommand) parser.parseCommand(AddAttendanceCommand.COMMAND_WORD + " "
+                        + PREFIX_CLASS_INDEX + INDEX_FIRST_ITEM.getOneBased() + " "
+                        + PREFIX_LESSON_INDEX + INDEX_FIRST_ITEM.getOneBased() + " "
+                        + PREFIX_STUDENT_INDEX + INDEX_FIRST_ITEM.getOneBased() + " "
+                        + PREFIX_WEEK + INDEX_FIRST_ITEM.getOneBased() + " "
+                        + PREFIX_PARTICIPATION_SCORE + "80 ");
+        assertEquals(expectedCommand, command);
     }
 
     @Test
     public void parseCommand_unlink() throws Exception {
-        UnlinkCommand command = new UnlinkCommand(INDEX_SECOND_ITEM, INDEX_FIRST_ITEM);
-        assertEquals(parser.parseCommand(UnlinkCommand.COMMAND_WORD + " "
+        UnlinkCommand expectedCommand = new UnlinkCommand(INDEX_SECOND_ITEM, INDEX_FIRST_ITEM);
+        UnlinkCommand command = (UnlinkCommand) parser.parseCommand(UnlinkCommand.COMMAND_WORD + " "
                 + PREFIX_CLASS_INDEX + INDEX_SECOND_ITEM.getOneBased() + " "
-                + PREFIX_STUDENT_INDEX + INDEX_FIRST_ITEM.getOneBased()), command);
-        assertEquals(parser.parseCommand(UnlinkCommand.COMMAND_WORD + " "
+                + PREFIX_STUDENT_INDEX + INDEX_FIRST_ITEM.getOneBased());
+        UnlinkCommand altCommand = (UnlinkCommand) parser.parseCommand(UnlinkCommand.COMMAND_WORD + " "
                 + PREFIX_STUDENT_INDEX + INDEX_FIRST_ITEM.getOneBased() + " "
-                + PREFIX_CLASS_INDEX + INDEX_SECOND_ITEM.getOneBased()), command);
+                + PREFIX_CLASS_INDEX + INDEX_SECOND_ITEM.getOneBased());
+        assertEquals(expectedCommand, command);
+        assertEquals(expectedCommand, altCommand);
     }
 
     @Test
     public void parseCommand_link() throws Exception {
-        LinkCommand command = new LinkCommand(INDEX_SECOND_ITEM, INDEX_FIRST_ITEM);
-        assertEquals(parser.parseCommand(LinkCommand.COMMAND_WORD + " "
+        LinkCommand expectedCommand = new LinkCommand(INDEX_SECOND_ITEM, INDEX_FIRST_ITEM);
+        LinkCommand command = (LinkCommand) parser.parseCommand(LinkCommand.COMMAND_WORD + " "
                 + PREFIX_CLASS_INDEX + INDEX_SECOND_ITEM.getOneBased() + " "
-                + PREFIX_STUDENT_INDEX + INDEX_FIRST_ITEM.getOneBased()), command);
-        assertEquals(parser.parseCommand(LinkCommand.COMMAND_WORD + " "
+                + PREFIX_STUDENT_INDEX + INDEX_FIRST_ITEM.getOneBased());
+        LinkCommand altCommand = (LinkCommand) parser.parseCommand(LinkCommand.COMMAND_WORD + " "
                 + PREFIX_STUDENT_INDEX + INDEX_FIRST_ITEM.getOneBased() + " "
-                + PREFIX_CLASS_INDEX + INDEX_SECOND_ITEM.getOneBased()), command);
+                + PREFIX_CLASS_INDEX + INDEX_SECOND_ITEM.getOneBased());
+        assertEquals(expectedCommand, command);
+        assertEquals(expectedCommand, altCommand);
     }
 
     @Test
