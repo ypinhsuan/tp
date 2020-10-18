@@ -86,6 +86,10 @@ public class DeleteAttendanceCommand extends Command {
         Student targetStudent = lastShownStudentList.get(studentIndex.getZeroBased());
         ModuleClass targetModuleClass = lastShownModuleClassList.get(moduleClassIndex.getZeroBased());
 
+        if (!targetModuleClass.hasStudentUuid(targetStudent.getUuid())) {
+            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_IN_MODULE_CLASS);
+        }
+
         if (lessonIndex.getZeroBased() >= targetModuleClass.getLessons().size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
         }
