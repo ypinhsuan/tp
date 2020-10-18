@@ -4,11 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASS_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON_INDEX;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PARTICIPATION_SCORE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEEK;
-import static seedu.address.logic.util.LessonModificationUtil.addLessonToAttendance;
-import static seedu.address.logic.util.ModuleClassModificationUtil.addModifiedLessonToModuleClass;
 
 import java.util.List;
 
@@ -17,50 +14,47 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.attendance.Attendance;
+import seedu.address.model.attendance.AttendanceRecord;
 import seedu.address.model.attendance.Week;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.moduleclass.ModuleClass;
 import seedu.address.model.student.Student;
 
 /**
- * Adds a student's attendance to the specified {@code Lesson} in the student manager.
+ * Finds a student's attendance for a specified lesson in a specified lesson on
+ * a specified week in the student manager.
  */
-public class AddAttendanceCommand extends Command {
+public class FindAttendanceCommand extends Command {
 
-    public static final String COMMAND_WORD = "add-attendance";
+    public static final String COMMAND_WORD = "find-attendance";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student's attendance to the specified "
-            + "lesson in the student manager. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + "Finds the attendance of a student in a specified "
+            + "lesson on a specified week.\n"
             + "Note: All indexes and numbers must be positive integers.\n"
             + "Parameters: "
-            + PREFIX_CLASS_INDEX + "CLASS_INDEX "
+            + PREFIX_CLASS_INDEX + "CLASS_INDEX"
             + PREFIX_LESSON_INDEX + "LESSON_INDEX "
             + PREFIX_STUDENT_INDEX + "STUDENT_INDEX "
-            + PREFIX_WEEK + "WEEK_NUMBER"
-            + PREFIX_PARTICIPATION_SCORE + "PARTICIPATION_SCORE (must be an integer between 0 and 100)";
+            + PREFIX_WEEK + "WEEK_NUMBER";
 
-    public static final String MESSAGE_SUCCESS = "New attendance added: %1$s attended week %2$s lesson with "
-            + "participation score of %3$s";
-    public static final String MESSAGE_DUPLICATE_ATTENDANCE = "Attendance have been recorded previously.";
+    public static final String MESSAGE_SUCCESS = "%1$S attended week %2$s lesson with a participation score of %3$s";
 
     private final Index moduleClassIndex;
     private final Index lessonIndex;
     private final Index studentIndex;
     private final Week week;
-    private final Attendance toAdd;
 
     /**
-     * Creates an AddAttendanceCommand to add the specified {@code Attendance}.
+     * Creates a FindAttendanceCommand to find a student's attendance for a specified lesson
+     * on a specified week in the student manager.
      */
-    public AddAttendanceCommand(Index moduleClassIndex, Index lessonIndex, Index studentIndex,
-                                Week week, Attendance toAdd) {
-        requireAllNonNull(moduleClassIndex, lessonIndex, studentIndex, week, toAdd);
+    public FindAttendanceCommand(Index moduleCLassIndex, Index lessonIndex, Index studentIndex, Week week) {
+        requireAllNonNull(moduleCLassIndex, lessonIndex, studentIndex, week);
 
-        this.moduleClassIndex = moduleClassIndex;
+        this.moduleClassIndex = moduleCLassIndex;
         this.lessonIndex = lessonIndex;
         this.studentIndex = studentIndex;
         this.week = week;
-        this.toAdd = toAdd;
     }
 
     @Override
@@ -95,24 +89,24 @@ public class AddAttendanceCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_WEEK);
         }
 
-        Lesson modifiedLesson = addLessonToAttendance(targetLesson, targetStudent, week, toAdd);
-        ModuleClass modifiedModuleClass =
-                addModifiedLessonToModuleClass(targetModuleClass, lessonIndex, modifiedLesson);
-        model.setModuleClass(targetModuleClass, modifiedModuleClass);
+        AttendanceRecord attendanceRecord = targetLesson.getAttendanceRecordList().getAttendanceRecord(week);
 
-        String message = String.format(MESSAGE_SUCCESS, targetStudent.getName(), week, toAdd);
-        model.commit(message);
+        if (!attendanceRecord.hasAttendance(targetStudent.getUuid())) {
+            throw new CommandException(Messages.MESSAGE_MISSING_STUDENT_ATTENDANCE);
+        }
+
+        Attendance attendance = targetLesson.getAttendanceRecordList().getAttendance(targetStudent, week);
+        String message = String.format(MESSAGE_SUCCESS, targetStudent.getName(), week, attendance);
         return new CommandResult(message);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddAttendanceCommand // instanceof handles nulls
-                && moduleClassIndex.equals(((AddAttendanceCommand) other).moduleClassIndex)
-                && lessonIndex.equals(((AddAttendanceCommand) other).lessonIndex)
-                && studentIndex.equals(((AddAttendanceCommand) other).studentIndex)
-                && week.equals(((AddAttendanceCommand) other).week)
-                && toAdd.equals(((AddAttendanceCommand) other).toAdd));
+                || (other instanceof FindAttendanceCommand // instanceof handles nulls
+                && moduleClassIndex.equals(((FindAttendanceCommand) other).moduleClassIndex)
+                && lessonIndex.equals(((FindAttendanceCommand) other).lessonIndex)
+                && studentIndex.equals(((FindAttendanceCommand) other).studentIndex)
+                && week.equals(((FindAttendanceCommand) other).week));
     }
 }

@@ -231,7 +231,7 @@ public class EditAttendanceCommandTest {
         EditAttendanceCommand editAttendanceCommand = new EditAttendanceCommand(moduleClassIndex, lessonIndex,
                 studentIndex, VALID_WEEK_5, DESC_ATTENDANCE_33);
 
-        assertCommandFailure(editAttendanceCommand, model, Messages.MESSAGE_INVALID_STUDENT_IN_ATTENDANCE_RECORD);
+        assertCommandFailure(editAttendanceCommand, model, Messages.MESSAGE_MISSING_STUDENT_ATTENDANCE);
     }
 
     @Test

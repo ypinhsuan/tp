@@ -4,18 +4,14 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASS_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON_INDEX;
+import static seedu.address.logic.util.ModuleClassModificationUtil.deleteLessonFromModuleClass;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.UUID;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.components.name.Name;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.moduleclass.ModuleClass;
 
@@ -70,7 +66,7 @@ public class DeleteLessonCommand extends Command {
         }
 
         Lesson lessonToDelete = targetModuleClass.getLessons().get(lessonIndex.getZeroBased());
-        ModuleClass modifiedModuleClass = createModifiedModuleClass(targetModuleClass, lessonToDelete);
+        ModuleClass modifiedModuleClass = deleteLessonFromModuleClass(targetModuleClass, lessonToDelete);
         model.setModuleClass(targetModuleClass, modifiedModuleClass);
 
         String message = String.format(MESSAGE_DELETE_LESSON_SUCCESS, lessonToDelete, targetModuleClass);
@@ -84,23 +80,5 @@ public class DeleteLessonCommand extends Command {
                 || (other instanceof DeleteLessonCommand // instance of handles nulls
                 && moduleClassIndex.equals(((DeleteLessonCommand) other).moduleClassIndex)
                 && lessonIndex.equals(((DeleteLessonCommand) other).lessonIndex));
-    }
-
-    private static ModuleClass createModifiedModuleClass(ModuleClass targetModuleClass, Lesson lessonToDelete) {
-        assert targetModuleClass != null;
-        assert lessonToDelete != null;
-        assert targetModuleClass.hasLesson(lessonToDelete);
-
-        Name moduleClassName = targetModuleClass.getName();
-        Set<UUID> studentsIds = new HashSet<>(targetModuleClass.getStudentUuids());
-        List<Lesson> listOfLessons = targetModuleClass.getLessons();
-        List<Lesson> editedListOfLessons = new ArrayList<>();
-        for (Lesson lesson : listOfLessons) {
-            if (!lesson.equals(lessonToDelete)) {
-                editedListOfLessons.add(lesson);
-            }
-        }
-        assert listOfLessons.size() - 1 == editedListOfLessons.size();
-        return new ModuleClass(moduleClassName, studentsIds, editedListOfLessons);
     }
 }

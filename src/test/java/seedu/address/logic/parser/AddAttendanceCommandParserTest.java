@@ -42,33 +42,31 @@ public class AddAttendanceCommandParserTest {
 
         // multiple class indexes - last class index accepted
         assertParseSuccess(parser, " c/2 l/1 s/1 c/1"
-                        + WEEK_DESC_WEEK_VALUE_5 + PARTICIPATION_SCORE_DESC_80,
+                + WEEK_DESC_WEEK_VALUE_5 + PARTICIPATION_SCORE_DESC_80,
                 new AddAttendanceCommand(INDEX_FIRST_ITEM, INDEX_FIRST_ITEM, INDEX_FIRST_ITEM,
                         expectedWeek, expectedAttendance));
 
         // multiple lesson indexes - last lesson index accepted
         assertParseSuccess(parser, " c/1 l/2 s/1 l/1"
-                        + WEEK_DESC_WEEK_VALUE_5 + PARTICIPATION_SCORE_DESC_80,
+                + WEEK_DESC_WEEK_VALUE_5 + PARTICIPATION_SCORE_DESC_80,
                 new AddAttendanceCommand(INDEX_FIRST_ITEM, INDEX_FIRST_ITEM, INDEX_FIRST_ITEM,
                         expectedWeek, expectedAttendance));
 
         // multiple student indexes - last student index accepted
         assertParseSuccess(parser, " c/1 l/1 s/2 s/1"
-                        + WEEK_DESC_WEEK_VALUE_5 + PARTICIPATION_SCORE_DESC_80,
+                + WEEK_DESC_WEEK_VALUE_5 + PARTICIPATION_SCORE_DESC_80,
                 new AddAttendanceCommand(INDEX_FIRST_ITEM, INDEX_FIRST_ITEM, INDEX_FIRST_ITEM,
                         expectedWeek, expectedAttendance));
 
         // multiple week values - last week value accepted
         assertParseSuccess(parser, " c/1 l/1 s/1"
-                        + WEEK_DESC_WEEK_VALUE_3 + PARTICIPATION_SCORE_DESC_80
-                        + WEEK_DESC_WEEK_VALUE_5,
+                + WEEK_DESC_WEEK_VALUE_3 + PARTICIPATION_SCORE_DESC_80 + WEEK_DESC_WEEK_VALUE_5,
                 new AddAttendanceCommand(INDEX_FIRST_ITEM, INDEX_FIRST_ITEM, INDEX_FIRST_ITEM,
                         expectedWeek, expectedAttendance));
 
         // multiple participation scores - last week value accepted
         assertParseSuccess(parser, " c/1 l/1 s/1"
-                        + PARTICIPATION_SCORE_DESC_51 + PARTICIPATION_SCORE_DESC_80
-                        + WEEK_DESC_WEEK_VALUE_5,
+                + PARTICIPATION_SCORE_DESC_51 + PARTICIPATION_SCORE_DESC_80 + WEEK_DESC_WEEK_VALUE_5,
                 new AddAttendanceCommand(INDEX_FIRST_ITEM, INDEX_FIRST_ITEM, INDEX_FIRST_ITEM,
                         expectedWeek, expectedAttendance));
     }

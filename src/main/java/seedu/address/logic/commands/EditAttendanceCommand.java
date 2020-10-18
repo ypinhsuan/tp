@@ -124,7 +124,7 @@ public class EditAttendanceCommand extends Command {
         AttendanceRecord targetAttendanceRecord = targetAttendanceRecordList.getAttendanceRecord(week);
 
         if (!targetAttendanceRecord.hasAttendance(targetStudent.getUuid())) {
-            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_IN_ATTENDANCE_RECORD);
+            throw new CommandException(Messages.MESSAGE_MISSING_STUDENT_ATTENDANCE);
         }
 
         Attendance attendanceToEdit = targetAttendanceRecord.getAttendance(targetStudent.getUuid());
