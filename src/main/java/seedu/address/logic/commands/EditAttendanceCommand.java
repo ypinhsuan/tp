@@ -130,10 +130,10 @@ public class EditAttendanceCommand extends Command {
         Attendance attendanceToEdit = targetAttendanceRecord.getAttendance(targetStudent.getUuid());
         Attendance editedAttendance = createEditedAttendance(attendanceToEdit, editAttendanceDescriptor);
 
-        AttendanceRecord modifiedAttendanceRecord =
-                createModifiedAttendanceRecord(targetAttendanceRecord, targetStudent, editedAttendance);
+        AttendanceRecord editedAttendanceRecord = createEditedAttendanceRecord(targetAttendanceRecord,
+                targetStudent, editedAttendance);
         AttendanceRecordList modifiedAttendanceRecordList =
-                createModifiedAttendanceRecordList(targetAttendanceRecordList, week, modifiedAttendanceRecord);
+                createModifiedAttendanceRecordList(targetAttendanceRecordList, week, editedAttendanceRecord);
         Lesson modifiedLesson = createModifiedLesson(targetLesson, modifiedAttendanceRecordList);
         ModuleClass modifiedModuleClass = createModifiedModuleClass(targetModuleClass, lessonIndex, modifiedLesson);
 
@@ -146,22 +146,22 @@ public class EditAttendanceCommand extends Command {
     }
 
     /**
-     * Creates and returns an {@code Attendance} with the details of {@code attendanceToEdit}
-     * edited with {@code editAttendanceDescriptor}.
+     * Creates and returns an {@code Attendance} with details of the {@code attendanceToEdit} edited with
+     * {@editAttendanceDescriptor}.
      */
     private static Attendance createEditedAttendance(
             Attendance attendanceToEdit, EditAttendanceDescriptor editAttendanceDescriptor) {
         assert attendanceToEdit != null;
 
-        int updatedParticipationScore =
+        int editedParticipationScore =
                 editAttendanceDescriptor.getParticipationScore().orElse(attendanceToEdit.getParticipationScore());
-        return new Attendance(updatedParticipationScore);
+        return new Attendance(editedParticipationScore);
     }
 
     /**
-     * Edits the attendance of the student in the target attendance record.
+     * Edits the attendance of the target student in the attendance record.
      */
-    private static AttendanceRecord createModifiedAttendanceRecord(
+    private static AttendanceRecord createEditedAttendanceRecord(
             AttendanceRecord targetAttendanceRecord, Student student, Attendance editedAttendance) {
         assert targetAttendanceRecord != null;
         assert student != null;
@@ -192,7 +192,7 @@ public class EditAttendanceCommand extends Command {
     }
 
     /**
-     * Edits the attendance record of the target lesson.
+     * Edits the attendance record list of the target lesson.
      */
     private static Lesson createModifiedLesson(Lesson targetLesson, AttendanceRecordList editedAttendanceRecordList) {
         assert targetLesson != null;
@@ -231,13 +231,34 @@ public class EditAttendanceCommand extends Command {
                 new Attendance(value.getParticipationScore()));
     }
 
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof EditAttendanceCommand)) {
+            return false;
+        }
+
+        // state check
+        EditAttendanceCommand e = (EditAttendanceCommand) other;
+        return moduleClassIndex.equals(e.moduleClassIndex)
+                && lessonIndex.equals(e.lessonIndex)
+                && studentIndex.equals(e.studentIndex)
+                && week.equals(e.week)
+                && editAttendanceDescriptor.equals(e.editAttendanceDescriptor);
+    }
+
     /**
      * Stores the details to edit the attendance with. Each non-empty field will replace the
      * corresponding field value of the attendance.
      */
     public static class EditAttendanceDescriptor {
 
-        private int participationScore;
+        private Integer participationScore;
 
         public EditAttendanceDescriptor() {}
 

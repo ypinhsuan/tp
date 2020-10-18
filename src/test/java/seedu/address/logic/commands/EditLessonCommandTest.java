@@ -42,7 +42,7 @@ public class EditLessonCommandTest {
     private Model model = new ModelManager(getTypicalTutorsPet(), new UserPrefs());
 
     @Test
-    public void constructor_nullModuleClasdIndex_throwsNullPointerException() {
+    public void constructor_nullModuleClassIndex_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new EditLessonCommand(
                 null, INDEX_FIRST_ITEM, EDITED_LESSON_DESCRIPTOR));
     }
@@ -61,7 +61,7 @@ public class EditLessonCommandTest {
                 INDEX_FIRST_ITEM, INDEX_FIRST_ITEM, editLessonDescriptor);
 
         ModuleClass moduleClass = model.getFilteredModuleClassList().get(INDEX_FIRST_ITEM.getZeroBased());
-        AttendanceRecordList attendanceRecordList = getAttendancerecordList(moduleClass, INDEX_FIRST_ITEM);
+        AttendanceRecordList attendanceRecordList = getAttendanceRecordList(moduleClass, INDEX_FIRST_ITEM);
         Lesson editedLesson = new LessonBuilder(LESSON_FRI_8_TO_10)
                 .withAttendanceRecordList(attendanceRecordList).build();
 
@@ -89,7 +89,7 @@ public class EditLessonCommandTest {
                 .get(INDEX_FIRST_ITEM.getZeroBased());
         LessonBuilder firstLessonInList = new LessonBuilder(firstModuleClass.getLessons()
                 .get(INDEX_FIRST_ITEM.getZeroBased()));
-        AttendanceRecordList attendanceRecordList = getAttendancerecordList(firstModuleClass, INDEX_FIRST_ITEM);
+        AttendanceRecordList attendanceRecordList = getAttendanceRecordList(firstModuleClass, INDEX_FIRST_ITEM);
 
         Lesson editedLesson = firstLessonInList
                 .withDay(VALID_DAY_FRI_LESSON_FRI_8_TO_10)
@@ -135,7 +135,7 @@ public class EditLessonCommandTest {
                 .get(INDEX_FIRST_ITEM.getZeroBased());
         Lesson lessonToEdit = moduleClassInFilteredList.getLessons().get(INDEX_SECOND_ITEM.getZeroBased());
         AttendanceRecordList attendanceRecordList =
-                getAttendancerecordList(moduleClassInFilteredList, INDEX_SECOND_ITEM);
+                getAttendanceRecordList(moduleClassInFilteredList, INDEX_SECOND_ITEM);
 
         Lesson editedLesson = new LessonBuilder(lessonToEdit)
                 .withVenue(VALID_VENUE_S17_0302_LESSON_FRI_8_TO_10)
@@ -242,7 +242,7 @@ public class EditLessonCommandTest {
                 INDEX_FIRST_ITEM, INDEX_FIRST_ITEM, DESC_LESSON_WED_2_TO_4)));
     }
 
-    private AttendanceRecordList getAttendancerecordList(ModuleClass moduleClass, Index index) {
+    private AttendanceRecordList getAttendanceRecordList(ModuleClass moduleClass, Index index) {
         return moduleClass.getLessons().get(index.getZeroBased()).getAttendanceRecordList();
     }
 }
