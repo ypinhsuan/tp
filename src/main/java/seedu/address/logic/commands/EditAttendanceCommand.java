@@ -168,10 +168,10 @@ public class EditAttendanceCommand extends Command {
         assert editedAttendance != null;
         assert targetAttendanceRecord.hasAttendance(student.getUuid());
 
-        Map<UUID, Attendance> editedAttendanceRecord = deepCopyAttendanceRecord(targetAttendanceRecord);
-        editedAttendanceRecord.put(student.getUuid(), editedAttendance);
+        Map<UUID, Attendance> editedAttendanceRecordMap = deepCopyAttendanceRecordMap(targetAttendanceRecord);
+        editedAttendanceRecordMap.put(student.getUuid(), editedAttendance);
 
-        return new AttendanceRecord(editedAttendanceRecord);
+        return new AttendanceRecord(editedAttendanceRecordMap);
     }
 
     /**
@@ -185,7 +185,7 @@ public class EditAttendanceCommand extends Command {
 
         List<AttendanceRecord> editedAttendanceRecordList =
                 deepCopyList(targetAttendanceRecordList.getAttendanceRecordList(), x ->
-                        new AttendanceRecord(deepCopyAttendanceRecord(x)));
+                        new AttendanceRecord(deepCopyAttendanceRecordMap(x)));
         editedAttendanceRecordList.set(week.getZeroBasedWeekIndex(), editedAttendanceRecord);
 
         return new AttendanceRecordList(editedAttendanceRecordList);
@@ -204,13 +204,12 @@ public class EditAttendanceCommand extends Command {
         Venue venue = targetLesson.getVenue();
         NumberOfOccurrences numberOfOccurrences = targetLesson.getNumberOfOccurrences();
 
-        return new Lesson(startTime, endTime, day, numberOfOccurrences,
-                venue, editedAttendanceRecordList);
+        return new Lesson(startTime, endTime, day, numberOfOccurrences, venue, editedAttendanceRecordList);
     }
 
     /**
      * Adds all lessons in the target module class to the new module class.
-     * The {@code editedLesson} is added in place of the {@code lessonToEdit}.
+     * The {@code editedLesson} is added in place of the lesson at {@code lessonIndexToEdit}.
      */
     private static ModuleClass createModifiedModuleClass(
             ModuleClass targetModuleClass, Index lessonIndexToEdit, Lesson editedLesson) {
@@ -226,7 +225,7 @@ public class EditAttendanceCommand extends Command {
         return new ModuleClass(moduleClassName, studentsIds, editedListOfLessons);
     }
 
-    private static Map<UUID, Attendance> deepCopyAttendanceRecord(AttendanceRecord record) {
+    private static Map<UUID, Attendance> deepCopyAttendanceRecordMap(AttendanceRecord record) {
         return deepCopyMap(record.getAttendanceRecord(), uuidKey -> uuidKey, value ->
                 new Attendance(value.getParticipationScore()));
     }

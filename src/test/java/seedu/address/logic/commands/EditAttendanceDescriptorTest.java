@@ -3,11 +3,11 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_ATTENDANCE_33;
-import static seedu.address.logic.commands.CommandTestUtil.DESC_ATTENDANCE_80;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.EditAttendanceCommand.EditAttendanceDescriptor;
+import seedu.address.testutil.EditAttendanceDescriptorBuilder;
 
 public class EditAttendanceDescriptorTest {
 
@@ -27,6 +27,8 @@ public class EditAttendanceDescriptorTest {
         assertFalse(DESC_ATTENDANCE_33.equals(3));
 
         // different values -> returns false
-        assertFalse(DESC_ATTENDANCE_33.equals(DESC_ATTENDANCE_80));
+        EditAttendanceDescriptor editedAttendance =
+                new EditAttendanceDescriptorBuilder(DESC_ATTENDANCE_33).withParticipationScore(80).build();
+        assertFalse(DESC_ATTENDANCE_33.equals(editedAttendance));
     }
 }

@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import seedu.address.logic.commands.EditAttendanceCommand.EditAttendanceDescriptor;
+import seedu.address.model.attendance.Attendance;
 
 public class EditAttendanceDescriptorBuilder {
 
@@ -11,16 +12,16 @@ public class EditAttendanceDescriptorBuilder {
     }
 
     public EditAttendanceDescriptorBuilder(EditAttendanceDescriptor descriptor) {
-        this.descriptor = descriptor;
+        this.descriptor = new EditAttendanceDescriptor(descriptor);
     }
 
     /**
      * Returns an {@code EditAttendanceDescriptor} with fields containing {@code attendance} details.
-     * @param participationScore
+     * @param attendance
      */
-    public EditAttendanceDescriptorBuilder(int participationScore) {
+    public EditAttendanceDescriptorBuilder(Attendance attendance) {
         descriptor = new EditAttendanceDescriptor();
-        descriptor.setParticipationScore(participationScore);
+        descriptor.setParticipationScore(attendance.getParticipationScore());
     }
 
     /**

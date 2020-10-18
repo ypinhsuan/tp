@@ -49,7 +49,7 @@ import seedu.address.testutil.EditAttendanceDescriptorBuilder;
 public class EditAttendanceCommandTest {
 
     private static final EditAttendanceDescriptor EDITED_ATTENDANCE_DESCRIPTOR =
-            new EditAttendanceDescriptorBuilder(10).build();
+            new EditAttendanceDescriptorBuilder(new Attendance(10)).build();
 
     private Model model = new ModelManager(getTypicalTutorsPet(), new UserPrefs());
 

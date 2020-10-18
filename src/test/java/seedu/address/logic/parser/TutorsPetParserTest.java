@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ATTENDANCE_33;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PARTICIPATION_SCORE_80;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_WEEK_1;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASS_INDEX;
@@ -229,7 +230,7 @@ public class TutorsPetParserTest {
     @Test
     public void parseCommand_editAttendance() throws Exception {
         EditAttendanceCommand.EditAttendanceDescriptor descriptor =
-                new EditAttendanceDescriptorBuilder(VALID_PARTICIPATION_SCORE_80).build();
+                new EditAttendanceDescriptorBuilder(VALID_ATTENDANCE_33).build();
         EditAttendanceCommand expectedCommand = new EditAttendanceCommand(INDEX_FIRST_ITEM, INDEX_FIRST_ITEM,
                 INDEX_FIRST_ITEM, VALID_WEEK_1, descriptor);
 
@@ -238,7 +239,7 @@ public class TutorsPetParserTest {
                 + PREFIX_LESSON_INDEX + INDEX_FIRST_ITEM.getOneBased() + " "
                 + PREFIX_STUDENT_INDEX + INDEX_FIRST_ITEM.getOneBased() + " "
                 + PREFIX_WEEK + INDEX_FIRST_ITEM.getOneBased() + " "
-                + PREFIX_PARTICIPATION_SCORE + "80 ");
+                + PREFIX_PARTICIPATION_SCORE + "33 ");
 
         assertEquals(expectedCommand, command);
     }
