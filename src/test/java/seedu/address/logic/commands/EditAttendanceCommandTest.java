@@ -48,9 +48,8 @@ import seedu.address.testutil.EditAttendanceDescriptorBuilder;
  */
 public class EditAttendanceCommandTest {
 
-    private static final Attendance EDITED_ATTENDANCE = new Attendance(10);
     private static final EditAttendanceDescriptor EDITED_ATTENDANCE_DESCRIPTOR =
-            new EditAttendanceDescriptorBuilder(EDITED_ATTENDANCE).build();
+            new EditAttendanceDescriptorBuilder(10).build();
 
     private Model model = new ModelManager(getTypicalTutorsPet(), new UserPrefs());
 

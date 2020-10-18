@@ -204,8 +204,10 @@ public class CommandTestUtil {
     public static final EditAttendanceCommand.EditAttendanceDescriptor DESC_ATTENDANCE_80;
 
     static {
-        DESC_ATTENDANCE_33 = new EditAttendanceDescriptorBuilder().withAttendance(VALID_PARTICIPATION_SCORE_33).build();
-        DESC_ATTENDANCE_80 = new EditAttendanceDescriptorBuilder().withAttendance(VALID_PARTICIPATION_SCORE_80).build();
+        DESC_ATTENDANCE_33 =
+                new EditAttendanceDescriptorBuilder().withParticipationScore(VALID_PARTICIPATION_SCORE_33).build();
+        DESC_ATTENDANCE_80 =
+                new EditAttendanceDescriptorBuilder().withParticipationScore(VALID_PARTICIPATION_SCORE_80).build();
     }
 
     /**

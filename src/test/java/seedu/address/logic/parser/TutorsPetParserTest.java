@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PARTICIPATION_SCORE_80;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_WEEK_1;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASS_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PARTICIPATION_SCORE;
@@ -29,6 +30,7 @@ import seedu.address.logic.commands.ClearStudentCommand;
 import seedu.address.logic.commands.DeleteLessonCommand;
 import seedu.address.logic.commands.DeleteModuleClassCommand;
 import seedu.address.logic.commands.DeleteStudentCommand;
+import seedu.address.logic.commands.EditAttendanceCommand;
 import seedu.address.logic.commands.EditLessonCommand;
 import seedu.address.logic.commands.EditModuleClassCommand;
 import seedu.address.logic.commands.EditModuleClassCommand.EditModuleClassDescriptor;
@@ -55,6 +57,7 @@ import seedu.address.model.components.name.NameContainsKeywordsPredicate;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.moduleclass.ModuleClass;
 import seedu.address.model.student.Student;
+import seedu.address.testutil.EditAttendanceDescriptorBuilder;
 import seedu.address.testutil.EditLessonDescriptorBuilder;
 import seedu.address.testutil.EditModuleClassDescriptorBuilder;
 import seedu.address.testutil.EditStudentDescriptorBuilder;
@@ -220,6 +223,23 @@ public class TutorsPetParserTest {
                         + PREFIX_STUDENT_INDEX + INDEX_FIRST_ITEM.getOneBased() + " "
                         + PREFIX_WEEK + INDEX_FIRST_ITEM.getOneBased() + " "
                         + PREFIX_PARTICIPATION_SCORE + "80 ");
+        assertEquals(expectedCommand, command);
+    }
+
+    @Test
+    public void parseCommand_editAttendance() throws Exception {
+        EditAttendanceCommand.EditAttendanceDescriptor descriptor =
+                new EditAttendanceDescriptorBuilder(VALID_PARTICIPATION_SCORE_80).build();
+        EditAttendanceCommand expectedCommand = new EditAttendanceCommand(INDEX_FIRST_ITEM, INDEX_FIRST_ITEM,
+                INDEX_FIRST_ITEM, VALID_WEEK_1, descriptor);
+
+        EditAttendanceCommand command = (EditAttendanceCommand) parser.parseCommand(EditAttendanceCommand.COMMAND_WORD
+                + " " + PREFIX_CLASS_INDEX + INDEX_FIRST_ITEM.getOneBased() + " "
+                + PREFIX_LESSON_INDEX + INDEX_FIRST_ITEM.getOneBased() + " "
+                + PREFIX_STUDENT_INDEX + INDEX_FIRST_ITEM.getOneBased() + " "
+                + PREFIX_WEEK + INDEX_FIRST_ITEM.getOneBased() + " "
+                + PREFIX_PARTICIPATION_SCORE + "80 ");
+
         assertEquals(expectedCommand, command);
     }
 

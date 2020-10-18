@@ -17,7 +17,7 @@ import seedu.address.model.attendance.Week;
 /**
  * Parses input arguments and create a new EditAttendanceCommand object.
  */
-public class EditAttendanceCommandParser {
+public class EditAttendanceCommandParser implements Parser<EditAttendanceCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the EditAttendanceCommand
@@ -33,11 +33,13 @@ public class EditAttendanceCommandParser {
         Index moduleClassIndex;
         Index lessonIndex;
         Index studentIndex;
+        Week week;
 
         boolean isModuleClassIndexPresent = argMultimap.getValue(PREFIX_CLASS_INDEX).isPresent();
         boolean isLessonIndexPresent = argMultimap.getValue(PREFIX_LESSON_INDEX).isPresent();
         boolean isStudentPresent = argMultimap.getValue(PREFIX_STUDENT_INDEX).isPresent();
-        if (!isModuleClassIndexPresent || !isLessonIndexPresent || !isStudentPresent) {
+        boolean isWeekPresent = argMultimap.getValue(PREFIX_WEEK).isPresent();
+        if (!isModuleClassIndexPresent || !isLessonIndexPresent || !isStudentPresent || !isWeekPresent) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditAttendanceCommand.MESSAGE_USAGE));
         }
@@ -51,7 +53,7 @@ public class EditAttendanceCommandParser {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditAttendanceCommand.MESSAGE_USAGE), pe);
         }
 
-        Week week = ParserUtil.parseWeek(argMultimap.getValue(PREFIX_WEEK).get());
+        week = ParserUtil.parseWeek(argMultimap.getValue(PREFIX_WEEK).get());
 
         EditAttendanceDescriptor editAttendanceDescriptor = new EditAttendanceDescriptor();
         if (argMultimap.getValue(PREFIX_PARTICIPATION_SCORE).isPresent()) {
