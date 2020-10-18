@@ -12,13 +12,13 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showModuleClassAtIndex;
 import static seedu.address.logic.commands.CommandTestUtil.showStudentAtIndex;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.ModuleClassUtil.manualReplaceLessonToModuleClass;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_ITEM;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_ITEM;
 import static seedu.address.testutil.TypicalTutorsPet.getTypicalTutorsPet;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -289,9 +289,7 @@ public class EditAttendanceCommandTest {
         Lesson editedLesson = new Lesson(lesson.getStartTime(), lesson.getEndTime(), lesson.getDay(),
                 lesson.getNumberOfOccurrences(), lesson.getVenue(),
                 new AttendanceRecordList(updatedAttendanceRecordList));
-        List<Lesson> editedLessonList = Arrays.asList(editedLesson);
-        ModuleClass editedModuleClass =
-                new ModuleClass(moduleClass.getName(), moduleClass.getStudentUuids(), editedLessonList);
+        ModuleClass editedModuleClass = manualReplaceLessonToModuleClass(moduleClass, lesson, editedLesson);
 
         return editedModuleClass;
     }

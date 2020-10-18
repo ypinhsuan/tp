@@ -236,12 +236,14 @@ public class TutorsPetParserTest {
         EditAttendanceCommand expectedCommand = new EditAttendanceCommand(INDEX_FIRST_ITEM, INDEX_FIRST_ITEM,
                 INDEX_FIRST_ITEM, VALID_WEEK_1, descriptor);
 
-        EditAttendanceCommand command = (EditAttendanceCommand) parser.parseCommand(EditAttendanceCommand.COMMAND_WORD
-                + " " + PREFIX_CLASS_INDEX + INDEX_FIRST_ITEM.getOneBased() + " "
+        EditAttendanceCommand command =
+                (EditAttendanceCommand) parser.parseCommand(EditAttendanceCommand.COMMAND_WORD + " "
+                + PREFIX_CLASS_INDEX + INDEX_FIRST_ITEM.getOneBased() + " "
                 + PREFIX_LESSON_INDEX + INDEX_FIRST_ITEM.getOneBased() + " "
                 + PREFIX_STUDENT_INDEX + INDEX_FIRST_ITEM.getOneBased() + " "
                 + PREFIX_WEEK + INDEX_FIRST_ITEM.getOneBased() + " "
                 + PREFIX_PARTICIPATION_SCORE + "33 ");
+        assertEquals(expectedCommand, command);
     }
 
     @Test
