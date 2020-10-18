@@ -8,17 +8,14 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NUMBER_OF_OCCURRENCES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
+import static seedu.address.logic.util.ModuleClassModificationUtil.addLessonToModuleClass;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.UUID;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.components.name.Name;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.moduleclass.ModuleClass;
 
@@ -73,7 +70,7 @@ public class AddLessonCommand extends Command {
 
         // add lesson to moduleClass
         ModuleClass moduleClassToAddTo = lastShownModuleClassList.get(moduleClassIndex.getZeroBased());
-        ModuleClass modifiedModuleClass = createModifiedModuleClass(moduleClassToAddTo, toAdd);
+        ModuleClass modifiedModuleClass = addLessonToModuleClass(moduleClassToAddTo, toAdd);
         model.setModuleClass(moduleClassToAddTo, modifiedModuleClass);
 
         String message = String.format(MESSAGE_SUCCESS, toAdd);
@@ -87,21 +84,5 @@ public class AddLessonCommand extends Command {
                 || (other instanceof AddLessonCommand // instanceof handles nulls
                 && moduleClassIndex.equals(((AddLessonCommand) other).moduleClassIndex))
                 && toAdd.equals(((AddLessonCommand) other).toAdd);
-    }
-
-    private static ModuleClass createModifiedModuleClass(ModuleClass moduleClassToAddTo, Lesson lessonToAdd)
-            throws CommandException {
-        assert moduleClassToAddTo != null;
-        assert lessonToAdd != null;
-
-        if (moduleClassToAddTo.hasLesson(lessonToAdd)) {
-            throw new CommandException(MESSAGE_EXISTING_LESSON);
-        }
-
-        Name moduleClassName = moduleClassToAddTo.getName();
-        Set<UUID> studentsIds = moduleClassToAddTo.getStudentUuids();
-        List<Lesson> lessons = new ArrayList<>(moduleClassToAddTo.getLessons());
-        lessons.add(lessonToAdd);
-        return new ModuleClass(moduleClassName, studentsIds, lessons);
     }
 }

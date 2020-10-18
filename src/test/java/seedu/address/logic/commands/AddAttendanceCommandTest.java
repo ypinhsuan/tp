@@ -13,10 +13,8 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_ITEM;
 import static seedu.address.testutil.TypicalTutorsPet.getTypicalTutorsPet;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
 
@@ -33,6 +31,7 @@ import seedu.address.model.lesson.Lesson;
 import seedu.address.model.moduleclass.ModuleClass;
 import seedu.address.model.student.Student;
 import seedu.address.testutil.LessonBuilder;
+import seedu.address.testutil.ModuleClassUtil;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code AddAttendanceCommand}.
@@ -43,29 +42,45 @@ public class AddAttendanceCommandTest {
 
     @Test
     public void constructor_nullAttendance_throwsNullPointerException() {
+        Index moduleClassIndex = INDEX_FIRST_ITEM;
+        Index lessonIndex = INDEX_FIRST_ITEM;
+        Index studentIndex = INDEX_FIRST_ITEM;
+        Week targetWeek = VALID_WEEK_5;
+
         assertThrows(NullPointerException.class, () ->
-                new AddAttendanceCommand(INDEX_FIRST_ITEM, INDEX_FIRST_ITEM, INDEX_FIRST_ITEM,
-                        VALID_WEEK_1, null));
+                new AddAttendanceCommand(moduleClassIndex, lessonIndex, studentIndex,
+                        targetWeek, null));
     }
 
     @Test
     public void constructor_nullIndexes_throwsNullPointerException() {
+        Index moduleClassIndex = INDEX_FIRST_ITEM;
+        Index lessonIndex = INDEX_FIRST_ITEM;
+        Index studentIndex = INDEX_FIRST_ITEM;
+        Week targetWeek = VALID_WEEK_1;
+        Attendance targetAttendance = VALID_ATTENDANCE;
+
         assertThrows(NullPointerException.class, () ->
-                new AddAttendanceCommand(null, INDEX_FIRST_ITEM, INDEX_FIRST_ITEM,
-                        VALID_WEEK_1, VALID_ATTENDANCE));
+                new AddAttendanceCommand(null, lessonIndex, studentIndex,
+                        targetWeek, targetAttendance));
         assertThrows(NullPointerException.class, () ->
-                new AddAttendanceCommand(INDEX_FIRST_ITEM, null, INDEX_FIRST_ITEM,
-                        VALID_WEEK_1, VALID_ATTENDANCE));
+                new AddAttendanceCommand(moduleClassIndex, null, studentIndex,
+                        targetWeek, targetAttendance));
         assertThrows(NullPointerException.class, () ->
-                new AddAttendanceCommand(INDEX_FIRST_ITEM, INDEX_FIRST_ITEM, null,
-                        VALID_WEEK_1, VALID_ATTENDANCE));
+                new AddAttendanceCommand(moduleClassIndex, lessonIndex, null,
+                        targetWeek, targetAttendance));
     }
 
     @Test
     public void constructor_nullWeek_throwsNullPointerException() {
+        Index moduleClassIndex = INDEX_FIRST_ITEM;
+        Index lessonIndex = INDEX_FIRST_ITEM;
+        Index studentIndex = INDEX_FIRST_ITEM;
+        Attendance targetAttendance = VALID_ATTENDANCE;
+
         assertThrows(NullPointerException.class, () ->
-                new AddAttendanceCommand(INDEX_FIRST_ITEM, INDEX_FIRST_ITEM, INDEX_FIRST_ITEM,
-                        null, VALID_ATTENDANCE));
+                new AddAttendanceCommand(moduleClassIndex, lessonIndex, studentIndex,
+                        null, targetAttendance));
     }
 
     @Test
@@ -74,35 +89,28 @@ public class AddAttendanceCommandTest {
         Index lessonIndex = INDEX_FIRST_ITEM;
         Index studentIndex = INDEX_FIRST_ITEM;
         Week targetWeek = VALID_WEEK_5;
+        Attendance targetAttendance = VALID_ATTENDANCE;
 
         ModuleClass moduleClass = model.getFilteredModuleClassList().get(moduleClassIndex.getZeroBased());
         Student student = model.getFilteredStudentList().get(studentIndex.getZeroBased());
         Lesson lesson = moduleClass.getLessons().get(lessonIndex.getZeroBased());
-        Map<UUID, Attendance> record = lesson.getAttendanceRecordList()
-                .getAttendanceRecord(targetWeek).getAttendanceRecord();
-        Map<UUID, Attendance> updatedRecord = new HashMap<>(record);
-        updatedRecord.put(student.getUuid(), VALID_ATTENDANCE);
-        AttendanceRecord updatedAttendanceRecord = new AttendanceRecord(updatedRecord);
-        List<AttendanceRecord> updatedAttendanceRecords =
+        AttendanceRecord attendanceRecord = new AttendanceRecord(Map.of(student.getUuid(), targetAttendance));
+        List<AttendanceRecord> attendanceRecords =
                 new ArrayList<>(lesson.getAttendanceRecordList().getAttendanceRecordList());
-        updatedAttendanceRecords.set(targetWeek.getZeroBasedWeekIndex(), updatedAttendanceRecord);
-        Lesson modifiedLesson = new LessonBuilder()
-                .withStartTime(lesson.getStartTime())
-                .withEndTime(lesson.getEndTime())
-                .withDay(lesson.getDay())
-                .withVenue(lesson.getVenue().venue)
-                .withAttendanceRecordList(new AttendanceRecordList(updatedAttendanceRecords))
-                .build();
-        ModuleClass modifiedModuleClass = manualReplaceLessonToModuleClass(moduleClass, lesson, modifiedLesson);
+        attendanceRecords.set(targetWeek.getZeroBasedWeekIndex(), attendanceRecord);
+        Lesson modifiedLesson = new LessonBuilder(lesson)
+                .withAttendanceRecordList(new AttendanceRecordList(attendanceRecords)).build();
+        ModuleClass modifiedModuleClass =
+                ModuleClassUtil.manualReplaceLessonToModuleClass(moduleClass, lesson, modifiedLesson);
 
         String expectedMessage =
-                String.format(AddAttendanceCommand.MESSAGE_SUCCESS, student.getName(), targetWeek, VALID_ATTENDANCE);
+                String.format(AddAttendanceCommand.MESSAGE_SUCCESS, student.getName(), targetWeek, targetAttendance);
         Model expectedModel = new ModelManager(model.getTutorsPet(), new UserPrefs());
         expectedModel.setModuleClass(moduleClass, modifiedModuleClass);
         expectedModel.commit(expectedMessage);
 
         AddAttendanceCommand addAttendanceCommand =
-                new AddAttendanceCommand(moduleClassIndex, lessonIndex, studentIndex, targetWeek, VALID_ATTENDANCE);
+                new AddAttendanceCommand(moduleClassIndex, lessonIndex, studentIndex, targetWeek, targetAttendance);
 
         assertCommandSuccess(addAttendanceCommand, model, expectedMessage, expectedModel);
     }
@@ -112,31 +120,25 @@ public class AddAttendanceCommandTest {
         Index moduleClassIndex = INDEX_FIRST_ITEM;
         Index lessonIndex = INDEX_FIRST_ITEM;
         Index studentIndex = INDEX_FIRST_ITEM;
+        Week targetWeek = VALID_WEEK_1;
+        Attendance targetAttendance = VALID_ATTENDANCE;
 
         ModuleClass moduleClass = model.getFilteredModuleClassList().get(moduleClassIndex.getZeroBased());
         Student student = model.getFilteredStudentList().get(studentIndex.getZeroBased());
         Lesson lesson = moduleClass.getLessons().get(lessonIndex.getZeroBased());
-        Map<UUID, Attendance> record = lesson.getAttendanceRecordList()
-                .getAttendanceRecord(VALID_WEEK_1).getAttendanceRecord();
-        Map<UUID, Attendance> updatedRecord = new HashMap<>(record);
-        updatedRecord.put(student.getUuid(), VALID_ATTENDANCE);
-        AttendanceRecord updatedAttendanceRecord = new AttendanceRecord(updatedRecord);
-        List<AttendanceRecord> updatedAttendanceRecords =
+        AttendanceRecord attendanceRecord = new AttendanceRecord(Map.of(student.getUuid(), targetAttendance));
+        List<AttendanceRecord> attendanceRecords =
                 new ArrayList<>(lesson.getAttendanceRecordList().getAttendanceRecordList());
-        updatedAttendanceRecords.set(VALID_WEEK_1.getZeroBasedWeekIndex(), updatedAttendanceRecord);
-        Lesson modifiedLesson = new LessonBuilder()
-                .withStartTime(lesson.getStartTime())
-                .withEndTime(lesson.getEndTime())
-                .withDay(lesson.getDay())
-                .withVenue(lesson.getVenue().venue)
-                .withAttendanceRecordList(new AttendanceRecordList(updatedAttendanceRecords))
-                .build();
-        ModuleClass modifiedModuleClass = manualReplaceLessonToModuleClass(moduleClass, lesson, modifiedLesson);
+        attendanceRecords.set(targetWeek.getZeroBasedWeekIndex(), attendanceRecord);
+        Lesson modifiedLesson = new LessonBuilder(lesson)
+                .withAttendanceRecordList(new AttendanceRecordList(attendanceRecords)).build();
+        ModuleClass modifiedModuleClass =
+                ModuleClassUtil.manualReplaceLessonToModuleClass(moduleClass, lesson, modifiedLesson);
 
         model.setModuleClass(moduleClass, modifiedModuleClass);
 
         AddAttendanceCommand addAttendanceCommand =
-                new AddAttendanceCommand(moduleClassIndex, lessonIndex, studentIndex, VALID_WEEK_1, VALID_ATTENDANCE);
+                new AddAttendanceCommand(moduleClassIndex, lessonIndex, studentIndex, targetWeek, targetAttendance);
 
         assertCommandFailure(addAttendanceCommand, model, AddAttendanceCommand.MESSAGE_DUPLICATE_ATTENDANCE);
     }
@@ -145,9 +147,12 @@ public class AddAttendanceCommandTest {
     public void execute_studentNotInClass_failure() {
         Index moduleClassIndex = INDEX_FIRST_ITEM;
         Index lessonIndex = INDEX_FIRST_ITEM;
+        Index studentIndex = INDEX_THIRD_ITEM;
+        Week targetWeek = VALID_WEEK_1;
+        Attendance targetAttendance = VALID_ATTENDANCE;
 
         AddAttendanceCommand addAttendanceCommand = new AddAttendanceCommand(moduleClassIndex, lessonIndex,
-                INDEX_THIRD_ITEM, VALID_WEEK_1, VALID_ATTENDANCE);
+                studentIndex, targetWeek, targetAttendance);
 
         assertCommandFailure(addAttendanceCommand, model, Messages.MESSAGE_INVALID_STUDENT_IN_MODULE_CLASS);
     }
@@ -157,9 +162,11 @@ public class AddAttendanceCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredModuleClassList().size() + 1);
         Index lessonIndex = INDEX_FIRST_ITEM;
         Index studentIndex = INDEX_FIRST_ITEM;
+        Week targetWeek = VALID_WEEK_1;
+        Attendance targetAttendance = VALID_ATTENDANCE;
 
         AddAttendanceCommand addAttendanceCommand =
-                new AddAttendanceCommand(outOfBoundIndex, lessonIndex, studentIndex, VALID_WEEK_1, VALID_ATTENDANCE);
+                new AddAttendanceCommand(outOfBoundIndex, lessonIndex, studentIndex, targetWeek, targetAttendance);
 
         assertCommandFailure(addAttendanceCommand, model, Messages.MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX);
     }
@@ -170,9 +177,11 @@ public class AddAttendanceCommandTest {
         ModuleClass moduleClass = model.getFilteredModuleClassList().get(moduleClassIndex.getZeroBased());
         Index outOfBoundIndex = Index.fromOneBased(moduleClass.getLessons().size() + 1);
         Index studentIndex = INDEX_FIRST_ITEM;
+        Week targetWeek = VALID_WEEK_1;
+        Attendance targetAttendance = VALID_ATTENDANCE;
 
         AddAttendanceCommand addAttendanceCommand = new AddAttendanceCommand(moduleClassIndex,
-                outOfBoundIndex, studentIndex, VALID_WEEK_1, VALID_ATTENDANCE);
+                outOfBoundIndex, studentIndex, targetWeek, targetAttendance);
 
         assertCommandFailure(addAttendanceCommand, model, Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
     }
@@ -182,9 +191,11 @@ public class AddAttendanceCommandTest {
         Index moduleClassIndex = INDEX_FIRST_ITEM;
         Index lessonIndex = INDEX_FIRST_ITEM;
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredStudentList().size() + 1);
+        Week targetWeek = VALID_WEEK_1;
+        Attendance targetAttendance = VALID_ATTENDANCE;
 
         AddAttendanceCommand addAttendanceCommand = new AddAttendanceCommand(moduleClassIndex,
-                lessonIndex, outOfBoundIndex, VALID_WEEK_1, VALID_ATTENDANCE);
+                lessonIndex, outOfBoundIndex, targetWeek, targetAttendance);
 
         assertCommandFailure(addAttendanceCommand, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
     }
@@ -198,28 +209,32 @@ public class AddAttendanceCommandTest {
             .getLessons().get(lessonIndex.getZeroBased());
         Week invalidWeek =
                 new Week(Index.fromOneBased(lesson.getAttendanceRecordList().getAttendanceRecordList().size() + 1));
+        Attendance targetAttendance = VALID_ATTENDANCE;
 
         AddAttendanceCommand addAttendanceCommand =
-                new AddAttendanceCommand(moduleClassIndex, lessonIndex, studentIndex, invalidWeek, VALID_ATTENDANCE);
+                new AddAttendanceCommand(moduleClassIndex, lessonIndex, studentIndex, invalidWeek, targetAttendance);
 
         assertCommandFailure(addAttendanceCommand, model, Messages.MESSAGE_INVALID_WEEK);
     }
 
     @Test
     public void equals() {
-        Attendance attendanceScore90 = new Attendance(90);
-        Attendance attendanceScore80 = new Attendance(80);
+        Index moduleClassIndex = INDEX_FIRST_ITEM;
+        Index lessonIndex = INDEX_FIRST_ITEM;
+        Index studentIndex = INDEX_FIRST_ITEM;
         Week week1 = new Week(Index.fromOneBased(1));
         Week week2 = new Week(Index.fromOneBased(2));
-        AddAttendanceCommand addAttendanceCommand = new AddAttendanceCommand(INDEX_FIRST_ITEM, INDEX_FIRST_ITEM,
-                INDEX_FIRST_ITEM, week1, attendanceScore90);
+        Attendance attendanceScore90 = new Attendance(90);
+        Attendance attendanceScore80 = new Attendance(80);
+        AddAttendanceCommand addAttendanceCommand = new AddAttendanceCommand(moduleClassIndex, lessonIndex,
+                studentIndex, week1, attendanceScore90);
 
         // same object -> returns true
         assertTrue(addAttendanceCommand.equals(addAttendanceCommand));
 
         // same value -> returns true
-        AddAttendanceCommand duplicateAddAttendanceCommand = new AddAttendanceCommand(INDEX_FIRST_ITEM,
-                INDEX_FIRST_ITEM, INDEX_FIRST_ITEM, week1, attendanceScore90);
+        AddAttendanceCommand duplicateAddAttendanceCommand = new AddAttendanceCommand(moduleClassIndex,
+                lessonIndex, studentIndex, week1, attendanceScore90);
         assertTrue(addAttendanceCommand.equals(duplicateAddAttendanceCommand));
 
         // different type -> returns false
@@ -230,31 +245,14 @@ public class AddAttendanceCommandTest {
 
         // different attendances -> returns false
         AddAttendanceCommand addAttendanceCommandDifferentAttendance =
-                new AddAttendanceCommand(INDEX_FIRST_ITEM, INDEX_FIRST_ITEM, INDEX_FIRST_ITEM, week1,
+                new AddAttendanceCommand(moduleClassIndex, lessonIndex, studentIndex, week1,
                         attendanceScore80);
         assertFalse(addAttendanceCommand.equals(addAttendanceCommandDifferentAttendance));
 
         // different weeks -> return false
         AddAttendanceCommand addAttendanceCommandDifferentWeek =
-                new AddAttendanceCommand(INDEX_FIRST_ITEM, INDEX_FIRST_ITEM, INDEX_FIRST_ITEM, week2,
+                new AddAttendanceCommand(moduleClassIndex, lessonIndex, studentIndex, week2,
                         attendanceScore90);
         assertFalse(addAttendanceCommand.equals(addAttendanceCommandDifferentWeek));
-    }
-
-    /**
-     * Returns a new {@code ModuleClass} based on the given {@code moduleClass} but with the specified
-     * {@code targetLesson} replaced.
-     */
-    private static ModuleClass manualReplaceLessonToModuleClass(ModuleClass moduleClass,
-                                                                Lesson targetLesson, Lesson modifiedLesson) {
-        List<Lesson> lessons = new ArrayList<>(moduleClass.getLessons());
-
-        for (Lesson lesson : lessons) {
-            if (lesson.isSameLesson(targetLesson)) {
-                lessons.set(lessons.indexOf(lesson), modifiedLesson);
-            }
-        }
-
-        return new ModuleClass(moduleClass.getName(), moduleClass.getStudentUuids(), lessons);
     }
 }
