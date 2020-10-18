@@ -13,8 +13,10 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_ITEM;
 import static seedu.address.testutil.TypicalTutorsPet.getTypicalTutorsPet;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
 
@@ -76,16 +78,20 @@ public class AddAttendanceCommandTest {
         ModuleClass moduleClass = model.getFilteredModuleClassList().get(moduleClassIndex.getZeroBased());
         Student student = model.getFilteredStudentList().get(studentIndex.getZeroBased());
         Lesson lesson = moduleClass.getLessons().get(lessonIndex.getZeroBased());
-        AttendanceRecord attendanceRecord = new AttendanceRecord(Map.of(student.getUuid(), VALID_ATTENDANCE));
-        List<AttendanceRecord> attendanceRecords =
+        Map<UUID, Attendance> record = lesson.getAttendanceRecordList()
+                .getAttendanceRecord(targetWeek).getAttendanceRecord();
+        Map<UUID, Attendance> updatedRecord = new HashMap<>(record);
+        updatedRecord.put(student.getUuid(), VALID_ATTENDANCE);
+        AttendanceRecord updatedAttendanceRecord = new AttendanceRecord(updatedRecord);
+        List<AttendanceRecord> updatedAttendanceRecords =
                 new ArrayList<>(lesson.getAttendanceRecordList().getAttendanceRecordList());
-        attendanceRecords.set(targetWeek.getZeroBasedWeekIndex(), attendanceRecord);
+        updatedAttendanceRecords.set(targetWeek.getZeroBasedWeekIndex(), updatedAttendanceRecord);
         Lesson modifiedLesson = new LessonBuilder()
                 .withStartTime(lesson.getStartTime())
                 .withEndTime(lesson.getEndTime())
                 .withDay(lesson.getDay())
                 .withVenue(lesson.getVenue().venue)
-                .withAttendanceRecordList(new AttendanceRecordList(attendanceRecords))
+                .withAttendanceRecordList(new AttendanceRecordList(updatedAttendanceRecords))
                 .build();
         ModuleClass modifiedModuleClass = manualReplaceLessonToModuleClass(moduleClass, lesson, modifiedLesson);
 
@@ -110,16 +116,20 @@ public class AddAttendanceCommandTest {
         ModuleClass moduleClass = model.getFilteredModuleClassList().get(moduleClassIndex.getZeroBased());
         Student student = model.getFilteredStudentList().get(studentIndex.getZeroBased());
         Lesson lesson = moduleClass.getLessons().get(lessonIndex.getZeroBased());
-        AttendanceRecord attendanceRecord = new AttendanceRecord(Map.of(student.getUuid(), VALID_ATTENDANCE));
-        List<AttendanceRecord> attendanceRecords =
+        Map<UUID, Attendance> record = lesson.getAttendanceRecordList()
+                .getAttendanceRecord(VALID_WEEK_1).getAttendanceRecord();
+        Map<UUID, Attendance> updatedRecord = new HashMap<>(record);
+        updatedRecord.put(student.getUuid(), VALID_ATTENDANCE);
+        AttendanceRecord updatedAttendanceRecord = new AttendanceRecord(updatedRecord);
+        List<AttendanceRecord> updatedAttendanceRecords =
                 new ArrayList<>(lesson.getAttendanceRecordList().getAttendanceRecordList());
-        attendanceRecords.set(VALID_WEEK_1.getZeroBasedWeekIndex(), attendanceRecord);
+        updatedAttendanceRecords.set(VALID_WEEK_1.getZeroBasedWeekIndex(), updatedAttendanceRecord);
         Lesson modifiedLesson = new LessonBuilder()
                 .withStartTime(lesson.getStartTime())
                 .withEndTime(lesson.getEndTime())
                 .withDay(lesson.getDay())
                 .withVenue(lesson.getVenue().venue)
-                .withAttendanceRecordList(new AttendanceRecordList(attendanceRecords))
+                .withAttendanceRecordList(new AttendanceRecordList(updatedAttendanceRecords))
                 .build();
         ModuleClass modifiedModuleClass = manualReplaceLessonToModuleClass(moduleClass, lesson, modifiedLesson);
 

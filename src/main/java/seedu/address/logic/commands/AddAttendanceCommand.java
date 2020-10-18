@@ -41,12 +41,12 @@ public class AddAttendanceCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student's attendance to the specified "
             + "lesson in the student manager. "
-            + "Note: All indexes must be positive integers.\n"
+            + "Note: All indexes and numbers must be positive integers.\n"
             + "Parameters: "
             + PREFIX_CLASS_INDEX + "CLASS_INDEX "
             + PREFIX_LESSON_INDEX + "LESSON_INDEX "
             + PREFIX_STUDENT_INDEX + "STUDENT_INDEX "
-            + PREFIX_WEEK + "WEEK_NUMBER (must be a positive integer) "
+            + PREFIX_WEEK + "WEEK_NUMBER"
             + PREFIX_PARTICIPATION_SCORE + "PARTICIPATION_SCORE (must be an integer between 0 and 100)";
 
     public static final String MESSAGE_SUCCESS = "New attendance added: %1$s attended week %2$s lesson with "
