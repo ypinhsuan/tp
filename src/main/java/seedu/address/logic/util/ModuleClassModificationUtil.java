@@ -1,4 +1,4 @@
-package seedu.address.model.util;
+package seedu.address.logic.util;
 
 import static seedu.address.logic.commands.AddLessonCommand.MESSAGE_EXISTING_LESSON;
 import static seedu.address.logic.commands.EditLessonCommand.MESSAGE_DUPLICATE_LESSON;

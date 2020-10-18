@@ -8,7 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NUMBER_OF_OCCURRENCES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
-import static seedu.address.model.util.ModuleClassModificationUtil.createModifiedModuleClassWithAddedLesson;
+import static seedu.address.logic.util.ModuleClassModificationUtil.createModifiedModuleClassWithAddedLesson;
 
 import java.util.List;
 

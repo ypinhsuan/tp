@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASS_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON_INDEX;
-import static seedu.address.model.util.ModuleClassModificationUtil.createModifiedModuleClassWithDeletedLesson;
+import static seedu.address.logic.util.ModuleClassModificationUtil.createModifiedModuleClassWithDeletedLesson;
 
 import java.util.List;
 

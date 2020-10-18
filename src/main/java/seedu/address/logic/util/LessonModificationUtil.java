@@ -1,4 +1,4 @@
-package seedu.address.model.util;
+package seedu.address.logic.util;
 
 import static seedu.address.logic.commands.AddAttendanceCommand.MESSAGE_DUPLICATE_ATTENDANCE;
 import static seedu.address.logic.commands.DeleteAttendanceCommand.MESSAGE_MISSING_ATTENDANCE;

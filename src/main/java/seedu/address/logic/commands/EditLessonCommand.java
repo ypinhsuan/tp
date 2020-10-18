@@ -9,7 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_MODULE_CLASS;
-import static seedu.address.model.util.ModuleClassModificationUtil.createModifiedModuleClassWithEditedLesson;
+import static seedu.address.logic.util.ModuleClassModificationUtil.createModifiedModuleClassWithEditedLesson;
 
 import java.time.LocalTime;
 import java.util.List;

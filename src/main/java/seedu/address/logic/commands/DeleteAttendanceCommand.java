@@ -6,8 +6,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASS_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEEK;
-import static seedu.address.model.util.LessonModificationUtil.createModifiedLessonWithDeletedAttendance;
-import static seedu.address.model.util.ModuleClassModificationUtil.createModifiedModuleClassWithModifiedLesson;
+import static seedu.address.logic.util.LessonModificationUtil.createModifiedLessonWithDeletedAttendance;
+import static seedu.address.logic.util.ModuleClassModificationUtil.createModifiedModuleClassWithModifiedLesson;
 
 import java.util.List;
 
