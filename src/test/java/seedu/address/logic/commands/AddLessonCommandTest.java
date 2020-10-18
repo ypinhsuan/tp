@@ -30,12 +30,10 @@ public class AddLessonCommandTest {
     private Model model = new ModelManager(getOnlyModuleClassTutorsPet(), new UserPrefs());
 
     @Test
-    public void constructor_nullLesson_throwNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddLessonCommand(INDEX_FIRST_ITEM, null));
-    }
+    public void constructor_nullIndexes_throwNullPointerException() {
+        Index moduleClassIndex = INDEX_FIRST_ITEM;
 
-    @Test
-    public void constructor_nullClassIndex_throwNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new AddLessonCommand(moduleClassIndex, null));
         Lesson lesson = new LessonBuilder().build();
         assertThrows(NullPointerException.class, () -> new AddLessonCommand(null, lesson));
     }
@@ -69,7 +67,7 @@ public class AddLessonCommandTest {
         // update model with modified class
         model.setModuleClass(moduleClass, modifiedModuleClass);
 
-        AddLessonCommand addLessonCommand = new AddLessonCommand(INDEX_FIRST_ITEM, lesson);
+        AddLessonCommand addLessonCommand = new AddLessonCommand(moduleClassIndex, lesson);
 
         assertCommandFailure(addLessonCommand, model, AddLessonCommand.MESSAGE_EXISTING_LESSON);
     }
@@ -85,16 +83,18 @@ public class AddLessonCommandTest {
 
     @Test
     public void equals() {
+        Index moduleClassIndex = INDEX_FIRST_ITEM;
+
         Lesson lessonAtCom1 = new LessonBuilder().withVenue("COM1-0001").build();
         Lesson lessonAtCom2 = new LessonBuilder().withVenue("COM2-0002").build();
-        AddLessonCommand addLessonCom1Command = new AddLessonCommand(INDEX_FIRST_ITEM, lessonAtCom1);
-        AddLessonCommand addLessonCom2Command = new AddLessonCommand(INDEX_FIRST_ITEM, lessonAtCom2);
+        AddLessonCommand addLessonCom1Command = new AddLessonCommand(moduleClassIndex, lessonAtCom1);
+        AddLessonCommand addLessonCom2Command = new AddLessonCommand(moduleClassIndex, lessonAtCom2);
 
         // same object -> returns true
         assertTrue(addLessonCom1Command.equals(addLessonCom1Command));
 
         // same values -> returns true
-        AddLessonCommand addLessonCom1CommandCopy = new AddLessonCommand(INDEX_FIRST_ITEM, lessonAtCom1);
+        AddLessonCommand addLessonCom1CommandCopy = new AddLessonCommand(moduleClassIndex, lessonAtCom1);
         assertTrue(addLessonCom1Command.equals(addLessonCom1CommandCopy));
 
         // different type -> returns false

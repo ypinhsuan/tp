@@ -9,14 +9,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_MODULE_CLASS;
+import static seedu.address.model.util.ModuleClassModificationUtil.createModifiedModuleClassWithEditedLesson;
 
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
-import java.util.UUID;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -24,7 +21,6 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.attendance.AttendanceRecordList;
-import seedu.address.model.components.name.Name;
 import seedu.address.model.lesson.Day;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.NumberOfOccurrences;
@@ -95,7 +91,8 @@ public class EditLessonCommand extends Command {
 
         Lesson lessonToEdit = targetModuleClass.getLessons().get(lessonIndex.getZeroBased());
         Lesson editedLesson = createEditedLesson(lessonToEdit, editLessonDescriptor);
-        ModuleClass modifiedModuleClass = createModifiedModuleClass(targetModuleClass, lessonToEdit, editedLesson);
+        ModuleClass modifiedModuleClass = createModifiedModuleClassWithEditedLesson(
+                targetModuleClass, lessonToEdit, editedLesson);
 
         model.setModuleClass(targetModuleClass, modifiedModuleClass);
         model.updateFilteredModuleClassList(PREDICATE_SHOW_ALL_MODULE_CLASS);
@@ -121,38 +118,6 @@ public class EditLessonCommand extends Command {
         AttendanceRecordList attendanceRecordList = lessonToEdit.getAttendanceRecordList();
         return new Lesson(updatedStartTime, updatedEndTime, updatedDay, originalNumberOfOccurrences,
                 updatedVenue, attendanceRecordList);
-    }
-
-    /**
-     * Adds all lessons in the target module class to the new module class.
-     * The {@code editedLesson} is added in place of the {@code lessonToEdit}.
-     *
-     * @throws CommandException if the {@code editedLesson} already exists.
-     */
-    private static ModuleClass createModifiedModuleClass(
-            ModuleClass targetModuleClass, Lesson lessonToEdit, Lesson editedLesson) throws CommandException {
-        assert targetModuleClass != null;
-        assert lessonToEdit != null;
-        assert editedLesson != null;
-        assert targetModuleClass.hasLesson(lessonToEdit);
-
-        if (!lessonToEdit.isSameLesson(editedLesson) && targetModuleClass.hasLesson(editedLesson)) {
-            throw new CommandException(MESSAGE_DUPLICATE_LESSON);
-        }
-
-        Name moduleClassName = targetModuleClass.getName();
-        Set<UUID> studentsIds = new HashSet<>(targetModuleClass.getStudentUuids());
-        List<Lesson> listOfLessons = targetModuleClass.getLessons();
-        List<Lesson> editedListOfLessons = new ArrayList<>();
-        for (Lesson lesson : listOfLessons) {
-            if (lesson.equals(lessonToEdit)) {
-                editedListOfLessons.add(editedLesson);
-            } else {
-                editedListOfLessons.add(lesson);
-            }
-        }
-        assert listOfLessons.size() == editedListOfLessons.size();
-        return new ModuleClass(moduleClassName, studentsIds, editedListOfLessons);
     }
 
     @Override

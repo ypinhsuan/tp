@@ -5,6 +5,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_WEEK_1;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_WEEK_5;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.model.attendance.Week.MESSAGE_CONSTRAINTS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_ITEM;
 
@@ -88,8 +89,7 @@ public class DeleteAttendanceCommandParserTest {
 
     @Test
     public void parse_invalidWeekIndex_throwsParseException() {
-        assertParseFailure(parser, " c/1 l/1 s/1 w/a", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                DeleteAttendanceCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, " c/1 l/1 s/1 w/a", String.format(MESSAGE_CONSTRAINTS));
     }
 
     @Test
@@ -112,8 +112,7 @@ public class DeleteAttendanceCommandParserTest {
 
     @Test
     public void parse_emptyWeekIndex_throwsParseException() {
-        assertParseFailure(parser, " c/1 l/1 s/1 w/", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                DeleteAttendanceCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, " c/1 l/1 s/1 w/", String.format(MESSAGE_CONSTRAINTS));
     }
 
     @Test

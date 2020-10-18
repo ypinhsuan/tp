@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.VALID_WEEK_1;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_WEEK_5;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -28,6 +29,7 @@ import seedu.address.model.lesson.Lesson;
 import seedu.address.model.moduleclass.ModuleClass;
 import seedu.address.model.student.Student;
 import seedu.address.testutil.LessonBuilder;
+import seedu.address.testutil.ModuleClassUtil;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -39,18 +41,27 @@ public class DeleteAttendanceCommandTest {
 
     @Test
     public void constructor_nullIndexes_throwsNullPointerException() {
+        Index moduleClassIndex = INDEX_FIRST_ITEM;
+        Index lessonIndex = INDEX_FIRST_ITEM;
+        Index studentIndex = INDEX_FIRST_ITEM;
+        Week targetWeek = VALID_WEEK_1;
+
         assertThrows(NullPointerException.class, () -> new DeleteAttendanceCommand(
-                null, INDEX_FIRST_ITEM, INDEX_FIRST_ITEM, VALID_WEEK_1));
+                null, lessonIndex, studentIndex, targetWeek));
         assertThrows(NullPointerException.class, () -> new DeleteAttendanceCommand(
-                INDEX_FIRST_ITEM, null, INDEX_FIRST_ITEM, VALID_WEEK_1));
+                moduleClassIndex, null, studentIndex, targetWeek));
         assertThrows(NullPointerException.class, () -> new DeleteAttendanceCommand(
-                INDEX_FIRST_ITEM, INDEX_FIRST_ITEM, null, VALID_WEEK_1));
+                moduleClassIndex, lessonIndex, null, targetWeek));
     }
 
     @Test
     public void constructor_nullWeek_throwsNullPointerException() {
+        Index moduleClassIndex = INDEX_FIRST_ITEM;
+        Index lessonIndex = INDEX_FIRST_ITEM;
+        Index studentIndex = INDEX_FIRST_ITEM;
+
         assertThrows(NullPointerException.class, () -> new DeleteAttendanceCommand(
-                INDEX_FIRST_ITEM, INDEX_FIRST_ITEM, INDEX_FIRST_ITEM, null));
+                moduleClassIndex, lessonIndex, studentIndex, null));
     }
 
     @Test
@@ -72,14 +83,10 @@ public class DeleteAttendanceCommandTest {
         List<AttendanceRecord> updatedAttendanceRecords =
                 new ArrayList<>(lesson.getAttendanceRecordList().getAttendanceRecordList());
         updatedAttendanceRecords.set(targetWeek.getZeroBasedWeekIndex(), updatedAttendanceRecord);
-        Lesson modifiedLesson = new LessonBuilder()
-                .withStartTime(lesson.getStartTime())
-                .withEndTime(lesson.getEndTime())
-                .withDay(lesson.getDay())
-                .withVenue(lesson.getVenue().venue)
-                .withAttendanceRecordList(new AttendanceRecordList(updatedAttendanceRecords))
-                .build();
-        ModuleClass modifiedModuleClass = manualReplaceLessonToModuleClass(moduleClass, lesson, modifiedLesson);
+        Lesson modifiedLesson = new LessonBuilder(lesson)
+                .withAttendanceRecordList(new AttendanceRecordList(updatedAttendanceRecords)).build();
+        ModuleClass modifiedModuleClass =
+                ModuleClassUtil.manualReplaceLessonToModuleClass(moduleClass, lesson, modifiedLesson);
 
         String expectedMessage = String.format(
                 DeleteAttendanceCommand.MESSAGE_DELETE_ATTENDANCE_SUCCESS, targetWeek,
@@ -92,6 +99,38 @@ public class DeleteAttendanceCommandTest {
                 new DeleteAttendanceCommand(moduleClassIndex, lessonIndex, studentIndex, targetWeek);
 
         assertCommandSuccess(deleteAttendanceCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_missingAttendance_failure() {
+        Index moduleClassIndex = INDEX_FIRST_ITEM;
+        Index lessonIndex = INDEX_FIRST_ITEM;
+        Index studentIndex = INDEX_FIRST_ITEM;
+        Week targetWeek = VALID_WEEK_5;
+
+        ModuleClass moduleClass = model.getFilteredModuleClassList().get(moduleClassIndex.getZeroBased());
+        Student student = model.getFilteredStudentList().get(studentIndex.getZeroBased());
+        Lesson lesson = moduleClass.getLessons().get(lessonIndex.getZeroBased());
+        Map<UUID, Attendance> record = lesson.getAttendanceRecordList()
+                .getAttendanceRecord(targetWeek).getAttendanceRecord();
+        Map<UUID, Attendance> updatedRecord = new HashMap<>(record);
+        // delete non-existent week 5 attendance record
+        updatedRecord.remove(student.getUuid());
+        AttendanceRecord updatedAttendanceRecord = new AttendanceRecord(updatedRecord);
+        List<AttendanceRecord> updatedAttendanceRecords =
+                new ArrayList<>(lesson.getAttendanceRecordList().getAttendanceRecordList());
+        updatedAttendanceRecords.set(targetWeek.getZeroBasedWeekIndex(), updatedAttendanceRecord);
+        Lesson modifiedLesson = new LessonBuilder(lesson)
+                .withAttendanceRecordList(new AttendanceRecordList(updatedAttendanceRecords)).build();
+        ModuleClass modifiedModuleClass =
+                ModuleClassUtil.manualReplaceLessonToModuleClass(moduleClass, lesson, modifiedLesson);
+
+        model.setModuleClass(moduleClass, modifiedModuleClass);
+
+        DeleteAttendanceCommand deleteAttendanceCommand =
+                new DeleteAttendanceCommand(moduleClassIndex, lessonIndex, studentIndex, targetWeek);
+
+        assertCommandFailure(deleteAttendanceCommand, model, DeleteAttendanceCommand.MESSAGE_MISSING_ATTENDANCE);
     }
 
     @Test
@@ -148,22 +187,5 @@ public class DeleteAttendanceCommandTest {
                 new DeleteAttendanceCommand(moduleClassIndex, lessonIndex, studentIndex, targetWeek);
 
         assertCommandFailure(deleteAttendanceCommand, model, Messages.MESSAGE_INVALID_WEEK);
-    }
-
-    /**
-     * Returns a new {@code ModuleClass} based on the given {@code moduleClass} but with the specified
-     * {@code targetLesson} replaced.
-     */
-    private static ModuleClass manualReplaceLessonToModuleClass(ModuleClass moduleClass,
-                                                                Lesson targetLesson, Lesson modifiedLesson) {
-        List<Lesson> lessons = new ArrayList<>(moduleClass.getLessons());
-
-        for (Lesson lesson : lessons) {
-            if (lesson.isSameLesson(targetLesson)) {
-                lessons.set(lessons.indexOf(lesson), modifiedLesson);
-            }
-        }
-
-        return new ModuleClass(moduleClass.getName(), moduleClass.getStudentUuids(), lessons);
     }
 }

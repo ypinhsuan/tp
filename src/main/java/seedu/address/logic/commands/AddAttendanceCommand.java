@@ -7,28 +7,18 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PARTICIPATION_SCORE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEEK;
+import static seedu.address.model.util.LessonModificationUtil.createModifiedLessonWithAddedAttendance;
+import static seedu.address.model.util.ModuleClassModificationUtil.createModifiedModuleClassWithModifiedLesson;
 
-import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.attendance.Attendance;
-import seedu.address.model.attendance.AttendanceRecord;
-import seedu.address.model.attendance.AttendanceRecordList;
 import seedu.address.model.attendance.Week;
-import seedu.address.model.components.name.Name;
-import seedu.address.model.lesson.Day;
 import seedu.address.model.lesson.Lesson;
-import seedu.address.model.lesson.NumberOfOccurrences;
-import seedu.address.model.lesson.Venue;
 import seedu.address.model.moduleclass.ModuleClass;
 import seedu.address.model.student.Student;
 
@@ -105,8 +95,9 @@ public class AddAttendanceCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_WEEK);
         }
 
-        Lesson modifiedLesson = createModifiedLesson(targetLesson, targetStudent, week, toAdd);
-        ModuleClass modifiedModuleClass = createModifiedModuleClass(targetModuleClass, lessonIndex, modifiedLesson);
+        Lesson modifiedLesson = createModifiedLessonWithAddedAttendance(targetLesson, targetStudent, week, toAdd);
+        ModuleClass modifiedModuleClass =
+                createModifiedModuleClassWithModifiedLesson(targetModuleClass, lessonIndex, modifiedLesson);
         model.setModuleClass(targetModuleClass, modifiedModuleClass);
 
         String message = String.format(MESSAGE_SUCCESS, targetStudent.getName(), week, toAdd);
@@ -123,50 +114,5 @@ public class AddAttendanceCommand extends Command {
                 && studentIndex.equals(((AddAttendanceCommand) other).studentIndex)
                 && week.equals(((AddAttendanceCommand) other).week)
                 && toAdd.equals(((AddAttendanceCommand) other).toAdd));
-    }
-
-    private static ModuleClass createModifiedModuleClass(ModuleClass targetModuleClass,
-                                                         Index lessonToEditIndex, Lesson lessonToUpdate) {
-        assert targetModuleClass != null;
-        assert lessonToEditIndex != null;
-        assert lessonToUpdate != null;
-
-        Name moduleClassName = targetModuleClass.getName();
-        Set<UUID> studentsIds = targetModuleClass.getStudentUuids();
-        List<Lesson> lessons = new ArrayList<>(targetModuleClass.getLessons());
-        lessons.set(lessonToEditIndex.getZeroBased(), lessonToUpdate);
-
-        return new ModuleClass(moduleClassName, studentsIds, lessons);
-    }
-
-    private static Lesson createModifiedLesson (Lesson targetLesson, Student targetStudent,
-                                                Week targetWeek, Attendance attendanceToAdd) throws CommandException {
-        assert targetLesson != null;
-        assert targetStudent != null;
-        assert targetWeek != null;
-        assert attendanceToAdd != null;
-
-        if (targetLesson.getAttendanceRecordList().hasAttendance(targetStudent, targetWeek)) {
-            throw new CommandException(MESSAGE_DUPLICATE_ATTENDANCE);
-        }
-
-        Map<UUID, Attendance> record = targetLesson.getAttendanceRecordList()
-                .getAttendanceRecord(targetWeek).getAttendanceRecord();
-        Map<UUID, Attendance> updatedRecord = new HashMap<>(record);
-        updatedRecord.put(targetStudent.getUuid(), attendanceToAdd);
-        AttendanceRecord updatedAttendanceRecord = new AttendanceRecord(updatedRecord);
-        List<AttendanceRecord> updatedAttendanceRecords =
-                new ArrayList<>(targetLesson.getAttendanceRecordList().getAttendanceRecordList());
-        updatedAttendanceRecords.set(targetWeek.getZeroBasedWeekIndex(), updatedAttendanceRecord);
-        AttendanceRecordList updatedAttendanceRecordList = new AttendanceRecordList(updatedAttendanceRecords);
-
-        // unchanged lesson fields
-        LocalTime startTime = targetLesson.getStartTime();
-        LocalTime endTime = targetLesson.getEndTime();
-        Day day = targetLesson.getDay();
-        NumberOfOccurrences numberOfOccurrences = targetLesson.getNumberOfOccurrences();
-        Venue venue = targetLesson.getVenue();
-
-        return new Lesson(startTime, endTime, day, numberOfOccurrences, venue, updatedAttendanceRecordList);
     }
 }

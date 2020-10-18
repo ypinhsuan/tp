@@ -33,7 +33,6 @@ public class DeleteAttendanceCommandParser implements Parser<DeleteAttendanceCom
         Index moduleClassIndex;
         Index lessonIndex;
         Index studentIndex;
-        Week week;
 
         if (!arePrefixesPresent(argMultimap, PREFIX_CLASS_INDEX, PREFIX_LESSON_INDEX, PREFIX_STUDENT_INDEX,
                 PREFIX_WEEK)
@@ -46,11 +45,12 @@ public class DeleteAttendanceCommandParser implements Parser<DeleteAttendanceCom
             moduleClassIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_CLASS_INDEX).get());
             lessonIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_LESSON_INDEX).get());
             studentIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_STUDENT_INDEX).get());
-            week = ParserUtil.parseWeek(argMultimap.getValue(PREFIX_WEEK).get());
         } catch (ParseException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteAttendanceCommand.MESSAGE_USAGE), pe);
         }
+
+        Week week = ParserUtil.parseWeek(argMultimap.getValue(PREFIX_WEEK).get());
 
         return new DeleteAttendanceCommand(moduleClassIndex, lessonIndex, studentIndex, week);
     }
