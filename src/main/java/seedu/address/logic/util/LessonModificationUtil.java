@@ -27,10 +27,11 @@ import seedu.address.model.student.Student;
 public class LessonModificationUtil {
 
     /**
-     * Adds all attendances in the target lesson to the new lesson.
-     * The {@code attendanceToAdd} is added to the lesson.
+     * Adds {@code attendanceToAdd} to {@code targetLesson}.
+     * All existing {@code Attendance}s in {@code targetLesson} are copied to the new {@code Lesson}.
      *
-     * @throws CommandException if the {@code attendanceToAdd} already exists.
+     * @throws CommandException if an {@code Attendance} already exists for the {@code targetStudent}
+     * in the {@code targetWeek}.
      */
     public static Lesson createModifiedLessonWithAddedAttendance(
             Lesson targetLesson, Student targetStudent, Week targetWeek, Attendance attendanceToAdd)
@@ -68,10 +69,12 @@ public class LessonModificationUtil {
     }
 
     /**
-     * Adds all attendances in the target lesson to the new lesson.
-     * The attendance of the {@code targetStudent} in the {@code targetWeek} is deleted from the lesson.
+     * Removes the {@code Attendance} of the {@code targetStudent} in the {@code targetWeek} from the
+     * {@code targetLesson}. All other existing {@code Attendance}s in {@code targetLesson} are copied
+     * to the new {@code Lesson}.
      *
-     * @throws CommandException if the attendance of the {@code targetStudent} in the {@code targetWeek} does not exist.
+     * @throws CommandException if the {@code Attendance} of the {@code targetStudent} in the {@code targetWeek}
+     * does not exist.
      */
     public static Lesson createModifiedLessonWithDeletedAttendance(
             Lesson targetLesson, Student targetStudent, Week targetWeek) throws CommandException {

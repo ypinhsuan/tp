@@ -74,15 +74,17 @@ public class DeleteAttendanceCommandTest {
         ModuleClass moduleClass = model.getFilteredModuleClassList().get(moduleClassIndex.getZeroBased());
         Student student = model.getFilteredStudentList().get(studentIndex.getZeroBased());
         Lesson lesson = moduleClass.getLessons().get(lessonIndex.getZeroBased());
+
+        // delete week 1 attendance record
         Map<UUID, Attendance> record = lesson.getAttendanceRecordList()
                 .getAttendanceRecord(targetWeek).getAttendanceRecord();
         Map<UUID, Attendance> updatedRecord = new HashMap<>(record);
-        // delete week 1 attendance record
         updatedRecord.remove(student.getUuid());
         AttendanceRecord updatedAttendanceRecord = new AttendanceRecord(updatedRecord);
         List<AttendanceRecord> updatedAttendanceRecords =
                 new ArrayList<>(lesson.getAttendanceRecordList().getAttendanceRecordList());
         updatedAttendanceRecords.set(targetWeek.getZeroBasedWeekIndex(), updatedAttendanceRecord);
+
         Lesson modifiedLesson = new LessonBuilder(lesson)
                 .withAttendanceRecordList(new AttendanceRecordList(updatedAttendanceRecords)).build();
         ModuleClass modifiedModuleClass =
@@ -111,15 +113,17 @@ public class DeleteAttendanceCommandTest {
         ModuleClass moduleClass = model.getFilteredModuleClassList().get(moduleClassIndex.getZeroBased());
         Student student = model.getFilteredStudentList().get(studentIndex.getZeroBased());
         Lesson lesson = moduleClass.getLessons().get(lessonIndex.getZeroBased());
+
+        // delete non-existent week 5 attendance record
         Map<UUID, Attendance> record = lesson.getAttendanceRecordList()
                 .getAttendanceRecord(targetWeek).getAttendanceRecord();
         Map<UUID, Attendance> updatedRecord = new HashMap<>(record);
-        // delete non-existent week 5 attendance record
         updatedRecord.remove(student.getUuid());
         AttendanceRecord updatedAttendanceRecord = new AttendanceRecord(updatedRecord);
         List<AttendanceRecord> updatedAttendanceRecords =
                 new ArrayList<>(lesson.getAttendanceRecordList().getAttendanceRecordList());
         updatedAttendanceRecords.set(targetWeek.getZeroBasedWeekIndex(), updatedAttendanceRecord);
+
         Lesson modifiedLesson = new LessonBuilder(lesson)
                 .withAttendanceRecordList(new AttendanceRecordList(updatedAttendanceRecords)).build();
         ModuleClass modifiedModuleClass =

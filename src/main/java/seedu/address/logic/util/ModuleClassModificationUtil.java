@@ -21,31 +21,31 @@ import seedu.address.model.moduleclass.ModuleClass;
 public class ModuleClassModificationUtil {
 
     /**
-     * Adds all lessons in the target module class to the new module class.
-     * The {@code lessonToAdd} is added to the new module class.
+     * Adds {@code lessonToAdd} to {@code moduleClassToAddTo}.
+     * All existing {@code Lesson}s in {@code moduleClassToAddTo} are copied to the new {@code ModuleClass}.
      *
      * @throws CommandException if the {@code lessonToAdd} already exists.
      */
     public static ModuleClass createModifiedModuleClassWithAddedLesson(
-            ModuleClass moduleClassToAddTo, Lesson lessonToAdd)
+            ModuleClass targetModuleClass, Lesson lessonToAdd)
             throws CommandException {
-        assert moduleClassToAddTo != null;
+        assert targetModuleClass != null;
         assert lessonToAdd != null;
 
-        if (moduleClassToAddTo.hasLesson(lessonToAdd)) {
+        if (targetModuleClass.hasLesson(lessonToAdd)) {
             throw new CommandException(MESSAGE_EXISTING_LESSON);
         }
 
-        Name moduleClassName = moduleClassToAddTo.getName();
-        Set<UUID> studentsIds = moduleClassToAddTo.getStudentUuids();
-        List<Lesson> lessons = new ArrayList<>(moduleClassToAddTo.getLessons());
+        Name moduleClassName = targetModuleClass.getName();
+        Set<UUID> studentsIds = targetModuleClass.getStudentUuids();
+        List<Lesson> lessons = new ArrayList<>(targetModuleClass.getLessons());
         lessons.add(lessonToAdd);
         return new ModuleClass(moduleClassName, studentsIds, lessons);
     }
 
     /**
-     * Adds all lessons in the target module class to the new module class.
-     * The {@code editedLesson} is added in place of the {@code lessonToEdit}.
+     * Replaces the {@code lessonToEdit} with {@code editedLesson} in {@code targetModuleClass}.
+     * All other existing {@code Lesson}s in {@code targetModuleClass} are copied to the new {@code ModuleClass}.
      *
      * @throws CommandException if the {@code editedLesson} already exists.
      */
@@ -76,10 +76,8 @@ public class ModuleClassModificationUtil {
     }
 
     /**
-     * Adds all lessons in the target module class to the new module class.
-     * The {@code lessonToDelete} is deleted from the new module class.
-     *
-     * @throws CommandException if the {@code lessonToDelete} already exists.
+     * Removes the {@code lessonToDelete} from the {@code targetModuleClass}.
+     * All other existing {@code Lesson}s in the {@code targetModuleClass} are copied to the new {@code ModuleClass}.
      */
     public static ModuleClass createModifiedModuleClassWithDeletedLesson(
             ModuleClass targetModuleClass, Lesson lessonToDelete) {
