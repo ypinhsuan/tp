@@ -244,6 +244,7 @@ public class TutorsPetParserTest {
                 + PREFIX_PARTICIPATION_SCORE + "33 ");
     }
 
+    @Test
     public void parseCommand_deleteAttendance() throws Exception {
         Week week = new Week(INDEX_FIRST_ITEM);
         DeleteAttendanceCommand expectedCommand =

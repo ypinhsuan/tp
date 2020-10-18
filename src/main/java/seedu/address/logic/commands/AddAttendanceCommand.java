@@ -7,7 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PARTICIPATION_SCORE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEEK;
-import static seedu.address.logic.util.LessonModificationUtil.addLessonToAttendance;
+import static seedu.address.logic.util.LessonModificationUtil.addAttendanceToLesson;
 import static seedu.address.logic.util.ModuleClassModificationUtil.addModifiedLessonToModuleClass;
 
 import java.util.List;
@@ -95,7 +95,7 @@ public class AddAttendanceCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_WEEK);
         }
 
-        Lesson modifiedLesson = addLessonToAttendance(targetLesson, targetStudent, week, toAdd);
+        Lesson modifiedLesson = addAttendanceToLesson(targetLesson, targetStudent, week, toAdd);
         ModuleClass modifiedModuleClass =
                 addModifiedLessonToModuleClass(targetModuleClass, lessonIndex, modifiedLesson);
         model.setModuleClass(targetModuleClass, modifiedModuleClass);

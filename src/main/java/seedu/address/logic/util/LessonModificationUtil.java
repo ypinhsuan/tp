@@ -23,7 +23,7 @@ import seedu.address.model.lesson.Venue;
 import seedu.address.model.student.Student;
 
 /**
- * Contains utility methods for modifying {@code Attendances} in {@code Lessons}.
+ * Contains utility methods for modifying {@code Attendance}s in {@code Lesson}s.
  */
 public class LessonModificationUtil {
 
@@ -34,7 +34,7 @@ public class LessonModificationUtil {
      * @throws CommandException if an {@code Attendance} already exists for the {@code targetStudent}
      * in the {@code targetWeek}.
      */
-    public static Lesson addLessonToAttendance(
+    public static Lesson addAttendanceToLesson(
             Lesson targetLesson, Student targetStudent, Week targetWeek, Attendance attendanceToAdd)
             throws CommandException {
         requireAllNonNull(targetLesson, targetStudent, targetWeek, attendanceToAdd);
@@ -50,6 +50,47 @@ public class LessonModificationUtil {
         updatedRecord.put(targetStudent.getUuid(), attendanceToAdd);
 
         assert updatedRecord.size() == record.size() + 1;
+
+        AttendanceRecord updatedAttendanceRecord = new AttendanceRecord(updatedRecord);
+        List<AttendanceRecord> updatedAttendanceRecords = new ArrayList<>(attendanceRecords);
+        updatedAttendanceRecords.set(targetWeek.getZeroBasedWeekIndex(), updatedAttendanceRecord);
+        AttendanceRecordList updatedAttendanceRecordList = new AttendanceRecordList(updatedAttendanceRecords);
+
+        // unchanged lesson fields
+        LocalTime startTime = targetLesson.getStartTime();
+        LocalTime endTime = targetLesson.getEndTime();
+        Day day = targetLesson.getDay();
+        NumberOfOccurrences numberOfOccurrences = targetLesson.getNumberOfOccurrences();
+        Venue venue = targetLesson.getVenue();
+
+        return new Lesson(startTime, endTime, day, numberOfOccurrences, venue, updatedAttendanceRecordList);
+    }
+
+    /**
+     * Edits the {@code Attendance} of the {@code targetStudent} in the {@code targetWeek} from the
+     * {@code targetLesson}. All other existing {@code Attendance}s in {@code targetLesson} are copied
+     * to the new {@code Lesson}.
+     *
+     * @throws CommandException if the {@code Attendance} of the {@code targetStudent} in the {@code targetWeek}
+     * does not exist.
+     */
+    public static Lesson editAttendanceInLesson(
+            Lesson targetLesson, Student targetStudent, Week targetWeek, Attendance attendanceToEdit)
+            throws CommandException {
+        requireAllNonNull(targetLesson, targetStudent, targetWeek, attendanceToEdit);
+
+        List<AttendanceRecord> attendanceRecords = targetLesson.getAttendanceRecordList().getAttendanceRecordList();
+        Map<UUID, Attendance> record = targetLesson.getAttendanceRecordList()
+                .getAttendanceRecord(targetWeek).getAttendanceRecord();
+
+        if (!record.containsKey(targetStudent.getUuid())) {
+            throw new CommandException(MESSAGE_MISSING_ATTENDANCE);
+        }
+
+        Map<UUID, Attendance> updatedRecord = new HashMap<>(record);
+        updatedRecord.put(targetStudent.getUuid(), attendanceToEdit);
+
+        assert updatedRecord.size() == record.size();
 
         AttendanceRecord updatedAttendanceRecord = new AttendanceRecord(updatedRecord);
         List<AttendanceRecord> updatedAttendanceRecords = new ArrayList<>(attendanceRecords);
