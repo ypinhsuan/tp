@@ -6,6 +6,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_WEEK_1;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_WEEK_5;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.showModuleClassAtIndex;
+import static seedu.address.logic.commands.CommandTestUtil.showStudentAtIndex;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_ITEM;
@@ -48,7 +50,7 @@ public class FindAttendanceCommandTest {
     }
 
     @Test
-    public void execute_success() {
+    public void execute_unfilteredList_success() {
         Index moduleClassIndex = INDEX_FIRST_ITEM;
         Index lessonIndex = INDEX_FIRST_ITEM;
         Index studentIndex = INDEX_FIRST_ITEM;
@@ -66,6 +68,37 @@ public class FindAttendanceCommandTest {
         String expectedMessage = String.format(FindAttendanceCommand.MESSAGE_SUCCESS, student.getName(),
                 targetWeek, attendance);
         Model expectedModel = new ModelManager(model.getTutorsPet(), new UserPrefs());
+        FindAttendanceCommand findAttendanceCommand =
+                new FindAttendanceCommand(moduleClassIndex, lessonIndex, studentIndex, targetWeek);
+
+        assertCommandSuccess(findAttendanceCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_filteredList_success() {
+        showModuleClassAtIndex(model, INDEX_FIRST_ITEM);
+        showStudentAtIndex(model, INDEX_FIRST_ITEM);
+
+        Index moduleClassIndex = INDEX_FIRST_ITEM;
+        Index lessonIndex = INDEX_FIRST_ITEM;
+        Index studentIndex = INDEX_FIRST_ITEM;
+        Week targetWeek = VALID_WEEK_1;
+
+        ModuleClass moduleClass = model.getFilteredModuleClassList().get(moduleClassIndex.getZeroBased());
+        Student student = model.getFilteredStudentList().get(studentIndex.getZeroBased());
+        Lesson lesson = moduleClass.getLessons().get(lessonIndex.getZeroBased());
+
+        assert moduleClass.hasLesson(lesson);
+        assert moduleClass.hasStudentUuid(student.getUuid());
+        assert lesson.getAttendanceRecordList().hasAttendance(student, targetWeek);
+
+        Attendance attendance = lesson.getAttendanceRecordList().getAttendance(student, targetWeek);
+        String expectedMessage = String.format(FindAttendanceCommand.MESSAGE_SUCCESS, student.getName(),
+                targetWeek, attendance);
+        Model expectedModel = new ModelManager(model.getTutorsPet(), new UserPrefs());
+        expectedModel.updateFilteredModuleClassList(c -> c.isSameModuleClass(moduleClass));
+        expectedModel.updateFilteredStudentList(s -> s.isSameStudent(student));
+
         FindAttendanceCommand findAttendanceCommand =
                 new FindAttendanceCommand(moduleClassIndex, lessonIndex, studentIndex, targetWeek);
 

@@ -30,16 +30,16 @@ public class FindAttendanceCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "Finds the attendance of a student in a specified "
             + "lesson on a specified week.\n"
-            + "Note: All indexes must be positive integers.\n"
+            + "Note: All indexes and numbers must be positive integers.\n"
             + "Parameters: "
             + PREFIX_CLASS_INDEX + "CLASS_INDEX"
             + PREFIX_LESSON_INDEX + "LESSON_INDEX "
             + PREFIX_STUDENT_INDEX + "STUDENT_INDEX "
-            + PREFIX_WEEK + "WEEK_NUMBER (must be a positive integer) ";
+            + PREFIX_WEEK + "WEEK_NUMBER";
 
     public static final String MESSAGE_SUCCESS = "%1$S attended week %2$s lesson with a participation score of %3$s";
 
-    private final Index moduleCLassIndex;
+    private final Index moduleClassIndex;
     private final Index lessonIndex;
     private final Index studentIndex;
     private final Week week;
@@ -51,7 +51,7 @@ public class FindAttendanceCommand extends Command {
     public FindAttendanceCommand(Index moduleCLassIndex, Index lessonIndex, Index studentIndex, Week week) {
         requireAllNonNull(moduleCLassIndex, lessonIndex, studentIndex, week);
 
-        this.moduleCLassIndex = moduleCLassIndex;
+        this.moduleClassIndex = moduleCLassIndex;
         this.lessonIndex = lessonIndex;
         this.studentIndex = studentIndex;
         this.week = week;
@@ -68,12 +68,12 @@ public class FindAttendanceCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
 
-        if (moduleCLassIndex.getZeroBased() >= lastShownModuleClassList.size()) {
+        if (moduleClassIndex.getZeroBased() >= lastShownModuleClassList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX);
         }
 
         Student targetStudent = lastShownStudentList.get(studentIndex.getZeroBased());
-        ModuleClass targetModuleClass = lastShownModuleClassList.get(moduleCLassIndex.getZeroBased());
+        ModuleClass targetModuleClass = lastShownModuleClassList.get(moduleClassIndex.getZeroBased());
 
         if (!targetModuleClass.hasStudentUuid(targetStudent.getUuid())) {
             throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_IN_MODULE_CLASS);
@@ -104,7 +104,7 @@ public class FindAttendanceCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof FindAttendanceCommand // instanceof handles nulls
-                && moduleCLassIndex.equals(((FindAttendanceCommand) other).moduleCLassIndex)
+                && moduleClassIndex.equals(((FindAttendanceCommand) other).moduleClassIndex)
                 && lessonIndex.equals(((FindAttendanceCommand) other).lessonIndex)
                 && studentIndex.equals(((FindAttendanceCommand) other).studentIndex)
                 && week.equals(((FindAttendanceCommand) other).week));
