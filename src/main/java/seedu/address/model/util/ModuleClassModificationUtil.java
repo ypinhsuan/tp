@@ -79,7 +79,7 @@ public class ModuleClassModificationUtil {
      * Adds all lessons in the target module class to the new module class.
      * The {@code lessonToDelete} is deleted from the new module class.
      *
-     * @throws CommandException if the {@code editedLesson} already exists.
+     * @throws CommandException if the {@code lessonToDelete} already exists.
      */
     public static ModuleClass createModifiedModuleClassWithDeletedLesson(
             ModuleClass targetModuleClass, Lesson lessonToDelete) {
