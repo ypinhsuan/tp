@@ -1,5 +1,6 @@
 package seedu.address.logic.util;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.commands.AddLessonCommand.MESSAGE_EXISTING_LESSON;
 import static seedu.address.logic.commands.EditLessonCommand.MESSAGE_DUPLICATE_LESSON;
 
@@ -26,11 +27,10 @@ public class ModuleClassModificationUtil {
      *
      * @throws CommandException if the {@code lessonToAdd} already exists.
      */
-    public static ModuleClass createModifiedModuleClassWithAddedLesson(
+    public static ModuleClass addLessonToModuleClass(
             ModuleClass targetModuleClass, Lesson lessonToAdd)
             throws CommandException {
-        assert targetModuleClass != null;
-        assert lessonToAdd != null;
+        requireAllNonNull(targetModuleClass, lessonToAdd);
 
         if (targetModuleClass.hasLesson(lessonToAdd)) {
             throw new CommandException(MESSAGE_EXISTING_LESSON);
@@ -49,12 +49,9 @@ public class ModuleClassModificationUtil {
      *
      * @throws CommandException if the {@code editedLesson} already exists.
      */
-    public static ModuleClass createModifiedModuleClassWithEditedLesson(
+    public static ModuleClass addEditedLessonToModuleClass(
             ModuleClass targetModuleClass, Lesson lessonToEdit, Lesson editedLesson) throws CommandException {
-        assert targetModuleClass != null;
-        assert lessonToEdit != null;
-        assert editedLesson != null;
-        assert targetModuleClass.hasLesson(lessonToEdit);
+        requireAllNonNull(targetModuleClass, lessonToEdit, editedLesson, targetModuleClass.hasLesson(lessonToEdit));
 
         if (!lessonToEdit.isSameLesson(editedLesson) && targetModuleClass.hasLesson(editedLesson)) {
             throw new CommandException(MESSAGE_DUPLICATE_LESSON);
@@ -79,11 +76,9 @@ public class ModuleClassModificationUtil {
      * Removes the {@code lessonToDelete} from the {@code targetModuleClass}.
      * All other existing {@code Lesson}s in the {@code targetModuleClass} are copied to the new {@code ModuleClass}.
      */
-    public static ModuleClass createModifiedModuleClassWithDeletedLesson(
+    public static ModuleClass deleteLessonFromModuleClass(
             ModuleClass targetModuleClass, Lesson lessonToDelete) {
-        assert targetModuleClass != null;
-        assert lessonToDelete != null;
-        assert targetModuleClass.hasLesson(lessonToDelete);
+        requireAllNonNull(targetModuleClass, lessonToDelete, targetModuleClass.hasLesson(lessonToDelete));
 
         Name moduleClassName = targetModuleClass.getName();
         Set<UUID> studentsIds = new HashSet<>(targetModuleClass.getStudentUuids());
@@ -101,11 +96,9 @@ public class ModuleClassModificationUtil {
     /**
      * Updates {@code lessons} in {@code moduleClass} and creates a modified {@code moduleClass} object.
      */
-    public static ModuleClass createModifiedModuleClassWithModifiedLesson(
+    public static ModuleClass addModifiedLessonToModuleClass(
             ModuleClass targetModuleClass, Index lessonToEditIndex, Lesson lessonToUpdate) {
-        assert targetModuleClass != null;
-        assert lessonToEditIndex != null;
-        assert lessonToUpdate != null;
+        requireAllNonNull(targetModuleClass, lessonToEditIndex, lessonToUpdate);
 
         Name moduleClassName = targetModuleClass.getName();
         Set<UUID> studentsIds = targetModuleClass.getStudentUuids();

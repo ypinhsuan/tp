@@ -1,5 +1,6 @@
 package seedu.address.logic.util;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.commands.AddAttendanceCommand.MESSAGE_DUPLICATE_ATTENDANCE;
 import static seedu.address.logic.commands.DeleteAttendanceCommand.MESSAGE_MISSING_ATTENDANCE;
 
@@ -33,13 +34,10 @@ public class LessonModificationUtil {
      * @throws CommandException if an {@code Attendance} already exists for the {@code targetStudent}
      * in the {@code targetWeek}.
      */
-    public static Lesson createModifiedLessonWithAddedAttendance(
+    public static Lesson addLessonToAttendance(
             Lesson targetLesson, Student targetStudent, Week targetWeek, Attendance attendanceToAdd)
             throws CommandException {
-        assert targetLesson != null;
-        assert targetStudent != null;
-        assert targetWeek != null;
-        assert attendanceToAdd != null;
+        requireAllNonNull(targetLesson, targetStudent, targetWeek, attendanceToAdd);
 
         if (targetLesson.getAttendanceRecordList().hasAttendance(targetStudent, targetWeek)) {
             throw new CommandException(MESSAGE_DUPLICATE_ATTENDANCE);
@@ -76,11 +74,9 @@ public class LessonModificationUtil {
      * @throws CommandException if the {@code Attendance} of the {@code targetStudent} in the {@code targetWeek}
      * does not exist.
      */
-    public static Lesson createModifiedLessonWithDeletedAttendance(
+    public static Lesson deleteAttendanceFromLesson(
             Lesson targetLesson, Student targetStudent, Week targetWeek) throws CommandException {
-        assert targetLesson != null;
-        assert targetStudent != null;
-        assert targetWeek != null;
+        requireAllNonNull(targetLesson, targetStudent, targetWeek);
 
         List<AttendanceRecord> attendanceRecords = targetLesson.getAttendanceRecordList().getAttendanceRecordList();
         Map<UUID, Attendance> record = targetLesson.getAttendanceRecordList()

@@ -8,7 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NUMBER_OF_OCCURRENCES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
-import static seedu.address.logic.util.ModuleClassModificationUtil.createModifiedModuleClassWithAddedLesson;
+import static seedu.address.logic.util.ModuleClassModificationUtil.addLessonToModuleClass;
 
 import java.util.List;
 
@@ -70,7 +70,7 @@ public class AddLessonCommand extends Command {
 
         // add lesson to moduleClass
         ModuleClass moduleClassToAddTo = lastShownModuleClassList.get(moduleClassIndex.getZeroBased());
-        ModuleClass modifiedModuleClass = createModifiedModuleClassWithAddedLesson(moduleClassToAddTo, toAdd);
+        ModuleClass modifiedModuleClass = addLessonToModuleClass(moduleClassToAddTo, toAdd);
         model.setModuleClass(moduleClassToAddTo, modifiedModuleClass);
 
         String message = String.format(MESSAGE_SUCCESS, toAdd);

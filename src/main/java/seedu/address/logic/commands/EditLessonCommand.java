@@ -8,7 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
-import static seedu.address.logic.util.ModuleClassModificationUtil.createModifiedModuleClassWithEditedLesson;
+import static seedu.address.logic.util.ModuleClassModificationUtil.addEditedLessonToModuleClass;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_MODULE_CLASS;
 
 import java.time.LocalTime;
@@ -91,7 +91,7 @@ public class EditLessonCommand extends Command {
 
         Lesson lessonToEdit = targetModuleClass.getLessons().get(lessonIndex.getZeroBased());
         Lesson editedLesson = createEditedLesson(lessonToEdit, editLessonDescriptor);
-        ModuleClass modifiedModuleClass = createModifiedModuleClassWithEditedLesson(
+        ModuleClass modifiedModuleClass = addEditedLessonToModuleClass(
                 targetModuleClass, lessonToEdit, editedLesson);
 
         model.setModuleClass(targetModuleClass, modifiedModuleClass);

@@ -6,8 +6,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASS_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEEK;
-import static seedu.address.logic.util.LessonModificationUtil.createModifiedLessonWithDeletedAttendance;
-import static seedu.address.logic.util.ModuleClassModificationUtil.createModifiedModuleClassWithModifiedLesson;
+import static seedu.address.logic.util.LessonModificationUtil.deleteAttendanceFromLesson;
+import static seedu.address.logic.util.ModuleClassModificationUtil.addModifiedLessonToModuleClass;
 
 import java.util.List;
 
@@ -100,9 +100,9 @@ public class DeleteAttendanceCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_WEEK);
         }
 
-        Lesson modifiedLesson = createModifiedLessonWithDeletedAttendance(targetLesson, targetStudent, week);
+        Lesson modifiedLesson = deleteAttendanceFromLesson(targetLesson, targetStudent, week);
         ModuleClass modifiedModuleClass =
-                createModifiedModuleClassWithModifiedLesson(targetModuleClass, lessonIndex, modifiedLesson);
+                addModifiedLessonToModuleClass(targetModuleClass, lessonIndex, modifiedLesson);
         model.setModuleClass(targetModuleClass, modifiedModuleClass);
 
         String message = String.format(MESSAGE_DELETE_ATTENDANCE_SUCCESS, week, targetStudent.getName(), targetLesson);

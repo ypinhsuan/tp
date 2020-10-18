@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASS_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON_INDEX;
-import static seedu.address.logic.util.ModuleClassModificationUtil.createModifiedModuleClassWithDeletedLesson;
+import static seedu.address.logic.util.ModuleClassModificationUtil.deleteLessonFromModuleClass;
 
 import java.util.List;
 
@@ -66,7 +66,7 @@ public class DeleteLessonCommand extends Command {
         }
 
         Lesson lessonToDelete = targetModuleClass.getLessons().get(lessonIndex.getZeroBased());
-        ModuleClass modifiedModuleClass = createModifiedModuleClassWithDeletedLesson(targetModuleClass, lessonToDelete);
+        ModuleClass modifiedModuleClass = deleteLessonFromModuleClass(targetModuleClass, lessonToDelete);
         model.setModuleClass(targetModuleClass, modifiedModuleClass);
 
         String message = String.format(MESSAGE_DELETE_LESSON_SUCCESS, lessonToDelete, targetModuleClass);
