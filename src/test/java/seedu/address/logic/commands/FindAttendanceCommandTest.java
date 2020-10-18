@@ -57,6 +57,11 @@ public class FindAttendanceCommandTest {
         ModuleClass moduleClass = model.getFilteredModuleClassList().get(moduleClassIndex.getZeroBased());
         Student student = model.getFilteredStudentList().get(studentIndex.getZeroBased());
         Lesson lesson = moduleClass.getLessons().get(lessonIndex.getZeroBased());
+
+        assert moduleClass.hasLesson(lesson);
+        assert moduleClass.hasStudentUuid(student.getUuid());
+        assert lesson.getAttendanceRecordList().hasAttendance(student, targetWeek);
+
         Attendance attendance = lesson.getAttendanceRecordList().getAttendance(student, targetWeek);
         String expectedMessage = String.format(FindAttendanceCommand.MESSAGE_SUCCESS, student.getName(),
                 targetWeek, attendance);
@@ -71,6 +76,11 @@ public class FindAttendanceCommandTest {
     public void execute_studentNotInClass_failure() {
         Index moduleClassIndex = INDEX_FIRST_ITEM;
         Index lessonIndex = INDEX_FIRST_ITEM;
+
+        ModuleClass moduleClass = model.getFilteredModuleClassList().get(moduleClassIndex.getZeroBased());
+        Lesson lesson = moduleClass.getLessons().get(lessonIndex.getZeroBased());
+
+        assert moduleClass.hasLesson(lesson);
 
         FindAttendanceCommand findAttendanceCommand = new FindAttendanceCommand(moduleClassIndex, lessonIndex,
                 INDEX_THIRD_ITEM, VALID_WEEK_1);
@@ -137,6 +147,13 @@ public class FindAttendanceCommandTest {
         Index lessonIndex = INDEX_FIRST_ITEM;
         Index studentIndex = INDEX_FIRST_ITEM;
         Week week = VALID_WEEK_5;
+
+        ModuleClass moduleClass = model.getFilteredModuleClassList().get(moduleClassIndex.getZeroBased());
+        Student student = model.getFilteredStudentList().get(studentIndex.getZeroBased());
+        Lesson lesson = moduleClass.getLessons().get(lessonIndex.getZeroBased());
+
+        assert moduleClass.hasLesson(lesson);
+        assert moduleClass.hasStudentUuid(student.getUuid());
 
         FindAttendanceCommand findAttendanceCommand =
                 new FindAttendanceCommand(moduleClassIndex, lessonIndex, studentIndex, week);

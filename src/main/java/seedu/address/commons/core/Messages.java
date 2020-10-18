@@ -18,5 +18,5 @@ public class Messages {
 
     public static final String MESSAGE_INVALID_STUDENT_IN_MODULE_CLASS = "Student does not exist in class";
 
-    public static final String MESSAGE_MISSING_STUDENT_ATTENDANCE = "Student's attendance does not exists";
+    public static final String MESSAGE_MISSING_STUDENT_ATTENDANCE = "Student's attendance does not exist";
 }
