@@ -165,7 +165,7 @@ public class FindAttendanceCommandTest {
         // null -> returns false
         assertFalse(findAttendanceCommand.equals(null));
 
-        //different weeks -> return false
+        // different weeks -> return false
         FindAttendanceCommand findAttendanceCommandDifferentWeek =
                 new FindAttendanceCommand(INDEX_FIRST_ITEM, INDEX_FIRST_ITEM, INDEX_FIRST_ITEM, week2);
         assertFalse(findAttendanceCommand.equals(findAttendanceCommandDifferentWeek));

@@ -21,7 +21,8 @@ import seedu.address.model.moduleclass.ModuleClass;
 import seedu.address.model.student.Student;
 
 /**
- * Finds a student's attendance for a specified lesson in a specified module class in the student manager.
+ * Finds a student's attendance for a specified lesson in a specified lesson on
+ * a specified week in the student manager.
  */
 public class FindAttendanceCommand extends Command {
 
@@ -44,7 +45,8 @@ public class FindAttendanceCommand extends Command {
     private final Week week;
 
     /**
-     * Creates a FindAttendanceCommand to find a student's attendance for a specified lesson in the student manager.
+     * Creates a FindAttendanceCommand to find a student's attendance for a specified lesson
+     * on a specified week in the student manager.
      */
     public FindAttendanceCommand(Index moduleCLassIndex, Index lessonIndex, Index studentIndex, Week week) {
         requireAllNonNull(moduleCLassIndex, lessonIndex, studentIndex, week);
