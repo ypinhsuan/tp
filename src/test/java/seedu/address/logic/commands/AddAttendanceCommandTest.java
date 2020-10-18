@@ -13,8 +13,10 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_ITEM;
 import static seedu.address.testutil.TypicalTutorsPet.getTypicalTutorsPet;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
 
