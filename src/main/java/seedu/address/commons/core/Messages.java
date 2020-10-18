@@ -17,4 +17,6 @@ public class Messages {
     public static final String MESSAGE_INVALID_WEEK = "The week provided is invalid";
 
     public static final String MESSAGE_INVALID_STUDENT_IN_MODULE_CLASS = "Student does not exist in class";
+    public static final String MESSAGE_INVALID_STUDENT_IN_ATTENDANCE_RECORD =
+            "Student does not exist in attendance record";
 }

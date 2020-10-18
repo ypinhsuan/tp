@@ -53,7 +53,7 @@ public class AddAttendanceCommand extends Command {
             + "participation score of %3$s";
     public static final String MESSAGE_DUPLICATE_ATTENDANCE = "Attendance have been recorded previously.";
 
-    private final Index moduleCLassIndex;
+    private final Index moduleClassIndex;
     private final Index lessonIndex;
     private final Index studentIndex;
     private final Week week;
@@ -62,11 +62,11 @@ public class AddAttendanceCommand extends Command {
     /**
      * Creates an AddAttendanceCommand to add the specified {@code Attendance}.
      */
-    public AddAttendanceCommand(Index moduleCLassIndex, Index lessonIndex, Index studentIndex,
+    public AddAttendanceCommand(Index moduleClassIndex, Index lessonIndex, Index studentIndex,
                                 Week week, Attendance toAdd) {
-        requireAllNonNull(moduleCLassIndex, lessonIndex, studentIndex, week, toAdd);
+        requireAllNonNull(moduleClassIndex, lessonIndex, studentIndex, week, toAdd);
 
-        this.moduleCLassIndex = moduleCLassIndex;
+        this.moduleClassIndex = moduleClassIndex;
         this.lessonIndex = lessonIndex;
         this.studentIndex = studentIndex;
         this.week = week;
@@ -84,12 +84,12 @@ public class AddAttendanceCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
 
-        if (moduleCLassIndex.getZeroBased() >= lastShownModuleClassList.size()) {
+        if (moduleClassIndex.getZeroBased() >= lastShownModuleClassList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX);
         }
 
         Student targetStudent = lastShownStudentList.get(studentIndex.getZeroBased());
-        ModuleClass targetModuleClass = lastShownModuleClassList.get(moduleCLassIndex.getZeroBased());
+        ModuleClass targetModuleClass = lastShownModuleClassList.get(moduleClassIndex.getZeroBased());
 
         if (!targetModuleClass.hasStudentUuid(targetStudent.getUuid())) {
             throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_IN_MODULE_CLASS);
@@ -118,7 +118,7 @@ public class AddAttendanceCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddAttendanceCommand // instanceof handles nulls
-                && moduleCLassIndex.equals(((AddAttendanceCommand) other).moduleCLassIndex)
+                && moduleClassIndex.equals(((AddAttendanceCommand) other).moduleClassIndex)
                 && lessonIndex.equals(((AddAttendanceCommand) other).lessonIndex)
                 && studentIndex.equals(((AddAttendanceCommand) other).studentIndex)
                 && week.equals(((AddAttendanceCommand) other).week)
