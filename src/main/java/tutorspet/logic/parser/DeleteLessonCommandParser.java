@@ -1,6 +1,11 @@
 package tutorspet.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static tutorspet.logic.commands.DeleteLessonCommand.MESSAGE_USAGE;
+import static tutorspet.logic.parser.ArgumentTokenizer.tokenize;
+import static tutorspet.logic.parser.CliSyntax.PREFIX_CLASS_INDEX;
+import static tutorspet.logic.parser.CliSyntax.PREFIX_LESSON_INDEX;
+import static tutorspet.logic.parser.ParserUtil.parseIndex;
 
 import tutorspet.commons.core.Messages;
 import tutorspet.commons.core.index.Index;
@@ -20,25 +25,23 @@ public class DeleteLessonCommandParser implements Parser<DeleteLessonCommand> {
     public DeleteLessonCommand parse(String args) throws ParseException {
         requireNonNull(args);
 
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_CLASS_INDEX, CliSyntax.PREFIX_LESSON_INDEX);
+        ArgumentMultimap argMultimap = tokenize(args, PREFIX_CLASS_INDEX, PREFIX_LESSON_INDEX);
 
         Index moduleClassIndex;
         Index lessonIndex;
 
-        boolean isModuleClassIndexPresent = argMultimap.getValue(CliSyntax.PREFIX_CLASS_INDEX).isPresent();
-        boolean isLessonIndexPresent = argMultimap.getValue(CliSyntax.PREFIX_LESSON_INDEX).isPresent();
+        boolean isModuleClassIndexPresent = argMultimap.getValue(PREFIX_CLASS_INDEX).isPresent();
+        boolean isLessonIndexPresent = argMultimap.getValue(PREFIX_LESSON_INDEX).isPresent();
         if (!isModuleClassIndexPresent || !isLessonIndexPresent) {
-            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                    DeleteLessonCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
         }
 
         try {
-            moduleClassIndex = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_CLASS_INDEX).get());
-            lessonIndex = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_LESSON_INDEX).get());
+            moduleClassIndex = parseIndex(argMultimap.getValue(PREFIX_CLASS_INDEX).get());
+            lessonIndex = parseIndex(argMultimap.getValue(PREFIX_LESSON_INDEX).get());
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeleteLessonCommand.MESSAGE_USAGE), pe);
+                    String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE), pe);
         }
 
         return new DeleteLessonCommand(moduleClassIndex, lessonIndex);

@@ -3,10 +3,15 @@ package tutorspet.logic;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 import static tutorspet.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static tutorspet.logic.LogicManager.FILE_OPS_ERROR_MESSAGE;
+import static tutorspet.logic.commands.AddStudentCommand.COMMAND_WORD;
+import static tutorspet.logic.commands.AddStudentCommand.MESSAGE_SUCCESS;
 import static tutorspet.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static tutorspet.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static tutorspet.logic.commands.CommandTestUtil.TELEGRAM_DESC_AMY;
+import static tutorspet.logic.commands.ListStudentCommand.MESSAGE_LIST_ALL_SUCCESS;
 import static tutorspet.testutil.Assert.assertThrows;
+import static tutorspet.testutil.TypicalStudent.AMY;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -15,7 +20,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import tutorspet.logic.commands.AddStudentCommand;
 import tutorspet.logic.commands.CommandResult;
 import tutorspet.logic.commands.ListStudentCommand;
 import tutorspet.logic.commands.exceptions.CommandException;
@@ -29,7 +33,6 @@ import tutorspet.storage.JsonTutorsPetStorage;
 import tutorspet.storage.JsonUserPrefsStorage;
 import tutorspet.storage.StorageManager;
 import tutorspet.testutil.StudentBuilder;
-import tutorspet.testutil.TypicalStudent;
 
 public class LogicManagerTest {
 
@@ -65,7 +68,7 @@ public class LogicManagerTest {
     @Test
     public void execute_validCommand_success() throws Exception {
         String listCommand = ListStudentCommand.COMMAND_WORD;
-        assertCommandSuccess(listCommand, ListStudentCommand.MESSAGE_LIST_ALL_SUCCESS, model);
+        assertCommandSuccess(listCommand, MESSAGE_LIST_ALL_SUCCESS, model);
     }
 
     @Test
@@ -79,12 +82,12 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Execute add student command
-        String addStudentCommand = AddStudentCommand.COMMAND_WORD + NAME_DESC_AMY + TELEGRAM_DESC_AMY + EMAIL_DESC_AMY;
-        Student expectedStudent = new StudentBuilder(TypicalStudent.AMY).withTags().build();
+        String addStudentCommand = COMMAND_WORD + NAME_DESC_AMY + TELEGRAM_DESC_AMY + EMAIL_DESC_AMY;
+        Student expectedStudent = new StudentBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addStudent(expectedStudent);
-        expectedModel.commit(String.format(AddStudentCommand.MESSAGE_SUCCESS, expectedStudent));
-        String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
+        expectedModel.commit(String.format(MESSAGE_SUCCESS, expectedStudent));
+        String expectedMessage = FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
         assertCommandFailure(addStudentCommand, CommandException.class, expectedMessage, expectedModel);
     }
 

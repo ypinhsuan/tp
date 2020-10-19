@@ -1,6 +1,8 @@
 package tutorspet.logic.parser;
 
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static tutorspet.logic.commands.FindStudentCommand.MESSAGE_USAGE;
+import static tutorspet.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import java.util.Arrays;
 
@@ -16,7 +18,7 @@ public class FindStudentCommandParserTest {
     @Test
     public void parse_emptyArg_throwsParseException() {
         CommandParserTestUtil.assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                FindStudentCommand.MESSAGE_USAGE));
+                MESSAGE_USAGE));
     }
 
     @Test
@@ -24,10 +26,9 @@ public class FindStudentCommandParserTest {
         // no leading and trailing whitespaces
         FindStudentCommand expectedFindStudentCommand =
                 new FindStudentCommand(new NameContainsKeywordsPredicate<>(Arrays.asList("Alice", "Bob")));
-        CommandParserTestUtil.assertParseSuccess(parser, "Alice Bob", expectedFindStudentCommand);
+        assertParseSuccess(parser, "Alice Bob", expectedFindStudentCommand);
 
         // multiple whitespaces between keywords
-        CommandParserTestUtil.assertParseSuccess(parser, " \n Alice \n \t Bob  \t",
-                expectedFindStudentCommand);
+        assertParseSuccess(parser, " \n Alice \n \t Bob  \t", expectedFindStudentCommand);
     }
 }

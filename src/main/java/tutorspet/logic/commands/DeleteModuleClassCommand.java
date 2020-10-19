@@ -1,10 +1,10 @@
 package tutorspet.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static tutorspet.commons.core.Messages.MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX;
 
 import java.util.List;
 
-import tutorspet.commons.core.Messages;
 import tutorspet.commons.core.index.Index;
 import tutorspet.logic.commands.exceptions.CommandException;
 import tutorspet.model.Model;
@@ -37,7 +37,7 @@ public class DeleteModuleClassCommand extends Command {
         List<ModuleClass> lastShownList = model.getFilteredModuleClassList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX);
+            throw new CommandException(MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX);
         }
 
         ModuleClass moduleClassToDelete = lastShownList.get(targetIndex.getZeroBased());

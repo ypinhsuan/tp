@@ -1,8 +1,10 @@
 package tutorspet.testutil;
 
+import static java.util.Collections.nCopies;
+import static tutorspet.model.lesson.Lesson.TIME_FORMATTER;
+
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import tutorspet.model.attendance.AttendanceRecord;
@@ -34,8 +36,8 @@ public class LessonBuilder {
      * Creates a {@code LessonBuilder} with the default details.
      */
     public LessonBuilder() {
-        startTime = LocalTime.parse(DEFAULT_START_TIME, Lesson.TIME_FORMATTER);
-        endTime = LocalTime.parse(DEFAULT_END_TIME, Lesson.TIME_FORMATTER);
+        startTime = LocalTime.parse(DEFAULT_START_TIME, TIME_FORMATTER);
+        endTime = LocalTime.parse(DEFAULT_END_TIME, TIME_FORMATTER);
         day = DEFAULT_DAY;
         numberOfOccurrences = new NumberOfOccurrences(DEFAULT_NUMBER_OF_OCCURRENCES);
         venue = new Venue(DEFAULT_VENUE);
@@ -118,7 +120,7 @@ public class LessonBuilder {
      */
     public static Lesson insertAttendanceRecords(Lesson lesson, AttendanceRecord... records) {
         int recurrences = lesson.getNumberOfOccurrences().value;
-        List<AttendanceRecord> recordList = new ArrayList<>(Collections.nCopies(recurrences, new AttendanceRecord()));
+        List<AttendanceRecord> recordList = new ArrayList<>(nCopies(recurrences, new AttendanceRecord()));
         for (int i = 0; i < records.length; i++) {
             recordList.set(i, records[i]);
         }

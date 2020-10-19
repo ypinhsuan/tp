@@ -1,6 +1,6 @@
 package tutorspet.testutil;
 
-import tutorspet.logic.commands.EditModuleClassCommand;
+import tutorspet.logic.commands.EditModuleClassCommand.EditModuleClassDescriptor;
 import tutorspet.model.components.name.Name;
 import tutorspet.model.moduleclass.ModuleClass;
 
@@ -9,21 +9,21 @@ import tutorspet.model.moduleclass.ModuleClass;
  */
 public class EditModuleClassDescriptorBuilder {
 
-    private EditModuleClassCommand.EditModuleClassDescriptor descriptor;
+    private EditModuleClassDescriptor descriptor;
 
     public EditModuleClassDescriptorBuilder() {
-        descriptor = new EditModuleClassCommand.EditModuleClassDescriptor();
+        descriptor = new EditModuleClassDescriptor();
     }
 
-    public EditModuleClassDescriptorBuilder(EditModuleClassCommand.EditModuleClassDescriptor descriptor) {
-        this.descriptor = new EditModuleClassCommand.EditModuleClassDescriptor(descriptor);
+    public EditModuleClassDescriptorBuilder(EditModuleClassDescriptor descriptor) {
+        this.descriptor = new EditModuleClassDescriptor(descriptor);
     }
 
     /**
      * Returns an {@code EditModuleClassDescriptor} with fields containing {@code moduleClass}'s details.
      */
     public EditModuleClassDescriptorBuilder(ModuleClass moduleClass) {
-        descriptor = new EditModuleClassCommand.EditModuleClassDescriptor();
+        descriptor = new EditModuleClassDescriptor();
         descriptor.setName(moduleClass.getName());
     }
 
@@ -35,7 +35,7 @@ public class EditModuleClassDescriptorBuilder {
         return this;
     }
 
-    public EditModuleClassCommand.EditModuleClassDescriptor build() {
+    public EditModuleClassDescriptor build() {
         return descriptor;
     }
 }

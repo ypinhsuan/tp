@@ -5,9 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static tutorspet.logic.commands.CommandTestUtil.showStudentAtIndex;
 import static tutorspet.logic.commands.DeleteStudentCommand.MESSAGE_DELETE_STUDENT_SUCCESS;
 import static tutorspet.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 import static tutorspet.testutil.TypicalIndexes.INDEX_SECOND_ITEM;
+import static tutorspet.testutil.TypicalTutorsPet.getTypicalTutorsPet;
 
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +18,6 @@ import tutorspet.model.Model;
 import tutorspet.model.ModelManager;
 import tutorspet.model.UserPrefs;
 import tutorspet.model.student.Student;
-import tutorspet.testutil.TypicalTutorsPet;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -24,7 +25,7 @@ import tutorspet.testutil.TypicalTutorsPet;
  */
 public class DeleteStudentCommandTest {
 
-    private Model model = new ModelManager(TypicalTutorsPet.getTypicalTutorsPet(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalTutorsPet(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -50,7 +51,7 @@ public class DeleteStudentCommandTest {
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        CommandTestUtil.showStudentAtIndex(model, INDEX_FIRST_ITEM);
+        showStudentAtIndex(model, INDEX_FIRST_ITEM);
 
         Student studentToDelete = model.getFilteredStudentList().get(INDEX_FIRST_ITEM.getZeroBased());
         DeleteStudentCommand deleteStudentCommand = new DeleteStudentCommand(INDEX_FIRST_ITEM);

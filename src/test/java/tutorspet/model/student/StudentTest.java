@@ -8,11 +8,11 @@ import static tutorspet.logic.commands.CommandTestUtil.VALID_TAG_AVERAGE;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_TELEGRAM_BOB;
 import static tutorspet.testutil.Assert.assertThrows;
 import static tutorspet.testutil.TypicalStudent.ALICE;
+import static tutorspet.testutil.TypicalStudent.BOB;
 
 import org.junit.jupiter.api.Test;
 
 import tutorspet.testutil.StudentBuilder;
-import tutorspet.testutil.TypicalStudent;
 
 public class StudentTest {
 
@@ -70,7 +70,7 @@ public class StudentTest {
         assertFalse(ALICE.equals(5));
 
         // different student -> returns false
-        assertFalse(ALICE.equals(TypicalStudent.BOB));
+        assertFalse(ALICE.equals(BOB));
 
         // different name -> returns false
         Student editedAlice = new StudentBuilder(ALICE).withName(VALID_NAME_BOB).build();

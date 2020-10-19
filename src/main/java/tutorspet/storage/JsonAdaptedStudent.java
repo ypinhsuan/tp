@@ -1,5 +1,10 @@
 package tutorspet.storage;
 
+import static java.util.UUID.fromString;
+import static tutorspet.model.student.Email.isValidEmail;
+import static tutorspet.model.student.Telegram.isValidTelegram;
+import static tutorspet.storage.JsonAdaptedUuid.MESSAGE_INVALID_UUID;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -79,9 +84,9 @@ public class JsonAdaptedStudent {
         // catch invalid UUID
         final UUID modelUuid;
         try {
-            modelUuid = UUID.fromString(uuid);
+            modelUuid = fromString(uuid);
         } catch (IllegalArgumentException e) {
-            throw new IllegalValueException(JsonAdaptedUuid.MESSAGE_INVALID_UUID);
+            throw new IllegalValueException(MESSAGE_INVALID_UUID);
         }
 
         if (name == null) {
@@ -94,7 +99,7 @@ public class JsonAdaptedStudent {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Telegram.class.getSimpleName()));
         }
-        if (!Telegram.isValidTelegram(telegram)) {
+        if (!isValidTelegram(telegram)) {
             throw new IllegalValueException(Telegram.MESSAGE_CONSTRAINTS);
         }
         final Telegram modelTelegram = new Telegram(telegram);
@@ -102,7 +107,7 @@ public class JsonAdaptedStudent {
         if (email == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
         }
-        if (!Email.isValidEmail(email)) {
+        if (!isValidEmail(email)) {
             throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
         }
         final Email modelEmail = new Email(email);

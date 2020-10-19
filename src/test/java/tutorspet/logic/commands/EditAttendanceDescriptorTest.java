@@ -3,6 +3,7 @@ package tutorspet.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tutorspet.logic.commands.CommandTestUtil.DESC_ATTENDANCE_33;
+import static tutorspet.logic.commands.EditAttendanceCommand.EditAttendanceDescriptor;
 
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +15,7 @@ public class EditAttendanceDescriptorTest {
     public void equals() {
         // same value -> returns true
         EditAttendanceCommand.EditAttendanceDescriptor descriptorWithSameValues =
-                new EditAttendanceCommand.EditAttendanceDescriptor(DESC_ATTENDANCE_33);
+                new EditAttendanceDescriptor(DESC_ATTENDANCE_33);
         assertTrue(DESC_ATTENDANCE_33.equals(descriptorWithSameValues));
 
         // same object -> returns true
@@ -27,7 +28,7 @@ public class EditAttendanceDescriptorTest {
         assertFalse(DESC_ATTENDANCE_33.equals(3));
 
         // different values -> returns false
-        EditAttendanceCommand.EditAttendanceDescriptor editedAttendance =
+        EditAttendanceDescriptor editedAttendance =
                 new EditAttendanceDescriptorBuilder(DESC_ATTENDANCE_33).withParticipationScore(80).build();
         assertFalse(DESC_ATTENDANCE_33.equals(editedAttendance));
     }

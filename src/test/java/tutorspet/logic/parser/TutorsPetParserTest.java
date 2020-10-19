@@ -13,6 +13,12 @@ import static tutorspet.logic.parser.CliSyntax.PREFIX_PARTICIPATION_SCORE;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_STUDENT_INDEX;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_WEEK;
 import static tutorspet.testutil.Assert.assertThrows;
+import static tutorspet.testutil.LessonUtil.getAddLessonCommand;
+import static tutorspet.testutil.LessonUtil.getEditLessonDescriptorDetails;
+import static tutorspet.testutil.ModuleClassUtil.getAddModuleClassCommand;
+import static tutorspet.testutil.ModuleClassUtil.getEditModuleClassDescriptorDetails;
+import static tutorspet.testutil.StudentUtil.getAddStudentCommand;
+import static tutorspet.testutil.StudentUtil.getEditStudentDescriptorDetails;
 import static tutorspet.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 import static tutorspet.testutil.TypicalIndexes.INDEX_SECOND_ITEM;
 
@@ -34,7 +40,9 @@ import tutorspet.logic.commands.DeleteLessonCommand;
 import tutorspet.logic.commands.DeleteModuleClassCommand;
 import tutorspet.logic.commands.DeleteStudentCommand;
 import tutorspet.logic.commands.EditAttendanceCommand;
+import tutorspet.logic.commands.EditAttendanceCommand.EditAttendanceDescriptor;
 import tutorspet.logic.commands.EditLessonCommand;
+import tutorspet.logic.commands.EditLessonCommand.EditLessonDescriptor;
 import tutorspet.logic.commands.EditModuleClassCommand;
 import tutorspet.logic.commands.EditModuleClassCommand.EditModuleClassDescriptor;
 import tutorspet.logic.commands.EditStudentCommand;
@@ -66,11 +74,8 @@ import tutorspet.testutil.EditLessonDescriptorBuilder;
 import tutorspet.testutil.EditModuleClassDescriptorBuilder;
 import tutorspet.testutil.EditStudentDescriptorBuilder;
 import tutorspet.testutil.LessonBuilder;
-import tutorspet.testutil.LessonUtil;
 import tutorspet.testutil.ModuleClassBuilder;
-import tutorspet.testutil.ModuleClassUtil;
 import tutorspet.testutil.StudentBuilder;
-import tutorspet.testutil.StudentUtil;
 
 public class TutorsPetParserTest {
 
@@ -80,7 +85,7 @@ public class TutorsPetParserTest {
     @Test
     public void parseCommand_addStudent() throws Exception {
         Student student = new StudentBuilder().build();
-        AddStudentCommand command = (AddStudentCommand) parser.parseCommand(StudentUtil.getAddStudentCommand(student));
+        AddStudentCommand command = (AddStudentCommand) parser.parseCommand(getAddStudentCommand(student));
         assertEquals(new AddStudentCommand(student), command);
     }
 
@@ -98,8 +103,8 @@ public class TutorsPetParserTest {
     public void parseCommand_editStudent() throws Exception {
         Student student = new StudentBuilder().build();
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder(student).build();
-        EditStudentCommand command = (EditStudentCommand) parser.parseCommand(EditStudentCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_ITEM.getOneBased() + " " + StudentUtil.getEditStudentDescriptorDetails(descriptor));
+        EditStudentCommand command = (EditStudentCommand) parser.parseCommand(EditStudentCommand.COMMAND_WORD
+                + " " + INDEX_FIRST_ITEM.getOneBased() + " " + getEditStudentDescriptorDetails(descriptor));
         assertEquals(new EditStudentCommand(INDEX_FIRST_ITEM, descriptor), command);
     }
 
@@ -120,8 +125,8 @@ public class TutorsPetParserTest {
     @Test
     public void parseCommand_findStudent() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindStudentCommand command = (FindStudentCommand) parser.parseCommand(
-                FindStudentCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+        FindStudentCommand command = (FindStudentCommand) parser.parseCommand(FindStudentCommand.COMMAND_WORD
+                + " " + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FindStudentCommand(new NameContainsKeywordsPredicate<>(keywords)), command);
     }
 
@@ -129,7 +134,7 @@ public class TutorsPetParserTest {
     public void parseCommand_addModuleClass() throws Exception {
         ModuleClass moduleClass = new ModuleClassBuilder().build();
         AddModuleClassCommand command = (AddModuleClassCommand) parser
-                .parseCommand(ModuleClassUtil.getAddModuleClassCommand(moduleClass));
+                .parseCommand(getAddModuleClassCommand(moduleClass));
         assertEquals(new AddModuleClassCommand(moduleClass), command);
     }
 
@@ -147,7 +152,7 @@ public class TutorsPetParserTest {
         EditModuleClassCommand command =
                 (EditModuleClassCommand) parser.parseCommand(EditModuleClassCommand.COMMAND_WORD + " "
                         + INDEX_FIRST_ITEM.getOneBased() + " "
-                        + ModuleClassUtil.getEditModuleClassDescriptorDetails(descriptor));
+                        + getEditModuleClassDescriptorDetails(descriptor));
         assertEquals(new EditModuleClassCommand(INDEX_FIRST_ITEM, descriptor), command);
     }
 
@@ -169,7 +174,8 @@ public class TutorsPetParserTest {
     public void parseCommand_findModuleClass() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindModuleClassCommand command = (FindModuleClassCommand) parser.parseCommand(
-                FindModuleClassCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+                FindModuleClassCommand.COMMAND_WORD
+                        + " " + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FindModuleClassCommand(new NameContainsKeywordsPredicate<>(keywords)), command);
     }
 
@@ -183,19 +189,19 @@ public class TutorsPetParserTest {
     public void parseCommand_addLesson() throws Exception {
         Lesson lesson = new LessonBuilder().build();
         AddLessonCommand command =
-                (AddLessonCommand) parser.parseCommand(LessonUtil.getAddLessonCommand(INDEX_FIRST_ITEM, lesson));
+                (AddLessonCommand) parser.parseCommand(getAddLessonCommand(INDEX_FIRST_ITEM, lesson));
         assertEquals(new AddLessonCommand(INDEX_FIRST_ITEM, lesson), command);
     }
 
     @Test
     public void parseCommand_editLesson() throws Exception {
         Lesson lesson = new LessonBuilder().build();
-        EditLessonCommand.EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder(lesson).build();
+        EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder(lesson).build();
         EditLessonCommand command =
                 (EditLessonCommand) parser.parseCommand(EditLessonCommand.COMMAND_WORD + " "
                         + PREFIX_CLASS_INDEX + INDEX_FIRST_ITEM.getOneBased() + " "
                         + PREFIX_LESSON_INDEX + INDEX_SECOND_ITEM.getOneBased() + " "
-                        + LessonUtil.getEditLessonDescriptorDetails(descriptor));
+                        + getEditLessonDescriptorDetails(descriptor));
         assertEquals(new EditLessonCommand(INDEX_FIRST_ITEM, INDEX_SECOND_ITEM, descriptor), command);
     }
 
@@ -232,8 +238,7 @@ public class TutorsPetParserTest {
 
     @Test
     public void parseCommand_editAttendance() throws Exception {
-        EditAttendanceCommand.EditAttendanceDescriptor descriptor =
-                new EditAttendanceDescriptorBuilder(VALID_ATTENDANCE_33).build();
+        EditAttendanceDescriptor descriptor = new EditAttendanceDescriptorBuilder(VALID_ATTENDANCE_33).build();
         EditAttendanceCommand expectedCommand = new EditAttendanceCommand(INDEX_FIRST_ITEM, INDEX_FIRST_ITEM,
                 INDEX_FIRST_ITEM, VALID_WEEK_1, descriptor);
 
@@ -342,6 +347,7 @@ public class TutorsPetParserTest {
 
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
+        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, ()
+            -> parser.parseCommand("unknownCommand"));
     }
 }

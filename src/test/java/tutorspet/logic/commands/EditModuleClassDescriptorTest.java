@@ -7,6 +7,7 @@ import static tutorspet.logic.commands.CommandTestUtil.VALID_NAME_CS2103T_TUTORI
 
 import org.junit.jupiter.api.Test;
 
+import tutorspet.logic.commands.EditModuleClassCommand.EditModuleClassDescriptor;
 import tutorspet.testutil.EditModuleClassDescriptorBuilder;
 
 public class EditModuleClassDescriptorTest {
@@ -14,8 +15,7 @@ public class EditModuleClassDescriptorTest {
     @Test
     public void equals() {
         // same value -> return true
-        EditModuleClassCommand.EditModuleClassDescriptor descriptorWithSameValues =
-                new EditModuleClassCommand.EditModuleClassDescriptor(DESC_CS2100_LAB);
+        EditModuleClassDescriptor descriptorWithSameValues = new EditModuleClassDescriptor(DESC_CS2100_LAB);
         assertTrue(DESC_CS2100_LAB.equals(descriptorWithSameValues));
 
         // same object -> return true
@@ -31,9 +31,9 @@ public class EditModuleClassDescriptorTest {
         assertFalse(DESC_CS2100_LAB.equals(CommandTestUtil.DESC_CS2103T_TUTORIAL));
 
         // different name -> return false
-        EditModuleClassCommand.EditModuleClassDescriptor editedCs2100Lab =
-                new EditModuleClassDescriptorBuilder(DESC_CS2100_LAB).withName(VALID_NAME_CS2103T_TUTORIAL)
-                        .build();
+        EditModuleClassDescriptor editedCs2100Lab = new EditModuleClassDescriptorBuilder(DESC_CS2100_LAB)
+                .withName(VALID_NAME_CS2103T_TUTORIAL).build();
+
         assertFalse(DESC_CS2100_LAB.equals(editedCs2100Lab));
     }
 }

@@ -6,19 +6,21 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_NUMBER_OF_OCCURRENCES_7_LESSON_WED_2_TO_4;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_PARTICIPATION_SCORE_80;
 import static tutorspet.testutil.Assert.assertThrows;
+import static tutorspet.testutil.TypicalAttendanceRecord.RECORD_ALICE_51_BENSON_33;
+import static tutorspet.testutil.TypicalAttendanceRecord.RECORD_ALICE_80;
+import static tutorspet.testutil.TypicalAttendanceRecord.RECORD_EMPTY;
+import static tutorspet.testutil.TypicalAttendanceRecord.getTypicalAttendanceRecord;
 import static tutorspet.testutil.TypicalStudent.ALICE;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import tutorspet.commons.core.index.Index;
 import tutorspet.model.attendance.exceptions.AttendanceNotFoundException;
 import tutorspet.model.attendance.exceptions.InvalidWeekException;
 import tutorspet.model.lesson.NumberOfOccurrences;
-import tutorspet.testutil.TypicalAttendanceRecord;
 
 public class AttendanceRecordListTest {
 
@@ -33,7 +35,7 @@ public class AttendanceRecordListTest {
     public void constructor_emptyAttendanceRecordMap() {
         assertTrue(recordList.getAttendanceRecordList().size() == 7);
         for (AttendanceRecord record: recordList.getAttendanceRecordList()) {
-            assertTrue(record.equals(TypicalAttendanceRecord.RECORD_EMPTY));
+            assertTrue(record.equals(RECORD_EMPTY));
         }
     }
 
@@ -44,8 +46,7 @@ public class AttendanceRecordListTest {
 
     @Test
     public void getAttendance_invalidWeek_throwsInvalidWeekException() {
-        assertThrows(InvalidWeekException.class, () -> recordList.getAttendance(
-                ALICE, INVALID_WEEK));
+        assertThrows(InvalidWeekException.class, () -> recordList.getAttendance(ALICE, INVALID_WEEK));
     }
 
     @Test
@@ -69,7 +70,7 @@ public class AttendanceRecordListTest {
     public void getAttendanceRecord_validWeek_success() {
         AttendanceRecordList attendanceRecordList = createAliceRecordList();
         AttendanceRecord attendanceRecord = attendanceRecordList.getAttendanceRecord(VALID_WEEK);
-        Assertions.assertEquals(TypicalAttendanceRecord.RECORD_ALICE_80, attendanceRecord);
+        assertEquals(RECORD_ALICE_80, attendanceRecord);
     }
 
     @Test
@@ -100,8 +101,7 @@ public class AttendanceRecordListTest {
 
     @Test
     public void equals() {
-        AttendanceRecordList attendanceRecordList =
-                new AttendanceRecordList(TypicalAttendanceRecord.getTypicalAttendanceRecord());
+        AttendanceRecordList attendanceRecordList = new AttendanceRecordList(getTypicalAttendanceRecord());
 
         // same object -> returns true
         assertTrue(attendanceRecordList.equals(attendanceRecordList));
@@ -116,26 +116,26 @@ public class AttendanceRecordListTest {
 
         // same size, same attendance records -> return true
         List<AttendanceRecord> list = new ArrayList<>();
-        list.add(TypicalAttendanceRecord.RECORD_EMPTY);
-        list.add(TypicalAttendanceRecord.RECORD_ALICE_80);
-        list.add(TypicalAttendanceRecord.RECORD_ALICE_51_BENSON_33);
+        list.add(RECORD_EMPTY);
+        list.add(RECORD_ALICE_80);
+        list.add(RECORD_ALICE_51_BENSON_33);
         AttendanceRecordList sameSizeAndRecord = new AttendanceRecordList(list);
         assertTrue(attendanceRecordList.equals(sameSizeAndRecord));
 
         // different size, same attendance records -> return false
-        list.add(TypicalAttendanceRecord.RECORD_EMPTY);
+        list.add(RECORD_EMPTY);
         AttendanceRecordList differentSizeSameRecord = new AttendanceRecordList(list);
         assertFalse(attendanceRecordList.equals(differentSizeSameRecord));
 
         // same size, different attendance records -> return false
         list.remove(list.size() - 1);
         list.remove(list.size() - 1);
-        list.add(TypicalAttendanceRecord.RECORD_EMPTY);
+        list.add(RECORD_EMPTY);
         AttendanceRecordList sameSizeDifferentRecord = new AttendanceRecordList(list);
         assertFalse(attendanceRecordList.equals(sameSizeDifferentRecord));
 
         //different size, different attendance records -> return false
-        list.add(TypicalAttendanceRecord.RECORD_ALICE_51_BENSON_33);
+        list.add(RECORD_ALICE_51_BENSON_33);
         AttendanceRecordList differentAttendanceRecordList = new AttendanceRecordList(list);
         assertFalse(attendanceRecordList.equals(differentAttendanceRecordList));
     }
@@ -146,9 +146,9 @@ public class AttendanceRecordListTest {
      */
     private AttendanceRecordList createAliceRecordList() {
         List<AttendanceRecord> list = new ArrayList<>();
-        list.add(TypicalAttendanceRecord.RECORD_ALICE_80);
+        list.add(RECORD_ALICE_80);
         for (int i = 0; i < 6; i++) {
-            list.add(TypicalAttendanceRecord.RECORD_EMPTY);
+            list.add(RECORD_EMPTY);
         }
         return new AttendanceRecordList(list);
     }

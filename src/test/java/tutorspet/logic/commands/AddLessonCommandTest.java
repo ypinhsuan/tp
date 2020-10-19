@@ -2,17 +2,18 @@ package tutorspet.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static tutorspet.commons.core.Messages.MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static tutorspet.testutil.Assert.assertThrows;
 import static tutorspet.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
+import static tutorspet.testutil.TypicalTutorsPet.getOnlyModuleClassTutorsPet;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import tutorspet.commons.core.Messages;
 import tutorspet.commons.core.index.Index;
 import tutorspet.model.Model;
 import tutorspet.model.ModelManager;
@@ -20,14 +21,13 @@ import tutorspet.model.UserPrefs;
 import tutorspet.model.lesson.Lesson;
 import tutorspet.model.moduleclass.ModuleClass;
 import tutorspet.testutil.LessonBuilder;
-import tutorspet.testutil.TypicalTutorsPet;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code AddLessonCommand}.
  */
 public class AddLessonCommandTest {
 
-    private Model model = new ModelManager(TypicalTutorsPet.getOnlyModuleClassTutorsPet(), new UserPrefs());
+    private Model model = new ModelManager(getOnlyModuleClassTutorsPet(), new UserPrefs());
 
     @Test
     public void constructor_nullIndexes_throwNullPointerException() {
@@ -78,7 +78,7 @@ public class AddLessonCommandTest {
         Lesson lesson = new LessonBuilder().build();
         AddLessonCommand addLessonCommand = new AddLessonCommand(outOfBoundIndex, lesson);
 
-        assertCommandFailure(addLessonCommand, model, Messages.MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX);
+        assertCommandFailure(addLessonCommand, model, MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX);
     }
 
     @Test

@@ -3,12 +3,15 @@ package tutorspet.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX;
+import static tutorspet.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static tutorspet.logic.commands.UnlinkCommand.MESSAGE_MISSING_LINK;
 import static tutorspet.testutil.Assert.assertThrows;
 import static tutorspet.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 import static tutorspet.testutil.TypicalIndexes.INDEX_SECOND_ITEM;
 import static tutorspet.testutil.TypicalIndexes.INDEX_THIRD_ITEM;
+import static tutorspet.testutil.TypicalTutorsPet.getTypicalTutorsPet;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -16,21 +19,19 @@ import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
 
-import tutorspet.commons.core.Messages;
 import tutorspet.commons.core.index.Index;
 import tutorspet.model.Model;
 import tutorspet.model.ModelManager;
 import tutorspet.model.UserPrefs;
 import tutorspet.model.moduleclass.ModuleClass;
 import tutorspet.model.student.Student;
-import tutorspet.testutil.TypicalTutorsPet;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code UnlinkCommand}.
  */
 public class UnlinkCommandTest {
 
-    private Model model = new ModelManager(TypicalTutorsPet.getTypicalTutorsPet(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalTutorsPet(), new UserPrefs());
 
     @Test
     public void constructor_nullStudentIndex_throwNullPointerException() {
@@ -85,7 +86,7 @@ public class UnlinkCommandTest {
     public void execute_studentNotInModuleClass_failure() {
         UnlinkCommand unlinkCommand = new UnlinkCommand(INDEX_FIRST_ITEM, INDEX_THIRD_ITEM);
 
-        assertCommandFailure(unlinkCommand, model, UnlinkCommand.MESSAGE_MISSING_LINK);
+        assertCommandFailure(unlinkCommand, model, MESSAGE_MISSING_LINK);
     }
 
     @Test
@@ -93,7 +94,7 @@ public class UnlinkCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredStudentList().size() + 1);
         UnlinkCommand unlinkCommand = new UnlinkCommand(INDEX_FIRST_ITEM, outOfBoundIndex);
 
-        assertCommandFailure(unlinkCommand, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        assertCommandFailure(unlinkCommand, model, MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
     }
 
     @Test
@@ -106,7 +107,7 @@ public class UnlinkCommandTest {
 
         UnlinkCommand unlinkCommand = new UnlinkCommand(INDEX_FIRST_ITEM, outOfBoundIndex);
 
-        assertCommandFailure(unlinkCommand, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        assertCommandFailure(unlinkCommand, model, MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
     }
 
     @Test

@@ -10,6 +10,7 @@ import static tutorspet.testutil.TypicalLesson.LESSON_FRI_8_TO_10;
 import static tutorspet.testutil.TypicalLesson.LESSON_THU_10_TO_11;
 import static tutorspet.testutil.TypicalLesson.ONLINE_LESSON_TUE_1030_1130;
 import static tutorspet.testutil.TypicalStudent.ALICE;
+import static tutorspet.testutil.TypicalStudent.BENSON;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,7 +25,7 @@ public class TypicalModuleClass {
      */
     public static final ModuleClass CS2103T_TUTORIAL = new ModuleClassBuilder()
             .withName(VALID_NAME_CS2103T_TUTORIAL)
-            .withStudentUuids(ALICE.getUuid(), TypicalStudent.BENSON.getUuid())
+            .withStudentUuids(ALICE.getUuid(), BENSON.getUuid())
             .withLessons(insertAttendanceRecords(LESSON_THU_10_TO_11, RECORD_ALICE_80, RECORD_ALICE_51_BENSON_33))
             .build();
 

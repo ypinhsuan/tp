@@ -1,5 +1,7 @@
 package tutorspet.model.lesson;
 
+import static java.time.LocalTime.parse;
+import static java.util.UUID.fromString;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -10,15 +12,16 @@ import static tutorspet.logic.commands.CommandTestUtil.VALID_PARTICIPATION_SCORE
 import static tutorspet.logic.commands.CommandTestUtil.VALID_START_TIME_1400_LESSON_WED_2_TO_4;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_UUID_AMY;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_VENUE_COM1_B111_LESSON_WED_2_TO_4;
+import static tutorspet.model.lesson.Lesson.TIME_FORMATTER;
 import static tutorspet.testutil.Assert.assertThrows;
 import static tutorspet.testutil.TypicalLesson.LESSON_FRI_8_TO_10;
+import static tutorspet.testutil.TypicalLesson.LESSON_WED_2_TO_4;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -28,20 +31,19 @@ import tutorspet.model.attendance.Attendance;
 import tutorspet.model.attendance.AttendanceRecord;
 import tutorspet.model.attendance.AttendanceRecordList;
 import tutorspet.testutil.LessonBuilder;
-import tutorspet.testutil.TypicalLesson;
 
 public class LessonTest {
 
     private static final LocalTime VALID_START_TIME =
-            LocalTime.parse(VALID_START_TIME_1400_LESSON_WED_2_TO_4);
+            parse(VALID_START_TIME_1400_LESSON_WED_2_TO_4);
     private static final LocalTime VALID_END_TIME =
-            LocalTime.parse(VALID_END_TIME_1600_LESSON_WED_2_TO_4);
+            parse(VALID_END_TIME_1600_LESSON_WED_2_TO_4);
     private static final Venue VALID_VENUE = new Venue(VALID_VENUE_COM1_B111_LESSON_WED_2_TO_4);
     private static final NumberOfOccurrences VALID_NUMBER_OF_OCCURRENCES =
             new NumberOfOccurrences(1);
     private static final Attendance VALID_ATTENDANCE = new Attendance(VALID_PARTICIPATION_SCORE_33);
     private static final AttendanceRecord VALID_ATTENDANCE_RECORD =
-            new AttendanceRecord(Map.of(UUID.fromString(VALID_UUID_AMY), VALID_ATTENDANCE));
+            new AttendanceRecord(Map.of(fromString(VALID_UUID_AMY), VALID_ATTENDANCE));
     private static final AttendanceRecordList VALID_ATTENDANCE_RECORD_LIST =
             new AttendanceRecordList(Collections.singletonList(VALID_ATTENDANCE_RECORD));
 
@@ -92,14 +94,14 @@ public class LessonTest {
 
         // different start time -> returns false
         Lesson editedLesson = new LessonBuilder(LESSON_FRI_8_TO_10)
-                .withStartTime(LocalTime.parse(VALID_START_TIME_1400_LESSON_WED_2_TO_4,
-                        Lesson.TIME_FORMATTER)).build();
+                .withStartTime(parse(VALID_START_TIME_1400_LESSON_WED_2_TO_4,
+                        TIME_FORMATTER)).build();
         assertFalse(LESSON_FRI_8_TO_10.isSameLesson(editedLesson));
 
         // different end time -> returns false
         editedLesson = new LessonBuilder(LESSON_FRI_8_TO_10)
-                .withEndTime(LocalTime.parse(VALID_END_TIME_1600_LESSON_WED_2_TO_4,
-                        Lesson.TIME_FORMATTER)).build();
+                .withEndTime(parse(VALID_END_TIME_1600_LESSON_WED_2_TO_4,
+                        TIME_FORMATTER)).build();
         assertFalse(LESSON_FRI_8_TO_10.isSameLesson(editedLesson));
 
         // different day -> returns false
@@ -121,8 +123,7 @@ public class LessonTest {
         List<AttendanceRecord> records = new ArrayList<>(Collections.nCopies(13, new AttendanceRecord()));
         records.set(0, VALID_ATTENDANCE_RECORD);
         editedLesson = new LessonBuilder(LESSON_FRI_8_TO_10)
-                .withAttendanceRecordList(new AttendanceRecordList(records))
-                .build();
+                .withAttendanceRecordList(new AttendanceRecordList(records)).build();
         assertTrue(LESSON_FRI_8_TO_10.isSameLesson(editedLesson));
     }
 
@@ -132,9 +133,9 @@ public class LessonTest {
                 VALID_NUMBER_OF_OCCURRENCES, VALID_VENUE, VALID_ATTENDANCE_RECORD_LIST);
         String expectedString = (new StringBuilder()).append(CommandTestUtil.VALID_DAY_WED_LESSON_WED_2_TO_4)
                 .append(" ")
-                .append(Lesson.TIME_FORMATTER.format(VALID_START_TIME))
+                .append(TIME_FORMATTER.format(VALID_START_TIME))
                 .append(" to ")
-                .append(Lesson.TIME_FORMATTER.format(VALID_END_TIME))
+                .append(TIME_FORMATTER.format(VALID_END_TIME))
                 .append(" Venue: ")
                 .append(VALID_VENUE.venue)
                 .append(" Number of occurrences: ")
@@ -158,18 +159,18 @@ public class LessonTest {
         assertFalse(LESSON_FRI_8_TO_10.equals(1));
 
         // different lesson -> returns false
-        assertFalse(LESSON_FRI_8_TO_10.equals(TypicalLesson.LESSON_WED_2_TO_4));
+        assertFalse(LESSON_FRI_8_TO_10.equals(LESSON_WED_2_TO_4));
 
         // different start time -> returns false
         Lesson editedLesson = new LessonBuilder(LESSON_FRI_8_TO_10)
-                .withStartTime(LocalTime.parse(VALID_START_TIME_1400_LESSON_WED_2_TO_4,
-                        Lesson.TIME_FORMATTER)).build();
+                .withStartTime(parse(VALID_START_TIME_1400_LESSON_WED_2_TO_4,
+                        TIME_FORMATTER)).build();
         assertFalse(LESSON_FRI_8_TO_10.equals(editedLesson));
 
         // different end time -> returns false
         editedLesson = new LessonBuilder(LESSON_FRI_8_TO_10)
-                .withEndTime(LocalTime.parse(VALID_END_TIME_1600_LESSON_WED_2_TO_4,
-                        Lesson.TIME_FORMATTER)).build();
+                .withEndTime(parse(VALID_END_TIME_1600_LESSON_WED_2_TO_4,
+                        TIME_FORMATTER)).build();
         assertFalse(LESSON_FRI_8_TO_10.equals(editedLesson));
 
         // different day -> returns false
@@ -191,8 +192,7 @@ public class LessonTest {
         List<AttendanceRecord> records = new ArrayList<>(Collections.nCopies(13, new AttendanceRecord()));
         records.set(0, VALID_ATTENDANCE_RECORD);
         editedLesson = new LessonBuilder(LESSON_FRI_8_TO_10)
-                .withAttendanceRecordList(new AttendanceRecordList(records))
-                .build();
+                .withAttendanceRecordList(new AttendanceRecordList(records)).build();
         assertFalse(LESSON_FRI_8_TO_10.equals(editedLesson));
     }
 }

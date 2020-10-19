@@ -2,14 +2,20 @@ package tutorspet.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static tutorspet.logic.commands.EditAttendanceCommand.MESSAGE_NOT_EDITED;
+import static tutorspet.logic.commands.EditAttendanceCommand.MESSAGE_USAGE;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_CLASS_INDEX;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_LESSON_INDEX;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_PARTICIPATION_SCORE;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_STUDENT_INDEX;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_WEEK;
+import static tutorspet.logic.parser.ParserUtil.parseIndex;
+import static tutorspet.logic.parser.ParserUtil.parseParticipationScore;
+import static tutorspet.logic.parser.ParserUtil.parseWeek;
 
 import tutorspet.commons.core.index.Index;
 import tutorspet.logic.commands.EditAttendanceCommand;
+import tutorspet.logic.commands.EditAttendanceCommand.EditAttendanceDescriptor;
 import tutorspet.logic.parser.exceptions.ParseException;
 import tutorspet.model.attendance.Week;
 
@@ -40,30 +46,29 @@ public class EditAttendanceCommandParser implements Parser<EditAttendanceCommand
         boolean isWeekPresent = argMultimap.getValue(PREFIX_WEEK).isPresent();
         if (!isModuleClassIndexPresent || !isLessonIndexPresent || !isStudentIndexPresent || !isWeekPresent) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditAttendanceCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
         }
 
         try {
-            moduleClassIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_CLASS_INDEX).get());
-            lessonIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_LESSON_INDEX).get());
-            studentIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_STUDENT_INDEX).get());
+            moduleClassIndex = parseIndex(argMultimap.getValue(PREFIX_CLASS_INDEX).get());
+            lessonIndex = parseIndex(argMultimap.getValue(PREFIX_LESSON_INDEX).get());
+            studentIndex = parseIndex(argMultimap.getValue(PREFIX_STUDENT_INDEX).get());
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditAttendanceCommand.MESSAGE_USAGE), pe);
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE), pe);
         }
 
-        week = ParserUtil.parseWeek(argMultimap.getValue(PREFIX_WEEK).get());
+        week = parseWeek(argMultimap.getValue(PREFIX_WEEK).get());
 
-        EditAttendanceCommand.EditAttendanceDescriptor editAttendanceDescriptor =
-                new EditAttendanceCommand.EditAttendanceDescriptor();
+        EditAttendanceDescriptor editAttendanceDescriptor = new EditAttendanceDescriptor();
 
         if (argMultimap.getValue(PREFIX_PARTICIPATION_SCORE).isPresent()) {
             editAttendanceDescriptor.setParticipationScore(
-                    ParserUtil.parseParticipationScore(argMultimap.getValue(PREFIX_PARTICIPATION_SCORE).get()));
+                    parseParticipationScore(argMultimap.getValue(PREFIX_PARTICIPATION_SCORE).get()));
         }
 
         if (!editAttendanceDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditAttendanceCommand.MESSAGE_NOT_EDITED);
+            throw new ParseException(MESSAGE_NOT_EDITED);
         }
 
         return new EditAttendanceCommand(moduleClassIndex, lessonIndex, studentIndex, week, editAttendanceDescriptor);

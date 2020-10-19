@@ -1,7 +1,8 @@
 package tutorspet.storage.attendance;
 
+import static java.util.Collections.nCopies;
+
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -63,7 +64,7 @@ public class JsonAdaptedAttendanceRecordList {
             throw new IllegalValueException(MESSAGE_INVALID_RECORD);
         }
 
-        List<AttendanceRecord> attendanceRecords = new ArrayList<>(Collections.nCopies(recordList.size(), null));
+        List<AttendanceRecord> attendanceRecords = new ArrayList<>(nCopies(recordList.size(), null));
         for (JsonAdaptedAttendanceRecord record : recordList) {
             Pair<Week, AttendanceRecord> pair = record.toKeyValuePair();
 

@@ -1,6 +1,8 @@
 package tutorspet.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static tutorspet.model.Model.PREDICATE_SHOW_ALL_MODULE_CLASS;
+import static tutorspet.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import tutorspet.logic.commands.exceptions.CommandException;
 import tutorspet.model.Model;
@@ -24,8 +26,8 @@ public class UndoCommand extends Command {
         }
 
         String commandMessage = model.undo();
-        model.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
-        model.updateFilteredModuleClassList(Model.PREDICATE_SHOW_ALL_MODULE_CLASS);
+        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+        model.updateFilteredModuleClassList(PREDICATE_SHOW_ALL_MODULE_CLASS);
         return new CommandResult(String.format(MESSAGE_SUCCESS, commandMessage));
     }
 }

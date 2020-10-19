@@ -1,13 +1,14 @@
 package tutorspet.logic.parser;
 
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static tutorspet.logic.commands.DeleteModuleClassCommand.MESSAGE_USAGE;
 import static tutorspet.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static tutorspet.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static tutorspet.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 
 import org.junit.jupiter.api.Test;
 
 import tutorspet.logic.commands.DeleteModuleClassCommand;
-import tutorspet.testutil.TypicalIndexes;
 
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations
@@ -22,12 +23,11 @@ public class DeleteModuleClassCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsDeleteModuleClassCommand() {
-        assertParseSuccess(parser, "1", new DeleteModuleClassCommand(TypicalIndexes.INDEX_FIRST_ITEM));
+        assertParseSuccess(parser, "1", new DeleteModuleClassCommand(INDEX_FIRST_ITEM));
     }
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                DeleteModuleClassCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
     }
 }

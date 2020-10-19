@@ -3,6 +3,7 @@ package tutorspet.logic.parser;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_PARTICIPATION_SCORE_33;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_WEEK_1;
+import static tutorspet.logic.commands.EditAttendanceCommand.MESSAGE_USAGE;
 import static tutorspet.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static tutorspet.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static tutorspet.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
@@ -11,6 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import tutorspet.commons.core.index.Index;
 import tutorspet.logic.commands.EditAttendanceCommand;
+import tutorspet.logic.commands.EditAttendanceCommand.EditAttendanceDescriptor;
 import tutorspet.model.attendance.Attendance;
 import tutorspet.model.attendance.Week;
 import tutorspet.testutil.EditAttendanceDescriptorBuilder;
@@ -18,7 +20,7 @@ import tutorspet.testutil.EditAttendanceDescriptorBuilder;
 public class EditAttendanceCommandParserTest {
 
     private static final String MESSAGE_INVALID_FORMAT =
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditAttendanceCommand.MESSAGE_USAGE);
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE);
 
     private EditAttendanceCommandParser parser = new EditAttendanceCommandParser();
 
@@ -71,7 +73,7 @@ public class EditAttendanceCommandParserTest {
         Index studentIndex = INDEX_FIRST_ITEM;
         Week week = VALID_WEEK_1;
         int participationScore = VALID_PARTICIPATION_SCORE_33;
-        EditAttendanceCommand.EditAttendanceDescriptor descriptor =
+        EditAttendanceDescriptor descriptor =
                 new EditAttendanceDescriptorBuilder().withParticipationScore(participationScore).build();
         EditAttendanceCommand expectedCommand =
                 new EditAttendanceCommand(moduleClassIndex, lessonIndex, studentIndex, week, descriptor);
@@ -87,7 +89,7 @@ public class EditAttendanceCommandParserTest {
         Index studentIndex = INDEX_FIRST_ITEM;
         Week week = VALID_WEEK_1;
         int participationScore = VALID_PARTICIPATION_SCORE_33;
-        EditAttendanceCommand.EditAttendanceDescriptor descriptor =
+        EditAttendanceDescriptor descriptor =
                 new EditAttendanceDescriptorBuilder().withParticipationScore(participationScore).build();
         EditAttendanceCommand expectedCommand =
                 new EditAttendanceCommand(moduleClassIndex, lessonIndex, studentIndex, week, descriptor);

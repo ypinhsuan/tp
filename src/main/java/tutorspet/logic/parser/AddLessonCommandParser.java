@@ -1,10 +1,19 @@
 package tutorspet.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static tutorspet.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static tutorspet.logic.commands.AddLessonCommand.MESSAGE_USAGE;
+import static tutorspet.logic.parser.CliSyntax.PREFIX_CLASS_INDEX;
+import static tutorspet.logic.parser.CliSyntax.PREFIX_DAY;
+import static tutorspet.logic.parser.CliSyntax.PREFIX_END_TIME;
+import static tutorspet.logic.parser.CliSyntax.PREFIX_NUMBER_OF_OCCURRENCES;
+import static tutorspet.logic.parser.CliSyntax.PREFIX_START_TIME;
+import static tutorspet.logic.parser.CliSyntax.PREFIX_VENUE;
+import static tutorspet.logic.parser.ParserUtil.parseIndex;
+import static tutorspet.logic.parser.ParserUtil.parseNumberOfOccurrences;
 
 import java.time.LocalTime;
 
-import tutorspet.commons.core.Messages;
 import tutorspet.commons.core.index.Index;
 import tutorspet.logic.commands.AddLessonCommand;
 import tutorspet.logic.parser.exceptions.ParseException;
@@ -27,41 +36,39 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
         requireNonNull(args);
 
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_CLASS_INDEX, CliSyntax.PREFIX_DAY,
-                        CliSyntax.PREFIX_START_TIME, CliSyntax.PREFIX_END_TIME, CliSyntax.PREFIX_VENUE,
-                        CliSyntax.PREFIX_NUMBER_OF_OCCURRENCES);
+                ArgumentTokenizer.tokenize(args, PREFIX_CLASS_INDEX, PREFIX_DAY,
+                        PREFIX_START_TIME, PREFIX_END_TIME, PREFIX_VENUE,
+                        PREFIX_NUMBER_OF_OCCURRENCES);
 
         Index moduleClassIndex;
 
         // parse moduleClass index
-        boolean isModuleClassIndexPresent = argMultimap.getValue(CliSyntax.PREFIX_CLASS_INDEX).isPresent();
+        boolean isModuleClassIndexPresent = argMultimap.getValue(PREFIX_CLASS_INDEX).isPresent();
         if (!isModuleClassIndexPresent) {
-            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                    AddLessonCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
         }
 
         try {
-            moduleClassIndex = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_CLASS_INDEX).get());
+            moduleClassIndex = parseIndex(argMultimap.getValue(PREFIX_CLASS_INDEX).get());
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddLessonCommand.MESSAGE_USAGE), pe);
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE), pe);
         }
 
         // parse lesson data values
-        if (!ParserUtil.arePrefixesPresent(argMultimap, CliSyntax.PREFIX_DAY,
-                CliSyntax.PREFIX_START_TIME, CliSyntax.PREFIX_END_TIME, CliSyntax.PREFIX_VENUE,
-                CliSyntax.PREFIX_NUMBER_OF_OCCURRENCES)
+        if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_DAY,
+                PREFIX_START_TIME, PREFIX_END_TIME, PREFIX_VENUE, PREFIX_NUMBER_OF_OCCURRENCES)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                    AddLessonCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    MESSAGE_USAGE));
         }
 
-        Day day = ParserUtil.parseDay(argMultimap.getValue(CliSyntax.PREFIX_DAY).get());
-        LocalTime startTime = ParserUtil.parseTime(argMultimap.getValue(CliSyntax.PREFIX_START_TIME).get());
-        LocalTime endTime = ParserUtil.parseTime(argMultimap.getValue(CliSyntax.PREFIX_END_TIME).get());
-        Venue venue = ParserUtil.parseVenue(argMultimap.getValue(CliSyntax.PREFIX_VENUE).get());
+        Day day = ParserUtil.parseDay(argMultimap.getValue(PREFIX_DAY).get());
+        LocalTime startTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_START_TIME).get());
+        LocalTime endTime = ParserUtil.parseTime(argMultimap.getValue(PREFIX_END_TIME).get());
+        Venue venue = ParserUtil.parseVenue(argMultimap.getValue(PREFIX_VENUE).get());
         NumberOfOccurrences numberOfOccurrences =
-                ParserUtil.parseNumberOfOccurrences(argMultimap.getValue(CliSyntax.PREFIX_NUMBER_OF_OCCURRENCES).get());
+                parseNumberOfOccurrences(argMultimap.getValue(PREFIX_NUMBER_OF_OCCURRENCES).get());
 
         Lesson lesson = new Lesson(startTime, endTime, day, numberOfOccurrences, venue);
 

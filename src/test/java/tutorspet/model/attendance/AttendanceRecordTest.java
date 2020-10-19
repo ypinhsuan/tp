@@ -14,7 +14,6 @@ import static tutorspet.testutil.TypicalStudent.BENSON;
 import java.util.HashMap;
 import java.util.UUID;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import tutorspet.model.attendance.exceptions.AttendanceNotFoundException;
@@ -79,28 +78,28 @@ public class AttendanceRecordTest {
     @Test
     public void equals() {
         // same object -> returns true
-        Assertions.assertTrue(RECORD_ALICE_80.equals(RECORD_ALICE_80));
-        Assertions.assertTrue(RECORD_EMPTY.equals(RECORD_EMPTY));
+        assertTrue(RECORD_ALICE_80.equals(RECORD_ALICE_80));
+        assertTrue(RECORD_EMPTY.equals(RECORD_EMPTY));
 
         // null -> returns false
-        Assertions.assertFalse(RECORD_ALICE_80.equals(null));
-        Assertions.assertFalse(RECORD_EMPTY.equals(null));
+        assertFalse(RECORD_ALICE_80.equals(null));
+        assertFalse(RECORD_EMPTY.equals(null));
 
         // different types -> returns false
-        Assertions.assertFalse(RECORD_ALICE_80.equals(RECORD_ALICE_80.getAttendanceRecord()));
+        assertFalse(RECORD_ALICE_80.equals(RECORD_ALICE_80.getAttendanceRecord()));
 
         // same attendance record -> returns true
         AttendanceRecord attendanceRecord = new AttendanceRecordBuilder()
                 .withEntry(ALICE.getUuid(), new Attendance(VALID_PARTICIPATION_SCORE_80)).build();
-        Assertions.assertTrue(RECORD_ALICE_80.equals(attendanceRecord));
+        assertTrue(RECORD_ALICE_80.equals(attendanceRecord));
 
         // different attendance record -> returns false
         AttendanceRecord attendanceRecordWrongUuid = new AttendanceRecordBuilder()
                 .withEntry(BENSON.getUuid(), new Attendance(VALID_PARTICIPATION_SCORE_80)).build();
-        Assertions.assertFalse(RECORD_ALICE_80.equals(attendanceRecordWrongUuid));
+        assertFalse(RECORD_ALICE_80.equals(attendanceRecordWrongUuid));
 
         AttendanceRecord attendanceRecordWrongAttendance = new AttendanceRecordBuilder()
                 .withEntry(ALICE.getUuid(), new Attendance(VALID_PARTICIPATION_SCORE_33)).build();
-        Assertions.assertFalse(RECORD_ALICE_80.equals(attendanceRecordWrongAttendance));
+        assertFalse(RECORD_ALICE_80.equals(attendanceRecordWrongAttendance));
     }
 }

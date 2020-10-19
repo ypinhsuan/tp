@@ -3,12 +3,13 @@ package tutorspet.logic.parser;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static tutorspet.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static tutorspet.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static tutorspet.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
+import static tutorspet.testutil.TypicalIndexes.INDEX_SECOND_ITEM;
 
 import org.junit.jupiter.api.Test;
 
 import tutorspet.logic.commands.ListStudentCommand;
 import tutorspet.logic.commands.ListStudentInClassCommand;
-import tutorspet.testutil.TypicalIndexes;
 
 public class ListStudentCommandParserTest {
 
@@ -20,10 +21,10 @@ public class ListStudentCommandParserTest {
         assertParseSuccess(parser, " ", new ListStudentCommand());
 
         // class specified
-        assertParseSuccess(parser, " c/2", new ListStudentInClassCommand(TypicalIndexes.INDEX_SECOND_ITEM));
+        assertParseSuccess(parser, " c/2", new ListStudentInClassCommand(INDEX_SECOND_ITEM));
 
         // multiple class indexes specified -> last class index accepted
-        assertParseSuccess(parser, " c/2 c/1", new ListStudentInClassCommand(TypicalIndexes.INDEX_FIRST_ITEM));
+        assertParseSuccess(parser, " c/2 c/1", new ListStudentInClassCommand(INDEX_FIRST_ITEM));
     }
 
     @Test

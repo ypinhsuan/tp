@@ -5,6 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tutorspet.commons.core.Messages.MESSAGE_STUDENTS_LISTED_OVERVIEW;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static tutorspet.testutil.TypicalStudent.CARL;
+import static tutorspet.testutil.TypicalStudent.ELLE;
+import static tutorspet.testutil.TypicalStudent.FIONA;
+import static tutorspet.testutil.TypicalTutorsPet.getTypicalTutorsPet;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -16,16 +20,14 @@ import tutorspet.model.ModelManager;
 import tutorspet.model.UserPrefs;
 import tutorspet.model.components.name.NameContainsKeywordsPredicate;
 import tutorspet.model.student.Student;
-import tutorspet.testutil.TypicalStudent;
-import tutorspet.testutil.TypicalTutorsPet;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindStudentCommand}.
  */
 public class FindStudentCommandTest {
 
-    private Model model = new ModelManager(TypicalTutorsPet.getTypicalTutorsPet(), new UserPrefs());
-    private Model expectedModel = new ModelManager(TypicalTutorsPet.getTypicalTutorsPet(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalTutorsPet(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalTutorsPet(), new UserPrefs());
 
     @Test
     public void equals() {
@@ -70,9 +72,9 @@ public class FindStudentCommandTest {
         NameContainsKeywordsPredicate<Student> predicate = preparePredicate("Kurz Elle Kunz");
         FindStudentCommand command = new FindStudentCommand(predicate);
         expectedModel.updateFilteredStudentList(predicate);
+
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(TypicalStudent.CARL, TypicalStudent.ELLE, TypicalStudent.FIONA),
-                model.getFilteredStudentList());
+        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredStudentList());
     }
 
     /**

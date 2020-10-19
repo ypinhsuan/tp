@@ -3,6 +3,9 @@ package tutorspet.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static tutorspet.testutil.Assert.assertThrows;
+import static tutorspet.testutil.TypicalStudent.ALICE;
+import static tutorspet.testutil.TypicalStudent.HOON;
+import static tutorspet.testutil.TypicalStudent.IDA;
 import static tutorspet.testutil.TypicalTutorsPet.getTypicalTutorsPet;
 
 import java.io.IOException;
@@ -16,7 +19,6 @@ import org.junit.jupiter.api.io.TempDir;
 import tutorspet.commons.exceptions.DataConversionException;
 import tutorspet.model.ReadOnlyTutorsPet;
 import tutorspet.model.TutorsPet;
-import tutorspet.testutil.TypicalStudent;
 
 public class JsonTutorsPetStorageTest {
 
@@ -91,14 +93,14 @@ public class JsonTutorsPetStorageTest {
         assertEquals(original, new TutorsPet(readBack));
 
         // Modify data, overwrite exiting file, and read back
-        original.addStudent(TypicalStudent.HOON);
-        original.deleteStudent(TypicalStudent.ALICE);
+        original.addStudent(HOON);
+        original.deleteStudent(ALICE);
         jsonTutorsPetStorage.saveTutorsPet(original, filePath);
         readBack = jsonTutorsPetStorage.readTutorsPet(filePath).get();
         assertEquals(original, new TutorsPet(readBack));
 
         // Save and read without specifying file path
-        original.addStudent(TypicalStudent.IDA);
+        original.addStudent(IDA);
         jsonTutorsPetStorage.saveTutorsPet(original); // file path not specified
         readBack = jsonTutorsPetStorage.readTutorsPet().get(); // file path not specified
         assertEquals(original, new TutorsPet(readBack));

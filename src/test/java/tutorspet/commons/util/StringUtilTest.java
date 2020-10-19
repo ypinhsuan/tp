@@ -2,6 +2,8 @@ package tutorspet.commons.util;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static tutorspet.commons.util.StringUtil.containsWordIgnoreCase;
+import static tutorspet.commons.util.StringUtil.getDetails;
 import static tutorspet.testutil.Assert.assertThrows;
 
 import java.io.FileNotFoundException;
@@ -57,24 +59,24 @@ public class StringUtilTest {
     @Test
     public void containsWordIgnoreCase_nullWord_throwsNullPointerException() {
         assertThrows(NullPointerException.class, ()
-            -> StringUtil.containsWordIgnoreCase("typical sentence", null));
+            -> containsWordIgnoreCase("typical sentence", null));
     }
 
     @Test
     public void containsWordIgnoreCase_emptyWord_throwsIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, "Word parameter cannot be empty", ()
-            -> StringUtil.containsWordIgnoreCase("typical sentence", "  "));
+            -> containsWordIgnoreCase("typical sentence", "  "));
     }
 
     @Test
     public void containsWordIgnoreCase_multipleWords_throwsIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, "Word parameter should be a single word", ()
-            -> StringUtil.containsWordIgnoreCase("typical sentence", "aaa BBB"));
+            -> containsWordIgnoreCase("typical sentence", "aaa BBB"));
     }
 
     @Test
     public void containsWordIgnoreCase_nullSentence_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> StringUtil.containsWordIgnoreCase(null, "abc"));
+        assertThrows(NullPointerException.class, () -> containsWordIgnoreCase(null, "abc"));
     }
 
     /*
@@ -106,22 +108,22 @@ public class StringUtilTest {
     public void containsWordIgnoreCase_validInputs_correctResult() {
 
         // Empty sentence
-        assertFalse(StringUtil.containsWordIgnoreCase("", "abc")); // Boundary case
-        assertFalse(StringUtil.containsWordIgnoreCase("    ", "123"));
+        assertFalse(containsWordIgnoreCase("", "abc")); // Boundary case
+        assertFalse(containsWordIgnoreCase("    ", "123"));
 
         // Matches a partial word only
-        assertFalse(StringUtil.containsWordIgnoreCase("aaa bbb ccc", "bb")); // Sentence word bigger than query word
-        assertFalse(StringUtil.containsWordIgnoreCase("aaa bbb ccc", "bbbb")); // Query word bigger than sentence word
+        assertFalse(containsWordIgnoreCase("aaa bbb ccc", "bb")); // Sentence word bigger than query word
+        assertFalse(containsWordIgnoreCase("aaa bbb ccc", "bbbb")); // Query word bigger than sentence word
 
         // Matches word in the sentence, different upper/lower case letters
-        assertTrue(StringUtil.containsWordIgnoreCase("aaa bBb ccc", "Bbb")); // First word (boundary case)
-        assertTrue(StringUtil.containsWordIgnoreCase("aaa bBb ccc@1", "CCc@1")); // Last word (boundary case)
-        assertTrue(StringUtil.containsWordIgnoreCase("  AAA   bBb   ccc  ", "aaa")); // Sentence has extra spaces
-        assertTrue(StringUtil.containsWordIgnoreCase("Aaa", "aaa")); // Only one word in sentence (boundary case)
-        assertTrue(StringUtil.containsWordIgnoreCase("aaa bbb ccc", "  ccc  ")); // Leading/trailing spaces
+        assertTrue(containsWordIgnoreCase("aaa bBb ccc", "Bbb")); // First word (boundary case)
+        assertTrue(containsWordIgnoreCase("aaa bBb ccc@1", "CCc@1")); // Last word (boundary case)
+        assertTrue(containsWordIgnoreCase("  AAA   bBb   ccc  ", "aaa")); // Sentence has extra spaces
+        assertTrue(containsWordIgnoreCase("Aaa", "aaa")); // Only one word in sentence (boundary case)
+        assertTrue(containsWordIgnoreCase("aaa bbb ccc", "  ccc  ")); // Leading/trailing spaces
 
         // Matches multiple words in sentence
-        assertTrue(StringUtil.containsWordIgnoreCase("AAA bBb ccc  bbb", "bbB"));
+        assertTrue(containsWordIgnoreCase("AAA bBb ccc  bbb", "bbB"));
     }
 
     //---------------- Tests for getDetails --------------------------------------
@@ -132,12 +134,12 @@ public class StringUtilTest {
 
     @Test
     public void getDetails_exceptionGiven() {
-        assertTrue(StringUtil.getDetails(new FileNotFoundException("file not found"))
+        assertTrue(getDetails(new FileNotFoundException("file not found"))
             .contains("java.io.FileNotFoundException: file not found"));
     }
 
     @Test
     public void getDetails_nullGiven_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> StringUtil.getDetails(null));
+        assertThrows(NullPointerException.class, () -> getDetails(null));
     }
 }

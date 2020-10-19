@@ -2,6 +2,12 @@ package tutorspet.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static tutorspet.commons.core.Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX;
+import static tutorspet.commons.core.Messages.MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX;
+import static tutorspet.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
+import static tutorspet.commons.core.Messages.MESSAGE_INVALID_STUDENT_IN_MODULE_CLASS;
+import static tutorspet.commons.core.Messages.MESSAGE_INVALID_WEEK;
+import static tutorspet.commons.core.Messages.MESSAGE_MISSING_STUDENT_ATTENDANCE;
 import static tutorspet.logic.commands.CommandTestUtil.DESC_ATTENDANCE_33;
 import static tutorspet.logic.commands.CommandTestUtil.DESC_ATTENDANCE_80;
 import static tutorspet.logic.commands.CommandTestUtil.INVALID_PARTICIPATION_SCORE_101;
@@ -13,6 +19,7 @@ import static tutorspet.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static tutorspet.logic.commands.CommandTestUtil.showModuleClassAtIndex;
 import static tutorspet.logic.commands.CommandTestUtil.showStudentAtIndex;
+import static tutorspet.logic.commands.EditAttendanceCommand.MESSAGE_EDIT_ATTENDANCE_SUCCESS;
 import static tutorspet.testutil.Assert.assertThrows;
 import static tutorspet.testutil.ModuleClassUtil.manualReplaceLessonToModuleClass;
 import static tutorspet.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
@@ -28,8 +35,8 @@ import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
 
-import tutorspet.commons.core.Messages;
 import tutorspet.commons.core.index.Index;
+import tutorspet.logic.commands.EditAttendanceCommand.EditAttendanceDescriptor;
 import tutorspet.model.Model;
 import tutorspet.model.ModelManager;
 import tutorspet.model.TutorsPet;
@@ -49,7 +56,7 @@ import tutorspet.testutil.EditAttendanceDescriptorBuilder;
  */
 public class EditAttendanceCommandTest {
 
-    private static final EditAttendanceCommand.EditAttendanceDescriptor EDITED_ATTENDANCE_DESCRIPTOR =
+    private static final EditAttendanceDescriptor EDITED_ATTENDANCE_DESCRIPTOR =
             new EditAttendanceDescriptorBuilder(VALID_ATTENDANCE_51).build();
 
     private Model model = new ModelManager(getTypicalTutorsPet(), new UserPrefs());
@@ -97,7 +104,7 @@ public class EditAttendanceCommandTest {
         Index studentIndex = INDEX_FIRST_ITEM;
         Week targetWeek = VALID_WEEK_1;
 
-        EditAttendanceCommand.EditAttendanceDescriptor editAttendanceDescriptor =
+        EditAttendanceDescriptor editAttendanceDescriptor =
                 new EditAttendanceDescriptorBuilder(DESC_ATTENDANCE_33).build();
         EditAttendanceCommand editAttendanceCommand = new EditAttendanceCommand(
                 moduleClassIndex, lessonIndex, studentIndex, targetWeek, editAttendanceDescriptor);
@@ -110,7 +117,7 @@ public class EditAttendanceCommandTest {
         ModuleClass editedModuleClass =
                 manualEditAttendance(moduleClass, lesson, student, targetWeek, editedAttendance);
 
-        String expectedMessage = String.format(EditAttendanceCommand.MESSAGE_EDIT_ATTENDANCE_SUCCESS,
+        String expectedMessage = String.format(MESSAGE_EDIT_ATTENDANCE_SUCCESS,
                 student.getName(), targetWeek, editedAttendance);
 
         Model expectedModel = new ModelManager(new TutorsPet(model.getTutorsPet()), new UserPrefs());
@@ -128,7 +135,7 @@ public class EditAttendanceCommandTest {
         Week targetWeek = VALID_WEEK_1;
 
         EditAttendanceCommand editAttendanceCommand = new EditAttendanceCommand(moduleClassIndex, lessonIndex,
-                studentIndex, targetWeek, new EditAttendanceCommand.EditAttendanceDescriptor());
+                studentIndex, targetWeek, new EditAttendanceDescriptor());
 
         Student student = model.getFilteredStudentList().get(moduleClassIndex.getZeroBased());
         Attendance editedAttendance = model.getFilteredModuleClassList().get(moduleClassIndex.getZeroBased())
@@ -136,7 +143,7 @@ public class EditAttendanceCommandTest {
                 .getAttendanceRecordList()
                 .getAttendance(student, targetWeek);
 
-        String expectedMessage = String.format(EditAttendanceCommand.MESSAGE_EDIT_ATTENDANCE_SUCCESS,
+        String expectedMessage = String.format(MESSAGE_EDIT_ATTENDANCE_SUCCESS,
                 student.getName(), targetWeek, editedAttendance);
 
         Model expectedModel = new ModelManager(new TutorsPet(model.getTutorsPet()), new UserPrefs());
@@ -169,7 +176,7 @@ public class EditAttendanceCommandTest {
         ModuleClass editedModuleClass = manualEditAttendance(moduleClassInFilteredList, lesson,
                 studentInFilteredList, targetWeek, editedAttendance);
 
-        String expectedMessage = String.format(EditAttendanceCommand.MESSAGE_EDIT_ATTENDANCE_SUCCESS,
+        String expectedMessage = String.format(MESSAGE_EDIT_ATTENDANCE_SUCCESS,
                 studentInFilteredList.getName(), targetWeek, editedAttendance);
 
         Model expectedModel = new ModelManager(new TutorsPet(model.getTutorsPet()), new UserPrefs());
@@ -187,12 +194,12 @@ public class EditAttendanceCommandTest {
         Index studentIndex = INDEX_FIRST_ITEM;
         Week targetWeek = VALID_WEEK_1;
 
-        EditAttendanceCommand.EditAttendanceDescriptor editAttendanceDescriptor =
+        EditAttendanceDescriptor editAttendanceDescriptor =
                 new EditAttendanceDescriptorBuilder(DESC_ATTENDANCE_33).build();
         EditAttendanceCommand editAttendanceCommand = new EditAttendanceCommand(
                 outOfBoundIndex, lessonIndex, studentIndex, targetWeek, editAttendanceDescriptor);
 
-        assertCommandFailure(editAttendanceCommand, model, Messages.MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX);
+        assertCommandFailure(editAttendanceCommand, model, MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX);
     }
 
     @Test
@@ -204,12 +211,12 @@ public class EditAttendanceCommandTest {
         ModuleClass moduleClass = model.getFilteredModuleClassList().get(moduleClassIndex.getZeroBased());
         Index outOfBoundIndex = Index.fromOneBased(moduleClass.getLessons().size() + 1);
 
-        EditAttendanceCommand.EditAttendanceDescriptor editAttendanceDescriptor = new EditAttendanceDescriptorBuilder()
+        EditAttendanceDescriptor editAttendanceDescriptor = new EditAttendanceDescriptorBuilder()
                 .withParticipationScore(INVALID_PARTICIPATION_SCORE_101).build();
         EditAttendanceCommand editAttendanceCommand = new EditAttendanceCommand(
                 moduleClassIndex, outOfBoundIndex, studentIndex, targetWeek, editAttendanceDescriptor);
 
-        assertCommandFailure(editAttendanceCommand, model, Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
+        assertCommandFailure(editAttendanceCommand, model, MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
     }
 
     @Test
@@ -219,12 +226,12 @@ public class EditAttendanceCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredStudentList().size() + 1);
         Week targetWeek = VALID_WEEK_1;
 
-        EditAttendanceCommand.EditAttendanceDescriptor editAttendanceDescriptor =
+        EditAttendanceDescriptor editAttendanceDescriptor =
                 new EditAttendanceDescriptorBuilder(DESC_ATTENDANCE_33).build();
         EditAttendanceCommand editAttendanceCommand = new EditAttendanceCommand(
                 moduleClassIndex, lessonIndex, outOfBoundIndex, targetWeek, editAttendanceDescriptor);
 
-        assertCommandFailure(editAttendanceCommand, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        assertCommandFailure(editAttendanceCommand, model, MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
     }
 
     @Test
@@ -243,7 +250,7 @@ public class EditAttendanceCommandTest {
         EditAttendanceCommand editAttendanceCommand = new EditAttendanceCommand(
                 moduleClassIndex, lessonIndex, studentIndex, invalidWeek, editAttendanceDescriptor);
 
-        assertCommandFailure(editAttendanceCommand, model, Messages.MESSAGE_INVALID_WEEK);
+        assertCommandFailure(editAttendanceCommand, model, MESSAGE_INVALID_WEEK);
     }
 
     @Test
@@ -254,7 +261,7 @@ public class EditAttendanceCommandTest {
         EditAttendanceCommand editAttendanceCommand = new EditAttendanceCommand(moduleClassIndex, lessonIndex,
                 INDEX_THIRD_ITEM, VALID_WEEK_1, DESC_ATTENDANCE_33);
 
-        assertCommandFailure(editAttendanceCommand, model, Messages.MESSAGE_INVALID_STUDENT_IN_MODULE_CLASS);
+        assertCommandFailure(editAttendanceCommand, model, MESSAGE_INVALID_STUDENT_IN_MODULE_CLASS);
     }
 
     @Test
@@ -266,7 +273,7 @@ public class EditAttendanceCommandTest {
         EditAttendanceCommand editAttendanceCommand = new EditAttendanceCommand(moduleClassIndex, lessonIndex,
                 studentIndex, VALID_WEEK_5, DESC_ATTENDANCE_33);
 
-        assertCommandFailure(editAttendanceCommand, model, Messages.MESSAGE_MISSING_STUDENT_ATTENDANCE);
+        assertCommandFailure(editAttendanceCommand, model, MESSAGE_MISSING_STUDENT_ATTENDANCE);
     }
 
     @Test
@@ -275,8 +282,7 @@ public class EditAttendanceCommandTest {
                 INDEX_FIRST_ITEM, VALID_WEEK_1, DESC_ATTENDANCE_33);
 
         // same values -> returns true
-        EditAttendanceCommand.EditAttendanceDescriptor copyDescriptor =
-                new EditAttendanceCommand.EditAttendanceDescriptor(DESC_ATTENDANCE_33);
+        EditAttendanceDescriptor copyDescriptor = new EditAttendanceDescriptor(DESC_ATTENDANCE_33);
         EditAttendanceCommand commandWithSameValues = new EditAttendanceCommand(INDEX_FIRST_ITEM, INDEX_FIRST_ITEM,
                 INDEX_FIRST_ITEM, VALID_WEEK_1, copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));

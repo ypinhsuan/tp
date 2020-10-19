@@ -1,5 +1,8 @@
 package tutorspet.storage;
 
+import static java.util.UUID.fromString;
+import static tutorspet.storage.JsonAdaptedStudent.STUDENT_UUID_FIELD;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -67,17 +70,15 @@ public class JsonAdaptedModuleClass {
         List<UUID> uuidList = new ArrayList<>();
         for (JsonAdaptedUuid studentUuid : studentUuids) {
             if (studentUuid == null) {
-                throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                        JsonAdaptedStudent.STUDENT_UUID_FIELD));
+                throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, STUDENT_UUID_FIELD));
             }
 
             // catch invalid UUID
             try {
                 String uuidString = studentUuid.getUuidString();
-                UUID.fromString(uuidString);
+                fromString(uuidString);
             } catch (IllegalArgumentException e) {
-                throw new IllegalValueException(String.format(INVALID_FIELD_MESSAGE_FORMAT,
-                        JsonAdaptedStudent.STUDENT_UUID_FIELD));
+                throw new IllegalValueException(String.format(INVALID_FIELD_MESSAGE_FORMAT, STUDENT_UUID_FIELD));
             }
             uuidList.add(studentUuid.toModelType());
         }

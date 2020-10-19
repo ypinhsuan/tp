@@ -1,8 +1,10 @@
 package tutorspet.logic.commands;
 
 import static tutorspet.logic.commands.AddStudentCommand.MESSAGE_DUPLICATE_STUDENT;
+import static tutorspet.logic.commands.AddStudentCommand.MESSAGE_SUCCESS;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static tutorspet.testutil.TypicalTutorsPet.getTypicalTutorsPet;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,7 +14,6 @@ import tutorspet.model.ModelManager;
 import tutorspet.model.UserPrefs;
 import tutorspet.model.student.Student;
 import tutorspet.testutil.StudentBuilder;
-import tutorspet.testutil.TypicalTutorsPet;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code AddStudentCommand}.
@@ -23,14 +24,14 @@ public class AddStudentCommandIntegrationTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(TypicalTutorsPet.getTypicalTutorsPet(), new UserPrefs());
+        model = new ModelManager(getTypicalTutorsPet(), new UserPrefs());
     }
 
     @Test
     public void execute_newStudent_success() {
         Student validStudent = new StudentBuilder().build();
 
-        String expectedMessage = String.format(AddStudentCommand.MESSAGE_SUCCESS, validStudent);
+        String expectedMessage = String.format(MESSAGE_SUCCESS, validStudent);
         Model expectedModel = new ModelManager(model.getTutorsPet(), new UserPrefs());
         expectedModel.addStudent(validStudent);
         expectedModel.commit(expectedMessage);

@@ -1,18 +1,18 @@
 package tutorspet.testutil;
 
-import tutorspet.logic.commands.EditAttendanceCommand;
+import tutorspet.logic.commands.EditAttendanceCommand.EditAttendanceDescriptor;
 import tutorspet.model.attendance.Attendance;
 
 public class EditAttendanceDescriptorBuilder {
 
-    private EditAttendanceCommand.EditAttendanceDescriptor descriptor;
+    private EditAttendanceDescriptor descriptor;
 
     public EditAttendanceDescriptorBuilder() {
-        descriptor = new EditAttendanceCommand.EditAttendanceDescriptor();
+        descriptor = new EditAttendanceDescriptor();
     }
 
-    public EditAttendanceDescriptorBuilder(EditAttendanceCommand.EditAttendanceDescriptor descriptor) {
-        this.descriptor = new EditAttendanceCommand.EditAttendanceDescriptor(descriptor);
+    public EditAttendanceDescriptorBuilder(EditAttendanceDescriptor descriptor) {
+        this.descriptor = new EditAttendanceDescriptor(descriptor);
     }
 
     /**
@@ -20,7 +20,7 @@ public class EditAttendanceDescriptorBuilder {
      * @param attendance
      */
     public EditAttendanceDescriptorBuilder(Attendance attendance) {
-        descriptor = new EditAttendanceCommand.EditAttendanceDescriptor();
+        descriptor = new EditAttendanceDescriptor();
         descriptor.setParticipationScore(attendance.getParticipationScore());
     }
 
@@ -32,7 +32,7 @@ public class EditAttendanceDescriptorBuilder {
         return this;
     }
 
-    public EditAttendanceCommand.EditAttendanceDescriptor build() {
+    public EditAttendanceDescriptor build() {
         return descriptor;
     }
 }

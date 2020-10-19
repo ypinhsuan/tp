@@ -3,8 +3,10 @@ package tutorspet.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static tutorspet.model.VersionedTutorsPet.INITIAL_COMMIT_MESSAGE;
 import static tutorspet.testutil.Assert.assertThrows;
 import static tutorspet.testutil.TypicalStudent.AMY;
+import static tutorspet.testutil.TypicalTutorsPet.getTypicalTutorsPet;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -13,7 +15,6 @@ import org.junit.jupiter.api.Test;
 
 import tutorspet.model.exception.RedoStateException;
 import tutorspet.model.exception.UndoStateException;
-import tutorspet.testutil.TypicalTutorsPet;
 
 public class VersionedTutorsPetTest {
 
@@ -21,7 +22,7 @@ public class VersionedTutorsPetTest {
     public static final String COMMIT_MESSAGE_2 = "Commit Message 2";
     public static final String COMMIT_MESSAGE_3 = "Commit Message 3";
 
-    private VersionedTutorsPet versionedTutorsPet = new VersionedTutorsPet(TypicalTutorsPet.getTypicalTutorsPet());
+    private VersionedTutorsPet versionedTutorsPet = new VersionedTutorsPet(getTypicalTutorsPet());
 
     @Test
     public void commit_nullCommitMessage_throwsNullPointerException() {
@@ -102,7 +103,7 @@ public class VersionedTutorsPetTest {
 
     @Test
     public void viewStateRecords_initialState() {
-        assertEquals(new StateRecords(0, Collections.singletonList(VersionedTutorsPet.INITIAL_COMMIT_MESSAGE)),
+        assertEquals(new StateRecords(0, Collections.singletonList(INITIAL_COMMIT_MESSAGE)),
                 versionedTutorsPet.viewStateRecords());
     }
 
@@ -110,7 +111,7 @@ public class VersionedTutorsPetTest {
     public void viewStateRecords_latestState() {
         versionedTutorsPet.commit(COMMIT_MESSAGE_1);
         assertEquals(new StateRecords(1,
-                        Arrays.asList(VersionedTutorsPet.INITIAL_COMMIT_MESSAGE, COMMIT_MESSAGE_1)),
+                        Arrays.asList(INITIAL_COMMIT_MESSAGE, COMMIT_MESSAGE_1)),
                 versionedTutorsPet.viewStateRecords());
     }
 
@@ -119,7 +120,7 @@ public class VersionedTutorsPetTest {
         versionedTutorsPet.commit(COMMIT_MESSAGE_1);
         versionedTutorsPet.undo();
         assertEquals(new StateRecords(0,
-                        Arrays.asList(VersionedTutorsPet.INITIAL_COMMIT_MESSAGE, COMMIT_MESSAGE_1)),
+                        Arrays.asList(INITIAL_COMMIT_MESSAGE, COMMIT_MESSAGE_1)),
                 versionedTutorsPet.viewStateRecords());
     }
 
@@ -129,14 +130,14 @@ public class VersionedTutorsPetTest {
         versionedTutorsPet.commit(COMMIT_MESSAGE_2);
         versionedTutorsPet.undo();
         assertEquals(new StateRecords(1,
-                        Arrays.asList(VersionedTutorsPet.INITIAL_COMMIT_MESSAGE, COMMIT_MESSAGE_1, COMMIT_MESSAGE_2)),
+                        Arrays.asList(INITIAL_COMMIT_MESSAGE, COMMIT_MESSAGE_1, COMMIT_MESSAGE_2)),
                 versionedTutorsPet.viewStateRecords());
     }
 
     @Test
     public void equals() {
         // same state -> returns true
-        VersionedTutorsPet versionedTutorsPetCopy = new VersionedTutorsPet(TypicalTutorsPet.getTypicalTutorsPet());
+        VersionedTutorsPet versionedTutorsPetCopy = new VersionedTutorsPet(getTypicalTutorsPet());
         versionedTutorsPet.commit(COMMIT_MESSAGE_1);
         versionedTutorsPet.undo();
         versionedTutorsPetCopy.commit(COMMIT_MESSAGE_1);
@@ -157,17 +158,15 @@ public class VersionedTutorsPetTest {
         assertFalse(versionedTutorsPet.equals(versionedTutorsPetCopy));
 
         // different state history -> returns false
-        versionedTutorsPet = new VersionedTutorsPet(TypicalTutorsPet.getTypicalTutorsPet());
-        VersionedTutorsPet versionedTutorsPetDifferentState =
-                new VersionedTutorsPet(TypicalTutorsPet.getTypicalTutorsPet());
+        versionedTutorsPet = new VersionedTutorsPet(getTypicalTutorsPet());
+        VersionedTutorsPet versionedTutorsPetDifferentState = new VersionedTutorsPet(getTypicalTutorsPet());
         versionedTutorsPet.commit(COMMIT_MESSAGE_1);
         versionedTutorsPetDifferentState.commit(COMMIT_MESSAGE_2);
         assertFalse(versionedTutorsPet.equals(versionedTutorsPetDifferentState));
 
         // different current state -> returns false
-        versionedTutorsPet = new VersionedTutorsPet(TypicalTutorsPet.getTypicalTutorsPet());
-        VersionedTutorsPet versionedTutorsPetDifferentCurrentState =
-                new VersionedTutorsPet(TypicalTutorsPet.getTypicalTutorsPet());
+        versionedTutorsPet = new VersionedTutorsPet(getTypicalTutorsPet());
+        VersionedTutorsPet versionedTutorsPetDifferentCurrentState = new VersionedTutorsPet(getTypicalTutorsPet());
         versionedTutorsPetDifferentCurrentState.addStudent(AMY);
         assertFalse(versionedTutorsPet.equals(versionedTutorsPetDifferentCurrentState));
     }

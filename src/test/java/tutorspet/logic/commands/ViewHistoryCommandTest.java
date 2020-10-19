@@ -7,6 +7,7 @@ import static tutorspet.model.VersionedTutorsPet.INITIAL_COMMIT_MESSAGE;
 import static tutorspet.model.VersionedTutorsPetTest.COMMIT_MESSAGE_1;
 import static tutorspet.model.VersionedTutorsPetTest.COMMIT_MESSAGE_2;
 import static tutorspet.model.VersionedTutorsPetTest.COMMIT_MESSAGE_3;
+import static tutorspet.testutil.TypicalTutorsPet.getTypicalTutorsPet;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,7 +15,6 @@ import org.junit.jupiter.api.Test;
 import tutorspet.model.Model;
 import tutorspet.model.ModelManager;
 import tutorspet.model.UserPrefs;
-import tutorspet.testutil.TypicalTutorsPet;
 
 public class ViewHistoryCommandTest {
 
@@ -23,11 +23,11 @@ public class ViewHistoryCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(TypicalTutorsPet.getTypicalTutorsPet(), new UserPrefs());
+        model = new ModelManager(getTypicalTutorsPet(), new UserPrefs());
         model.commit(COMMIT_MESSAGE_1);
         model.commit(COMMIT_MESSAGE_2);
         model.commit(COMMIT_MESSAGE_3);
-        expectedModel = new ModelManager(TypicalTutorsPet.getTypicalTutorsPet(), new UserPrefs());
+        expectedModel = new ModelManager(getTypicalTutorsPet(), new UserPrefs());
         expectedModel.commit(COMMIT_MESSAGE_1);
         expectedModel.commit(COMMIT_MESSAGE_2);
         expectedModel.commit(COMMIT_MESSAGE_3);
@@ -77,8 +77,8 @@ public class ViewHistoryCommandTest {
 
     @Test
     public void execute_noPreviousState_success() {
-        model = new ModelManager(TypicalTutorsPet.getTypicalTutorsPet(), new UserPrefs());
-        expectedModel = new ModelManager(TypicalTutorsPet.getTypicalTutorsPet(), new UserPrefs());
+        model = new ModelManager(getTypicalTutorsPet(), new UserPrefs());
+        expectedModel = new ModelManager(getTypicalTutorsPet(), new UserPrefs());
 
         String expectedMessage = String.format(MESSAGE_TEMPLATE,
                 "\n" + CURRENT_INDICATOR + INITIAL_COMMIT_MESSAGE);

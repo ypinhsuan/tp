@@ -4,7 +4,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import tutorspet.logic.commands.EditStudentCommand;
 import tutorspet.logic.commands.EditStudentCommand.EditStudentDescriptor;
 import tutorspet.model.components.name.Name;
 import tutorspet.model.components.tag.Tag;
@@ -17,7 +16,7 @@ import tutorspet.model.student.Telegram;
  */
 public class EditStudentDescriptorBuilder {
 
-    private EditStudentCommand.EditStudentDescriptor descriptor;
+    private EditStudentDescriptor descriptor;
 
     public EditStudentDescriptorBuilder() {
         descriptor = new EditStudentDescriptor();
@@ -31,7 +30,7 @@ public class EditStudentDescriptorBuilder {
      * Returns an {@code EditStudentDescriptor} with fields containing {@code student}'s details
      */
     public EditStudentDescriptorBuilder(Student student) {
-        descriptor = new EditStudentCommand.EditStudentDescriptor();
+        descriptor = new EditStudentDescriptor();
         descriptor.setName(student.getName());
         descriptor.setTelegram(student.getTelegram());
         descriptor.setEmail(student.getEmail());

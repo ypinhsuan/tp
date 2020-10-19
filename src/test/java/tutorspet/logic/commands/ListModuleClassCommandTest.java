@@ -1,6 +1,8 @@
 package tutorspet.logic.commands;
 
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static tutorspet.logic.commands.ListModuleClassCommand.MESSAGE_SUCCESS;
+import static tutorspet.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 import static tutorspet.testutil.TypicalTutorsPet.getTypicalTutorsPet;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -9,7 +11,6 @@ import org.junit.jupiter.api.Test;
 import tutorspet.model.Model;
 import tutorspet.model.ModelManager;
 import tutorspet.model.UserPrefs;
-import tutorspet.testutil.TypicalIndexes;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListModuleClassCommand.
@@ -28,13 +29,12 @@ public class ListModuleClassCommandTest {
     @Test
     public void execute_moduleClassListIsNotFiltered_showsSameList() {
         assertCommandSuccess(
-                new ListModuleClassCommand(), model, ListModuleClassCommand.MESSAGE_SUCCESS, expectedModel);
+                new ListModuleClassCommand(), model, MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
     public void execute_moduleClassListIsFiltered_showsEverything() {
-        CommandTestUtil.showModuleClassAtIndex(model, TypicalIndexes.INDEX_FIRST_ITEM);
-        assertCommandSuccess(
-                new ListModuleClassCommand(), model, ListModuleClassCommand.MESSAGE_SUCCESS, expectedModel);
+        CommandTestUtil.showModuleClassAtIndex(model, INDEX_FIRST_ITEM);
+        assertCommandSuccess(new ListModuleClassCommand(), model, MESSAGE_SUCCESS, expectedModel);
     }
 }

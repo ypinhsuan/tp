@@ -3,15 +3,16 @@ package tutorspet.logic.parser;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_WEEK_1;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_WEEK_5;
+import static tutorspet.logic.commands.DeleteAttendanceCommand.MESSAGE_USAGE;
 import static tutorspet.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static tutorspet.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static tutorspet.model.attendance.Week.MESSAGE_CONSTRAINTS;
 import static tutorspet.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 import static tutorspet.testutil.TypicalIndexes.INDEX_SECOND_ITEM;
 
 import org.junit.jupiter.api.Test;
 
 import tutorspet.logic.commands.DeleteAttendanceCommand;
-import tutorspet.model.attendance.Week;
 
 /**
  * As we are only doing white-box testing, out test cases do not cover path variations
@@ -48,76 +49,76 @@ public class DeleteAttendanceCommandParserTest {
     @Test
     public void parse_missingClassIndex_throwsParseException() {
         assertParseFailure(parser, " l/1 s/1 w/1", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                DeleteAttendanceCommand.MESSAGE_USAGE));
+                MESSAGE_USAGE));
     }
 
     @Test
     public void parse_missingLessonIndex_throwsParseException() {
         assertParseFailure(parser, " c/1 s/1 w/1", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                DeleteAttendanceCommand.MESSAGE_USAGE));
+                MESSAGE_USAGE));
     }
 
     @Test
     public void parse_missingStudentIndex_throwsParseException() {
         assertParseFailure(parser, " c/1 l/1 w/1", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                DeleteAttendanceCommand.MESSAGE_USAGE));
+                MESSAGE_USAGE));
     }
 
     @Test
     public void parse_missingWeekIndex_throwsParseException() {
         assertParseFailure(parser, " c/1 l/1 s/1", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                DeleteAttendanceCommand.MESSAGE_USAGE));
+                MESSAGE_USAGE));
     }
 
     @Test
     public void parse_invalidClassIndex_throwsParseException() {
         assertParseFailure(parser, " c/a l/1 s/1 w/1", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                DeleteAttendanceCommand.MESSAGE_USAGE));
+                MESSAGE_USAGE));
     }
 
     @Test
     public void parse_invalidLessonIndex_throwsParseException() {
         assertParseFailure(parser, " c/1 l/a s/1 w/1", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                DeleteAttendanceCommand.MESSAGE_USAGE));
+                MESSAGE_USAGE));
     }
 
     @Test
     public void parse_invalidStudentIndex_throwsParseException() {
         assertParseFailure(parser, " c/1 l/1 s/a w/1", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                DeleteAttendanceCommand.MESSAGE_USAGE));
+                MESSAGE_USAGE));
     }
 
     @Test
     public void parse_invalidWeekIndex_throwsParseException() {
-        assertParseFailure(parser, " c/1 l/1 s/1 w/a", String.format(Week.MESSAGE_CONSTRAINTS));
+        assertParseFailure(parser, " c/1 l/1 s/1 w/a", String.format(MESSAGE_CONSTRAINTS));
     }
 
     @Test
     public void parse_emptyClassIndex_throwsParseException() {
         assertParseFailure(parser, " c/ l/1 s/1 w/1", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                DeleteAttendanceCommand.MESSAGE_USAGE));
+                MESSAGE_USAGE));
     }
 
     @Test
     public void parse_emptyLessonIndex_throwsParseException() {
         assertParseFailure(parser, " c/1 l/ s/1 w/1", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                DeleteAttendanceCommand.MESSAGE_USAGE));
+                MESSAGE_USAGE));
     }
 
     @Test
     public void parse_emptyStudentIndex_throwsParseException() {
         assertParseFailure(parser, " c/1 l/1 s/ w/1", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                DeleteAttendanceCommand.MESSAGE_USAGE));
+                MESSAGE_USAGE));
     }
 
     @Test
     public void parse_emptyWeekIndex_throwsParseException() {
-        assertParseFailure(parser, " c/1 l/1 s/1 w/", String.format(Week.MESSAGE_CONSTRAINTS));
+        assertParseFailure(parser, " c/1 l/1 s/1 w/", String.format(MESSAGE_CONSTRAINTS));
     }
 
     @Test
     public void parse_invalidArgs_throwParseException() {
         assertParseFailure(parser, " a", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                DeleteAttendanceCommand.MESSAGE_USAGE));
+                MESSAGE_USAGE));
     }
 }

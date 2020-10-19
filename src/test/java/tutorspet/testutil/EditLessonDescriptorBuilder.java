@@ -2,7 +2,7 @@ package tutorspet.testutil;
 
 import java.time.LocalTime;
 
-import tutorspet.logic.commands.EditLessonCommand;
+import tutorspet.logic.commands.EditLessonCommand.EditLessonDescriptor;
 import tutorspet.model.lesson.Day;
 import tutorspet.model.lesson.Lesson;
 import tutorspet.model.lesson.Venue;
@@ -12,21 +12,21 @@ import tutorspet.model.lesson.Venue;
  */
 public class EditLessonDescriptorBuilder {
 
-    private EditLessonCommand.EditLessonDescriptor descriptor;
+    private EditLessonDescriptor descriptor;
 
     public EditLessonDescriptorBuilder() {
-        descriptor = new EditLessonCommand.EditLessonDescriptor();
+        descriptor = new EditLessonDescriptor();
     }
 
-    public EditLessonDescriptorBuilder(EditLessonCommand.EditLessonDescriptor descriptor) {
-        this.descriptor = new EditLessonCommand.EditLessonDescriptor(descriptor);
+    public EditLessonDescriptorBuilder(EditLessonDescriptor descriptor) {
+        this.descriptor = new EditLessonDescriptor(descriptor);
     }
 
     /**
      * Returns an {@code EditLessonDescriptor} with fields containing {@code lesson}'s details.
      */
     public EditLessonDescriptorBuilder(Lesson lesson) {
-        descriptor = new EditLessonCommand.EditLessonDescriptor();
+        descriptor = new EditLessonDescriptor();
         descriptor.setStartTime(lesson.getStartTime());
         descriptor.setEndTime(lesson.getEndTime());
         descriptor.setDay(lesson.getDay());
@@ -65,7 +65,7 @@ public class EditLessonDescriptorBuilder {
         return this;
     }
 
-    public EditLessonCommand.EditLessonDescriptor build() {
+    public EditLessonDescriptor build() {
         return descriptor;
     }
 }

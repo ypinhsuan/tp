@@ -1,8 +1,14 @@
 package tutorspet.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static tutorspet.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static tutorspet.logic.commands.AddAttendanceCommand.MESSAGE_USAGE;
+import static tutorspet.logic.parser.CliSyntax.PREFIX_CLASS_INDEX;
+import static tutorspet.logic.parser.CliSyntax.PREFIX_LESSON_INDEX;
+import static tutorspet.logic.parser.CliSyntax.PREFIX_PARTICIPATION_SCORE;
+import static tutorspet.logic.parser.CliSyntax.PREFIX_STUDENT_INDEX;
+import static tutorspet.logic.parser.CliSyntax.PREFIX_WEEK;
 
-import tutorspet.commons.core.Messages;
 import tutorspet.commons.core.index.Index;
 import tutorspet.logic.commands.AddAttendanceCommand;
 import tutorspet.logic.parser.exceptions.ParseException;
@@ -23,32 +29,32 @@ public class AddAttendanceCommandParser implements Parser<AddAttendanceCommand> 
         requireNonNull(args);
 
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_CLASS_INDEX, CliSyntax.PREFIX_LESSON_INDEX,
-                        CliSyntax.PREFIX_STUDENT_INDEX, CliSyntax.PREFIX_WEEK, CliSyntax.PREFIX_PARTICIPATION_SCORE);
+                ArgumentTokenizer.tokenize(args, PREFIX_CLASS_INDEX, PREFIX_LESSON_INDEX,
+                        PREFIX_STUDENT_INDEX, PREFIX_WEEK, PREFIX_PARTICIPATION_SCORE);
 
         Index moduleClassIndex;
         Index lessonIndex;
         Index studentIndex;
 
-        if (!ParserUtil.arePrefixesPresent(argMultimap, CliSyntax.PREFIX_CLASS_INDEX, CliSyntax.PREFIX_LESSON_INDEX,
-                CliSyntax.PREFIX_STUDENT_INDEX, CliSyntax.PREFIX_WEEK, CliSyntax.PREFIX_PARTICIPATION_SCORE)
+        if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_CLASS_INDEX, PREFIX_LESSON_INDEX,
+                PREFIX_STUDENT_INDEX, PREFIX_WEEK, PREFIX_PARTICIPATION_SCORE)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                    AddAttendanceCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    MESSAGE_USAGE));
         }
 
         try {
-            moduleClassIndex = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_CLASS_INDEX).get());
-            lessonIndex = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_LESSON_INDEX).get());
-            studentIndex = ParserUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_STUDENT_INDEX).get());
+            moduleClassIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_CLASS_INDEX).get());
+            lessonIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_LESSON_INDEX).get());
+            studentIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_STUDENT_INDEX).get());
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddAttendanceCommand.MESSAGE_USAGE), pe);
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE), pe);
         }
 
-        Week week = ParserUtil.parseWeek(argMultimap.getValue(CliSyntax.PREFIX_WEEK).get());
+        Week week = ParserUtil.parseWeek(argMultimap.getValue(PREFIX_WEEK).get());
         int participationScore =
-                ParserUtil.parseParticipationScore(argMultimap.getValue(CliSyntax.PREFIX_PARTICIPATION_SCORE).get());
+                ParserUtil.parseParticipationScore(argMultimap.getValue(PREFIX_PARTICIPATION_SCORE).get());
 
         Attendance attendance = new Attendance(participationScore);
         return new AddAttendanceCommand(moduleClassIndex, lessonIndex, studentIndex, week, attendance);

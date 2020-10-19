@@ -2,20 +2,22 @@ package tutorspet.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static tutorspet.commons.core.Messages.MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static tutorspet.logic.commands.CommandTestUtil.showModuleClassAtIndex;
+import static tutorspet.logic.commands.DeleteModuleClassCommand.MESSAGE_DELETE_MODULE_CLASS_SUCCESS;
+import static tutorspet.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
+import static tutorspet.testutil.TypicalIndexes.INDEX_SECOND_ITEM;
 import static tutorspet.testutil.TypicalTutorsPet.getTypicalTutorsPet;
 
 import org.junit.jupiter.api.Test;
 
-import tutorspet.commons.core.Messages;
 import tutorspet.commons.core.index.Index;
 import tutorspet.model.Model;
 import tutorspet.model.ModelManager;
 import tutorspet.model.UserPrefs;
 import tutorspet.model.moduleclass.ModuleClass;
-import tutorspet.testutil.TypicalIndexes;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -28,12 +30,11 @@ public class DeleteModuleClassCommandTest {
     @Test
     public void execute_validIndexUnfilteredList_success() {
         ModuleClass moduleClassToDelete =
-                model.getFilteredModuleClassList().get(TypicalIndexes.INDEX_FIRST_ITEM.getZeroBased());
+                model.getFilteredModuleClassList().get(INDEX_FIRST_ITEM.getZeroBased());
         DeleteModuleClassCommand deleteModuleClassCommand =
-                new DeleteModuleClassCommand(TypicalIndexes.INDEX_FIRST_ITEM);
+                new DeleteModuleClassCommand(INDEX_FIRST_ITEM);
 
-        String expectedMessage = String.format(DeleteModuleClassCommand.MESSAGE_DELETE_MODULE_CLASS_SUCCESS,
-                moduleClassToDelete);
+        String expectedMessage = String.format(MESSAGE_DELETE_MODULE_CLASS_SUCCESS, moduleClassToDelete);
 
         ModelManager expectedModel = new ModelManager(model.getTutorsPet(), new UserPrefs());
         expectedModel.deleteModuleClass(moduleClassToDelete);
@@ -47,20 +48,17 @@ public class DeleteModuleClassCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredModuleClassList().size() + 1);
         DeleteModuleClassCommand deleteModuleClassCommand = new DeleteModuleClassCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteModuleClassCommand, model, Messages.MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX);
+        assertCommandFailure(deleteModuleClassCommand, model, MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX);
     }
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        showModuleClassAtIndex(model, TypicalIndexes.INDEX_FIRST_ITEM);
+        showModuleClassAtIndex(model, INDEX_FIRST_ITEM);
 
-        ModuleClass moduleClassToDelete =
-                model.getFilteredModuleClassList().get(TypicalIndexes.INDEX_FIRST_ITEM.getZeroBased());
-        DeleteModuleClassCommand deleteModuleClassCommand =
-                new DeleteModuleClassCommand(TypicalIndexes.INDEX_FIRST_ITEM);
+        ModuleClass moduleClassToDelete = model.getFilteredModuleClassList().get(INDEX_FIRST_ITEM.getZeroBased());
+        DeleteModuleClassCommand deleteModuleClassCommand = new DeleteModuleClassCommand(INDEX_FIRST_ITEM);
 
-        String expectedMessage = String.format(DeleteModuleClassCommand.MESSAGE_DELETE_MODULE_CLASS_SUCCESS,
-                moduleClassToDelete);
+        String expectedMessage = String.format(MESSAGE_DELETE_MODULE_CLASS_SUCCESS, moduleClassToDelete);
 
         Model expectedModel = new ModelManager(model.getTutorsPet(), new UserPrefs());
         expectedModel.deleteModuleClass(moduleClassToDelete);
@@ -72,31 +70,31 @@ public class DeleteModuleClassCommandTest {
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showModuleClassAtIndex(model, TypicalIndexes.INDEX_FIRST_ITEM);
+        showModuleClassAtIndex(model, INDEX_FIRST_ITEM);
 
-        Index outOfBoundIndex = TypicalIndexes.INDEX_SECOND_ITEM;
+        Index outOfBoundIndex = INDEX_SECOND_ITEM;
 
         // ensures that outOfBoundIndex is still in bounds of Tutor's Pet list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getTutorsPet().getModuleClassList().size());
 
         DeleteModuleClassCommand deleteModuleClassCommand = new DeleteModuleClassCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteModuleClassCommand, model, Messages.MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX);
+        assertCommandFailure(deleteModuleClassCommand, model, MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
         DeleteModuleClassCommand deleteFirstModuleClassCommand =
-                new DeleteModuleClassCommand(TypicalIndexes.INDEX_FIRST_ITEM);
+                new DeleteModuleClassCommand(INDEX_FIRST_ITEM);
         DeleteModuleClassCommand deleteSecondModuleClassCommand =
-                new DeleteModuleClassCommand(TypicalIndexes.INDEX_SECOND_ITEM);
+                new DeleteModuleClassCommand(INDEX_SECOND_ITEM);
 
         // same object -> returns true
         assertTrue(deleteFirstModuleClassCommand.equals(deleteFirstModuleClassCommand));
 
         // same values -> returns true
         DeleteModuleClassCommand deleteFirstModuleClassCommandCopy =
-                new DeleteModuleClassCommand(TypicalIndexes.INDEX_FIRST_ITEM);
+                new DeleteModuleClassCommand(INDEX_FIRST_ITEM);
         assertTrue(deleteFirstModuleClassCommand.equals(deleteFirstModuleClassCommandCopy));
 
         // different types -> returns false
