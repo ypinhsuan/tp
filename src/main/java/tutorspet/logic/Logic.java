@@ -7,7 +7,6 @@ import tutorspet.commons.core.GuiSettings;
 import tutorspet.logic.commands.CommandResult;
 import tutorspet.logic.commands.exceptions.CommandException;
 import tutorspet.logic.parser.exceptions.ParseException;
-import tutorspet.model.Model;
 import tutorspet.model.ReadOnlyTutorsPet;
 import tutorspet.model.moduleclass.ModuleClass;
 import tutorspet.model.student.Student;
@@ -28,7 +27,7 @@ public interface Logic {
     /**
      * Returns the TutorsPet.
      *
-     * @see Model#getTutorsPet()
+     * @see tutorspet.model.Model#getTutorsPet()
      */
     ReadOnlyTutorsPet getTutorsPet();
 
