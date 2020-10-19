@@ -33,6 +33,7 @@ import seedu.address.model.attendance.Week;
 import seedu.address.model.lesson.Day;
 import seedu.address.model.moduleclass.ModuleClass;
 import seedu.address.model.student.Student;
+import seedu.address.testutil.EditAttendanceDescriptorBuilder;
 import seedu.address.testutil.EditLessonDescriptorBuilder;
 import seedu.address.testutil.EditModuleClassDescriptorBuilder;
 import seedu.address.testutil.EditStudentDescriptorBuilder;
@@ -197,6 +198,16 @@ public class CommandTestUtil {
     static {
         VALID_ATTENDANCE_LIST.put(UUID.fromString(VALID_UUID_AMY), new Attendance(VALID_PARTICIPATION_SCORE_33));
         VALID_ATTENDANCE_LIST.put(UUID.fromString(VALID_UUID_BOB), new Attendance(VALID_PARTICIPATION_SCORE_51));
+    }
+
+    public static final EditAttendanceCommand.EditAttendanceDescriptor DESC_ATTENDANCE_33;
+    public static final EditAttendanceCommand.EditAttendanceDescriptor DESC_ATTENDANCE_80;
+
+    static {
+        DESC_ATTENDANCE_33 =
+                new EditAttendanceDescriptorBuilder().withParticipationScore(VALID_PARTICIPATION_SCORE_33).build();
+        DESC_ATTENDANCE_80 =
+                new EditAttendanceDescriptorBuilder().withParticipationScore(VALID_PARTICIPATION_SCORE_80).build();
     }
 
     /**

@@ -42,7 +42,7 @@ public class EditLessonCommandTest {
     private Model model = new ModelManager(getTypicalTutorsPet(), new UserPrefs());
 
     @Test
-    public void constructor_nullModuleClasdIndex_throwsNullPointerException() {
+    public void constructor_nullModuleClassIndex_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new EditLessonCommand(
                 null, INDEX_FIRST_ITEM, EDITED_LESSON_DESCRIPTOR));
     }

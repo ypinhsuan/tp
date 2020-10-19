@@ -8,7 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
-import static seedu.address.logic.util.ModuleClassModificationUtil.addEditedLessonToModuleClass;
+import static seedu.address.logic.util.ModuleClassUtil.addEditedLessonToModuleClass;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_MODULE_CLASS;
 
 import java.time.LocalTime;
