@@ -37,10 +37,9 @@ public class EditAttendanceCommandParser implements Parser<EditAttendanceCommand
 
         boolean isModuleClassIndexPresent = argMultimap.getValue(PREFIX_CLASS_INDEX).isPresent();
         boolean isLessonIndexPresent = argMultimap.getValue(PREFIX_LESSON_INDEX).isPresent();
-        boolean isStudentPresent = argMultimap.getValue(PREFIX_STUDENT_INDEX).isPresent();
+        boolean isStudentIndexPresent = argMultimap.getValue(PREFIX_STUDENT_INDEX).isPresent();
         boolean isWeekPresent = argMultimap.getValue(PREFIX_WEEK).isPresent();
-
-        if (!isModuleClassIndexPresent || !isLessonIndexPresent || !isStudentPresent || !isWeekPresent) {
+        if (!isModuleClassIndexPresent || !isLessonIndexPresent || !isStudentIndexPresent || !isWeekPresent) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditAttendanceCommand.MESSAGE_USAGE));
         }
