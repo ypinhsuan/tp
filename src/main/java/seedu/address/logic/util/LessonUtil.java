@@ -25,7 +25,7 @@ import seedu.address.model.student.Student;
 /**
  * Contains utility methods for modifying {@code Attendance}s in {@code Lesson}s.
  */
-public class LessonModificationUtil {
+public class LessonUtil {
 
     /**
      * Adds {@code attendanceToAdd} to {@code targetLesson}.

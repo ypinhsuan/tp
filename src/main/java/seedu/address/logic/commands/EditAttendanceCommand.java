@@ -7,8 +7,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PARTICIPATION_SCORE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEEK;
-import static seedu.address.logic.util.LessonModificationUtil.editAttendanceInLesson;
-import static seedu.address.logic.util.ModuleClassModificationUtil.addModifiedLessonToModuleClass;
+import static seedu.address.logic.util.LessonUtil.editAttendanceInLesson;
+import static seedu.address.logic.util.ModuleClassUtil.addModifiedLessonToModuleClass;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_MODULE_CLASS;
 
 import java.util.List;
@@ -40,10 +40,11 @@ public class EditAttendanceCommand extends Command {
             + "index number used in the displayed student list "
             + "and the week number.\n"
             + "Existing values will be overwritten by the input values.\n"
+            + "Note: All indexes must be positive integers.\n"
             + "Parameters: "
-            + PREFIX_CLASS_INDEX + "CLASS_INDEX (must be a positive integer) "
-            + PREFIX_LESSON_INDEX + "LESSON_INDEX (must be a positive integer) "
-            + PREFIX_STUDENT_INDEX + "STUDENT_INDEX (must be a positive integer) "
+            + PREFIX_CLASS_INDEX + "CLASS_INDEX "
+            + PREFIX_LESSON_INDEX + "LESSON_INDEX "
+            + PREFIX_STUDENT_INDEX + "STUDENT_INDEX "
             + PREFIX_WEEK + "WEEK_NUMBER "
             + PREFIX_PARTICIPATION_SCORE + "PARTICIPATION_SCORE\n"
             + "Example: " + COMMAND_WORD + " "
@@ -89,7 +90,9 @@ public class EditAttendanceCommand extends Command {
 
         if (studentIndex.getZeroBased() >= lastShownStudentList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
-        } else if (moduleClassIndex.getZeroBased() >= lastShownModuleClassList.size()) {
+        }
+
+        if (moduleClassIndex.getZeroBased() >= lastShownModuleClassList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX);
         }
 
@@ -126,6 +129,7 @@ public class EditAttendanceCommand extends Command {
 
         model.setModuleClass(targetModuleClass, modifiedModuleClass);
         model.updateFilteredModuleClassList(PREDICATE_SHOW_ALL_MODULE_CLASS);
+
         String message =
                 String.format(MESSAGE_EDIT_ATTENDANCE_SUCCESS, targetStudent.getName(), week, editedAttendance);
         model.commit(message);

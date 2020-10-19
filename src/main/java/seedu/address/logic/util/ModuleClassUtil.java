@@ -19,7 +19,7 @@ import seedu.address.model.moduleclass.ModuleClass;
 /**
  * Contains utility methods for modifying {@code Lesson}s in {@code ModuleClass}.
  */
-public class ModuleClassModificationUtil {
+public class ModuleClassUtil {
 
     /**
      * Adds {@code lessonToAdd} to {@code moduleClassToAddTo}.

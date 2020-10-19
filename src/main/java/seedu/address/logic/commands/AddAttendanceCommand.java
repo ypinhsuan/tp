@@ -7,8 +7,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PARTICIPATION_SCORE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEEK;
-import static seedu.address.logic.util.LessonModificationUtil.addAttendanceToLesson;
-import static seedu.address.logic.util.ModuleClassModificationUtil.addModifiedLessonToModuleClass;
+import static seedu.address.logic.util.LessonUtil.addAttendanceToLesson;
+import static seedu.address.logic.util.ModuleClassUtil.addModifiedLessonToModuleClass;
 
 import java.util.List;
 
