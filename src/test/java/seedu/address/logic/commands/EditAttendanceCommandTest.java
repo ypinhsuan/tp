@@ -248,21 +248,6 @@ public class EditAttendanceCommandTest {
     }
 
     @Test
-    public void execute_invalidParticipationScore_failure() {
-        Index moduleClassIndex = INDEX_FIRST_ITEM;
-        Index lessonIndex = INDEX_FIRST_ITEM;
-        Index studentIndex = INDEX_FIRST_ITEM;
-        Week targetWeek = VALID_WEEK_1;
-
-        EditAttendanceDescriptor editAttendanceDescriptor =
-                new EditAttendanceDescriptorBuilder().build();
-        EditAttendanceCommand editAttendanceCommand = new EditAttendanceCommand(
-                moduleClassIndex, lessonIndex, studentIndex, targetWeek, editAttendanceDescriptor);
-
-        assertCommandFailure(editAttendanceCommand, model, Attendance.MESSAGE_CONSTRAINTS);
-    }
-
-    @Test
     public void execute_studentNotInClass_failure() {
         Index moduleClassIndex = INDEX_FIRST_ITEM;
         Index lessonIndex = INDEX_FIRST_ITEM;
