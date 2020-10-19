@@ -48,7 +48,7 @@ public class EditLessonCommand extends Command {
             + "[" + PREFIX_VENUE + "VENUE]\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_CLASS_INDEX + "1 " + PREFIX_LESSON_INDEX + "1 "
-            + PREFIX_DAY + "WEDNESDAY "
+            + PREFIX_DAY + "Wednesday "
             + PREFIX_END_TIME + "18:00";
 
     public static final String MESSAGE_EDIT_LESSON_SUCCESS = "Edited Lesson: %1$s";

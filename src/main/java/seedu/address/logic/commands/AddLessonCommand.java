@@ -36,7 +36,7 @@ public class AddLessonCommand extends Command {
             + PREFIX_NUMBER_OF_OCCURRENCES + "NO_OF_OCCURRENCES\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_CLASS_INDEX + "1 "
-            + PREFIX_DAY + "TUESDAY "
+            + PREFIX_DAY + "Tuesday "
             + PREFIX_START_TIME + "08:00 "
             + PREFIX_END_TIME + "10:00 "
             + PREFIX_VENUE + "COM1-0211 "
