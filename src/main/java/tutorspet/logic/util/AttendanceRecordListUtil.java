@@ -37,7 +37,7 @@ public class AttendanceRecordListUtil {
         AttendanceRecord targetAttendanceRecord = targetAttendanceRecordList.getAttendanceRecord(targetWeek);
 
         AttendanceRecord editedWeekAttendanceRecord =
-                AttendanceRecordUitl.addAttendance(targetAttendanceRecord, targetStudent, attendanceToAdd);
+                AttendanceRecordUtil.addAttendance(targetAttendanceRecord, targetStudent, attendanceToAdd);
 
         List<AttendanceRecord> modifiedAttendanceRecordList =
                 new ArrayList<>(targetAttendanceRecordList.getAttendanceRecordList());
@@ -65,7 +65,7 @@ public class AttendanceRecordListUtil {
         AttendanceRecord targetAttendanceRecord = targetAttendanceRecordList.getAttendanceRecord(targetWeek);
 
         AttendanceRecord editedWeekAttendanceRecord =
-                AttendanceRecordUitl.setAttendance(targetAttendanceRecord, targetStudent, attendanceToSet);
+                AttendanceRecordUtil.setAttendance(targetAttendanceRecord, targetStudent, attendanceToSet);
 
         List<AttendanceRecord> modifiedAttendanceRecordList =
                 new ArrayList<>(targetAttendanceRecordList.getAttendanceRecordList());
@@ -92,7 +92,7 @@ public class AttendanceRecordListUtil {
         AttendanceRecord targetAttendanceRecord = targetAttendanceRecordList.getAttendanceRecord(targetWeek);
 
         AttendanceRecord editedWeekAttendanceRecord =
-                AttendanceRecordUitl.removeAttendance(targetAttendanceRecord, targetStudent);
+                AttendanceRecordUtil.removeAttendance(targetAttendanceRecord, targetStudent);
 
         List<AttendanceRecord> modifiedAttendanceRecordList =
                 new ArrayList<>(targetAttendanceRecordList.getAttendanceRecordList());

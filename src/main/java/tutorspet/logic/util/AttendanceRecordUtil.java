@@ -13,7 +13,7 @@ import tutorspet.model.attendance.Attendance;
 import tutorspet.model.attendance.AttendanceRecord;
 import tutorspet.model.student.Student;
 
-public class AttendanceRecordUitl {
+public class AttendanceRecordUtil {
 
     /**
      * Returns an {@code AttendanceRecord} where the {@code attendanceToAdd} has been added to the
