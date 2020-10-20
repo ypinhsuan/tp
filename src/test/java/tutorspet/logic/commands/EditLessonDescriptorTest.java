@@ -9,6 +9,7 @@ import static tutorspet.logic.commands.CommandTestUtil.VALID_VENUE_S17_0302_LESS
 
 import org.junit.jupiter.api.Test;
 
+import tutorspet.logic.commands.EditLessonCommand.EditLessonDescriptor;
 import tutorspet.testutil.EditLessonDescriptorBuilder;
 
 public class EditLessonDescriptorTest {
@@ -16,7 +17,7 @@ public class EditLessonDescriptorTest {
     @Test
     public void equals() {
         // same value -> return true
-        EditLessonCommand.EditLessonDescriptor descriptorWithSameValues =
+        EditLessonDescriptor descriptorWithSameValues =
                 new EditLessonCommand.EditLessonDescriptor(DESC_LESSON_WED_2_TO_4);
         assertTrue(DESC_LESSON_WED_2_TO_4.equals(descriptorWithSameValues));
 

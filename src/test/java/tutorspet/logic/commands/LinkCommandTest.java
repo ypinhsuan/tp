@@ -6,6 +6,8 @@ import static tutorspet.commons.core.Messages.MESSAGE_INVALID_MODULE_CLASS_DISPL
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static tutorspet.logic.commands.CommandTestUtil.showModuleClassAtIndex;
+import static tutorspet.logic.commands.CommandTestUtil.showStudentAtIndex;
 import static tutorspet.logic.commands.LinkCommand.MESSAGE_LINK_SUCCESS;
 import static tutorspet.logic.commands.UnlinkCommandTest.copyModelWithModuleClassAndShowStudents;
 import static tutorspet.model.Model.PREDICATE_SHOW_ALL_MODULE_CLASS;
@@ -65,8 +67,8 @@ public class LinkCommandTest {
 
     @Test
     public void execute_filteredList_success() {
-        CommandTestUtil.showStudentAtIndex(model, INDEX_FIRST_ITEM);
-        CommandTestUtil.showModuleClassAtIndex(model, INDEX_FIRST_ITEM);
+        showStudentAtIndex(model, INDEX_FIRST_ITEM);
+        showModuleClassAtIndex(model, INDEX_FIRST_ITEM);
 
         Index moduleClassIndex = INDEX_FIRST_ITEM;
         Index studentIndex = INDEX_FIRST_ITEM;
@@ -113,7 +115,7 @@ public class LinkCommandTest {
 
     @Test
     public void execute_invalidStudentIndexFilteredList_failure() {
-        CommandTestUtil.showStudentAtIndex(model, INDEX_FIRST_ITEM);
+        showStudentAtIndex(model, INDEX_FIRST_ITEM);
         Index outOfBoundIndex = INDEX_SECOND_ITEM;
 
         // ensures that outOfBoundIndex is still in bounds of student list
@@ -134,7 +136,7 @@ public class LinkCommandTest {
 
     @Test
     public void execute_invalidModuleClassIndexFilteredList_failure() {
-        CommandTestUtil.showModuleClassAtIndex(model, INDEX_FIRST_ITEM);
+        showModuleClassAtIndex(model, INDEX_FIRST_ITEM);
         Index outOfBoundIndex = INDEX_SECOND_ITEM;
 
         // ensures that outOfBoundIndex is still in bounds of class list

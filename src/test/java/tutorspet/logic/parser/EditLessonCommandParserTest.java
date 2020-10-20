@@ -17,6 +17,7 @@ import static tutorspet.logic.commands.CommandTestUtil.VALID_VENUE_COM1_B111_LES
 import static tutorspet.logic.commands.CommandTestUtil.VALID_VENUE_S17_0302_LESSON_FRI_8_TO_10;
 import static tutorspet.logic.commands.CommandTestUtil.VENUE_DESC_LESSON_FRI_8_TO_10;
 import static tutorspet.logic.commands.CommandTestUtil.VENUE_DESC_LESSON_WED_2_TO_4;
+import static tutorspet.logic.commands.EditLessonCommand.MESSAGE_USAGE;
 import static tutorspet.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static tutorspet.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static tutorspet.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
@@ -26,6 +27,7 @@ import org.junit.jupiter.api.Test;
 
 import tutorspet.commons.core.index.Index;
 import tutorspet.logic.commands.EditLessonCommand;
+import tutorspet.logic.commands.EditLessonCommand.EditLessonDescriptor;
 import tutorspet.model.lesson.Day;
 import tutorspet.model.lesson.Venue;
 import tutorspet.testutil.EditLessonDescriptorBuilder;
@@ -37,7 +39,7 @@ public class EditLessonCommandParserTest {
     private static final String INPUT_PREAMBLE =
             " c/" + VALID_MODULE_CLASS_INDEX_ONE.getOneBased() + " l/" + VALID_LESSON_INDEX_TWO.getOneBased();
     private static final String MESSAGE_INVALID_FORMAT =
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditLessonCommand.MESSAGE_USAGE);
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE);
 
     private EditLessonCommandParser parser = new EditLessonCommandParser();
 
@@ -101,7 +103,7 @@ public class EditLessonCommandParserTest {
                 + DAY_DESC_LESSON_FRI_8_TO_10 + START_TIME_DESC_LESSON_FRI_8_TO_10
                 + END_TIME_DESC_LESSON_FRI_8_TO_10 + VENUE_DESC_LESSON_FRI_8_TO_10;
 
-        EditLessonCommand.EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder()
+        EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder()
                 .withDay(VALID_DAY_FRI_LESSON_FRI_8_TO_10.toString())
                 .withStartTime(VALID_START_TIME_0800_LESSON_FRI_8_TO_10)
                 .withEndTime(VALID_END_TIME_1000_LESSON_FRI_8_TO_10)
@@ -116,7 +118,7 @@ public class EditLessonCommandParserTest {
     public void parse_someFieldsSpecified_success() {
         String userInput = INPUT_PREAMBLE + DAY_DESC_LESSON_FRI_8_TO_10 + END_TIME_DESC_LESSON_FRI_8_TO_10;
 
-        EditLessonCommand.EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder()
+        EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder()
                 .withDay(VALID_DAY_FRI_LESSON_FRI_8_TO_10.toString())
                 .withEndTime(VALID_END_TIME_1000_LESSON_FRI_8_TO_10).build();
         EditLessonCommand expectedCommand = new EditLessonCommand(
@@ -130,7 +132,7 @@ public class EditLessonCommandParserTest {
 
         // day
         String userInput = INPUT_PREAMBLE + DAY_DESC_LESSON_FRI_8_TO_10;
-        EditLessonCommand.EditLessonDescriptor descriptor =
+        EditLessonDescriptor descriptor =
                 new EditLessonDescriptorBuilder().withDay(VALID_DAY_FRI_LESSON_FRI_8_TO_10.toString()).build();
         EditLessonCommand expectedCommand = new EditLessonCommand(
                 VALID_MODULE_CLASS_INDEX_ONE, VALID_LESSON_INDEX_TWO, descriptor);
@@ -163,7 +165,7 @@ public class EditLessonCommandParserTest {
         String userInput = INPUT_PREAMBLE + VENUE_DESC_LESSON_FRI_8_TO_10 + DAY_DESC_LESSON_FRI_8_TO_10
                 + VENUE_DESC_LESSON_FRI_8_TO_10 + DAY_DESC_LESSON_WED_2_TO_4 + VENUE_DESC_LESSON_WED_2_TO_4;
 
-        EditLessonCommand.EditLessonDescriptor descriptor =
+        EditLessonDescriptor descriptor =
                 new EditLessonDescriptorBuilder()
                         .withDay(VALID_DAY_WED_LESSON_WED_2_TO_4.toString())
                         .withVenue(VALID_VENUE_COM1_B111_LESSON_WED_2_TO_4).build();
@@ -177,7 +179,7 @@ public class EditLessonCommandParserTest {
     public void parse_invalidValueFollowedByValidValue_success() {
         // no other valid values specified
         String userInput = INPUT_PREAMBLE + INVALID_END_TIME_DESC + END_TIME_DESC_LESSON_FRI_8_TO_10;
-        EditLessonCommand.EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder()
+        EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder()
                 .withEndTime(VALID_END_TIME_1000_LESSON_FRI_8_TO_10).build();
         EditLessonCommand expectedCommand = new EditLessonCommand(
                 VALID_MODULE_CLASS_INDEX_ONE, VALID_LESSON_INDEX_TWO, descriptor);

@@ -8,6 +8,7 @@ import static tutorspet.logic.commands.CommandTestUtil.DESC_CS2103T_TUTORIAL;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_NAME_CS2030_TUTORIAL;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static tutorspet.logic.commands.CommandTestUtil.showModuleClassAtIndex;
 import static tutorspet.logic.commands.EditModuleClassCommand.MESSAGE_DUPLICATE_MODULE_CLASS;
 import static tutorspet.logic.commands.EditModuleClassCommand.MESSAGE_EDIT_MODULE_CLASS_SUCCESS;
 import static tutorspet.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
@@ -74,7 +75,7 @@ public class EditModuleClassCommandTest {
 
     @Test
     public void execute_filteredList_success() {
-        CommandTestUtil.showModuleClassAtIndex(model, INDEX_FIRST_ITEM);
+        showModuleClassAtIndex(model, INDEX_FIRST_ITEM);
 
         ModuleClass moduleClassInFilteredList =
                 model.getFilteredModuleClassList().get(INDEX_FIRST_ITEM.getZeroBased());
@@ -103,7 +104,7 @@ public class EditModuleClassCommandTest {
 
     @Test
     public void execute_duplicateModuleClassFilteredList_failure() {
-        CommandTestUtil.showModuleClassAtIndex(model, INDEX_FIRST_ITEM);
+        showModuleClassAtIndex(model, INDEX_FIRST_ITEM);
 
         // edit ModuleClass in filtered list into a duplicate in Tutor's Pet
         ModuleClass moduleClassInList = model.getTutorsPet().getModuleClassList()
@@ -130,7 +131,7 @@ public class EditModuleClassCommandTest {
      */
     @Test
     public void execute_invalidModuleClassIndexFilteredList_failure() {
-        CommandTestUtil.showModuleClassAtIndex(model, INDEX_FIRST_ITEM);
+        showModuleClassAtIndex(model, INDEX_FIRST_ITEM);
         Index outOfBoundIndex = INDEX_SECOND_ITEM;
 
         // ensures that outOfBoundIndex is still in bounds of the class list
@@ -139,7 +140,7 @@ public class EditModuleClassCommandTest {
         EditModuleClassCommand editModuleClassCommand = new EditModuleClassCommand(outOfBoundIndex,
                 new EditModuleClassDescriptorBuilder().withName(VALID_NAME_CS2030_TUTORIAL).build());
 
-        CommandTestUtil.assertCommandFailure(editModuleClassCommand, model,
+        assertCommandFailure(editModuleClassCommand, model,
                 MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX);
     }
 

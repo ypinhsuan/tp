@@ -4,13 +4,14 @@ import static java.util.Objects.requireNonNull;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX;
 import static tutorspet.commons.util.CollectionUtil.requireAllNonNull;
+import static tutorspet.logic.parser.CliSyntax.PREFIX_CLASS_INDEX;
+import static tutorspet.logic.parser.CliSyntax.PREFIX_LESSON_INDEX;
 import static tutorspet.logic.util.ModuleClassUtil.deleteLessonFromModuleClass;
 
 import java.util.List;
 
 import tutorspet.commons.core.index.Index;
 import tutorspet.logic.commands.exceptions.CommandException;
-import tutorspet.logic.parser.CliSyntax;
 import tutorspet.model.Model;
 import tutorspet.model.lesson.Lesson;
 import tutorspet.model.moduleclass.ModuleClass;
@@ -27,11 +28,11 @@ public class DeleteLessonCommand extends Command {
             + "by the index number used in the displayed class list "
             + "and index number in the lesson list.\n"
             + "Parameters: "
-            + CliSyntax.PREFIX_CLASS_INDEX + "CLASS_INDEX (must be a positive integer) "
-            + CliSyntax.PREFIX_LESSON_INDEX + "LESSON_INDEX (must be a positive integer)\n"
+            + PREFIX_CLASS_INDEX + "CLASS_INDEX (must be a positive integer) "
+            + PREFIX_LESSON_INDEX + "LESSON_INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " "
-            + CliSyntax.PREFIX_CLASS_INDEX + "1 "
-            + CliSyntax.PREFIX_LESSON_INDEX + "1";
+            + PREFIX_CLASS_INDEX + "1 "
+            + PREFIX_LESSON_INDEX + "1";
 
     public static final String MESSAGE_DELETE_LESSON_SUCCESS = "Deleted lesson %1$s from %2$s";
 

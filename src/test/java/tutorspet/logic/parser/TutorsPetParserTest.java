@@ -26,7 +26,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import tutorspet.logic.commands.AddAttendanceCommand;
@@ -96,7 +95,7 @@ public class TutorsPetParserTest {
                 (ListStudentCommand) parser.parseCommand(ListStudentCommand.COMMAND_WORD
                         + " " + PREFIX_CLASS_INDEX + INDEX_SECOND_ITEM.getOneBased());
         assertEquals(new ListStudentCommand(), command);
-        Assertions.assertEquals(new ListStudentInClassCommand(INDEX_SECOND_ITEM), altCommand);
+        assertEquals(new ListStudentInClassCommand(INDEX_SECOND_ITEM), altCommand);
     }
 
     @Test

@@ -14,7 +14,7 @@ public class EditAttendanceDescriptorTest {
     @Test
     public void equals() {
         // same value -> returns true
-        EditAttendanceCommand.EditAttendanceDescriptor descriptorWithSameValues =
+        EditAttendanceDescriptor descriptorWithSameValues =
                 new EditAttendanceDescriptor(DESC_ATTENDANCE_33);
         assertTrue(DESC_ATTENDANCE_33.equals(descriptorWithSameValues));
 

@@ -1,10 +1,17 @@
 package tutorspet.logic.commands;
 
+import static tutorspet.commons.core.Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX;
+import static tutorspet.commons.core.Messages.MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX;
+import static tutorspet.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
+import static tutorspet.commons.core.Messages.MESSAGE_INVALID_WEEK;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_WEEK_1;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_WEEK_5;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static tutorspet.logic.commands.DeleteAttendanceCommand.MESSAGE_DELETE_ATTENDANCE_SUCCESS;
+import static tutorspet.logic.commands.DeleteAttendanceCommand.MESSAGE_MISSING_ATTENDANCE;
 import static tutorspet.testutil.Assert.assertThrows;
+import static tutorspet.testutil.ModuleClassUtil.manualReplaceLessonToModuleClass;
 import static tutorspet.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 import static tutorspet.testutil.TypicalTutorsPet.getTypicalTutorsPet;
 
@@ -16,7 +23,6 @@ import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
 
-import tutorspet.commons.core.Messages;
 import tutorspet.commons.core.index.Index;
 import tutorspet.model.Model;
 import tutorspet.model.ModelManager;
@@ -29,7 +35,6 @@ import tutorspet.model.lesson.Lesson;
 import tutorspet.model.moduleclass.ModuleClass;
 import tutorspet.model.student.Student;
 import tutorspet.testutil.LessonBuilder;
-import tutorspet.testutil.ModuleClassUtil;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -88,10 +93,10 @@ public class DeleteAttendanceCommandTest {
         Lesson modifiedLesson = new LessonBuilder(lesson)
                 .withAttendanceRecordList(new AttendanceRecordList(updatedAttendanceRecords)).build();
         ModuleClass modifiedModuleClass =
-                ModuleClassUtil.manualReplaceLessonToModuleClass(moduleClass, lesson, modifiedLesson);
+                manualReplaceLessonToModuleClass(moduleClass, lesson, modifiedLesson);
 
         String expectedMessage = String.format(
-                DeleteAttendanceCommand.MESSAGE_DELETE_ATTENDANCE_SUCCESS, targetWeek,
+                MESSAGE_DELETE_ATTENDANCE_SUCCESS, targetWeek,
                 student.getName(), modifiedLesson);
         Model expectedModel = new ModelManager(model.getTutorsPet(), new UserPrefs());
         expectedModel.setModuleClass(moduleClass, modifiedModuleClass);
@@ -127,14 +132,14 @@ public class DeleteAttendanceCommandTest {
         Lesson modifiedLesson = new LessonBuilder(lesson)
                 .withAttendanceRecordList(new AttendanceRecordList(updatedAttendanceRecords)).build();
         ModuleClass modifiedModuleClass =
-                ModuleClassUtil.manualReplaceLessonToModuleClass(moduleClass, lesson, modifiedLesson);
+                manualReplaceLessonToModuleClass(moduleClass, lesson, modifiedLesson);
 
         model.setModuleClass(moduleClass, modifiedModuleClass);
 
         DeleteAttendanceCommand deleteAttendanceCommand =
                 new DeleteAttendanceCommand(moduleClassIndex, lessonIndex, studentIndex, targetWeek);
 
-        assertCommandFailure(deleteAttendanceCommand, model, DeleteAttendanceCommand.MESSAGE_MISSING_ATTENDANCE);
+        assertCommandFailure(deleteAttendanceCommand, model, MESSAGE_MISSING_ATTENDANCE);
     }
 
     @Test
@@ -147,7 +152,7 @@ public class DeleteAttendanceCommandTest {
         DeleteAttendanceCommand deleteAttendanceCommand =
                 new DeleteAttendanceCommand(moduleClassIndex, lessonIndex, studentIndex, targetWeek);
 
-        assertCommandFailure(deleteAttendanceCommand, model, Messages.MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX);
+        assertCommandFailure(deleteAttendanceCommand, model, MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX);
     }
 
     @Test
@@ -161,7 +166,7 @@ public class DeleteAttendanceCommandTest {
         DeleteAttendanceCommand deleteAttendanceCommand =
                 new DeleteAttendanceCommand(moduleClassIndex, lessonIndex, studentIndex, targetWeek);
 
-        assertCommandFailure(deleteAttendanceCommand, model, Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
+        assertCommandFailure(deleteAttendanceCommand, model, MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
     }
 
     @Test
@@ -174,7 +179,7 @@ public class DeleteAttendanceCommandTest {
         DeleteAttendanceCommand deleteAttendanceCommand =
                 new DeleteAttendanceCommand(moduleClassIndex, lessonIndex, studentIndex, targetWeek);
 
-        assertCommandFailure(deleteAttendanceCommand, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        assertCommandFailure(deleteAttendanceCommand, model, MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
     }
 
     @Test
@@ -190,6 +195,6 @@ public class DeleteAttendanceCommandTest {
         DeleteAttendanceCommand deleteAttendanceCommand =
                 new DeleteAttendanceCommand(moduleClassIndex, lessonIndex, studentIndex, targetWeek);
 
-        assertCommandFailure(deleteAttendanceCommand, model, Messages.MESSAGE_INVALID_WEEK);
+        assertCommandFailure(deleteAttendanceCommand, model, MESSAGE_INVALID_WEEK);
     }
 }

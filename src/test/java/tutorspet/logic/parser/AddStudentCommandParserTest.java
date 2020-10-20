@@ -21,7 +21,10 @@ import static tutorspet.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_TAG_AVERAGE;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_TAG_EXPERIENCED;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_TELEGRAM_BOB;
+import static tutorspet.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static tutorspet.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static tutorspet.testutil.TypicalStudent.AMY;
+import static tutorspet.testutil.TypicalStudent.BOB;
 
 import org.junit.jupiter.api.Test;
 
@@ -33,7 +36,6 @@ import tutorspet.model.student.Email;
 import tutorspet.model.student.Student;
 import tutorspet.model.student.Telegram;
 import tutorspet.testutil.StudentBuilder;
-import tutorspet.testutil.TypicalStudent;
 
 public class AddStudentCommandParserTest {
 
@@ -41,7 +43,7 @@ public class AddStudentCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Student expectedStudent = new StudentBuilder(TypicalStudent.BOB)
+        Student expectedStudent = new StudentBuilder(BOB)
                 .withTags(VALID_TAG_EXPERIENCED).build();
 
         // whitespace only preamble
@@ -66,7 +68,7 @@ public class AddStudentCommandParserTest {
                 + TAG_DESC_EXPERIENCED, new AddStudentCommand(expectedStudent));
 
         // multiple tags - all accepted
-        Student expectedStudentMultipleTags = new StudentBuilder(TypicalStudent.BOB)
+        Student expectedStudentMultipleTags = new StudentBuilder(BOB)
                 .withTags(VALID_TAG_EXPERIENCED, VALID_TAG_AVERAGE).build();
         assertParseSuccess(parser, NAME_DESC_BOB
                 + TELEGRAM_DESC_BOB + EMAIL_DESC_BOB
@@ -77,7 +79,7 @@ public class AddStudentCommandParserTest {
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
-        Student expectedStudent = new StudentBuilder(TypicalStudent.AMY).withTags().build();
+        Student expectedStudent = new StudentBuilder(AMY).withTags().build();
         assertParseSuccess(parser, NAME_DESC_AMY
                 + TELEGRAM_DESC_AMY + EMAIL_DESC_AMY, new AddStudentCommand(expectedStudent));
     }
@@ -87,52 +89,52 @@ public class AddStudentCommandParserTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE);
 
         // missing name prefix
-        CommandParserTestUtil.assertParseFailure(parser, VALID_NAME_BOB
+        assertParseFailure(parser, VALID_NAME_BOB
                 + TELEGRAM_DESC_BOB + EMAIL_DESC_BOB, expectedMessage);
 
         // missing telegram prefix
-        CommandParserTestUtil.assertParseFailure(parser, NAME_DESC_BOB
+        assertParseFailure(parser, NAME_DESC_BOB
                 + CommandTestUtil.VALID_TELEGRAM_BOB + EMAIL_DESC_BOB, expectedMessage);
 
         // missing email prefix
-        CommandParserTestUtil.assertParseFailure(parser, NAME_DESC_BOB
+        assertParseFailure(parser, NAME_DESC_BOB
                 + TELEGRAM_DESC_BOB + CommandTestUtil.VALID_EMAIL_BOB, expectedMessage);
 
         // all prefixes missing
-        CommandParserTestUtil.assertParseFailure(parser, VALID_NAME_BOB
+        assertParseFailure(parser, VALID_NAME_BOB
                 + VALID_TELEGRAM_BOB + VALID_EMAIL_BOB, expectedMessage);
     }
 
     @Test
     public void parse_invalidValue_failure() {
         // invalid name
-        CommandParserTestUtil.assertParseFailure(parser, INVALID_NAME_DESC
+        assertParseFailure(parser, INVALID_NAME_DESC
                 + TELEGRAM_DESC_BOB + EMAIL_DESC_BOB + TAG_DESC_AVERAGE
                 + TAG_DESC_EXPERIENCED, Name.MESSAGE_CONSTRAINTS);
 
         // invalid telegram
-        CommandParserTestUtil.assertParseFailure(parser, NAME_DESC_BOB
+        assertParseFailure(parser, NAME_DESC_BOB
                 + INVALID_TELEGRAM_DESC + EMAIL_DESC_BOB
                 + TAG_DESC_AVERAGE + TAG_DESC_EXPERIENCED, Telegram.MESSAGE_CONSTRAINTS);
 
         // invalid email
-        CommandParserTestUtil.assertParseFailure(parser, NAME_DESC_BOB
+        assertParseFailure(parser, NAME_DESC_BOB
                 + TELEGRAM_DESC_BOB + INVALID_EMAIL_DESC + TAG_DESC_AVERAGE
                 + TAG_DESC_EXPERIENCED, Email.MESSAGE_CONSTRAINTS);
 
         // invalid tag
-        CommandParserTestUtil.assertParseFailure(parser, NAME_DESC_BOB
+        assertParseFailure(parser, NAME_DESC_BOB
                 + TELEGRAM_DESC_BOB + EMAIL_DESC_BOB
                 + INVALID_TAG_DESC + VALID_TAG_EXPERIENCED, Tag.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
-        CommandParserTestUtil.assertParseFailure(parser, PREAMBLE_NON_EMPTY
+        assertParseFailure(parser, PREAMBLE_NON_EMPTY
                 + NAME_DESC_BOB + TELEGRAM_DESC_BOB
                 + EMAIL_DESC_BOB + TAG_DESC_AVERAGE + TAG_DESC_EXPERIENCED,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
 
         // two invalid values, only first invalid value reported
-        CommandParserTestUtil.assertParseFailure(parser, INVALID_NAME_DESC + TELEGRAM_DESC_BOB
+        assertParseFailure(parser, INVALID_NAME_DESC + TELEGRAM_DESC_BOB
                 + INVALID_EMAIL_DESC, Name.MESSAGE_CONSTRAINTS);
     }
 }

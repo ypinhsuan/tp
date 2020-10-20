@@ -6,7 +6,10 @@ import static tutorspet.commons.core.Messages.MESSAGE_INVALID_MODULE_CLASS_DISPL
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static tutorspet.logic.commands.CommandTestUtil.showModuleClassAtIndex;
+import static tutorspet.logic.commands.CommandTestUtil.showStudentAtIndex;
 import static tutorspet.logic.commands.UnlinkCommand.MESSAGE_MISSING_LINK;
+import static tutorspet.logic.commands.UnlinkCommand.MESSAGE_UNLINK_SUCCESS;
 import static tutorspet.testutil.Assert.assertThrows;
 import static tutorspet.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 import static tutorspet.testutil.TypicalIndexes.INDEX_SECOND_ITEM;
@@ -54,7 +57,7 @@ public class UnlinkCommandTest {
         ModuleClass modifiedModuleClass = manualUnlinkStudentFromModuleClass(moduleClass, student);
 
         String expectedMessage =
-                String.format(UnlinkCommand.MESSAGE_UNLINK_SUCCESS, student.getName(), modifiedModuleClass);
+                String.format(MESSAGE_UNLINK_SUCCESS, student.getName(), modifiedModuleClass);
         Model expectedModel = copyModelWithModuleClassAndShowStudents(model, moduleClass, modifiedModuleClass);
         expectedModel.commit(expectedMessage);
 
@@ -63,8 +66,8 @@ public class UnlinkCommandTest {
 
     @Test
     public void execute_filteredList_success() {
-        CommandTestUtil.showStudentAtIndex(model, INDEX_FIRST_ITEM);
-        CommandTestUtil.showModuleClassAtIndex(model, INDEX_THIRD_ITEM);
+        showStudentAtIndex(model, INDEX_FIRST_ITEM);
+        showModuleClassAtIndex(model, INDEX_THIRD_ITEM);
 
         Index moduleClassIndex = INDEX_FIRST_ITEM;
         Index studentIndex = INDEX_FIRST_ITEM;
@@ -75,7 +78,7 @@ public class UnlinkCommandTest {
         ModuleClass modifiedModuleClass = manualUnlinkStudentFromModuleClass(moduleClass, student);
 
         String expectedMessage =
-                String.format(UnlinkCommand.MESSAGE_UNLINK_SUCCESS, student.getName(), modifiedModuleClass);
+                String.format(MESSAGE_UNLINK_SUCCESS, student.getName(), modifiedModuleClass);
         Model expectedModel = copyModelWithModuleClassAndShowStudents(model, moduleClass, modifiedModuleClass);
         expectedModel.commit(expectedMessage);
 
@@ -99,7 +102,7 @@ public class UnlinkCommandTest {
 
     @Test
     public void execute_invalidStudentIndexFilteredList_failure() {
-        CommandTestUtil.showStudentAtIndex(model, INDEX_FIRST_ITEM);
+        showStudentAtIndex(model, INDEX_FIRST_ITEM);
         Index outOfBoundIndex = INDEX_SECOND_ITEM;
 
         // ensures that outOfBoundIndex is still in bounds of student list
@@ -120,7 +123,7 @@ public class UnlinkCommandTest {
 
     @Test
     public void execute_invalidModuleClassIndexFilteredList_failure() {
-        CommandTestUtil.showModuleClassAtIndex(model, INDEX_FIRST_ITEM);
+        showModuleClassAtIndex(model, INDEX_FIRST_ITEM);
         Index outOfBoundIndex = INDEX_SECOND_ITEM;
 
         // ensures that outOfBoundIndex is still in bounds of class list

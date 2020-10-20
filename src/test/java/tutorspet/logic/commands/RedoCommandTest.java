@@ -1,5 +1,6 @@
 package tutorspet.logic.commands;
 
+import static tutorspet.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static tutorspet.logic.commands.RedoCommand.MESSAGE_NO_PREVIOUS_COMMAND;
 import static tutorspet.logic.commands.RedoCommand.MESSAGE_SUCCESS;
@@ -29,7 +30,7 @@ public class RedoCommandTest {
         model.commit(COMMIT_MESSAGE_1);
         model.undo();
 
-        String expectedMessage = String.format(String.format(MESSAGE_SUCCESS, COMMIT_MESSAGE_1));
+        String expectedMessage = String.format(MESSAGE_SUCCESS, COMMIT_MESSAGE_1);
         expectedModel.commit(COMMIT_MESSAGE_1);
 
         assertCommandSuccess(new RedoCommand(), model, expectedMessage, expectedModel);
@@ -38,6 +39,6 @@ public class RedoCommandTest {
     @Test
     public void execute_noNextState_throwsCommandException() {
         model.commit(COMMIT_MESSAGE_1);
-        CommandTestUtil.assertCommandFailure(new RedoCommand(), model, MESSAGE_NO_PREVIOUS_COMMAND);
+        assertCommandFailure(new RedoCommand(), model, MESSAGE_NO_PREVIOUS_COMMAND);
     }
 }
