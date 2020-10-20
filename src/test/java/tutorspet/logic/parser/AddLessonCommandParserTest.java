@@ -60,7 +60,7 @@ public class AddLessonCommandParserTest {
 
         // multiple class indexes - last class index accepted
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + " "
-                + PREFIX_CLASS_INDEX + "1" + " "
+                + PREFIX_CLASS_INDEX + "2" + " "
                 + PREFIX_CLASS_INDEX + "1"
                 + DAY_DESC_LESSON_FRI_8_TO_10
                 + START_TIME_DESC_LESSON_FRI_8_TO_10

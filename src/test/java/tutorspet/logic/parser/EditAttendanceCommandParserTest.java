@@ -1,7 +1,9 @@
 package tutorspet.logic.parser;
 
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static tutorspet.logic.commands.CommandTestUtil.INVALID_PARTICIPATION_SCORE_101;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_PARTICIPATION_SCORE_33;
+import static tutorspet.logic.commands.CommandTestUtil.VALID_PARTICIPATION_SCORE_80;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_WEEK_1;
 import static tutorspet.logic.commands.EditAttendanceCommand.MESSAGE_USAGE;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_CLASS_INDEX;
@@ -36,28 +38,28 @@ public class EditAttendanceCommandParserTest {
                 + PREFIX_LESSON_INDEX + "1" + " "
                 + PREFIX_STUDENT_INDEX + "1" + " "
                 + PREFIX_WEEK + "1" + " "
-                + PREFIX_PARTICIPATION_SCORE + "70", MESSAGE_INVALID_FORMAT);
+                + PREFIX_PARTICIPATION_SCORE + VALID_PARTICIPATION_SCORE_80, MESSAGE_INVALID_FORMAT);
 
         // no lesson index specified
         assertParseFailure(parser, " "
                 + PREFIX_CLASS_INDEX + "1" + " "
                 + PREFIX_STUDENT_INDEX + "1" + " "
                 + PREFIX_WEEK + "1" + " "
-                + PREFIX_PARTICIPATION_SCORE + "70", MESSAGE_INVALID_FORMAT);
+                + PREFIX_PARTICIPATION_SCORE + VALID_PARTICIPATION_SCORE_80, MESSAGE_INVALID_FORMAT);
 
         // no student index specified
         assertParseFailure(parser, " "
                 + PREFIX_CLASS_INDEX + "1" + " "
                 + PREFIX_LESSON_INDEX + "1" + " "
                 + PREFIX_WEEK + "1" + " "
-                + PREFIX_PARTICIPATION_SCORE + "70", MESSAGE_INVALID_FORMAT);
+                + PREFIX_PARTICIPATION_SCORE + VALID_PARTICIPATION_SCORE_80, MESSAGE_INVALID_FORMAT);
 
         // no week specified
         assertParseFailure(parser, " "
                 + PREFIX_CLASS_INDEX + "1" + " "
                 + PREFIX_LESSON_INDEX + "1" + " "
                 + PREFIX_STUDENT_INDEX + "1" + " "
-                + PREFIX_PARTICIPATION_SCORE + "70", MESSAGE_INVALID_FORMAT);
+                + PREFIX_PARTICIPATION_SCORE + VALID_PARTICIPATION_SCORE_80, MESSAGE_INVALID_FORMAT);
     }
 
     @Test
@@ -68,7 +70,7 @@ public class EditAttendanceCommandParserTest {
                 + PREFIX_LESSON_INDEX + "0" + " "
                 + PREFIX_STUDENT_INDEX + "1" + " "
                 + PREFIX_WEEK + "1" + " "
-                + PREFIX_PARTICIPATION_SCORE + "70", MESSAGE_INVALID_FORMAT);
+                + PREFIX_PARTICIPATION_SCORE + VALID_PARTICIPATION_SCORE_80, MESSAGE_INVALID_FORMAT);
 
         // invalid prefix being parsed as preamble
         assertParseFailure(parser, " "
@@ -76,7 +78,7 @@ public class EditAttendanceCommandParserTest {
                 + PREFIX_LESSON_INDEX + "1" + " "
                 + PREFIX_STUDENT_INDEX + "1" + " "
                 + "k\\" + "1" + " "
-                + PREFIX_PARTICIPATION_SCORE + "70", MESSAGE_INVALID_FORMAT);
+                + PREFIX_PARTICIPATION_SCORE + VALID_PARTICIPATION_SCORE_80, MESSAGE_INVALID_FORMAT);
     }
 
     @Test
@@ -87,7 +89,7 @@ public class EditAttendanceCommandParserTest {
                 + PREFIX_LESSON_INDEX + "1" + " "
                 + PREFIX_STUDENT_INDEX + "1" + " "
                 + PREFIX_WEEK + "1" + " "
-                + PREFIX_PARTICIPATION_SCORE + "70", MESSAGE_INVALID_FORMAT);
+                + PREFIX_PARTICIPATION_SCORE + VALID_PARTICIPATION_SCORE_80, MESSAGE_INVALID_FORMAT);
 
         // invalid lesson index
         assertParseFailure(parser, " "
@@ -95,7 +97,7 @@ public class EditAttendanceCommandParserTest {
                 + PREFIX_LESSON_INDEX + "0" + " "
                 + PREFIX_STUDENT_INDEX + "1" + " "
                 + PREFIX_WEEK + "1" + " "
-                + PREFIX_PARTICIPATION_SCORE + "70", MESSAGE_INVALID_FORMAT);
+                + PREFIX_PARTICIPATION_SCORE + VALID_PARTICIPATION_SCORE_80, MESSAGE_INVALID_FORMAT);
 
         // invalid student index
         assertParseFailure(parser, " "
@@ -103,7 +105,7 @@ public class EditAttendanceCommandParserTest {
                 + PREFIX_LESSON_INDEX + "1" + " "
                 + PREFIX_STUDENT_INDEX + "*" + " "
                 + PREFIX_WEEK + "1" + " "
-                + PREFIX_PARTICIPATION_SCORE + "70", MESSAGE_INVALID_FORMAT);
+                + PREFIX_PARTICIPATION_SCORE + VALID_PARTICIPATION_SCORE_80, MESSAGE_INVALID_FORMAT);
 
         // invalid week
         assertParseFailure(parser, " "
@@ -111,7 +113,7 @@ public class EditAttendanceCommandParserTest {
                 + PREFIX_LESSON_INDEX + "1" + " "
                 + PREFIX_STUDENT_INDEX + "1" + " "
                 + PREFIX_WEEK + " "
-                + PREFIX_PARTICIPATION_SCORE + "70", Week.MESSAGE_CONSTRAINTS);
+                + PREFIX_PARTICIPATION_SCORE + VALID_PARTICIPATION_SCORE_80, Week.MESSAGE_CONSTRAINTS);
 
         // invalid participation score
         assertParseFailure(parser, " "
@@ -119,7 +121,7 @@ public class EditAttendanceCommandParserTest {
                 + PREFIX_LESSON_INDEX + "1" + " "
                 + PREFIX_STUDENT_INDEX + "1" + " "
                 + PREFIX_WEEK + "1" + " "
-                + PREFIX_PARTICIPATION_SCORE + "1000", Attendance.MESSAGE_CONSTRAINTS);
+                + PREFIX_PARTICIPATION_SCORE + INVALID_PARTICIPATION_SCORE_101, Attendance.MESSAGE_CONSTRAINTS);
     }
 
     @Test
@@ -139,7 +141,7 @@ public class EditAttendanceCommandParserTest {
                 + PREFIX_LESSON_INDEX + "1" + " "
                 + PREFIX_STUDENT_INDEX + "1" + " "
                 + PREFIX_WEEK + "1" + " "
-                + PREFIX_PARTICIPATION_SCORE + "33";
+                + PREFIX_PARTICIPATION_SCORE + VALID_PARTICIPATION_SCORE_33;
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
@@ -166,7 +168,7 @@ public class EditAttendanceCommandParserTest {
                 + PREFIX_LESSON_INDEX + "1" + " "
                 + PREFIX_STUDENT_INDEX + "1" + " "
                 + PREFIX_WEEK + "1" + " "
-                + PREFIX_PARTICIPATION_SCORE + "33";
+                + PREFIX_PARTICIPATION_SCORE + VALID_PARTICIPATION_SCORE_33;
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 }
