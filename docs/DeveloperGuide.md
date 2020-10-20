@@ -135,37 +135,37 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Student Universally Unique Identifier (UUID)
 
-A ```UUID``` is a unique 128-bit number to identify unique ```Student``` information within Tutor’s Pet.
-In Tutor’s Pet, every ```Student``` upon construction is assigned a randomly generated ```UUID``` that is used to
-uniquely identify a ```Student``` across ```Classes``` and ```Lessons```. This is important because we are dealing with
-```Student``` data not just in the ```Student``` model itself, but also ```Classes``` and ```Lessons```. Using a
-```Student``` ```UUID``` will help to ensure ```Student``` data persistence across different models when interacting
+A `UUID` is a unique 128-bit number to identify unique `Student` information within Tutor’s Pet.
+In Tutor’s Pet, every `Student` upon construction is assigned a randomly generated `UUID` that is used to
+uniquely identify a `Student` across `Classes` and `Lessons`. This is important because we are dealing with
+`Student` data not just in the `Student` model itself, but also `Classes` and `Lessons`. Using a
+`Student` `UUID` will help to ensure `Student` data persistence across different models when interacting
 with the application.
 
 #### Implementation
 
 ![StudentUUID](images/StudentUUID.png)
 
-From the class diagram above, we have designed the ```Student``` model such that every ```Student``` has a ```UUID```
-tagged to him/her, in addition to the ```Name```, ```Telegram```, ```Email```, and ```Tags``` fields providing
-information of the ```Student```. 
+From the class diagram above, we have designed the `Student` model such that every `Student` has a `UUID`
+tagged to him/her, in addition to the `Name`, `Telegram`, `Email`, and `Tags` fields providing
+information of the `Student`. 
 
 #### Design consideration:
 
-This section elaborates further on the reason why we eventually chose to adopt a ```UUID``` over other potential
+This section elaborates further on the reason why we eventually chose to adopt a `UUID` over other potential
 solutions.
 
 ##### Aspect: How to uniquely identify Students across models.
 
-* **Alternative 1 (current choice):** Assign a ```UUID``` tag to each ```Student```
-  * Pros: Convenient to generate ```UUID``` in Java as Java has a ```UUID``` package to support ```UUID```s.
-  Moreover, ```UUID``` is non-editable.
-  * Cons: Implementation is slightly more complicated as caution must be taken in integrating the ```UUID``` field into
-  ```Student``` model, enforce ```Student``` equality checks using ```UUID``` in Tutor’s Pet.
+* **Alternative 1 (current choice):** Assign a `UUID` tag to each `Student`
+  * Pros: Convenient to generate `UUID` in Java as Java has a `UUID` package to support `UUID`s.
+  Moreover, `UUID` is non-editable.
+  * Cons: Implementation is slightly more complicated as caution must be taken in integrating the `UUID` field into
+  `Student` model, enforce `Student` equality checks using `UUID` in Tutor’s Pet.
 
-* **Alternative 2:** Enforce that each ```Student``` must have a unique ```Email```
-  * Pros: Easier to implement as the original AB3 already has an ```Email``` field integrated into it.
-  * Cons: ```Email``` field is editable. Unique identifier to each ```Student``` should not be editable.
+* **Alternative 2:** Enforce that each `Student` must have a unique `Email`
+  * Pros: Easier to implement as the original AB3 already has an `Email` field integrated into it.
+  * Cons: `Email` field is editable. Unique identifier to each `Student` should not be editable.
 
 ### \[Proposed\] Undo/redo feature
 
