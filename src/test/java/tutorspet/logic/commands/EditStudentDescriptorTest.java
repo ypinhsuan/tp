@@ -3,6 +3,7 @@ package tutorspet.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tutorspet.logic.commands.CommandTestUtil.DESC_AMY;
+import static tutorspet.logic.commands.CommandTestUtil.DESC_BOB;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_TAG_AVERAGE;
@@ -31,7 +32,7 @@ public class EditStudentDescriptorTest {
         assertFalse(DESC_AMY.equals(5));
 
         // different values -> returns false
-        assertFalse(DESC_AMY.equals(CommandTestUtil.DESC_BOB));
+        assertFalse(DESC_AMY.equals(DESC_BOB));
 
         // different name -> returns false
         EditStudentDescriptor editedAmy =

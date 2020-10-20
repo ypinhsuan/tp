@@ -7,6 +7,7 @@ import static tutorspet.logic.commands.CommandTestUtil.NAME_DESC_CS2103T_TUTORIA
 import static tutorspet.logic.commands.CommandTestUtil.VALID_NAME_CS2100_LAB;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_NAME_CS2103T_TUTORIAL;
 import static tutorspet.logic.commands.EditModuleClassCommand.MESSAGE_NOT_EDITED;
+import static tutorspet.logic.commands.EditModuleClassCommand.MESSAGE_USAGE;
 import static tutorspet.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static tutorspet.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static tutorspet.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
@@ -23,7 +24,7 @@ import tutorspet.testutil.EditModuleClassDescriptorBuilder;
 public class EditModuleClassCommandParserTest {
 
     private static final String MESSAGE_INVALID_FORMAT =
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditModuleClassCommand.MESSAGE_USAGE);
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE);
 
     private EditModuleClassCommandParser parser = new EditModuleClassCommandParser();
 

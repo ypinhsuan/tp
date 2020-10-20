@@ -2,12 +2,19 @@ package tutorspet.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static tutorspet.commons.core.Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX;
+import static tutorspet.commons.core.Messages.MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX;
+import static tutorspet.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
+import static tutorspet.commons.core.Messages.MESSAGE_INVALID_STUDENT_IN_MODULE_CLASS;
+import static tutorspet.commons.core.Messages.MESSAGE_INVALID_WEEK;
+import static tutorspet.commons.core.Messages.MESSAGE_MISSING_STUDENT_ATTENDANCE;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_WEEK_1;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_WEEK_5;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static tutorspet.logic.commands.CommandTestUtil.showModuleClassAtIndex;
 import static tutorspet.logic.commands.CommandTestUtil.showStudentAtIndex;
+import static tutorspet.logic.commands.FindAttendanceCommand.MESSAGE_SUCCESS;
 import static tutorspet.testutil.Assert.assertThrows;
 import static tutorspet.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 import static tutorspet.testutil.TypicalIndexes.INDEX_THIRD_ITEM;
@@ -15,7 +22,6 @@ import static tutorspet.testutil.TypicalTutorsPet.getTypicalTutorsPet;
 
 import org.junit.jupiter.api.Test;
 
-import tutorspet.commons.core.Messages;
 import tutorspet.commons.core.index.Index;
 import tutorspet.model.Model;
 import tutorspet.model.ModelManager;
@@ -56,8 +62,14 @@ public class FindAttendanceCommandTest {
         Index studentIndex = INDEX_FIRST_ITEM;
         Week targetWeek = VALID_WEEK_1;
 
+        assert moduleClassIndex.getZeroBased() < model.getFilteredModuleClassList().size();
+        assert studentIndex.getZeroBased() < model.getFilteredStudentList().size();
+
         ModuleClass moduleClass = model.getFilteredModuleClassList().get(moduleClassIndex.getZeroBased());
         Student student = model.getFilteredStudentList().get(studentIndex.getZeroBased());
+
+        assert lessonIndex.getZeroBased() < moduleClass.getLessons().size();
+
         Lesson lesson = moduleClass.getLessons().get(lessonIndex.getZeroBased());
 
         assert moduleClass.hasLesson(lesson);
@@ -65,7 +77,7 @@ public class FindAttendanceCommandTest {
         assert lesson.getAttendanceRecordList().hasAttendance(student, targetWeek);
 
         Attendance attendance = lesson.getAttendanceRecordList().getAttendance(student, targetWeek);
-        String expectedMessage = String.format(FindAttendanceCommand.MESSAGE_SUCCESS, student.getName(),
+        String expectedMessage = String.format(MESSAGE_SUCCESS, student.getName(),
                 targetWeek, attendance);
         Model expectedModel = new ModelManager(model.getTutorsPet(), new UserPrefs());
         FindAttendanceCommand findAttendanceCommand =
@@ -84,8 +96,14 @@ public class FindAttendanceCommandTest {
         Index studentIndex = INDEX_FIRST_ITEM;
         Week targetWeek = VALID_WEEK_1;
 
+        assert moduleClassIndex.getZeroBased() < model.getFilteredModuleClassList().size();
+        assert studentIndex.getZeroBased() < model.getFilteredStudentList().size();
+
         ModuleClass moduleClass = model.getFilteredModuleClassList().get(moduleClassIndex.getZeroBased());
         Student student = model.getFilteredStudentList().get(studentIndex.getZeroBased());
+
+        assert lessonIndex.getZeroBased() < moduleClass.getLessons().size();
+
         Lesson lesson = moduleClass.getLessons().get(lessonIndex.getZeroBased());
 
         assert moduleClass.hasLesson(lesson);
@@ -93,7 +111,7 @@ public class FindAttendanceCommandTest {
         assert lesson.getAttendanceRecordList().hasAttendance(student, targetWeek);
 
         Attendance attendance = lesson.getAttendanceRecordList().getAttendance(student, targetWeek);
-        String expectedMessage = String.format(FindAttendanceCommand.MESSAGE_SUCCESS, student.getName(),
+        String expectedMessage = String.format(MESSAGE_SUCCESS, student.getName(),
                 targetWeek, attendance);
         Model expectedModel = new ModelManager(model.getTutorsPet(), new UserPrefs());
         expectedModel.updateFilteredModuleClassList(c -> c.isSameModuleClass(moduleClass));
@@ -110,7 +128,12 @@ public class FindAttendanceCommandTest {
         Index moduleClassIndex = INDEX_FIRST_ITEM;
         Index lessonIndex = INDEX_FIRST_ITEM;
 
+        assert moduleClassIndex.getZeroBased() < model.getFilteredModuleClassList().size();
+
         ModuleClass moduleClass = model.getFilteredModuleClassList().get(moduleClassIndex.getZeroBased());
+
+        assert lessonIndex.getZeroBased() < moduleClass.getLessons().size();
+
         Lesson lesson = moduleClass.getLessons().get(lessonIndex.getZeroBased());
 
         assert moduleClass.hasLesson(lesson);
@@ -118,7 +141,7 @@ public class FindAttendanceCommandTest {
         FindAttendanceCommand findAttendanceCommand = new FindAttendanceCommand(moduleClassIndex, lessonIndex,
                 INDEX_THIRD_ITEM, VALID_WEEK_1);
 
-        assertCommandFailure(findAttendanceCommand, model, Messages.MESSAGE_INVALID_STUDENT_IN_MODULE_CLASS);
+        assertCommandFailure(findAttendanceCommand, model, MESSAGE_INVALID_STUDENT_IN_MODULE_CLASS);
     }
 
     @Test
@@ -130,12 +153,15 @@ public class FindAttendanceCommandTest {
         FindAttendanceCommand findAttendanceCommand =
                 new FindAttendanceCommand(outOfBoundIndex, lessonIndex, studentIndex, VALID_WEEK_1);
 
-        assertCommandFailure(findAttendanceCommand, model, Messages.MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX);
+        assertCommandFailure(findAttendanceCommand, model, MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX);
     }
 
     @Test
     public void execute_invalidLessonIndex_failure() {
         Index moduleClassIndex = INDEX_FIRST_ITEM;
+
+        assert moduleClassIndex.getZeroBased() < model.getFilteredModuleClassList().size();
+
         ModuleClass moduleClass = model.getFilteredModuleClassList().get(moduleClassIndex.getZeroBased());
         Index outOfBoundIndex = Index.fromOneBased(moduleClass.getLessons().size() + 1);
         Index studentIndex = INDEX_FIRST_ITEM;
@@ -143,7 +169,7 @@ public class FindAttendanceCommandTest {
         FindAttendanceCommand findAttendanceCommand =
                 new FindAttendanceCommand(moduleClassIndex, outOfBoundIndex, studentIndex, VALID_WEEK_1);
 
-        assertCommandFailure(findAttendanceCommand, model, Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
+        assertCommandFailure(findAttendanceCommand, model, MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
     }
 
     @Test
@@ -155,7 +181,7 @@ public class FindAttendanceCommandTest {
         FindAttendanceCommand findAttendanceCommand = new FindAttendanceCommand(moduleClassIndex,
                 lessonIndex, outOfBoundIndex, VALID_WEEK_1);
 
-        assertCommandFailure(findAttendanceCommand, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        assertCommandFailure(findAttendanceCommand, model, MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
     }
 
     @Test
@@ -163,15 +189,24 @@ public class FindAttendanceCommandTest {
         Index moduleClassIndex = INDEX_FIRST_ITEM;
         Index lessonIndex = INDEX_FIRST_ITEM;
         Index studentIndex = INDEX_FIRST_ITEM;
-        Lesson lesson = model.getFilteredModuleClassList().get(moduleClassIndex.getZeroBased())
-                .getLessons().get(lessonIndex.getZeroBased());
+
+        assert moduleClassIndex.getZeroBased() < model.getFilteredModuleClassList().size();
+
+        ModuleClass moduleClass = model.getFilteredModuleClassList().get(moduleClassIndex.getZeroBased());
+
+        assert lessonIndex.getZeroBased() < moduleClass.getLessons().size();
+
+        Lesson lesson = moduleClass.getLessons().get(lessonIndex.getZeroBased());
+
+        assert moduleClass.hasLesson(lesson);
+
         Week invalidWeek =
                 new Week(Index.fromOneBased(lesson.getAttendanceRecordList().getAttendanceRecordList().size() + 1));
 
         FindAttendanceCommand findAttendanceCommand =
                 new FindAttendanceCommand(moduleClassIndex, lessonIndex, studentIndex, invalidWeek);
 
-        assertCommandFailure(findAttendanceCommand, model, Messages.MESSAGE_INVALID_WEEK);
+        assertCommandFailure(findAttendanceCommand, model, MESSAGE_INVALID_WEEK);
     }
 
     @Test
@@ -181,8 +216,14 @@ public class FindAttendanceCommandTest {
         Index studentIndex = INDEX_FIRST_ITEM;
         Week week = VALID_WEEK_5;
 
+        assert moduleClassIndex.getZeroBased() < model.getFilteredModuleClassList().size();
+        assert studentIndex.getZeroBased() < model.getFilteredStudentList().size();
+
         ModuleClass moduleClass = model.getFilteredModuleClassList().get(moduleClassIndex.getZeroBased());
         Student student = model.getFilteredStudentList().get(studentIndex.getZeroBased());
+
+        assert lessonIndex.getZeroBased() < moduleClass.getLessons().size();
+
         Lesson lesson = moduleClass.getLessons().get(lessonIndex.getZeroBased());
 
         assert moduleClass.hasLesson(lesson);
@@ -191,7 +232,7 @@ public class FindAttendanceCommandTest {
         FindAttendanceCommand findAttendanceCommand =
                 new FindAttendanceCommand(moduleClassIndex, lessonIndex, studentIndex, week);
 
-        assertCommandFailure(findAttendanceCommand, model, Messages.MESSAGE_MISSING_STUDENT_ATTENDANCE);
+        assertCommandFailure(findAttendanceCommand, model, MESSAGE_MISSING_STUDENT_ATTENDANCE);
     }
 
     @Test
@@ -207,7 +248,7 @@ public class FindAttendanceCommandTest {
         // same value -> returns true
         FindAttendanceCommand duplicateFindAttendanceCommand = new FindAttendanceCommand(INDEX_FIRST_ITEM,
                 INDEX_FIRST_ITEM, INDEX_FIRST_ITEM, week1);
-        assertTrue(findAttendanceCommand.equals(findAttendanceCommand));
+        assertTrue(findAttendanceCommand.equals(duplicateFindAttendanceCommand));
 
         // different type -> returns false
         assertFalse(findAttendanceCommand.equals(5));

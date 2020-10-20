@@ -1,6 +1,7 @@
 package tutorspet.logic.commands;
 
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static tutorspet.logic.commands.CommandTestUtil.showModuleClassAtIndex;
 import static tutorspet.logic.commands.ListModuleClassCommand.MESSAGE_SUCCESS;
 import static tutorspet.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 import static tutorspet.testutil.TypicalTutorsPet.getTypicalTutorsPet;
@@ -34,7 +35,7 @@ public class ListModuleClassCommandTest {
 
     @Test
     public void execute_moduleClassListIsFiltered_showsEverything() {
-        CommandTestUtil.showModuleClassAtIndex(model, INDEX_FIRST_ITEM);
+        showModuleClassAtIndex(model, INDEX_FIRST_ITEM);
         assertCommandSuccess(new ListModuleClassCommand(), model, MESSAGE_SUCCESS, expectedModel);
     }
 }

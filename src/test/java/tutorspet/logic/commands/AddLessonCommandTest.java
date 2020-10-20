@@ -3,6 +3,8 @@ package tutorspet.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX;
+import static tutorspet.logic.commands.AddLessonCommand.MESSAGE_EXISTING_LESSON;
+import static tutorspet.logic.commands.AddLessonCommand.MESSAGE_SUCCESS;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static tutorspet.testutil.Assert.assertThrows;
@@ -47,7 +49,7 @@ public class AddLessonCommandTest {
         Lesson lesson = new LessonBuilder().build();
         ModuleClass modifiedModuleClass = manualAddLessonToModuleClass(moduleClass, lesson);
 
-        String expectedMessage = String.format(AddLessonCommand.MESSAGE_SUCCESS, lesson);
+        String expectedMessage = String.format(MESSAGE_SUCCESS, lesson);
         Model expectedModel = new ModelManager(model.getTutorsPet(), new UserPrefs());
         expectedModel.setModuleClass(moduleClass, modifiedModuleClass);
         expectedModel.commit(expectedMessage);
@@ -69,7 +71,7 @@ public class AddLessonCommandTest {
 
         AddLessonCommand addLessonCommand = new AddLessonCommand(moduleClassIndex, lesson);
 
-        assertCommandFailure(addLessonCommand, model, AddLessonCommand.MESSAGE_EXISTING_LESSON);
+        assertCommandFailure(addLessonCommand, model, MESSAGE_EXISTING_LESSON);
     }
 
     @Test

@@ -62,7 +62,7 @@ public class EditStudentCommandTest {
                 .withTelegram(VALID_TELEGRAM_BOB)
                 .withTags(VALID_TAG_AVERAGE).build();
 
-        EditStudentCommand.EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder()
+        EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder()
                 .withName(VALID_NAME_BOB).withTelegram(VALID_TELEGRAM_BOB)
                 .withTags(VALID_TAG_AVERAGE).build();
         EditStudentCommand editStudentCommand = new EditStudentCommand(indexLastStudent, descriptor);
@@ -92,7 +92,7 @@ public class EditStudentCommandTest {
 
     @Test
     public void execute_filteredList_success() {
-        CommandTestUtil.showStudentAtIndex(model, INDEX_FIRST_ITEM);
+        showStudentAtIndex(model, INDEX_FIRST_ITEM);
 
         Student studentInFilteredList = model.getFilteredStudentList()
                 .get(INDEX_FIRST_ITEM.getZeroBased());
@@ -116,7 +116,7 @@ public class EditStudentCommandTest {
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder(firstStudent).build();
         EditStudentCommand editStudentCommand = new EditStudentCommand(INDEX_SECOND_ITEM, descriptor);
 
-        assertCommandFailure(editStudentCommand, model, EditStudentCommand.MESSAGE_DUPLICATE_STUDENT);
+        assertCommandFailure(editStudentCommand, model, MESSAGE_DUPLICATE_STUDENT);
     }
 
     @Test
@@ -165,8 +165,8 @@ public class EditStudentCommandTest {
                 new EditStudentCommand(INDEX_FIRST_ITEM, DESC_AMY);
 
         // same values -> returns true
-        EditStudentCommand.EditStudentDescriptor copyDescriptor =
-                new EditStudentCommand.EditStudentDescriptor(DESC_AMY);
+        EditStudentDescriptor copyDescriptor =
+                new EditStudentDescriptor(DESC_AMY);
         EditStudentCommand commandWithSameValues =
                 new EditStudentCommand(INDEX_FIRST_ITEM, copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));

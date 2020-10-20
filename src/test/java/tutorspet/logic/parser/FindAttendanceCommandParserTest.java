@@ -7,12 +7,14 @@ import static tutorspet.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_WEEK_VALUE_5;
 import static tutorspet.logic.commands.CommandTestUtil.WEEK_DESC_WEEK_VALUE_3;
 import static tutorspet.logic.commands.CommandTestUtil.WEEK_DESC_WEEK_VALUE_5;
+import static tutorspet.logic.commands.FindAttendanceCommand.MESSAGE_USAGE;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_CLASS_INDEX;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_LESSON_INDEX;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_STUDENT_INDEX;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_WEEK;
 import static tutorspet.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static tutorspet.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static tutorspet.model.attendance.Week.MESSAGE_CONSTRAINTS;
 import static tutorspet.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 
 import org.junit.jupiter.api.Test;
@@ -40,7 +42,7 @@ public class FindAttendanceCommandParserTest {
 
         // multiple class indexes - last class index accepted
         assertParseSuccess(parser, " "
-                + PREFIX_CLASS_INDEX + "1" + " "
+                + PREFIX_CLASS_INDEX + "2" + " "
                 + PREFIX_LESSON_INDEX + "1" + " "
                 + PREFIX_STUDENT_INDEX + "1" + " "
                 + PREFIX_CLASS_INDEX + "1"
@@ -51,7 +53,7 @@ public class FindAttendanceCommandParserTest {
         // multiple lesson indexes - last class index accepted
         assertParseSuccess(parser, " "
                 + PREFIX_CLASS_INDEX + "1" + " "
-                + PREFIX_LESSON_INDEX + "1" + " "
+                + PREFIX_LESSON_INDEX + "2" + " "
                 + PREFIX_STUDENT_INDEX + "1" + " "
                 + PREFIX_LESSON_INDEX + "1"
                 + WEEK_DESC_WEEK_VALUE_5,
@@ -62,7 +64,7 @@ public class FindAttendanceCommandParserTest {
         assertParseSuccess(parser, " "
                 + PREFIX_CLASS_INDEX + "1" + " "
                 + PREFIX_LESSON_INDEX + "1" + " "
-                + PREFIX_STUDENT_INDEX + "1" + " "
+                + PREFIX_STUDENT_INDEX + "2" + " "
                 + PREFIX_STUDENT_INDEX + "1"
                 + WEEK_DESC_WEEK_VALUE_5,
                 new FindAttendanceCommand(INDEX_FIRST_ITEM, INDEX_FIRST_ITEM, INDEX_FIRST_ITEM,
@@ -80,7 +82,7 @@ public class FindAttendanceCommandParserTest {
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindAttendanceCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE);
 
         // missing class prefix
         assertParseFailure(parser, " "
@@ -141,7 +143,7 @@ public class FindAttendanceCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindAttendanceCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE);
 
         // invalid class index
         assertParseFailure(parser, " "
@@ -169,13 +171,13 @@ public class FindAttendanceCommandParserTest {
                 + PREFIX_CLASS_INDEX + "1" + " "
                 + PREFIX_LESSON_INDEX + "1" + " "
                 + PREFIX_STUDENT_INDEX + "1"
-                + INVALID_WEEK_LOWER_BOUND_DESC, Week.MESSAGE_CONSTRAINTS);
+                + INVALID_WEEK_LOWER_BOUND_DESC, MESSAGE_CONSTRAINTS);
 
         // invalid week value - upper-bound
         assertParseFailure(parser, " "
                 + PREFIX_CLASS_INDEX + "1" + " "
                 + PREFIX_LESSON_INDEX + "1" + " "
                 + PREFIX_STUDENT_INDEX + "1"
-                + INVALID_WEEK_UPPER_BOUND_DESC, Week.MESSAGE_CONSTRAINTS);
+                + INVALID_WEEK_UPPER_BOUND_DESC, MESSAGE_CONSTRAINTS);
     }
 }

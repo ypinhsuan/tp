@@ -162,7 +162,7 @@ public class EditAttendanceCommandTest {
         Index studentIndex = INDEX_FIRST_ITEM;
         Week targetWeek = VALID_WEEK_1;
 
-        EditAttendanceCommand.EditAttendanceDescriptor editAttendanceDescriptor =
+        EditAttendanceDescriptor editAttendanceDescriptor =
                 new EditAttendanceDescriptorBuilder(DESC_ATTENDANCE_33).build();
         EditAttendanceCommand editAttendanceCommand = new EditAttendanceCommand(
                 moduleClassIndex, lessonIndex, studentIndex, targetWeek, editAttendanceDescriptor);
@@ -245,7 +245,7 @@ public class EditAttendanceCommandTest {
         Week invalidWeek =
                 new Week(Index.fromOneBased(lesson.getAttendanceRecordList().getAttendanceRecordList().size() + 1));
 
-        EditAttendanceCommand.EditAttendanceDescriptor editAttendanceDescriptor =
+        EditAttendanceDescriptor editAttendanceDescriptor =
                 new EditAttendanceDescriptorBuilder(DESC_ATTENDANCE_33).build();
         EditAttendanceCommand editAttendanceCommand = new EditAttendanceCommand(
                 moduleClassIndex, lessonIndex, studentIndex, invalidWeek, editAttendanceDescriptor);

@@ -63,7 +63,7 @@ public class AddAttendanceCommandTest {
         Index lessonIndex = INDEX_FIRST_ITEM;
         Index studentIndex = INDEX_FIRST_ITEM;
         Week targetWeek = VALID_WEEK_1;
-        Attendance targetAttendance = CommandTestUtil.VALID_ATTENDANCE;
+        Attendance targetAttendance = VALID_ATTENDANCE;
 
         assertThrows(NullPointerException.class, () ->
                 new AddAttendanceCommand(null, lessonIndex, studentIndex,
@@ -124,7 +124,7 @@ public class AddAttendanceCommandTest {
         Index lessonIndex = INDEX_FIRST_ITEM;
         Index studentIndex = INDEX_FIRST_ITEM;
         Week targetWeek = VALID_WEEK_1;
-        Attendance targetAttendance = CommandTestUtil.VALID_ATTENDANCE;
+        Attendance targetAttendance = VALID_ATTENDANCE;
 
         ModuleClass moduleClass = model.getFilteredModuleClassList().get(moduleClassIndex.getZeroBased());
         Student student = model.getFilteredStudentList().get(studentIndex.getZeroBased());
@@ -152,12 +152,12 @@ public class AddAttendanceCommandTest {
         Index lessonIndex = INDEX_FIRST_ITEM;
         Index studentIndex = INDEX_THIRD_ITEM;
         Week targetWeek = VALID_WEEK_1;
-        Attendance targetAttendance = CommandTestUtil.VALID_ATTENDANCE;
+        Attendance targetAttendance = VALID_ATTENDANCE;
 
         AddAttendanceCommand addAttendanceCommand = new AddAttendanceCommand(moduleClassIndex, lessonIndex,
                 studentIndex, targetWeek, targetAttendance);
 
-        CommandTestUtil.assertCommandFailure(addAttendanceCommand, model, MESSAGE_INVALID_STUDENT_IN_MODULE_CLASS);
+        assertCommandFailure(addAttendanceCommand, model, MESSAGE_INVALID_STUDENT_IN_MODULE_CLASS);
     }
 
     @Test
@@ -171,7 +171,7 @@ public class AddAttendanceCommandTest {
         AddAttendanceCommand addAttendanceCommand =
                 new AddAttendanceCommand(outOfBoundIndex, lessonIndex, studentIndex, targetWeek, targetAttendance);
 
-        CommandTestUtil.assertCommandFailure(addAttendanceCommand, model, MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX);
+        assertCommandFailure(addAttendanceCommand, model, MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX);
     }
 
     @Test

@@ -3,6 +3,7 @@ package tutorspet.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static tutorspet.logic.commands.CommandTestUtil.showStudentAtIndex;
 import static tutorspet.logic.commands.ListStudentCommand.MESSAGE_LIST_ALL_SUCCESS;
 import static tutorspet.testutil.TypicalTutorsPet.getTypicalTutorsPet;
 
@@ -35,7 +36,7 @@ public class ListStudentCommandTest {
 
     @Test
     public void execute_noIndexStudentListIsFiltered_showsEverything() {
-        CommandTestUtil.showStudentAtIndex(model, TypicalIndexes.INDEX_FIRST_ITEM);
+        showStudentAtIndex(model, TypicalIndexes.INDEX_FIRST_ITEM);
         assertCommandSuccess(new ListStudentCommand(), model, MESSAGE_LIST_ALL_SUCCESS, expectedModel);
     }
 

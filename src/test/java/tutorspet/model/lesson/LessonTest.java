@@ -26,7 +26,6 @@ import java.util.Map;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import tutorspet.logic.commands.CommandTestUtil;
 import tutorspet.model.attendance.Attendance;
 import tutorspet.model.attendance.AttendanceRecord;
 import tutorspet.model.attendance.AttendanceRecordList;
@@ -106,7 +105,7 @@ public class LessonTest {
 
         // different day -> returns false
         editedLesson = new LessonBuilder(LESSON_FRI_8_TO_10)
-                .withDay(CommandTestUtil.VALID_DAY_WED_LESSON_WED_2_TO_4).build();
+                .withDay(VALID_DAY_WED_LESSON_WED_2_TO_4).build();
         assertFalse(LESSON_FRI_8_TO_10.isSameLesson(editedLesson));
 
         // different venue -> returns false
@@ -131,7 +130,7 @@ public class LessonTest {
     public void toString_returnsCorrectFormat() {
         Lesson lesson = new Lesson(VALID_START_TIME, VALID_END_TIME, VALID_DAY_WED_LESSON_WED_2_TO_4,
                 VALID_NUMBER_OF_OCCURRENCES, VALID_VENUE, VALID_ATTENDANCE_RECORD_LIST);
-        String expectedString = (new StringBuilder()).append(CommandTestUtil.VALID_DAY_WED_LESSON_WED_2_TO_4)
+        String expectedString = (new StringBuilder()).append(VALID_DAY_WED_LESSON_WED_2_TO_4)
                 .append(" ")
                 .append(TIME_FORMATTER.format(VALID_START_TIME))
                 .append(" to ")
@@ -141,6 +140,18 @@ public class LessonTest {
                 .append(" Number of occurrences: ")
                 .append(VALID_NUMBER_OF_OCCURRENCES.value).toString();
         assertEquals(expectedString, lesson.toString());
+    }
+
+    @Test
+    public void printLesson_returnsCorrectFormat() {
+        Lesson lesson = new Lesson(VALID_START_TIME, VALID_END_TIME, VALID_DAY_WED_LESSON_WED_2_TO_4,
+                VALID_NUMBER_OF_OCCURRENCES, VALID_VENUE, VALID_ATTENDANCE_RECORD_LIST);
+        String expectedString = (new StringBuilder()).append(VALID_DAY_WED_LESSON_WED_2_TO_4)
+                .append(" ")
+                .append(TIME_FORMATTER.format(VALID_START_TIME))
+                .append(" to ")
+                .append(TIME_FORMATTER.format(VALID_END_TIME)).toString();
+        assertEquals(expectedString, lesson.printLesson());
     }
 
     @Test

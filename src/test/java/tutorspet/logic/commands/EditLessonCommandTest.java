@@ -2,6 +2,8 @@ package tutorspet.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static tutorspet.commons.core.Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX;
+import static tutorspet.commons.core.Messages.MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX;
 import static tutorspet.logic.commands.CommandTestUtil.DESC_LESSON_FRI_8_TO_10;
 import static tutorspet.logic.commands.CommandTestUtil.DESC_LESSON_WED_2_TO_4;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_DAY_FRI_LESSON_FRI_8_TO_10;
@@ -9,6 +11,8 @@ import static tutorspet.logic.commands.CommandTestUtil.VALID_VENUE_S17_0302_LESS
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static tutorspet.logic.commands.CommandTestUtil.showModuleClassAtIndex;
+import static tutorspet.logic.commands.EditLessonCommand.MESSAGE_DUPLICATE_LESSON;
+import static tutorspet.logic.commands.EditLessonCommand.MESSAGE_EDIT_LESSON_SUCCESS;
 import static tutorspet.testutil.Assert.assertThrows;
 import static tutorspet.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 import static tutorspet.testutil.TypicalIndexes.INDEX_SECOND_ITEM;
@@ -21,8 +25,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import tutorspet.commons.core.Messages;
 import tutorspet.commons.core.index.Index;
+import tutorspet.logic.commands.EditLessonCommand.EditLessonDescriptor;
 import tutorspet.model.Model;
 import tutorspet.model.ModelManager;
 import tutorspet.model.TutorsPet;
@@ -36,7 +40,7 @@ import tutorspet.testutil.LessonBuilder;
 public class EditLessonCommandTest {
 
     private static final Lesson EDITED_LESSON = new LessonBuilder().build();
-    private static final EditLessonCommand.EditLessonDescriptor EDITED_LESSON_DESCRIPTOR =
+    private static final EditLessonDescriptor EDITED_LESSON_DESCRIPTOR =
             new EditLessonDescriptorBuilder(EDITED_LESSON).build();
 
     private Model model = new ModelManager(getTypicalTutorsPet(), new UserPrefs());
@@ -55,7 +59,7 @@ public class EditLessonCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        EditLessonCommand.EditLessonDescriptor editLessonDescriptor =
+        EditLessonDescriptor editLessonDescriptor =
                 new EditLessonDescriptorBuilder(DESC_LESSON_FRI_8_TO_10).build();
         EditLessonCommand editLessonCommand = new EditLessonCommand(
                 INDEX_FIRST_ITEM, INDEX_FIRST_ITEM, editLessonDescriptor);
@@ -69,7 +73,7 @@ public class EditLessonCommandTest {
         ModuleClass updatedModuleClass = new ModuleClass(
                 moduleClass.getName(), moduleClass.getStudentUuids(), editedLessonList);
 
-        String expectedMessage = String.format(EditLessonCommand.MESSAGE_EDIT_LESSON_SUCCESS, editedLesson);
+        String expectedMessage = String.format(MESSAGE_EDIT_LESSON_SUCCESS, editedLesson);
 
         Model expectedModel = new ModelManager(new TutorsPet(model.getTutorsPet()), new UserPrefs());
         expectedModel.setModuleClass(moduleClass, updatedModuleClass);
@@ -80,7 +84,7 @@ public class EditLessonCommandTest {
 
     @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
-        EditLessonCommand.EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder()
+        EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder()
                 .withDay(VALID_DAY_FRI_LESSON_FRI_8_TO_10.toString())
                 .withVenue(VALID_VENUE_S17_0302_LESSON_FRI_8_TO_10).build();
         EditLessonCommand editLessonCommand = new EditLessonCommand(INDEX_FIRST_ITEM, INDEX_FIRST_ITEM, descriptor);
@@ -99,7 +103,7 @@ public class EditLessonCommandTest {
         ModuleClass updatedModuleClass = new ModuleClass(
                 firstModuleClass.getName(), firstModuleClass.getStudentUuids(), editedLessonList);
 
-        String expectedMessage = String.format(EditLessonCommand.MESSAGE_EDIT_LESSON_SUCCESS, editedLesson);
+        String expectedMessage = String.format(MESSAGE_EDIT_LESSON_SUCCESS, editedLesson);
 
         Model expectedModel = new ModelManager(new TutorsPet(model.getTutorsPet()), new UserPrefs());
         expectedModel.setModuleClass(firstModuleClass, updatedModuleClass);
@@ -111,12 +115,12 @@ public class EditLessonCommandTest {
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
         EditLessonCommand editLessonCommand = new EditLessonCommand(
-                INDEX_FIRST_ITEM, INDEX_FIRST_ITEM, new EditLessonCommand.EditLessonDescriptor());
-        System.out.println(new EditLessonCommand.EditLessonDescriptor().getDay());
+                INDEX_FIRST_ITEM, INDEX_FIRST_ITEM, new EditLessonDescriptor());
+        System.out.println(new EditLessonDescriptor().getDay());
         Lesson editedLesson = model.getFilteredModuleClassList().get(INDEX_FIRST_ITEM.getZeroBased())
                 .getLessons().get(INDEX_FIRST_ITEM.getZeroBased());
 
-        String expectedMessage = String.format(EditLessonCommand.MESSAGE_EDIT_LESSON_SUCCESS, editedLesson);
+        String expectedMessage = String.format(MESSAGE_EDIT_LESSON_SUCCESS, editedLesson);
 
         Model expectedModel = new ModelManager(new TutorsPet(model.getTutorsPet()), new UserPrefs());
         expectedModel.commit(expectedMessage);
@@ -141,7 +145,7 @@ public class EditLessonCommandTest {
                 .withVenue(VALID_VENUE_S17_0302_LESSON_FRI_8_TO_10)
                 .withAttendanceRecordList(attendanceRecordList).build();
 
-        String expectedMessage = String.format(EditLessonCommand.MESSAGE_EDIT_LESSON_SUCCESS, editedLesson);
+        String expectedMessage = String.format(MESSAGE_EDIT_LESSON_SUCCESS, editedLesson);
 
         List<Lesson> editedLessonList = Arrays.asList(
                 moduleClassInFilteredList.getLessons().get(INDEX_FIRST_ITEM.getZeroBased()),
@@ -161,11 +165,11 @@ public class EditLessonCommandTest {
         ModuleClass secondModuleClass = model.getFilteredModuleClassList().get(INDEX_SECOND_ITEM.getZeroBased());
         Lesson secondClassFirstLesson = secondModuleClass.getLessons().get(INDEX_FIRST_ITEM.getZeroBased());
 
-        EditLessonCommand.EditLessonDescriptor descriptor =
+        EditLessonDescriptor descriptor =
                 new EditLessonDescriptorBuilder(secondClassFirstLesson).build();
         EditLessonCommand editLessonCommand = new EditLessonCommand(INDEX_SECOND_ITEM, INDEX_SECOND_ITEM, descriptor);
 
-        assertCommandFailure(editLessonCommand, model, EditLessonCommand.MESSAGE_DUPLICATE_LESSON);
+        assertCommandFailure(editLessonCommand, model, MESSAGE_DUPLICATE_LESSON);
     }
 
     @Test
@@ -174,7 +178,7 @@ public class EditLessonCommandTest {
         EditLessonCommand editLessonCommand = new EditLessonCommand(outOfBoundIndex, INDEX_FIRST_ITEM,
                 new EditLessonDescriptorBuilder().withVenue(VALID_VENUE_S17_0302_LESSON_FRI_8_TO_10).build());
 
-        assertCommandFailure(editLessonCommand, model, Messages.MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX);
+        assertCommandFailure(editLessonCommand, model, MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX);
     }
 
     /**
@@ -191,7 +195,7 @@ public class EditLessonCommandTest {
         EditLessonCommand editLessonCommand = new EditLessonCommand(outOfBoundIndex, INDEX_FIRST_ITEM,
                 new EditLessonDescriptorBuilder().withVenue(VALID_VENUE_S17_0302_LESSON_FRI_8_TO_10).build());
 
-        assertCommandFailure(editLessonCommand, model, Messages.MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX);
+        assertCommandFailure(editLessonCommand, model, MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX);
     }
 
     @Test
@@ -201,7 +205,7 @@ public class EditLessonCommandTest {
         EditLessonCommand editLessonCommand = new EditLessonCommand(moduleClassIndex, outOfBoundIndex,
                 new EditLessonDescriptorBuilder().withVenue(VALID_VENUE_S17_0302_LESSON_FRI_8_TO_10).build());
 
-        assertCommandFailure(editLessonCommand, model, Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
+        assertCommandFailure(editLessonCommand, model, MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
     }
 
     @Test
@@ -210,8 +214,8 @@ public class EditLessonCommandTest {
                 INDEX_FIRST_ITEM, INDEX_FIRST_ITEM, DESC_LESSON_FRI_8_TO_10);
 
         // same values -> returns true
-        EditLessonCommand.EditLessonDescriptor copyDescriptor =
-                new EditLessonCommand.EditLessonDescriptor(DESC_LESSON_FRI_8_TO_10);
+        EditLessonDescriptor copyDescriptor =
+                new EditLessonDescriptor(DESC_LESSON_FRI_8_TO_10);
         EditLessonCommand commandWithSameValues = new EditLessonCommand(
                 INDEX_FIRST_ITEM, INDEX_FIRST_ITEM, copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));

@@ -1,6 +1,7 @@
 package tutorspet.logic.parser;
 
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static tutorspet.logic.commands.LinkCommand.MESSAGE_USAGE;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_CLASS_INDEX;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_STUDENT_INDEX;
 import static tutorspet.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -41,14 +42,14 @@ public class LinkCommandParserTest {
     public void parse_missingStudentIndex_throwsParseException() {
         assertParseFailure(parser, " "
                 + PREFIX_CLASS_INDEX + "1",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, LinkCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
     }
 
     @Test
     public void parse_missingClassIndex_throwsParseException() {
         assertParseFailure(parser, " "
                 + PREFIX_STUDENT_INDEX + "1",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, LinkCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
     }
 
     @Test
@@ -56,7 +57,7 @@ public class LinkCommandParserTest {
         assertParseFailure(parser, " "
                 + PREFIX_STUDENT_INDEX + "a" + " "
                 + PREFIX_CLASS_INDEX + "2",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, LinkCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
     }
 
     @Test
@@ -64,7 +65,7 @@ public class LinkCommandParserTest {
         assertParseFailure(parser, " "
                 + PREFIX_STUDENT_INDEX + "1" + " "
                 + PREFIX_CLASS_INDEX + "a",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, LinkCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
     }
 
     @Test
@@ -72,7 +73,7 @@ public class LinkCommandParserTest {
         assertParseFailure(parser, " "
                 + PREFIX_STUDENT_INDEX + " "
                 + PREFIX_CLASS_INDEX + "1",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, LinkCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
     }
 
     @Test
@@ -80,12 +81,12 @@ public class LinkCommandParserTest {
         assertParseFailure(parser, " "
                 + PREFIX_STUDENT_INDEX + "1" + " "
                 + PREFIX_CLASS_INDEX,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, LinkCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
     }
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
         assertParseFailure(parser, " a",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, LinkCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
     }
 }

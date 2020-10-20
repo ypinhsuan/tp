@@ -18,6 +18,8 @@ import static tutorspet.logic.parser.CliSyntax.PREFIX_LESSON_INDEX;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_PARTICIPATION_SCORE;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_STUDENT_INDEX;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_WEEK;
+import static tutorspet.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static tutorspet.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static tutorspet.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 
 import org.junit.jupiter.api.Test;
@@ -37,7 +39,7 @@ public class AddAttendanceCommandParserTest {
         Week expectedWeek = new Week(Index.fromOneBased(VALID_WEEK_VALUE_5));
 
         // whitespace only preamble
-        CommandParserTestUtil.assertParseSuccess(parser, PREAMBLE_WHITESPACE + " "
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + " "
                 + PREFIX_CLASS_INDEX + "1" + " "
                 + PREFIX_LESSON_INDEX + "1" + " "
                 + PREFIX_STUDENT_INDEX + "1" + " "
@@ -47,7 +49,7 @@ public class AddAttendanceCommandParserTest {
                         INDEX_FIRST_ITEM, expectedWeek, expectedAttendance));
 
         // multiple class indexes - last class index accepted
-        CommandParserTestUtil.assertParseSuccess(parser, " "
+        assertParseSuccess(parser, " "
                 + PREFIX_CLASS_INDEX + "2" + " "
                 + PREFIX_LESSON_INDEX + "1" + " "
                 + PREFIX_STUDENT_INDEX + "1" + " "
@@ -58,7 +60,7 @@ public class AddAttendanceCommandParserTest {
                         INDEX_FIRST_ITEM, expectedWeek, expectedAttendance));
 
         // multiple lesson indexes - last lesson index accepted
-        CommandParserTestUtil.assertParseSuccess(parser, " "
+        assertParseSuccess(parser, " "
                 + PREFIX_CLASS_INDEX + "1" + " "
                 + PREFIX_LESSON_INDEX + "2" + " "
                 + PREFIX_STUDENT_INDEX + "1" + " "
@@ -69,7 +71,7 @@ public class AddAttendanceCommandParserTest {
                         INDEX_FIRST_ITEM, expectedWeek, expectedAttendance));
 
         // multiple student indexes - last student index accepted
-        CommandParserTestUtil.assertParseSuccess(parser, " "
+        assertParseSuccess(parser, " "
                 + PREFIX_CLASS_INDEX + "1" + " "
                 + PREFIX_LESSON_INDEX + "1" + " "
                 + PREFIX_STUDENT_INDEX + "2" + " "
@@ -80,7 +82,7 @@ public class AddAttendanceCommandParserTest {
                         INDEX_FIRST_ITEM, expectedWeek, expectedAttendance));
 
         // multiple week values - last week value accepted
-        CommandParserTestUtil.assertParseSuccess(parser, " "
+        assertParseSuccess(parser, " "
                 + PREFIX_CLASS_INDEX + "1" + " "
                 + PREFIX_LESSON_INDEX + "1" + " "
                 + PREFIX_STUDENT_INDEX + "1"
@@ -91,7 +93,7 @@ public class AddAttendanceCommandParserTest {
                         INDEX_FIRST_ITEM, expectedWeek, expectedAttendance));
 
         // multiple participation scores - last week value accepted
-        CommandParserTestUtil.assertParseSuccess(parser, " "
+        assertParseSuccess(parser, " "
                 + PREFIX_CLASS_INDEX + "1" + " "
                 + PREFIX_LESSON_INDEX + "1" + " "
                 + PREFIX_STUDENT_INDEX + "1"
@@ -108,7 +110,7 @@ public class AddAttendanceCommandParserTest {
                 MESSAGE_USAGE);
 
         // missing class prefix
-        CommandParserTestUtil.assertParseFailure(parser, " "
+        assertParseFailure(parser, " "
                 + "1" + " "
                 + PREFIX_LESSON_INDEX + "1" + " "
                 + PREFIX_STUDENT_INDEX + "1"
@@ -116,7 +118,7 @@ public class AddAttendanceCommandParserTest {
                 + PARTICIPATION_SCORE_DESC_80, expectedMessage);
 
         // missing lesson prefix
-        CommandParserTestUtil.assertParseFailure(parser, " "
+        assertParseFailure(parser, " "
                 + PREFIX_CLASS_INDEX + "1" + " "
                 + "1" + " "
                 + PREFIX_STUDENT_INDEX + "1"
@@ -124,7 +126,7 @@ public class AddAttendanceCommandParserTest {
                 + PARTICIPATION_SCORE_DESC_80, expectedMessage);
 
         // missing student prefix
-        CommandParserTestUtil.assertParseFailure(parser, " "
+        assertParseFailure(parser, " "
                 + PREFIX_CLASS_INDEX + "1" + " "
                 + PREFIX_LESSON_INDEX + "1" + " "
                 + "1"
@@ -132,7 +134,7 @@ public class AddAttendanceCommandParserTest {
                 + PARTICIPATION_SCORE_DESC_80, expectedMessage);
 
         // missing week prefix
-        CommandParserTestUtil.assertParseFailure(parser, " "
+        assertParseFailure(parser, " "
                 + PREFIX_CLASS_INDEX + "1" + " "
                 + PREFIX_LESSON_INDEX + "1" + " "
                 + PREFIX_STUDENT_INDEX + "1"
@@ -140,7 +142,7 @@ public class AddAttendanceCommandParserTest {
                 + PARTICIPATION_SCORE_DESC_80, expectedMessage);
 
         // missing participation score prefix
-        CommandParserTestUtil.assertParseFailure(parser, " "
+        assertParseFailure(parser, " "
                 + PREFIX_CLASS_INDEX + "1" + " "
                 + PREFIX_LESSON_INDEX + "1" + " "
                 + PREFIX_STUDENT_INDEX + "1"
@@ -148,7 +150,7 @@ public class AddAttendanceCommandParserTest {
                 + VALID_PARTICIPATION_SCORE_80, expectedMessage);
 
         // missing class index
-        CommandParserTestUtil.assertParseFailure(parser, " "
+        assertParseFailure(parser, " "
                 + PREFIX_CLASS_INDEX + " "
                 + PREFIX_LESSON_INDEX + "1" + " "
                 + PREFIX_STUDENT_INDEX + "1"
@@ -156,7 +158,7 @@ public class AddAttendanceCommandParserTest {
                 + PARTICIPATION_SCORE_DESC_80, expectedMessage);
 
         // missing lesson index
-        CommandParserTestUtil.assertParseFailure(parser, " "
+        assertParseFailure(parser, " "
                 + PREFIX_CLASS_INDEX + "1" + " "
                 + PREFIX_LESSON_INDEX + " "
                 + PREFIX_STUDENT_INDEX + "1"
@@ -164,7 +166,7 @@ public class AddAttendanceCommandParserTest {
                 + PARTICIPATION_SCORE_DESC_80, expectedMessage);
 
         // missing student index
-        CommandParserTestUtil.assertParseFailure(parser, " "
+        assertParseFailure(parser, " "
                 + PREFIX_CLASS_INDEX + "1" + " "
                 + PREFIX_LESSON_INDEX + "1" + " "
                 + PREFIX_STUDENT_INDEX
@@ -172,7 +174,7 @@ public class AddAttendanceCommandParserTest {
                 + PARTICIPATION_SCORE_DESC_80, expectedMessage);
 
         // missing week value
-        CommandParserTestUtil.assertParseFailure(parser, " "
+        assertParseFailure(parser, " "
                 + PREFIX_CLASS_INDEX + "1" + " "
                 + PREFIX_LESSON_INDEX + "1" + " "
                 + PREFIX_STUDENT_INDEX + "1"
@@ -180,7 +182,7 @@ public class AddAttendanceCommandParserTest {
                 + PARTICIPATION_SCORE_DESC_80, expectedMessage);
 
         // missing participation score
-        CommandParserTestUtil.assertParseFailure(parser, " "
+        assertParseFailure(parser, " "
                 + PREFIX_CLASS_INDEX + "1" + " "
                 + PREFIX_LESSON_INDEX + "1" + " "
                 + PREFIX_STUDENT_INDEX + "1"
@@ -193,7 +195,7 @@ public class AddAttendanceCommandParserTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE);
 
         // invalid class index
-        CommandParserTestUtil.assertParseFailure(parser, " "
+        assertParseFailure(parser, " "
                 + PREFIX_CLASS_INDEX + "&" + " "
                 + PREFIX_LESSON_INDEX + "1" + " "
                 + PREFIX_STUDENT_INDEX + "1"
@@ -201,7 +203,7 @@ public class AddAttendanceCommandParserTest {
                 + PARTICIPATION_SCORE_DESC_80, expectedMessage);
 
         // invalid lesson index
-        CommandParserTestUtil.assertParseFailure(parser, " "
+        assertParseFailure(parser, " "
                 + PREFIX_CLASS_INDEX + "1" + " "
                 + PREFIX_LESSON_INDEX + "&" + " "
                 + PREFIX_STUDENT_INDEX + "1"
@@ -209,7 +211,7 @@ public class AddAttendanceCommandParserTest {
                 + PARTICIPATION_SCORE_DESC_80, expectedMessage);
 
         // invalid student index
-        CommandParserTestUtil.assertParseFailure(parser, " "
+        assertParseFailure(parser, " "
                 + PREFIX_CLASS_INDEX + "1" + " "
                 + PREFIX_LESSON_INDEX + "1" + " "
                 + PREFIX_STUDENT_INDEX + "&"
@@ -217,7 +219,7 @@ public class AddAttendanceCommandParserTest {
                 + PARTICIPATION_SCORE_DESC_80, expectedMessage);
 
         // invalid week value - lower-bound
-        CommandParserTestUtil.assertParseFailure(parser, " "
+        assertParseFailure(parser, " "
                 + PREFIX_CLASS_INDEX + "1" + " "
                 + PREFIX_LESSON_INDEX + "1" + " "
                 + PREFIX_STUDENT_INDEX + "1"
@@ -225,14 +227,14 @@ public class AddAttendanceCommandParserTest {
                 + PARTICIPATION_SCORE_DESC_80, Week.MESSAGE_CONSTRAINTS);
 
         // invalid week value - upper-bound
-        CommandParserTestUtil.assertParseFailure(parser, " "
+        assertParseFailure(parser, " "
                 + PREFIX_CLASS_INDEX + "1" + " "
                 + PREFIX_LESSON_INDEX + "1" + " "
                 + PREFIX_STUDENT_INDEX + "1"
                 + INVALID_WEEK_UPPER_BOUND_DESC + PARTICIPATION_SCORE_DESC_80, Week.MESSAGE_CONSTRAINTS);
 
         // invalid participation score - lower-bound
-        CommandParserTestUtil.assertParseFailure(parser, " "
+        assertParseFailure(parser, " "
                 + PREFIX_CLASS_INDEX + "1" + " "
                 + PREFIX_LESSON_INDEX + "1" + " "
                 + PREFIX_STUDENT_INDEX + "1"
@@ -240,7 +242,7 @@ public class AddAttendanceCommandParserTest {
                 + INVALID_PARTICIPATION_LOWER_BOUND_SCORE_DESC, Attendance.MESSAGE_CONSTRAINTS);
 
         // invalid participation score - upper-bound
-        CommandParserTestUtil.assertParseFailure(parser, " "
+        assertParseFailure(parser, " "
                 + PREFIX_CLASS_INDEX + "1" + " "
                 + PREFIX_LESSON_INDEX + "1" + " "
                 + PREFIX_STUDENT_INDEX + "1"
