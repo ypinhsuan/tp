@@ -36,9 +36,9 @@ public class EditLessonCommandParserTest {
 
     private static final Index VALID_MODULE_CLASS_INDEX_ONE = INDEX_FIRST_ITEM;
     private static final Index VALID_LESSON_INDEX_TWO = INDEX_SECOND_ITEM;
-    private static final String INPUT_PREAMBLE =
-            " " + PREFIX_CLASS_INDEX + VALID_MODULE_CLASS_INDEX_ONE.getOneBased()
-            + " " + PREFIX_LESSON_INDEX + VALID_LESSON_INDEX_TWO.getOneBased();
+    private static final String INPUT_PREAMBLE = " "
+            + PREFIX_CLASS_INDEX + VALID_MODULE_CLASS_INDEX_ONE.getOneBased() + " "
+            + PREFIX_LESSON_INDEX + VALID_LESSON_INDEX_TWO.getOneBased();
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditLessonCommand.MESSAGE_USAGE);
 

@@ -79,8 +79,8 @@ public class DeleteAttendanceCommandParserTest {
         assertParseFailure(parser, " "
                 + PREFIX_LESSON_INDEX + "1" + " "
                 + PREFIX_STUDENT_INDEX + "1" + " "
-                + PREFIX_WEEK + "1", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                MESSAGE_USAGE));
+                + PREFIX_WEEK + "1",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
     }
 
     @Test
@@ -88,8 +88,8 @@ public class DeleteAttendanceCommandParserTest {
         assertParseFailure(parser, " "
                 + PREFIX_CLASS_INDEX + "1" + " "
                 + PREFIX_STUDENT_INDEX + "1" + " "
-                + PREFIX_WEEK + "1", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                MESSAGE_USAGE));
+                + PREFIX_WEEK + "1",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
     }
 
     @Test
@@ -97,8 +97,8 @@ public class DeleteAttendanceCommandParserTest {
         assertParseFailure(parser, " "
                 + PREFIX_CLASS_INDEX + "1" + " "
                 + PREFIX_LESSON_INDEX + "1" + " "
-                + PREFIX_WEEK + "1", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                MESSAGE_USAGE));
+                + PREFIX_WEEK + "1",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
     }
 
     @Test
@@ -106,8 +106,8 @@ public class DeleteAttendanceCommandParserTest {
         assertParseFailure(parser, " "
                 + PREFIX_CLASS_INDEX + "1" + " "
                 + PREFIX_LESSON_INDEX + "1" + " "
-                + PREFIX_STUDENT_INDEX + "1", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                MESSAGE_USAGE));
+                + PREFIX_STUDENT_INDEX + "1",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
     }
 
     @Test
@@ -116,8 +116,8 @@ public class DeleteAttendanceCommandParserTest {
                 + PREFIX_CLASS_INDEX + "a" + " "
                 + PREFIX_LESSON_INDEX + "1" + " "
                 + PREFIX_STUDENT_INDEX + "1" + " "
-                + PREFIX_WEEK + "1", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                MESSAGE_USAGE));
+                + PREFIX_WEEK + "1",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
     }
 
     @Test
@@ -126,8 +126,8 @@ public class DeleteAttendanceCommandParserTest {
                 + PREFIX_CLASS_INDEX + "1" + " "
                 + PREFIX_LESSON_INDEX + "a" + " "
                 + PREFIX_STUDENT_INDEX + "1" + " "
-                + PREFIX_WEEK + "1", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                MESSAGE_USAGE));
+                + PREFIX_WEEK + "1",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
     }
 
     @Test
@@ -136,8 +136,8 @@ public class DeleteAttendanceCommandParserTest {
                 + PREFIX_CLASS_INDEX + "1" + " "
                 + PREFIX_LESSON_INDEX + "1" + " "
                 + PREFIX_STUDENT_INDEX + "a" + " "
-                + PREFIX_WEEK + "1", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                MESSAGE_USAGE));
+                + PREFIX_WEEK + "1",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
     }
 
     @Test
@@ -146,7 +146,8 @@ public class DeleteAttendanceCommandParserTest {
                 + PREFIX_CLASS_INDEX + "1" + " "
                 + PREFIX_LESSON_INDEX + "1" + " "
                 + PREFIX_STUDENT_INDEX + "1" + " "
-                + PREFIX_WEEK + "a", String.format(MESSAGE_CONSTRAINTS));
+                + PREFIX_WEEK + "a",
+                String.format(MESSAGE_CONSTRAINTS));
     }
 
     @Test
@@ -155,8 +156,8 @@ public class DeleteAttendanceCommandParserTest {
                 + PREFIX_CLASS_INDEX + " "
                 + PREFIX_LESSON_INDEX + "1" + " "
                 + PREFIX_STUDENT_INDEX + "1" + " "
-                + PREFIX_WEEK + "1", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                MESSAGE_USAGE));
+                + PREFIX_WEEK + "1",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
     }
 
     @Test
@@ -165,8 +166,8 @@ public class DeleteAttendanceCommandParserTest {
                 + PREFIX_CLASS_INDEX + "1" + " "
                 + PREFIX_LESSON_INDEX + " "
                 + PREFIX_STUDENT_INDEX + "1" + " "
-                + PREFIX_WEEK + "1", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                MESSAGE_USAGE));
+                + PREFIX_WEEK + "1",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
     }
 
     @Test
@@ -175,8 +176,8 @@ public class DeleteAttendanceCommandParserTest {
                 + PREFIX_CLASS_INDEX + "1" + " "
                 + PREFIX_LESSON_INDEX + "1" + " "
                 + PREFIX_STUDENT_INDEX + " "
-                + PREFIX_WEEK + "1", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                MESSAGE_USAGE));
+                + PREFIX_WEEK + "1",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
     }
 
     @Test
@@ -185,12 +186,13 @@ public class DeleteAttendanceCommandParserTest {
                 + PREFIX_CLASS_INDEX + "1" + " "
                 + PREFIX_LESSON_INDEX + "1" + " "
                 + PREFIX_STUDENT_INDEX + "1" + " "
-                + PREFIX_WEEK, String.format(MESSAGE_CONSTRAINTS));
+                + PREFIX_WEEK,
+                String.format(MESSAGE_CONSTRAINTS));
     }
 
     @Test
     public void parse_invalidArgs_throwParseException() {
-        assertParseFailure(parser, " a", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                MESSAGE_USAGE));
+        assertParseFailure(parser, " a",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
     }
 }
