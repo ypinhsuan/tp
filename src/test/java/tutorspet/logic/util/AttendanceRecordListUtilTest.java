@@ -76,6 +76,49 @@ public class AttendanceRecordListUtilTest {
     }
 
     @Test
+    public void addAttendance_nullAttendanceRecordList_throwsNullPointerException() {
+        Student student = new StudentBuilder().build();
+        Attendance attendance = new Attendance(VALID_PARTICIPATION_SCORE_33);
+        Week week = VALID_WEEK_1;
+
+        assertThrows(NullPointerException.class, () ->
+                addAttendanceToAttendanceRecordList(null, student, week, attendance));
+    }
+
+    @Test
+    public void addAttendance_nullStudent_throwsNullPointerException() {
+        AttendanceRecord record = new AttendanceRecordBuilder().build();
+        Attendance attendance = new Attendance(VALID_PARTICIPATION_SCORE_33);
+        Week week = VALID_WEEK_1;
+        AttendanceRecordList recordList = new AttendanceRecordList(Collections.singletonList(record));
+
+        assertThrows(NullPointerException.class, () ->
+                addAttendanceToAttendanceRecordList(recordList, null, week, attendance));
+    }
+
+    @Test
+    public void addAttendance_nullWeek_throwsNullPointerException() {
+        AttendanceRecord record = new AttendanceRecordBuilder().build();
+        Attendance attendance = new Attendance(VALID_PARTICIPATION_SCORE_33);
+        Week week = VALID_WEEK_1;
+        AttendanceRecordList recordList = new AttendanceRecordList(Collections.singletonList(record));
+
+        assertThrows(NullPointerException.class, () ->
+                addAttendanceToAttendanceRecordList(recordList, null, week, attendance));
+    }
+
+    @Test
+    public void addAttendance_nullAttendance_throwsNullPointerException() {
+        AttendanceRecord record = new AttendanceRecordBuilder().build();
+        Student student = new StudentBuilder().build();
+        Week week = VALID_WEEK_1;
+        AttendanceRecordList recordList = new AttendanceRecordList(Collections.singletonList(record));
+
+        assertThrows(NullPointerException.class, () ->
+                addAttendanceToAttendanceRecordList(recordList, student, week, null));
+    }
+
+    @Test
     public void editAttendance_validParameters_success() throws CommandException {
         Attendance attendance = new Attendance(VALID_PARTICIPATION_SCORE_33);
         Student student = new StudentBuilder().build();
@@ -114,6 +157,53 @@ public class AttendanceRecordListUtilTest {
 
         assertThrows(CommandException.class, MESSAGE_MISSING_STUDENT_ATTENDANCE, () ->
                 editAttendanceInAttendanceRecordList(recordList, student, week, attendanceToSet));
+    }
+
+    @Test
+    public void editAttendance_nullAttendanceRecordList_throwsNullPointerException() {
+        Student student = new StudentBuilder().build();
+        Week week = VALID_WEEK_1;
+        Attendance attendanceToSet = new Attendance(VALID_PARTICIPATION_SCORE_51);
+
+        assertThrows(NullPointerException.class, () ->
+                editAttendanceInAttendanceRecordList(null, student, week, attendanceToSet));
+    }
+
+    @Test
+    public void editAttendance_nullStudent_throwsNullPointerException() {
+        Attendance attendance = new Attendance(VALID_PARTICIPATION_SCORE_33);
+        Student student = new StudentBuilder().build();
+        AttendanceRecord record = new AttendanceRecordBuilder().withEntry(student.getUuid(), attendance).build();
+        Week week = VALID_WEEK_1;
+        AttendanceRecordList recordList = new AttendanceRecordList(Collections.singletonList(record));
+        Attendance attendanceToSet = new Attendance(VALID_PARTICIPATION_SCORE_51);
+
+        assertThrows(NullPointerException.class, () ->
+                editAttendanceInAttendanceRecordList(recordList, null, week, attendanceToSet));
+    }
+
+    @Test
+    public void editAttendance_nullWeek_throwsNullPointerException() {
+        Attendance attendance = new Attendance(VALID_PARTICIPATION_SCORE_33);
+        Student student = new StudentBuilder().build();
+        AttendanceRecord record = new AttendanceRecordBuilder().withEntry(student.getUuid(), attendance).build();
+        AttendanceRecordList recordList = new AttendanceRecordList(Collections.singletonList(record));
+        Attendance attendanceToSet = new Attendance(VALID_PARTICIPATION_SCORE_51);
+
+        assertThrows(NullPointerException.class, () ->
+                editAttendanceInAttendanceRecordList(recordList, student, null, attendanceToSet));
+    }
+
+    @Test
+    public void editAttendance_nullAttendance_throwsNullPointerException() {
+        Attendance attendance = new Attendance(VALID_PARTICIPATION_SCORE_33);
+        Student student = new StudentBuilder().build();
+        AttendanceRecord record = new AttendanceRecordBuilder().withEntry(student.getUuid(), attendance).build();
+        Week week = VALID_WEEK_1;
+        AttendanceRecordList recordList = new AttendanceRecordList(Collections.singletonList(record));
+
+        assertThrows(NullPointerException.class, () ->
+                editAttendanceInAttendanceRecordList(recordList, student, week, null));
     }
 
     @Test
@@ -156,6 +246,38 @@ public class AttendanceRecordListUtilTest {
     }
 
     @Test
+    public void removeAttendance_nullAttendanceRecordList_throwsNullPointerException() {
+        Student student = new StudentBuilder().build();
+        Week week = VALID_WEEK_1;
+
+        assertThrows(NullPointerException.class, () ->
+                removeAttendanceFromAttendanceRecordList(null, student, week));
+    }
+
+    @Test
+    public void removeAttendance_nullStudent_throwsNullPointerException() {
+        Attendance attendance = new Attendance(VALID_PARTICIPATION_SCORE_33);
+        Student student = new StudentBuilder().build();
+        AttendanceRecord record = new AttendanceRecordBuilder().withEntry(student.getUuid(), attendance).build();
+        Week week = VALID_WEEK_1;
+        AttendanceRecordList recordList = new AttendanceRecordList(Collections.singletonList(record));
+
+        assertThrows(NullPointerException.class, () ->
+                removeAttendanceFromAttendanceRecordList(recordList, null, week));
+    }
+
+    @Test
+    public void removeAttendance_nullWeek_throwsNullPointerException() {
+        Attendance attendance = new Attendance(VALID_PARTICIPATION_SCORE_33);
+        Student student = new StudentBuilder().build();
+        AttendanceRecord record = new AttendanceRecordBuilder().withEntry(student.getUuid(), attendance).build();
+        AttendanceRecordList recordList = new AttendanceRecordList(Collections.singletonList(record));
+
+        assertThrows(NullPointerException.class, () ->
+                removeAttendanceFromAttendanceRecordList(recordList, student, null));
+    }
+
+    @Test
     public void getAttendanceFromLesson_hasAttendance_returnsAttendance() throws Exception {
         Attendance attendance = new Attendance(VALID_PARTICIPATION_SCORE_33);
         Student student = new StudentBuilder().build();
@@ -190,7 +312,38 @@ public class AttendanceRecordListUtilTest {
     }
 
     @Test
-    public void getAttendancesFromLesson_returnsAttendances() {
+    public void getAttendanceFromLesson_nullAttendanceRecordList_throwsNullPointerException() {
+        Student student = new StudentBuilder().build();
+        Week week = VALID_WEEK_1;
+        assertThrows(NullPointerException.class, () ->
+                removeAttendanceFromAttendanceRecordList(null, student, week));
+    }
+
+    @Test
+    public void getAttendanceFromLesson_nullStudent_throwsNullPointerException() {
+        Attendance attendance = new Attendance(VALID_PARTICIPATION_SCORE_33);
+        Student student = new StudentBuilder().build();
+        AttendanceRecord record = new AttendanceRecordBuilder().withEntry(student.getUuid(), attendance).build();
+        AttendanceRecordList recordList = new AttendanceRecordList(Collections.singletonList(record));
+
+        Week week = VALID_WEEK_1;
+        assertThrows(NullPointerException.class, () ->
+                removeAttendanceFromAttendanceRecordList(recordList, null, week));
+    }
+
+    @Test
+    public void getAttendanceFromLesson_nullParameters_throwsNullPointerException() {
+        Attendance attendance = new Attendance(VALID_PARTICIPATION_SCORE_33);
+        Student student = new StudentBuilder().build();
+        AttendanceRecord record = new AttendanceRecordBuilder().withEntry(student.getUuid(), attendance).build();
+        AttendanceRecordList recordList = new AttendanceRecordList(Collections.singletonList(record));
+
+        assertThrows(NullPointerException.class, () ->
+                removeAttendanceFromAttendanceRecordList(recordList, student, null));
+    }
+
+    @Test
+    public void getAttendances_returnsAttendances() {
         AttendanceRecord recordWeekOne = new AttendanceRecordBuilder().build();
         Attendance attendance = new Attendance(VALID_PARTICIPATION_SCORE_33);
         Student student = new StudentBuilder().build();
@@ -199,5 +352,22 @@ public class AttendanceRecordListUtilTest {
 
         List<Optional<Attendance>> expectedList = Arrays.asList(Optional.empty(), Optional.of(attendance));
         assertEquals(expectedList, getAttendances(recordList, student));
+    }
+
+    @Test
+    public void getAttendances_nullAttendanceRecordList_throwsNullPointerException() {
+        Student student = new StudentBuilder().build();
+        assertThrows(NullPointerException.class, () -> getAttendances(null, student));
+    }
+
+    @Test
+    public void getAttendances_nullStudent_throwsNullPointerException() {
+        AttendanceRecord recordWeekOne = new AttendanceRecordBuilder().build();
+        Attendance attendance = new Attendance(VALID_PARTICIPATION_SCORE_33);
+        Student student = new StudentBuilder().build();
+        AttendanceRecord recordWeekTwo = new AttendanceRecordBuilder().withEntry(student.getUuid(), attendance).build();
+        AttendanceRecordList recordList = new AttendanceRecordList(Arrays.asList(recordWeekOne, recordWeekTwo));
+
+        assertThrows(NullPointerException.class, () -> getAttendances(recordList, null));
     }
 }
