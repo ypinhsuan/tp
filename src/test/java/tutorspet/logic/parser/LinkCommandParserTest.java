@@ -29,13 +29,15 @@ public class LinkCommandParserTest {
         assertParseSuccess(parser, " "
                 + PREFIX_CLASS_INDEX + "2" + " "
                 + PREFIX_STUDENT_INDEX + "1" + " "
-                + PREFIX_CLASS_INDEX + "3", new LinkCommand(INDEX_THIRD_ITEM, INDEX_FIRST_ITEM));
+                + PREFIX_CLASS_INDEX + "3",
+                new LinkCommand(INDEX_THIRD_ITEM, INDEX_FIRST_ITEM));
 
         // multiple student indexes -> last student accepted
         assertParseSuccess(parser, " "
                 + PREFIX_STUDENT_INDEX + "1" + " "
                 + PREFIX_CLASS_INDEX + "2" + " "
-                + PREFIX_STUDENT_INDEX + "3", new LinkCommand(INDEX_SECOND_ITEM, INDEX_THIRD_ITEM));
+                + PREFIX_STUDENT_INDEX + "3",
+                new LinkCommand(INDEX_SECOND_ITEM, INDEX_THIRD_ITEM));
     }
 
     @Test
