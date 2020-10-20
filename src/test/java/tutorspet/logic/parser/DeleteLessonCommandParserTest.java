@@ -1,5 +1,8 @@
 package tutorspet.logic.parser;
 
+import static tutorspet.logic.parser.CliSyntax.PREFIX_CLASS_INDEX;
+import static tutorspet.logic.parser.CliSyntax.PREFIX_LESSON_INDEX;
+
 import org.junit.jupiter.api.Test;
 
 import tutorspet.commons.core.Messages;
@@ -19,51 +22,69 @@ public class DeleteLessonCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsDeleteLessonCommand() {
-        CommandParserTestUtil.assertParseSuccess(parser, " c/1 l/1",
+        CommandParserTestUtil.assertParseSuccess(parser, " "
+                + PREFIX_CLASS_INDEX + "1" + " "
+                + PREFIX_LESSON_INDEX + "1",
                 new DeleteLessonCommand(TypicalIndexes.INDEX_FIRST_ITEM, TypicalIndexes.INDEX_FIRST_ITEM));
 
         // multiple class indexes -> last class index accepted
-        CommandParserTestUtil.assertParseSuccess(parser, " c/1 l/1 c/2",
+        CommandParserTestUtil.assertParseSuccess(parser, " "
+                + PREFIX_CLASS_INDEX + "1" + " "
+                + PREFIX_LESSON_INDEX + "1" + " "
+                + PREFIX_CLASS_INDEX + "2",
                 new DeleteLessonCommand(TypicalIndexes.INDEX_SECOND_ITEM, TypicalIndexes.INDEX_FIRST_ITEM));
 
         // multiple lesson indexes -> last lesson index accepted
-        CommandParserTestUtil.assertParseSuccess(parser, " l/1 c/1 l/2",
+        CommandParserTestUtil.assertParseSuccess(parser, " "
+                + PREFIX_CLASS_INDEX + "1" + " "
+                + PREFIX_LESSON_INDEX + "1" + " "
+                + PREFIX_LESSON_INDEX + "2",
                 new DeleteLessonCommand(TypicalIndexes.INDEX_FIRST_ITEM, TypicalIndexes.INDEX_SECOND_ITEM));
     }
 
     @Test
     public void parse_missingClassIndex_throwsParseException() {
-        CommandParserTestUtil.assertParseFailure(parser, " l/1",
+        CommandParserTestUtil.assertParseFailure(parser, " "
+                + PREFIX_LESSON_INDEX + "1",
                 String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeleteLessonCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_missingLessonIndex_throwsParseException() {
-        CommandParserTestUtil.assertParseFailure(parser, " c/1",
+        CommandParserTestUtil.assertParseFailure(parser, " "
+                + PREFIX_CLASS_INDEX + "1",
                 String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeleteLessonCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_invalidClassIndex_throwsParseException() {
-        CommandParserTestUtil.assertParseFailure(parser, " c/a l/1",
+        CommandParserTestUtil.assertParseFailure(parser, " "
+                + PREFIX_CLASS_INDEX + "a" + " "
+                + PREFIX_LESSON_INDEX + "1",
                 String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeleteLessonCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_invalidLessonIndex_throwsParseException() {
-        CommandParserTestUtil.assertParseFailure(parser, " c/1 l/a",
+        CommandParserTestUtil.assertParseFailure(parser, " "
+                + PREFIX_CLASS_INDEX + "1" + " "
+                + PREFIX_LESSON_INDEX + "a",
                 String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeleteLessonCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_emptyClassIndex_throwsParseException() {
-        CommandParserTestUtil.assertParseFailure(parser, " c/ l/1",
+        CommandParserTestUtil.assertParseFailure(parser, " "
+                + PREFIX_CLASS_INDEX + " "
+                + PREFIX_LESSON_INDEX + "1",
                 String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeleteLessonCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_emptyLessonIndex_throwsParseException() {
-        CommandParserTestUtil.assertParseFailure(parser, " c/1 l/",
+        CommandParserTestUtil.assertParseFailure(parser, " "
+                + PREFIX_CLASS_INDEX + "1" + " "
+                + PREFIX_LESSON_INDEX,
                 String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeleteLessonCommand.MESSAGE_USAGE));
     }
 
