@@ -21,121 +21,104 @@ import tutorspet.testutil.StudentBuilder;
 
 public class AttendanceRecordUtilTest {
 
+    private static final Attendance DEFAULT_ATTENDANCE = new Attendance(VALID_PARTICIPATION_SCORE_33);
+    private static final Student DEFAULT_STUDENT = new StudentBuilder().build();
+
     @Test
     public void addAttendance_validParameters_success() throws Exception {
         AttendanceRecord attendanceRecord = new AttendanceRecordBuilder().build();
-        Student student = new StudentBuilder().build();
-        Attendance attendance = new Attendance(VALID_PARTICIPATION_SCORE_33);
         AttendanceRecord expectedAttendanceRecord =
-                new AttendanceRecordBuilder().withEntry(student.getUuid(), attendance).build();
+                new AttendanceRecordBuilder().withEntry(DEFAULT_STUDENT.getUuid(), DEFAULT_ATTENDANCE).build();
 
-        AttendanceRecord actualAttendanceRecord = addAttendance(attendanceRecord, student, attendance);
+        AttendanceRecord actualAttendanceRecord = addAttendance(attendanceRecord, DEFAULT_STUDENT, DEFAULT_ATTENDANCE);
         assertEquals(expectedAttendanceRecord, actualAttendanceRecord);
     }
 
     @Test
     public void addAttendance_existingAttendance_throwsCommandException() {
-        Student student = new StudentBuilder().build();
-        Attendance attendance = new Attendance(VALID_PARTICIPATION_SCORE_33);
         AttendanceRecord attendanceRecord =
-                new AttendanceRecordBuilder().withEntry(student.getUuid(), attendance).build();
+                new AttendanceRecordBuilder().withEntry(DEFAULT_STUDENT.getUuid(), DEFAULT_ATTENDANCE).build();
 
         assertThrows(CommandException.class, MESSAGE_DUPLICATE_ATTENDANCE, () ->
-                addAttendance(attendanceRecord, student, attendance));
+                addAttendance(attendanceRecord, DEFAULT_STUDENT, DEFAULT_ATTENDANCE));
     }
 
     @Test
     public void addAttendance_nullAttendanceRecord_throwsNullPointerException() {
-        Student student = new StudentBuilder().build();
-        Attendance attendance = new Attendance(VALID_PARTICIPATION_SCORE_33);
-        assertThrows(NullPointerException.class, () -> addAttendance(null, student, attendance));
+        assertThrows(NullPointerException.class, () -> addAttendance(null, DEFAULT_STUDENT, DEFAULT_ATTENDANCE));
     }
 
     @Test
     public void addAttendance_nullStudent_throwsNullPointerException() {
         AttendanceRecord attendanceRecord = new AttendanceRecordBuilder().build();
-        Attendance attendance = new Attendance(VALID_PARTICIPATION_SCORE_33);
-        assertThrows(NullPointerException.class, () -> addAttendance(attendanceRecord, null, attendance));
+        assertThrows(NullPointerException.class, () -> addAttendance(attendanceRecord, null, DEFAULT_ATTENDANCE));
     }
 
     @Test
     public void addAttendance_nullAttendance_throwsNullPointerException() {
         AttendanceRecord attendanceRecord = new AttendanceRecordBuilder().build();
-        Student student = new StudentBuilder().build();
-        assertThrows(NullPointerException.class, () -> addAttendance(attendanceRecord, student, null));
+        assertThrows(NullPointerException.class, () -> addAttendance(attendanceRecord, DEFAULT_STUDENT, null));
     }
 
     @Test
     public void setAttendance_validParameters_success() throws CommandException {
-        Student student = new StudentBuilder().build();
-        Attendance attendance = new Attendance(VALID_PARTICIPATION_SCORE_33);
         AttendanceRecord attendanceRecord =
-                new AttendanceRecordBuilder().withEntry(student.getUuid(), attendance).build();
+                new AttendanceRecordBuilder().withEntry(DEFAULT_STUDENT.getUuid(), DEFAULT_ATTENDANCE).build();
         Attendance attendanceToSet = new Attendance(VALID_PARTICIPATION_SCORE_51);
         AttendanceRecord expectedAttendanceRecord =
-                new AttendanceRecordBuilder().withEntry(student.getUuid(), attendanceToSet).build();
+                new AttendanceRecordBuilder().withEntry(DEFAULT_STUDENT.getUuid(), attendanceToSet).build();
 
-        AttendanceRecord actualAttendanceRecord = setAttendance(attendanceRecord, student, attendanceToSet);
+        AttendanceRecord actualAttendanceRecord = setAttendance(attendanceRecord, DEFAULT_STUDENT, attendanceToSet);
         assertEquals(expectedAttendanceRecord, actualAttendanceRecord);
     }
 
     @Test
     public void setAttendance_noExistingAttendance_throwsCommandException() {
         AttendanceRecord attendanceRecord = new AttendanceRecordBuilder().build();
-        Student student = new StudentBuilder().build();
-        Attendance attendance = new Attendance(VALID_PARTICIPATION_SCORE_33);
 
         assertThrows(CommandException.class, MESSAGE_MISSING_STUDENT_ATTENDANCE, () ->
-                setAttendance(attendanceRecord, student, attendance));
+                setAttendance(attendanceRecord, DEFAULT_STUDENT, DEFAULT_ATTENDANCE));
     }
 
     @Test
     public void setAttendance_nullAttendanceRecord_throwsNullPointerException() {
-        Student student = new StudentBuilder().build();
-        Attendance attendance = new Attendance(VALID_PARTICIPATION_SCORE_33);
-        assertThrows(NullPointerException.class, () -> setAttendance(null, student, attendance));
+        assertThrows(NullPointerException.class, () -> setAttendance(null, DEFAULT_STUDENT, DEFAULT_ATTENDANCE));
     }
 
     @Test
     public void setAttendance_nullStudent_throwsNullPointerException() {
         AttendanceRecord attendanceRecord = new AttendanceRecordBuilder().build();
-        Attendance attendance = new Attendance(VALID_PARTICIPATION_SCORE_33);
-        assertThrows(NullPointerException.class, () -> setAttendance(attendanceRecord, null, attendance));
+        assertThrows(NullPointerException.class, () -> setAttendance(attendanceRecord, null, DEFAULT_ATTENDANCE));
     }
 
     @Test
     public void setAttendance_nullAttendance_throwsNullPointerException() {
         AttendanceRecord attendanceRecord = new AttendanceRecordBuilder().build();
-        Student student = new StudentBuilder().build();
-        assertThrows(NullPointerException.class, () -> setAttendance(attendanceRecord, student, null));
+        assertThrows(NullPointerException.class, () -> setAttendance(attendanceRecord, DEFAULT_STUDENT, null));
     }
 
     @Test
     public void removeAttendance_validParameters_success() throws Exception {
-        Student student = new StudentBuilder().build();
-        Attendance attendance = new Attendance(VALID_PARTICIPATION_SCORE_33);
         AttendanceRecord attendanceRecord =
-                new AttendanceRecordBuilder().withEntry(student.getUuid(), attendance).build();
+                new AttendanceRecordBuilder().withEntry(DEFAULT_STUDENT.getUuid(), DEFAULT_ATTENDANCE).build();
         AttendanceRecord expectedAttendanceRecord =
                 new AttendanceRecordBuilder().build();
 
-        AttendanceRecord actualAttendanceRecord = removeAttendance(attendanceRecord, student);
+        AttendanceRecord actualAttendanceRecord = removeAttendance(attendanceRecord, DEFAULT_STUDENT);
         assertEquals(expectedAttendanceRecord, actualAttendanceRecord);
     }
 
     @Test
     public void removeAttendance_noExistingAttendance_throwsCommandException() {
         AttendanceRecord attendanceRecord = new AttendanceRecordBuilder().build();
-        Student student = new StudentBuilder().build();
 
         assertThrows(CommandException.class, MESSAGE_MISSING_STUDENT_ATTENDANCE, () ->
-                removeAttendance(attendanceRecord, student));
+                removeAttendance(attendanceRecord, DEFAULT_STUDENT));
     }
 
     @Test
     public void removeAttendance_nullAttendanceRecord_throwsNullPointerException() {
-        Student student = new StudentBuilder().build();
-        assertThrows(NullPointerException.class, () -> removeAttendance(null, student));
+        assertThrows(NullPointerException.class, () -> removeAttendance(null, DEFAULT_STUDENT));
     }
 
     @Test

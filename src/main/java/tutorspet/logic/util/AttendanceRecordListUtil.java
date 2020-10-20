@@ -18,6 +18,9 @@ import tutorspet.model.attendance.AttendanceRecordList;
 import tutorspet.model.attendance.Week;
 import tutorspet.model.student.Student;
 
+/**
+ * Contains utility methods for modifying {@code Attendance}s in {@code AttendanceRecordList}.
+ */
 public class AttendanceRecordListUtil {
 
     /**
@@ -42,10 +45,7 @@ public class AttendanceRecordListUtil {
         AttendanceRecord editedWeekAttendanceRecord =
                 addAttendance(targetAttendanceRecord, targetStudent, attendanceToAdd);
 
-        List<AttendanceRecord> modifiedAttendanceRecordList =
-                new ArrayList<>(targetAttendanceRecordList.getAttendanceRecordList());
-        modifiedAttendanceRecordList.set(targetWeek.getZeroBasedWeekIndex(), editedWeekAttendanceRecord);
-        return new AttendanceRecordList(modifiedAttendanceRecordList);
+        return replaceAttendanceRecordInList(targetAttendanceRecordList, targetWeek, editedWeekAttendanceRecord);
     }
 
     /**
@@ -71,10 +71,7 @@ public class AttendanceRecordListUtil {
         AttendanceRecord editedWeekAttendanceRecord =
                 setAttendance(targetAttendanceRecord, targetStudent, attendanceToSet);
 
-        List<AttendanceRecord> modifiedAttendanceRecordList =
-                new ArrayList<>(targetAttendanceRecordList.getAttendanceRecordList());
-        modifiedAttendanceRecordList.set(targetWeek.getZeroBasedWeekIndex(), editedWeekAttendanceRecord);
-        return new AttendanceRecordList(modifiedAttendanceRecordList);
+        return replaceAttendanceRecordInList(targetAttendanceRecordList, targetWeek, editedWeekAttendanceRecord);
     }
 
     /**
@@ -99,10 +96,7 @@ public class AttendanceRecordListUtil {
         AttendanceRecord editedWeekAttendanceRecord =
                 AttendanceRecordUtil.removeAttendance(targetAttendanceRecord, targetStudent);
 
-        List<AttendanceRecord> modifiedAttendanceRecordList =
-                new ArrayList<>(targetAttendanceRecordList.getAttendanceRecordList());
-        modifiedAttendanceRecordList.set(targetWeek.getZeroBasedWeekIndex(), editedWeekAttendanceRecord);
-        return new AttendanceRecordList(modifiedAttendanceRecordList);
+        return replaceAttendanceRecordInList(targetAttendanceRecordList, targetWeek, editedWeekAttendanceRecord);
     }
 
     /**
@@ -151,5 +145,14 @@ public class AttendanceRecordListUtil {
         }
 
         return Collections.unmodifiableList(studentRecords);
+    }
+
+    private static AttendanceRecordList replaceAttendanceRecordInList(AttendanceRecordList attendanceRecordList,
+                                                                      Week week,
+                                                                      AttendanceRecord attendanceRecordToSet) {
+        List<AttendanceRecord> modifiedAttendanceRecordList =
+                new ArrayList<>(attendanceRecordList.getAttendanceRecordList());
+        modifiedAttendanceRecordList.set(week.getZeroBasedWeekIndex(), attendanceRecordToSet);
+        return new AttendanceRecordList(modifiedAttendanceRecordList);
     }
 }

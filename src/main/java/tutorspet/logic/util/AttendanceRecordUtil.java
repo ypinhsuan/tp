@@ -13,6 +13,9 @@ import tutorspet.model.attendance.Attendance;
 import tutorspet.model.attendance.AttendanceRecord;
 import tutorspet.model.student.Student;
 
+/**
+ * Contains utility methods for modifying {@code Attendance}s in {@code AttendanceRecord}.
+ */
 public class AttendanceRecordUtil {
 
     /**
