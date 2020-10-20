@@ -17,22 +17,30 @@ participation scores.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
+### Installing Tutor's Pet
+
+Here are a few steps to get you started on Tutor's Pet:
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-2. Download the latest `tutorspet.jar`.
+2. Download the latest `tutorspet.jar` [here](https://github.com/AY2021S1-CS2103T-T10-4/tp/releases).
 
-3. Copy the file to the folder you want to use as the _home folder_ for your Tutor's Pet.
+3. Copy the file to the folder you want to use as the home folder for your Tutor's Pet.
 
-4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+4. Double-click the file to start the application. The GUI similar to the below should appear in a few seconds.<br>
+
    ![Ui](images/Ui.png)
+   Figure 1. GUI for Tutor's Pet.
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press <kbd>Enter</kbd> to execute it.<br>
+   e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.<br>
+   
    Some example commands you can try:
 
-   * **`list`** : Lists all students.
+   * **`list`** : Lists all students and classes.
 
-   * **`add-student`**`n/John Doe t/johndoe e/johnd@example.com tag/student` : Adds a student named `John Doe` to the application.
+   * **`add-student`**`n\John Doe t\johndoe e\johnd@example.com tag\student` : Adds a student named `John Doe` 
+   to the application.
 
    * **`delete-student`**`3` : Deletes the 3rd student shown in the current list.
 
@@ -41,6 +49,42 @@ participation scores.
    * **`exit`** : Exits the app.
 
 6. Refer to the [Features](#features) below for details of each command.
+
+### Using Tutor's Pet
+
+This section offers an overview of Tutor's Pet layout.
+
+There are two main areas in Tutor's Pet:
+
+1. A command box and result display box.
+
+2. A main viewing area. 
+
+The command box is the area for you to enter your commands. The result of each command would be shown in the result 
+display box, which is located immediately below the command box.
+
+   ![Command box and result display box](images/ugimages/CommandAndDisplayBox.png)
+   Figure 2. The command box and result display box.
+   
+The main viewing area consists of two sections: **Class** and **Student**
+
+* The **Class** section contains information about classes and lessons in Tutor's Pet. To view the list of all
+ classes in Tutor's Pet, make use of the **`list-class`** command.
+ 
+    ![Class_section](images/ugimages/ClassPanel.png)
+    Figure 3. The class section.
+
+* The **Student** section displays contains information about students in Tutor's Pet. To view the list of all
+ students in Tutor's Pet, make use of the **'list-student`** command.
+
+    ![Student_section](images/ugimages/StudentPanel.png)
+    Figure 4. The student section.
+    
+If you would like to change Tutor's Pet theme, double-click on the **Theme** tab at the top of the screen. There are
+ 3 different themes in Tutor's Pet: **Light**, **Alternate** and **Dark**. 
+ 
+   ![Theme tab](images/ugimages/ThemeTab.png)
+   Figure 5. The Theme tab.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -95,6 +139,8 @@ participation scores.
 | **Undo**                          | `undo`                                                                                                                                                                    |
 | **Redo**                          | `redo`                                                                                                                                                                    |
 | **View Action History**           | `view-history`                                                                                                                                                            |
+| **Statistics**                    | `stats c\CLASS_INDEX s\STUDENT_INDEX`<br> e.g., `stats c\1 s\1`
+| **Display Venue**                 | `display-venue c\CLASS_INDEX l\LESSON_INDEX`<br> e.g., `display-venue c\1 l\1`
 | **Exit**                          | `exit`                                                                                                                                                                    |
 | **Reset**                         | `reset`                                                                                                                                                                   |
 
@@ -210,24 +256,49 @@ Examples:
 
 #### Editing a class : `edit-class`
 
-Edits an existing class in the application.
+If you entered the wrong class name or would like to change the name of a class, you can make use of this command.
 
 Format: `edit-class INDEX n/CLASS_NAME`
-
 * Edits the class at the specified `INDEX`.
+
+For example:
+* Your module coordinator decides to allocate another class to you and you want to be able to distinguish between
+ the two classes. Hence you decide to edit the `CS2103T Tutorial` class to `CS2103T Tutorial T10`. You type the
+ command `edit-class 1 n\CS2103T Tutorial T10` and press <kbd>Enter</kbd>.
+ 
+    ![Edit class before](images/ugimages/EditClassBefore.png)
+ 
+* The class has been renamed from `CS2103T Tutorial` to `CS2103T Tutorial 10`.
+
+    ![Edit class after](images/ugimages/EditClassAfter.png)
+
+Constraints:
 * The index refers to the index number shown in the displayed class list.
 * The index **must be a positive whole number** 1, 2, 3, …​
 * A new class name must be provided.
 
-Examples:
-*  `edit-class 1 n/CS2103T Tutorial T10` Edits the class name of the 1st class to be `CS2103T Tutorial T10`.
+Other examples:
+* `find-class CS2030 lab`
+  `edit-class 1 n\CS2030 lab L05`
+  Edits the name of the 1st class in the results of the find command.
 
 #### Finding class by name : `find-class`
 
-Finds classes whose names contain any of the given keywords.
+If you would like to find classes that contain any of the given keywords in their name, make use of this command.
 
 Format: `find-class KEYWORD [MORE_KEYWORDS]`
 
+For example:
+* You would like to find out how many `Tutorial` class you are currently teaching. You type the command
+ `find-class Tutorial` and press <kbd>Enter</kbd>.
+ 
+    ![Find class before](images/ugimages/FindClassBefore.png)
+    
+* You find out that you are teaching 2 tutorials this semester.
+
+    ![Find class after](images/ugimages/FindClassAfter.png)
+
+Constraints:
 * The search is case-insensitive. e.g `cs2103t` will match `CS2103T`
 * The order of the keywords does not matter. e.g. `lab CS2100` will match `CS2100 lab`
 * Only the name is searched.
@@ -235,9 +306,11 @@ Format: `find-class KEYWORD [MORE_KEYWORDS]`
 * Students matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `CS2103T lab` will return `CS2103T tut`, `CS2100 lab`
 
-Examples:
-* `find-class CS2100` returns `CS2100 tut` and `CS2100 lab`
-* `find-class tut CS2030` returns `CS2103T tut`, `CS2030 lab`<br>
+Other examples:
+* `find-class CS2100`<br>
+    Returns `CS2100 tut` and `CS2100 lab`
+* `find-class tut CS2030`<br>
+    Returns `CS2103T tut`, `CS2030 lab`
 
 #### Deleting a class : `delete-class`
 
@@ -254,9 +327,19 @@ Examples:
 
 #### Clearing all classes : `clear-class`
 
-Clears all classes from the application.
+If you would like to delete all the classes in Tutor's Pet, make use of this command.
 
 Format: `clear-class`
+
+For-example:
+* It is the start of a new semester. You would like to delete all information of all the classes you taught last
+ semester to start anew. You type the command `clear-class` and press <kbd>Enter</kbd>.
+ 
+    ![Clear class before](images/ugimages/ClearClassBefore.png)
+    
+* All classes have been cleared. You can start managing your new classes.
+
+    ![Clear class after](images/ugimages/ClearClassAfter.png)
 
 #### Listing all students and classes : `list`
 
@@ -319,23 +402,60 @@ Examples:
 
 #### Deleting a lesson : `delete-lesson`
 
-Deletes the specified lesson from the application.
+If you would like to delete a lesson in a class, you can make use of this command.
 
-Format: `delete-lesson c/CLASS_INDEX l/LESSON_INDEX`
-
+Format: `delete-lesson c\CLASS_INDEX l\LESSON_INDEX`
 * Deletes the lesson at the specified `CLASS_INDEX` + `LESSON_INDEX`.
+
+For example:
+* You receive news that the `Tuesday 10:00-11:00` `CS2103T Tutorial` would be cancelled permanently. You decide to
+ remove that lesson from your Tutor's Pet and hence you type in the command `delete-lesson c\1 l\2` and press 
+ <kbd>Enter</kbd>.
+ 
+    ![Delete lesson before](images/ugimages/DeleteLessonBefore.png)
+     
+* You have one less lesson to teach now.
+
+    ![Delete lesson before](images/ugimages/DeleteLessonBefore.png)
+     
+Constraints:
 * The indexes **must be positive whole numbers** 1, 2, 3, …​
+
+Other examples:
+* `find-class CS2030 lab`
+  `delete-lesson c\1 l\1`
+  Deletes the 1st lesson in the results of the find command.
 
 ### Managing Attendance Records
 
 #### Adding an attendance record : `add-attendance`
 
-Adds an attendance record to the application.
+If you would like to record a new attendance for a student, you can make use of this command.
 
-Format: `add-attendance c/CLASS_INDEX l/LESSON_INDEX s/STUDENT_INDEX w/WEEK p/PARTICIPATION_SCORE`
+Format: `add-attendance c\CLASS_INDEX l\LESSON_INDEX s\STUDENT_INDEX w\WEEK p\PARTICIPATION_SCORE`
 
-Examples:
-* `add-attendance c/1 l/1 s/1 w/1 p/1`
+For example: 
+* Your `CS2103T Tutorial` lesson has just ended and you would like to give participation scores to the students. You
+ decide to start with Alex. Hence, you type in the command `add-attendance c\1 l\1 s\1 w\10 p\80` and press 
+ <kbd>Enter</kbd>.
+ 
+    ![Add attendance before](images/ugimages/AddAttendanceBefore.png)
+
+* You have successfully recorded Alex's attendance. You have another 2 more students' attendance to record.
+
+    ![Add attendance after](images/ugimages/AddAttendanceAfter.png)
+
+Other Examples:
+* `find-class CS2100 lab`
+  `find-student bernice yu`
+  `add-attendance c\1 l\1 s\1 w\10 p\70`
+  Adds the attendance of the 1st student to the 1st lesson of the 1st class in the results of the find commands.
+  Attendance recorded is for week 10 and student's participation score is 70.
+  
+* `list-student c\1`
+  `add-attendance c\1 l\1 s\2 w\5 p\50`
+  Adds the attendance of the 2nd student in the results of the list command to the 1st lesson of the 1st class.
+  Attendance recorded is for week 5 and student's participation score is 50.
 
 #### Editing an attendance record : `edit-attendance`
 
@@ -353,16 +473,37 @@ Examples:
 
 #### Finding attendance record by indexes: `find-attendance`
 
-Finds an attendance record at the specified `CLASS_INDEX` + `LESSON_INDEX` + `STUDENT_INDEX` + `WEEK`. 
+If you need to find out a specific student's attendance for a specific week, make use of this command.
 
-Format: `find-attendance c/CLASS_INDEX l/LESSON_INDEX s/STUDENT_INDEX w/WEEK`
-
+Format: `find-attendance c\CLASS_INDEX l\LESSON_INDEX s\STUDENT_INDEX w\WEEK`
 * Finds the attendance record at the specified `CLASS_INDEX` + `LESSON_INDEX` + `STUDENT_INDEX` + `WEEK`.
+
+For example:
+* It is the end of a semester and it's time to key in your students' attendance into luminus. You would like to find
+ out if Alex attended week 1 lesson and hence you type in the command `find-attendance c\1 l\1 s\1 w\1` and press 
+ <kbd>Enter</kbd>.
+ 
+    ![Find attendance before](images/ugimages/FindAttendanceBefore.png)
+     
+* Now you can find out if Alex attended the first lesson and how participative he was in week 1.
+
+    ![Find attendance after](images/ugimages/FindAttendanceAfter.png)
+
+Constraints:
 * The indexes **must be positive whole numbers** 1, 2, 3, …​
 * The `WEEK` **must be a positive whole number** 1, 2, 3, …​
 
-Examples:
-* `find-attendance c/1 l/1 s/1 w/1` Finds the 1st week's attendance record of the 1st student of the 1st lesson of the 1st class.
+Other Examples:
+* `find-class CS2100 lab`
+  `find-student bernice yu`
+  `find-attendance c\1 l\1 s\1 w\10`
+  Shows the attendance of the 1st student in the 1st lesson of the first class in the results of the find command.
+  Attendance shown is for week 10.
+ 
+* `list-student c\1`
+  `find-attendance c\1 l\1 s\2 w\5`
+  Shows the attendance of the 2nd student in the 1st lesson of the first class in the results of the list command.
+  Attendance shown is for week 5.
 
 #### Deleting an attendance record : `delete-attendance`
 
@@ -394,6 +535,41 @@ Format : `redo`
 View a list of actions that can be undone or redone.
 
 Format : `view-history` 
+
+### Statistics : `stats`
+
+Gives an overall summary of a student's attendance.
+
+Format: `stats c\1 s\1`
+* Gives a summary of the student's attendance at the specified `CLASS_INDEX` + `LESSON_INDEX` + `STUDENT_INDEX
+` + `WEEK`.
+
+For example: 
+* It is the end of the semester and time for you to grade a student's class participation. You would like to find out
+ if Alex has been participative throughout the semester and hence you type in the command `stats c\1 s\1` and press 
+ <kbd>Enter<\kbd>.
+ 
+* Now you can see his average participation score and overall attendance to give a corresponding grade.
+
+Constraints:
+* The indexes **must be positive whole numbers** 1, 2, 3, …​
+
+### Display venue : `display`
+
+Displays the venue of a lesson.
+
+Format: `display-venue c\1 l\1`
+* Gives the venue of the lesson specified at `CLASS_INDEX` + `LESSON_INDEX`.
+
+For example: 
+* Due to covid, most of your physical lessons have been converted to zoom lessons and thus all the venues are zoom
+ links. Your lesson is starting in 10 minutes and it is time to start the session. Hence, you input the command
+ `display-venue c\1 l\1` and press <kbd>Enter</kbd>.
+ 
+* You can now proceed to copy the link to that zoom session from the command result box.
+
+Constraints:
+* The indexes **must be positive whole numbers** 1, 2, 3, …​
 
 ### Exiting the program : `exit`
 
