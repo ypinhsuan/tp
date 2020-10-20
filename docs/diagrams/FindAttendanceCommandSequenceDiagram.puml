@@ -1,0 +1,40 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor black
+skinparam classBackgroundColor ATTENDANCE_COLOR_T1
+skinparam fontColor black
+
+box FindAttendanceCommand ATTENDANCE_COLOR_T1
+participant ":FindCommand" as FindCommand LOGIC_COLOR
+participant ":Model" as Model LOGIC_COLOR
+participant ":ModuleClassUtil" as ModuleClassUtil LOGIC_COLOR
+participant ":ModuleClass" as ModuleClass LOGIC_COLOR
+participant ":LessonUtil" as LessonUtil LOGIC_COLOR
+participant ":AttendanceRecordList" as AttendanceRecordList LOGIC_COLOR
+participant ":AttendanceRecordListUtil" as AttendanceRecordListUtil LOGIC_COLOR
+participant ":AttendanceRecord" as AttendanceRecord LOGIC_COLOR
+participant ":Attendance" as Attendance LOGIC_COLOR
+end box
+
+group ref
+FindCommand -> Model :get target module class and student
+end
+
+FindCommand -> ModuleClassUtil :getAttendanceFromModuleClass
+
+group ref
+ModuleClassUtil -> ModuleClass :get target lesson
+end
+ModuleClassUtil -> LessonUtil :getAttendanceFromLesson
+
+LessonUtil -> AttendanceRecordList :getAttendanceRecordList
+LessonUtil -> AttendanceRecordListUtil :getAttendanceFromAttendanceRecordList
+
+AttendanceRecordListUtil -> AttendanceRecordList :getAttendanceRecord
+AttendanceRecordListUtil -> AttendanceRecord :getAttendance
+
+AttendanceRecord -> Attendance :get
+FindCommand <-- Attendance :attendance
+
+@enduml

@@ -213,6 +213,26 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
+### Attendance Model
+
+The `Attendance` model, along with `AttendanceRecord` and `AttendanceRecordList` is implemented as follows:
+
+<insert plantuml diagram>
+
+`AttendanceRecord` refers to the actual attendance roster of a particular lesson event. It consists of a `Map` that stores a `Student`'s `UUID` as keys and his or her associated `Attendance` as values. `AttendanceRecordList` refers to the list of all `AttendanceRecord` belonging to a `Lesson` object. It contains a fixed number of `AttendanceRecord` objects as determined by the `NumberOfOccurences` in `Lesson`<insert link to lesson model>. Note that all classes in the `Attendance` package are designed to be immutable.
+
+#### Considerations:
+The `Attendance` package was designed to prevent users from having to type in attendance related commands when the user's students are absent from his or her lesson. Therefore, the `Attendance` class only has a `participationScore` attribute. It does not have have, for example, a `hasAttended` attribute.
+
+With this consideration in mind, `AttendanceRecord` is thus designed to maintain a `Map` of student `UUID`s to `Attendance`. A `Map` object allows `Attendance` objects to be added or removed dynamically and provides constant time access to `Attendance` instances via the `Student#uuid` the user wishes to retrieve. Note that the students not present in `AttendanceRecord` are treated as not having attended the particular lesson.
+
+The sequence diagram below shows how an `Attendance` instance is accessed when a user keys in a `find-attendance` command:
+
+<insert puml activity diagram>
+
+In the diagram above, 
+* guard clauses are ommited
+
 ### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
