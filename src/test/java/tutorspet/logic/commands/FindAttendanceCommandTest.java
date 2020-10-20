@@ -62,8 +62,14 @@ public class FindAttendanceCommandTest {
         Index studentIndex = INDEX_FIRST_ITEM;
         Week targetWeek = VALID_WEEK_1;
 
+        assert moduleClassIndex.getZeroBased() < model.getFilteredModuleClassList().size();
+        assert studentIndex.getZeroBased() < model.getFilteredStudentList().size();
+
         ModuleClass moduleClass = model.getFilteredModuleClassList().get(moduleClassIndex.getZeroBased());
         Student student = model.getFilteredStudentList().get(studentIndex.getZeroBased());
+
+        assert lessonIndex.getZeroBased() < moduleClass.getLessons().size();
+
         Lesson lesson = moduleClass.getLessons().get(lessonIndex.getZeroBased());
 
         assert moduleClass.hasLesson(lesson);
@@ -90,8 +96,14 @@ public class FindAttendanceCommandTest {
         Index studentIndex = INDEX_FIRST_ITEM;
         Week targetWeek = VALID_WEEK_1;
 
+        assert moduleClassIndex.getZeroBased() < model.getFilteredModuleClassList().size();
+        assert studentIndex.getZeroBased() < model.getFilteredStudentList().size();
+
         ModuleClass moduleClass = model.getFilteredModuleClassList().get(moduleClassIndex.getZeroBased());
         Student student = model.getFilteredStudentList().get(studentIndex.getZeroBased());
+
+        assert lessonIndex.getZeroBased() < moduleClass.getLessons().size();
+
         Lesson lesson = moduleClass.getLessons().get(lessonIndex.getZeroBased());
 
         assert moduleClass.hasLesson(lesson);
@@ -116,7 +128,12 @@ public class FindAttendanceCommandTest {
         Index moduleClassIndex = INDEX_FIRST_ITEM;
         Index lessonIndex = INDEX_FIRST_ITEM;
 
+        assert moduleClassIndex.getZeroBased() < model.getFilteredModuleClassList().size();
+
         ModuleClass moduleClass = model.getFilteredModuleClassList().get(moduleClassIndex.getZeroBased());
+
+        assert lessonIndex.getZeroBased() < moduleClass.getLessons().size();
+
         Lesson lesson = moduleClass.getLessons().get(lessonIndex.getZeroBased());
 
         assert moduleClass.hasLesson(lesson);
@@ -142,6 +159,9 @@ public class FindAttendanceCommandTest {
     @Test
     public void execute_invalidLessonIndex_failure() {
         Index moduleClassIndex = INDEX_FIRST_ITEM;
+
+        assert moduleClassIndex.getZeroBased() < model.getFilteredModuleClassList().size();
+
         ModuleClass moduleClass = model.getFilteredModuleClassList().get(moduleClassIndex.getZeroBased());
         Index outOfBoundIndex = Index.fromOneBased(moduleClass.getLessons().size() + 1);
         Index studentIndex = INDEX_FIRST_ITEM;
@@ -169,8 +189,17 @@ public class FindAttendanceCommandTest {
         Index moduleClassIndex = INDEX_FIRST_ITEM;
         Index lessonIndex = INDEX_FIRST_ITEM;
         Index studentIndex = INDEX_FIRST_ITEM;
-        Lesson lesson = model.getFilteredModuleClassList().get(moduleClassIndex.getZeroBased())
-                .getLessons().get(lessonIndex.getZeroBased());
+
+        assert moduleClassIndex.getZeroBased() < model.getFilteredModuleClassList().size();
+
+        ModuleClass moduleClass = model.getFilteredModuleClassList().get(moduleClassIndex.getZeroBased());
+
+        assert lessonIndex.getZeroBased() < moduleClass.getLessons().size();
+
+        Lesson lesson = moduleClass.getLessons().get(lessonIndex.getZeroBased());
+
+        assert moduleClass.hasLesson(lesson);
+
         Week invalidWeek =
                 new Week(Index.fromOneBased(lesson.getAttendanceRecordList().getAttendanceRecordList().size() + 1));
 
@@ -187,8 +216,14 @@ public class FindAttendanceCommandTest {
         Index studentIndex = INDEX_FIRST_ITEM;
         Week week = VALID_WEEK_5;
 
+        assert moduleClassIndex.getZeroBased() < model.getFilteredModuleClassList().size();
+        assert studentIndex.getZeroBased() < model.getFilteredStudentList().size();
+
         ModuleClass moduleClass = model.getFilteredModuleClassList().get(moduleClassIndex.getZeroBased());
         Student student = model.getFilteredStudentList().get(studentIndex.getZeroBased());
+
+        assert lessonIndex.getZeroBased() < moduleClass.getLessons().size();
+
         Lesson lesson = moduleClass.getLessons().get(lessonIndex.getZeroBased());
 
         assert moduleClass.hasLesson(lesson);
@@ -213,7 +248,7 @@ public class FindAttendanceCommandTest {
         // same value -> returns true
         FindAttendanceCommand duplicateFindAttendanceCommand = new FindAttendanceCommand(INDEX_FIRST_ITEM,
                 INDEX_FIRST_ITEM, INDEX_FIRST_ITEM, week1);
-        assertTrue(findAttendanceCommand.equals(findAttendanceCommand));
+        assertTrue(findAttendanceCommand.equals(duplicateFindAttendanceCommand));
 
         // different type -> returns false
         assertFalse(findAttendanceCommand.equals(5));

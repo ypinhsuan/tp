@@ -17,6 +17,7 @@ import tutorspet.logic.commands.DeleteAttendanceCommand;
 import tutorspet.logic.commands.DeleteLessonCommand;
 import tutorspet.logic.commands.DeleteModuleClassCommand;
 import tutorspet.logic.commands.DeleteStudentCommand;
+import tutorspet.logic.commands.DisplayVenueCommand;
 import tutorspet.logic.commands.EditAttendanceCommand;
 import tutorspet.logic.commands.EditLessonCommand;
 import tutorspet.logic.commands.EditModuleClassCommand;
@@ -130,6 +131,9 @@ public class TutorsPetParser {
 
         case FindAttendanceCommand.COMMAND_WORD:
             return new FindAttendanceCommandParser().parse(arguments);
+
+        case DisplayVenueCommand.COMMAND_WORD:
+            return new DisplayVenueCommandParser().parse(arguments);
 
         case ViewHistoryCommand.COMMAND_WORD:
             return new ViewHistoryCommand();

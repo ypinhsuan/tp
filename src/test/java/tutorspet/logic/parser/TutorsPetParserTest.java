@@ -38,6 +38,7 @@ import tutorspet.logic.commands.DeleteAttendanceCommand;
 import tutorspet.logic.commands.DeleteLessonCommand;
 import tutorspet.logic.commands.DeleteModuleClassCommand;
 import tutorspet.logic.commands.DeleteStudentCommand;
+import tutorspet.logic.commands.DisplayVenueCommand;
 import tutorspet.logic.commands.EditAttendanceCommand;
 import tutorspet.logic.commands.EditAttendanceCommand.EditAttendanceDescriptor;
 import tutorspet.logic.commands.EditLessonCommand;
@@ -336,6 +337,21 @@ public class TutorsPetParserTest {
     public void parseCommand_reset() throws Exception {
         assertTrue(parser.parseCommand(ResetCommand.COMMAND_WORD) instanceof ResetCommand);
         assertTrue(parser.parseCommand(ResetCommand.COMMAND_WORD + NON_EMPTY_STRING) instanceof ResetCommand);
+    }
+
+    @Test
+    public void parseCommand_displayVenue() throws Exception {
+        DisplayVenueCommand expectedCommand = new DisplayVenueCommand(INDEX_FIRST_ITEM, INDEX_FIRST_ITEM);
+        DisplayVenueCommand command =
+                (DisplayVenueCommand) parser.parseCommand(DisplayVenueCommand.COMMAND_WORD + " "
+                        + PREFIX_CLASS_INDEX + INDEX_FIRST_ITEM.getOneBased() + " "
+                        + PREFIX_LESSON_INDEX + INDEX_FIRST_ITEM.getOneBased());
+        DisplayVenueCommand altCommand =
+                (DisplayVenueCommand) parser.parseCommand(DisplayVenueCommand.COMMAND_WORD + " "
+                        + PREFIX_LESSON_INDEX + INDEX_FIRST_ITEM.getOneBased() + " "
+                        + PREFIX_CLASS_INDEX + INDEX_FIRST_ITEM.getOneBased());
+        assertEquals(expectedCommand, command);
+        assertEquals(expectedCommand, altCommand);
     }
 
     @Test

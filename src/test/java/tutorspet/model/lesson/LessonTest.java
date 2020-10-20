@@ -143,6 +143,18 @@ public class LessonTest {
     }
 
     @Test
+    public void printLesson_returnsCorrectFormat() {
+        Lesson lesson = new Lesson(VALID_START_TIME, VALID_END_TIME, VALID_DAY_WED_LESSON_WED_2_TO_4,
+                VALID_NUMBER_OF_OCCURRENCES, VALID_VENUE, VALID_ATTENDANCE_RECORD_LIST);
+        String expectedString = (new StringBuilder()).append(CommandTestUtil.VALID_DAY_WED_LESSON_WED_2_TO_4)
+                .append(" ")
+                .append(TIME_FORMATTER.format(VALID_START_TIME))
+                .append(" to ")
+                .append(TIME_FORMATTER.format(VALID_END_TIME)).toString();
+        assertEquals(expectedString, lesson.printLesson());
+    }
+
+    @Test
     public void equals() {
         // same object -> returns true
         assertTrue(LESSON_FRI_8_TO_10.equals(LESSON_FRI_8_TO_10));

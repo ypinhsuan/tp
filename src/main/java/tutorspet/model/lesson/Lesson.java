@@ -101,6 +101,13 @@ public class Lesson {
     }
 
     /**
+     * Returns a print friendly version of the {@code Lesson} object.
+     */
+    public String printLesson() {
+        return this.day.toString() + " " + this.startTime.toString() + " to " + this.endTime.toString();
+    }
+
+    /**
      * Returns true if both lessons have same start time, end time, day, number of occurrences and venue.
      * This defines a stronger notion of equality between two lessons.
      */
