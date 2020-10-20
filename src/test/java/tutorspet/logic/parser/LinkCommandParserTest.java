@@ -1,6 +1,7 @@
 package tutorspet.logic.parser;
 
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static tutorspet.logic.commands.LinkCommand.MESSAGE_USAGE;
 import static tutorspet.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static tutorspet.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static tutorspet.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
@@ -28,43 +29,36 @@ public class LinkCommandParserTest {
 
     @Test
     public void parse_missingStudentIndex_throwsParseException() {
-        assertParseFailure(parser, " c/1", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                LinkCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, " c/1", String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
     }
 
     @Test
     public void parse_missingClassIndex_throwsParseException() {
-        assertParseFailure(parser, " s/1", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                LinkCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, " s/1", String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
     }
 
     @Test
     public void parse_invalidStudentIndex_throwsParseException() {
-        assertParseFailure(parser, " s/a c/2", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                LinkCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, " s/a c/2", String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
     }
 
     @Test
     public void parse_invalidClassIndex_throwsParseException() {
-        assertParseFailure(parser, " s/1 c/a", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                LinkCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, " s/1 c/a", String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
     }
 
     @Test
     public void parse_emptyStudentIndex_throwsParseException() {
-        assertParseFailure(parser, " s/ c/1", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                LinkCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, " s/ c/1", String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
     }
 
     @Test
     public void parse_emptyClassIndex_throwsParseException() {
-        assertParseFailure(parser, " s/1 c/", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                LinkCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, " s/1 c/", String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
     }
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser, " a", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                LinkCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, " a", String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
     }
 }

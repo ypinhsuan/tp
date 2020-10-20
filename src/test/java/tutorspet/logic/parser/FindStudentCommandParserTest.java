@@ -2,6 +2,7 @@ package tutorspet.logic.parser;
 
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static tutorspet.logic.commands.FindStudentCommand.MESSAGE_USAGE;
+import static tutorspet.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static tutorspet.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import java.util.Arrays;
@@ -17,7 +18,7 @@ public class FindStudentCommandParserTest {
 
     @Test
     public void parse_emptyArg_throwsParseException() {
-        CommandParserTestUtil.assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 MESSAGE_USAGE));
     }
 

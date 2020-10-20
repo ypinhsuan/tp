@@ -1,5 +1,6 @@
 package tutorspet.logic.commands;
 
+import static tutorspet.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static tutorspet.logic.commands.UndoCommand.MESSAGE_NO_PREVIOUS_COMMAND;
 import static tutorspet.logic.commands.UndoCommand.MESSAGE_SUCCESS;
@@ -37,6 +38,6 @@ public class UndoCommandTest {
 
     @Test
     public void execute_noPreviousState_throwsCommandException() {
-        CommandTestUtil.assertCommandFailure(new UndoCommand(), model, MESSAGE_NO_PREVIOUS_COMMAND);
+        assertCommandFailure(new UndoCommand(), model, MESSAGE_NO_PREVIOUS_COMMAND);
     }
 }

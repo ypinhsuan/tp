@@ -3,6 +3,7 @@ package tutorspet.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tutorspet.logic.commands.CommandTestUtil.DESC_CS2100_LAB;
+import static tutorspet.logic.commands.CommandTestUtil.DESC_CS2103T_TUTORIAL;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_NAME_CS2103T_TUTORIAL;
 
 import org.junit.jupiter.api.Test;
@@ -28,7 +29,7 @@ public class EditModuleClassDescriptorTest {
         assertFalse(DESC_CS2100_LAB.equals(5));
 
         // different value -> return false
-        assertFalse(DESC_CS2100_LAB.equals(CommandTestUtil.DESC_CS2103T_TUTORIAL));
+        assertFalse(DESC_CS2100_LAB.equals(DESC_CS2103T_TUTORIAL));
 
         // different name -> return false
         EditModuleClassDescriptor editedCs2100Lab = new EditModuleClassDescriptorBuilder(DESC_CS2100_LAB)

@@ -1,6 +1,9 @@
 package tutorspet.logic.parser;
 
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static tutorspet.logic.commands.DeleteStudentCommand.MESSAGE_USAGE;
+import static tutorspet.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static tutorspet.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static tutorspet.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 
 import org.junit.jupiter.api.Test;
@@ -20,13 +23,12 @@ public class DeleteStudentCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsDeleteStudentCommand() {
-        CommandParserTestUtil.assertParseSuccess(parser, "1",
-                new DeleteStudentCommand(INDEX_FIRST_ITEM));
+        assertParseSuccess(parser, "1", new DeleteStudentCommand(INDEX_FIRST_ITEM));
     }
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        CommandParserTestUtil.assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                DeleteStudentCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "a",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
     }
 }

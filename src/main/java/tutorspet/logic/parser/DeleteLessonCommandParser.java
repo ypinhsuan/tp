@@ -1,13 +1,13 @@
 package tutorspet.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static tutorspet.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static tutorspet.logic.commands.DeleteLessonCommand.MESSAGE_USAGE;
 import static tutorspet.logic.parser.ArgumentTokenizer.tokenize;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_CLASS_INDEX;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_LESSON_INDEX;
 import static tutorspet.logic.parser.ParserUtil.parseIndex;
 
-import tutorspet.commons.core.Messages;
 import tutorspet.commons.core.index.Index;
 import tutorspet.logic.commands.DeleteLessonCommand;
 import tutorspet.logic.parser.exceptions.ParseException;
@@ -33,7 +33,7 @@ public class DeleteLessonCommandParser implements Parser<DeleteLessonCommand> {
         boolean isModuleClassIndexPresent = argMultimap.getValue(PREFIX_CLASS_INDEX).isPresent();
         boolean isLessonIndexPresent = argMultimap.getValue(PREFIX_LESSON_INDEX).isPresent();
         if (!isModuleClassIndexPresent || !isLessonIndexPresent) {
-            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
         }
 
         try {
@@ -41,7 +41,7 @@ public class DeleteLessonCommandParser implements Parser<DeleteLessonCommand> {
             lessonIndex = parseIndex(argMultimap.getValue(PREFIX_LESSON_INDEX).get());
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE), pe);
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE), pe);
         }
 
         return new DeleteLessonCommand(moduleClassIndex, lessonIndex);

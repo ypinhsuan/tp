@@ -9,6 +9,8 @@ import static tutorspet.logic.commands.CommandTestUtil.VALID_UUID_AMY;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_UUID_BOB;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_WEEK_INDEX_5;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_WEEK_VALUE_5;
+import static tutorspet.storage.attendance.JsonAdaptedAttendanceRecord.MESSAGE_DUPLICATE_ATTENDANCE;
+import static tutorspet.storage.attendance.JsonAdaptedAttendanceRecord.MESSAGE_INVALID_ATTENDANCE;
 import static tutorspet.storage.attendance.JsonAdaptedStudentAttendanceTest.VALID_JSON_ADAPTED_STUDENT_ATTENDANCE_AMY;
 import static tutorspet.storage.attendance.JsonAdaptedStudentAttendanceTest.VALID_JSON_ADAPTED_STUDENT_ATTENDANCE_BOB;
 import static tutorspet.testutil.Assert.assertThrows;
@@ -104,9 +106,7 @@ public class JsonAdaptedAttendanceRecordTest {
         List<JsonAdaptedStudentAttendance> duplicateList =
                 Arrays.asList(VALID_JSON_ADAPTED_STUDENT_ATTENDANCE_AMY, VALID_JSON_ADAPTED_STUDENT_ATTENDANCE_AMY);
         JsonAdaptedAttendanceRecord record = new JsonAdaptedAttendanceRecord(VALID_WEEK_VALUE_5, duplicateList);
-        assertThrows(IllegalValueException.class,
-                JsonAdaptedAttendanceRecord.MESSAGE_DUPLICATE_ATTENDANCE,
-                record::toKeyValuePair);
+        assertThrows(IllegalValueException.class, MESSAGE_DUPLICATE_ATTENDANCE, record::toKeyValuePair);
     }
 
     @Test
@@ -114,24 +114,18 @@ public class JsonAdaptedAttendanceRecordTest {
         JsonAdaptedAttendanceRecord record =
                 new JsonAdaptedAttendanceRecord(NumberOfOccurrences.UPPER_BOUND + 1,
                         VALID_JSON_ADAPTED_STUDENT_ATTENDANCES);
-        assertThrows(IllegalValueException.class,
-                Week.MESSAGE_CONSTRAINTS,
-                record::toKeyValuePair);
+        assertThrows(IllegalValueException.class, Week.MESSAGE_CONSTRAINTS, record::toKeyValuePair);
 
         JsonAdaptedAttendanceRecord recordWeekZero =
                 new JsonAdaptedAttendanceRecord(NumberOfOccurrences.LOWER_BOUND - 1,
                         VALID_JSON_ADAPTED_STUDENT_ATTENDANCES);
-        assertThrows(IllegalValueException.class,
-                Week.MESSAGE_CONSTRAINTS,
-                recordWeekZero::toKeyValuePair);
+        assertThrows(IllegalValueException.class, Week.MESSAGE_CONSTRAINTS, recordWeekZero::toKeyValuePair);
     }
 
     @Test
     public void toKeyValuePair_nullInJsonAdaptedStudentAttendances_throwsIllegalValueException() {
         List<JsonAdaptedStudentAttendance> nullContainingList = Collections.singletonList(null);
         JsonAdaptedAttendanceRecord record = new JsonAdaptedAttendanceRecord(VALID_WEEK_VALUE_5, nullContainingList);
-        assertThrows(IllegalValueException.class,
-                JsonAdaptedAttendanceRecord.MESSAGE_INVALID_ATTENDANCE,
-                record::toKeyValuePair);
+        assertThrows(IllegalValueException.class, MESSAGE_INVALID_ATTENDANCE, record::toKeyValuePair);
     }
 }

@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tutorspet.logic.commands.AddModuleClassCommand.MESSAGE_DUPLICATE_MODULE_CLASS;
 import static tutorspet.logic.commands.AddModuleClassCommand.MESSAGE_SUCCESS;
+import static tutorspet.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static tutorspet.testutil.TypicalTutorsPet.getTypicalTutorsPet;
 
@@ -44,7 +45,7 @@ public class AddModuleClassCommandIntegrationTest {
     @Test
     public void execute_duplicateModuleClass_throwsCommandException() {
         ModuleClass moduleClassInList = model.getTutorsPet().getModuleClassList().get(0);
-        CommandTestUtil.assertCommandFailure(new AddModuleClassCommand(moduleClassInList), model,
+        assertCommandFailure(new AddModuleClassCommand(moduleClassInList), model,
                 MESSAGE_DUPLICATE_MODULE_CLASS);
         assertFalse(model.canUndo());
     }

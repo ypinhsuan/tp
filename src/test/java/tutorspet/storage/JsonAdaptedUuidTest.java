@@ -3,6 +3,8 @@ package tutorspet.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static tutorspet.logic.commands.CommandTestUtil.INVALID_STUDENT_UUID;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_UUID_AMY;
+import static tutorspet.storage.JsonAdaptedUuid.MESSAGE_INVALID_UUID;
+import static tutorspet.storage.JsonAdaptedUuid.MESSAGE_NULL_UUID;
 import static tutorspet.testutil.Assert.assertThrows;
 
 import java.util.UUID;
@@ -31,12 +33,12 @@ public class JsonAdaptedUuidTest {
     @Test
     public void toModelType_invalidUuid_throwsIllegalValueException() {
         JsonAdaptedUuid uuid = new JsonAdaptedUuid(INVALID_STUDENT_UUID);
-        assertThrows(IllegalValueException.class, JsonAdaptedUuid.MESSAGE_INVALID_UUID, uuid::toModelType);
+        assertThrows(IllegalValueException.class, MESSAGE_INVALID_UUID, uuid::toModelType);
     }
 
     @Test
     public void toModelType_nullUuid_throwsIllegalValueException() {
         JsonAdaptedUuid uuid = new JsonAdaptedUuid((String) null);
-        assertThrows(IllegalValueException.class, JsonAdaptedUuid.MESSAGE_NULL_UUID, uuid::toModelType);
+        assertThrows(IllegalValueException.class, MESSAGE_NULL_UUID, uuid::toModelType);
     }
 }

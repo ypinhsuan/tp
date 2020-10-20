@@ -4,6 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_ATTENDANCE_RECORD;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_ATTENDANCE_RECORD_LIST;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_WEEK_VALUE_5;
+import static tutorspet.storage.attendance.JsonAdaptedAttendanceRecordList.MESSAGE_DUPLICATE_ATTENDANCE_RECORD;
+import static tutorspet.storage.attendance.JsonAdaptedAttendanceRecordList.MESSAGE_INVALID_RECORD;
+import static tutorspet.storage.attendance.JsonAdaptedAttendanceRecordList.MESSAGE_MISSING_ATTENDANCE_RECORD_LIST;
+import static tutorspet.storage.attendance.JsonAdaptedAttendanceRecordTest.EMPTY_JSON_ADAPTED_ATTENDANCE_RECORD_WEEK_ONE;
+import static tutorspet.storage.attendance.JsonAdaptedAttendanceRecordTest.VALID_JSON_ADAPTED_ATTENDANCE_RECORD_WEEK_TWO;
 import static tutorspet.storage.attendance.JsonAdaptedStudentAttendanceTest.VALID_JSON_ADAPTED_STUDENT_ATTENDANCE_AMY;
 import static tutorspet.testutil.Assert.assertThrows;
 
@@ -38,8 +43,8 @@ public class JsonAdaptedAttendanceRecordListTest {
     @Test
     public void toModelType_validJsonAdaptedAttendanceRecords_returnsAttendanceRecordList() throws Exception {
         List<JsonAdaptedAttendanceRecord> records =
-                Arrays.asList(JsonAdaptedAttendanceRecordTest.EMPTY_JSON_ADAPTED_ATTENDANCE_RECORD_WEEK_ONE,
-                JsonAdaptedAttendanceRecordTest.VALID_JSON_ADAPTED_ATTENDANCE_RECORD_WEEK_TWO);
+                Arrays.asList(
+                        EMPTY_JSON_ADAPTED_ATTENDANCE_RECORD_WEEK_ONE, VALID_JSON_ADAPTED_ATTENDANCE_RECORD_WEEK_TWO);
         JsonAdaptedAttendanceRecordList attendanceRecordList =
                 new JsonAdaptedAttendanceRecordList(records);
         assertEquals(VALID_ATTENDANCE_RECORD_LIST, attendanceRecordList.toModelType());
@@ -48,8 +53,8 @@ public class JsonAdaptedAttendanceRecordListTest {
     @Test
     public void toModelType_outOfOrderJsonAdaptedAttendanceRecords_returnsAttendanceRecordList() throws Exception {
         List<JsonAdaptedAttendanceRecord> records =
-                Arrays.asList(JsonAdaptedAttendanceRecordTest.VALID_JSON_ADAPTED_ATTENDANCE_RECORD_WEEK_TWO,
-                JsonAdaptedAttendanceRecordTest.EMPTY_JSON_ADAPTED_ATTENDANCE_RECORD_WEEK_ONE);
+                Arrays.asList(
+                        VALID_JSON_ADAPTED_ATTENDANCE_RECORD_WEEK_TWO, EMPTY_JSON_ADAPTED_ATTENDANCE_RECORD_WEEK_ONE);
         JsonAdaptedAttendanceRecordList attendanceRecordList =
                 new JsonAdaptedAttendanceRecordList(records);
         assertEquals(VALID_ATTENDANCE_RECORD_LIST, attendanceRecordList.toModelType());
@@ -60,8 +65,7 @@ public class JsonAdaptedAttendanceRecordListTest {
         List<JsonAdaptedAttendanceRecord> emptyRecords = new ArrayList<>();
         JsonAdaptedAttendanceRecordList attendanceRecordList = new JsonAdaptedAttendanceRecordList(emptyRecords);
         assertThrows(IllegalValueException.class,
-                JsonAdaptedAttendanceRecordList.MESSAGE_MISSING_ATTENDANCE_RECORD_LIST,
-                attendanceRecordList::toModelType);
+                MESSAGE_MISSING_ATTENDANCE_RECORD_LIST, attendanceRecordList::toModelType);
     }
 
     @Test
@@ -69,8 +73,7 @@ public class JsonAdaptedAttendanceRecordListTest {
         List<JsonAdaptedAttendanceRecord> nullRecords = null;
         JsonAdaptedAttendanceRecordList attendanceRecordList = new JsonAdaptedAttendanceRecordList(nullRecords);
         assertThrows(IllegalValueException.class,
-                JsonAdaptedAttendanceRecordList.MESSAGE_MISSING_ATTENDANCE_RECORD_LIST,
-                attendanceRecordList::toModelType);
+                MESSAGE_MISSING_ATTENDANCE_RECORD_LIST, attendanceRecordList::toModelType);
     }
 
     @Test
@@ -82,8 +85,7 @@ public class JsonAdaptedAttendanceRecordListTest {
         JsonAdaptedAttendanceRecordList attendanceRecordList =
                 new JsonAdaptedAttendanceRecordList(invalidAttendanceRecord);
         assertThrows(IllegalValueException.class,
-                JsonAdaptedAttendanceRecord.MESSAGE_DUPLICATE_ATTENDANCE,
-                attendanceRecordList::toModelType);
+                JsonAdaptedAttendanceRecord.MESSAGE_DUPLICATE_ATTENDANCE, attendanceRecordList::toModelType);
     }
 
     @Test
@@ -91,13 +93,11 @@ public class JsonAdaptedAttendanceRecordListTest {
         JsonAdaptedAttendanceRecord recordWeekThree =
                 new JsonAdaptedAttendanceRecord(new Week(Index.fromOneBased(3)), VALID_ATTENDANCE_RECORD);
         List<JsonAdaptedAttendanceRecord> records =
-                Arrays.asList(JsonAdaptedAttendanceRecordTest.VALID_JSON_ADAPTED_ATTENDANCE_RECORD_WEEK_TWO,
-                        recordWeekThree);
+                Arrays.asList(VALID_JSON_ADAPTED_ATTENDANCE_RECORD_WEEK_TWO, recordWeekThree);
         JsonAdaptedAttendanceRecordList attendanceRecordList =
                 new JsonAdaptedAttendanceRecordList(records);
         assertThrows(IllegalValueException.class,
-                JsonAdaptedAttendanceRecordList.MESSAGE_INVALID_RECORD,
-                attendanceRecordList::toModelType);
+                MESSAGE_INVALID_RECORD, attendanceRecordList::toModelType);
     }
 
     @Test
@@ -106,8 +106,7 @@ public class JsonAdaptedAttendanceRecordListTest {
         JsonAdaptedAttendanceRecordList attendanceRecordList =
                 new JsonAdaptedAttendanceRecordList(nullContainingList);
         assertThrows(IllegalValueException.class,
-                JsonAdaptedAttendanceRecordList.MESSAGE_INVALID_RECORD,
-                attendanceRecordList::toModelType);
+                MESSAGE_INVALID_RECORD, attendanceRecordList::toModelType);
     }
 
     @Test
@@ -115,12 +114,10 @@ public class JsonAdaptedAttendanceRecordListTest {
         JsonAdaptedAttendanceRecord recordWeekOne =
                 new JsonAdaptedAttendanceRecord(new Week(Index.fromOneBased(1)), VALID_ATTENDANCE_RECORD);
         List<JsonAdaptedAttendanceRecord> records =
-                Arrays.asList(JsonAdaptedAttendanceRecordTest.EMPTY_JSON_ADAPTED_ATTENDANCE_RECORD_WEEK_ONE,
-                recordWeekOne);
+                Arrays.asList(EMPTY_JSON_ADAPTED_ATTENDANCE_RECORD_WEEK_ONE, recordWeekOne);
         JsonAdaptedAttendanceRecordList attendanceRecordList =
                 new JsonAdaptedAttendanceRecordList(records);
         assertThrows(IllegalValueException.class,
-                JsonAdaptedAttendanceRecordList.MESSAGE_DUPLICATE_ATTENDANCE_RECORD,
-                attendanceRecordList::toModelType);
+                MESSAGE_DUPLICATE_ATTENDANCE_RECORD, attendanceRecordList::toModelType);
     }
 }

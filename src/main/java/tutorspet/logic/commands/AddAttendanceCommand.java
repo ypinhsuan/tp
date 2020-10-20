@@ -7,6 +7,11 @@ import static tutorspet.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_STUDENT_IN_MODULE_CLASS;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_WEEK;
 import static tutorspet.commons.util.CollectionUtil.requireAllNonNull;
+import static tutorspet.logic.parser.CliSyntax.PREFIX_CLASS_INDEX;
+import static tutorspet.logic.parser.CliSyntax.PREFIX_LESSON_INDEX;
+import static tutorspet.logic.parser.CliSyntax.PREFIX_PARTICIPATION_SCORE;
+import static tutorspet.logic.parser.CliSyntax.PREFIX_STUDENT_INDEX;
+import static tutorspet.logic.parser.CliSyntax.PREFIX_WEEK;
 import static tutorspet.logic.util.LessonUtil.addAttendanceToLesson;
 import static tutorspet.logic.util.ModuleClassUtil.addModifiedLessonToModuleClass;
 
@@ -14,7 +19,6 @@ import java.util.List;
 
 import tutorspet.commons.core.index.Index;
 import tutorspet.logic.commands.exceptions.CommandException;
-import tutorspet.logic.parser.CliSyntax;
 import tutorspet.model.Model;
 import tutorspet.model.attendance.Attendance;
 import tutorspet.model.attendance.Week;
@@ -33,11 +37,11 @@ public class AddAttendanceCommand extends Command {
             + "lesson in the student manager. "
             + "Note: All indexes and numbers must be positive integers.\n"
             + "Parameters: "
-            + CliSyntax.PREFIX_CLASS_INDEX + "CLASS_INDEX "
-            + CliSyntax.PREFIX_LESSON_INDEX + "LESSON_INDEX "
-            + CliSyntax.PREFIX_STUDENT_INDEX + "STUDENT_INDEX "
-            + CliSyntax.PREFIX_WEEK + "WEEK_NUMBER"
-            + CliSyntax.PREFIX_PARTICIPATION_SCORE + "PARTICIPATION_SCORE (must be an integer between 0 and 100)";
+            + PREFIX_CLASS_INDEX + "CLASS_INDEX "
+            + PREFIX_LESSON_INDEX + "LESSON_INDEX "
+            + PREFIX_STUDENT_INDEX + "STUDENT_INDEX "
+            + PREFIX_WEEK + "WEEK_NUMBER"
+            + PREFIX_PARTICIPATION_SCORE + "PARTICIPATION_SCORE (must be an integer between 0 and 100)";
 
     public static final String MESSAGE_SUCCESS = "New attendance added: %1$s attended week %2$s lesson with "
             + "participation score of %3$s";

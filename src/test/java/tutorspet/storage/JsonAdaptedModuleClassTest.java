@@ -3,6 +3,7 @@ package tutorspet.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_PARTICIPATION_SCORE_33;
 import static tutorspet.storage.JsonAdaptedModuleClass.INVALID_FIELD_MESSAGE_FORMAT;
+import static tutorspet.storage.JsonAdaptedModuleClass.MESSAGE_INVALID_STUDENTS_IN_LESSON;
 import static tutorspet.storage.JsonAdaptedModuleClass.MISSING_FIELD_MESSAGE_FORMAT;
 import static tutorspet.testutil.Assert.assertThrows;
 import static tutorspet.testutil.LessonBuilder.insertAttendanceRecords;
@@ -133,7 +134,7 @@ public class JsonAdaptedModuleClassTest {
                 Collections.singletonList(new JsonAdaptedLesson(lessonWithInvalidStudent));
         JsonAdaptedModuleClass moduleClass = new JsonAdaptedModuleClass(
                 VALID_CLASS_JSON_ADAPTED_NAME, VALID_JSON_ADAPTED_UUIDS, jsonAdaptedLessons);
-        assertThrows(IllegalValueException.class, JsonAdaptedModuleClass.MESSAGE_INVALID_STUDENTS_IN_LESSON,
+        assertThrows(IllegalValueException.class, MESSAGE_INVALID_STUDENTS_IN_LESSON,
                 moduleClass::toModelType);
     }
 }
