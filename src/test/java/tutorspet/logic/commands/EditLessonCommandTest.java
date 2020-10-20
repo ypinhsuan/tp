@@ -7,12 +7,15 @@ import static tutorspet.commons.core.Messages.MESSAGE_INVALID_MODULE_CLASS_DISPL
 import static tutorspet.logic.commands.CommandTestUtil.DESC_LESSON_FRI_8_TO_10;
 import static tutorspet.logic.commands.CommandTestUtil.DESC_LESSON_WED_2_TO_4;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_DAY_FRI_LESSON_FRI_8_TO_10;
+import static tutorspet.logic.commands.CommandTestUtil.VALID_END_TIME_1000_LESSON_FRI_8_TO_10;
+import static tutorspet.logic.commands.CommandTestUtil.VALID_START_TIME_1400_LESSON_WED_2_TO_4;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_VENUE_S17_0302_LESSON_FRI_8_TO_10;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static tutorspet.logic.commands.CommandTestUtil.showModuleClassAtIndex;
 import static tutorspet.logic.commands.EditLessonCommand.MESSAGE_DUPLICATE_LESSON;
 import static tutorspet.logic.commands.EditLessonCommand.MESSAGE_EDIT_LESSON_SUCCESS;
+import static tutorspet.model.lesson.Lesson.MESSAGE_CONSTRAINTS;
 import static tutorspet.testutil.Assert.assertThrows;
 import static tutorspet.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 import static tutorspet.testutil.TypicalIndexes.INDEX_SECOND_ITEM;
@@ -206,6 +209,26 @@ public class EditLessonCommandTest {
                 new EditLessonDescriptorBuilder().withVenue(VALID_VENUE_S17_0302_LESSON_FRI_8_TO_10).build());
 
         assertCommandFailure(editLessonCommand, model, MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_invalidStartTime_failure() {
+        Index moduleClassIndex = INDEX_FIRST_ITEM;
+        Index lessonIndex = INDEX_FIRST_ITEM;
+        EditLessonCommand editLessonCommand = new EditLessonCommand(moduleClassIndex, lessonIndex,
+                new EditLessonDescriptorBuilder().withStartTime(VALID_START_TIME_1400_LESSON_WED_2_TO_4).build());
+
+        assertCommandFailure(editLessonCommand, model, MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
+    public void execute_invalidEndTime_failure() {
+        Index moduleClassIndex = INDEX_FIRST_ITEM;
+        Index lessonIndex = INDEX_FIRST_ITEM;
+        EditLessonCommand editLessonCommand = new EditLessonCommand(moduleClassIndex, lessonIndex,
+                new EditLessonDescriptorBuilder().withEndTime(VALID_END_TIME_1000_LESSON_FRI_8_TO_10).build());
+
+        assertCommandFailure(editLessonCommand, model, MESSAGE_CONSTRAINTS);
     }
 
     @Test

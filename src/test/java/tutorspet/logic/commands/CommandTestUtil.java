@@ -2,6 +2,10 @@ package tutorspet.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static tutorspet.logic.commands.EditAttendanceCommand.EditAttendanceDescriptor;
+import static tutorspet.logic.commands.EditLessonCommand.EditLessonDescriptor;
+import static tutorspet.logic.commands.EditModuleClassCommand.EditModuleClassDescriptor;
+import static tutorspet.logic.commands.EditStudentCommand.EditStudentDescriptor;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_DAY;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_END_TIME;
@@ -77,8 +81,8 @@ public class CommandTestUtil {
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "good*"; // '*' not allowed in tags
 
-    public static final EditStudentCommand.EditStudentDescriptor DESC_AMY;
-    public static final EditStudentCommand.EditStudentDescriptor DESC_BOB;
+    public static final EditStudentDescriptor DESC_AMY;
+    public static final EditStudentDescriptor DESC_BOB;
 
     static {
         DESC_AMY = new EditStudentDescriptorBuilder(new StudentBuilder().withUuid(VALID_UUID_AMY).build())
@@ -99,8 +103,8 @@ public class CommandTestUtil {
     public static final String NAME_DESC_CS2103T_TUTORIAL = " " + PREFIX_NAME + VALID_NAME_CS2103T_TUTORIAL;
     public static final String NAME_DESC_CS2100_LAB = " " + PREFIX_NAME + VALID_NAME_CS2100_LAB;
 
-    public static final EditModuleClassCommand.EditModuleClassDescriptor DESC_CS2100_LAB;
-    public static final EditModuleClassCommand.EditModuleClassDescriptor DESC_CS2103T_TUTORIAL;
+    public static final EditModuleClassDescriptor DESC_CS2100_LAB;
+    public static final EditModuleClassDescriptor DESC_CS2103T_TUTORIAL;
 
     static {
         DESC_CS2100_LAB = new EditModuleClassDescriptorBuilder().withName(VALID_NAME_CS2100_LAB).build();
@@ -109,6 +113,7 @@ public class CommandTestUtil {
 
     // lesson-related constants
 
+    public static final String VALID_START_TIME_0900 = "09:00";
     public static final String VALID_START_TIME_1400_LESSON_WED_2_TO_4 = "14:00";
     public static final String VALID_START_TIME_0800_LESSON_FRI_8_TO_10 = "08:00";
     public static final String VALID_END_TIME_1600_LESSON_WED_2_TO_4 = "16:00";
@@ -153,8 +158,8 @@ public class CommandTestUtil {
     public static final String INVALID_NUMBER_OF_OCCURRENCES_DESC =
             " " + PREFIX_NUMBER_OF_OCCURRENCES + "asd"; // 'asd' is not a number
 
-    public static final EditLessonCommand.EditLessonDescriptor DESC_LESSON_WED_2_TO_4;
-    public static final EditLessonCommand.EditLessonDescriptor DESC_LESSON_FRI_8_TO_10;
+    public static final EditLessonDescriptor DESC_LESSON_WED_2_TO_4;
+    public static final EditLessonDescriptor DESC_LESSON_FRI_8_TO_10;
 
     static {
         DESC_LESSON_WED_2_TO_4 = new EditLessonDescriptorBuilder(new LessonBuilder().build())
@@ -200,8 +205,8 @@ public class CommandTestUtil {
         VALID_ATTENDANCE_LIST.put(UUID.fromString(VALID_UUID_BOB), new Attendance(VALID_PARTICIPATION_SCORE_51));
     }
 
-    public static final EditAttendanceCommand.EditAttendanceDescriptor DESC_ATTENDANCE_33;
-    public static final EditAttendanceCommand.EditAttendanceDescriptor DESC_ATTENDANCE_80;
+    public static final EditAttendanceDescriptor DESC_ATTENDANCE_33;
+    public static final EditAttendanceDescriptor DESC_ATTENDANCE_80;
 
     static {
         DESC_ATTENDANCE_33 =

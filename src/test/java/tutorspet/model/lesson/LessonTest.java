@@ -9,6 +9,7 @@ import static tutorspet.logic.commands.CommandTestUtil.VALID_DAY_WED_LESSON_WED_
 import static tutorspet.logic.commands.CommandTestUtil.VALID_END_TIME_1600_LESSON_WED_2_TO_4;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_NUMBER_OF_OCCURRENCES_7_LESSON_WED_2_TO_4;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_PARTICIPATION_SCORE_33;
+import static tutorspet.logic.commands.CommandTestUtil.VALID_START_TIME_0900;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_START_TIME_1400_LESSON_WED_2_TO_4;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_UUID_AMY;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_VENUE_COM1_B111_LESSON_WED_2_TO_4;
@@ -93,7 +94,7 @@ public class LessonTest {
 
         // different start time -> returns false
         Lesson editedLesson = new LessonBuilder(LESSON_FRI_8_TO_10)
-                .withStartTime(parse(VALID_START_TIME_1400_LESSON_WED_2_TO_4,
+                .withStartTime(parse(VALID_START_TIME_0900,
                         TIME_FORMATTER)).build();
         assertFalse(LESSON_FRI_8_TO_10.isSameLesson(editedLesson));
 
@@ -174,7 +175,7 @@ public class LessonTest {
 
         // different start time -> returns false
         Lesson editedLesson = new LessonBuilder(LESSON_FRI_8_TO_10)
-                .withStartTime(parse(VALID_START_TIME_1400_LESSON_WED_2_TO_4,
+                .withStartTime(parse(VALID_START_TIME_0900,
                         TIME_FORMATTER)).build();
         assertFalse(LESSON_FRI_8_TO_10.equals(editedLesson));
 

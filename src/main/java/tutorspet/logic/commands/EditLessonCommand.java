@@ -59,7 +59,7 @@ public class EditLessonCommand extends Command {
 
     private final Index moduleClassIndex;
     private final Index lessonIndex;
-    private final EditLessonCommand.EditLessonDescriptor editLessonDescriptor;
+    private final EditLessonDescriptor editLessonDescriptor;
 
     /**
      * @param moduleClassIndex in the filtered class list.
@@ -67,12 +67,12 @@ public class EditLessonCommand extends Command {
      * @param editLessonDescriptor details to edit the class with.
      */
     public EditLessonCommand(
-            Index moduleClassIndex, Index lessonIndex, EditLessonCommand.EditLessonDescriptor editLessonDescriptor) {
+            Index moduleClassIndex, Index lessonIndex, EditLessonDescriptor editLessonDescriptor) {
         requireAllNonNull(moduleClassIndex, lessonIndex, editLessonDescriptor);
 
         this.moduleClassIndex = moduleClassIndex;
         this.lessonIndex = lessonIndex;
-        this.editLessonDescriptor = new EditLessonCommand.EditLessonDescriptor(editLessonDescriptor);
+        this.editLessonDescriptor = new EditLessonDescriptor(editLessonDescriptor);
     }
 
     @Override
@@ -162,7 +162,7 @@ public class EditLessonCommand extends Command {
         /**
          * Copy constructor.
          */
-        public EditLessonDescriptor(EditLessonCommand.EditLessonDescriptor toCopy) {
+        public EditLessonDescriptor(EditLessonDescriptor toCopy) {
             setStartTime(toCopy.startTime);
             setEndTime(toCopy.endTime);
             setDay(toCopy.day);
@@ -216,12 +216,12 @@ public class EditLessonCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditLessonCommand.EditLessonDescriptor)) {
+            if (!(other instanceof EditLessonDescriptor)) {
                 return false;
             }
 
             // state check
-            EditLessonCommand.EditLessonDescriptor e = (EditLessonCommand.EditLessonDescriptor) other;
+            EditLessonDescriptor e = (EditLessonDescriptor) other;
 
             return getStartTime().equals(e.getStartTime())
                     && getEndTime().equals(e.getEndTime())

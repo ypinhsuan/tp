@@ -11,8 +11,8 @@ import static tutorspet.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_VENUE;
 import static tutorspet.logic.parser.ParserUtil.parseIndex;
 import static tutorspet.logic.parser.ParserUtil.parseNumberOfOccurrences;
-import static tutorspet.model.lesson.Lesson.isValidStartTimeEndTime;
 import static tutorspet.model.lesson.Lesson.MESSAGE_CONSTRAINTS;
+import static tutorspet.model.lesson.Lesson.isValidStartTimeEndTime;
 
 import java.time.LocalTime;
 
