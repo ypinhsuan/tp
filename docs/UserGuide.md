@@ -64,7 +64,7 @@ The command box is the area for you to enter your commands. The result of each c
 display box, which is located immediately below the command box.
 
    ![Command box and result display box](images/ugimages/CommandAndDisplayBox.png)
-   Figure 2. The command box and result display box.
+   <br>Figure 2. The command box and result display box.
    
 The main viewing area consists of two sections: **Class** and **Student**
 
@@ -72,19 +72,19 @@ The main viewing area consists of two sections: **Class** and **Student**
  classes in Tutor's Pet, make use of the **`list-class`** command.
  
     ![Class_section](images/ugimages/ClassPanel.png)
-    Figure 3. The class section.
+    <br>Figure 3. The class section.
 
 * The **Student** section displays contains information about students in Tutor's Pet. To view the list of all
  students in Tutor's Pet, make use of the **'list-student`** command.
 
     ![Student_section](images/ugimages/StudentPanel.png)
-    Figure 4. The student section.
+    <br>Figure 4. The student section.
     
 If you would like to change Tutor's Pet theme, double-click on the **Theme** tab at the top of the screen. There are
  3 different themes in Tutor's Pet: **Light**, **Alternate** and **Dark**. 
  
    ![Theme tab](images/ugimages/ThemeTab.png)
-   Figure 5. The Theme tab.
+   <br>Figure 5. The Theme tab.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -258,7 +258,7 @@ Examples:
 
 If you entered the wrong class name or would like to change the name of a class, you can make use of this command.
 
-Format: `edit-class INDEX n/CLASS_NAME`
+Format: `edit-class INDEX n\CLASS_NAME`
 * Edits the class at the specified `INDEX`.
 
 For example:
@@ -278,8 +278,8 @@ Constraints:
 * A new class name must be provided.
 
 Other examples:
-* `find-class CS2030 lab`
-  `edit-class 1 n\CS2030 lab L05`
+* `find-class CS2030 lab`<br>
+  `edit-class 1 n\CS2030 lab L05`<br>
   Edits the name of the 1st class in the results of the find command.
 
 #### Finding class by name : `find-class`
@@ -294,7 +294,7 @@ For example:
  
     ![Find class before](images/ugimages/FindClassBefore.png)
     
-* You find out that you are teaching 2 tutorials this semester.
+* You find out that you are only teaching 2 tutorials this semester and hence decides to accept more classes.
 
     ![Find class after](images/ugimages/FindClassAfter.png)
 
@@ -416,14 +416,14 @@ For example:
      
 * You have one less lesson to teach now.
 
-    ![Delete lesson before](images/ugimages/DeleteLessonBefore.png)
+    ![Delete lesson before](images/ugimages/DeleteLessonAfter.png)
      
 Constraints:
 * The indexes **must be positive whole numbers** 1, 2, 3, …​
 
 Other examples:
-* `find-class CS2030 lab`
-  `delete-lesson c\1 l\1`
+* `find-class CS2030 lab`<br>
+  `delete-lesson c\1 l\1`<br>
   Deletes the 1st lesson in the results of the find command.
 
 ### Managing Attendance Records
@@ -446,15 +446,15 @@ For example:
     ![Add attendance after](images/ugimages/AddAttendanceAfter.png)
 
 Other Examples:
-* `find-class CS2100 lab`
-  `find-student bernice yu`
-  `add-attendance c\1 l\1 s\1 w\10 p\70`
-  Adds the attendance of the 1st student to the 1st lesson of the 1st class in the results of the find commands.
+* `find-class CS2100 lab`<br>
+  `find-student bernice yu`<br>
+  `add-attendance c\1 l\1 s\1 w\10 p\70`<br>
+  Adds the attendance of the 1st student to the 1st lesson of the 1st class in the results of the find commands.<br>
   Attendance recorded is for week 10 and student's participation score is 70.
   
-* `list-student c\1`
-  `add-attendance c\1 l\1 s\2 w\5 p\50`
-  Adds the attendance of the 2nd student in the results of the list command to the 1st lesson of the 1st class.
+* `list-student c\1`<br>
+  `add-attendance c\1 l\1 s\2 w\5 p\50`<br>
+  Adds the attendance of the 2nd student in the results of the list command to the 1st lesson of the 1st class.<br>
   Attendance recorded is for week 5 and student's participation score is 50.
 
 #### Editing an attendance record : `edit-attendance`
@@ -494,10 +494,10 @@ Constraints:
 * The `WEEK` **must be a positive whole number** 1, 2, 3, …​
 
 Other Examples:
-* `find-class CS2100 lab`
-  `find-student bernice yu`
-  `find-attendance c\1 l\1 s\1 w\10`
-  Shows the attendance of the 1st student in the 1st lesson of the first class in the results of the find command.
+* `find-class CS2100 lab`<br>
+  `find-student bernice yu`<br>
+  `find-attendance c\1 l\1 s\1 w\10`<br>
+  Shows the attendance of the 1st student in the 1st lesson of the first class in the results of the find command.<br>
   Attendance shown is for week 10.
  
 * `list-student c\1`
@@ -562,9 +562,9 @@ Format: `display-venue c\1 l\1`
 * Gives the venue of the lesson specified at `CLASS_INDEX` + `LESSON_INDEX`.
 
 For example: 
-* Due to covid, most of your physical lessons have been converted to zoom lessons and thus all the venues are zoom
- links. Your lesson is starting in 10 minutes and it is time to start the session. Hence, you input the command
- `display-venue c\1 l\1` and press <kbd>Enter</kbd>.
+* Due to covid, most of your physical lessons have been converted to zoom lessons and thus all the venues are 
+ in the form of zoom links. Your lesson is starting in 10 minutes and it is time to start the session. Hence, you
+ input the command `display-venue c\1 l\1` and press <kbd>Enter</kbd>.
  
 * You can now proceed to copy the link to that zoom session from the command result box.
 
