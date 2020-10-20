@@ -10,6 +10,8 @@ import static tutorspet.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_VENUE;
 import static tutorspet.logic.util.ModuleClassUtil.addEditedLessonToModuleClass;
 import static tutorspet.model.Model.PREDICATE_SHOW_ALL_MODULE_CLASS;
+import static tutorspet.model.lesson.Lesson.MESSAGE_CONSTRAINTS;
+import static tutorspet.model.lesson.Lesson.isValidStartTimeEndTime;
 
 import java.time.LocalTime;
 import java.util.List;
@@ -106,7 +108,7 @@ public class EditLessonCommand extends Command {
      * {@code NumberOfOccurrences} and {@code AttendanceRecordList} remain unchanged.
      */
     private static Lesson createEditedLesson(
-            Lesson lessonToEdit, EditLessonDescriptor editLessonDescriptor) {
+            Lesson lessonToEdit, EditLessonDescriptor editLessonDescriptor) throws CommandException {
         assert lessonToEdit != null;
         LocalTime updatedStartTime = editLessonDescriptor.getStartTime().orElse(lessonToEdit.getStartTime());
         LocalTime updatedEndTime = editLessonDescriptor.getEndTime().orElse(lessonToEdit.getEndTime());
@@ -115,6 +117,12 @@ public class EditLessonCommand extends Command {
 
         NumberOfOccurrences originalNumberOfOccurrences = lessonToEdit.getNumberOfOccurrences();
         AttendanceRecordList attendanceRecordList = lessonToEdit.getAttendanceRecordList();
+
+        // check that start time and end time are valid
+        if (!isValidStartTimeEndTime(updatedStartTime, updatedEndTime)) {
+            throw new CommandException(MESSAGE_CONSTRAINTS);
+        }
+
         return new Lesson(updatedStartTime, updatedEndTime, updatedDay, originalNumberOfOccurrences,
                 updatedVenue, attendanceRecordList);
     }
