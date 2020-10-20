@@ -1,0 +1,10 @@
+@startuml
+Class Student {
+    - uuid:UUID
+    - name:Name
+    - telegram:Telegram
+    - email:Email
+    - tags:Set<Tag> = new HashSet<>()
+---
+}
+@enduml
