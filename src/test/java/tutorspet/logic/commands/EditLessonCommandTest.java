@@ -115,8 +115,8 @@ public class EditLessonCommandTest {
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
         EditLessonCommand editLessonCommand = new EditLessonCommand(
-                INDEX_FIRST_ITEM, INDEX_FIRST_ITEM, new EditLessonDescriptor());
-        System.out.println(new EditLessonDescriptor().getDay());
+                INDEX_FIRST_ITEM, INDEX_FIRST_ITEM, new EditLessonCommand.EditLessonDescriptor());
+
         Lesson editedLesson = model.getFilteredModuleClassList().get(INDEX_FIRST_ITEM.getZeroBased())
                 .getLessons().get(INDEX_FIRST_ITEM.getZeroBased());
 

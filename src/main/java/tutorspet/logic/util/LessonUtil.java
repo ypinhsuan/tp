@@ -1,19 +1,18 @@
 package tutorspet.logic.util;
 
 import static tutorspet.commons.util.CollectionUtil.requireAllNonNull;
-import static tutorspet.logic.commands.AddAttendanceCommand.MESSAGE_DUPLICATE_ATTENDANCE;
-import static tutorspet.logic.commands.DeleteAttendanceCommand.MESSAGE_MISSING_ATTENDANCE;
+import static tutorspet.logic.util.AttendanceRecordListUtil.addAttendanceToAttendanceRecordList;
+import static tutorspet.logic.util.AttendanceRecordListUtil.editAttendanceInAttendanceRecordList;
+import static tutorspet.logic.util.AttendanceRecordListUtil.getAttendanceFromAttendanceRecordList;
+import static tutorspet.logic.util.AttendanceRecordListUtil.getAttendances;
+import static tutorspet.logic.util.AttendanceRecordListUtil.removeAttendanceFromAttendanceRecordList;
 
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.Optional;
 
 import tutorspet.logic.commands.exceptions.CommandException;
 import tutorspet.model.attendance.Attendance;
-import tutorspet.model.attendance.AttendanceRecord;
 import tutorspet.model.attendance.AttendanceRecordList;
 import tutorspet.model.attendance.Week;
 import tutorspet.model.lesson.Day;
@@ -28,33 +27,22 @@ import tutorspet.model.student.Student;
 public class LessonUtil {
 
     /**
-     * Adds {@code attendanceToAdd} to {@code targetLesson}.
-     * All existing {@code Attendance}s in {@code targetLesson} are copied to the new {@code Lesson}.
+     * Returns a {@code Lesson} where the {@code attendanceToAdd} has been added to the {@code targetLesson}.
      *
-     * @throws CommandException if an {@code Attendance} already exists for the {@code targetStudent}
-     * in the {@code targetWeek}.
+     * @throws CommandException if any of the following violations are found:
+     * - the {@code targetWeek} does not exist in the {@code targetLesson}<br/>
+     * - there is an existing {@code Attendance} for the {@code targetStudent} in the {@code targetWeek}<br/>
      */
     public static Lesson addAttendanceToLesson(
             Lesson targetLesson, Student targetStudent, Week targetWeek, Attendance attendanceToAdd)
             throws CommandException {
         requireAllNonNull(targetLesson, targetStudent, targetWeek, attendanceToAdd);
 
-        if (targetLesson.getAttendanceRecordList().hasAttendance(targetStudent, targetWeek)) {
-            throw new CommandException(MESSAGE_DUPLICATE_ATTENDANCE);
-        }
+        AttendanceRecordList targetAttendanceRecordList = targetLesson.getAttendanceRecordList();
 
-        List<AttendanceRecord> attendanceRecords = targetLesson.getAttendanceRecordList().getAttendanceRecordList();
-        Map<UUID, Attendance> record = targetLesson.getAttendanceRecordList()
-                .getAttendanceRecord(targetWeek).getAttendanceRecord();
-        Map<UUID, Attendance> updatedRecord = new HashMap<>(record);
-        updatedRecord.put(targetStudent.getUuid(), attendanceToAdd);
-
-        assert updatedRecord.size() == record.size() + 1;
-
-        AttendanceRecord updatedAttendanceRecord = new AttendanceRecord(updatedRecord);
-        List<AttendanceRecord> updatedAttendanceRecords = new ArrayList<>(attendanceRecords);
-        updatedAttendanceRecords.set(targetWeek.getZeroBasedWeekIndex(), updatedAttendanceRecord);
-        AttendanceRecordList updatedAttendanceRecordList = new AttendanceRecordList(updatedAttendanceRecords);
+        AttendanceRecordList updatedAttendanceRecordList =
+                addAttendanceToAttendanceRecordList(targetAttendanceRecordList,
+                        targetStudent, targetWeek, attendanceToAdd);
 
         // unchanged lesson fields
         LocalTime startTime = targetLesson.getStartTime();
@@ -67,35 +55,23 @@ public class LessonUtil {
     }
 
     /**
-     * Edits the {@code Attendance} of the {@code targetStudent} in the {@code targetWeek} from the
-     * {@code targetLesson}. All other existing {@code Attendance}s in {@code targetLesson} are copied
-     * to the new {@code Lesson}.
+     * Returns a {@code Lesson} where the {@code attendanceToSet} has replaced the existing
+     * {@code Attendance} for the {@code targetStudent} in the {@code targetWeek} in the {@code targetLesson}.
      *
-     * @throws CommandException if the {@code Attendance} of the {@code targetStudent} in the {@code targetWeek}
-     * does not exist.
+     * @throws CommandException if any of the following violations are found:
+     * - the {@code targetWeek} does not exist in the {@code targetLesson}<br/>
+     * - the {@code Attendance} of the {@code targetStudent} in the {@code targetWeek} does not exist<br/>
      */
     public static Lesson editAttendanceInLesson(
-            Lesson targetLesson, Student targetStudent, Week targetWeek, Attendance attendanceToEdit)
+            Lesson targetLesson, Student targetStudent, Week targetWeek, Attendance attendanceToSet)
             throws CommandException {
-        requireAllNonNull(targetLesson, targetStudent, targetWeek, attendanceToEdit);
+        requireAllNonNull(targetLesson, targetStudent, targetWeek, attendanceToSet);
 
-        List<AttendanceRecord> attendanceRecords = targetLesson.getAttendanceRecordList().getAttendanceRecordList();
-        Map<UUID, Attendance> record = targetLesson.getAttendanceRecordList()
-                .getAttendanceRecord(targetWeek).getAttendanceRecord();
+        AttendanceRecordList targetAttendanceRecordList = targetLesson.getAttendanceRecordList();
 
-        if (!record.containsKey(targetStudent.getUuid())) {
-            throw new CommandException(MESSAGE_MISSING_ATTENDANCE);
-        }
-
-        Map<UUID, Attendance> updatedRecord = new HashMap<>(record);
-        updatedRecord.put(targetStudent.getUuid(), attendanceToEdit);
-
-        assert updatedRecord.size() == record.size();
-
-        AttendanceRecord updatedAttendanceRecord = new AttendanceRecord(updatedRecord);
-        List<AttendanceRecord> updatedAttendanceRecords = new ArrayList<>(attendanceRecords);
-        updatedAttendanceRecords.set(targetWeek.getZeroBasedWeekIndex(), updatedAttendanceRecord);
-        AttendanceRecordList updatedAttendanceRecordList = new AttendanceRecordList(updatedAttendanceRecords);
+        AttendanceRecordList updatedAttendanceRecordList =
+                editAttendanceInAttendanceRecordList(targetAttendanceRecordList,
+                        targetStudent, targetWeek, attendanceToSet);
 
         // unchanged lesson fields
         LocalTime startTime = targetLesson.getStartTime();
@@ -108,35 +84,21 @@ public class LessonUtil {
     }
 
     /**
-     * Removes the {@code Attendance} of the {@code targetStudent} in the {@code targetWeek} from the
-     * {@code targetLesson}. All other existing {@code Attendance}s in {@code targetLesson} are copied
-     * to the new {@code Lesson}.
+     * Returns a {@code Lesson} where the {@code Attendance} for the {@code targetStudent} in the
+     * {@code targetWeek} in the {@code targetLesson} has been removed.
      *
-     * @throws CommandException if the {@code Attendance} of the {@code targetStudent} in the {@code targetWeek}
-     * does not exist.
+     * @throws CommandException if any of the following violations are found:
+     * - the {@code targetWeek} does not exist in the {@code targetLesson}<br/>
+     * - the {@code Attendance} of the {@code targetStudent} in the {@code targetWeek} does not exist<br/>
      */
     public static Lesson deleteAttendanceFromLesson(
             Lesson targetLesson, Student targetStudent, Week targetWeek) throws CommandException {
         requireAllNonNull(targetLesson, targetStudent, targetWeek);
 
-        List<AttendanceRecord> attendanceRecords = targetLesson.getAttendanceRecordList().getAttendanceRecordList();
-        Map<UUID, Attendance> record = targetLesson.getAttendanceRecordList()
-                .getAttendanceRecord(targetWeek).getAttendanceRecord();
-        Map<UUID, Attendance> updatedRecord = new HashMap<>(record);
+        AttendanceRecordList targetAttendanceRecordList = targetLesson.getAttendanceRecordList();
 
-        if (!updatedRecord.containsKey(targetStudent.getUuid())) {
-            throw new CommandException(MESSAGE_MISSING_ATTENDANCE);
-        }
-
-        // delete attendance record
-        updatedRecord.remove(targetStudent.getUuid());
-
-        assert updatedRecord.size() == record.size() - 1;
-
-        AttendanceRecord updatedAttendanceRecord = new AttendanceRecord(updatedRecord);
-        List<AttendanceRecord> updatedAttendanceRecords = new ArrayList<>(attendanceRecords);
-        updatedAttendanceRecords.set(targetWeek.getZeroBasedWeekIndex(), updatedAttendanceRecord);
-        AttendanceRecordList updatedAttendanceRecordList = new AttendanceRecordList(updatedAttendanceRecords);
+        AttendanceRecordList updatedAttendanceRecordList =
+                removeAttendanceFromAttendanceRecordList(targetAttendanceRecordList, targetStudent, targetWeek);
 
         // unchanged lesson fields
         LocalTime startTime = targetLesson.getStartTime();
@@ -146,5 +108,34 @@ public class LessonUtil {
         Venue venue = targetLesson.getVenue();
 
         return new Lesson(startTime, endTime, day, numberOfOccurrences, venue, updatedAttendanceRecordList);
+    }
+
+    /**
+     * Returns the {@code Attendance} for the {@code targetStudent} in the {@code targetWeek} in the
+     * {@code targetLesson}.
+     *
+     * @throws CommandException if any of the following violations are found:
+     * - the {@code targetWeek} does not exist in the {@code targetLesson}<br/>
+     * - the {@code Attendance} of the {@code targetStudent} in the {@code targetWeek} does not exist<br/>
+     */
+    public static Attendance getAttendanceFromLesson(Lesson targetLesson, Student targetStudent, Week targetWeek)
+            throws CommandException {
+        requireAllNonNull(targetLesson, targetStudent, targetWeek);
+
+        AttendanceRecordList targetAttendanceRecordList = targetLesson.getAttendanceRecordList();
+
+        return getAttendanceFromAttendanceRecordList(targetAttendanceRecordList, targetStudent, targetWeek);
+    }
+
+    /**
+     * Returns an ordered and unmodifiable {@code List<Optional<Attendance>} summarising the {@code targetStudent}'s
+     * attendance in the respective weeks.
+     */
+    public static List<Optional<Attendance>> getAttendancesFromLesson(Lesson targetLesson, Student targetStudent) {
+        requireAllNonNull(targetLesson, targetStudent);
+
+        AttendanceRecordList targetAttendanceRecordList = targetLesson.getAttendanceRecordList();
+
+        return getAttendances(targetAttendanceRecordList, targetStudent);
     }
 }
