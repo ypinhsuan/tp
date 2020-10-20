@@ -54,7 +54,7 @@ public class AttendanceRecordListUtil {
      * {@code targetAttendanceRecordList}.
      *
      * @throws CommandException if the {@code targetWeek} does not exist in the {@code targetAttendanceRecordList} or
-     * if there does not exist an existing {@code Attendance} for the {@code targetStudent}.
+     * if the {@code Attendance} of the {@code targetStudent} in the {@code targetWeek} does not exist.
      */
     public static AttendanceRecordList editAttendanceInAttendanceRecordList(
             AttendanceRecordList targetAttendanceRecordList,
@@ -82,7 +82,7 @@ public class AttendanceRecordListUtil {
      * {@code targetWeek} in the {@code targetAttendanceRecordList} has been removed.
      *
      * @throws CommandException if the {@code targetWeek} does not exist in the {@code targetAttendanceRecordList} or
-     * if there does not exist an existing {@code Attendance} for the {@code targetStudent}.
+     * if the {@code Attendance} of the {@code targetStudent} in the {@code targetWeek} does not exist.
      */
     public static AttendanceRecordList removeAttendanceFromAttendanceRecordList(
             AttendanceRecordList targetAttendanceRecordList,
@@ -110,7 +110,7 @@ public class AttendanceRecordListUtil {
      * {@code targetAttendanceRecordList}.
      *
      * @throws CommandException if the {@code targetWeek} does not exist in the {@code targetAttendanceRecordList} or
-     * if there does not exist an existing {@code Attendance} for the {@code targetStudent}.
+     * if the {@code Attendance} of the {@code targetStudent} in the {@code targetWeek} does not exist.
      */
     public static Attendance getAttendanceFromAttendanceRecordList(
             AttendanceRecordList targetAttendanceRecordList, Student targetStudent,

@@ -133,25 +133,29 @@ public class ModuleClassUtil {
      * Returns a {@code ModuleClass} where the {@code attendanceToAdd} has been added to the {@code Lesson} at
      * the {@code lessonIndex} in the {@code targetModuleClass}.
      *
-     * @throws CommandException if the {@code targetStudent} is not part of the {@code targetModuleClass} or
-     * an {@code Attendance} already exists for the {@code targetStudent} in the {@code targetWeek}.
+     * @throws CommandException if any of the following violations are found:
+     * - the {@code targetStudent} is not part of the {@code targetModuleClass}<br/>
+     * - the {@code lessonIndex} is invalid<br/>
+     * - the {@code targetWeek} does not exist in the {@code Lesson} as given by the {@code lessonIndex}<br/>
+     * - there is an existing {@code Attendance} for the {@code targetStudent} in the {@code targetWeek}<br/>
      */
-    public static ModuleClass addAttendanceToModuleClass(ModuleClass targetModuleClass, Index lessonIndex, Week week,
-                                                         Student targetStudent, Attendance attendanceToAdd)
+    public static ModuleClass addAttendanceToModuleClass(ModuleClass targetModuleClass, Index lessonIndex,
+                                                         Week targetWeek, Student targetStudent,
+                                                         Attendance attendanceToAdd)
             throws CommandException {
-        requireAllNonNull(targetModuleClass, lessonIndex, week, targetStudent, attendanceToAdd);
+        requireAllNonNull(targetModuleClass, lessonIndex, targetWeek, targetStudent, attendanceToAdd);
 
         if (!targetModuleClass.hasStudentUuid(targetStudent.getUuid())) {
             throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_IN_MODULE_CLASS);
         }
 
-        if (lessonIndex.getZeroBased() >= targetModuleClass.getLessons().size()) {
+        if (lessonIndex.getOneBased() > targetModuleClass.getLessons().size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
         }
 
         Lesson targetLesson = targetModuleClass.getLessons().get(lessonIndex.getZeroBased());
 
-        Lesson modifiedLesson = addAttendanceToLesson(targetLesson, targetStudent, week, attendanceToAdd);
+        Lesson modifiedLesson = addAttendanceToLesson(targetLesson, targetStudent, targetWeek, attendanceToAdd);
 
         return updateLessonInModuleClass(targetModuleClass, lessonIndex, modifiedLesson);
     }
@@ -161,25 +165,29 @@ public class ModuleClassUtil {
      * {@code Attendance} for the {@code targetStudent} in the {@code targetWeek} in the {@code Lesson} at
      * the {@code lessonIndex} in the {@code targetModuleClass}.
      *
-     * @throws CommandException if the {@code targetStudent} is not part of the {@code targetModuleClass} or
-     * the {@code Attendance} of the {@code targetStudent} in the {@code targetWeek} does not exist.
+     * @throws CommandException if any of the following violations are found:
+     * - the {@code targetStudent} is not part of the {@code targetModuleClass}<br/>
+     * - the {@code lessonIndex} is invalid<br/>
+     * - the {@code targetWeek} does not exist in the {@code Lesson} as given by the {@code lessonIndex}<br/>
+     * - the {@code Attendance} of the {@code targetStudent} in the {@code targetWeek} does not exist<br/>
      */
-    public static ModuleClass editAttendanceInModuleClass(ModuleClass targetModuleClass, Index lessonIndex, Week week,
-                                                          Student targetStudent, Attendance attendanceToSet)
+    public static ModuleClass editAttendanceInModuleClass(ModuleClass targetModuleClass, Index lessonIndex,
+                                                          Week targetWeek, Student targetStudent,
+                                                          Attendance attendanceToSet)
         throws CommandException {
-        requireAllNonNull(targetModuleClass, lessonIndex, week, targetStudent, attendanceToSet);
+        requireAllNonNull(targetModuleClass, lessonIndex, targetWeek, targetStudent, attendanceToSet);
 
         if (!targetModuleClass.hasStudentUuid(targetStudent.getUuid())) {
             throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_IN_MODULE_CLASS);
         }
 
-        if (lessonIndex.getZeroBased() >= targetModuleClass.getLessons().size()) {
+        if (lessonIndex.getOneBased() > targetModuleClass.getLessons().size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
         }
 
         Lesson targetLesson = targetModuleClass.getLessons().get(lessonIndex.getZeroBased());
 
-        Lesson modifiedLesson = editAttendanceInLesson(targetLesson, targetStudent, week, attendanceToSet);
+        Lesson modifiedLesson = editAttendanceInLesson(targetLesson, targetStudent, targetWeek, attendanceToSet);
 
         return updateLessonInModuleClass(targetModuleClass, lessonIndex, modifiedLesson);
     }
@@ -189,9 +197,11 @@ public class ModuleClassUtil {
      * {@code targetWeek} in the {@code Lesson} at the {@code lessonIndex} in {@code targetModuleClass}
      * has been removed.
      *
-     * @throws CommandException if the {@code targetStudent} is not part of the {@code targetModuleClass} or
-     * the {@code lessonIndex} is invalid or if the {@code Attendance} of the {@code targetStudent}
-     * in the {@code targetWeek} does not exist.
+     * @throws CommandException if any of the following violations are found:
+     * - the {@code targetStudent} is not part of the {@code targetModuleClass}<br/>
+     * - the {@code lessonIndex} is invalid<br/>
+     * - the {@code targetWeek} does not exist in the {@code Lesson} as given by the {@code lessonIndex}<br/>
+     * - the {@code Attendance} of the {@code targetStudent} in the {@code targetWeek} does not exist<br/>
      */
     public static ModuleClass deleteAttendanceFromModuleClass(ModuleClass targetModuleClass, Index lessonIndex,
                                                               Week week, Student targetStudent)
@@ -202,7 +212,7 @@ public class ModuleClassUtil {
             throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_IN_MODULE_CLASS);
         }
 
-        if (lessonIndex.getZeroBased() >= targetModuleClass.getLessons().size()) {
+        if (lessonIndex.getOneBased() > targetModuleClass.getLessons().size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
         }
 
@@ -217,25 +227,28 @@ public class ModuleClassUtil {
      * Returns the {@code Attendance} for the {@code targetStudent} in the {@code targetWeek} in the
      * {@code Lesson} at the {@code lessonIndex}.
      *
-     * @throws CommandException if the {@code targetStudent} is not part of the {@code targetModuleClass} or
-     * the {@code lessonIndex} is invalid or if the {@code Attendance} of the {@code targetStudent}
-     * in the {@code targetWeek} does not exist.
+     * @throws CommandException if any of the following violations are found:
+     * - the {@code targetStudent} is not part of the {@code targetModuleClass}<br/>
+     * - the {@code lessonIndex} is invalid<br/>
+     * - the {@code targetWeek} does not exist in the {@code Lesson} as given by the {@code lessonIndex}<br/>
+     * - the {@code Attendance} of the {@code targetStudent} in the {@code targetWeek} does not exist<br/>
      */
-    public static Attendance getAttendanceFromModuleClass(ModuleClass targetModuleClass, Index lessonIndex, Week week,
-                                                          Student targetStudent) throws CommandException {
-        requireAllNonNull(targetModuleClass, lessonIndex, week, targetStudent);
+    public static Attendance getAttendanceFromModuleClass(ModuleClass targetModuleClass, Index lessonIndex,
+                                                          Week targetWeek, Student targetStudent)
+            throws CommandException {
+        requireAllNonNull(targetModuleClass, lessonIndex, targetWeek, targetStudent);
 
         if (!targetModuleClass.hasStudentUuid(targetStudent.getUuid())) {
             throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_IN_MODULE_CLASS);
         }
 
-        if (lessonIndex.getZeroBased() >= targetModuleClass.getLessons().size()) {
+        if (lessonIndex.getOneBased() > targetModuleClass.getLessons().size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
         }
 
         Lesson targetLesson = targetModuleClass.getLessons().get(lessonIndex.getZeroBased());
 
-        return getAttendanceFromLesson(targetLesson, targetStudent, week);
+        return getAttendanceFromLesson(targetLesson, targetStudent, targetWeek);
     }
 
     // private methods

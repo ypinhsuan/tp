@@ -29,8 +29,9 @@ public class LessonUtil {
     /**
      * Returns a {@code Lesson} where the {@code attendanceToAdd} has been added to the {@code targetLesson}.
      *
-     * @throws CommandException if an {@code Attendance} already exists for the {@code targetStudent}
-     * in the {@code targetWeek}.
+     * @throws CommandException if any of the following violations are found:
+     * - the {@code targetWeek} does not exist in the {@code targetLesson}<br/>
+     * - there is an existing {@code Attendance} for the {@code targetStudent} in the {@code targetWeek}<br/>
      */
     public static Lesson addAttendanceToLesson(
             Lesson targetLesson, Student targetStudent, Week targetWeek, Attendance attendanceToAdd)
@@ -57,8 +58,9 @@ public class LessonUtil {
      * Returns a {@code Lesson} where the {@code attendanceToSet} has replaced the existing
      * {@code Attendance} for the {@code targetStudent} in the {@code targetWeek} in the {@code targetLesson}.
      *
-     * @throws CommandException if the {@code Attendance} of the {@code targetStudent} in the {@code targetWeek}
-     * does not exist.
+     * @throws CommandException if any of the following violations are found:
+     * - the {@code targetWeek} does not exist in the {@code targetLesson}<br/>
+     * - the {@code Attendance} of the {@code targetStudent} in the {@code targetWeek} does not exist<br/>
      */
     public static Lesson editAttendanceInLesson(
             Lesson targetLesson, Student targetStudent, Week targetWeek, Attendance attendanceToSet)
@@ -85,8 +87,9 @@ public class LessonUtil {
      * Returns a {@code Lesson} where the {@code Attendance} for the {@code targetStudent} in the
      * {@code targetWeek} in the {@code targetLesson} has been removed.
      *
-     * @throws CommandException if the {@code Attendance} of the {@code targetStudent} in the {@code targetWeek}
-     * does not exist.
+     * @throws CommandException if any of the following violations are found:
+     * - the {@code targetWeek} does not exist in the {@code targetLesson}<br/>
+     * - the {@code Attendance} of the {@code targetStudent} in the {@code targetWeek} does not exist<br/>
      */
     public static Lesson deleteAttendanceFromLesson(
             Lesson targetLesson, Student targetStudent, Week targetWeek) throws CommandException {
@@ -111,8 +114,9 @@ public class LessonUtil {
      * Returns the {@code Attendance} for the {@code targetStudent} in the {@code targetWeek} in the
      * {@code targetLesson}.
      *
-     * @throws CommandException if the {@code Attendance} of the {@code targetStudent} in the {@code targetWeek}
-     * does not exist.
+     * @throws CommandException if any of the following violations are found:
+     * - the {@code targetWeek} does not exist in the {@code targetLesson}<br/>
+     * - the {@code Attendance} of the {@code targetStudent} in the {@code targetWeek} does not exist<br/>
      */
     public static Attendance getAttendanceFromLesson(Lesson targetLesson, Student targetStudent, Week targetWeek)
             throws CommandException {
