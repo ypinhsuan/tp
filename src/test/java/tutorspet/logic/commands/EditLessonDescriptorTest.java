@@ -34,7 +34,7 @@ public class EditLessonDescriptorTest {
         assertFalse(DESC_LESSON_WED_2_TO_4.equals(DESC_LESSON_FRI_8_TO_10));
 
         // different startTime -> returns false
-        EditLessonCommand.EditLessonDescriptor editedLesson = new EditLessonDescriptorBuilder(DESC_LESSON_WED_2_TO_4)
+        EditLessonDescriptor editedLesson = new EditLessonDescriptorBuilder(DESC_LESSON_WED_2_TO_4)
                 .withStartTime("00:01").build();
         assertFalse(DESC_LESSON_WED_2_TO_4.equals(editedLesson));
 
