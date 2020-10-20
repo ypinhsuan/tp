@@ -148,7 +148,7 @@ with the application.
 
 From the class diagram above, we have designed the `Student` model such that every `Student` has a `UUID`
 tagged to him/her, in addition to the `Name`, `Telegram`, `Email`, and `Tags` fields providing
-information of the `Student`. 
+information of the `Student`.
 
 #### Design consideration:
 

@@ -3,12 +3,12 @@ layout: page
 title: User Guide
 ---
 
-As a Computer Science teaching assistant, the traditional approach of managing students within your class would be to 
-manually record their learning progress and attendance. However, as you will notice after some time, manual students 
+As a Computer Science teaching assistant, the traditional approach of managing students within your class would be to
+manually record their learning progress and attendance. However, as you will notice after some time, manual students
 tracking is unnecessarily time-consuming. This is why we have created Tutor's Pet.
 
-Tutor’s Pet is a desktop application that helps you reduce the amount of time you spend on administrative tasks as a 
-teaching assistant. It allows you to keep track of the students in your classes, and record both their attendance and 
+Tutor’s Pet is a desktop application that helps you reduce the amount of time you spend on administrative tasks as a
+teaching assistant. It allows you to keep track of the students in your classes, and record both their attendance and
 participation scores.
 
 * Table of Contents
@@ -353,7 +353,7 @@ Examples:
 
 #### Finding attendance record by indexes: `find-attendance`
 
-Finds an attendance record at the specified `CLASS_INDEX` + `LESSON_INDEX` + `STUDENT_INDEX` + `WEEK`. 
+Finds an attendance record at the specified `CLASS_INDEX` + `LESSON_INDEX` + `STUDENT_INDEX` + `WEEK`.
 
 Format: `find-attendance c/CLASS_INDEX l/LESSON_INDEX s/STUDENT_INDEX w/WEEK`
 
@@ -393,7 +393,7 @@ Format : `redo`
 
 View a list of actions that can be undone or redone.
 
-Format : `view-history` 
+Format : `view-history`
 
 ### Exiting the program : `exit`
 
