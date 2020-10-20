@@ -1,8 +1,8 @@
 package tutorspet.logic.util;
 
+import static tutorspet.commons.core.Messages.MESSAGE_MISSING_STUDENT_ATTENDANCE;
 import static tutorspet.commons.util.CollectionUtil.requireAllNonNull;
 import static tutorspet.logic.commands.AddAttendanceCommand.MESSAGE_DUPLICATE_ATTENDANCE;
-import static tutorspet.logic.commands.DeleteAttendanceCommand.MESSAGE_MISSING_ATTENDANCE;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,6 +23,8 @@ public class AttendanceRecordUtil {
      */
     public static AttendanceRecord addAttendance(AttendanceRecord targetAttendanceRecord, Student targetStudent,
                                                  Attendance attendanceToAdd) throws CommandException {
+        requireAllNonNull(targetAttendanceRecord, targetStudent, attendanceToAdd);
+
         if (targetAttendanceRecord.hasAttendance(targetStudent.getUuid())) {
             throw new CommandException(MESSAGE_DUPLICATE_ATTENDANCE);
         }
@@ -46,7 +48,7 @@ public class AttendanceRecordUtil {
         requireAllNonNull(targetAttendanceRecord, targetStudent, attendanceToSet);
 
         if (!targetAttendanceRecord.hasAttendance(targetStudent.getUuid())) {
-            throw new CommandException(MESSAGE_MISSING_ATTENDANCE);
+            throw new CommandException(MESSAGE_MISSING_STUDENT_ATTENDANCE);
         }
 
         Map<UUID, Attendance> attendanceMap = new HashMap<>(targetAttendanceRecord.getAttendanceRecord());
@@ -68,7 +70,7 @@ public class AttendanceRecordUtil {
         requireAllNonNull(targetAttendanceRecord, targetStudent);
 
         if (!targetAttendanceRecord.hasAttendance(targetStudent.getUuid())) {
-            throw new CommandException(MESSAGE_MISSING_ATTENDANCE);
+            throw new CommandException(MESSAGE_MISSING_STUDENT_ATTENDANCE);
         }
 
         Map<UUID, Attendance> attendanceMap = new HashMap<>(targetAttendanceRecord.getAttendanceRecord());

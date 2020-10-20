@@ -1,11 +1,11 @@
 package tutorspet.logic.util;
 
 import static tutorspet.commons.util.CollectionUtil.requireAllNonNull;
-import static tutorspet.logic.util.AttendanceRecordListUtil.addAttendance;
-import static tutorspet.logic.util.AttendanceRecordListUtil.editAttendance;
-import static tutorspet.logic.util.AttendanceRecordListUtil.getAttendance;
+import static tutorspet.logic.util.AttendanceRecordListUtil.addAttendanceToAttendanceRecordList;
+import static tutorspet.logic.util.AttendanceRecordListUtil.editAttendanceInAttendanceRecordList;
+import static tutorspet.logic.util.AttendanceRecordListUtil.getAttendanceFromAttendanceRecordList;
 import static tutorspet.logic.util.AttendanceRecordListUtil.getAttendances;
-import static tutorspet.logic.util.AttendanceRecordListUtil.removeAttendance;
+import static tutorspet.logic.util.AttendanceRecordListUtil.removeAttendanceFromAttendanceRecordList;
 
 import java.time.LocalTime;
 import java.util.List;
@@ -40,7 +40,8 @@ public class LessonUtil {
         AttendanceRecordList targetAttendanceRecordList = targetLesson.getAttendanceRecordList();
 
         AttendanceRecordList updatedAttendanceRecordList =
-                addAttendance(targetAttendanceRecordList, targetStudent, targetWeek, attendanceToAdd);
+                addAttendanceToAttendanceRecordList(targetAttendanceRecordList,
+                        targetStudent, targetWeek, attendanceToAdd);
 
         // unchanged lesson fields
         LocalTime startTime = targetLesson.getStartTime();
@@ -67,7 +68,8 @@ public class LessonUtil {
         AttendanceRecordList targetAttendanceRecordList = targetLesson.getAttendanceRecordList();
 
         AttendanceRecordList updatedAttendanceRecordList =
-                editAttendance(targetAttendanceRecordList, targetStudent, targetWeek, attendanceToSet);
+                editAttendanceInAttendanceRecordList(targetAttendanceRecordList,
+                        targetStudent, targetWeek, attendanceToSet);
 
         // unchanged lesson fields
         LocalTime startTime = targetLesson.getStartTime();
@@ -93,7 +95,7 @@ public class LessonUtil {
         AttendanceRecordList targetAttendanceRecordList = targetLesson.getAttendanceRecordList();
 
         AttendanceRecordList updatedAttendanceRecordList =
-                removeAttendance(targetAttendanceRecordList, targetStudent, targetWeek);
+                removeAttendanceFromAttendanceRecordList(targetAttendanceRecordList, targetStudent, targetWeek);
 
         // unchanged lesson fields
         LocalTime startTime = targetLesson.getStartTime();
@@ -118,7 +120,7 @@ public class LessonUtil {
 
         AttendanceRecordList targetAttendanceRecordList = targetLesson.getAttendanceRecordList();
 
-        return getAttendance(targetAttendanceRecordList, targetStudent, targetWeek);
+        return getAttendanceFromAttendanceRecordList(targetAttendanceRecordList, targetStudent, targetWeek);
     }
 
     /**

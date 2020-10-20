@@ -3,6 +3,8 @@ package tutorspet.logic.util;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_WEEK;
 import static tutorspet.commons.core.Messages.MESSAGE_MISSING_STUDENT_ATTENDANCE;
 import static tutorspet.commons.util.CollectionUtil.requireAllNonNull;
+import static tutorspet.logic.util.AttendanceRecordUtil.addAttendance;
+import static tutorspet.logic.util.AttendanceRecordUtil.setAttendance;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -25,9 +27,10 @@ public class AttendanceRecordListUtil {
      * @throws CommandException if the {@code targetWeek} does not exist in the {@code targetAttendanceRecordList} or
      * if there is an existing {@code Attendance} for the {@code targetStudent}.
      */
-    public static AttendanceRecordList addAttendance(AttendanceRecordList targetAttendanceRecordList,
-                                                     Student targetStudent, Week targetWeek,
-                                                     Attendance attendanceToAdd) throws CommandException {
+    public static AttendanceRecordList addAttendanceToAttendanceRecordList(
+            AttendanceRecordList targetAttendanceRecordList,
+            Student targetStudent, Week targetWeek,
+            Attendance attendanceToAdd) throws CommandException {
         requireAllNonNull(targetAttendanceRecordList, targetStudent, targetWeek, attendanceToAdd);
 
         if (!targetAttendanceRecordList.isWeekContained(targetWeek)) {
@@ -37,7 +40,7 @@ public class AttendanceRecordListUtil {
         AttendanceRecord targetAttendanceRecord = targetAttendanceRecordList.getAttendanceRecord(targetWeek);
 
         AttendanceRecord editedWeekAttendanceRecord =
-                AttendanceRecordUtil.addAttendance(targetAttendanceRecord, targetStudent, attendanceToAdd);
+                addAttendance(targetAttendanceRecord, targetStudent, attendanceToAdd);
 
         List<AttendanceRecord> modifiedAttendanceRecordList =
                 new ArrayList<>(targetAttendanceRecordList.getAttendanceRecordList());
@@ -53,9 +56,10 @@ public class AttendanceRecordListUtil {
      * @throws CommandException if the {@code targetWeek} does not exist in the {@code targetAttendanceRecordList} or
      * if there does not exist an existing {@code Attendance} for the {@code targetStudent}.
      */
-    public static AttendanceRecordList editAttendance(AttendanceRecordList targetAttendanceRecordList,
-                                                      Student targetStudent, Week targetWeek,
-                                                      Attendance attendanceToSet) throws CommandException {
+    public static AttendanceRecordList editAttendanceInAttendanceRecordList(
+            AttendanceRecordList targetAttendanceRecordList,
+            Student targetStudent, Week targetWeek,
+            Attendance attendanceToSet) throws CommandException {
         requireAllNonNull(targetAttendanceRecordList, targetStudent, targetWeek, attendanceToSet);
 
         if (!targetAttendanceRecordList.isWeekContained(targetWeek)) {
@@ -65,7 +69,7 @@ public class AttendanceRecordListUtil {
         AttendanceRecord targetAttendanceRecord = targetAttendanceRecordList.getAttendanceRecord(targetWeek);
 
         AttendanceRecord editedWeekAttendanceRecord =
-                AttendanceRecordUtil.setAttendance(targetAttendanceRecord, targetStudent, attendanceToSet);
+                setAttendance(targetAttendanceRecord, targetStudent, attendanceToSet);
 
         List<AttendanceRecord> modifiedAttendanceRecordList =
                 new ArrayList<>(targetAttendanceRecordList.getAttendanceRecordList());
@@ -80,9 +84,10 @@ public class AttendanceRecordListUtil {
      * @throws CommandException if the {@code targetWeek} does not exist in the {@code targetAttendanceRecordList} or
      * if there does not exist an existing {@code Attendance} for the {@code targetStudent}.
      */
-    public static AttendanceRecordList removeAttendance(AttendanceRecordList targetAttendanceRecordList,
-                                                        Student targetStudent,
-                                                        Week targetWeek) throws CommandException {
+    public static AttendanceRecordList removeAttendanceFromAttendanceRecordList(
+            AttendanceRecordList targetAttendanceRecordList,
+            Student targetStudent,
+            Week targetWeek) throws CommandException {
         requireAllNonNull(targetAttendanceRecordList, targetStudent, targetWeek);
 
         if (!targetAttendanceRecordList.isWeekContained(targetWeek)) {
@@ -101,34 +106,15 @@ public class AttendanceRecordListUtil {
     }
 
     /**
-     * Returns true if an {@code Attendance} exists for the {@code targetStudent} in the {@code targetWeek} in the
-     * {@code targetAttendanceRecordList}.
-     *
-     * @throws CommandException if the {@code targetWeek} does not exist in the {@code targetAttendanceRecordList} or
-     * if there does not exist an existing {@code Attendance} for the {@code targetStudent}.
-     */
-    public static boolean hasAttendance(AttendanceRecordList targetAttendanceRecordList, Student targetStudent,
-                                           Week targetWeek) throws CommandException {
-        requireAllNonNull(targetAttendanceRecordList, targetStudent, targetWeek);
-
-        if (!targetAttendanceRecordList.isWeekContained(targetWeek)) {
-            throw new CommandException(MESSAGE_INVALID_WEEK);
-        }
-
-        AttendanceRecord targetAttendanceRecord = targetAttendanceRecordList.getAttendanceRecord(targetWeek);
-
-        return targetAttendanceRecord.hasAttendance(targetStudent.getUuid());
-    }
-
-    /**
      * Returns the {@code Attendance} for the {@code targetStudent} in the {@code targetWeek} in the
      * {@code targetAttendanceRecordList}.
      *
      * @throws CommandException if the {@code targetWeek} does not exist in the {@code targetAttendanceRecordList} or
      * if there does not exist an existing {@code Attendance} for the {@code targetStudent}.
      */
-    public static Attendance getAttendance(AttendanceRecordList targetAttendanceRecordList, Student targetStudent,
-                                           Week targetWeek) throws CommandException {
+    public static Attendance getAttendanceFromAttendanceRecordList(
+            AttendanceRecordList targetAttendanceRecordList, Student targetStudent,
+            Week targetWeek) throws CommandException {
         requireAllNonNull(targetAttendanceRecordList, targetStudent, targetWeek);
 
         if (!targetAttendanceRecordList.isWeekContained(targetWeek)) {
