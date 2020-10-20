@@ -96,10 +96,6 @@ public class EditAttendanceCommand extends Command {
         Student targetStudent = lastShownStudentList.get(studentIndex.getZeroBased());
         ModuleClass targetModuleClass = lastShownModuleClassList.get(moduleClassIndex.getZeroBased());
 
-        if (!targetModuleClass.hasStudentUuid(targetStudent.getUuid())) {
-            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_IN_MODULE_CLASS);
-        }
-
         Attendance attendanceToEdit = getAttendanceFromModuleClass(targetModuleClass, lessonIndex, week, targetStudent);
         Attendance editedAttendance = createEditedAttendance(attendanceToEdit, editAttendanceDescriptor);
         ModuleClass modifiedModuleClass =

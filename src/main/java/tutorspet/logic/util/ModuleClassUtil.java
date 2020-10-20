@@ -61,7 +61,9 @@ public class ModuleClassUtil {
      */
     public static ModuleClass editLessonInModuleClass(
             ModuleClass targetModuleClass, Lesson lessonToEdit, Lesson editedLesson) throws CommandException {
-        requireAllNonNull(targetModuleClass, lessonToEdit, editedLesson, targetModuleClass.hasLesson(lessonToEdit));
+        requireAllNonNull(targetModuleClass, lessonToEdit, editedLesson);
+
+        assert targetModuleClass.hasLesson(lessonToEdit);
 
         if (!lessonToEdit.isSameLesson(editedLesson) && targetModuleClass.hasLesson(editedLesson)) {
             throw new CommandException(MESSAGE_DUPLICATE_LESSON);
@@ -78,7 +80,9 @@ public class ModuleClassUtil {
                 editedListOfLessons.add(lesson);
             }
         }
+
         assert listOfLessons.size() == editedListOfLessons.size();
+
         return new ModuleClass(moduleClassName, studentsIds, editedListOfLessons);
     }
 
@@ -88,7 +92,9 @@ public class ModuleClassUtil {
      */
     public static ModuleClass deleteLessonFromModuleClass(
             ModuleClass targetModuleClass, Lesson lessonToDelete) {
-        requireAllNonNull(targetModuleClass, lessonToDelete, targetModuleClass.hasLesson(lessonToDelete));
+        requireAllNonNull(targetModuleClass, lessonToDelete);
+
+        assert targetModuleClass.hasLesson(lessonToDelete);
 
         Name moduleClassName = targetModuleClass.getName();
         Set<UUID> studentsIds = new HashSet<>(targetModuleClass.getStudentUuids());
@@ -99,10 +105,17 @@ public class ModuleClassUtil {
                 editedListOfLessons.add(lesson);
             }
         }
+
         assert listOfLessons.size() - 1 == editedListOfLessons.size();
+
         return new ModuleClass(moduleClassName, studentsIds, editedListOfLessons);
     }
 
+    /**
+     * Returns the {@code Lesson} at the {@code lessonIndex} of the {@code targetModuleClass}.
+     *
+     * @throws CommandException if the {@code lessonIndex} is invalid.
+     */
     public static Lesson getLessonFromModuleClass(ModuleClass targetModuleClass, Index lessonIndex)
             throws CommandException {
         requireAllNonNull(targetModuleClass, lessonIndex);
@@ -120,8 +133,8 @@ public class ModuleClassUtil {
      * Returns a {@code ModuleClass} where the {@code attendanceToAdd} has been added to the {@code Lesson} at
      * the {@code lessonIndex} in the {@code targetModuleClass}.
      *
-     * @throws CommandException if an {@code Attendance} already exists for the {@code targetStudent}
-     * in the {@code targetWeek}.
+     * @throws CommandException if the {@code targetStudent} is not part of the {@code targetModuleClass} or
+     * an {@code Attendance} already exists for the {@code targetStudent} in the {@code targetWeek}.
      */
     public static ModuleClass addAttendanceToModuleClass(ModuleClass targetModuleClass, Index lessonIndex, Week week,
                                                          Student targetStudent, Attendance attendanceToAdd)
@@ -148,8 +161,8 @@ public class ModuleClassUtil {
      * {@code Attendance} for the {@code targetStudent} in the {@code targetWeek} in the {@code Lesson} at
      * the {@code lessonIndex} in the {@code targetModuleClass}.
      *
-     * @throws CommandException if the {@code Attendance} of the {@code targetStudent} in the {@code targetWeek}
-     * does not exist.
+     * @throws CommandException if the {@code targetStudent} is not part of the {@code targetModuleClass} or
+     * the {@code Attendance} of the {@code targetStudent} in the {@code targetWeek} does not exist.
      */
     public static ModuleClass editAttendanceInModuleClass(ModuleClass targetModuleClass, Index lessonIndex, Week week,
                                                           Student targetStudent, Attendance attendanceToSet)
@@ -172,12 +185,13 @@ public class ModuleClassUtil {
     }
 
     /**
-     * Returns a {@code ModuleClas} where the {@code Attendance} for the {@code targetStudent} in the
+     * Returns a {@code ModuleClass} where the {@code Attendance} for the {@code targetStudent} in the
      * {@code targetWeek} in the {@code Lesson} at the {@code lessonIndex} in {@code targetModuleClass}
      * has been removed.
      *
-     * @throws CommandException if the {@code lessonIndex} is invalid or if the {@code Attendance} of the
-     * {@code targetStudent} in the {@code targetWeek} does not exist.
+     * @throws CommandException if the {@code targetStudent} is not part of the {@code targetModuleClass} or
+     * the {@code lessonIndex} is invalid or if the {@code Attendance} of the {@code targetStudent}
+     * in the {@code targetWeek} does not exist.
      */
     public static ModuleClass deleteAttendanceFromModuleClass(ModuleClass targetModuleClass, Index lessonIndex,
                                                               Week week, Student targetStudent)
@@ -201,10 +215,11 @@ public class ModuleClassUtil {
 
     /**
      * Returns the {@code Attendance} for the {@code targetStudent} in the {@code targetWeek} in the
-     * {@code Lesson} at the {@code lessonIndex} has been removed.
+     * {@code Lesson} at the {@code lessonIndex}.
      *
-     * @throws CommandException if the {@code lessonIndex} is invalid or if the {@code Attendance} of the
-     * {@code targetStudent} in the {@code targetWeek} does not exist.
+     * @throws CommandException if the {@code targetStudent} is not part of the {@code targetModuleClass} or
+     * the {@code lessonIndex} is invalid or if the {@code Attendance} of the {@code targetStudent}
+     * in the {@code targetWeek} does not exist.
      */
     public static Attendance getAttendanceFromModuleClass(ModuleClass targetModuleClass, Index lessonIndex, Week week,
                                                           Student targetStudent) throws CommandException {
@@ -222,6 +237,8 @@ public class ModuleClassUtil {
 
         return getAttendanceFromLesson(targetLesson, targetStudent, week);
     }
+
+    // private methods
 
     private static ModuleClass updateLessonInModuleClass(
             ModuleClass targetModuleClass, Index lessonToEditIndex, Lesson lessonToUpdate) {

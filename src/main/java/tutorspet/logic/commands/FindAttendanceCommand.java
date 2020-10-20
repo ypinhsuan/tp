@@ -76,10 +76,6 @@ public class FindAttendanceCommand extends Command {
         Student targetStudent = lastShownStudentList.get(studentIndex.getZeroBased());
         ModuleClass targetModuleClass = lastShownModuleClassList.get(moduleClassIndex.getZeroBased());
 
-        if (!targetModuleClass.hasStudentUuid(targetStudent.getUuid())) {
-            throw new CommandException(MESSAGE_INVALID_STUDENT_IN_MODULE_CLASS);
-        }
-
         Attendance attendance = getAttendanceFromModuleClass(targetModuleClass, lessonIndex, week, targetStudent);
 
         String message = String.format(MESSAGE_SUCCESS, targetStudent.getName(), week, attendance);

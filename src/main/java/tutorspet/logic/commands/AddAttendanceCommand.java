@@ -1,10 +1,8 @@
 package tutorspet.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static tutorspet.commons.core.Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
-import static tutorspet.commons.core.Messages.MESSAGE_INVALID_STUDENT_IN_MODULE_CLASS;
 import static tutorspet.commons.util.CollectionUtil.requireAllNonNull;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_CLASS_INDEX;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_LESSON_INDEX;
@@ -81,10 +79,6 @@ public class AddAttendanceCommand extends Command {
 
         Student targetStudent = lastShownStudentList.get(studentIndex.getZeroBased());
         ModuleClass targetModuleClass = lastShownModuleClassList.get(moduleClassIndex.getZeroBased());
-
-        if (!targetModuleClass.hasStudentUuid(targetStudent.getUuid())) {
-            throw new CommandException(MESSAGE_INVALID_STUDENT_IN_MODULE_CLASS);
-        }
 
         ModuleClass modifiedModuleClass =
                 addAttendanceToModuleClass(targetModuleClass, lessonIndex, week, targetStudent, toAdd);
