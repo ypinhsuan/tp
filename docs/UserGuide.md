@@ -331,7 +331,7 @@ If you would like to delete all the classes in Tutor's Pet, make use of this com
 
 Format: `clear-class`
 
-For-example:
+For example:
 * It is the start of a new semester. You would like to delete all information of all the classes you taught last
  semester to start anew. You type the command `clear-class` and press <kbd>Enter</kbd>.
  
