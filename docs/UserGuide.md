@@ -564,9 +564,13 @@ Format: `display-venue c\1 l\1`
 For example: 
 * Due to covid, most of your physical lessons have been converted to zoom lessons and thus all the venues are 
  in the form of zoom links. Your lesson is starting in 10 minutes and it is time to start the session. Hence, you
- input the command `display-venue c\1 l\1` and press <kbd>Enter</kbd>.
+ input the command `display-venue c\1 l\2` and press <kbd>Enter</kbd>.
+ 
+    ![Display venue before](images/ugimages/DisplayVenueBefore.png)
  
 * You can now proceed to copy the link to that zoom session from the command result box.
+
+    ![Display venue after](images/ugimages/DisplayVenueAfter.png)
 
 Constraints:
 * The indexes **must be positive whole numbers** 1, 2, 3, …​
