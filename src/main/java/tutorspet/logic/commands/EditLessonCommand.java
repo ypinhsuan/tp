@@ -8,7 +8,8 @@ import static tutorspet.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_LESSON_INDEX;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_VENUE;
-import static tutorspet.logic.util.ModuleClassUtil.addEditedLessonToModuleClass;
+import static tutorspet.logic.util.ModuleClassUtil.editLessonInModuleClass;
+import static tutorspet.logic.util.ModuleClassUtil.getLessonFromModuleClass;
 import static tutorspet.model.Model.PREDICATE_SHOW_ALL_MODULE_CLASS;
 
 import java.time.LocalTime;
@@ -85,13 +86,9 @@ public class EditLessonCommand extends Command {
 
         ModuleClass targetModuleClass = lastShownModuleClassList.get(moduleClassIndex.getZeroBased());
 
-        if (lessonIndex.getZeroBased() >= targetModuleClass.getLessons().size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
-        }
-
-        Lesson lessonToEdit = targetModuleClass.getLessons().get(lessonIndex.getZeroBased());
+        Lesson lessonToEdit = getLessonFromModuleClass(targetModuleClass, lessonIndex);
         Lesson editedLesson = createEditedLesson(lessonToEdit, editLessonDescriptor);
-        ModuleClass modifiedModuleClass = addEditedLessonToModuleClass(targetModuleClass, lessonToEdit, editedLesson);
+        ModuleClass modifiedModuleClass = editLessonInModuleClass(targetModuleClass, lessonToEdit, editedLesson);
 
         model.setModuleClass(targetModuleClass, modifiedModuleClass);
         model.updateFilteredModuleClassList(PREDICATE_SHOW_ALL_MODULE_CLASS);

@@ -5,15 +5,13 @@ import static tutorspet.commons.core.Messages.MESSAGE_INVALID_LESSON_DISPLAYED_I
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_STUDENT_IN_MODULE_CLASS;
-import static tutorspet.commons.core.Messages.MESSAGE_INVALID_WEEK;
 import static tutorspet.commons.util.CollectionUtil.requireAllNonNull;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_CLASS_INDEX;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_LESSON_INDEX;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_PARTICIPATION_SCORE;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_STUDENT_INDEX;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_WEEK;
-import static tutorspet.logic.util.LessonUtil.addAttendanceToLesson;
-import static tutorspet.logic.util.ModuleClassUtil.addModifiedLessonToModuleClass;
+import static tutorspet.logic.util.ModuleClassUtil.addAttendanceToModuleClass;
 
 import java.util.List;
 
@@ -22,7 +20,6 @@ import tutorspet.logic.commands.exceptions.CommandException;
 import tutorspet.model.Model;
 import tutorspet.model.attendance.Attendance;
 import tutorspet.model.attendance.Week;
-import tutorspet.model.lesson.Lesson;
 import tutorspet.model.moduleclass.ModuleClass;
 import tutorspet.model.student.Student;
 
@@ -89,19 +86,8 @@ public class AddAttendanceCommand extends Command {
             throw new CommandException(MESSAGE_INVALID_STUDENT_IN_MODULE_CLASS);
         }
 
-        if (lessonIndex.getZeroBased() >= targetModuleClass.getLessons().size()) {
-            throw new CommandException(MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
-        }
-
-        Lesson targetLesson = targetModuleClass.getLessons().get(lessonIndex.getZeroBased());
-
-        if (!targetLesson.getAttendanceRecordList().isWeekContained(week)) {
-            throw new CommandException(MESSAGE_INVALID_WEEK);
-        }
-
-        Lesson modifiedLesson = addAttendanceToLesson(targetLesson, targetStudent, week, toAdd);
         ModuleClass modifiedModuleClass =
-                addModifiedLessonToModuleClass(targetModuleClass, lessonIndex, modifiedLesson);
+                addAttendanceToModuleClass(targetModuleClass, lessonIndex, week, targetStudent, toAdd);
         model.setModuleClass(targetModuleClass, modifiedModuleClass);
 
         String message = String.format(MESSAGE_SUCCESS, targetStudent.getName(), week, toAdd);

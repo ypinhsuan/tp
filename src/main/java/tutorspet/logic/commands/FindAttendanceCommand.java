@@ -1,17 +1,15 @@
 package tutorspet.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static tutorspet.commons.core.Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_STUDENT_IN_MODULE_CLASS;
-import static tutorspet.commons.core.Messages.MESSAGE_INVALID_WEEK;
-import static tutorspet.commons.core.Messages.MESSAGE_MISSING_STUDENT_ATTENDANCE;
 import static tutorspet.commons.util.CollectionUtil.requireAllNonNull;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_CLASS_INDEX;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_LESSON_INDEX;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_STUDENT_INDEX;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_WEEK;
+import static tutorspet.logic.util.ModuleClassUtil.getAttendanceFromModuleClass;
 
 import java.util.List;
 
@@ -19,9 +17,7 @@ import tutorspet.commons.core.index.Index;
 import tutorspet.logic.commands.exceptions.CommandException;
 import tutorspet.model.Model;
 import tutorspet.model.attendance.Attendance;
-import tutorspet.model.attendance.AttendanceRecord;
 import tutorspet.model.attendance.Week;
-import tutorspet.model.lesson.Lesson;
 import tutorspet.model.moduleclass.ModuleClass;
 import tutorspet.model.student.Student;
 
@@ -84,23 +80,8 @@ public class FindAttendanceCommand extends Command {
             throw new CommandException(MESSAGE_INVALID_STUDENT_IN_MODULE_CLASS);
         }
 
-        if (lessonIndex.getOneBased() > targetModuleClass.getLessons().size()) {
-            throw new CommandException(MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
-        }
+        Attendance attendance = getAttendanceFromModuleClass(targetModuleClass, lessonIndex, week, targetStudent);
 
-        Lesson targetLesson = targetModuleClass.getLessons().get(lessonIndex.getZeroBased());
-
-        if (!targetLesson.getAttendanceRecordList().isWeekContained(week)) {
-            throw new CommandException(MESSAGE_INVALID_WEEK);
-        }
-
-        AttendanceRecord attendanceRecord = targetLesson.getAttendanceRecordList().getAttendanceRecord(week);
-
-        if (!attendanceRecord.hasAttendance(targetStudent.getUuid())) {
-            throw new CommandException(MESSAGE_MISSING_STUDENT_ATTENDANCE);
-        }
-
-        Attendance attendance = targetLesson.getAttendanceRecordList().getAttendance(targetStudent, week);
         String message = String.format(MESSAGE_SUCCESS, targetStudent.getName(), week, attendance);
         return new CommandResult(message);
     }
