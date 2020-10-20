@@ -1,6 +1,7 @@
 package tutorspet.logic.commands;
 
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX;
+import static tutorspet.commons.core.Messages.MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_WEEK;
 import static tutorspet.commons.core.Messages.MESSAGE_MISSING_STUDENT_ATTENDANCE;
@@ -139,7 +140,6 @@ public class DeleteAttendanceCommandTest {
                 new DeleteAttendanceCommand(moduleClassIndex, lessonIndex, studentIndex, targetWeek);
 
         assertCommandFailure(deleteAttendanceCommand, model, MESSAGE_MISSING_STUDENT_ATTENDANCE);
-
     }
 
     @Test

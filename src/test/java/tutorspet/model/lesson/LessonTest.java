@@ -146,7 +146,7 @@ public class LessonTest {
     public void printLesson_returnsCorrectFormat() {
         Lesson lesson = new Lesson(VALID_START_TIME, VALID_END_TIME, VALID_DAY_WED_LESSON_WED_2_TO_4,
                 VALID_NUMBER_OF_OCCURRENCES, VALID_VENUE, VALID_ATTENDANCE_RECORD_LIST);
-        String expectedString = (new StringBuilder()).append(CommandTestUtil.VALID_DAY_WED_LESSON_WED_2_TO_4)
+        String expectedString = (new StringBuilder()).append(VALID_DAY_WED_LESSON_WED_2_TO_4)
                 .append(" ")
                 .append(TIME_FORMATTER.format(VALID_START_TIME))
                 .append(" to ")
