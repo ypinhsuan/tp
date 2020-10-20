@@ -201,14 +201,14 @@ This initial state will be saved into the `tutorsPetStateList`, and the `statePo
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete-student 5` command to delete the 5th student in Tutor's Pet. 
+Step 2. The user executes `delete-student 5` command to delete the 5th student in Tutor's Pet.
 The `delete-student` command calls `Model#commit(String commitMessage)` after it has deleted the student.
 This causes the modified state of Tutor's Pet, after the `delete-student 5` command has executed, to be saved in the `tutorsPetStateList`.
 The `statePointer` will be updated to point to the newly inserted `TutorsPetState`.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add-student n/David …` to add a new student. 
+Step 3. The user executes `add-student n/David …` to add a new student.
 The `add-student` command also calls `Model#commit(String commitMessage)` after it has added the new student.
 This causes another modified Tutor's Pet state to be saved into the `tutorsPetStateList`.
 
@@ -225,7 +225,7 @@ The `undo` command will call `Model#undo()`, which shifts the `statePointer` onc
 ![UndoRedoState3](images/UndoRedoState3.png)
 
 <div markdown="span" class="alert alert-info">
-:information_source: **Note:** If the `statePointer` is at index 0, pointing to the initial Tutor's Pet state, then there are no previous Tutor's Pet states to restore. 
+:information_source: **Note:** If the `statePointer` is at index 0, pointing to the initial Tutor's Pet state, then there are no previous Tutor's Pet states to restore.
 The `undo` command uses `Model#canUndo()` to check if this is the case.
 If so, it will return an error to the user rather than attempting to perform the undo.
 </div>
@@ -242,16 +242,16 @@ The `redo` command does the opposite — it calls `Model#redo()`, which shifts t
 
 <div markdown="span" class="alert alert-info">
 :information_source: **Note:** If the `statePointer` is at index `tutorsPetStateList.size() - 1`, pointing to the latest Tutor's Pet state, then there are no undone Tutor's Pet states to restore.
-The `redo` command uses `Model#canRedo()` to check if this is the case. 
+The `redo` command uses `Model#canRedo()` to check if this is the case.
 If so, it will return an error to the user rather than attempting to perform the redo.
 </div>
 
-Step 5. The user then decides to execute the command `list`. 
+Step 5. The user then decides to execute the command `list`.
 Commands that do not modify the contents of Tutor's Pet, such as `list`, do not call `Model#commit()`, `Model#undo()` or `Model#redo()`. Thus, the `tutorsPetStateList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#commit()`. 
+Step 6. The user executes `clear`, which calls `Model#commit()`.
 Since the `statePointer` is not pointing to the last entry of `tutorsPetStateList`, all Tutor's Pet states after the `statePointer` will be purged,
 and the new Tutor's Pet state after the `clear` command has executed will be saved into the `tutorsPetStateList`.
 
