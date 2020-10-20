@@ -3,42 +3,43 @@
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
-participant "u:UndoCommand" as UndoCommand LOGIC_COLOR
+participant ":TutorsPetParser" as TutorsPetParser LOGIC_COLOR
+participant "command:UndoCommand" as UndoCommand LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
-participant ":VersionedAddressBook" as VersionedAddressBook MODEL_COLOR
+participant ":VersionedTutorsPet" as VersionedTutorsPet MODEL_COLOR
 end box
+
 [-> LogicManager : execute(undo)
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand(undo)
-activate AddressBookParser
+LogicManager -> TutorsPetParser : parseCommand(undo)
+activate TutorsPetParser
 
 create UndoCommand
-AddressBookParser -> UndoCommand
+TutorsPetParser -> UndoCommand
 activate UndoCommand
 
-UndoCommand --> AddressBookParser
+UndoCommand --> TutorsPetParser
 deactivate UndoCommand
 
-AddressBookParser --> LogicManager : u
-deactivate AddressBookParser
+TutorsPetParser --> LogicManager : command
+deactivate TutorsPetParser
 
 LogicManager -> UndoCommand : execute()
 activate UndoCommand
 
-UndoCommand -> Model : undoAddressBook()
+UndoCommand -> Model : undo()
 activate Model
 
-Model -> VersionedAddressBook : undo()
-activate VersionedAddressBook
+Model -> VersionedTutorsPet : undo()
+activate VersionedTutorsPet
 
-VersionedAddressBook -> VersionedAddressBook :resetData(ReadOnlyAddressBook)
-VersionedAddressBook --> Model :
-deactivate VersionedAddressBook
+VersionedTutorsPet -> VersionedTutorsPet : resetData(ReadOnlyTutorsPet)
+VersionedTutorsPet --> Model
+deactivate VersionedTutorsPet
 
 Model --> UndoCommand
 deactivate Model
