@@ -15,7 +15,7 @@ import tutorspet.model.student.Student;
 /**
  * A utility class for Student.
  */
-public class StudentUtil {
+public class StudentTestUtil {
 
     /**
      * Returns an add student command string for adding the {@code student}.
