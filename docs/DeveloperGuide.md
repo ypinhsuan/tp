@@ -150,7 +150,7 @@ From the object diagram above, we have designed the `Student` model such that ev
 has a unique 128 bit `UUID` tagged to him/her, in addition to the `Name`, `Telegram`, `Email`, and `Tags`
 fields providing information of the `Student`.
 
-#### Design considerations
+#### Design Considerations
 
 This section elaborates further on the reason why we eventually chose to adopt a `UUID` over other potential
 solutions.
@@ -164,7 +164,7 @@ solutions.
     * Cons:
       * Implementation is slightly more complicated as caution must be taken in integrating the `UUID` field into
         `Student` model, and enforce `Student` equality checks using `UUID` in Tutor’s Pet.
-      * Although the chances are low, it is possible that generating random `UUID`s present a risk of `UUID` collisions 
+      * Although the chances are low, it is possible that generating random `UUID`s present a risk of `UUID` collisions
         when we deal with large amounts of student data.
 
 * **Alternative 2:** Enforce that each `Student` must have a unique `Email`
@@ -410,25 +410,80 @@ A `ModuleClass` can contain any number of `Lesson` objects. Every `Lesson` conta
 
 #### Design Considerations
 * **Alternative 1 (current choice):** Stores `Lesson` object in `ModuleClass`
-  
+
   This implementation allows duplicate lessons in different classes.
-  * Pros: 
+  * Pros:
     * Easy to implement.
-  * Cons: 
+  * Cons:
     * Difficult to check for duplicate lessons when adding or editing lessons.
 
 * **Alternative 2:** Have UUID field for `Lesson` and `ModuleClass` stores UUID
 
-  This is similar to how `Student` is implemented. It would be a better alternative if we want all lessons to be unique 
+  This is similar to how `Student` is implemented. It would be a better alternative if we want all lessons to be unique
   as we can have a `UniqueLessonList` to store all lessons as shown below.
-  
+
   ![Lesson Model](images/UniqueLessonListClassDiagram.png)
-  
+
   * Pros:
     * Easy to check for duplicate lessons.
   * Cons:
     * There is a possibility of UUID collision, even though the probability is very low.
     * Harder to implement.
+
+### Attendance Model
+This section explains the design considerations of the `Attendance` model.
+
+#### Implementation
+The `Attendance`, `AttendanceRecord` and `AttendanceRecordList` models are implemented as follows:
+
+![AttendanceClassDiagram](images/AttendanceClassDiagram.png)
+
+`Attendance` encapsulates the information of a particular student's attendance in a specific lesson he/she has attended.
+`AttendanceRecord` refers to the actual attendance roster of a particular lesson event.
+It contains the `Attendance`s of all `Student`s who have attended the particular lesson.
+These information are stored as a `Map` with `Student` `UUID` as keys.
+`AttendanceRecordList` refers to the list of all `AttendanceRecord` instances.
+The size of this list is fixed and is determined by the `NumberOfOccurences` in `Lesson`.
+
+<div markdown="span" class="alert alert-primary">
+Note that all classes in the `Attendance` package are designed to be immutable.
+</div>
+
+### Design Considerations
+#### Aspect 1: Reducing user input
+Users should not have to type in attendance-related commands when the student is absent from a lesson.
+Therefore, the `Attendance` class does not have, for example, a `boolean hasAttended` attribute.
+It only has a `participationScore` attribute.
+
+#### Aspect 2: Maintaining immutability and optimising `AttendanceRecord`
+* **Alternative 1 (current choice):** Dynamically updating `AttendanceRecord` whenever there is a change to attendance.
+    * Pros: Guarantees immutability.
+    * Cons: Requires re-instantiation of a `Map` object whenever a user adds/edits/deletes an `Attendance`.
+
+* **Alternative 2:** Initialising empty `Attendance`s for all students on call to constructor method. \
+This would mean that each `Attendance` is set to a particular value, rather than having to copy the entire `Map` object, whenever a user adds/edits/deletes it.
+    * Pros: Less overhead in modifying `Attendance`.
+    * Cons:
+      * Violates immutability.
+      * Incurs greater memory use.
+
+#### Aspect 3: Handling of invalid `Week` number
+* **Alternative 1 (current choice):** Fixed size `List`.
+    * Pros:
+      * Handles exceptions easily when a user inputs a week number greater than the total number of lessons.
+      * Provides constant time access as the week number is used as an index to the `List`.
+      * Easier to iterate over for `StatisticsCommand`.
+    * Cons: Requires additional methods to ensure the size of the `List` is fixed.
+
+* **Alternative 2:** `Map` of `Week` number to `AttendanceRecord`.
+    * Pros: Incurs less memory use.
+    * Cons:
+      * More difficult to iterate over for `StatisticsCommand`.
+      * More difficult to implement as each `Week` number must be checked to ensure it does not exceed `NumberOfOccurences` in `Lesson`.
+
+The sequence diagram below shows how an `Attendance` instance is retrieved.
+
+![AttendanceRetrievalSequenceDiagram](images/AttendanceRetrievalSequenceDiagram.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
