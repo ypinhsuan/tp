@@ -3,16 +3,24 @@ layout: page
 title: User Guide
 ---
 
-As a Computer Science teaching assistant, the traditional approach of managing students within your class would be to
-manually record their learning progress and attendance. However, as you will notice after some time, manual students
-tracking is unnecessarily time-consuming. This is why we have created Tutor's Pet.
-
-Tutor’s Pet is a desktop application that helps you reduce the amount of time you spend on administrative tasks as a
-teaching assistant. It allows you to keep track of the students in your classes, and record both their attendance and
-participation scores.
-
 * Table of Contents
 {:toc}
+
+## Introduction
+
+Tutor's Pet is a **student management application** for teaching assistants in NUS Computing.
+Tutor's Pet reduces the amount of time you spend on administrative tasks as a teaching assistant.
+It is a one stop solution to keep track of your classes, students, and their progress.
+
+As a teaching assistant, administrative chores such as attendance taking and grading students' participation
+can be troublesome with existing solutions such as spreadsheets. This is why we have created _Tutor's Pet, a
+solution for teaching assistants, by students._
+
+## About
+
+This user guide provides documentation on the installation and usage of Tutor's Pet. 
+It also provides a comprehensive list of features available to you and 
+includes a quick-start section that helps you get started.
 
 --------------------------------------------------------------------------------------------------------------------
 
