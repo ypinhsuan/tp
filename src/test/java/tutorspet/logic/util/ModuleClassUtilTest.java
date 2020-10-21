@@ -64,8 +64,8 @@ public class ModuleClassUtilTest {
 
     @Test
     public void addLessonToModuleClass_nullParameters_throwsNullPointerException() {
-        assertThrows(CommandException.class, () -> addLessonToModuleClass(null, DEFAULT_LESSON));
-        assertThrows(CommandException.class, () -> addLessonToModuleClass(CS2103T_TUTORIAL, null));
+        assertThrows(NullPointerException.class, () -> addLessonToModuleClass(null, DEFAULT_LESSON));
+        assertThrows(NullPointerException.class, () -> addLessonToModuleClass(CS2103T_TUTORIAL, null));
     }
 
     @Test
