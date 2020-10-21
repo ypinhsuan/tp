@@ -4,12 +4,12 @@ import static tutorspet.commons.core.Messages.MESSAGE_INVALID_LESSON_DISPLAYED_I
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_WEEK;
+import static tutorspet.commons.core.Messages.MESSAGE_MISSING_STUDENT_ATTENDANCE;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_WEEK_1;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_WEEK_5;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static tutorspet.logic.commands.DeleteAttendanceCommand.MESSAGE_DELETE_ATTENDANCE_SUCCESS;
-import static tutorspet.logic.commands.DeleteAttendanceCommand.MESSAGE_MISSING_ATTENDANCE;
 import static tutorspet.testutil.Assert.assertThrows;
 import static tutorspet.testutil.ModuleClassUtil.manualReplaceLessonToModuleClass;
 import static tutorspet.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
@@ -139,7 +139,7 @@ public class DeleteAttendanceCommandTest {
         DeleteAttendanceCommand deleteAttendanceCommand =
                 new DeleteAttendanceCommand(moduleClassIndex, lessonIndex, studentIndex, targetWeek);
 
-        assertCommandFailure(deleteAttendanceCommand, model, MESSAGE_MISSING_ATTENDANCE);
+        assertCommandFailure(deleteAttendanceCommand, model, MESSAGE_MISSING_STUDENT_ATTENDANCE);
     }
 
     @Test

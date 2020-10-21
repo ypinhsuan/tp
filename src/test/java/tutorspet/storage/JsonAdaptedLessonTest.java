@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 import tutorspet.commons.exceptions.IllegalValueException;
 import tutorspet.model.attendance.AttendanceRecordList;
 import tutorspet.model.lesson.Day;
+import tutorspet.model.lesson.Lesson;
 import tutorspet.model.lesson.NumberOfOccurrences;
 import tutorspet.model.lesson.Venue;
 import tutorspet.storage.attendance.JsonAdaptedAttendanceRecordList;
@@ -22,6 +23,7 @@ import tutorspet.storage.attendance.JsonAdaptedAttendanceRecordList;
 public class JsonAdaptedLessonTest {
 
     private static final String INVALID_TIME = "1400";
+    private static final String INVALID_END_TIME = "12:00";
     private static final String INVALID_DAY = "wed";
     private static final int INVALID_NUMBER_OF_OCCURRENCES = NumberOfOccurrences.UPPER_BOUND + 1;
     private static final String INVALID_VENUE = "!@#$%^&*";
@@ -84,6 +86,15 @@ public class JsonAdaptedLessonTest {
                 VALID_START_TIME, null, VALID_DAY, VALID_NUMBER_OF_OCCURRENCES, VALID_VENUE,
                 VALID_JSON_ADAPTED_ATTENDANCE_RECORD_LIST);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, END_TIME_FIELD);
+        assertThrows(IllegalValueException.class, expectedMessage, lesson::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidStartTimeAfterEndTime_throwsIllegalValueException() {
+        JsonAdaptedLesson lesson = new JsonAdaptedLesson(
+                VALID_START_TIME, INVALID_END_TIME, VALID_DAY, VALID_NUMBER_OF_OCCURRENCES, VALID_VENUE,
+                VALID_JSON_ADAPTED_ATTENDANCE_RECORD_LIST);
+        String expectedMessage = Lesson.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, lesson::toModelType);
     }
 

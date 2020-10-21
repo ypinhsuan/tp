@@ -2,6 +2,9 @@ package tutorspet.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static tutorspet.logic.commands.EditStudentCommand.EditStudentDescriptor;
+import static tutorspet.logic.commands.EditStudentCommand.MESSAGE_NOT_EDITED;
+import static tutorspet.logic.commands.EditStudentCommand.MESSAGE_USAGE;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_NAME;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_TAG;
@@ -14,7 +17,6 @@ import java.util.Set;
 
 import tutorspet.commons.core.index.Index;
 import tutorspet.logic.commands.EditStudentCommand;
-import tutorspet.logic.commands.EditStudentCommand.EditStudentDescriptor;
 import tutorspet.logic.parser.exceptions.ParseException;
 import tutorspet.model.components.tag.Tag;
 
@@ -40,10 +42,10 @@ public class EditStudentCommandParser implements Parser<EditStudentCommand> {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditStudentCommand.MESSAGE_USAGE), pe);
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE), pe);
         }
 
-        EditStudentDescriptor editStudentDescriptor = new EditStudentCommand.EditStudentDescriptor();
+        EditStudentDescriptor editStudentDescriptor = new EditStudentDescriptor();
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             editStudentDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
         }
@@ -56,7 +58,7 @@ public class EditStudentCommandParser implements Parser<EditStudentCommand> {
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editStudentDescriptor::setTags);
 
         if (!editStudentDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditStudentCommand.MESSAGE_NOT_EDITED);
+            throw new ParseException(MESSAGE_NOT_EDITED);
         }
 
         return new EditStudentCommand(index, editStudentDescriptor);

@@ -7,8 +7,8 @@ import static tutorspet.logic.parser.CliSyntax.PREFIX_LESSON_INDEX;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_PARTICIPATION_SCORE;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_STUDENT_INDEX;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_WEEK;
-import static tutorspet.logic.util.LessonUtil.editAttendanceInLesson;
-import static tutorspet.logic.util.ModuleClassUtil.addModifiedLessonToModuleClass;
+import static tutorspet.logic.util.ModuleClassUtil.editAttendanceInModuleClass;
+import static tutorspet.logic.util.ModuleClassUtil.getAttendanceFromModuleClass;
 import static tutorspet.model.Model.PREDICATE_SHOW_ALL_MODULE_CLASS;
 
 import java.util.List;
@@ -20,10 +20,7 @@ import tutorspet.commons.util.CollectionUtil;
 import tutorspet.logic.commands.exceptions.CommandException;
 import tutorspet.model.Model;
 import tutorspet.model.attendance.Attendance;
-import tutorspet.model.attendance.AttendanceRecord;
-import tutorspet.model.attendance.AttendanceRecordList;
 import tutorspet.model.attendance.Week;
-import tutorspet.model.lesson.Lesson;
 import tutorspet.model.moduleclass.ModuleClass;
 import tutorspet.model.student.Student;
 
@@ -99,33 +96,10 @@ public class EditAttendanceCommand extends Command {
         Student targetStudent = lastShownStudentList.get(studentIndex.getZeroBased());
         ModuleClass targetModuleClass = lastShownModuleClassList.get(moduleClassIndex.getZeroBased());
 
-        if (!targetModuleClass.hasStudentUuid(targetStudent.getUuid())) {
-            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_IN_MODULE_CLASS);
-        }
-
-        if (lessonIndex.getZeroBased() >= targetModuleClass.getLessons().size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
-        }
-
-        Lesson targetLesson = targetModuleClass.getLessons().get(lessonIndex.getZeroBased());
-        AttendanceRecordList targetAttendanceRecordList = targetLesson.getAttendanceRecordList();
-
-        if (!targetAttendanceRecordList.isWeekContained(week)) {
-            throw new CommandException(Messages.MESSAGE_INVALID_WEEK);
-        }
-
-        AttendanceRecord targetAttendanceRecord = targetAttendanceRecordList.getAttendanceRecord(week);
-
-        if (!targetAttendanceRecord.hasAttendance(targetStudent.getUuid())) {
-            throw new CommandException(Messages.MESSAGE_MISSING_STUDENT_ATTENDANCE);
-        }
-
-        Attendance attendanceToEdit = targetAttendanceRecord.getAttendance(targetStudent.getUuid());
+        Attendance attendanceToEdit = getAttendanceFromModuleClass(targetModuleClass, lessonIndex, week, targetStudent);
         Attendance editedAttendance = createEditedAttendance(attendanceToEdit, editAttendanceDescriptor);
-
-        Lesson modifiedLesson = editAttendanceInLesson(targetLesson, targetStudent, week, editedAttendance);
         ModuleClass modifiedModuleClass =
-                addModifiedLessonToModuleClass(targetModuleClass, lessonIndex, modifiedLesson);
+                editAttendanceInModuleClass(targetModuleClass, lessonIndex, week, targetStudent, editedAttendance);
 
         model.setModuleClass(targetModuleClass, modifiedModuleClass);
         model.updateFilteredModuleClassList(PREDICATE_SHOW_ALL_MODULE_CLASS);

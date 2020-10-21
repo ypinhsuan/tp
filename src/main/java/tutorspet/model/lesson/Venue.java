@@ -9,7 +9,7 @@ import static tutorspet.commons.util.AppUtil.checkArgument;
  */
 public class Venue {
 
-    public static final String SPECIAL_CHARACTERS = "-.~%:/?#[]@!$&'()*+,;=";
+    public static final String SPECIAL_CHARACTERS = "_-.~%:/?#[]@!$&'()*+,;=";
     public static final String MESSAGE_CONSTRAINTS = "Venues should only contain alphanumeric characters, spaces,"
             + " these special characters, excluding the parentheses, (" + SPECIAL_CHARACTERS + ")"
             + " and should not be blank.";

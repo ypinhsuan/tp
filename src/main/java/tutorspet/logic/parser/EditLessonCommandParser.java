@@ -2,6 +2,8 @@ package tutorspet.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static tutorspet.logic.commands.EditLessonCommand.EditLessonDescriptor;
+import static tutorspet.logic.commands.EditLessonCommand.MESSAGE_USAGE;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_CLASS_INDEX;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_DAY;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_END_TIME;
@@ -36,7 +38,7 @@ public class EditLessonCommandParser implements Parser<EditLessonCommand> {
         boolean isModuleClassIndexPresent = argMultimap.getValue(PREFIX_CLASS_INDEX).isPresent();
         boolean isLessonIndexPresent = argMultimap.getValue(PREFIX_LESSON_INDEX).isPresent();
         if (!isModuleClassIndexPresent || !isLessonIndexPresent) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditLessonCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
         }
 
         try {
@@ -44,10 +46,10 @@ public class EditLessonCommandParser implements Parser<EditLessonCommand> {
             lessonIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_LESSON_INDEX).get());
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditLessonCommand.MESSAGE_USAGE), pe);
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE), pe);
         }
 
-        EditLessonCommand.EditLessonDescriptor editLessonDescriptor = new EditLessonCommand.EditLessonDescriptor();
+        EditLessonDescriptor editLessonDescriptor = new EditLessonDescriptor();
         if (argMultimap.getValue(PREFIX_DAY).isPresent()) {
             editLessonDescriptor.setDay(ParserUtil.parseDay(argMultimap.getValue(PREFIX_DAY).get()));
         }

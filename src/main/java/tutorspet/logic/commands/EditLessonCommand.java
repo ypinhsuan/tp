@@ -8,8 +8,11 @@ import static tutorspet.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_LESSON_INDEX;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_VENUE;
-import static tutorspet.logic.util.ModuleClassUtil.addEditedLessonToModuleClass;
+import static tutorspet.logic.util.ModuleClassUtil.editLessonInModuleClass;
+import static tutorspet.logic.util.ModuleClassUtil.getLessonFromModuleClass;
 import static tutorspet.model.Model.PREDICATE_SHOW_ALL_MODULE_CLASS;
+import static tutorspet.model.lesson.Lesson.MESSAGE_CONSTRAINTS;
+import static tutorspet.model.lesson.Lesson.isValidStartTimeEndTime;
 
 import java.time.LocalTime;
 import java.util.List;
@@ -57,7 +60,7 @@ public class EditLessonCommand extends Command {
 
     private final Index moduleClassIndex;
     private final Index lessonIndex;
-    private final EditLessonCommand.EditLessonDescriptor editLessonDescriptor;
+    private final EditLessonDescriptor editLessonDescriptor;
 
     /**
      * @param moduleClassIndex in the filtered class list.
@@ -65,12 +68,12 @@ public class EditLessonCommand extends Command {
      * @param editLessonDescriptor details to edit the class with.
      */
     public EditLessonCommand(
-            Index moduleClassIndex, Index lessonIndex, EditLessonCommand.EditLessonDescriptor editLessonDescriptor) {
+            Index moduleClassIndex, Index lessonIndex, EditLessonDescriptor editLessonDescriptor) {
         requireAllNonNull(moduleClassIndex, lessonIndex, editLessonDescriptor);
 
         this.moduleClassIndex = moduleClassIndex;
         this.lessonIndex = lessonIndex;
-        this.editLessonDescriptor = new EditLessonCommand.EditLessonDescriptor(editLessonDescriptor);
+        this.editLessonDescriptor = new EditLessonDescriptor(editLessonDescriptor);
     }
 
     @Override
@@ -85,13 +88,9 @@ public class EditLessonCommand extends Command {
 
         ModuleClass targetModuleClass = lastShownModuleClassList.get(moduleClassIndex.getZeroBased());
 
-        if (lessonIndex.getZeroBased() >= targetModuleClass.getLessons().size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
-        }
-
-        Lesson lessonToEdit = targetModuleClass.getLessons().get(lessonIndex.getZeroBased());
+        Lesson lessonToEdit = getLessonFromModuleClass(targetModuleClass, lessonIndex);
         Lesson editedLesson = createEditedLesson(lessonToEdit, editLessonDescriptor);
-        ModuleClass modifiedModuleClass = addEditedLessonToModuleClass(targetModuleClass, lessonToEdit, editedLesson);
+        ModuleClass modifiedModuleClass = editLessonInModuleClass(targetModuleClass, lessonToEdit, editedLesson);
 
         model.setModuleClass(targetModuleClass, modifiedModuleClass);
         model.updateFilteredModuleClassList(PREDICATE_SHOW_ALL_MODULE_CLASS);
@@ -106,7 +105,7 @@ public class EditLessonCommand extends Command {
      * {@code NumberOfOccurrences} and {@code AttendanceRecordList} remain unchanged.
      */
     private static Lesson createEditedLesson(
-            Lesson lessonToEdit, EditLessonDescriptor editLessonDescriptor) {
+            Lesson lessonToEdit, EditLessonDescriptor editLessonDescriptor) throws CommandException {
         assert lessonToEdit != null;
         LocalTime updatedStartTime = editLessonDescriptor.getStartTime().orElse(lessonToEdit.getStartTime());
         LocalTime updatedEndTime = editLessonDescriptor.getEndTime().orElse(lessonToEdit.getEndTime());
@@ -115,6 +114,12 @@ public class EditLessonCommand extends Command {
 
         NumberOfOccurrences originalNumberOfOccurrences = lessonToEdit.getNumberOfOccurrences();
         AttendanceRecordList attendanceRecordList = lessonToEdit.getAttendanceRecordList();
+
+        // check that start time and end time are valid
+        if (!isValidStartTimeEndTime(updatedStartTime, updatedEndTime)) {
+            throw new CommandException(MESSAGE_CONSTRAINTS);
+        }
+
         return new Lesson(updatedStartTime, updatedEndTime, updatedDay, originalNumberOfOccurrences,
                 updatedVenue, attendanceRecordList);
     }
@@ -154,7 +159,7 @@ public class EditLessonCommand extends Command {
         /**
          * Copy constructor.
          */
-        public EditLessonDescriptor(EditLessonCommand.EditLessonDescriptor toCopy) {
+        public EditLessonDescriptor(EditLessonDescriptor toCopy) {
             setStartTime(toCopy.startTime);
             setEndTime(toCopy.endTime);
             setDay(toCopy.day);
@@ -208,12 +213,12 @@ public class EditLessonCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditLessonCommand.EditLessonDescriptor)) {
+            if (!(other instanceof EditLessonDescriptor)) {
                 return false;
             }
 
             // state check
-            EditLessonCommand.EditLessonDescriptor e = (EditLessonCommand.EditLessonDescriptor) other;
+            EditLessonDescriptor e = (EditLessonDescriptor) other;
 
             return getStartTime().equals(e.getStartTime())
                     && getEndTime().equals(e.getEndTime())

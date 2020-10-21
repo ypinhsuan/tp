@@ -18,6 +18,8 @@ import static tutorspet.logic.commands.CommandTestUtil.VALID_VENUE_S17_0302_LESS
 import static tutorspet.logic.commands.CommandTestUtil.VENUE_DESC_LESSON_FRI_8_TO_10;
 import static tutorspet.logic.commands.CommandTestUtil.VENUE_DESC_LESSON_WED_2_TO_4;
 import static tutorspet.logic.commands.EditLessonCommand.MESSAGE_USAGE;
+import static tutorspet.logic.parser.CliSyntax.PREFIX_CLASS_INDEX;
+import static tutorspet.logic.parser.CliSyntax.PREFIX_LESSON_INDEX;
 import static tutorspet.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static tutorspet.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static tutorspet.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
@@ -36,8 +38,9 @@ public class EditLessonCommandParserTest {
 
     private static final Index VALID_MODULE_CLASS_INDEX_ONE = INDEX_FIRST_ITEM;
     private static final Index VALID_LESSON_INDEX_TWO = INDEX_SECOND_ITEM;
-    private static final String INPUT_PREAMBLE =
-            " c/" + VALID_MODULE_CLASS_INDEX_ONE.getOneBased() + " l/" + VALID_LESSON_INDEX_TWO.getOneBased();
+    private static final String INPUT_PREAMBLE = " "
+            + PREFIX_CLASS_INDEX + VALID_MODULE_CLASS_INDEX_ONE.getOneBased() + " "
+            + PREFIX_LESSON_INDEX + VALID_LESSON_INDEX_TWO.getOneBased();
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE);
 
@@ -46,10 +49,14 @@ public class EditLessonCommandParserTest {
     @Test
     public void parse_missingParts_failure() {
         // no class index specified
-        assertParseFailure(parser, " l/1" + DAY_DESC_LESSON_FRI_8_TO_10, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, " "
+                + PREFIX_LESSON_INDEX + "1"
+                + DAY_DESC_LESSON_FRI_8_TO_10, MESSAGE_INVALID_FORMAT);
 
         // no lesson index specified
-        assertParseFailure(parser, " c/1" + DAY_DESC_LESSON_FRI_8_TO_10, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, " "
+                + PREFIX_CLASS_INDEX + "1"
+                + DAY_DESC_LESSON_FRI_8_TO_10, MESSAGE_INVALID_FORMAT);
 
         // no class and lesson index
         assertParseFailure(parser, DAY_DESC_LESSON_FRI_8_TO_10, MESSAGE_INVALID_FORMAT);
@@ -61,46 +68,79 @@ public class EditLessonCommandParserTest {
     @Test
     public void parse_invalidPreamble_failure() {
         // negative index
-        assertParseFailure(parser, " c/-5 l/1" + DAY_DESC_LESSON_FRI_8_TO_10, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, " "
+                + PREFIX_CLASS_INDEX + "-5" + " "
+                + PREFIX_LESSON_INDEX + "1"
+                + DAY_DESC_LESSON_FRI_8_TO_10, MESSAGE_INVALID_FORMAT);
 
         // zero index
-        assertParseFailure(parser, " c/1 l/0" + DAY_DESC_LESSON_FRI_8_TO_10, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, " "
+                + PREFIX_CLASS_INDEX + "1" + " "
+                + PREFIX_LESSON_INDEX + "0"
+                + DAY_DESC_LESSON_FRI_8_TO_10, MESSAGE_INVALID_FORMAT);
 
         // invalid arguments being parsed as preamble
         assertParseFailure(parser, " 1 some random string", MESSAGE_INVALID_FORMAT);
 
         // invalid prefix being parsed as preamble
-        assertParseFailure(parser, " c/1 l/1 i/ string", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, " "
+                + PREFIX_CLASS_INDEX + "1" + " "
+                + PREFIX_LESSON_INDEX + "1"
+                + " i\\ string", MESSAGE_INVALID_FORMAT);
     }
 
     @Test
     public void parse_invalidValue_failure() {
-        assertParseFailure(parser, " c/1 l/1" + INVALID_DAY_DESC, Day.MESSAGE_CONSTRAINTS); // invalid day
+        assertParseFailure(parser, " "
+                + PREFIX_CLASS_INDEX + "1" + " "
+                + PREFIX_LESSON_INDEX + "1"
+                + INVALID_DAY_DESC, Day.MESSAGE_CONSTRAINTS); // invalid day
         assertParseFailure(
-                parser, " c/1 l/1" + INVALID_START_TIME_DESC, ParserUtil.MESSAGE_INVALID_TIME); // invalid start time
+                parser, " "
+                + PREFIX_CLASS_INDEX + "1" + " "
+                + PREFIX_LESSON_INDEX + "1"
+                + INVALID_START_TIME_DESC, ParserUtil.MESSAGE_INVALID_TIME); // invalid start time
         assertParseFailure(
-                parser, " c/1 l/1" + INVALID_END_TIME_DESC, ParserUtil.MESSAGE_INVALID_TIME); // invalid end time
-        assertParseFailure(parser, " c/1 l/1" + INVALID_VENUE_DESC, Venue.MESSAGE_CONSTRAINTS); // invalid venue
+                parser, " "
+                + PREFIX_CLASS_INDEX + "1" + " "
+                + PREFIX_LESSON_INDEX + "1"
+                + INVALID_END_TIME_DESC, ParserUtil.MESSAGE_INVALID_TIME); // invalid end time
+        assertParseFailure(parser, " "
+                + PREFIX_CLASS_INDEX + "1" + " "
+                + PREFIX_LESSON_INDEX + "1"
+                + INVALID_VENUE_DESC, Venue.MESSAGE_CONSTRAINTS); // invalid venue
 
         // invalid venue followed by valid start time
-        assertParseFailure(parser, " c/1 l/1" + INVALID_VENUE_DESC + START_TIME_DESC_LESSON_FRI_8_TO_10,
+        assertParseFailure(parser, " "
+                + PREFIX_CLASS_INDEX + "1" + " "
+                + PREFIX_LESSON_INDEX + "1"
+                + INVALID_VENUE_DESC
+                + START_TIME_DESC_LESSON_FRI_8_TO_10,
                 Venue.MESSAGE_CONSTRAINTS);
 
         // valid venue followed by invalid venue. The test case for invalid venue followed by valid venue
         // is tested at {@code parse_invalidValueFollowedByValidValue_success()}
-        assertParseFailure(parser, " c/1 l/1" + VENUE_DESC_LESSON_FRI_8_TO_10 + INVALID_VENUE_DESC,
+        assertParseFailure(parser, " "
+                + PREFIX_CLASS_INDEX + "1" + " "
+                + PREFIX_LESSON_INDEX + "1"
+                + VENUE_DESC_LESSON_FRI_8_TO_10
+                + INVALID_VENUE_DESC,
                 Venue.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser,
-                " c/1 l/1" + INVALID_DAY_DESC + INVALID_START_TIME_DESC + VALID_START_TIME_0800_LESSON_FRI_8_TO_10,
+                " "
+                + PREFIX_CLASS_INDEX + "1" + " "
+                + PREFIX_LESSON_INDEX + "1"
+                + INVALID_DAY_DESC
+                + INVALID_START_TIME_DESC
+                + VALID_START_TIME_0800_LESSON_FRI_8_TO_10,
                 Day.MESSAGE_CONSTRAINTS);
     }
 
     @Test
     public void parse_allFieldsSpecified_success() {
-        String userInput = INPUT_PREAMBLE
-                + DAY_DESC_LESSON_FRI_8_TO_10 + START_TIME_DESC_LESSON_FRI_8_TO_10
+        String userInput = INPUT_PREAMBLE + DAY_DESC_LESSON_FRI_8_TO_10 + START_TIME_DESC_LESSON_FRI_8_TO_10
                 + END_TIME_DESC_LESSON_FRI_8_TO_10 + VENUE_DESC_LESSON_FRI_8_TO_10;
 
         EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder()

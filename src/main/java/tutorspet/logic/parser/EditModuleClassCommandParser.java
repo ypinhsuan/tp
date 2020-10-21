@@ -2,11 +2,13 @@ package tutorspet.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static tutorspet.logic.commands.EditModuleClassCommand.EditModuleClassDescriptor;
+import static tutorspet.logic.commands.EditModuleClassCommand.MESSAGE_NOT_EDITED;
+import static tutorspet.logic.commands.EditModuleClassCommand.MESSAGE_USAGE;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_NAME;
 
 import tutorspet.commons.core.index.Index;
 import tutorspet.logic.commands.EditModuleClassCommand;
-import tutorspet.logic.commands.EditModuleClassCommand.EditModuleClassDescriptor;
 import tutorspet.logic.parser.exceptions.ParseException;
 
 /**
@@ -31,16 +33,16 @@ public class EditModuleClassCommandParser implements Parser<EditModuleClassComma
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditModuleClassCommand.MESSAGE_USAGE), pe);
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE), pe);
         }
 
-        EditModuleClassDescriptor editModuleClassDescriptor = new EditModuleClassCommand.EditModuleClassDescriptor();
+        EditModuleClassDescriptor editModuleClassDescriptor = new EditModuleClassDescriptor();
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             editModuleClassDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
         }
 
         if (!editModuleClassDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditModuleClassCommand.MESSAGE_NOT_EDITED);
+            throw new ParseException(MESSAGE_NOT_EDITED);
         }
 
         return new EditModuleClassCommand(index, editModuleClassDescriptor);

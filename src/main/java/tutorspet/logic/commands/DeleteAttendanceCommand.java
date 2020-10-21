@@ -6,8 +6,8 @@ import static tutorspet.logic.parser.CliSyntax.PREFIX_CLASS_INDEX;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_LESSON_INDEX;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_STUDENT_INDEX;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_WEEK;
-import static tutorspet.logic.util.LessonUtil.deleteAttendanceFromLesson;
-import static tutorspet.logic.util.ModuleClassUtil.addModifiedLessonToModuleClass;
+import static tutorspet.logic.util.ModuleClassUtil.deleteAttendanceFromModuleClass;
+import static tutorspet.logic.util.ModuleClassUtil.getLessonFromModuleClass;
 
 import java.util.List;
 
@@ -86,26 +86,14 @@ public class DeleteAttendanceCommand extends Command {
         Student targetStudent = lastShownStudentList.get(studentIndex.getZeroBased());
         ModuleClass targetModuleClass = lastShownModuleClassList.get(moduleClassIndex.getZeroBased());
 
-        if (!targetModuleClass.hasStudentUuid(targetStudent.getUuid())) {
-            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_IN_MODULE_CLASS);
-        }
-
-        if (lessonIndex.getZeroBased() >= targetModuleClass.getLessons().size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
-        }
-
-        Lesson targetLesson = targetModuleClass.getLessons().get(lessonIndex.getZeroBased());
-
-        if (!targetLesson.getAttendanceRecordList().isWeekContained(week)) {
-            throw new CommandException(Messages.MESSAGE_INVALID_WEEK);
-        }
-
-        Lesson modifiedLesson = deleteAttendanceFromLesson(targetLesson, targetStudent, week);
         ModuleClass modifiedModuleClass =
-                addModifiedLessonToModuleClass(targetModuleClass, lessonIndex, modifiedLesson);
+                deleteAttendanceFromModuleClass(targetModuleClass, lessonIndex, week, targetStudent);
+
+        Lesson lesson = getLessonFromModuleClass(targetModuleClass, lessonIndex);
+
         model.setModuleClass(targetModuleClass, modifiedModuleClass);
 
-        String message = String.format(MESSAGE_DELETE_ATTENDANCE_SUCCESS, week, targetStudent.getName(), targetLesson);
+        String message = String.format(MESSAGE_DELETE_ATTENDANCE_SUCCESS, week, targetStudent.getName(), lesson);
         model.commit(message);
         return new CommandResult(message);
     }
