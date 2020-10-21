@@ -5,6 +5,7 @@ skinparam arrowColor black
 skinparam classBackgroundColor ATTENDANCE_COLOR
 skinparam classFontColor black
 show member
+hide method
 
 Package Attendance <<Rectangle>>{
 
@@ -25,8 +26,7 @@ week : Index
 }
 
 AttendanceRecord "n" <-- AttendanceRecordList
-Attendance <-- AttendanceRecord
+Attendance "*" <-- AttendanceRecord
 Week <.. AttendanceRecordList
 }
-UUID <-- AttendanceRecord
 @enduml

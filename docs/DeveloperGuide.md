@@ -147,10 +147,10 @@ uniquely identify a `Student` across `Classes` and `Lessons`. This is important 
 ![StudentUUID](images/StudentUUID.png)
 
 From the object diagram above, we have designed the `Student` model such that every `Student` like `Alice`
-has a unique 128 bit `UUID` tagged to him/her, in addition to the `Name`, `Telegram`, `Email`, and `Tags` 
+has a unique 128 bit `UUID` tagged to him/her, in addition to the `Name`, `Telegram`, `Email`, and `Tags`
 fields providing information of the `Student`.
 
-#### Design consideration:
+#### Design Considerations:
 
 This section elaborates further on the reason why we eventually chose to adopt a `UUID` over other potential
 solutions.
@@ -235,7 +235,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ![CommitActivityDiagram](images/CommitActivityDiagram.png)
 
-#### Design consideration:
+#### Design Considerations:
 
 ##### Aspect: How undo & redo executes
 
@@ -249,26 +249,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
-
-### Attendance Model
-
-The `Attendance` model, along with `AttendanceRecord` and `AttendanceRecordList` is implemented as follows:
-
-<insert plantuml diagram>
-
-`AttendanceRecord` refers to the actual attendance roster of a particular lesson event. It consists of a `Map` that stores a `Student`'s `UUID` as keys and his or her associated `Attendance` as values. `AttendanceRecordList` refers to the list of all `AttendanceRecord` belonging to a `Lesson` object. It contains a fixed number of `AttendanceRecord` objects as determined by the `NumberOfOccurences` in `Lesson`<insert link to lesson model>. Note that all classes in the `Attendance` package are designed to be immutable.
-
-#### Considerations:
-The `Attendance` package was designed to prevent users from having to type in attendance related commands when the user's students are absent from his or her lesson. Therefore, the `Attendance` class only has a `participationScore` attribute. It does not have have, for example, a `hasAttended` attribute.
-
-With this consideration in mind, `AttendanceRecord` is thus designed to maintain a `Map` of student `UUID`s to `Attendance`. A `Map` object allows `Attendance` objects to be added or removed dynamically and provides constant time access to `Attendance` instances via the `Student#uuid` the user wishes to retrieve. Note that the students not present in `AttendanceRecord` are treated as not having attended the particular lesson.
-
-The sequence diagram below shows how an `Attendance` instance is accessed when a user keys in a `find-attendance` command:
-
-<insert puml activity diagram>
-
-In the diagram above, 
-* guard clauses are ommited
 
 ### \[Proposed\] Data archiving
 
@@ -303,7 +283,7 @@ of a `StatisticsCommand`:
 
 ### Design Consideration:
 
-#### Aspect 1: How statistics feature executes
+#### Aspect: How statistics feature executes
 
 * **Alternative 1:** Obtain all attendance information within `StatisticsCommand#execute()`.
     * Pros: Easy to implement.
@@ -313,6 +293,61 @@ of a `StatisticsCommand`:
 (`ModuleClassUtil` and `LessonClassUtil`).
     * Pros: Does not violate the law of demeter. Increases cohesion and thus increase maintainability.
     * Cons: Requires more wrapper methods to carry information. More effort to implement.
+
+### Attendance Model
+This section explains the design considerations of the `Attendance` model.
+
+#### Implementation
+The `Attendance`, `AttendanceRecord` and `AttendanceRecordList` models are implemented as follows:
+
+![AttendanceClassDiagram](images/AttendanceClassDiagram.png)
+
+`Attendance` encapsulates the information of a particular student's attendance in a specific lesson he/she has attended.
+`AttendanceRecord` refers to the actual attendance roster of a particular lesson event.
+It contains the `Attendances` of all `Students` who have attended the particular lesson.
+These information are stored as a `Map` with `Student` `UUID` as keys.
+`AttendanceRecordList` refers to the list of all `AttendanceRecord` instances. 
+The size of this list is fixed and is determined by the `NumberOfOccurences` in `Lesson`.
+
+<div markdown="span" class="alert alert-primary">
+Note that all classes in the `Attendance` package are designed to be immutable.
+</div>
+
+### Design Considerations:
+#### Aspect: Reducing user input
+Users should not have to type in attendance related commands when the student is absent from a lesson.
+Therefore, the `Attendance` class does not have, for example, a `boolean hasAttended` attribute. 
+It only has a `participationScore` attribute. 
+
+#### Aspect: Maintaining immutability and optimising `AttendanceRecord`
+* **Alternative 1 (current choice):** Dynamically updating `AttendanceRecord` whenever there is a change to attendance. 
+    * Pros: Guarantees immutability.
+    * Cons: Requires re-instantiation of a `Map` object whenever a user adds/edits/deletes an `Attendance`.
+
+* **Alternative 2:** Initialising empty `Attendance`s for all students on call to constructor method. \
+This would mean that each `Attendance` is set to a particular value, rather than having to copy the entire `Map` object, whenever a user adds/edits/deletes it.
+    * Pros: Less overhead in modifying `Attendance`.
+    * Cons: 
+      * Violates immutability.
+      * Incurs greater memory use.
+
+#### Aspect: Handling of invalid `Week` number
+* **Alternative 1 (current choice):** Fixed size `List`.
+    * Pros: 
+      * Handles exceptions easily when a user inputs a week number greater than the total number of lessons.
+      * Provides constant time access as the week number is used as an index to the `List`.
+      * Easier to iterate over for `StatisticsCommand`.
+    * Cons: Requires additional methods to ensure the size of the `List` is fixed.
+
+* **Alternative 2:** `Map` of `Week` number to `AttendanceRecord`.
+    * Pros: Incurs less memory use.
+    * Cons: 
+      * More difficult to iterate over for `StatisticsCommand`.
+      * More difficult to implement as each `Week` number must be checked to ensure it does not exceed `NumberOfOccurences` in `Lesson`.
+
+The sequence diagram below shows how an `Attendance` instance is retrieved.
+
+![AttendanceRetrievalSequenceDiagram](images/AttendanceRetrievalSequenceDiagram.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
