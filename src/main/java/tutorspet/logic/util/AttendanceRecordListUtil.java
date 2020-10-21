@@ -2,6 +2,7 @@ package tutorspet.logic.util;
 
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_WEEK;
 import static tutorspet.commons.core.Messages.MESSAGE_MISSING_STUDENT_ATTENDANCE;
+import static tutorspet.commons.core.Messages.MESSAGE_NO_LESSON_ATTENDED;
 import static tutorspet.commons.util.CollectionUtil.requireAllNonNull;
 import static tutorspet.logic.util.AttendanceRecordUtil.addAttendance;
 import static tutorspet.logic.util.AttendanceRecordUtil.setAttendance;
@@ -145,6 +146,53 @@ public class AttendanceRecordListUtil {
         }
 
         return Collections.unmodifiableList(studentRecords);
+    }
+
+    /**
+     * Returns the average participation score for {@code targetStudent}.
+     */
+    public static int getScoreFromAttendance(AttendanceRecordList targetAttendanceRecordList, Student targetStudent)
+            throws CommandException {
+        requireAllNonNull(targetAttendanceRecordList, targetStudent);
+
+        List<Optional<Attendance>> listOfAttendance = getAttendances(targetAttendanceRecordList, targetStudent);
+
+        int totalScore = 0;
+        int numOfWeeksParticipated = 0;
+
+        for (Optional<Attendance> attendance : listOfAttendance) {
+            if (attendance.isPresent()) {
+                totalScore = totalScore + attendance.get().getParticipationScore();
+                numOfWeeksParticipated++;
+            }
+        }
+
+        if (numOfWeeksParticipated == 0) {
+            throw new CommandException(MESSAGE_NO_LESSON_ATTENDED);
+        }
+
+        return totalScore / numOfWeeksParticipated;
+    }
+
+    /**
+     * Returns a string containing lessons in which {@code targetStudent} did not attend.
+     */
+    public static String getAbsentWeekFromAttendance(AttendanceRecordList targetAttendanceRecordList,
+                                                Student targetStudent) {
+        requireAllNonNull(targetAttendanceRecordList, targetStudent);
+
+        List<Optional<Attendance>> listOfAttendance = getAttendances(targetAttendanceRecordList, targetStudent);
+        StringBuilder weeksNotPresent = new StringBuilder();
+        int weekNo = 1;
+
+        for (Optional<Attendance> attendance : listOfAttendance) {
+            if (attendance.isEmpty()) {
+                weeksNotPresent.append(" ").append(weekNo);
+            }
+            weekNo++;
+        }
+
+        return weeksNotPresent.toString();
     }
 
     private static AttendanceRecordList replaceAttendanceRecordInList(AttendanceRecordList attendanceRecordList,

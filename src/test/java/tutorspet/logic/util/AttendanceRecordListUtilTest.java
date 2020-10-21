@@ -3,6 +3,7 @@ package tutorspet.logic.util;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_WEEK;
 import static tutorspet.commons.core.Messages.MESSAGE_MISSING_STUDENT_ATTENDANCE;
+import static tutorspet.commons.core.Messages.MESSAGE_NO_LESSON_ATTENDED;
 import static tutorspet.logic.commands.AddAttendanceCommand.MESSAGE_DUPLICATE_ATTENDANCE;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_PARTICIPATION_SCORE_33;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_PARTICIPATION_SCORE_51;
@@ -10,12 +11,15 @@ import static tutorspet.logic.commands.CommandTestUtil.VALID_WEEK_1;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_WEEK_5;
 import static tutorspet.logic.util.AttendanceRecordListUtil.addAttendanceToAttendanceRecordList;
 import static tutorspet.logic.util.AttendanceRecordListUtil.editAttendanceInAttendanceRecordList;
+import static tutorspet.logic.util.AttendanceRecordListUtil.getAbsentWeekFromAttendance;
 import static tutorspet.logic.util.AttendanceRecordListUtil.getAttendanceFromAttendanceRecordList;
 import static tutorspet.logic.util.AttendanceRecordListUtil.getAttendances;
+import static tutorspet.logic.util.AttendanceRecordListUtil.getScoreFromAttendance;
 import static tutorspet.logic.util.AttendanceRecordListUtil.removeAttendanceFromAttendanceRecordList;
 import static tutorspet.logic.util.AttendanceRecordUtil.addAttendance;
 import static tutorspet.logic.util.AttendanceRecordUtil.setAttendance;
 import static tutorspet.testutil.Assert.assertThrows;
+import static tutorspet.testutil.TypicalStudent.ALICE;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -341,5 +345,65 @@ public class AttendanceRecordListUtilTest {
         AttendanceRecordList recordList = new AttendanceRecordList(Arrays.asList(recordWeekOne, recordWeekTwo));
 
         assertThrows(NullPointerException.class, () -> getAttendances(recordList, null));
+    }
+
+    @Test
+    public void getScoreFromAttendance_validParameters_success() throws CommandException {
+        AttendanceRecord recordWeekOne = new AttendanceRecordBuilder().build();
+        Attendance attendance = new Attendance(VALID_PARTICIPATION_SCORE_33);
+        AttendanceRecord recordWeekTwo = new AttendanceRecordBuilder().withEntry(ALICE.getUuid(), attendance).build();
+        AttendanceRecordList recordList = new AttendanceRecordList(Arrays.asList(recordWeekOne, recordWeekTwo));
+
+        assertEquals(33, getScoreFromAttendance(recordList, ALICE));
+    }
+
+    @Test
+    public void getScoreFromAttendance_noLessonAttended_throwsCommandException() {
+        AttendanceRecord record = new AttendanceRecordBuilder().build();
+        AttendanceRecordList recordList = new AttendanceRecordList(Arrays.asList(record, record));
+
+        assertThrows(CommandException.class, MESSAGE_NO_LESSON_ATTENDED, () ->
+                getScoreFromAttendance(recordList, ALICE));
+    }
+
+    @Test
+    public void getScoreFromAttendance_nullParameters_throwsNullPointerException() {
+        AttendanceRecord recordWeekOne = new AttendanceRecordBuilder().build();
+        Attendance attendance = new Attendance(VALID_PARTICIPATION_SCORE_33);
+        AttendanceRecord recordWeekTwo = new AttendanceRecordBuilder().withEntry(ALICE.getUuid(), attendance).build();
+        AttendanceRecordList recordList = new AttendanceRecordList(Arrays.asList(recordWeekOne, recordWeekTwo));
+
+        assertThrows(NullPointerException.class, () -> getScoreFromAttendance(null, ALICE));
+        assertThrows(NullPointerException.class, () -> getScoreFromAttendance(recordList, null));
+    }
+
+    @Test
+    public void getAbsentWeekFromAttendance_validParameters_success() {
+        AttendanceRecord recordWeekOne = new AttendanceRecordBuilder().build();
+        Attendance attendance = new Attendance(VALID_PARTICIPATION_SCORE_33);
+        AttendanceRecord recordWeekTwo = new AttendanceRecordBuilder().withEntry(ALICE.getUuid(), attendance).build();
+        AttendanceRecordList recordList = new AttendanceRecordList(Arrays.asList(recordWeekOne, recordWeekTwo));
+
+        assertEquals(" 1", getAbsentWeekFromAttendance(recordList, ALICE));
+    }
+
+    @Test
+    public void getAbsentWeekFromAttendance_validParametersAllPresent_success() {
+        Attendance attendance = new Attendance(VALID_PARTICIPATION_SCORE_33);
+        AttendanceRecord record = new AttendanceRecordBuilder().withEntry(ALICE.getUuid(), attendance).build();
+        AttendanceRecordList recordList = new AttendanceRecordList(Arrays.asList(record, record));
+
+        assertEquals("", getAbsentWeekFromAttendance(recordList, ALICE));
+    }
+
+    @Test
+    public void getAbsentWeekFromAttendance_nullParameters_throwsNullPointerException() {
+        AttendanceRecord recordWeekOne = new AttendanceRecordBuilder().build();
+        Attendance attendance = new Attendance(VALID_PARTICIPATION_SCORE_33);
+        AttendanceRecord recordWeekTwo = new AttendanceRecordBuilder().withEntry(ALICE.getUuid(), attendance).build();
+        AttendanceRecordList recordList = new AttendanceRecordList(Arrays.asList(recordWeekOne, recordWeekTwo));
+
+        assertThrows(NullPointerException.class, () -> getAbsentWeekFromAttendance(null, ALICE));
+        assertThrows(NullPointerException.class, () -> getAbsentWeekFromAttendance(recordList, null));
     }
 }

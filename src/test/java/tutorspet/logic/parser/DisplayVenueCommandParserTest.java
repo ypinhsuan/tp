@@ -32,7 +32,7 @@ public class DisplayVenueCommandParserTest {
                 + PREFIX_CLASS_INDEX + "1",
                 new DisplayVenueCommand(INDEX_FIRST_ITEM, INDEX_FIRST_ITEM));
 
-        // multiple lesson indexes - last class index accepted
+        // multiple lesson indexes - last lesson index accepted
         assertParseSuccess(parser, " "
                 + PREFIX_CLASS_INDEX + "1" + " "
                 + PREFIX_LESSON_INDEX + "2" + " "

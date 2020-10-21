@@ -3,8 +3,10 @@ package tutorspet.logic.util;
 import static tutorspet.commons.util.CollectionUtil.requireAllNonNull;
 import static tutorspet.logic.util.AttendanceRecordListUtil.addAttendanceToAttendanceRecordList;
 import static tutorspet.logic.util.AttendanceRecordListUtil.editAttendanceInAttendanceRecordList;
+import static tutorspet.logic.util.AttendanceRecordListUtil.getAbsentWeekFromAttendance;
 import static tutorspet.logic.util.AttendanceRecordListUtil.getAttendanceFromAttendanceRecordList;
 import static tutorspet.logic.util.AttendanceRecordListUtil.getAttendances;
+import static tutorspet.logic.util.AttendanceRecordListUtil.getScoreFromAttendance;
 import static tutorspet.logic.util.AttendanceRecordListUtil.removeAttendanceFromAttendanceRecordList;
 
 import java.time.LocalTime;
@@ -137,5 +139,28 @@ public class LessonUtil {
         AttendanceRecordList targetAttendanceRecordList = targetLesson.getAttendanceRecordList();
 
         return getAttendances(targetAttendanceRecordList, targetStudent);
+    }
+
+    /**
+     * Returns the average participation score for {@code targetStudent} for a lesson.
+     */
+    public static int getParticipationScoreFromLesson(Lesson targetLesson, Student targetStudent)
+            throws CommandException {
+        requireAllNonNull(targetLesson, targetStudent);
+
+        AttendanceRecordList targetAttendanceRecordList = targetLesson.getAttendanceRecordList();
+
+        return getScoreFromAttendance(targetAttendanceRecordList, targetStudent);
+    }
+
+    /**
+     * Returns a string containing lessons in which {@code targetStudent} did not attend.
+     */
+    public static String getAbsentWeekFromLesson(Lesson targetLesson, Student targetStudent) {
+        requireAllNonNull(targetLesson, targetStudent);
+
+        AttendanceRecordList targetAttendanceRecordList = targetLesson.getAttendanceRecordList();
+
+        return getAbsentWeekFromAttendance(targetAttendanceRecordList, targetStudent);
     }
 }
