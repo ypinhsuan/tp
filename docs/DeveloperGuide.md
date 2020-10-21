@@ -147,7 +147,7 @@ uniquely identify a `Student` across `Classes` and `Lessons`. This is important 
 ![StudentUUID](images/StudentUUID.png)
 
 From the object diagram above, we have designed the `Student` model such that every `Student` like `Alice`
-has a unique 128 bit `UUID` tagged to him/her, in addition to the `Name`, `Telegram`, `Email`, and `Tags` 
+has a unique 128 bit `UUID` tagged to him/her, in addition to the `Name`, `Telegram`, `Email`, and `Tags`
 fields providing information of the `Student`.
 
 #### Design consideration:
@@ -302,7 +302,7 @@ The class diagram below shows the current implementation of `Lesson` model.
 
 ![Lesson Model](images/LessonModelClassDiagram.png)
 
-A `ModuleClass` can contain any number of `Lesson` objects. Every `Lesson` contains a `startTime`, `endTime`, `Day`, 
+A `ModuleClass` can contain any number of `Lesson` objects. Every `Lesson` contains a `startTime`, `endTime`, `Day`,
 `NumberOfOccurrences`, `Venue` and `AttendanceRecordList`.
 
 #### Design Considerations
