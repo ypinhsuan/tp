@@ -158,17 +158,21 @@ solutions.
 ##### Aspect: How to uniquely identify Students across models.
 
 * **Alternative 1 (current choice):** Assign a `UUID` tag to each `Student`
-  * Pros: Convenient to generate `UUID` in Java as Java has a `UUID` package to support `UUID`s.
-  Moreover, `UUID` is non-editable.
-  * Cons: Implementation is slightly more complicated as caution must be taken in integrating the `UUID` field into
-  `Student` model, and enforce `Student` equality checks using `UUID` in Tutor’s Pet. Moreover, although the chances
-  are low, it is possible that generating random `UUID`s present a risk of `UUID` collisions when we deal with large
-  amounts of student data.
+    * Pros:
+      * Convenient to generate `UUID` in Java as Java has a `UUID` package to support `UUID`s.
+      * `UUID` is non-editable.
+    * Cons:
+      * Implementation is slightly more complicated as caution must be taken in integrating the `UUID` field into
+        `Student` model, and enforce `Student` equality checks using `UUID` in Tutor’s Pet.
+      * Although the chances are low, it is possible that generating random `UUID`s present a risk of `UUID` collisions 
+        when we deal with large amounts of student data.
 
 * **Alternative 2:** Enforce that each `Student` must have a unique `Email`
-  * Pros: Easier to implement as the original AB3 already has an `Email` field integrated into it.
-  * Cons: The `Email` field is editable while the unique identifier of each `Student` should not be editable to prevent
-  the need to cascade a change in the identifier of the `Student`.
+    * Pros:
+      * Easier to implement as the original AB3 already has an `Email` field integrated into it.
+    * Cons:
+      * The `Email` field is editable while the unique identifier of each `Student` should not be editable to prevent
+        the need to cascade a change in the identifier of the `Student`.
 
 ### Undo/Redo Feature
 
