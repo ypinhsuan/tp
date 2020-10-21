@@ -1,0 +1,51 @@
+@startuml
+!include style.puml
+skinparam classAttributeFontColor #FFFFFFF
+skinparam classAttributeIconSize 0
+skinparam arrowThickness 1.1
+skinparam arrowColor LOGIC_COLOR_T4
+skinparam classBackgroundColor LOGIC_COLOR
+
+package Logic {
+
+Interface Logic <<Interface>> {
+Class LogicManager
+}
+
+package Command {
+Class StatisticsCommand
+Class CommandResult
+Class "{abstract}\nCommand" as Command
+}
+
+package Parser {
+Interface Parser <<Interface>>
+Class StatisticsCommandParser
+Class CommandResult
+Class TutorsPetParser
+}
+
+package Util {
+Class LessonUtil
+Class ModuleClassUtil
+}
+
+LogicManager .up.|> Logic
+LogicManager -->"1" TutorsPetParser
+TutorsPetParser .left.> StatisticsCommandParser: creates >
+
+StatisticsCommandParser ..> StatisticsCommand : creates >
+StatisticsCommandParser ..|> Parser
+StatisticsCommand -up-|> Command
+StatisticsCommand ..> ModuleClassUtil
+ModuleClassUtil .right..> LessonUtil
+LogicManager .left.> Command : executes >
+
+Logic ..> CommandResult
+LogicManager .down.> CommandResult
+Command .up.> CommandResult
+
+
+}
+
+@enduml
