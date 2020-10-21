@@ -217,6 +217,41 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+## Display Statistics Feature
+
+#### Implementation
+
+The display statistics mechanism is facilitated by `StatisticsCommand`. It extends `Command`.
+
+* DisplayStatisticsCommand#execute(): Do validity check and returns a specific student's statistics if all
+ validations passed.
+ 
+These operations are exposed in the `Command` interface as `Command#execute()`. The following sequence diagram shows 
+the interactions within the `Logic` component during the execution of a `StatisticsCommand`:
+
+![StatisticsSequenceDiagram](images/StatisticsSequenceDiagram.png)
+
+1. `Logic` uses the `TutorsPetParser` class to parse the user command.
+3. A new instance of a `StatisticsCommand` object would be created by the `StatisticsCommandParser` and returns to
+ `TutorsPetParser`.
+2. `TutorsPetParser` encapsulates the `StatisticsCommand` object as a `Command` object which is executed by
+ the `LogicManager`.
+3. The command execution affects the `ModuleClassUtil` and `LessonUtil` as static methods from those classes are
+ called.
+4. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
+
+### Design Consideration:
+
+#### Aspect 1: How statistics feature executes
+
+* **Alternative 1:** Obtain all attendance information within `StatisticsCommand#execute()`.
+    * Pros: Easy to implement.
+    * Cons: Violates the law of demeter to a large extent.
+    
+* **Alternative 2 (cuurent choice):** Extract the methods out to another class 
+(`ModuleClassUtil` and `LessonClassUtil`).
+    * Pros: Does not violate the law of demeter. Increases cohesion and thus increasing maintainability.
+    * Cons: Requires more wrapper methods to carry information. More effort to implement.
 
 --------------------------------------------------------------------------------------------------------------------
 
