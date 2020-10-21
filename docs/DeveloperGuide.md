@@ -225,7 +225,7 @@ The display statistics mechanism is facilitated by `StatisticsCommand`. It exten
 
 * DisplayStatisticsCommand#execute(): Do validity check and returns a specific student's statistics if all
  validations passed.
- 
+
 The following class diagram shows the relationship between classes within the `Logic` component during the execution
 of a `StatisticsCommand`:
  
