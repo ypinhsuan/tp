@@ -164,7 +164,7 @@ solutions.
     * Cons:
       * Implementation is slightly more complicated as caution must be taken in integrating the `UUID` field into
         `Student` model, and enforce `Student` equality checks using `UUID` in Tutor’s Pet.
-      * Although the chances are low, it is possible that generating random `UUID`s present a risk of `UUID` collisions 
+      * Although the chances are low, it is possible that generating random `UUID`s present a risk of `UUID` collisions
         when we deal with large amounts of student data.
 
 * **Alternative 2:** Enforce that each `Student` must have a unique `Email`
@@ -410,20 +410,20 @@ A `ModuleClass` can contain any number of `Lesson` objects. Every `Lesson` conta
 
 #### Design Considerations
 * **Alternative 1 (current choice):** Stores `Lesson` object in `ModuleClass`
-  
+
   This implementation allows duplicate lessons in different classes.
-  * Pros: 
+  * Pros:
     * Easy to implement.
-  * Cons: 
+  * Cons:
     * Difficult to check for duplicate lessons when adding or editing lessons.
 
 * **Alternative 2:** Have UUID field for `Lesson` and `ModuleClass` stores UUID
 
-  This is similar to how `Student` is implemented. It would be a better alternative if we want all lessons to be unique 
+  This is similar to how `Student` is implemented. It would be a better alternative if we want all lessons to be unique
   as we can have a `UniqueLessonList` to store all lessons as shown below.
-  
+
   ![Lesson Model](images/UniqueLessonListClassDiagram.png)
-  
+
   * Pros:
     * Easy to check for duplicate lessons.
   * Cons:
@@ -449,7 +449,7 @@ The size of this list is fixed and is determined by the `NumberOfOccurences` in 
 Note that all classes in the `Attendance` package are designed to be immutable.
 </div>
 
-### Design Considerations:
+### Design Considerations
 #### Aspect 1: Reducing user input
 Users should not have to type in attendance-related commands when the student is absent from a lesson.
 Therefore, the `Attendance` class does not have, for example, a `boolean hasAttended` attribute.
