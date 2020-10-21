@@ -147,10 +147,10 @@ uniquely identify a `Student` across `Classes` and `Lessons`. This is important 
 ![StudentUUID](images/StudentUUID.png)
 
 From the object diagram above, we have designed the `Student` model such that every `Student` like `Alice`
-has a unique 128 bit `UUID` tagged to him/her, in addition to the `Name`, `Telegram`, `Email`, and `Tags` 
+has a unique 128 bit `UUID` tagged to him/her, in addition to the `Name`, `Telegram`, `Email`, and `Tags`
 fields providing information of the `Student`.
 
-#### Design consideration:
+#### Design considerations
 
 This section elaborates further on the reason why we eventually chose to adopt a `UUID` over other potential
 solutions.
@@ -178,14 +178,14 @@ This section explains the implementation of the Undo and Redo mechanism and high
 
 #### Implementation
 
-The Undo/Redo mechanism is designed around maintaining a history of `TutorsPet` states, and restoring a particular states when the user triggers an undo or redo command.
+The Undo/Redo mechanism is designed around maintaining a history of `TutorsPet` states, and restoring a particular state when the user triggers an undo or redo command.
 
 ![TutorsPetState](images/TutorsPetState.png)
 
-A `TutorsPetState` contains a Tutor's Pet state, along with a message that describes the changes relevant to this state.
-
 The undo and redo mechanism is facilitated by `VersionedTutorsPet`. It extends `TutorsPet` with a history of Tutor's Pet states,
 stored internally as a list of `TutorsPetState`. It also maintains a `statePointer` to keep track of the undo/redo history.
+
+A `TutorsPetState` object contains a Tutor's Pet state, represented as a `ReadOnlyTutorsPet`, along with a message that describes the changes relevant to this state.
 
 Additionally, it implements the following operations:
 
@@ -266,18 +266,18 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ![CommitActivityDiagram](images/CommitActivityDiagram.png)
 
-#### Design Considerations:
+#### Design Considerations
 
 ##### Aspect: How undo & redo executes
 
-Two alternatives of implementing the undo/redo mechanism were considered.
+Two possible implementations the undo/redo mechanism were considered.
 
 * **Alternative 1 (current choice):** Save all data stored in Tutor's Pet at a given state.
   * Pros: Easy to implement.
   * Cons: May have performance issues in terms of memory usage.
 
 * **Alternative 2:** Commands are designed such that they can reverse the result of their execution.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+  * Pros: Will use less memory (e.g. for `delete-student`, save only the student deleted, so that it can be restored when undo is called).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
 ##### Aspect: Commands to support for undo/redo
@@ -314,7 +314,7 @@ of a `StatisticsCommand`:
 1. The command execution calls static methods from the `ModuleClassUtil` and `LessonUtil` classes.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 
-### Design Consideration:
+### Design Considerations
 
 #### Aspect 1: How statistics feature executes
 
@@ -359,7 +359,7 @@ If the `pointer` is not currently pointing to an entry in the list, i.e. its ind
 the current text in the command box is stored in the cache. Otherwise, there is no change to the cached value.
 Subsequently, `CommandHistory` decreases its `pointer` by one, and the respective `String` in the list is returned.
 
-The text in the command box is then set to the returned `string`. As such, the `pointer` always points to the command that is displayed
+The text in the command box is then set to the returned `String`. As such, the `pointer` always points to the command that is displayed
 in the command box, and if the text in the command box is a new command, then the `pointer` index is one greater than the last stored command.
 
 If there are no earlier commands to recall, then there is no change to the text in the command box.
@@ -383,7 +383,7 @@ The activity diagram above provides a summary of the recall command mechanism.
 
 ##### Aspect: Behaviour when returning from most recent recalled command
 
-Two alternative behaviours were considered when designing the recall command feature.
+Two possible behaviours were considered when designing the recall command feature.
 
 * **Alternative 1 (current choice):** Display any text the user had entered before recalling commands.
   * Pros: The user does not loose any progress to partially typed commands.
