@@ -8,6 +8,7 @@ import static tutorspet.logic.util.LessonUtil.deleteStudentFromLesson;
 import static tutorspet.testutil.Assert.assertThrows;
 import static tutorspet.testutil.TypicalModuleClass.CS2100_LAB;
 import static tutorspet.testutil.TypicalModuleClass.CS2103T_TUTORIAL;
+import static tutorspet.testutil.TypicalModuleClass.CS2103T_TUTORIAL_NO_STUDENTS;
 import static tutorspet.testutil.TypicalStudent.ALICE;
 import static tutorspet.testutil.TypicalStudent.AMY;
 
@@ -169,7 +170,7 @@ public class UniqueModuleClassListTest {
         uniqueModuleClassList.add(CS2100_LAB);
         uniqueModuleClassList.removeAllStudentUuids();
         UniqueModuleClassList expectedUniqueModuleClassList = new UniqueModuleClassList();
-        expectedUniqueModuleClassList.add(new ModuleClassBuilder(CS2103T_TUTORIAL)
+        expectedUniqueModuleClassList.add(new ModuleClassBuilder(CS2103T_TUTORIAL_NO_STUDENTS)
                 .withStudentUuids().build());
         expectedUniqueModuleClassList.add(new ModuleClassBuilder(CS2100_LAB)
                 .withStudentUuids().build());

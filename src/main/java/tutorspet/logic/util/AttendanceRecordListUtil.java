@@ -27,7 +27,6 @@ public class AttendanceRecordListUtil {
 
     /**
      * Returns an {@code AttendanceRecordList} where the {@code studentToRemove} has been removed.
-     *
      */
     public static AttendanceRecordList removeStudentFromAttendanceRecordList(
             AttendanceRecordList targetAttendanceRecordList, Student studentToRemove) {
@@ -38,6 +37,22 @@ public class AttendanceRecordListUtil {
         List<AttendanceRecord> updatedAttendanceRecords =
                 attendanceRecords.stream().map(attendanceRecord ->
                         removeStudentFromAttendanceRecord(attendanceRecord, studentToRemove))
+                        .collect(Collectors.toUnmodifiableList());
+
+        return new AttendanceRecordList(updatedAttendanceRecords);
+    }
+
+    /**
+     * Returns an {@code AttendanceRecordList} where all {@code Student}s has been removed.
+     */
+    public static AttendanceRecordList removeAllStudentsFromAttendanceRecordList(
+            AttendanceRecordList targetAttendanceRecordList) {
+        requireAllNonNull(targetAttendanceRecordList);
+
+        List<AttendanceRecord> attendanceRecords = targetAttendanceRecordList.getAttendanceRecordList();
+
+        List<AttendanceRecord> updatedAttendanceRecords =
+                attendanceRecords.stream().map(attendanceRecord -> new AttendanceRecord())
                         .collect(Collectors.toUnmodifiableList());
 
         return new AttendanceRecordList(updatedAttendanceRecords);

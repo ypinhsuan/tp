@@ -10,6 +10,7 @@ import static tutorspet.logic.commands.CommandTestUtil.VALID_PARTICIPATION_SCORE
 import static tutorspet.logic.commands.CommandTestUtil.VALID_WEEK_1;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_WEEK_5;
 import static tutorspet.logic.util.LessonUtil.addAttendanceToLesson;
+import static tutorspet.logic.util.LessonUtil.deleteAllStudentsFromLesson;
 import static tutorspet.logic.util.LessonUtil.deleteAttendanceFromLesson;
 import static tutorspet.logic.util.LessonUtil.deleteStudentFromLesson;
 import static tutorspet.logic.util.LessonUtil.editAttendanceInLesson;
@@ -57,6 +58,14 @@ public class LessonUtilTest {
     @Test
     public void deleteStudentFromLesson_noExistingStudent_success() {
         assertEquals(DEFAULT_LESSON, deleteStudentFromLesson(DEFAULT_LESSON, CARL));
+    }
+
+    @Test
+    public void deleteAllStudentFromLesson_validParameters_success() {
+        Lesson expectedLesson = insertAttendanceRecords(new LessonBuilder().withNumberOfOccurrences(2).build(),
+                RECORD_EMPTY, new AttendanceRecord());
+
+        assertEquals(expectedLesson, deleteAllStudentsFromLesson(DEFAULT_LESSON));
     }
 
     @Test

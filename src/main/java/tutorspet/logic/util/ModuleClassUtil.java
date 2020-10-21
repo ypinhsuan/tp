@@ -4,12 +4,14 @@ import static tutorspet.commons.util.CollectionUtil.requireAllNonNull;
 import static tutorspet.logic.commands.AddLessonCommand.MESSAGE_EXISTING_LESSON;
 import static tutorspet.logic.commands.EditLessonCommand.MESSAGE_DUPLICATE_LESSON;
 import static tutorspet.logic.util.LessonUtil.addAttendanceToLesson;
+import static tutorspet.logic.util.LessonUtil.deleteAllStudentsFromLesson;
 import static tutorspet.logic.util.LessonUtil.deleteAttendanceFromLesson;
 import static tutorspet.logic.util.LessonUtil.deleteStudentFromLesson;
 import static tutorspet.logic.util.LessonUtil.editAttendanceInLesson;
 import static tutorspet.logic.util.LessonUtil.getAttendanceFromLesson;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -49,6 +51,21 @@ public class ModuleClassUtil {
         Set<UUID> studentsIds = new HashSet<>(targetModuleClass.getStudentUuids());
         studentsIds.remove(studentToRemove.getUuid());
         return new ModuleClass(moduleClassName, studentsIds, updatedLessons);
+    }
+
+    /**
+     * Removes all {@code Student}s from the {@code targetModuleClass}.
+     */
+    public static ModuleClass deleteAllStudentsFromModuleClass(ModuleClass targetModuleClass) {
+        requireAllNonNull(targetModuleClass);
+
+        List<Lesson> lessons = targetModuleClass.getLessons();
+
+        List<Lesson> updatedLessons = lessons.stream().map(lesson ->
+                deleteAllStudentsFromLesson(lesson)).collect(Collectors.toUnmodifiableList());
+
+        Name moduleClassName = targetModuleClass.getName();
+        return new ModuleClass(moduleClassName, Collections.emptySet(), updatedLessons);
     }
 
     // lesson-related methods

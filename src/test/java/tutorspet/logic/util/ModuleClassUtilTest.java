@@ -10,11 +10,13 @@ import static tutorspet.logic.commands.CommandTestUtil.VALID_WEEK_1;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_WEEK_5;
 import static tutorspet.logic.commands.EditLessonCommand.MESSAGE_DUPLICATE_LESSON;
 import static tutorspet.logic.util.LessonUtil.addAttendanceToLesson;
+import static tutorspet.logic.util.LessonUtil.deleteAllStudentsFromLesson;
 import static tutorspet.logic.util.LessonUtil.deleteAttendanceFromLesson;
 import static tutorspet.logic.util.LessonUtil.deleteStudentFromLesson;
 import static tutorspet.logic.util.LessonUtil.editAttendanceInLesson;
 import static tutorspet.logic.util.ModuleClassUtil.addAttendanceToModuleClass;
 import static tutorspet.logic.util.ModuleClassUtil.addLessonToModuleClass;
+import static tutorspet.logic.util.ModuleClassUtil.deleteAllStudentsFromModuleClass;
 import static tutorspet.logic.util.ModuleClassUtil.deleteAttendanceFromModuleClass;
 import static tutorspet.logic.util.ModuleClassUtil.deleteLessonFromModuleClass;
 import static tutorspet.logic.util.ModuleClassUtil.deleteStudentFromModuleClass;
@@ -29,6 +31,7 @@ import static tutorspet.testutil.TypicalStudent.ALICE;
 import static tutorspet.testutil.TypicalStudent.CARL;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -66,6 +69,22 @@ public class ModuleClassUtilTest {
     public void deleteStudentFromModuleClass_nullParameters_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> deleteStudentFromModuleClass(null, ALICE));
         assertThrows(NullPointerException.class, () -> deleteStudentFromModuleClass(CS2103T_TUTORIAL, null));
+    }
+
+    @Test
+    public void deleteAllStudentsFromModuleClass_validParameters_success() {
+        List<Lesson> lessons = new ArrayList<>(CS2103T_TUTORIAL.getLessons());
+        List<Lesson> modifiedLessons = lessons.stream().map(lesson ->
+                deleteAllStudentsFromLesson(lesson)).collect(Collectors.toUnmodifiableList());
+        ModuleClass expectedModuleClass = new ModuleClass(CS2103T_TUTORIAL.getName(), Collections.emptySet(),
+                modifiedLessons);
+
+        assertEquals(expectedModuleClass, deleteAllStudentsFromModuleClass(CS2103T_TUTORIAL));
+    }
+
+    @Test
+    public void deleteAllStudentsFromModuleClass_nullParameters_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> deleteAllStudentsFromModuleClass(null));
     }
 
     @Test

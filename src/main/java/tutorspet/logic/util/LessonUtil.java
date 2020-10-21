@@ -5,6 +5,7 @@ import static tutorspet.logic.util.AttendanceRecordListUtil.addAttendanceToAtten
 import static tutorspet.logic.util.AttendanceRecordListUtil.editAttendanceInAttendanceRecordList;
 import static tutorspet.logic.util.AttendanceRecordListUtil.getAttendanceFromAttendanceRecordList;
 import static tutorspet.logic.util.AttendanceRecordListUtil.getAttendances;
+import static tutorspet.logic.util.AttendanceRecordListUtil.removeAllStudentsFromAttendanceRecordList;
 import static tutorspet.logic.util.AttendanceRecordListUtil.removeAttendanceFromAttendanceRecordList;
 import static tutorspet.logic.util.AttendanceRecordListUtil.removeStudentFromAttendanceRecordList;
 
@@ -37,6 +38,26 @@ public class LessonUtil {
 
         AttendanceRecordList updatedAttendanceRecordList = removeStudentFromAttendanceRecordList(
                 targetAttendanceRecordList, studentToRemove);
+
+        LocalTime startTime = targetLesson.getStartTime();
+        LocalTime endTime = targetLesson.getEndTime();
+        Day day = targetLesson.getDay();
+        NumberOfOccurrences numberOfOccurrences = targetLesson.getNumberOfOccurrences();
+        Venue venue = targetLesson.getVenue();
+
+        return new Lesson(startTime, endTime, day, numberOfOccurrences, venue, updatedAttendanceRecordList);
+    }
+
+    /**
+     * Returns a {@code Lesson} where all {@code Student}s has been removed.
+     */
+    public static Lesson deleteAllStudentsFromLesson(Lesson targetLesson) {
+        requireAllNonNull(targetLesson);
+
+        AttendanceRecordList targetAttendanceRecordList = targetLesson.getAttendanceRecordList();
+
+        AttendanceRecordList updatedAttendanceRecordList = removeAllStudentsFromAttendanceRecordList(
+                targetAttendanceRecordList);
 
         LocalTime startTime = targetLesson.getStartTime();
         LocalTime endTime = targetLesson.getEndTime();

@@ -4,18 +4,15 @@ import static java.util.Objects.requireNonNull;
 import static tutorspet.commons.util.CollectionUtil.requireAllNonNull;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_CLASS_INDEX;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_STUDENT_INDEX;
+import static tutorspet.logic.util.ModuleClassUtil.deleteStudentFromModuleClass;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 
 import tutorspet.commons.core.Messages;
 import tutorspet.commons.core.index.Index;
 import tutorspet.logic.commands.exceptions.CommandException;
 import tutorspet.model.Model;
-import tutorspet.model.components.name.Name;
-import tutorspet.model.lesson.Lesson;
 import tutorspet.model.moduleclass.ModuleClass;
 import tutorspet.model.moduleclass.SameModuleClassPredicate;
 import tutorspet.model.student.Student;
@@ -102,10 +99,6 @@ public class UnlinkCommand extends Command {
             throw new CommandException(MESSAGE_MISSING_LINK);
         }
 
-        Name moduleClassName = moduleClassToUnlink.getName();
-        Set<UUID> studentsIds = new HashSet<>(moduleClassToUnlink.getStudentUuids());
-        studentsIds.remove(studentUuid);
-        List<Lesson> lessons = moduleClassToUnlink.getLessons();
-        return new ModuleClass(moduleClassName, studentsIds, lessons);
+        return deleteStudentFromModuleClass(moduleClassToUnlink, studentToUnlink);
     }
 }

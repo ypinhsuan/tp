@@ -52,9 +52,19 @@ public class TypicalModuleClass {
     public static final ModuleClass CS2100_TUTORIAL = new ModuleClassBuilder()
             .withName(VALID_NAME_CS2100_TUTORIAL).withStudentUuids(ALICE.getUuid()).build();
 
+    /**
+     * A {@code ModuleClass} for testing with no lessons.
+     */
+    public static final ModuleClass CS2100_TUTORIAL_NO_STUDENTS = new ModuleClassBuilder()
+            .withName(VALID_NAME_CS2100_TUTORIAL).build();
+
     private TypicalModuleClass() {} // prevents instantiation
 
     public static List<ModuleClass> getTypicalModuleClasses() {
         return new ArrayList<>(Arrays.asList(CS2103T_TUTORIAL, CS2100_LAB, CS2100_TUTORIAL));
+    }
+
+    public static List<ModuleClass> getOnlyModuleClasses() {
+        return new ArrayList<>(Arrays.asList(CS2103T_TUTORIAL_NO_STUDENTS, CS2100_LAB, CS2100_TUTORIAL_NO_STUDENTS));
     }
 }

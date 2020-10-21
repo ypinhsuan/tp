@@ -2,9 +2,9 @@ package tutorspet.model.moduleclass;
 
 import static java.util.Objects.requireNonNull;
 import static tutorspet.commons.util.CollectionUtil.requireAllNonNull;
+import static tutorspet.logic.util.ModuleClassUtil.deleteAllStudentsFromModuleClass;
 import static tutorspet.logic.util.ModuleClassUtil.deleteStudentFromModuleClass;
 
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -141,8 +141,7 @@ public class UniqueModuleClassList implements Iterable<ModuleClass> {
      */
     public void removeAllStudentUuids() {
         internalList.setAll(internalList.stream()
-                .map(moduleClass ->
-                        new ModuleClass(moduleClass.getName(), Collections.emptySet(), moduleClass.getLessons()))
+                .map(moduleClass -> deleteAllStudentsFromModuleClass(moduleClass))
                 .collect(Collectors.toList()));
     }
 
