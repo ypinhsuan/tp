@@ -228,10 +228,10 @@ The display statistics mechanism is facilitated by `StatisticsCommand`. It exten
 
 The following class diagram shows the relationship between classes within the `Logic` component during the execution
 of a `StatisticsCommand`:
- 
+
 ![StatisticsClassDiagram](images/StatisticsClassDiagram.png)
- 
-The following sequence diagram shows the interactions within the `Logic` component during the execution 
+
+The following sequence diagram shows the interactions within the `Logic` component during the execution
 of a `StatisticsCommand`:
 
 ![StatisticsSequenceDiagram](images/StatisticsSequenceDiagram.png)
@@ -252,8 +252,8 @@ of a `StatisticsCommand`:
 * **Alternative 1:** Obtain all attendance information within `StatisticsCommand#execute()`.
     * Pros: Easy to implement.
     * Cons: Violates the law of demeter to a large extent.
-    
-* **Alternative 2 (cuurent choice):** Extract the methods out to another class 
+
+* **Alternative 2 (cuurent choice):** Extract the methods out to another class
 (`ModuleClassUtil` and `LessonClassUtil`).
     * Pros: Does not violate the law of demeter. Increases cohesion and thus increasing maintainability.
     * Cons: Requires more wrapper methods to carry information. More effort to implement.

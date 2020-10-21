@@ -423,11 +423,11 @@ For example:
  <kbd>Enter</kbd>.
 
     ![Delete lesson before](images/ugimages/DeleteLessonBefore.png)
-   
+
 * You have one less lesson to teach now.
 
     ![Delete lesson after](images/ugimages/DeleteLessonAfter.png)
-   
+
 Constraints:
 * The indexes **must be positive whole numbers** 1, 2, 3, …​
 
