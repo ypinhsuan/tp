@@ -150,7 +150,7 @@ From the object diagram above, we have designed the `Student` model such that ev
 has a unique 128 bit `UUID` tagged to him/her, in addition to the `Name`, `Telegram`, `Email`, and `Tags`
 fields providing information of the `Student`.
 
-#### Design Considerations:
+#### Design Considerations
 
 This section elaborates further on the reason why we eventually chose to adopt a `UUID` over other potential
 solutions.
@@ -270,7 +270,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ![CommitActivityDiagram](images/CommitActivityDiagram.png)
 
-#### Design Considerations:
+#### Design Considerations
 
 ##### Aspect: How undo & redo executes
 
@@ -440,7 +440,7 @@ The `Attendance`, `AttendanceRecord` and `AttendanceRecordList` models are imple
 
 `Attendance` encapsulates the information of a particular student's attendance in a specific lesson he/she has attended.
 `AttendanceRecord` refers to the actual attendance roster of a particular lesson event.
-It contains the `Attendances` of all `Students` who have attended the particular lesson.
+It contains the `Attendance`s of all `Student`s who have attended the particular lesson.
 These information are stored as a `Map` with `Student` `UUID` as keys.
 `AttendanceRecordList` refers to the list of all `AttendanceRecord` instances.
 The size of this list is fixed and is determined by the `NumberOfOccurences` in `Lesson`.

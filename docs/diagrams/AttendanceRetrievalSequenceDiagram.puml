@@ -6,11 +6,11 @@ skinparam classBackgroundColor LOGIC_COLOR_T1
 skinparam fontColor black
 
 box Attendance Retrieval LOGIC_COLOR_T1
-participant "<<Class>>\nModuleClassUtil" as ModuleClassUtil LOGIC_COLOR
+participant "<<Class>>\n:ModuleClassUtil" as ModuleClassUtil LOGIC_COLOR
 participant ":ModuleClass" as ModuleClass LOGIC_COLOR
-participant "<<Class>>\nLessonUtil" as LessonUtil LOGIC_COLOR
+participant "<<Class>>\n:LessonUtil" as LessonUtil LOGIC_COLOR
 participant ":Lesson" as Lesson LOGIC_COLOR
-participant "<<Class>>\nAttendanceRecordListUtil" as AttendanceRecordListUtil LOGIC_COLOR
+participant "<<Class>>\n:AttendanceRecordListUtil" as AttendanceRecordListUtil LOGIC_COLOR
 participant ":AttendanceRecordList" as AttendanceRecordList LOGIC_COLOR
 participant ":AttendanceRecord" as AttendanceRecord LOGIC_COLOR
 participant ":Attendance" as Attendance LOGIC_COLOR
