@@ -81,6 +81,17 @@ public class LessonTest {
     }
 
     @Test
+    public void isValidStartTimeEndTime() {
+        // invalid start time and end time
+        assertFalse(Lesson.isValidStartTimeEndTime(LocalTime.of(12, 0), LocalTime.of(10, 0)));
+        assertFalse(Lesson.isValidStartTimeEndTime(LocalTime.of(12, 0), LocalTime.of(12, 0)));
+
+        // valid start time and end time
+        assertTrue(Lesson.isValidStartTimeEndTime(LocalTime.of(8, 0), LocalTime.of(14, 0)));
+        assertTrue(Lesson.isValidStartTimeEndTime(LocalTime.of(8, 0), LocalTime.of(8, 1)));
+    }
+
+    @Test
     public void isSameLesson() {
         // same object -> returns true
         assertTrue(LESSON_FRI_8_TO_10.isSameLesson(LESSON_FRI_8_TO_10));
