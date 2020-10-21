@@ -64,7 +64,7 @@ public class AddLessonCommand extends Command {
 
         List<ModuleClass> lastShownModuleClassList = model.getFilteredModuleClassList();
 
-        if (moduleClassIndex.getZeroBased() >= lastShownModuleClassList.size()) {
+        if (moduleClassIndex.getOneBased() > lastShownModuleClassList.size()) {
             throw new CommandException(MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX);
         }
 
