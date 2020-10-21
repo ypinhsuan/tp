@@ -56,13 +56,13 @@ public class DeleteLessonCommand extends Command {
 
         List<ModuleClass> lastShownModuleClassList = model.getFilteredModuleClassList();
 
-        if (moduleClassIndex.getZeroBased() >= lastShownModuleClassList.size()) {
+        if (moduleClassIndex.getOneBased() > lastShownModuleClassList.size()) {
             throw new CommandException(MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX);
         }
 
         ModuleClass targetModuleClass = lastShownModuleClassList.get(moduleClassIndex.getZeroBased());
 
-        if (lessonIndex.getZeroBased() >= targetModuleClass.getLessons().size()) {
+        if (lessonIndex.getOneBased() > targetModuleClass.getLessons().size()) {
             throw new CommandException(MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
         }
 

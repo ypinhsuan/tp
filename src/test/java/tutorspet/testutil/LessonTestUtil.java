@@ -15,7 +15,7 @@ import tutorspet.model.lesson.Lesson;
 /**
  * A utility class for Lesson.
  */
-public class LessonUtil {
+public class LessonTestUtil {
 
     /**
      * Returns an add lesson command string for adding the {@code lesson}.

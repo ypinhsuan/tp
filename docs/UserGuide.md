@@ -3,12 +3,12 @@ layout: page
 title: User Guide
 ---
 
-As a Computer Science teaching assistant, the traditional approach of managing students within your class would be to 
-manually record their learning progress and attendance. However, as you will notice after some time, manual students 
+As a Computer Science teaching assistant, the traditional approach of managing students within your class would be to
+manually record their learning progress and attendance. However, as you will notice after some time, manual students
 tracking is unnecessarily time-consuming. This is why we have created Tutor's Pet.
 
-Tutor’s Pet is a desktop application that helps you reduce the amount of time you spend on administrative tasks as a 
-teaching assistant. It allows you to keep track of the students in your classes, and record both their attendance and 
+Tutor’s Pet is a desktop application that helps you reduce the amount of time you spend on administrative tasks as a
+teaching assistant. It allows you to keep track of the students in your classes, and record both their attendance and
 participation scores.
 
 * Table of Contents
@@ -40,11 +40,11 @@ There are three main areas in Tutor's Pet:
 
 1. A command box and result display box.
 
-2. A main viewing area. 
+2. A main viewing area.
 
 3. A utility area.
 
-The command box is the area for you to enter your commands. The result of each command would be shown in the result 
+The command box is the area for you to enter your commands. The result of each command would be shown in the result
 display box, which is located immediately below the command box.
 
    ![Command box and result display box](images/ugimages/CommandAndDisplayBox.png)
@@ -52,12 +52,12 @@ display box, which is located immediately below the command box.
 
 * Type a command in the command box and press <kbd>Enter</kbd> to execute it.<br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.<br>
-   
+
    Some example commands you can try:
 
    * **`list`** : Lists all students and classes.
 
-   * **`add-student`**`n\John Doe t\johndoe e\johnd@example.com tag\student` : Adds a student named `John Doe` 
+   * **`add-student`**`n\John Doe t\johndoe e\johnd@example.com tag\student` : Adds a student named `John Doe`
    to the application.
 
    * **`delete-student`**`3` : Deletes the 3rd student shown in the current list.
@@ -67,12 +67,12 @@ display box, which is located immediately below the command box.
    * **`exit`** : Exits the app.
 
 * Refer to the [Features](#features) below for details of each command.
-   
+
 The main viewing area consists of two sections: **Classes** and **Students**.
 
 * The **Classes** section contains information about classes and lessons in Tutor's Pet. To view the list of all
  classes in Tutor's Pet, make use of the **`list-class`** command.
- 
+
     ![Class_section](images/ugimages/ClassPanel.png)
     <br>Figure 3. The class section.
 
@@ -81,18 +81,18 @@ The main viewing area consists of two sections: **Classes** and **Students**.
 
     ![Student_section](images/ugimages/StudentPanel.png)
     <br>Figure 4. The student section.
-    
+
 The utility area consists of three tabs: **File**, **Theme**, **Help**.
 
 * The **File** tab consists of an exit button. To exit Tutor's Pet, click on the exit button. Alternatively, make
  use of the `quit` command to exit the application.
- 
-* The **Theme** tab consist of 3 different themes, mainly **Light**, **Alternate** and **Dark**. To change the theme of 
+
+* The **Theme** tab consist of 3 different themes, mainly **Light**, **Alternate** and **Dark**. To change the theme of
  your Tutor's Pet, click on one of these buttons.
- 
+
 * The **Help** tab consists of a help button. If you require any assistance, click on the help button, copy the link
  given and paste it into any web browsers.
- 
+
    ![Utility area](images/ugimages/UtilityArea.png)
    <br>Figure 5. The Theme tab.
 
@@ -275,9 +275,9 @@ For example:
 * Your module coordinator decides to allocate another class to you and you want to be able to distinguish between
  the two classes. Hence you decide to edit the `CS2103T Tutorial` class to `CS2103T Tutorial T10`. You type the
  command `edit-class 1 n\CS2103T Tutorial T10` and press <kbd>Enter</kbd>.
- 
+
     ![Edit class before](images/ugimages/EditClassBefore.png)
- 
+
 * The class has been renamed from `CS2103T Tutorial` to `CS2103T Tutorial 10`.
 
     ![Edit class after](images/ugimages/EditClassAfter.png)
@@ -301,9 +301,9 @@ Format: `find-class KEYWORD [MORE_KEYWORDS]`
 For example:
 * You would like to find out how many `Tutorial` class you are currently teaching. You type the command
  `find-class Tutorial` and press <kbd>Enter</kbd>.
- 
+
     ![Find class before](images/ugimages/FindClassBefore.png)
-    
+
 * You find out that you are only teaching 2 tutorials this semester and hence decides to accept more classes.
 
     ![Find class after](images/ugimages/FindClassAfter.png)
@@ -344,9 +344,9 @@ Format: `clear-class`
 For example:
 * It is the start of a new semester. You would like to delete all information of all the classes you taught last
  semester to start anew. You type the command `clear-class` and press <kbd>Enter</kbd>.
- 
+
     ![Clear class before](images/ugimages/ClearClassBefore.png)
-    
+
 * All classes have been cleared. You can start managing your new classes.
 
     ![Clear class after](images/ugimages/ClearClassAfter.png)
@@ -419,15 +419,15 @@ Format: `delete-lesson c\CLASS_INDEX l\LESSON_INDEX`
 
 For example:
 * You receive news that the `Tuesday 10:00-11:00` `CS2103T Tutorial` would be cancelled permanently. You decide to
- remove that lesson from your Tutor's Pet and hence you type in the command `delete-lesson c\1 l\2` and press 
+ remove that lesson from your Tutor's Pet and hence you type in the command `delete-lesson c\1 l\2` and press
  <kbd>Enter</kbd>.
- 
+
     ![Delete lesson before](images/ugimages/DeleteLessonBefore.png)
-     
+
 * You have one less lesson to teach now.
 
     ![Delete lesson after](images/ugimages/DeleteLessonAfter.png)
-     
+
 Constraints:
 * The indexes **must be positive whole numbers** 1, 2, 3, …​
 
@@ -444,11 +444,11 @@ If you would like to record a new attendance for a student, you can make use of 
 
 Format: `add-attendance c\CLASS_INDEX l\LESSON_INDEX s\STUDENT_INDEX w\WEEK p\PARTICIPATION_SCORE`
 
-For example: 
+For example:
 * Your `CS2103T Tutorial` lesson in week 10 has just ended and you would like to give participation scores to the
  students. You decide to start with Alex. Hence, you type in the command `add-attendance c\1 l\1 s\1 w\10 p\80` and
  press <kbd>Enter</kbd>.
- 
+
     ![Add attendance before](images/ugimages/AddAttendanceBefore.png)
 
 * You have successfully recorded Alex's attendance. You have another 2 more students' attendance to record.
@@ -461,7 +461,7 @@ Other Examples:
   `add-attendance c\1 l\1 s\1 w\10 p\70`<br>
   Adds the attendance of the 1st student to the 1st lesson of the 1st class in the results of the find commands.<br>
   Attendance recorded is for week 10 and student's participation score is 70.
-  
+
 * `list-student c\1`<br>
   `add-attendance c\1 l\1 s\2 w\5 p\50`<br>
   Adds the attendance of the 2nd student in the results of the list command to the 1st lesson of the 1st class.<br>
@@ -490,11 +490,11 @@ Format: `find-attendance c\CLASS_INDEX l\LESSON_INDEX s\STUDENT_INDEX w\WEEK`
 
 For example:
 * It is the end of a semester and it's time to key in your students' attendance into luminus. You would like to find
- out if Alex attended week 1 lesson and hence you type in the command `find-attendance c\1 l\1 s\1 w\1` and press 
+ out if Alex attended week 1 lesson and hence you type in the command `find-attendance c\1 l\1 s\1 w\1` and press
  <kbd>Enter</kbd>.
- 
+
     ![Find attendance before](images/ugimages/FindAttendanceBefore.png)
-     
+
 * Now you can find out if Alex attended the first lesson and how participative he was in week 1.
 
     ![Find attendance after](images/ugimages/FindAttendanceAfter.png)
@@ -509,7 +509,7 @@ Other Examples:
   `find-attendance c\1 l\1 s\1 w\10`<br>
   Shows the attendance of the 1st student in the 1st lesson of the first class in the results of the find command.<br>
   Attendance shown is for week 10.
- 
+
 * `list-student c\1`
   `find-attendance c\1 l\1 s\2 w\5`
   Shows the attendance of the 2nd student in the 1st lesson of the first class in the results of the list command.
@@ -544,7 +544,7 @@ Format : `redo`
 
 View a list of actions that can be undone or redone.
 
-Format : `view-history` 
+Format : `view-history`
 
 ### Statistics : `stats`
 
@@ -554,11 +554,11 @@ Format: `stats c\1 s\1`
 * Gives a summary of the student's attendance at the specified `CLASS_INDEX` + `LESSON_INDEX` + `STUDENT_INDEX
 ` + `WEEK`.
 
-For example: 
+For example:
 * It is the end of the semester and time for you to grade a student's class participation. You would like to find out
- if Alex has been participative throughout the semester and hence you type in the command `stats c\1 s\1` and press 
+ if Alex has been participative throughout the semester and hence you type in the command `stats c\1 s\1` and press
  <kbd>Enter<\kbd>.
- 
+
 * Now you can see his average participation score and overall attendance to give a corresponding grade.
 
 Constraints:
@@ -571,13 +571,13 @@ Gives you the venue of a lesson.
 Format: `display-venue c\1 l\1`
 * Gives the venue of the lesson specified at `CLASS_INDEX` + `LESSON_INDEX`.
 
-For example: 
-* Due to covid, most of your physical lessons have been converted to zoom lessons and thus all the venues are 
+For example:
+* Due to covid, most of your physical lessons have been converted to zoom lessons and thus all the venues are
  in the form of zoom links. Your lesson is starting in 10 minutes and it is time to start the session. Hence, you
  input the command `display-venue c\1 l\2` and press <kbd>Enter</kbd>.
- 
+
     ![Display venue before](images/ugimages/DisplayVenueBefore.png)
- 
+
 * You can now proceed to copy the link to that zoom session from the command result box.
 
     ![Display venue after](images/ugimages/DisplayVenueAfter.png)

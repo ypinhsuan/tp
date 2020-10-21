@@ -21,7 +21,7 @@ import static tutorspet.logic.commands.CommandTestUtil.showModuleClassAtIndex;
 import static tutorspet.logic.commands.CommandTestUtil.showStudentAtIndex;
 import static tutorspet.logic.commands.EditAttendanceCommand.MESSAGE_EDIT_ATTENDANCE_SUCCESS;
 import static tutorspet.testutil.Assert.assertThrows;
-import static tutorspet.testutil.ModuleClassUtil.manualReplaceLessonToModuleClass;
+import static tutorspet.testutil.ModuleClassTestUtil.manualReplaceLessonToModuleClass;
 import static tutorspet.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 import static tutorspet.testutil.TypicalIndexes.INDEX_SECOND_ITEM;
 import static tutorspet.testutil.TypicalIndexes.INDEX_THIRD_ITEM;

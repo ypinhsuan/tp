@@ -82,7 +82,7 @@ public class EditLessonCommand extends Command {
 
         List<ModuleClass> lastShownModuleClassList = model.getFilteredModuleClassList();
 
-        if (moduleClassIndex.getZeroBased() >= lastShownModuleClassList.size()) {
+        if (moduleClassIndex.getOneBased() > lastShownModuleClassList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX);
         }
 
