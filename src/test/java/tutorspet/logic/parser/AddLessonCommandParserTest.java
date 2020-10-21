@@ -246,5 +246,14 @@ public class AddLessonCommandParserTest {
                 + END_TIME_DESC_LESSON_FRI_8_TO_10
                 + VENUE_DESC_LESSON_FRI_8_TO_10
                 + INVALID_NUMBER_OF_OCCURRENCES_DESC, NumberOfOccurrences.MESSAGE_CONSTRAINTS);
+
+        // invalid start time before end time
+        assertParseFailure(parser, " "
+                + PREFIX_CLASS_INDEX + "1"
+                + DAY_DESC_LESSON_FRI_8_TO_10
+                + START_TIME_DESC_LESSON_WED_2_TO_4
+                + END_TIME_DESC_LESSON_FRI_8_TO_10
+                + VENUE_DESC_LESSON_FRI_8_TO_10
+                + NUMBER_OF_OCCURRENCES_DESC_LESSON_FRI_8_TO_10, Lesson.MESSAGE_CONSTRAINTS);
     }
 }

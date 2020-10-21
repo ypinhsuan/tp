@@ -1,5 +1,9 @@
 package tutorspet.storage;
 
+import static tutorspet.model.lesson.Lesson.isValidStartTimeEndTime;
+import static tutorspet.model.lesson.NumberOfOccurrences.isValidNumberOfOccurrences;
+import static tutorspet.model.lesson.Venue.isValidVenue;
+
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 
@@ -89,6 +93,10 @@ public class JsonAdaptedLesson {
         final LocalTime modelEndTime = convertToTime(
                 endTime, String.format(INVALID_FIELD_MESSAGE_FORMAT, END_TIME_FIELD));
 
+        if (!isValidStartTimeEndTime(modelStartTime, modelEndTime)) {
+            throw new IllegalValueException(Lesson.MESSAGE_CONSTRAINTS);
+        }
+
         if (day == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Day.class.getSimpleName()));
         }
@@ -99,7 +107,7 @@ public class JsonAdaptedLesson {
             throw new IllegalValueException(Day.MESSAGE_CONSTRAINTS);
         }
 
-        if (!NumberOfOccurrences.isValidNumberOfOccurrences(numberOfOccurrences)) {
+        if (!isValidNumberOfOccurrences(numberOfOccurrences)) {
             throw new IllegalValueException(NumberOfOccurrences.MESSAGE_CONSTRAINTS);
         }
         final NumberOfOccurrences modelNumberOfOccurrences = new NumberOfOccurrences(numberOfOccurrences);
@@ -107,7 +115,7 @@ public class JsonAdaptedLesson {
         if (venue == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Venue.class.getSimpleName()));
         }
-        if (!Venue.isValidVenue(venue)) {
+        if (!isValidVenue(venue)) {
             throw new IllegalValueException(Venue.MESSAGE_CONSTRAINTS);
         }
         final Venue modelVenue = new Venue(venue);

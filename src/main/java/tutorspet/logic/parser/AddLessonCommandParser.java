@@ -11,6 +11,8 @@ import static tutorspet.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_VENUE;
 import static tutorspet.logic.parser.ParserUtil.parseIndex;
 import static tutorspet.logic.parser.ParserUtil.parseNumberOfOccurrences;
+import static tutorspet.model.lesson.Lesson.MESSAGE_CONSTRAINTS;
+import static tutorspet.model.lesson.Lesson.isValidStartTimeEndTime;
 
 import java.time.LocalTime;
 
@@ -69,6 +71,11 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
         Venue venue = ParserUtil.parseVenue(argMultimap.getValue(PREFIX_VENUE).get());
         NumberOfOccurrences numberOfOccurrences =
                 parseNumberOfOccurrences(argMultimap.getValue(PREFIX_NUMBER_OF_OCCURRENCES).get());
+
+        // check that start time and end time are valid
+        if (!isValidStartTimeEndTime(startTime, endTime)) {
+            throw new ParseException(MESSAGE_CONSTRAINTS);
+        }
 
         Lesson lesson = new Lesson(startTime, endTime, day, numberOfOccurrences, venue);
 

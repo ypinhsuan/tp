@@ -1,5 +1,7 @@
 package tutorspet.storage;
 
+import static tutorspet.model.components.tag.Tag.isValidTagName;
+
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -41,7 +43,7 @@ public class JsonAdaptedTag {
      * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
      */
     public Tag toModelType() throws IllegalValueException {
-        if (Objects.isNull(tagName) || !Tag.isValidTagName(tagName)) {
+        if (Objects.isNull(tagName) || !isValidTagName(tagName)) {
             throw new IllegalValueException(Tag.MESSAGE_CONSTRAINTS);
         }
         return new Tag(tagName);
