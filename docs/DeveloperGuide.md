@@ -283,7 +283,7 @@ of a `StatisticsCommand`:
 
 ### Design Consideration:
 
-#### Aspect: How statistics feature executes
+#### Aspect 1: How statistics feature executes
 
 * **Alternative 1:** Obtain all attendance information within `StatisticsCommand#execute()`.
     * Pros: Easy to implement.
@@ -314,12 +314,12 @@ Note that all classes in the `Attendance` package are designed to be immutable.
 </div>
 
 ### Design Considerations:
-#### Aspect: Reducing user input
-Users should not have to type in attendance related commands when the student is absent from a lesson.
+#### Aspect 1: Reducing user input
+Users should not have to type in attendance-related commands when the student is absent from a lesson.
 Therefore, the `Attendance` class does not have, for example, a `boolean hasAttended` attribute.
 It only has a `participationScore` attribute.
 
-#### Aspect: Maintaining immutability and optimising `AttendanceRecord`
+#### Aspect 2: Maintaining immutability and optimising `AttendanceRecord`
 * **Alternative 1 (current choice):** Dynamically updating `AttendanceRecord` whenever there is a change to attendance.
     * Pros: Guarantees immutability.
     * Cons: Requires re-instantiation of a `Map` object whenever a user adds/edits/deletes an `Attendance`.
@@ -331,7 +331,7 @@ This would mean that each `Attendance` is set to a particular value, rather than
       * Violates immutability.
       * Incurs greater memory use.
 
-#### Aspect: Handling of invalid `Week` number
+#### Aspect 3: Handling of invalid `Week` number
 * **Alternative 1 (current choice):** Fixed size `List`.
     * Pros:
       * Handles exceptions easily when a user inputs a week number greater than the total number of lessons.
