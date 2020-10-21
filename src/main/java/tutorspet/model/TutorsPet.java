@@ -112,7 +112,7 @@ public class TutorsPet implements ReadOnlyTutorsPet {
     public void deleteStudent(Student student) {
         requireNonNull(student);
 
-        moduleClasses.removeUuid(student.getUuid());
+        moduleClasses.removeUuid(student);
         students.remove(student);
     }
 

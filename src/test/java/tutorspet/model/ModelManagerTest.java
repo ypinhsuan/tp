@@ -10,6 +10,7 @@ import static tutorspet.model.VersionedTutorsPetTest.COMMIT_MESSAGE_2;
 import static tutorspet.testutil.Assert.assertThrows;
 import static tutorspet.testutil.TypicalModuleClass.CS2100_LAB;
 import static tutorspet.testutil.TypicalModuleClass.CS2103T_TUTORIAL;
+import static tutorspet.testutil.TypicalModuleClass.CS2103T_TUTORIAL_NO_STUDENTS;
 import static tutorspet.testutil.TypicalStudent.ALICE;
 import static tutorspet.testutil.TypicalStudent.AMY;
 import static tutorspet.testutil.TypicalStudent.BENSON;
@@ -198,7 +199,9 @@ public class ModelManagerTest {
         modelManager.deleteStudent(BENSON);
 
         ModelManager expectedModelManager = new ModelManager();
-        expectedModelManager.addModuleClass(new ModuleClassBuilder(CS2103T_TUTORIAL).withStudentUuids().build());
+        // Resultant moduleClass will have no students because of cascading delete.
+        expectedModelManager.addModuleClass(new ModuleClassBuilder(CS2103T_TUTORIAL_NO_STUDENTS)
+                .withStudentUuids().build());
         assertEquals(expectedModelManager, modelManager);
     }
 

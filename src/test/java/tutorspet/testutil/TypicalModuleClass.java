@@ -30,6 +30,14 @@ public class TypicalModuleClass {
             .build();
 
     /**
+     * A {@code ModuleClass} for testing with no students and THU_10_TO_11 lesson.
+     */
+    public static final ModuleClass CS2103T_TUTORIAL_NO_STUDENTS = new ModuleClassBuilder()
+            .withName(VALID_NAME_CS2103T_TUTORIAL)
+            .withLessons(insertAttendanceRecords(LESSON_THU_10_TO_11))
+            .build();
+
+    /**
      * A {@code ModuleClass} for testing with no students and the following lessons:
      * LESSON_FRI_8_TO_10 and ONLINE_LESSON_TUE_1030_1130.
      */

@@ -6,6 +6,7 @@ import static tutorspet.logic.util.AttendanceRecordListUtil.editAttendanceInAtte
 import static tutorspet.logic.util.AttendanceRecordListUtil.getAttendanceFromAttendanceRecordList;
 import static tutorspet.logic.util.AttendanceRecordListUtil.getAttendances;
 import static tutorspet.logic.util.AttendanceRecordListUtil.removeAttendanceFromAttendanceRecordList;
+import static tutorspet.logic.util.AttendanceRecordListUtil.removeStudentFromAttendanceRecordList;
 
 import java.time.LocalTime;
 import java.util.List;
@@ -25,6 +26,26 @@ import tutorspet.model.student.Student;
  * Contains utility methods for modifying {@code Attendance}s in {@code Lesson}s.
  */
 public class LessonUtil {
+
+    /**
+     * Returns a {@code Lesson} where the {@code studentToRemove} has been removed.
+     */
+    public static Lesson deleteStudentFromLesson(Lesson targetLesson, Student studentToRemove) {
+        requireAllNonNull(targetLesson, studentToRemove);
+
+        AttendanceRecordList targetAttendanceRecordList = targetLesson.getAttendanceRecordList();
+
+        AttendanceRecordList updatedAttendanceRecordList = removeStudentFromAttendanceRecordList(
+                targetAttendanceRecordList, studentToRemove);
+
+        LocalTime startTime = targetLesson.getStartTime();
+        LocalTime endTime = targetLesson.getEndTime();
+        Day day = targetLesson.getDay();
+        NumberOfOccurrences numberOfOccurrences = targetLesson.getNumberOfOccurrences();
+        Venue venue = targetLesson.getVenue();
+
+        return new Lesson(startTime, endTime, day, numberOfOccurrences, venue, updatedAttendanceRecordList);
+    }
 
     /**
      * Returns a {@code Lesson} where the {@code attendanceToAdd} has been added to the {@code targetLesson}.
