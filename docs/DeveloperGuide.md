@@ -309,8 +309,10 @@ A `ModuleClass` can contain any number of `Lesson` objects. Every `Lesson` conta
 * **Alternative 1 (current choice):** Stores `Lesson` object in `ModuleClass`
   
   This implementation allows duplicate lessons in different classes.
-  * Pros: Easy to implement.
-  * Cons: Difficult to check for duplicate lessons when adding or editing lessons.
+  * Pros: 
+    * Easy to implement.
+  * Cons: 
+    * Difficult to check for duplicate lessons when adding or editing lessons.
 
 * **Alternative 2:** Have UUID field for `Lesson` and `ModuleClass` stores UUID
 
@@ -319,8 +321,11 @@ A `ModuleClass` can contain any number of `Lesson` objects. Every `Lesson` conta
   
   ![Lesson Model](images/UniqueLessonListClassDiagram.png)
   
-  * Pros: Easy to check for duplicate lessons.
-  * Cons: There is a possibility of UUID collision, even though the probability is very low. Harder to implement.
+  * Pros: 
+    * Easy to check for duplicate lessons.
+  * Cons: 
+    * There is a possibility of UUID collision, even though the probability is very low. 
+    * Harder to implement.
 
 --------------------------------------------------------------------------------------------------------------------
 
