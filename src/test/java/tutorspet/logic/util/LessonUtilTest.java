@@ -11,6 +11,7 @@ import static tutorspet.logic.commands.CommandTestUtil.VALID_WEEK_1;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_WEEK_5;
 import static tutorspet.logic.util.LessonUtil.addAttendanceToLesson;
 import static tutorspet.logic.util.LessonUtil.deleteAttendanceFromLesson;
+import static tutorspet.logic.util.LessonUtil.deleteStudentFromLesson;
 import static tutorspet.logic.util.LessonUtil.editAttendanceInLesson;
 import static tutorspet.logic.util.LessonUtil.getAttendanceFromLesson;
 import static tutorspet.logic.util.LessonUtil.getAttendancesFromLesson;
@@ -20,6 +21,7 @@ import static tutorspet.testutil.TypicalAttendanceRecord.RECORD_ALICE_51_BENSON_
 import static tutorspet.testutil.TypicalAttendanceRecord.RECORD_EMPTY;
 import static tutorspet.testutil.TypicalStudent.ALICE;
 import static tutorspet.testutil.TypicalStudent.BENSON;
+import static tutorspet.testutil.TypicalStudent.CARL;
 
 import java.util.Arrays;
 import java.util.List;
@@ -41,6 +43,21 @@ public class LessonUtilTest {
     private static final Lesson DEFAULT_LESSON =
             insertAttendanceRecords(new LessonBuilder().withNumberOfOccurrences(2).build(),
                     RECORD_EMPTY, RECORD_ALICE_51_BENSON_33);
+
+    @Test
+    public void deleteStudentFromLesson_validParameters_success() {
+        AttendanceRecord record =
+                new AttendanceRecord(Map.of(BENSON.getUuid(), VALID_ATTENDANCE_33));
+        Lesson expectedLesson = insertAttendanceRecords(new LessonBuilder().withNumberOfOccurrences(2).build(),
+                RECORD_EMPTY, record);
+
+        assertEquals(expectedLesson, deleteStudentFromLesson(DEFAULT_LESSON, ALICE));
+    }
+
+    @Test
+    public void deleteStudentFromLesson_noExistingStudent_success() {
+        assertEquals(DEFAULT_LESSON, deleteStudentFromLesson(DEFAULT_LESSON, CARL));
+    }
 
     @Test
     public void addAttendanceToLesson_validParameters_success() throws Exception {

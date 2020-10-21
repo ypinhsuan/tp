@@ -11,11 +11,13 @@ import static tutorspet.logic.commands.CommandTestUtil.VALID_WEEK_5;
 import static tutorspet.logic.commands.EditLessonCommand.MESSAGE_DUPLICATE_LESSON;
 import static tutorspet.logic.util.LessonUtil.addAttendanceToLesson;
 import static tutorspet.logic.util.LessonUtil.deleteAttendanceFromLesson;
+import static tutorspet.logic.util.LessonUtil.deleteStudentFromLesson;
 import static tutorspet.logic.util.LessonUtil.editAttendanceInLesson;
 import static tutorspet.logic.util.ModuleClassUtil.addAttendanceToModuleClass;
 import static tutorspet.logic.util.ModuleClassUtil.addLessonToModuleClass;
 import static tutorspet.logic.util.ModuleClassUtil.deleteAttendanceFromModuleClass;
 import static tutorspet.logic.util.ModuleClassUtil.deleteLessonFromModuleClass;
+import static tutorspet.logic.util.ModuleClassUtil.deleteStudentFromModuleClass;
 import static tutorspet.logic.util.ModuleClassUtil.editAttendanceInModuleClass;
 import static tutorspet.logic.util.ModuleClassUtil.editLessonInModuleClass;
 import static tutorspet.logic.util.ModuleClassUtil.getAttendanceFromModuleClass;
@@ -27,7 +29,11 @@ import static tutorspet.testutil.TypicalStudent.ALICE;
 import static tutorspet.testutil.TypicalStudent.CARL;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
@@ -42,6 +48,25 @@ import tutorspet.testutil.ModuleClassBuilder;
 public class ModuleClassUtilTest {
 
     private static final Lesson DEFAULT_LESSON = new LessonBuilder().build();
+
+    @Test
+    public void deleteStudentFromModuleClass_validParameters_success() {
+        Set<UUID> modifiedUuids = new HashSet<>(CS2103T_TUTORIAL.getStudentUuids());
+        modifiedUuids.remove(ALICE.getUuid());
+        List<Lesson> lessons = new ArrayList<>(CS2103T_TUTORIAL.getLessons());
+        List<Lesson> modifiedLessons = lessons.stream().map(lesson ->
+                deleteStudentFromLesson(lesson, ALICE)).collect(Collectors.toUnmodifiableList());
+        ModuleClass expectedModuleClass = new ModuleClass(CS2103T_TUTORIAL.getName(), modifiedUuids,
+                modifiedLessons);
+
+        assertEquals(expectedModuleClass, deleteStudentFromModuleClass(CS2103T_TUTORIAL, ALICE));
+    }
+
+    @Test
+    public void deleteStudentFromModuleClass_nullParameters_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> deleteStudentFromModuleClass(null, ALICE));
+        assertThrows(NullPointerException.class, () -> deleteStudentFromModuleClass(CS2103T_TUTORIAL, null));
+    }
 
     @Test
     public void addLessonToModuleClass_validParameters_success() throws CommandException {
