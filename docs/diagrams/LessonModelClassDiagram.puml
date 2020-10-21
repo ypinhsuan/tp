@@ -1,0 +1,44 @@
+@startuml
+!include style.puml
+show members
+hide empty members
+skinparam classAttributeFontColor #FFFFFF
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Class ModuleClass
+
+package Lesson <<Rectangle>> {
+    class Lesson {
+        startTime : LocalTime
+        endTime : LocalTime
+    }
+    enum Day <<enumeration>> {
+        MONDAY
+        TUESDAY
+        WEDNESDAY
+        THURSDAY
+        FRIDAY
+        SATURDAY
+        SUNDAY
+    }
+    class NumberOfOccurrences {
+        value : int
+    }
+    class Venue {
+        venue : String
+    }
+}
+
+package Attendance <<Rectangle>> {
+    class AttendanceRecordList
+}
+
+ModuleClass *-down->"*" Lesson
+Lesson *-down->"1" Day
+Lesson *-down->"1" NumberOfOccurrences
+Lesson *-down->"1" Venue
+Lesson *-right->"1" AttendanceRecordList
+
+@enduml
