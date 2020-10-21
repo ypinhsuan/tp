@@ -1,0 +1,49 @@
+@startuml
+!include style.puml
+
+start
+
+:User presses the UP
+or DOWN arrow key in
+the command box;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([UP arrow key])
+    if () then ([has previous command])
+        if () then ([pointer is above the stack])
+            :Save the current
+            command box text
+            to cache;
+        else ([else])
+        endif
+        :Set pointer to
+        previous command;
+        :Set the command
+        box text to the
+        previous command;
+    else ([else])
+    endif
+else ([DOWN arrow key])
+    if () then ([has next command])
+        :Set pointer to
+        next command;
+        :Set the command
+        box text to the
+        next command;
+    else ([no next command])
+        if () then ([has cached command])
+            :Set the command
+            box text to the
+            cached command;
+            :Restore pointer
+            to above stack;
+        else ([else])
+        endif
+    endif
+endif
+
+stop
+
+@enduml
