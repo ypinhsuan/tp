@@ -58,7 +58,7 @@ public class EditModuleClassCommand extends Command {
 
         List<ModuleClass> lastShownList = model.getFilteredModuleClassList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
+        if (index.getOneBased() > lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX);
         }
 

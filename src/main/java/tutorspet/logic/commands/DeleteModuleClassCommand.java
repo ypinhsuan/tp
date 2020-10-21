@@ -36,7 +36,7 @@ public class DeleteModuleClassCommand extends Command {
 
         List<ModuleClass> lastShownList = model.getFilteredModuleClassList();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+        if (targetIndex.getOneBased() > lastShownList.size()) {
             throw new CommandException(MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX);
         }
 

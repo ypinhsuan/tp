@@ -62,11 +62,11 @@ public class LinkCommand extends Command {
         List<Student> lastShownStudentList = model.getFilteredStudentList();
         List<ModuleClass> lastShownModuleClassList = model.getFilteredModuleClassList();
 
-        if (studentIndex.getZeroBased() >= lastShownStudentList.size()) {
+        if (studentIndex.getOneBased() > lastShownStudentList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
 
-        if (moduleClassIndex.getZeroBased() >= lastShownModuleClassList.size()) {
+        if (moduleClassIndex.getOneBased() > lastShownModuleClassList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX);
         }
 

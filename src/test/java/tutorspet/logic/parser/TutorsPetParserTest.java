@@ -13,12 +13,12 @@ import static tutorspet.logic.parser.CliSyntax.PREFIX_PARTICIPATION_SCORE;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_STUDENT_INDEX;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_WEEK;
 import static tutorspet.testutil.Assert.assertThrows;
-import static tutorspet.testutil.LessonUtil.getAddLessonCommand;
-import static tutorspet.testutil.LessonUtil.getEditLessonDescriptorDetails;
-import static tutorspet.testutil.ModuleClassUtil.getAddModuleClassCommand;
-import static tutorspet.testutil.ModuleClassUtil.getEditModuleClassDescriptorDetails;
-import static tutorspet.testutil.StudentUtil.getAddStudentCommand;
-import static tutorspet.testutil.StudentUtil.getEditStudentDescriptorDetails;
+import static tutorspet.testutil.LessonTestUtil.getAddLessonCommand;
+import static tutorspet.testutil.LessonTestUtil.getEditLessonDescriptorDetails;
+import static tutorspet.testutil.ModuleClassTestUtil.getAddModuleClassCommand;
+import static tutorspet.testutil.ModuleClassTestUtil.getEditModuleClassDescriptorDetails;
+import static tutorspet.testutil.StudentTestUtil.getAddStudentCommand;
+import static tutorspet.testutil.StudentTestUtil.getEditStudentDescriptorDetails;
 import static tutorspet.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 import static tutorspet.testutil.TypicalIndexes.INDEX_SECOND_ITEM;
 

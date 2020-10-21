@@ -11,7 +11,7 @@ import static tutorspet.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static tutorspet.logic.commands.DeleteAttendanceCommand.MESSAGE_DELETE_ATTENDANCE_SUCCESS;
 import static tutorspet.testutil.Assert.assertThrows;
-import static tutorspet.testutil.ModuleClassUtil.manualReplaceLessonToModuleClass;
+import static tutorspet.testutil.ModuleClassTestUtil.manualReplaceLessonToModuleClass;
 import static tutorspet.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 import static tutorspet.testutil.TypicalTutorsPet.getTypicalTutorsPet;
 
