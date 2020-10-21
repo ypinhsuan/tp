@@ -5,13 +5,10 @@ import static tutorspet.logic.util.AttendanceRecordListUtil.addAttendanceToAtten
 import static tutorspet.logic.util.AttendanceRecordListUtil.editAttendanceInAttendanceRecordList;
 import static tutorspet.logic.util.AttendanceRecordListUtil.getAbsentWeekFromAttendance;
 import static tutorspet.logic.util.AttendanceRecordListUtil.getAttendanceFromAttendanceRecordList;
-import static tutorspet.logic.util.AttendanceRecordListUtil.getAttendances;
 import static tutorspet.logic.util.AttendanceRecordListUtil.getScoreFromAttendance;
 import static tutorspet.logic.util.AttendanceRecordListUtil.removeAttendanceFromAttendanceRecordList;
 
 import java.time.LocalTime;
-import java.util.List;
-import java.util.Optional;
 
 import tutorspet.logic.commands.exceptions.CommandException;
 import tutorspet.model.attendance.Attendance;
@@ -127,18 +124,6 @@ public class LessonUtil {
         AttendanceRecordList targetAttendanceRecordList = targetLesson.getAttendanceRecordList();
 
         return getAttendanceFromAttendanceRecordList(targetAttendanceRecordList, targetStudent, targetWeek);
-    }
-
-    /**
-     * Returns an ordered and unmodifiable {@code List<Optional<Attendance>} summarising the {@code targetStudent}'s
-     * attendance in the respective weeks.
-     */
-    public static List<Optional<Attendance>> getAttendancesFromLesson(Lesson targetLesson, Student targetStudent) {
-        requireAllNonNull(targetLesson, targetStudent);
-
-        AttendanceRecordList targetAttendanceRecordList = targetLesson.getAttendanceRecordList();
-
-        return getAttendances(targetAttendanceRecordList, targetStudent);
     }
 
     /**

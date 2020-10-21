@@ -126,29 +126,6 @@ public class AttendanceRecordListUtil {
     }
 
     /**
-     * Returns an ordered and unmodifiable {@code List<Optional<Attendance>} summarising the {@code targetStudent}'s
-     * attendance in the respective weeks.
-     */
-    public static List<Optional<Attendance>> getAttendances(AttendanceRecordList targetAttendanceRecordList,
-                                                            Student targetStudent) {
-        requireAllNonNull(targetAttendanceRecordList, targetStudent);
-
-        List<Optional<Attendance>> studentRecords = new ArrayList<>();
-
-        List<AttendanceRecord> attendanceRecords = targetAttendanceRecordList.getAttendanceRecordList();
-
-        for (AttendanceRecord attendanceRecord : attendanceRecords) {
-            if (attendanceRecord.hasAttendance(targetStudent.getUuid())) {
-                studentRecords.add(Optional.of(attendanceRecord.getAttendance(targetStudent.getUuid())));
-            } else {
-                studentRecords.add(Optional.empty());
-            }
-        }
-
-        return Collections.unmodifiableList(studentRecords);
-    }
-
-    /**
      * Returns the average participation score for {@code targetStudent}.
      */
     public static int getScoreFromAttendance(AttendanceRecordList targetAttendanceRecordList, Student targetStudent)
@@ -202,5 +179,24 @@ public class AttendanceRecordListUtil {
                 new ArrayList<>(attendanceRecordList.getAttendanceRecordList());
         modifiedAttendanceRecordList.set(week.getZeroBasedWeekIndex(), attendanceRecordToSet);
         return new AttendanceRecordList(modifiedAttendanceRecordList);
+    }
+
+    private static List<Optional<Attendance>> getAttendances(AttendanceRecordList targetAttendanceRecordList,
+                                                             Student targetStudent) {
+        requireAllNonNull(targetAttendanceRecordList, targetStudent);
+
+        List<Optional<Attendance>> studentRecords = new ArrayList<>();
+
+        List<AttendanceRecord> attendanceRecords = targetAttendanceRecordList.getAttendanceRecordList();
+
+        for (AttendanceRecord attendanceRecord : attendanceRecords) {
+            if (attendanceRecord.hasAttendance(targetStudent.getUuid())) {
+                studentRecords.add(Optional.of(attendanceRecord.getAttendance(targetStudent.getUuid())));
+            } else {
+                studentRecords.add(Optional.empty());
+            }
+        }
+
+        return Collections.unmodifiableList(studentRecords);
     }
 }

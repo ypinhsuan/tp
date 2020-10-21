@@ -6,7 +6,6 @@ import static tutorspet.commons.core.Messages.MESSAGE_MISSING_STUDENT_ATTENDANCE
 import static tutorspet.commons.core.Messages.MESSAGE_NO_LESSON_ATTENDED;
 import static tutorspet.logic.commands.AddAttendanceCommand.MESSAGE_DUPLICATE_ATTENDANCE;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_ATTENDANCE_33;
-import static tutorspet.logic.commands.CommandTestUtil.VALID_PARTICIPATION_SCORE_51;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_PARTICIPATION_SCORE_80;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_WEEK_1;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_WEEK_5;
@@ -15,7 +14,6 @@ import static tutorspet.logic.util.LessonUtil.deleteAttendanceFromLesson;
 import static tutorspet.logic.util.LessonUtil.editAttendanceInLesson;
 import static tutorspet.logic.util.LessonUtil.getAbsentWeekFromLesson;
 import static tutorspet.logic.util.LessonUtil.getAttendanceFromLesson;
-import static tutorspet.logic.util.LessonUtil.getAttendancesFromLesson;
 import static tutorspet.logic.util.LessonUtil.getParticipationScoreFromLesson;
 import static tutorspet.testutil.Assert.assertThrows;
 import static tutorspet.testutil.LessonBuilder.insertAttendanceRecords;
@@ -25,10 +23,7 @@ import static tutorspet.testutil.TypicalStudent.ALICE;
 import static tutorspet.testutil.TypicalStudent.BENSON;
 import static tutorspet.testutil.TypicalStudent.CARL;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
@@ -136,13 +131,6 @@ public class LessonUtilTest {
     public void getAttendanceFromLesson_invalidWeek_throwsCommandException() {
         assertThrows(CommandException.class, MESSAGE_INVALID_WEEK, () ->
                 getAttendanceFromLesson(DEFAULT_LESSON, BENSON, VALID_WEEK_5));
-    }
-
-    @Test
-    public void getAttendancesFromLesson_returnsAttendances() {
-        List<Optional<Attendance>> expectedList =
-                Arrays.asList(Optional.empty(), Optional.of(new Attendance(VALID_PARTICIPATION_SCORE_51)));
-        assertEquals(expectedList, getAttendancesFromLesson(DEFAULT_LESSON, ALICE));
     }
 
     @Test

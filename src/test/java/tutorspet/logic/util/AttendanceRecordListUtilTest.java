@@ -13,7 +13,6 @@ import static tutorspet.logic.util.AttendanceRecordListUtil.addAttendanceToAtten
 import static tutorspet.logic.util.AttendanceRecordListUtil.editAttendanceInAttendanceRecordList;
 import static tutorspet.logic.util.AttendanceRecordListUtil.getAbsentWeekFromAttendance;
 import static tutorspet.logic.util.AttendanceRecordListUtil.getAttendanceFromAttendanceRecordList;
-import static tutorspet.logic.util.AttendanceRecordListUtil.getAttendances;
 import static tutorspet.logic.util.AttendanceRecordListUtil.getScoreFromAttendance;
 import static tutorspet.logic.util.AttendanceRecordListUtil.removeAttendanceFromAttendanceRecordList;
 import static tutorspet.logic.util.AttendanceRecordUtil.addAttendance;
@@ -23,8 +22,6 @@ import static tutorspet.testutil.TypicalStudent.ALICE;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
@@ -316,35 +313,6 @@ public class AttendanceRecordListUtilTest {
 
         assertThrows(NullPointerException.class, () ->
                 removeAttendanceFromAttendanceRecordList(recordList, student, null));
-    }
-
-    @Test
-    public void getAttendances_returnsAttendances() {
-        AttendanceRecord recordWeekOne = new AttendanceRecordBuilder().build();
-        Attendance attendance = new Attendance(VALID_PARTICIPATION_SCORE_33);
-        Student student = new StudentBuilder().build();
-        AttendanceRecord recordWeekTwo = new AttendanceRecordBuilder().withEntry(student.getUuid(), attendance).build();
-        AttendanceRecordList recordList = new AttendanceRecordList(Arrays.asList(recordWeekOne, recordWeekTwo));
-
-        List<Optional<Attendance>> expectedList = Arrays.asList(Optional.empty(), Optional.of(attendance));
-        assertEquals(expectedList, getAttendances(recordList, student));
-    }
-
-    @Test
-    public void getAttendances_nullAttendanceRecordList_throwsNullPointerException() {
-        Student student = new StudentBuilder().build();
-        assertThrows(NullPointerException.class, () -> getAttendances(null, student));
-    }
-
-    @Test
-    public void getAttendances_nullStudent_throwsNullPointerException() {
-        AttendanceRecord recordWeekOne = new AttendanceRecordBuilder().build();
-        Attendance attendance = new Attendance(VALID_PARTICIPATION_SCORE_33);
-        Student student = new StudentBuilder().build();
-        AttendanceRecord recordWeekTwo = new AttendanceRecordBuilder().withEntry(student.getUuid(), attendance).build();
-        AttendanceRecordList recordList = new AttendanceRecordList(Arrays.asList(recordWeekOne, recordWeekTwo));
-
-        assertThrows(NullPointerException.class, () -> getAttendances(recordList, null));
     }
 
     @Test
