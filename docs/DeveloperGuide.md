@@ -170,9 +170,10 @@ solutions.
   * Cons: The `Email` field is editable while the unique identifier of each `Student` should not be editable to prevent
   the need to cascade a change in the identifier of the `Student`.
 
-### Undo/Redo feature
+### Undo/Redo Feature
 
-The Undo and Redo features are important in allowing users to revert wrongly executed commands.
+The Undo/Redo feature allows users to revert wrongly executed commands.
+
 This section explains the implementation of the Undo and Redo mechanism and highlights the design considerations taken into account when implementing this feature.
 
 #### Implementation
@@ -265,7 +266,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ![CommitActivityDiagram](images/CommitActivityDiagram.png)
 
-#### Design considerations:
+#### Design Considerations:
 
 ##### Aspect: How undo & redo executes
 
@@ -325,6 +326,72 @@ of a `StatisticsCommand`:
 (`ModuleClassUtil` and `LessonClassUtil`).
     * Pros: Does not violate the law of demeter. Increases cohesion and thus increase maintainability.
     * Cons: Requires more wrapper methods to carry information. More effort to implement.
+
+### Command Recall Feature
+
+The command recall feature reduces the effort required by users when frequently entering similar commands.
+It allows users to view and reuse previously edited commands through the <kbd>UP</kbd> and <kbd>DOWN</kbd> arrow keys
+when the command box is focused.
+
+This section explains the implementation of the Command Recall feature and highlights the design considerations taken into
+account when implementing this feature.
+
+#### Implementation
+
+The command recall mechanism is designed around maintaining a list of previously executed commands, and traversing this list
+when the user requests to recall a previous command.
+
+The command recall mechanism is facilitated by `CommandHistory`, which consists of a list of previously executed commands,
+stored internally as a list of `String`, and a `pointer` to determine the location of the currently recalled command.
+In addition, it also consists of a cache, which is used to store the user's existing input.
+
+<div markdown="span" class="alert alert-info">
+:information_source: **Note:** The data stored in `CommandHistory` does not persist when the application is exited.
+</div>
+
+When the application is started, the `CommandHistory` is initialized with an empty list, and the `pointer` is set to
+the size of the list, currently zero. Every successful command executed will be appended to the list and the `pointer` will be set
+to the current size of the list after the update, regardless of its original position.
+
+When the user presses the <kbd>UP</kbd> arrow key, a check is performed to determine if there is a next available command to recall.
+If there is a previous command available, `CommandHistory` next checks if the `pointer` is currently pointing to an entry in its list.
+If the `pointer` is not currently pointing to an entry in the list, i.e. its index is one greater than the last entry in the list,
+the current text in the command box is stored in the cache. Otherwise, there is no change to the cached value.
+Subsequently, `CommandHistory` decreases its `pointer` by one, and the respective `String` in the list is returned.
+
+The text in the command box is then set to the returned `string`. As such, the `pointer` always points to the command that is displayed
+in the command box, and if the text in the command box is a new command, then the `pointer` index is one greater than the last stored command.
+
+If there are no earlier commands to recall, then there is no change to the text in the command box.
+
+<div markdown="span" class="alert alert-info">
+:information_source: **Note:** Any edits made by the user to recalled commands are not stored.
+</div>
+
+When the user presses the <kbd>DOWN</kbd> arrow key, a check is performed to determine if there is a next available command to recall.
+If there is a next available command, the `pointer` index is increased and the respective `String` in the list is returned.
+
+![CommandHistoryNoNext](images/CommandHistoryReturnsCache.png)
+
+Otherwise, if there is no available next command, i.e. the pointer index is at the last element in the list, then the cached value (if there is one) is returned instead.
+
+![CommandHistoryActivityDiagram](images/CommandHistoryActivityDiagram.png)
+
+The activity diagram above provides a summary of the recall command mechanism.
+
+#### Design Considerations
+
+##### Aspect: Behaviour when returning from most recent recalled command
+
+Two alternative behaviours were considered when designing the recall command feature.
+
+* **Alternative 1 (current choice):** Display any text the user had entered before recalling commands.
+  * Pros: The user does not loose any progress to partially typed commands.
+  * Cons: Difficult to implement.
+
+* **Alternative 2:** Reset the command box to its blank state.
+  * Pros: Easy to implement.
+  * Cons: The user looses any partially typed commands.
 
 --------------------------------------------------------------------------------------------------------------------
 
