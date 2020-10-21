@@ -306,7 +306,7 @@ The `Attendance`, `AttendanceRecord` and `AttendanceRecordList` models are imple
 `AttendanceRecord` refers to the actual attendance roster of a particular lesson event.
 It contains the `Attendances` of all `Students` who have attended the particular lesson.
 These information are stored as a `Map` with `Student` `UUID` as keys.
-`AttendanceRecordList` refers to the list of all `AttendanceRecord` instances. 
+`AttendanceRecordList` refers to the list of all `AttendanceRecord` instances.
 The size of this list is fixed and is determined by the `NumberOfOccurences` in `Lesson`.
 
 <div markdown="span" class="alert alert-primary">
@@ -316,24 +316,24 @@ Note that all classes in the `Attendance` package are designed to be immutable.
 ### Design Considerations:
 #### Aspect: Reducing user input
 Users should not have to type in attendance related commands when the student is absent from a lesson.
-Therefore, the `Attendance` class does not have, for example, a `boolean hasAttended` attribute. 
-It only has a `participationScore` attribute. 
+Therefore, the `Attendance` class does not have, for example, a `boolean hasAttended` attribute.
+It only has a `participationScore` attribute.
 
 #### Aspect: Maintaining immutability and optimising `AttendanceRecord`
-* **Alternative 1 (current choice):** Dynamically updating `AttendanceRecord` whenever there is a change to attendance. 
+* **Alternative 1 (current choice):** Dynamically updating `AttendanceRecord` whenever there is a change to attendance.
     * Pros: Guarantees immutability.
     * Cons: Requires re-instantiation of a `Map` object whenever a user adds/edits/deletes an `Attendance`.
 
 * **Alternative 2:** Initialising empty `Attendance`s for all students on call to constructor method. \
 This would mean that each `Attendance` is set to a particular value, rather than having to copy the entire `Map` object, whenever a user adds/edits/deletes it.
     * Pros: Less overhead in modifying `Attendance`.
-    * Cons: 
+    * Cons:
       * Violates immutability.
       * Incurs greater memory use.
 
 #### Aspect: Handling of invalid `Week` number
 * **Alternative 1 (current choice):** Fixed size `List`.
-    * Pros: 
+    * Pros:
       * Handles exceptions easily when a user inputs a week number greater than the total number of lessons.
       * Provides constant time access as the week number is used as an index to the `List`.
       * Easier to iterate over for `StatisticsCommand`.
@@ -341,7 +341,7 @@ This would mean that each `Attendance` is set to a particular value, rather than
 
 * **Alternative 2:** `Map` of `Week` number to `AttendanceRecord`.
     * Pros: Incurs less memory use.
-    * Cons: 
+    * Cons:
       * More difficult to iterate over for `StatisticsCommand`.
       * More difficult to implement as each `Week` number must be checked to ensure it does not exceed `NumberOfOccurences` in `Lesson`.
 
