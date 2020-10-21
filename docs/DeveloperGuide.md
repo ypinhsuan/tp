@@ -146,9 +146,9 @@ uniquely identify a `Student` across `Classes` and `Lessons`. This is important 
 
 ![StudentUUID](images/StudentUUID.png)
 
-From the class diagram above, we have designed the `Student` model such that every `Student` has a `UUID`
-tagged to him/her, in addition to the `Name`, `Telegram`, `Email`, and `Tags` fields providing
-information of the `Student`.
+From the object diagram above, we have designed the `Student` model such that every `Student` like `Alice`
+has a unique 128 bit `UUID` tagged to him/her, in addition to the `Name`, `Telegram`, `Email`, and `Tags` 
+fields providing information of the `Student`.
 
 #### Design consideration:
 
