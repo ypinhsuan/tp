@@ -1,5 +1,6 @@
 package tutorspet.model.lesson;
 
+import static tutorspet.commons.util.AppUtil.checkArgument;
 import static tutorspet.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalTime;
@@ -15,6 +16,7 @@ import tutorspet.model.attendance.AttendanceRecordList;
 public class Lesson {
 
     public static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
+    public static final String MESSAGE_CONSTRAINTS = "Start time must be earlier than end time";
 
     // identity fields
     private final LocalTime startTime;
@@ -33,6 +35,7 @@ public class Lesson {
     public Lesson(LocalTime startTime, LocalTime endTime, Day day, NumberOfOccurrences numberOfOccurrences,
                   Venue venue) {
         requireAllNonNull(startTime, endTime, day, numberOfOccurrences, venue);
+        checkArgument(isValidStartTimeEndTime(startTime, endTime));
 
         this.startTime = startTime;
         this.endTime = endTime;
@@ -49,6 +52,7 @@ public class Lesson {
     public Lesson(LocalTime startTime, LocalTime endTime, Day day, NumberOfOccurrences numberOfOccurrences,
                   Venue venue, AttendanceRecordList attendanceRecordList) {
         requireAllNonNull(startTime, endTime, day, numberOfOccurrences, venue, attendanceRecordList);
+        checkArgument(isValidStartTimeEndTime(startTime, endTime));
 
         assert attendanceRecordList.getAttendanceRecordList().size() == numberOfOccurrences.getNumberOfOccurrences();
 
@@ -58,6 +62,13 @@ public class Lesson {
         this.numberOfOccurrences = numberOfOccurrences;
         this.venue = venue;
         this.attendanceRecordList = attendanceRecordList;
+    }
+
+    /**
+     * Returns true if the startTime is earlier than endTime.
+     */
+    public static boolean isValidStartTimeEndTime(LocalTime startTime, LocalTime endTime) {
+        return startTime.compareTo(endTime) < 0;
     }
 
     public LocalTime getStartTime() {
