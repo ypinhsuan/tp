@@ -5,7 +5,7 @@ box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":TutorsPetParser" as TutorsPetParser LOGIC_COLOR
 participant ":StatisticsCommandParser" as StatisticsCommandParser LOGIC_COLOR
-participant "d:StatisticsCommand" as StatisticsCommand LOGIC_COLOR
+participant ":StatisticsCommand" as StatisticsCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 participant "<<Class>>\nModuleClassUtil" as ModuleClassUtil LOGIC_COLOR
 participant "<<Class>>\nLessonUtil" as LessonUtil LOGIC_COLOR
