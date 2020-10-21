@@ -217,6 +217,33 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### Lesson Model
+This section explains the design considerations of the `Lesson` model.
+
+#### Implementation
+The class diagram below shows the current implementation of `Lesson` model.
+
+![Lesson Model](images/LessonModelClassDiagram.png)
+
+A `ModuleClass` can contain any number of `Lesson` objects. Every `Lesson` contains a `startTime`, `endTime`, `Day`, 
+`NumberOfOccurrences`, `Venue` and `AttendanceRecordList`.
+
+#### Design Considerations
+* **Alternative 1 (current choice):** Stores `Lesson` object in `ModuleClass`
+  
+  This implementation allows duplicate lessons in different classes.
+  * Pros: Easy to implement.
+  * Cons: Difficult to check for duplicate lessons when adding or editing lessons.
+
+* **Alternative 2:** Have UUID field for `Lesson` and `ModuleClass` stores UUID
+
+  This is similar to how `Student` is implemented. It would be a better alternative if we want all lessons to be unique 
+  as we can have a `UniqueLessonList` to store all lessons as shown below.
+  
+  ![Lesson Model](images/UniqueLessonListClassDiagram.png)
+  
+  * Pros: Easy to check for duplicate lessons.
+  * Cons: There is a possibility of UUID collision, even though the probability is very low. Harder to implement.
 
 --------------------------------------------------------------------------------------------------------------------
 

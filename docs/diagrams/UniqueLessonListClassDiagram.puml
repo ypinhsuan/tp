@@ -1,0 +1,37 @@
+@startuml
+!include style.puml
+show members
+hide empty members
+skinparam classAttributeFontColor #FFFFFF
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Package Model <<Rectangle>> {
+    class ModelManager
+    class TutorsPet
+
+    Package ModuleClass {
+        class UniqueModuleClassList
+        class ModuleClass {
+            lessonUuids : List<UUID>
+        }
+    }
+
+    Package Lesson {
+        class UniqueLessonList
+        class Lesson {
+            uuid : UUID
+        }
+    }
+}
+
+ModelManager o--> "1" TutorsPet
+
+TutorsPet *--> "1" UniqueModuleClassList
+TutorsPet *--> "1" UniqueLessonList
+
+UniqueModuleClassList o--> "*" ModuleClass
+UniqueLessonList o--> "*" Lesson
+
+@enduml
