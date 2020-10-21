@@ -13,7 +13,7 @@ import tutorspet.model.moduleclass.ModuleClass;
 /**
  * A utility class for ModuleClass.
  */
-public class ModuleClassUtil {
+public class ModuleClassTestUtil {
 
     /**
      * Returns an add class command string for adding the {@code moduleClass}.
