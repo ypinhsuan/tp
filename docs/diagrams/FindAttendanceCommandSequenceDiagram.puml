@@ -6,7 +6,7 @@ skinparam classBackgroundColor ATTENDANCE_COLOR_T1
 skinparam fontColor black
 
 box FindAttendanceCommand ATTENDANCE_COLOR_T1
-participant ":FindCommand" as FindCommand LOGIC_COLOR
+participant ":FindAttendanceCommand" as FindAttendanceCommand LOGIC_COLOR
 participant ":Model" as Model LOGIC_COLOR
 participant ":ModuleClassUtil" as ModuleClassUtil LOGIC_COLOR
 participant ":ModuleClass" as ModuleClass LOGIC_COLOR
@@ -18,10 +18,10 @@ participant ":Attendance" as Attendance LOGIC_COLOR
 end box
 
 group ref
-FindCommand -> Model :get target module class and student
+FindAttendanceCommand -> Model :get target module class and student
 end
 
-FindCommand -> ModuleClassUtil :getAttendanceFromModuleClass
+FindAttendanceCommand -> ModuleClassUtil :getAttendanceFromModuleClass
 
 group ref
 ModuleClassUtil -> ModuleClass :get target lesson
@@ -35,6 +35,6 @@ AttendanceRecordListUtil -> AttendanceRecordList :getAttendanceRecord
 AttendanceRecordListUtil -> AttendanceRecord :getAttendance
 
 AttendanceRecord -> Attendance :get
-FindCommand <-- Attendance :attendance
+FindAttendanceCommand <-- Attendance :attendance
 
 @enduml
