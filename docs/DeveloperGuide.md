@@ -158,17 +158,21 @@ solutions.
 ##### Aspect: How to uniquely identify Students across models.
 
 * **Alternative 1 (current choice):** Assign a `UUID` tag to each `Student`
-  * Pros: Convenient to generate `UUID` in Java as Java has a `UUID` package to support `UUID`s.
-  Moreover, `UUID` is non-editable.
-  * Cons: Implementation is slightly more complicated as caution must be taken in integrating the `UUID` field into
-  `Student` model, and enforce `Student` equality checks using `UUID` in Tutor’s Pet. Moreover, although the chances
-  are low, it is possible that generating random `UUID`s present a risk of `UUID` collisions when we deal with large
-  amounts of student data.
+    * Pros:
+      * Convenient to generate `UUID` in Java as Java has a `UUID` package to support `UUID`s.
+      * `UUID` is non-editable.
+    * Cons:
+      * Implementation is slightly more complicated as caution must be taken in integrating the `UUID` field into
+        `Student` model, and enforce `Student` equality checks using `UUID` in Tutor’s Pet.
+      * Although the chances are low, it is possible that generating random `UUID`s present a risk of `UUID` collisions 
+        when we deal with large amounts of student data.
 
 * **Alternative 2:** Enforce that each `Student` must have a unique `Email`
-  * Pros: Easier to implement as the original AB3 already has an `Email` field integrated into it.
-  * Cons: The `Email` field is editable while the unique identifier of each `Student` should not be editable to prevent
-  the need to cascade a change in the identifier of the `Student`.
+    * Pros:
+      * Easier to implement as the original AB3 already has an `Email` field integrated into it.
+    * Cons:
+      * The `Email` field is editable while the unique identifier of each `Student` should not be editable to prevent
+        the need to cascade a change in the identifier of the `Student`.
 
 ### Undo/Redo Feature
 
@@ -392,6 +396,39 @@ Two possible behaviours were considered when designing the recall command featur
 * **Alternative 2:** Reset the command box to its blank state.
   * Pros: Easy to implement.
   * Cons: The user looses any partially typed commands.
+
+### Lesson Model
+This section explains the design considerations of the `Lesson` model.
+
+#### Implementation
+The class diagram below shows the current implementation of `Lesson` model.
+
+![Lesson Model](images/LessonModelClassDiagram.png)
+
+A `ModuleClass` can contain any number of `Lesson` objects. Every `Lesson` contains a `startTime`, `endTime`, `Day`,
+`NumberOfOccurrences`, `Venue` and `AttendanceRecordList`.
+
+#### Design Considerations
+* **Alternative 1 (current choice):** Stores `Lesson` object in `ModuleClass`
+  
+  This implementation allows duplicate lessons in different classes.
+  * Pros: 
+    * Easy to implement.
+  * Cons: 
+    * Difficult to check for duplicate lessons when adding or editing lessons.
+
+* **Alternative 2:** Have UUID field for `Lesson` and `ModuleClass` stores UUID
+
+  This is similar to how `Student` is implemented. It would be a better alternative if we want all lessons to be unique 
+  as we can have a `UniqueLessonList` to store all lessons as shown below.
+  
+  ![Lesson Model](images/UniqueLessonListClassDiagram.png)
+  
+  * Pros:
+    * Easy to check for duplicate lessons.
+  * Cons:
+    * There is a possibility of UUID collision, even though the probability is very low.
+    * Harder to implement.
 
 ### Attendance Model
 This section explains the design considerations of the `Attendance` model.
