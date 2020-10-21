@@ -240,12 +240,25 @@ Format: `clear-student`
 
 #### Adding a class : `add-class`
 
-Adds a class to the application.
+If you would like to add a new class, you can make use of this command.
 
-Format: `add-class n/CLASS_NAME`
+Format: `add-class n\CLASS_NAME`
+* Adds a class with the specified `CLASS_NAME`.
 
-Examples:
-* `add-class n/CS2103T Tutorial T10`
+For example:
+* You have just been allocated to teach a tutorial class, Tutorial 3, in the module CS1231.
+Hence, you decide to add this new tutorial class to your Tutor's Pet.
+You type `add-class n\CS1231 Tutorial 3` and press <kbd>Enter</kbd>.
+
+![AddClassBefore](images/ugimages/AddClassBefore.png)
+
+* The class has been added, and you can see it in the class section.
+
+![AddClassAfter](images/ugimages/AddClassAfter.png)
+
+Constraints:
+* The class name can only contain alphabets, numbers and spaces.
+* The class name cannot be the same as an existing class in your Tutor's Pet.
 
 #### Listing all classes : `list-class`
 
@@ -299,12 +312,12 @@ If you would like to find classes that contain any of the given keywords in thei
 Format: `find-class KEYWORD [MORE_KEYWORDS]`
 
 For example:
-* You would like to find out how many `Tutorial` class you are currently teaching. You type the command
+* You would like to find out how many `Tutorial` classes you are currently teaching. You type the command
  `find-class Tutorial` and press <kbd>Enter</kbd>.
 
     ![Find class before](images/ugimages/FindClassBefore.png)
 
-* You find out that you are only teaching 2 tutorials this semester and hence decides to accept more classes.
+* You find out that you are only teaching 2 tutorials this semester and hence decide to accept more classes.
 
     ![Find class after](images/ugimages/FindClassAfter.png)
 
@@ -324,16 +337,28 @@ Other examples:
 
 #### Deleting a class : `delete-class`
 
-Deletes the specified class from the application.
+If you would like to delete a class, you can make use of this command.
 
 Format: `delete-class INDEX`
-
 * Deletes the class at the specified `INDEX`.
 * The index refers to the index number shown in the displayed class list.
 * The index **must be a positive whole number** 1, 2, 3, …​
 
-Examples:
-* `delete-class 2` deletes the 2nd class in the application.
+For example:
+* You have just received news that one of your classes, CS2100 Lab, has been permanently removed due to low enrollment.
+Hence, you want to delete the class from your Tutor's Pet.
+You type the command `delete-class 2` and press <kbd>Enter</kbd>.
+
+![DeleteClassBefore](images/ugimages/DeleteClassBefore.png)
+
+* The class has been successfully deleted.
+
+![DeleteClassAfter](images/ugimages/DeleteClassAfter.png)
+
+Other examples:
+* `find-class CS2030 lab`<br/>
+  `delete-class 1`<br/>
+  Deletes the 1st class in the results of the find class command.
 
 #### Clearing all classes : `clear-class`
 
@@ -434,7 +459,7 @@ Constraints:
 Other examples:
 * `find-class CS2030 lab`<br>
   `delete-lesson c\1 l\1`<br>
-  Deletes the 1st lesson in the results of the find command.
+  Deletes the 1st lesson of the 1st class in the results of the find class command.
 
 ### Managing Attendance Records
 
