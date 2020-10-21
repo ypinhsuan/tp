@@ -241,8 +241,7 @@ of a `StatisticsCommand`:
  `TutorsPetParser`.
 2. `TutorsPetParser` encapsulates the `StatisticsCommand` object as a `Command` object which is executed by
  the `LogicManager`.
-3. The command execution affects the `ModuleClassUtil` and `LessonUtil` as static methods from those classes are
- called.
+3. The command execution calls static methods from the `ModuleClassUtil` and `LessonUtil` classes.
 4. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 
 ### Design Consideration:
