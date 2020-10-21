@@ -133,6 +133,43 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Student Universally Unique Identifier (UUID)
+
+A `UUID` is a unique 128-bit number to identify a unique `Student` within Tutor’s Pet.
+In Tutor’s Pet, every `Student` upon construction is assigned a randomly generated `UUID` that is used to
+uniquely identify a `Student` across `Classes` and `Lessons`. This is important because we are dealing with
+`Student` data not just in the `Student` model itself, but also `Classes` and `Lessons`. Using a
+`Student` `UUID` will help to ensure referential integrity of `Student` data across different models when
+`Student` data is modified by the user.
+
+#### Implementation
+
+![StudentUUID](images/StudentUUID.png)
+
+From the object diagram above, we have designed the `Student` model such that every `Student` like `Alice`
+has a unique 128 bit `UUID` tagged to him/her, in addition to the `Name`, `Telegram`, `Email`, and `Tags` 
+fields providing information of the `Student`.
+
+#### Design consideration:
+
+This section elaborates further on the reason why we eventually chose to adopt a `UUID` over other potential
+solutions.
+
+##### Aspect: How to uniquely identify Students across models.
+
+* **Alternative 1 (current choice):** Assign a `UUID` tag to each `Student`
+  * Pros: Convenient to generate `UUID` in Java as Java has a `UUID` package to support `UUID`s.
+  Moreover, `UUID` is non-editable.
+  * Cons: Implementation is slightly more complicated as caution must be taken in integrating the `UUID` field into
+  `Student` model, and enforce `Student` equality checks using `UUID` in Tutor’s Pet. Moreover, although the chances
+  are low, it is possible that generating random `UUID`s present a risk of `UUID` collisions when we deal with large
+  amounts of student data.
+
+* **Alternative 2:** Enforce that each `Student` must have a unique `Email`
+  * Pros: Easier to implement as the original AB3 already has an `Email` field integrated into it.
+  * Cons: The `Email` field is editable while the unique identifier of each `Student` should not be editable to prevent
+  the need to cascade a change in the identifier of the `Student`.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
