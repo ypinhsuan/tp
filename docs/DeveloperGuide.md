@@ -227,7 +227,7 @@ The display statistics mechanism is facilitated by `StatisticsCommand`. It exten
  validations passed.
  
 The following class diagram shows the relationship between classes within the `Logic` component during the execution
-of a `StatisticsCommand`.
+of a `StatisticsCommand`:
  
 ![StatisticsClassDiagram](images/StatisticsClassDiagram.png)
  
