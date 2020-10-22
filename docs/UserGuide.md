@@ -173,9 +173,9 @@ The utility area consists of three tabs: **File**, **Theme**, **Help**.
 
 ### General
 
-### Viewing help : `help`
+#### Viewing help : `help`
 
-Shows a message explaining how to access the help page.
+If you wish to view the user guide, you can use this command to get the link.
 
 Format: `help`
 
