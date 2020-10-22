@@ -294,7 +294,7 @@ If you would like to search for a student by name, use this command.
 Format: `find-student KEYWORD [MORE_KEYWORDS]`
 
 For example:
-* `Roy` requested for supplementary notes in class today. 
+* `Roy` requested for supplementary notes in class today.
 You want to email him these notes.
 Type `find-student roy` and press <kbd>Enter</kbd>.
 
