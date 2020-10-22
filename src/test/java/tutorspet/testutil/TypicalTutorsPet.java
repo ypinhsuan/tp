@@ -29,7 +29,7 @@ public class TypicalTutorsPet {
             tp.addStudent(student);
         }
         for (ModuleClass moduleClass : TypicalModuleClass.getOnlyModuleClasses()) {
-            tp.addModuleClass(new ModuleClassBuilder(moduleClass).withStudentUuids().build());
+            tp.addModuleClass(moduleClass);
         }
         return tp;
     }
@@ -40,7 +40,7 @@ public class TypicalTutorsPet {
     public static TutorsPet getOnlyModuleClassTutorsPet() {
         TutorsPet tp = new TutorsPet();
         for (ModuleClass moduleClass : TypicalModuleClass.getOnlyModuleClasses()) {
-            tp.addModuleClass(new ModuleClassBuilder(moduleClass).withStudentUuids().build());
+            tp.addModuleClass(moduleClass);
         }
         return tp;
     }

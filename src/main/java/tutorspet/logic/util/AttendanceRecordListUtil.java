@@ -26,7 +26,8 @@ import tutorspet.model.student.Student;
 public class AttendanceRecordListUtil {
 
     /**
-     * Returns an {@code AttendanceRecordList} where the {@code studentToRemove} has been removed.
+     * Returns an {@code AttendanceRecordList} where the {@code Attendance}s of the {@code studentToRemove}
+     * have been removed.
      */
     public static AttendanceRecordList removeStudentFromAttendanceRecordList(
             AttendanceRecordList targetAttendanceRecordList, Student studentToRemove) {
@@ -43,7 +44,7 @@ public class AttendanceRecordListUtil {
     }
 
     /**
-     * Returns an {@code AttendanceRecordList} where all {@code Student}s has been removed.
+     * Returns an {@code AttendanceRecordList} where the {@code Attendance}s of all {@code Student}s have been removed.
      */
     public static AttendanceRecordList removeAllStudentsFromAttendanceRecordList(
             AttendanceRecordList targetAttendanceRecordList) {
@@ -56,22 +57,6 @@ public class AttendanceRecordListUtil {
                         .collect(Collectors.toUnmodifiableList());
 
         return new AttendanceRecordList(updatedAttendanceRecords);
-    }
-
-    /**
-     * Returns an {@code AttendanceRecord} where the {@code studentToRemove} has been removed.
-     */
-    private static AttendanceRecord removeStudentFromAttendanceRecord(
-            AttendanceRecord attendanceRecord, Student studentToRemove) {
-        if (!attendanceRecord.hasAttendance(studentToRemove.getUuid())) {
-            return attendanceRecord;
-        }
-
-        try {
-            return removeAttendance(attendanceRecord, studentToRemove);
-        } catch (CommandException e) {
-            return attendanceRecord;
-        }
     }
 
     /**
@@ -205,5 +190,23 @@ public class AttendanceRecordListUtil {
                 new ArrayList<>(attendanceRecordList.getAttendanceRecordList());
         modifiedAttendanceRecordList.set(week.getZeroBasedWeekIndex(), attendanceRecordToSet);
         return new AttendanceRecordList(modifiedAttendanceRecordList);
+    }
+
+    /**
+     * Returns an {@code AttendanceRecord} where the {@code Attendance} of the {@code studentToRemove} has been removed.
+     * If the {@code studentToRemove} does not exist in the {@code attendanceRecord}, the {@code attendanceRecord} is
+     * returned unchanged.
+     */
+    private static AttendanceRecord removeStudentFromAttendanceRecord(
+            AttendanceRecord attendanceRecord, Student studentToRemove) {
+        if (!attendanceRecord.hasAttendance(studentToRemove.getUuid())) {
+            return attendanceRecord;
+        }
+
+        try {
+            return removeAttendance(attendanceRecord, studentToRemove);
+        } catch (CommandException e) {
+            return attendanceRecord;
+        }
     }
 }

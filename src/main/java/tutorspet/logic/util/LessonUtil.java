@@ -29,7 +29,7 @@ import tutorspet.model.student.Student;
 public class LessonUtil {
 
     /**
-     * Returns a {@code Lesson} where the {@code studentToRemove} has been removed.
+     * Returns a {@code Lesson} where the {@code Attendance}s of the {@code studentToRemove} has been removed.
      */
     public static Lesson deleteStudentFromLesson(Lesson targetLesson, Student studentToRemove) {
         requireAllNonNull(targetLesson, studentToRemove);

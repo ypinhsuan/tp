@@ -36,7 +36,7 @@ public class ModuleClassUtil {
     // student-related methods
 
     /**
-     * Removes the {@code studentToRemove} from the {@code targetModuleClass}.
+     * Removes the {@code studentToRemove} and all associated {@code Attendance}s from the {@code targetModuleClass}.
      * All other existing {@code Student}s in the {@code targetModuleClass} are copied to the new {@code ModuleClass}.
      */
     public static ModuleClass deleteStudentFromModuleClass(ModuleClass targetModuleClass, Student studentToRemove) {
