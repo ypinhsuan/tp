@@ -59,6 +59,7 @@ import tutorspet.logic.commands.ListStudentCommand;
 import tutorspet.logic.commands.ListStudentInClassCommand;
 import tutorspet.logic.commands.RedoCommand;
 import tutorspet.logic.commands.ResetCommand;
+import tutorspet.logic.commands.StatisticsCommand;
 import tutorspet.logic.commands.UndoCommand;
 import tutorspet.logic.commands.UnlinkCommand;
 import tutorspet.logic.commands.ViewHistoryCommand;
@@ -349,6 +350,21 @@ public class TutorsPetParserTest {
         DisplayVenueCommand altCommand =
                 (DisplayVenueCommand) parser.parseCommand(DisplayVenueCommand.COMMAND_WORD + " "
                         + PREFIX_LESSON_INDEX + INDEX_FIRST_ITEM.getOneBased() + " "
+                        + PREFIX_CLASS_INDEX + INDEX_FIRST_ITEM.getOneBased());
+        assertEquals(expectedCommand, command);
+        assertEquals(expectedCommand, altCommand);
+    }
+
+    @Test
+    public void parseCommand_statistics() throws Exception {
+        StatisticsCommand expectedCommand = new StatisticsCommand(INDEX_FIRST_ITEM, INDEX_FIRST_ITEM);
+        StatisticsCommand command =
+                (StatisticsCommand) parser.parseCommand(StatisticsCommand.COMMAND_WORD + " "
+                        + PREFIX_CLASS_INDEX + INDEX_FIRST_ITEM.getOneBased() + " "
+                        + PREFIX_STUDENT_INDEX + INDEX_FIRST_ITEM.getOneBased());
+        StatisticsCommand altCommand =
+                (StatisticsCommand) parser.parseCommand(StatisticsCommand.COMMAND_WORD + " "
+                        + PREFIX_STUDENT_INDEX + INDEX_FIRST_ITEM.getOneBased() + " "
                         + PREFIX_CLASS_INDEX + INDEX_FIRST_ITEM.getOneBased());
         assertEquals(expectedCommand, command);
         assertEquals(expectedCommand, altCommand);

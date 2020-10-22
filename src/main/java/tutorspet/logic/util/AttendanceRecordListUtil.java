@@ -2,6 +2,7 @@ package tutorspet.logic.util;
 
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_WEEK;
 import static tutorspet.commons.core.Messages.MESSAGE_MISSING_STUDENT_ATTENDANCE;
+import static tutorspet.commons.core.Messages.MESSAGE_NO_LESSON_ATTENDED;
 import static tutorspet.commons.util.CollectionUtil.requireAllNonNull;
 import static tutorspet.logic.util.AttendanceRecordUtil.addAttendance;
 import static tutorspet.logic.util.AttendanceRecordUtil.setAttendance;
@@ -125,11 +126,63 @@ public class AttendanceRecordListUtil {
     }
 
     /**
-     * Returns an ordered and unmodifiable {@code List<Optional<Attendance>} summarising the {@code targetStudent}'s
-     * attendance in the respective weeks.
+     * Returns {@code targetStudent}'s average participation score.
      */
-    public static List<Optional<Attendance>> getAttendances(AttendanceRecordList targetAttendanceRecordList,
-                                                            Student targetStudent) {
+    public static double getScoreFromAttendance(AttendanceRecordList targetAttendanceRecordList, Student targetStudent)
+            throws CommandException {
+        requireAllNonNull(targetAttendanceRecordList, targetStudent);
+
+        List<Optional<Attendance>> listOfAttendance = getAttendances(targetAttendanceRecordList, targetStudent);
+
+        int totalScore = 0;
+        int numOfWeeksParticipated = 0;
+
+        for (Optional<Attendance> attendance : listOfAttendance) {
+            if (attendance.isPresent()) {
+                totalScore = totalScore + attendance.get().getParticipationScore();
+                numOfWeeksParticipated++;
+            }
+        }
+
+        if (numOfWeeksParticipated == 0) {
+            throw new CommandException(MESSAGE_NO_LESSON_ATTENDED);
+        }
+
+        return (double) totalScore / numOfWeeksParticipated;
+    }
+
+    /**
+     * Returns a {@code List<Integer>} containing weeks in which {@code targetStudent} did not attend.
+     */
+    public static List<Integer> getAbsentWeekFromAttendance(AttendanceRecordList targetAttendanceRecordList,
+                                                Student targetStudent) {
+        requireAllNonNull(targetAttendanceRecordList, targetStudent);
+
+        List<Optional<Attendance>> listOfAttendance = getAttendances(targetAttendanceRecordList, targetStudent);
+        int weekNo = 1;
+        List<Integer> weeksNotPresent = new ArrayList<>();
+
+        for (Optional<Attendance> attendance : listOfAttendance) {
+            if (attendance.isEmpty()) {
+                weeksNotPresent.add(weekNo);
+            }
+            weekNo++;
+        }
+
+        return weeksNotPresent;
+    }
+
+    private static AttendanceRecordList replaceAttendanceRecordInList(AttendanceRecordList attendanceRecordList,
+                                                                      Week week,
+                                                                      AttendanceRecord attendanceRecordToSet) {
+        List<AttendanceRecord> modifiedAttendanceRecordList =
+                new ArrayList<>(attendanceRecordList.getAttendanceRecordList());
+        modifiedAttendanceRecordList.set(week.getZeroBasedWeekIndex(), attendanceRecordToSet);
+        return new AttendanceRecordList(modifiedAttendanceRecordList);
+    }
+
+    private static List<Optional<Attendance>> getAttendances(AttendanceRecordList targetAttendanceRecordList,
+                                                             Student targetStudent) {
         requireAllNonNull(targetAttendanceRecordList, targetStudent);
 
         List<Optional<Attendance>> studentRecords = new ArrayList<>();
@@ -145,14 +198,5 @@ public class AttendanceRecordListUtil {
         }
 
         return Collections.unmodifiableList(studentRecords);
-    }
-
-    private static AttendanceRecordList replaceAttendanceRecordInList(AttendanceRecordList attendanceRecordList,
-                                                                      Week week,
-                                                                      AttendanceRecord attendanceRecordToSet) {
-        List<AttendanceRecord> modifiedAttendanceRecordList =
-                new ArrayList<>(attendanceRecordList.getAttendanceRecordList());
-        modifiedAttendanceRecordList.set(week.getZeroBasedWeekIndex(), attendanceRecordToSet);
-        return new AttendanceRecordList(modifiedAttendanceRecordList);
     }
 }

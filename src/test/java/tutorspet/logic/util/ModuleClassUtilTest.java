@@ -3,6 +3,7 @@ package tutorspet.logic.util;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_STUDENT_IN_MODULE_CLASS;
+import static tutorspet.commons.core.Messages.MESSAGE_NO_LESSONS_IN_MODULE_CLASS;
 import static tutorspet.logic.commands.AddLessonCommand.MESSAGE_EXISTING_LESSON;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_ATTENDANCE;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_PARTICIPATION_SCORE_80;
@@ -18,16 +19,22 @@ import static tutorspet.logic.util.ModuleClassUtil.deleteAttendanceFromModuleCla
 import static tutorspet.logic.util.ModuleClassUtil.deleteLessonFromModuleClass;
 import static tutorspet.logic.util.ModuleClassUtil.editAttendanceInModuleClass;
 import static tutorspet.logic.util.ModuleClassUtil.editLessonInModuleClass;
+import static tutorspet.logic.util.ModuleClassUtil.getAbsentWeek;
 import static tutorspet.logic.util.ModuleClassUtil.getAttendanceFromModuleClass;
 import static tutorspet.logic.util.ModuleClassUtil.getLessonFromModuleClass;
+import static tutorspet.logic.util.ModuleClassUtil.getParticipationScore;
 import static tutorspet.testutil.Assert.assertThrows;
 import static tutorspet.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
+import static tutorspet.testutil.TypicalModuleClass.CS2100_TUTORIAL;
 import static tutorspet.testutil.TypicalModuleClass.CS2103T_TUTORIAL;
 import static tutorspet.testutil.TypicalStudent.ALICE;
 import static tutorspet.testutil.TypicalStudent.CARL;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
@@ -81,7 +88,7 @@ public class ModuleClassUtilTest {
     }
 
     @Test
-    public void editLessonInModuleClass_duplicateLesson_throwsCommandException() throws CommandException {
+    public void editLessonInModuleClass_duplicateLesson_throwsCommandException() {
         List<Lesson> updatedLessons = new ArrayList<>(CS2103T_TUTORIAL.getLessons());
         updatedLessons.add(DEFAULT_LESSON);
         Lesson lessonToEdit = updatedLessons.get(0);
@@ -309,5 +316,60 @@ public class ModuleClassUtilTest {
                 CS2103T_TUTORIAL, INDEX_FIRST_ITEM, null, ALICE));
         assertThrows(NullPointerException.class, () -> getAttendanceFromModuleClass(
                 CS2103T_TUTORIAL, INDEX_FIRST_ITEM, VALID_WEEK_1, null));
+    }
+
+    @Test
+    public void getParticipationScore_validParameter_success() throws CommandException {
+        double avgParticipationScoreAlice = 65.5;
+        assertEquals(avgParticipationScoreAlice,
+                getParticipationScore(CS2103T_TUTORIAL, ALICE));
+    }
+
+    @Test
+    public void getParticipationScore_invalidStudent_throwsCommandException() {
+        assertThrows(CommandException.class, MESSAGE_INVALID_STUDENT_IN_MODULE_CLASS, () ->
+                getParticipationScore(CS2103T_TUTORIAL, CARL));
+    }
+
+    @Test
+    public void getParticipationScore_noLessonInClass_throwsCommandException() {
+        assertThrows(CommandException.class, MESSAGE_NO_LESSONS_IN_MODULE_CLASS, () ->
+                getParticipationScore(CS2100_TUTORIAL, ALICE));
+    }
+
+    @Test
+    public void getParticipationScore_nullParameters_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> getParticipationScore(
+                null, ALICE));
+        assertThrows(NullPointerException.class, () -> getParticipationScore(
+                CS2103T_TUTORIAL, null));
+    }
+
+    @Test
+    public void getAbsentWeek_validParameter_success() throws CommandException {
+        Map<Lesson, List<Integer>> result = new HashMap<>();
+        result.put(CS2103T_TUTORIAL.getLessons().get(0),
+                new ArrayList<>(Arrays.asList(3, 4, 5, 6, 7, 8, 9, 10)));
+        assertEquals(result, getAbsentWeek(CS2103T_TUTORIAL, ALICE));
+    }
+
+    @Test
+    public void getAbsentWeek_invalidStudent_throwsCommandException() {
+        assertThrows(CommandException.class, MESSAGE_INVALID_STUDENT_IN_MODULE_CLASS, () ->
+                getAbsentWeek(CS2103T_TUTORIAL, CARL));
+    }
+
+    @Test
+    public void getAbsentWeek_noLessonInClass_throwsCommandException() {
+        assertThrows(CommandException.class, MESSAGE_NO_LESSONS_IN_MODULE_CLASS , () ->
+                getAbsentWeek(CS2100_TUTORIAL, CARL));
+    }
+
+    @Test
+    public void getAbsentWeek_nullParameter_throwsCommandException() {
+        assertThrows(NullPointerException.class, () -> getParticipationScore(
+                null, ALICE));
+        assertThrows(NullPointerException.class, () -> getParticipationScore(
+                CS2103T_TUTORIAL, null));
     }
 }
