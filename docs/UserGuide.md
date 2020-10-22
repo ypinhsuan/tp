@@ -679,24 +679,6 @@ For example"
 
     ![Delete attendance after](images/ugimages/DeleteAttendanceAfter.png)
 
-### Undo previous command : `undo`
-
-Undo most recent command.
-
-Format: `undo`
-
-### Redo an undo : `redo`
-
-Redo the most recent undo command.
-
-Format : `redo`
-
-### View action history : `view-history`
-
-View a list of actions that can be undone or redone.
-
-Format : `view-history`
-
 ### Display Statistics : `stats`
 
 Gives you an overall summary of a student's attendance and participation scores.
