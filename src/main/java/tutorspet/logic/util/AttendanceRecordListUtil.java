@@ -220,7 +220,7 @@ public class AttendanceRecordListUtil {
     /**
      * Returns an {@code AttendanceRecord} where the {@code Attendance} of the {@code studentToRemove} has been removed.
      * If the {@code studentToRemove} does not exist in the {@code attendanceRecord}, the {@code attendanceRecord} is
-     * returned unchanged.
+     * remains unchanged.
      */
     private static AttendanceRecord removeStudentFromAttendanceRecord(
             AttendanceRecord attendanceRecord, Student studentToRemove) {

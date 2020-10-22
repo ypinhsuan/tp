@@ -153,10 +153,10 @@ public class UniqueModuleClassListTest {
     @Test
     public void removeUuid_nonExistingUuid_sameModuleClasses() {
         uniqueModuleClassList.add(CS2100_LAB);
-        Student randomStudentToRemove = new StudentBuilder().withUuid("4e13dcba-047d-4da7-9860-981493f1884e")
+        Student targetStudentToRemove = new StudentBuilder().withUuid("4e13dcba-047d-4da7-9860-981493f1884e")
                 .withName("Random Student").withTelegram("random_student")
                 .withEmail("randomstudent@randomemail.com").build();
-        uniqueModuleClassList.removeUuid(randomStudentToRemove);
+        uniqueModuleClassList.removeUuid(targetStudentToRemove);
 
         UniqueModuleClassList expectedUniqueModuleClassList = new UniqueModuleClassList();
         expectedUniqueModuleClassList.add(CS2100_LAB);
