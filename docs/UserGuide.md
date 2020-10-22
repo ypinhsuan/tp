@@ -316,7 +316,7 @@ If you would like to delete a student, you can make use of this command.
 Format: `delete-student INDEX`
 
 For example:
-* One of your students, `Bernice`, has swapped `CS203T Tutorial` slots and you no longer teach her.
+* `Bernice`, the 2nd student displayed in Tutor's Pet, has swapped `CS2103T Tutorial` slots and you no longer teach her.
 Hence, you want to delete her entry from Tutor's Pet. You type in `delete-student 2` and press <kbd>Enter</kbd>.
 
   ![DeleteStudentBefore](images/ugimages/DeleteStudentBefore.png)
@@ -561,7 +561,7 @@ If you entered wrong details pertaining to your lesson and would like to change 
 Format: `edit-lesson c\CLASS_INDEX l\LESSON_INDEX [d\DAY] [st\START_TIME] [et\END_TIME] [v\VENUE]`
 
 For example:
-* You made an error while entering the `CS2103T Tutorial` lesson. It should be `Tueday` and not `Thursday`. You type the command `edit-lesson c\1 l\1 d\Tuesday` and press <kbd>Enter</kbd>.
+* You made an error while entering the `CS2103T Tutorial` lesson. It should be `Tuesday` and not `Thursday`. You type the command `edit-lesson c\1 l\1 d\Tuesday` and press <kbd>Enter</kbd>.
 
   ![Edit lesson before](images/ugimages/EditLessonBefore.png)
 
@@ -570,7 +570,6 @@ For example:
   ![Edit lesson after](images/ugimages/EditLessonAfter.png)
 
 Constraints:
-* The index refers to the index number shown in the displayed class list.
 * The indexes **must be positive whole numbers** 1, 2, 3, …​
 * The day entered must be typed out in full.
 * The start time and end time must follow the form `hh:mm`. For instance, `11:00` is allowed, but not `1100`.
