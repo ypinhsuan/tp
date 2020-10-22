@@ -61,11 +61,25 @@ public class LessonUtilTest {
     }
 
     @Test
+    public void deleteStudentFromLesson_nullParameters_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () ->
+                deleteStudentFromLesson(null, ALICE));
+        assertThrows(NullPointerException.class, () ->
+                deleteStudentFromLesson(DEFAULT_LESSON, null));
+    }
+
+    @Test
     public void deleteAllStudentFromLesson_validParameters_success() {
         Lesson expectedLesson = insertAttendanceRecords(new LessonBuilder().withNumberOfOccurrences(2).build(),
                 RECORD_EMPTY, new AttendanceRecord());
 
         assertEquals(expectedLesson, deleteAllStudentsFromLesson(DEFAULT_LESSON));
+    }
+
+    @Test
+    public void deleteAllStudentFromLesson_nullLesson_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () ->
+                deleteAllStudentsFromLesson(null));
     }
 
     @Test
