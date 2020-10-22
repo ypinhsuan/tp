@@ -230,12 +230,12 @@ There is no need for you to save manually.
 
 #### Adding a student : `add-student`
 
-If you would like to add a student to Tutor's Pet use this command.
+If you would like to add a student to Tutor's Pet, use this command.
 
 Format: `add-student n\NAME t\TELEGRAM_USERNAME e\EMAIL [tag\TAG]…​`
 
 For example:
-* You would like to add a new student, `Joel Lee` to Tutor's Pet. 
+* You would like to add a new student, `Joel Lee` to Tutor's Pet.
 Type in `add-student n\Joel Lee t\joeleee e\jlee@example.com`
 
   ![AddStudentBefore](images/ugimages/AddStudentBefore.png)
@@ -274,17 +274,18 @@ For example:
   ![EditStudentAfter](images/ugimages/EditStudentAfter.png)
 
 Constraints:
-* The index refers to the index number shown in the displayed student list.
-* The index **must be a positive whole number** 1, 2, 3, …​
+* The index refers to the number shown in the displayed student list.
+* This index **must be a positive whole number** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the student will be removed.
-* You can remove all the student’s tags by typing `tag\` without
+* When editing tags, the existing tags of the student will be removed and replaced by the newly typed in tags.
+* You can remove all the tags of a student by typing `tag\` without
     specifying any tags after it.
 
-More examples:
-*  `edit-student 1 t\smartlex e\yeohalex@example.com` Edits the telegram username and email address of the 1st student to `smartlex` and `yeohalex@example.com` respectively.
-*  `edit-student 2 n/Betsy Yu tag/` Edits the name of the 2nd student to be `Betsy Yu` and clears all existing tags.
+Other examples:
+*  `edit-student 1 t\smartlex e\yeohalex@example.com` \
+Edits the telegram username and email address of the 1st student to `smartlex` and `yeohalex@example.com` respectively.
+*  `edit-student 2 n/Betsy Yu tag/` \
+Edits the name of the 2nd student to `Betsy Yu` and clears all existing tags.
 
 #### Finding student by name : `find-student`
 
@@ -293,42 +294,39 @@ If you would like to search for a student by name, use this command.
 Format: `find-student KEYWORD [MORE_KEYWORDS]`
 
 For example:
-* `Roy` requested for supplementary notes in class today. You want to find his email address.
-Type `find-student roy` and press <kbd>Enter</kbd>. 
+* `Roy` requested for supplementary notes in class today. 
+You want to email him these notes.
+Type `find-student roy` and press <kbd>Enter</kbd>.
 
-  ![DeleteStudentBefore](images/ugimages/DeleteStudentBefore.png)
+  ![FindStudentBefore](images/ugimages/FindStudentBefore.png)
 
-  ![DeleteStudentAfter](images/ugimages/DeleteStudentAfter.png)
+  ![FindStudentAfter](images/ugimages/FindStudentAfter.png)
 
 Constraints:
-* The search is case-insensitive. e.g `roy` will match `Roy`
-* The order of the keywords does not matter. e.g. `Yeoh Alex` will match `Alex Yeoh`
+* The search is case-insensitive. For instance, `roy` will match `Roy`.
+* The order of the keywords does not matter. e.g. `Yeoh Alex` will match `Alex Yeoh`.
 * Only the name is searched.
-* Only full words will be matched e.g. `Irfa` will not match `Irfan`
-* Students matching at least one keyword will be returned (i.e. **OR** search).
-  e.g. `Alex Li` will return `Alex Yeoh`, `David Li`
-
-Examples:
-* `find-student John` returns `john` and `John Doe`
-* `find-student alex david` returns `Alex Yeoh`, `David Li`<br>
+* Only full words will be matched. For instance, `Irfa` will not match `Irfan`.
+* Students matching at least one keyword will be returned. For instance, `Alex Li` will return `Alex Yeoh` and `David Li`
 
 #### Deleting a student : `delete-student`
 
-If you would like to delete a class, you can make use of this command.
+If you would like to delete a student, you can make use of this command.
 
 Format: `delete-student INDEX`
-* Deletes the student at the specified `INDEX`.
-* The index refers to the index number shown in the displayed student list.
-* The index **must be a positive whole number** 1, 2, 3, …​
 
 For example:
-* One of your students, `Bernice`, has swapped `CS203T Tutorial` slots and you no longer teach her. 
+* One of your students, `Bernice`, has swapped `CS203T Tutorial` slots and you no longer teach her.
 Hence, you want to delete her entry from Tutor's Pet. You type in `delete-student 2` and press <kbd>Enter</kbd>.
 
   ![DeleteStudentBefore](images/ugimages/DeleteStudentBefore.png)
 
 * Notice that the number of students in `CS2103T Tutorial` decreases from 3 to 2.
   ![DeleteStudentAfter](images/ugimages/DeleteStudentAfter.png)
+
+Constraints:
+* The index refers to the index number shown in the displayed student list.
+* The index **must be a positive whole number** 1, 2, 3, …​
 
 #### Clearing all students : `clear-student`
 
@@ -561,18 +559,21 @@ Hence, you type in the command `add-lesson c\1 d\TUESDAY st\10:00 et\11:00 v\COM
 If you entered wrong details pertaining to your lesson and would like to change it, you can make use of this command.
 
 Format: `edit-lesson c\CLASS_INDEX l\LESSON_INDEX [d\DAY] [st\START_TIME] [et\END_TIME] [v\VENUE]`
-* Edits the lesson of the class at the specified `LESSON_INDEX` and `CLASS_INDEX` respectively.
 
 For example:
-* You made an error while entering the `CS2103T Tutorial` lesson. It should be `Tueday` and not `Thursday`. You type the command `edit-lesson c\1 l\1 d\Tuesday` and press <kbd>Enter</kbd>. 
+* You made an error while entering the `CS2103T Tutorial` lesson. It should be `Tueday` and not `Thursday`. You type the command `edit-lesson c\1 l\1 d\Tuesday` and press <kbd>Enter</kbd>.
+
   ![Edit lesson before](images/ugimages/EditLessonBefore.png)
+
 * The day of the lesson has been changed from `Thursday` to `Tuesday`.
+
   ![Edit lesson after](images/ugimages/EditLessonAfter.png)
 
 Constraints:
 * The index refers to the index number shown in the displayed class list.
 * The indexes **must be positive whole numbers** 1, 2, 3, …​
 * The day entered must be typed out in full.
+* The start time and end time must follow the form `hh:mm`. For instance, `11:00` is allowed, but not `1100`.
 * You have to specify at least one field (DAY, START_TIME, END_TIME, VENUE) to be changed.
 * You are not able to change the Number of occurrences.
 
