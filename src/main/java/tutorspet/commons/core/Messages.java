@@ -13,10 +13,12 @@ public class Messages {
     public static final String MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX = "The class index provided is invalid";
     public static final String MESSAGE_MODULE_CLASS_LISTED_OVERVIEW = "%1$d classes listed!";
 
+    public static final String MESSAGE_NO_LESSONS_IN_MODULE_CLASS = "There is no lesson in this class";
     public static final String MESSAGE_INVALID_LESSON_DISPLAYED_INDEX = "The lesson index provided is invalid";
     public static final String MESSAGE_INVALID_WEEK = "The week provided is invalid";
 
     public static final String MESSAGE_INVALID_STUDENT_IN_MODULE_CLASS = "Student does not exist in class";
 
     public static final String MESSAGE_MISSING_STUDENT_ATTENDANCE = "Student's attendance does not exist";
+    public static final String MESSAGE_NO_LESSON_ATTENDED = "Student did not attend any lesson";
 }

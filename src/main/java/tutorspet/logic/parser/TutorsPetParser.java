@@ -33,6 +33,7 @@ import tutorspet.logic.commands.ListModuleClassCommand;
 import tutorspet.logic.commands.ListStudentCommand;
 import tutorspet.logic.commands.RedoCommand;
 import tutorspet.logic.commands.ResetCommand;
+import tutorspet.logic.commands.StatisticsCommand;
 import tutorspet.logic.commands.UndoCommand;
 import tutorspet.logic.commands.UnlinkCommand;
 import tutorspet.logic.commands.ViewHistoryCommand;
@@ -134,6 +135,9 @@ public class TutorsPetParser {
 
         case DisplayVenueCommand.COMMAND_WORD:
             return new DisplayVenueCommandParser().parse(arguments);
+
+        case StatisticsCommand.COMMAND_WORD:
+            return new StatisticsCommandParser().parse(arguments);
 
         case ViewHistoryCommand.COMMAND_WORD:
             return new ViewHistoryCommand();

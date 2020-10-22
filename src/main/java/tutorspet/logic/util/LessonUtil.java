@@ -3,15 +3,15 @@ package tutorspet.logic.util;
 import static tutorspet.commons.util.CollectionUtil.requireAllNonNull;
 import static tutorspet.logic.util.AttendanceRecordListUtil.addAttendanceToAttendanceRecordList;
 import static tutorspet.logic.util.AttendanceRecordListUtil.editAttendanceInAttendanceRecordList;
+import static tutorspet.logic.util.AttendanceRecordListUtil.getAbsentWeekFromAttendance;
 import static tutorspet.logic.util.AttendanceRecordListUtil.getAttendanceFromAttendanceRecordList;
-import static tutorspet.logic.util.AttendanceRecordListUtil.getAttendances;
+import static tutorspet.logic.util.AttendanceRecordListUtil.getScoreFromAttendance;
 import static tutorspet.logic.util.AttendanceRecordListUtil.removeAllStudentsFromAttendanceRecordList;
 import static tutorspet.logic.util.AttendanceRecordListUtil.removeAttendanceFromAttendanceRecordList;
 import static tutorspet.logic.util.AttendanceRecordListUtil.removeStudentFromAttendanceRecordList;
 
 import java.time.LocalTime;
 import java.util.List;
-import java.util.Optional;
 
 import tutorspet.logic.commands.exceptions.CommandException;
 import tutorspet.model.attendance.Attendance;
@@ -170,14 +170,26 @@ public class LessonUtil {
     }
 
     /**
-     * Returns an ordered and unmodifiable {@code List<Optional<Attendance>} summarising the {@code targetStudent}'s
-     * attendance in the respective weeks.
+     * Returns {@code targetStudent}'s average participation score for a lesson.
      */
-    public static List<Optional<Attendance>> getAttendancesFromLesson(Lesson targetLesson, Student targetStudent) {
+    public static double getParticipationScoreFromLesson(Lesson targetLesson, Student targetStudent)
+            throws CommandException {
         requireAllNonNull(targetLesson, targetStudent);
 
         AttendanceRecordList targetAttendanceRecordList = targetLesson.getAttendanceRecordList();
 
-        return getAttendances(targetAttendanceRecordList, targetStudent);
+        return getScoreFromAttendance(targetAttendanceRecordList, targetStudent);
+    }
+
+    /**
+     * Returns a {@code List<Integer>} containing the weeks in which {@code targetStudent} did not attend
+     * the {@code targetLesson}.
+     */
+    public static List<Integer> getAbsentWeekFromLesson(Lesson targetLesson, Student targetStudent) {
+        requireAllNonNull(targetLesson, targetStudent);
+
+        AttendanceRecordList targetAttendanceRecordList = targetLesson.getAttendanceRecordList();
+
+        return getAbsentWeekFromAttendance(targetAttendanceRecordList, targetStudent);
     }
 }

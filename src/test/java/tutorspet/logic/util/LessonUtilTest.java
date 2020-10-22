@@ -3,9 +3,9 @@ package tutorspet.logic.util;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_WEEK;
 import static tutorspet.commons.core.Messages.MESSAGE_MISSING_STUDENT_ATTENDANCE;
+import static tutorspet.commons.core.Messages.MESSAGE_NO_LESSON_ATTENDED;
 import static tutorspet.logic.commands.AddAttendanceCommand.MESSAGE_DUPLICATE_ATTENDANCE;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_ATTENDANCE_33;
-import static tutorspet.logic.commands.CommandTestUtil.VALID_PARTICIPATION_SCORE_51;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_PARTICIPATION_SCORE_80;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_WEEK_1;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_WEEK_5;
@@ -14,8 +14,9 @@ import static tutorspet.logic.util.LessonUtil.deleteAllStudentsFromLesson;
 import static tutorspet.logic.util.LessonUtil.deleteAttendanceFromLesson;
 import static tutorspet.logic.util.LessonUtil.deleteStudentFromLesson;
 import static tutorspet.logic.util.LessonUtil.editAttendanceInLesson;
+import static tutorspet.logic.util.LessonUtil.getAbsentWeekFromLesson;
 import static tutorspet.logic.util.LessonUtil.getAttendanceFromLesson;
-import static tutorspet.logic.util.LessonUtil.getAttendancesFromLesson;
+import static tutorspet.logic.util.LessonUtil.getParticipationScoreFromLesson;
 import static tutorspet.testutil.Assert.assertThrows;
 import static tutorspet.testutil.LessonBuilder.insertAttendanceRecords;
 import static tutorspet.testutil.TypicalAttendanceRecord.RECORD_ALICE_51_BENSON_33;
@@ -24,10 +25,11 @@ import static tutorspet.testutil.TypicalStudent.ALICE;
 import static tutorspet.testutil.TypicalStudent.BENSON;
 import static tutorspet.testutil.TypicalStudent.CARL;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
@@ -175,9 +177,51 @@ public class LessonUtilTest {
     }
 
     @Test
-    public void getAttendancesFromLesson_returnsAttendances() {
-        List<Optional<Attendance>> expectedList =
-                Arrays.asList(Optional.empty(), Optional.of(new Attendance(VALID_PARTICIPATION_SCORE_51)));
-        assertEquals(expectedList, getAttendancesFromLesson(DEFAULT_LESSON, ALICE));
+    public void getParticipationScoreFromLesson_validParameter_success() throws CommandException {
+        double avgParticipationScoreAlice = 51.0;
+        assertEquals(avgParticipationScoreAlice,
+                getParticipationScoreFromLesson(DEFAULT_LESSON, ALICE));
+    }
+
+    @Test
+    public void getParticipationScore_invalidStudentAttendance_throwsCommandException() {
+        Lesson lesson =
+                insertAttendanceRecords(new LessonBuilder().withNumberOfOccurrences(2).build(),
+                        RECORD_EMPTY, RECORD_EMPTY);
+        assertThrows(CommandException.class, MESSAGE_NO_LESSON_ATTENDED, () ->
+                getParticipationScoreFromLesson(lesson, CARL));
+    }
+
+    @Test
+    public void getParticipationScore_nullParameters_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> getParticipationScoreFromLesson(
+                null, ALICE));
+        assertThrows(NullPointerException.class, () -> getParticipationScoreFromLesson(
+                DEFAULT_LESSON, null));
+    }
+
+    @Test
+    public void getAbsentWeekFromLesson_validParameter_success() {
+        List<Integer> result = new ArrayList<>(Collections.singletonList(1));
+        assertEquals(result,
+                getAbsentWeekFromLesson(DEFAULT_LESSON, ALICE));
+    }
+
+    @Test
+    public void getAbsentWeekLesson_validParameterAll_success() {
+        Lesson lesson =
+                insertAttendanceRecords(new LessonBuilder().withNumberOfOccurrences(2).build(),
+                        RECORD_EMPTY, RECORD_EMPTY);
+        List<Integer> result = new ArrayList<>(Arrays.asList(1, 2));
+        assertEquals(result,
+                getAbsentWeekFromLesson(lesson, ALICE));
+    }
+
+    @Test
+    public void getAbsentWeekFromLesson_nullParameters_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> getAbsentWeekFromLesson(
+                null, ALICE));
+        assertThrows(NullPointerException.class, () -> getAbsentWeekFromLesson(
+                DEFAULT_LESSON, null));
     }
 }
