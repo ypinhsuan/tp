@@ -72,6 +72,22 @@ public class StatisticsCommand extends Command {
 
         double avgParticipationScore = getParticipationScore(targetModuleClass, targetStudent);
         Map<Lesson, List<Integer>> attendances = getAbsentWeek(targetModuleClass, targetStudent);
+        String weeksNotPresent = printStats(attendances);
+
+        String message = String.format(MESSAGE_SUCCESS, targetStudent.getName().fullName,
+                targetModuleClass.getName().fullName, avgParticipationScore, weeksNotPresent);
+        return new CommandResult(message);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof StatisticsCommand // instanceof handles nulls
+                && moduleClassIndex.equals(((StatisticsCommand) other).moduleClassIndex)
+                && studentIndex.equals(((StatisticsCommand) other).studentIndex));
+    }
+
+    private String printStats(Map<Lesson, List<Integer>> attendances) {
         StringBuilder weeksNotPresent = new StringBuilder();
 
         for (Lesson lesson : attendances.keySet()) {
@@ -85,16 +101,6 @@ public class StatisticsCommand extends Command {
             weeksNotPresent.append("\n");
         }
 
-        String message = String.format(MESSAGE_SUCCESS, targetStudent.getName().fullName,
-                targetModuleClass.getName().fullName, avgParticipationScore, weeksNotPresent);
-        return new CommandResult(message);
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof StatisticsCommand // instanceof handles nulls
-                && moduleClassIndex.equals(((StatisticsCommand) other).moduleClassIndex)
-                && studentIndex.equals(((StatisticsCommand) other).studentIndex));
+        return weeksNotPresent.toString();
     }
 }

@@ -324,11 +324,11 @@ public class AttendanceRecordListUtilTest {
         AttendanceRecord recordWeekTwo = new AttendanceRecordBuilder().withEntry(ALICE.getUuid(), attendance).build();
         AttendanceRecordList recordList = new AttendanceRecordList(Arrays.asList(recordWeekOne, recordWeekTwo));
 
-        assertEquals(33.0, getScoreFromAttendance(recordList, ALICE));
+        assertEquals(VALID_PARTICIPATION_SCORE_33, getScoreFromAttendance(recordList, ALICE));
     }
 
     @Test
-    public void getScoreFromAttendance_noLessonAttended_throwsCommandException() {
+    public void getScoreFromAttendance_noLessonAttended_throwsCommandException() throws CommandException {
         AttendanceRecord record = new AttendanceRecordBuilder().build();
         AttendanceRecordList recordList = new AttendanceRecordList(Arrays.asList(record, record));
 
@@ -354,6 +354,7 @@ public class AttendanceRecordListUtilTest {
         AttendanceRecord recordWeekTwo = new AttendanceRecordBuilder().withEntry(ALICE.getUuid(), attendance).build();
         AttendanceRecordList recordList = new AttendanceRecordList(Arrays.asList(recordWeekOne, recordWeekTwo));
         List<Integer> result = new ArrayList<>(Collections.singletonList(1));
+
         assertEquals(result, getAbsentWeekFromAttendance(recordList, ALICE));
     }
 
@@ -363,6 +364,7 @@ public class AttendanceRecordListUtilTest {
         AttendanceRecord record = new AttendanceRecordBuilder().withEntry(ALICE.getUuid(), attendance).build();
         AttendanceRecordList recordList = new AttendanceRecordList(Arrays.asList(record, record));
         List<Integer> result = new ArrayList<>();
+
         assertEquals(result, getAbsentWeekFromAttendance(recordList, ALICE));
     }
 

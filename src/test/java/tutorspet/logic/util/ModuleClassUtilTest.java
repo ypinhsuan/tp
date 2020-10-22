@@ -320,7 +320,7 @@ public class ModuleClassUtilTest {
 
     @Test
     public void getParticipationScore_validParameter_success() throws CommandException {
-        double avgParticipationScoreAlice = 65.0;
+        double avgParticipationScoreAlice = 65.5;
         assertEquals(avgParticipationScoreAlice,
                 getParticipationScore(CS2103T_TUTORIAL, ALICE));
     }

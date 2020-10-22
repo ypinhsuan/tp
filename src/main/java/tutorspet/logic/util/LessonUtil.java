@@ -128,7 +128,7 @@ public class LessonUtil {
     }
 
     /**
-     * Returns the average participation score for {@code targetStudent} for a lesson.
+     * Returns {@code targetStudent}'s average participation score for a lesson.
      */
     public static double getParticipationScoreFromLesson(Lesson targetLesson, Student targetStudent)
             throws CommandException {
@@ -140,7 +140,8 @@ public class LessonUtil {
     }
 
     /**
-     * Returns a string containing lessons in which {@code targetStudent} did not attend.
+     * Returns a {@code List<Integer>} containing the weeks in which {@code targetStudent} did not attend
+     * the {@code targetLesson}.
      */
     public static List<Integer> getAbsentWeekFromLesson(Lesson targetLesson, Student targetStudent) {
         requireAllNonNull(targetLesson, targetStudent);

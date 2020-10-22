@@ -258,7 +258,7 @@ public class ModuleClassUtil {
     }
 
     /**
-     * Returns the average participation score for {@code targetStudent} for a class.
+     * Returns {@code targetStudent}'s average participation score for a class.
      */
     public static double getParticipationScore(ModuleClass targetModuleClass, Student targetStudent)
             throws CommandException {
@@ -280,11 +280,14 @@ public class ModuleClassUtil {
             totalParticipationScore = totalParticipationScore
                     + getParticipationScoreFromLesson(lesson, targetStudent);
         }
+
         return totalParticipationScore / totalLesson;
     }
 
     /**
-     * Returns a string containing lessons in which {@code targetStudent} did not attend for a class.
+     * Returns a Map with {@code Lesson} as key and {@code List<Integer>} as value.
+     * The {@code List<Integer>} contains the weeks in which {@code targetStudent} did not attend
+     * {@code targetModuleClass}.
      */
     public static Map<Lesson, List<Integer>> getAbsentWeek(ModuleClass targetModuleClass, Student targetStudent)
             throws CommandException {
