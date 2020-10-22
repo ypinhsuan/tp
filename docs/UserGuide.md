@@ -557,7 +557,7 @@ Other examples:
   `delete-lesson c\1 l\1`<br>
   Deletes the 1st lesson of the 1st class in the results of the find class command.
 
-#### Display venue : `display`
+#### Display venue : `display-venue`
 
 Gives you the venue of a lesson.
 
@@ -670,7 +670,7 @@ Format: `delete-attendance c/CLASS_INDEX l/LESSON_INDEX s/STUDENT_INDEX w/WEEK`
 Examples:
 * `delete-attendance c/1 l/1 s/1 w/1` Deletes the 1st week's attendance record of the 1st student of the 1st lesson of the 1st class.
 
-#### Statistics : `stats`
+#### Display Statistics : `stats`
 
 Gives you an overall summary of a student's attendance and participation scores.
 
