@@ -287,7 +287,6 @@ Examples:
 Deletes the specified student from the application.
 
 Format: `delete-student INDEX`
-
 * Deletes the student at the specified `INDEX`.
 * The index refers to the index number shown in the displayed student list.
 * The index **must be a positive whole number** 1, 2, 3, …​
@@ -337,7 +336,6 @@ Format: `list-class`
 Shows a list of all students within a particular class in the application.
 
 Format: `list-students c/INDEX`
-
 * The index refers to the index number shown in the displayed class list.
 
 Examples:
@@ -454,8 +452,6 @@ You can link a student to a class using this command.
 
 Format: `link s\STUDENT_INDEX c\CLASS_INDEX`
 * Links the student at the specified `STUDENT_INDEX` to the class at the specified `CLASS_INDEX`.
-* The `STUDENT_INDEX` refers to the index number shown in the displayed student list.
-* The `CLASS_INDEX` refers to the index number shown in the displayed class list.
 
 For example:
 * You have a new student, David Li, who has transferred into one of your classes, CS2103T Tutorial.
@@ -483,8 +479,6 @@ You can remove a student from a class using this command.
 
 Format: `unlink s\STUDENT_INDEX c\CLASS_INDEX`
 * Unlinks the student at the specified `STUDENT_INDEX` from the class at the specified `CLASS_INDEX`.
-* The `STUDENT_INDEX` refers to the index number shown in the displayed student list.
-* The `CLASS_INDEX` refers to the index number shown in the displayed class list.
 
 For example:
 * One of your students, Alex Yeoh, has transferred out of your class and you decide to unlink him from his class.
@@ -694,5 +688,13 @@ Constraints:
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Tutor's Pet home folder.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Glossary
+
+* The `STUDENT_INDEX` refers to the index number shown in the displayed student list.
+* The `CLASS_INDEX` refers to the index number shown in the displayed class list.
+* The `LESSON_INDEX` refers to the index number of a lesson shown in its class.
 
 --------------------------------------------------------------------------------------------------------------------
