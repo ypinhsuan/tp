@@ -71,7 +71,7 @@ public class DeleteAttendanceCommandTest {
         Student student = model.getFilteredStudentList().get(studentIndex.getZeroBased());
 
         ModuleClass modifiedModuleClass =
-                deleteAttendanceFromModuleClass(moduleClass, lessonIndex, VALID_WEEK_1, student);
+                deleteAttendanceFromModuleClass(moduleClass, lessonIndex, targetWeek, student);
         Lesson modifiedLesson = modifiedModuleClass.getLessons().get(lessonIndex.getZeroBased());
 
         String expectedMessage = String.format(
