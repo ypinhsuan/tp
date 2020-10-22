@@ -61,7 +61,7 @@ public class StatisticsCommandTest {
         assert !listOfLessons.isEmpty();
 
         String averageScore = "65.0";
-        String lessonNotAttended = "Thursday 10:00 to 11:00: 3 4 5 6 7 8 9 10\n";
+        String lessonNotAttended = "Thursday 10:00 to 11:00: Weeks 3 4 5 6 7 8 9 10\n";
 
         String expectedMessage = String.format(MESSAGE_SUCCESS, student.getName().fullName,
                 moduleClass.getName().fullName, averageScore, lessonNotAttended);
@@ -89,7 +89,7 @@ public class StatisticsCommandTest {
         assert !listOfLessons.isEmpty();
 
         String averageScore = "65.0";
-        String lessonNotAttended = "Thursday 10:00 to 11:00: 3 4 5 6 7 8 9 10\n";
+        String lessonNotAttended = "Thursday 10:00 to 11:00: Weeks 3 4 5 6 7 8 9 10\n";
 
         String expectedMessage = String.format(MESSAGE_SUCCESS, student.getName().fullName,
                 moduleClass.getName().fullName, averageScore, lessonNotAttended);

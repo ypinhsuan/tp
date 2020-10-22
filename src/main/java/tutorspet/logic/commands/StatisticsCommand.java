@@ -75,7 +75,7 @@ public class StatisticsCommand extends Command {
         StringBuilder weeksNotPresent = new StringBuilder();
 
         for (Lesson lesson : attendances.keySet()) {
-            weeksNotPresent.append(lesson.printLesson()).append(":");
+            weeksNotPresent.append(lesson.printLesson()).append(": Weeks");
             List<Integer> absentWeeks = attendances.get(lesson);
 
             for (Integer weekNo : absentWeeks) {
