@@ -399,16 +399,28 @@ Examples:
 
 #### Editing a lesson : `edit-lesson`
 
-Edits an existing lesson in the application.
+If you entered wrong details pertaining to your lesson and would like to change it, you can make use of this command.
 
-Format: `edit-lesson c/CLASS_INDEX l/LESSON_INDEX [d/DAY] [st/START_TIME] [et/END_TIME] [v/VENUE]`
+Format: `edit-lesson c\CLASS_INDEX l\LESSON_INDEX [d\DAY] [st\START_TIME] [et\END_TIME] [v\VENUE]`
+* Edits the lesson of the class at the specified `LESSON_INDEX` and `CLASS_INDEX` respectively.
 
-* Edits the lesson at the specified `CLASS_INDEX` + `LESSON_INDEX`.
+For example:
+* You made an error while entering the `CS2103T Tutorial` lesson. It should be `Tueday` and not `Thursday`. You type the command `edit-lesson c\1 l\1 d\Tuesday` and press <kbd>Enter</kbd>. 
+  ![Edit lesson before](images/ugimages/EditLessonBefore.png)
+* The day of the lesson has been changed from `Thursday` to `Tuesday`.
+  ![Edit lesson after](images/ugimages/EditLessonAfter.png)
+
+Constraints:
+* The index refers to the index number shown in the displayed class list.
 * The indexes **must be positive whole numbers** 1, 2, 3, …​
-* User has to specify at least 1 field (DAY/START_TIME/END_TIME/VENUE) to be changed.
+* The day entered must be typed out in full.
+* You have to specify at least one field (DAY, START_TIME, END_TIME, VENUE) to be changed.
+* You are not able to change the Number of occurrences.
 
-Examples:
-*  `edit-lesson c/1 l/1 d/TUESDAY st/1000 et/1200 v/COM2 #02-02` Edits the 1st lesson of the 1st class to be held on Tuesdays, 10.00AM to 12.00PM at COM2 #02-02.
+Other examples:
+*  `find-class CS2100 lab`\
+`edit-lesson c\1 l\1 d\TUESDAY st\1000 et\1200 v\COM2 #02-02`\
+Edits the 1st lesson of the CS2100 lab to be held on Tuesdays, 10.00AM to 12.00PM at COM2 #02-02.
 
 #### Deleting a lesson : `delete-lesson`
 
