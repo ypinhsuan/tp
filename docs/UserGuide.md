@@ -3,27 +3,43 @@ layout: page
 title: User Guide
 ---
 
-As a Computer Science teaching assistant, the traditional approach of managing students within your class would be to
-manually record their learning progress and attendance. However, as you will notice after some time, manual students
-tracking is unnecessarily time-consuming. This is why we have created Tutor's Pet.
-
-Tutor’s Pet is a desktop application that helps you reduce the amount of time you spend on administrative tasks as a
-teaching assistant. It allows you to keep track of the students in your classes, and record both their attendance and
-participation scores.
-
 * Table of Contents
 {:toc}
 
+## Introduction
+
+Tutor's Pet is a **student management application** for teaching assistants in NUS Computing.
+Tutor's Pet reduces the amount of time you spend on administrative tasks as a teaching assistant.
+It is a one stop solution to keep track of your classes, students, and their progress.
+
+As a teaching assistant, administrative chores such as attendance taking and grading students' participation
+can be troublesome with existing solutions such as spreadsheets. This is why we have created _Tutor's Pet, a
+solution for teaching assistants, by students._
+
+## About
+
+This user guide provides documentation on the installation and usage of Tutor's Pet.
+It also provides a comprehensive description of features available to you and
+includes a [quick-start](#quick-start) section that helps you get started.
+
+### Using This Guide
+
+The following features are used in this guide to make it easier for you to navigate around:
+
+* You can click on [blue words](#using-this-guide) to jump to the related section.
+* `Words with a grey background` refer to keywords used as part of commands or responses from your Tutor's Pet.
+* Words in <kbd>block font</kbd> refer to keyboard keys that you can press.
+
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## Quick Start
 ### Installing Tutor's Pet
 
 Here are a few steps to get you started on Tutor's Pet:
 
-1. Ensure you have Java `11` or above installed in your Computer.
+1. Ensure you have Java **11** or above installed in your Computer.
 
-2. Download the latest `tutorspet.jar` [here](https://github.com/AY2021S1-CS2103T-T10-4/tp/releases).
+2. Download the latest **tutorspet.jar** [here](https://github.com/AY2021S1-CS2103T-T10-4/tp/releases).
 
 3. Copy the file to the folder you want to use as the home folder for your Tutor's Pet.
 
@@ -85,13 +101,13 @@ The main viewing area consists of two sections: **Classes** and **Students**.
 The utility area consists of three tabs: **File**, **Theme**, **Help**.
 
 * The **File** tab consists of an exit button. To exit Tutor's Pet, click on the exit button. Alternatively, make
- use of the `quit` command to exit the application.
+ use of the `exit` command to exit the application.
 
 * The **Theme** tab consist of 3 different themes, mainly **Light**, **Alternate** and **Dark**. To change the theme of
  your Tutor's Pet, click on one of these buttons.
 
 * The **Help** tab consists of a help button. If you require any assistance, click on the help button, copy the link
- given and paste it into any web browsers.
+ given and paste it into any web browsers. Alternatively, press <kbd>F1</kbd> to bring up the help window.
 
    ![Utility area](images/ugimages/UtilityArea.png)
    <br>Figure 5. The Theme tab.
@@ -118,11 +134,16 @@ The utility area consists of three tabs: **File**, **Theme**, **Help**.
 
 </div>
 
-## Command overview
+## Command Overview
 
 | Action                            | Format, Examples                                                                                                                                                          |
 |-----------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Help**                          | `help`                                                                                                                                                                    |
+| **Undo**                          | `undo`                                                                                                                                                                    |
+| **Redo**                          | `redo`                                                                                                                                                                    |
+| **View Change History**           | `view-history`                                                                                                                                                            |
+| **Exit**                          | `exit`                                                                                                                                                                    |
+| **Reset**                         | `reset`                                                                                                                                                                   |
 | **Add Student**                   | `add-student n\NAME t\TELEGRAM_USERNAME e\EMAIL [tag\TAG]…​` <br> e.g., `add-student n\John Doe t\johndoe e\johnd@example.com tag\student`                             |
 | **List All Students**             | `list-student`                                                                                                                                                            |
 | **Edit Student**                  | `edit-student INDEX [n\NAME] [t\TELEGRAM_USERNAME] [e\EMAIL] [tag\TAG]…​`<br> e.g., `edit-student 2 n\James Lee e\jameslee@example.com`                                |
@@ -142,23 +163,68 @@ The utility area consists of three tabs: **File**, **Theme**, **Help**.
 | **Add Lesson**                    | `add-lesson c\CLASS_INDEX d\DAY st\START_TIME et\END_TIME v\VENUE r\NO_OF_TIMES` <br> e.g., `add-lesson c\1 d\MONDAY st\0800 et\1000 v\COM1 #01-01 r\13`                  |
 | **Edit Lesson**                   | `edit-lesson c\CLASS_INDEX l\LESSON_INDEX [d\DAY] [st\START_TIME] [et\END_TIME] [v\VENUE]` <br> e.g., `edit-lesson c\1 l\1 d\TUESDAY st\1000 et\1200 v\COM2 #02-02`       |
 | **Delete Lesson**                 | `delete-lesson c\CLASS_INDEX l\LESSON_INDEX` <br> e.g., `delete-lesson c\1 l\1`                                                                                           |
+| **Display Venue**                 | `display-venue c\CLASS_INDEX l\LESSON_INDEX`<br> e.g., `display-venue c\1 l\1`
 | **Add Attendance Record**         | `add-attendance c\CLASS_INDEX l\LESSON_INDEX s\STUDENT_INDEX w\WEEK p\PARTICIPATION_SCORE` <br> e.g., `add-attendance c\1 l\1 s\1 w\1 p\1`                                |
 | **Edit Attendance Record**        | `edit-attendance c\CLASS_INDEX l\LESSON_INDEX s\STUDENT_INDEX w\WEEK p\PARTICIPATION_SCORE` <br> e.g., `edit-attendance c\1 l\1 s\1 w\1 p\10`                             |
 | **Find Attendance Record**        | `find-attendance c\CLASS_INDEX l\LESSON_INDEX s\STUDENT_INDEX w\WEEK` <br> e.g., `find-attendance c\1 l\1 s\1 w\1`                                                        |
 | **Delete Attendance Record**      | `delete-attendance c\CLASS_INDEX l\LESSON_INDEX s\STUDENT_INDEX w\WEEK` <br> e.g., `delete-attendance c\1 l\1 s\1 w\1`                                                    |
-| **Undo**                          | `undo`                                                                                                                                                                    |
-| **Redo**                          | `redo`                                                                                                                                                                    |
-| **View Action History**           | `view-history`                                                                                                                                                            |
 | **Display Statistics**            | `stats c\CLASS_INDEX s\STUDENT_INDEX`<br> e.g., `stats c\1 s\1`
-| **Display Venue**                 | `display-venue c\CLASS_INDEX l\LESSON_INDEX`<br> e.g., `display-venue c\1 l\1`
-| **Exit**                          | `exit`                                                                                                                                                                    |
-| **Reset**                         | `reset`                                                                                                                                                                   |
+
+
+### General
 
 ### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
 
 Format: `help`
+
+#### Undoing previous commands : `undo`
+
+If you have accidentally entered a command that permanently changes the data in your Tutor's Pet,
+you can use this command to undo the changes.
+
+Format: `undo`
+
+For example:
+* You want to delete Alex from your Tutor's Pet, however you accidentally deleted Bernice instead of Alex.
+  You type in the command `undo` and press <kbd>Enter</kbd>.
+
+![Undo before](images/ugimages/UndoBefore.png)
+
+* Bernice has been undeleted and now you can delete Alex.
+
+![Undo after](images/ugimages/UndoAfter.png)
+
+#### Redoing previously undone commands : `redo`
+
+If you decide that you did not need to undo a command, instead of typing out the command again, you can use
+this command to redo the changes.
+
+Format : `redo`
+
+#### View change history : `view-history`
+
+You can use this command to see a list of changes that can be undone and redone.
+
+Format : `view-history`
+
+#### Exiting the program : `exit`
+
+Exits the program.
+
+Format: `exit`
+
+#### Resetting the program : `reset`
+
+Resets the program and clears all the data.
+
+Format: `reset`
+
+#### Saving the data
+
+Tutor's Pet automatically saves your data to your home folder after any changes are made.
+There is no need for you to save manually.
 
 ### Managing Students
 
@@ -209,7 +275,7 @@ Format: `find-student KEYWORD [MORE_KEYWORDS]`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Students matching at least one keyword will be returned (i.e. `OR` search).
+* Students matching at least one keyword will be returned (i.e. **OR** search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
@@ -221,7 +287,6 @@ Examples:
 Deletes the specified student from the application.
 
 Format: `delete-student INDEX`
-
 * Deletes the student at the specified `INDEX`.
 * The index refers to the index number shown in the displayed student list.
 * The index **must be a positive whole number** 1, 2, 3, …​
@@ -240,12 +305,25 @@ Format: `clear-student`
 
 #### Adding a class : `add-class`
 
-Adds a class to the application.
+If you would like to add a new class, you can make use of this command.
 
-Format: `add-class n/CLASS_NAME`
+Format: `add-class n\CLASS_NAME`
+* Adds a class with the specified `CLASS_NAME`.
 
-Examples:
-* `add-class n/CS2103T Tutorial T10`
+For example:
+* You have just been allocated to teach a tutorial class, Tutorial 3, in the module CS1231.
+Hence, you decide to add this new tutorial class to your Tutor's Pet.
+You type `add-class n\CS1231 Tutorial 3` and press <kbd>Enter</kbd>.
+
+![AddClassBefore](images/ugimages/AddClassBefore.png)
+
+* The class has been added, and you can see it in the displayed class list.
+
+![AddClassAfter](images/ugimages/AddClassAfter.png)
+
+Constraints:
+* The class name can only contain alphabets, numbers and spaces.
+* The class name cannot be the same as an existing class in your Tutor's Pet.
 
 #### Listing all classes : `list-class`
 
@@ -258,7 +336,6 @@ Format: `list-class`
 Shows a list of all students within a particular class in the application.
 
 Format: `list-students c/INDEX`
-
 * The index refers to the index number shown in the displayed class list.
 
 Examples:
@@ -299,12 +376,12 @@ If you would like to find classes that contain any of the given keywords in thei
 Format: `find-class KEYWORD [MORE_KEYWORDS]`
 
 For example:
-* You would like to find out how many `Tutorial` class you are currently teaching. You type the command
+* You would like to find out how many `Tutorial` classes you are currently teaching. You type the command
  `find-class Tutorial` and press <kbd>Enter</kbd>.
 
     ![Find class before](images/ugimages/FindClassBefore.png)
 
-* You find out that you are only teaching 2 tutorials this semester and hence decides to accept more classes.
+* You find out that you are only teaching 2 tutorials this semester and hence decide to accept more classes.
 
     ![Find class after](images/ugimages/FindClassAfter.png)
 
@@ -313,7 +390,7 @@ Constraints:
 * The order of the keywords does not matter. e.g. `lab CS2100` will match `CS2100 lab`
 * Only the name is searched.
 * Only full words will be matched e.g. `CS` will not match `CS2100`
-* Students matching at least one keyword will be returned (i.e. `OR` search).
+* Students matching at least one keyword will be returned (i.e. **OR** search).
   e.g. `CS2103T lab` will return `CS2103T tut`, `CS2100 lab`
 
 Other examples:
@@ -324,16 +401,28 @@ Other examples:
 
 #### Deleting a class : `delete-class`
 
-Deletes the specified class from the application.
+If you would like to delete a class, you can make use of this command.
 
 Format: `delete-class INDEX`
-
 * Deletes the class at the specified `INDEX`.
 * The index refers to the index number shown in the displayed class list.
 * The index **must be a positive whole number** 1, 2, 3, …​
 
-Examples:
-* `delete-class 2` deletes the 2nd class in the application.
+For example:
+* You have just received news that one of your classes, CS2100 Lab, has been permanently removed due to low enrollment.
+Hence, you want to delete the class from your Tutor's Pet.
+You type the command `delete-class 2` and press <kbd>Enter</kbd>.
+
+![DeleteClassBefore](images/ugimages/DeleteClassBefore.png)
+
+* The class has been successfully deleted.
+
+![DeleteClassAfter](images/ugimages/DeleteClassAfter.png)
+
+Other examples:
+* `find-class CS2030 lab`<br/>
+  `delete-class 1`<br/>
+  Deletes the 1st class in the results of the find class command.
 
 #### Clearing all classes : `clear-class`
 
@@ -359,32 +448,58 @@ Format: `list`
 
 #### Linking a student to a class : `link`
 
-Links an existing student to an existing class in the application.
+You can link a student to a class using this command.
 
-Format: `link s/STUDENT_INDEX c/CLASS_INDEX`
-
+Format: `link s\STUDENT_INDEX c\CLASS_INDEX`
 * Links the student at the specified `STUDENT_INDEX` to the class at the specified `CLASS_INDEX`.
-* `STUDENT_INDEX` refers to the index number shown in the displayed student list.
-* `CLASS_INDEX` refers to the index number shown in the displayed class list.
+
+For example:
+* You have a new student, David Li, who has transferred into one of your classes, CS2103T Tutorial.
+  You have already [added](#adding-a-student--add-student) this student to your Tutor's Pet, and want
+  to link him to the class. Hence, you type in the command `link s\4 c\1` and press <kbd>Enter</kbd>.
+
+![Link before](images/ugimages/LinkBefore.png)
+
+* Your Tutor's Pet displays the students in CS2103T Tutorial to confirm that you have successfully linked
+  David to the class.
+
+![Link after](images/ugimages/LinkAfter.png)
+
+Constraints:
 * The indexes **must be positive whole numbers** 1, 2, 3, …​
 
-Examples:
-* `list` followed by `link s/1 c/2` links the 1st student in the application to the 2nd class in the application.
-* `find-student Betsy` followed by `link s/1 c/2` links the 1st student in the results of the `find-student` command to the 2nd class in the application.
+Other examples:
+* `find-student Alex`
+  `link s\1 c\2`
+  Links the 1st result of the find student command to the 2nd class in the displayed class list.
 
 #### Unlinking a student from a class : `unlink`
 
-Unlinks an existing student from an existing class in the application.
+You can remove a student from a class using this command.
 
-Format: `unlink s/STUDENT_INDEX c/CLASS_INDEX`
-
+Format: `unlink s\STUDENT_INDEX c\CLASS_INDEX`
 * Unlinks the student at the specified `STUDENT_INDEX` from the class at the specified `CLASS_INDEX`.
-* `STUDENT_INDEX` refers to the index number shown in the displayed student list.
-* `CLASS_INDEX` refers to the index number shown in the displayed class list.
+
+For example:
+* One of your students, Alex Yeoh, has transferred out of your class and you decide to unlink him from his class.
+  You type in the command `unlink s\1 c\1` and press <kbd>Enter</kbd>.
+
+![Unlink before](images/ugimages/UnlinkBefore.png)
+
+* Your Tutor's Pet displays the remaining students in CS2103T Tutorial to confirm that you have successfully unlinked
+  Alex from the class.
+
+![Unlink after](images/ugimages/UnlinkAfter.png)
+
+* Note that all of Alex's attendance in the class was also deleted.
+
+Constraints:
 * The indexes **must be positive whole numbers** 1, 2, 3, …​
 
-Examples:
-*  `unlink s/1 c/2` Unlinks the 1st student from the 2nd class in the respective lists.
+Other examples:
+* `list-student c\2`
+  `unlink s\1 c\1`
+  Lists the students of the 2nd class in the displayed class list, and unlinks the 2nd student of that class.
 
 ### Managing Lessons
 
@@ -434,7 +549,28 @@ Constraints:
 Other examples:
 * `find-class CS2030 lab`<br>
   `delete-lesson c\1 l\1`<br>
-  Deletes the 1st lesson in the results of the find command.
+  Deletes the 1st lesson of the 1st class in the results of the find class command.
+
+#### Display venue : `display-venue`
+
+Gives you the venue of a lesson.
+
+Format: `display-venue c\1 l\1`
+* Gives the venue of the lesson specified at `CLASS_INDEX` + `LESSON_INDEX`.
+
+For example:
+* Due to covid, most of your physical lessons have been converted to zoom lessons and thus all the venues are
+ in the form of zoom links. Your lesson is starting in 10 minutes and it is time to start the session. Hence, you
+ input the command `display-venue c\1 l\2` and press <kbd>Enter</kbd>.
+
+    ![Display venue before](images/ugimages/DisplayVenueBefore.png)
+
+* You can now proceed to copy the link to that zoom session from the command result box.
+
+    ![Display venue after](images/ugimages/DisplayVenueAfter.png)
+
+Constraints:
+* The indexes **must be positive whole numbers** 1, 2, 3, …​
 
 ### Managing Attendance Records
 
@@ -528,25 +664,7 @@ Format: `delete-attendance c/CLASS_INDEX l/LESSON_INDEX s/STUDENT_INDEX w/WEEK`
 Examples:
 * `delete-attendance c/1 l/1 s/1 w/1` Deletes the 1st week's attendance record of the 1st student of the 1st lesson of the 1st class.
 
-### Undo previous command : `undo`
-
-Undo most recent command.
-
-Format: `undo`
-
-### Redo an undo : `redo`
-
-Redo the most recent undo command.
-
-Format : `redo`
-
-### View action history : `view-history`
-
-View a list of actions that can be undone or redone.
-
-Format : `view-history`
-
-### Statistics : `stats`
+#### Display Statistics : `stats`
 
 Gives you an overall summary of a student's attendance and participation scores.
 
@@ -564,49 +682,19 @@ For example:
 Constraints:
 * The indexes **must be positive whole numbers** 1, 2, 3, …​
 
-### Display venue : `display`
-
-Gives you the venue of a lesson.
-
-Format: `display-venue c\1 l\1`
-* Gives the venue of the lesson specified at `CLASS_INDEX` + `LESSON_INDEX`.
-
-For example:
-* Due to covid, most of your physical lessons have been converted to zoom lessons and thus all the venues are
- in the form of zoom links. Your lesson is starting in 10 minutes and it is time to start the session. Hence, you
- input the command `display-venue c\1 l\2` and press <kbd>Enter</kbd>.
-
-    ![Display venue before](images/ugimages/DisplayVenueBefore.png)
-
-* You can now proceed to copy the link to that zoom session from the command result box.
-
-    ![Display venue after](images/ugimages/DisplayVenueAfter.png)
-
-Constraints:
-* The indexes **must be positive whole numbers** 1, 2, 3, …​
-
-### Exiting the program : `exit`
-
-Exits the program.
-
-Format: `exit`
-
-### Resetting the program : `reset`
-
-Resets the program and clears all the data.
-
-Format: `reset`
-
-### Saving the data
-
-Tutor's Pet automatically saves your data to your hard disk after any changes are made.
-There is no need to save manually.
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Tutor's Pet home folder.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Glossary
+
+* The `STUDENT_INDEX` refers to the index number shown in the displayed student list.
+* The `CLASS_INDEX` refers to the index number shown in the displayed class list.
+* The `LESSON_INDEX` refers to the index number of a lesson shown in its class.
 
 --------------------------------------------------------------------------------------------------------------------
