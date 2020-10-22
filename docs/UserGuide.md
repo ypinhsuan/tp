@@ -19,19 +19,27 @@ solution for teaching assistants, by students._
 ## About
 
 This user guide provides documentation on the installation and usage of Tutor's Pet. 
-It also provides a comprehensive list of features available to you and 
-includes a quick-start section that helps you get started.
+It also provides a comprehensive description of features available to you and 
+includes a [quick-start](#quick-start) section that helps you get started.
+
+### Using This Guide
+
+The following features are used in this guide to make it easier for you to navigate around:
+
+* You can click on [blue words](#using-this-guide) to jump to the related section.
+* `Words with a grey background` refer to keywords used as part of commands or responses from your Tutor's Pet.
+* Words in <kbd>block font</kbd> refer to keyboard keys that you can press.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## Quick Start
 ### Installing Tutor's Pet
 
 Here are a few steps to get you started on Tutor's Pet:
 
-1. Ensure you have Java `11` or above installed in your Computer.
+1. Ensure you have Java **11** or above installed in your Computer.
 
-2. Download the latest `tutorspet.jar` [here](https://github.com/AY2021S1-CS2103T-T10-4/tp/releases).
+2. Download the latest **tutorspet.jar** [here](https://github.com/AY2021S1-CS2103T-T10-4/tp/releases).
 
 3. Copy the file to the folder you want to use as the home folder for your Tutor's Pet.
 
@@ -93,13 +101,13 @@ The main viewing area consists of two sections: **Classes** and **Students**.
 The utility area consists of three tabs: **File**, **Theme**, **Help**.
 
 * The **File** tab consists of an exit button. To exit Tutor's Pet, click on the exit button. Alternatively, make
- use of the `quit` command to exit the application.
+ use of the `exit` command to exit the application.
 
 * The **Theme** tab consist of 3 different themes, mainly **Light**, **Alternate** and **Dark**. To change the theme of
  your Tutor's Pet, click on one of these buttons.
 
 * The **Help** tab consists of a help button. If you require any assistance, click on the help button, copy the link
- given and paste it into any web browsers.
+ given and paste it into any web browsers. Alternatively, press <kbd>F1</kbd> to bring up the help window.
 
    ![Utility area](images/ugimages/UtilityArea.png)
    <br>Figure 5. The Theme tab.
@@ -126,7 +134,7 @@ The utility area consists of three tabs: **File**, **Theme**, **Help**.
 
 </div>
 
-## Command overview
+## Command Overview
 
 | Action                            | Format, Examples                                                                                                                                                          |
 |-----------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -217,7 +225,7 @@ Format: `find-student KEYWORD [MORE_KEYWORDS]`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Students matching at least one keyword will be returned (i.e. `OR` search).
+* Students matching at least one keyword will be returned (i.e. **OR** search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
@@ -260,7 +268,7 @@ You type `add-class n\CS1231 Tutorial 3` and press <kbd>Enter</kbd>.
 
 ![AddClassBefore](images/ugimages/AddClassBefore.png)
 
-* The class has been added, and you can see it in the class section.
+* The class has been added, and you can see it in the displayed class list.
 
 ![AddClassAfter](images/ugimages/AddClassAfter.png)
 
@@ -334,7 +342,7 @@ Constraints:
 * The order of the keywords does not matter. e.g. `lab CS2100` will match `CS2100 lab`
 * Only the name is searched.
 * Only full words will be matched e.g. `CS` will not match `CS2100`
-* Students matching at least one keyword will be returned (i.e. `OR` search).
+* Students matching at least one keyword will be returned (i.e. **OR** search).
   e.g. `CS2103T lab` will return `CS2103T tut`, `CS2100 lab`
 
 Other examples:
@@ -392,32 +400,62 @@ Format: `list`
 
 #### Linking a student to a class : `link`
 
-Links an existing student to an existing class in the application.
+You can link a student to a class using this command.
 
-Format: `link s/STUDENT_INDEX c/CLASS_INDEX`
-
+Format: `link s\STUDENT_INDEX c\CLASS_INDEX`
 * Links the student at the specified `STUDENT_INDEX` to the class at the specified `CLASS_INDEX`.
-* `STUDENT_INDEX` refers to the index number shown in the displayed student list.
-* `CLASS_INDEX` refers to the index number shown in the displayed class list.
+* The `STUDENT_INDEX` refers to the index number shown in the displayed student list.
+* The `CLASS_INDEX` refers to the index number shown in the displayed class list.
+
+For example:
+* You have a new student, David Li, who has transferred into one of your classes, CS2103T Tutorial. 
+  You have already [added](#adding-a-student--add-student) this student to your Tutor's Pet, and want
+  to link him to the class. Hence, you type in the command `link s\4 c\1` and press <kbd>Enter</kbd>.
+
+![Link before](images/ugimages/LinkBefore.png)
+
+* Your Tutor's Pet displays the students in CS2103T Tutorial to confirm that you have successfully linked
+  David to the class.
+
+![Link after](images/ugimages/LinkAfter.png)
+
+Constraints:
 * The indexes **must be positive whole numbers** 1, 2, 3, …​
 
-Examples:
-* `list` followed by `link s/1 c/2` links the 1st student in the application to the 2nd class in the application.
-* `find-student Betsy` followed by `link s/1 c/2` links the 1st student in the results of the `find-student` command to the 2nd class in the application.
+Other examples:
+* `find-student Alex`
+  `link s\1 c\2`
+  Links the 1st result of the find student command to the 2nd class in the displayed class list.
 
 #### Unlinking a student from a class : `unlink`
 
-Unlinks an existing student from an existing class in the application.
+You can remove a student from a class using this command.
 
-Format: `unlink s/STUDENT_INDEX c/CLASS_INDEX`
-
+Format: `unlink s\STUDENT_INDEX c\CLASS_INDEX`
 * Unlinks the student at the specified `STUDENT_INDEX` from the class at the specified `CLASS_INDEX`.
-* `STUDENT_INDEX` refers to the index number shown in the displayed student list.
-* `CLASS_INDEX` refers to the index number shown in the displayed class list.
+* The `STUDENT_INDEX` refers to the index number shown in the displayed student list.
+* The `CLASS_INDEX` refers to the index number shown in the displayed class list.
+
+For example:
+* One of your students, Alex Yeoh, has transferred out of your class and you decide to unlink him from his class.
+  You type in the command `unlink s\1 c\1` and press <kbd>Enter</kbd>.
+
+![Unlink before](images/ugimages/UnlinkBefore.png)
+  
+* Your Tutor's Pet displays the remaining students in CS2103T Tutorial to confirm that you have successfully unlinked
+  Alex from the class.
+
+![Unlink after](images/ugimages/UnlinkAfter.png)
+
+* Note that all of Alex's attendance in the class was also deleted.
+
+Constraints:
 * The indexes **must be positive whole numbers** 1, 2, 3, …​
 
-Examples:
-*  `unlink s/1 c/2` Unlinks the 1st student from the 2nd class in the respective lists.
+Other examples: 
+* `list-student c\2`
+  `unlink s\1 c\1`
+  Lists the students of the 2nd class in the displayed class list, and unlinks the 2nd student of that class.
 
 ### Managing Lessons
 
