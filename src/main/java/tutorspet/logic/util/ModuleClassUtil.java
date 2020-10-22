@@ -1,16 +1,22 @@
 package tutorspet.logic.util;
 
+import static tutorspet.commons.core.Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX;
+import static tutorspet.commons.core.Messages.MESSAGE_INVALID_STUDENT_IN_MODULE_CLASS;
 import static tutorspet.commons.util.CollectionUtil.requireAllNonNull;
 import static tutorspet.logic.commands.AddLessonCommand.MESSAGE_EXISTING_LESSON;
 import static tutorspet.logic.commands.EditLessonCommand.MESSAGE_DUPLICATE_LESSON;
 import static tutorspet.logic.util.LessonUtil.addAttendanceToLesson;
 import static tutorspet.logic.util.LessonUtil.deleteAttendanceFromLesson;
 import static tutorspet.logic.util.LessonUtil.editAttendanceInLesson;
+import static tutorspet.logic.util.LessonUtil.getAbsentWeekFromLesson;
 import static tutorspet.logic.util.LessonUtil.getAttendanceFromLesson;
+import static tutorspet.logic.util.LessonUtil.getParticipationScoreFromLesson;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
@@ -121,7 +127,7 @@ public class ModuleClassUtil {
         requireAllNonNull(targetModuleClass, lessonIndex);
 
         if (lessonIndex.getZeroBased() >= targetModuleClass.getLessons().size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
+            throw new CommandException(MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
         }
 
         return targetModuleClass.getLessons().get(lessonIndex.getZeroBased());
@@ -146,11 +152,11 @@ public class ModuleClassUtil {
         requireAllNonNull(targetModuleClass, lessonIndex, targetWeek, targetStudent, attendanceToAdd);
 
         if (!targetModuleClass.hasStudentUuid(targetStudent.getUuid())) {
-            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_IN_MODULE_CLASS);
+            throw new CommandException(MESSAGE_INVALID_STUDENT_IN_MODULE_CLASS);
         }
 
         if (lessonIndex.getOneBased() > targetModuleClass.getLessons().size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
+            throw new CommandException(MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
         }
 
         Lesson targetLesson = targetModuleClass.getLessons().get(lessonIndex.getZeroBased());
@@ -178,11 +184,11 @@ public class ModuleClassUtil {
         requireAllNonNull(targetModuleClass, lessonIndex, targetWeek, targetStudent, attendanceToSet);
 
         if (!targetModuleClass.hasStudentUuid(targetStudent.getUuid())) {
-            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_IN_MODULE_CLASS);
+            throw new CommandException(MESSAGE_INVALID_STUDENT_IN_MODULE_CLASS);
         }
 
         if (lessonIndex.getOneBased() > targetModuleClass.getLessons().size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
+            throw new CommandException(MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
         }
 
         Lesson targetLesson = targetModuleClass.getLessons().get(lessonIndex.getZeroBased());
@@ -209,11 +215,11 @@ public class ModuleClassUtil {
         requireAllNonNull(targetModuleClass, lessonIndex, week, targetStudent);
 
         if (!targetModuleClass.hasStudentUuid(targetStudent.getUuid())) {
-            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_IN_MODULE_CLASS);
+            throw new CommandException(MESSAGE_INVALID_STUDENT_IN_MODULE_CLASS);
         }
 
         if (lessonIndex.getOneBased() > targetModuleClass.getLessons().size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
+            throw new CommandException(MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
         }
 
         Lesson targetLesson = targetModuleClass.getLessons().get(lessonIndex.getZeroBased());
@@ -239,16 +245,71 @@ public class ModuleClassUtil {
         requireAllNonNull(targetModuleClass, lessonIndex, targetWeek, targetStudent);
 
         if (!targetModuleClass.hasStudentUuid(targetStudent.getUuid())) {
-            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_IN_MODULE_CLASS);
+            throw new CommandException(MESSAGE_INVALID_STUDENT_IN_MODULE_CLASS);
         }
 
         if (lessonIndex.getOneBased() > targetModuleClass.getLessons().size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
+            throw new CommandException(MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
         }
 
         Lesson targetLesson = targetModuleClass.getLessons().get(lessonIndex.getZeroBased());
 
         return getAttendanceFromLesson(targetLesson, targetStudent, targetWeek);
+    }
+
+    /**
+     * Returns {@code targetStudent}'s average participation score for a class.
+     */
+    public static double getParticipationScore(ModuleClass targetModuleClass, Student targetStudent)
+            throws CommandException {
+        requireAllNonNull(targetModuleClass, targetStudent);
+
+        if (targetModuleClass.getLessons().isEmpty()) {
+            throw new CommandException(Messages.MESSAGE_NO_LESSONS_IN_MODULE_CLASS);
+        }
+
+        if (!targetModuleClass.hasStudentUuid(targetStudent.getUuid())) {
+            throw new CommandException(MESSAGE_INVALID_STUDENT_IN_MODULE_CLASS);
+        }
+
+        List<Lesson> listOfLesson = targetModuleClass.getLessons();
+        double totalParticipationScore = 0;
+        int totalLesson = listOfLesson.size();
+
+        for (Lesson lesson : listOfLesson) {
+            totalParticipationScore = totalParticipationScore
+                    + getParticipationScoreFromLesson(lesson, targetStudent);
+        }
+
+        return totalParticipationScore / totalLesson;
+    }
+
+    /**
+     * Returns a Map with {@code Lesson} as key and {@code List<Integer>} as value.
+     * The {@code List<Integer>} contains the weeks in which {@code targetStudent} did not attend
+     * {@code targetModuleClass}.
+     */
+    public static Map<Lesson, List<Integer>> getAbsentWeek(ModuleClass targetModuleClass, Student targetStudent)
+            throws CommandException {
+        requireAllNonNull(targetModuleClass, targetStudent);
+
+        if (targetModuleClass.getLessons().isEmpty()) {
+            throw new CommandException(Messages.MESSAGE_NO_LESSONS_IN_MODULE_CLASS);
+        }
+
+        if (!targetModuleClass.hasStudentUuid(targetStudent.getUuid())) {
+            throw new CommandException(MESSAGE_INVALID_STUDENT_IN_MODULE_CLASS);
+        }
+
+        List<Lesson> listOfLesson = targetModuleClass.getLessons();
+        Map<Lesson, List<Integer>> listOfAttendance = new HashMap<>();
+
+        for (Lesson lesson : listOfLesson) {
+            List<Integer> attendances = getAbsentWeekFromLesson(lesson, targetStudent);
+            listOfAttendance.put(lesson, attendances);
+        }
+
+        return listOfAttendance;
     }
 
     // private methods
