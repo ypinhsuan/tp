@@ -13,8 +13,10 @@ import static tutorspet.logic.util.LessonUtil.getAttendanceFromLesson;
 import static tutorspet.logic.util.LessonUtil.getParticipationScoreFromLesson;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
@@ -258,7 +260,7 @@ public class ModuleClassUtil {
     /**
      * Returns the average participation score for {@code targetStudent} for a class.
      */
-    public static int getParticipationScore(ModuleClass targetModuleClass, Student targetStudent)
+    public static double getParticipationScore(ModuleClass targetModuleClass, Student targetStudent)
             throws CommandException {
         requireAllNonNull(targetModuleClass, targetStudent);
 
@@ -271,7 +273,7 @@ public class ModuleClassUtil {
         }
 
         List<Lesson> listOfLesson = targetModuleClass.getLessons();
-        int totalParticipationScore = 0;
+        double totalParticipationScore = 0;
         int totalLesson = listOfLesson.size();
 
         for (Lesson lesson : listOfLesson) {
@@ -284,7 +286,7 @@ public class ModuleClassUtil {
     /**
      * Returns a string containing lessons in which {@code targetStudent} did not attend for a class.
      */
-    public static String getAbsentWeek(ModuleClass targetModuleClass, Student targetStudent)
+    public static Map<Lesson, List<Integer>> getAbsentWeek(ModuleClass targetModuleClass, Student targetStudent)
             throws CommandException {
         requireAllNonNull(targetModuleClass, targetStudent);
 
@@ -297,16 +299,14 @@ public class ModuleClassUtil {
         }
 
         List<Lesson> listOfLesson = targetModuleClass.getLessons();
-        StringBuilder weeksNotPresent = new StringBuilder();
+        Map<Lesson, List<Integer>> listOfAttendance = new HashMap<>();
 
         for (Lesson lesson : listOfLesson) {
-            weeksNotPresent.append(lesson.printLesson())
-                    .append(":")
-                    .append(getAbsentWeekFromLesson(lesson, targetStudent))
-                    .append("\n");
+            List<Integer> attendances = getAbsentWeekFromLesson(lesson, targetStudent);
+            listOfAttendance.put(lesson, attendances);
         }
 
-        return weeksNotPresent.toString();
+        return listOfAttendance;
     }
 
     // private methods

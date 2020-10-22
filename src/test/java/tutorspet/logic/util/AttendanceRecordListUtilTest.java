@@ -20,8 +20,10 @@ import static tutorspet.logic.util.AttendanceRecordUtil.setAttendance;
 import static tutorspet.testutil.Assert.assertThrows;
 import static tutorspet.testutil.TypicalStudent.ALICE;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -322,7 +324,7 @@ public class AttendanceRecordListUtilTest {
         AttendanceRecord recordWeekTwo = new AttendanceRecordBuilder().withEntry(ALICE.getUuid(), attendance).build();
         AttendanceRecordList recordList = new AttendanceRecordList(Arrays.asList(recordWeekOne, recordWeekTwo));
 
-        assertEquals(33, getScoreFromAttendance(recordList, ALICE));
+        assertEquals(33.0, getScoreFromAttendance(recordList, ALICE));
     }
 
     @Test
@@ -351,8 +353,8 @@ public class AttendanceRecordListUtilTest {
         Attendance attendance = new Attendance(VALID_PARTICIPATION_SCORE_33);
         AttendanceRecord recordWeekTwo = new AttendanceRecordBuilder().withEntry(ALICE.getUuid(), attendance).build();
         AttendanceRecordList recordList = new AttendanceRecordList(Arrays.asList(recordWeekOne, recordWeekTwo));
-
-        assertEquals(" 1", getAbsentWeekFromAttendance(recordList, ALICE));
+        List<Integer> result = new ArrayList<>(Collections.singletonList(1));
+        assertEquals(result, getAbsentWeekFromAttendance(recordList, ALICE));
     }
 
     @Test
@@ -360,8 +362,8 @@ public class AttendanceRecordListUtilTest {
         Attendance attendance = new Attendance(VALID_PARTICIPATION_SCORE_33);
         AttendanceRecord record = new AttendanceRecordBuilder().withEntry(ALICE.getUuid(), attendance).build();
         AttendanceRecordList recordList = new AttendanceRecordList(Arrays.asList(record, record));
-
-        assertEquals("", getAbsentWeekFromAttendance(recordList, ALICE));
+        List<Integer> result = new ArrayList<>();
+        assertEquals(result, getAbsentWeekFromAttendance(recordList, ALICE));
     }
 
     @Test

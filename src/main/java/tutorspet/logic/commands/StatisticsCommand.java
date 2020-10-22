@@ -10,10 +10,12 @@ import static tutorspet.logic.util.ModuleClassUtil.getAbsentWeek;
 import static tutorspet.logic.util.ModuleClassUtil.getParticipationScore;
 
 import java.util.List;
+import java.util.Map;
 
 import tutorspet.commons.core.index.Index;
 import tutorspet.logic.commands.exceptions.CommandException;
 import tutorspet.model.Model;
+import tutorspet.model.lesson.Lesson;
 import tutorspet.model.moduleclass.ModuleClass;
 import tutorspet.model.student.Student;
 
@@ -26,7 +28,7 @@ public class StatisticsCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "Gives a summary of a student's attendance"
             + "for a specific class\n"
-            + "Note: All indexes and numbers must be a positive integer.\n"
+            + "Note: All indexes and numbers must be positive integers.\n"
             + "Parameters: "
             + PREFIX_CLASS_INDEX + "CLASS_INDEX "
             + PREFIX_STUDENT_INDEX + "STUDENT_INDEX ";
@@ -68,8 +70,21 @@ public class StatisticsCommand extends Command {
         ModuleClass targetModuleClass = lastShownModuleClassList.get(moduleClassIndex.getZeroBased());
         Student targetStudent = lastShownStudentList.get(studentIndex.getZeroBased());
 
-        int avgParticipationScore = getParticipationScore(targetModuleClass, targetStudent);
-        String weeksNotPresent = getAbsentWeek(targetModuleClass, targetStudent);
+        double avgParticipationScore = getParticipationScore(targetModuleClass, targetStudent);
+        Map<Lesson, List<Integer>> attendances = getAbsentWeek(targetModuleClass, targetStudent);
+        StringBuilder weeksNotPresent = new StringBuilder();
+
+        for (Lesson lesson : attendances.keySet()) {
+            weeksNotPresent.append(lesson.printLesson()).append(":");
+            List<Integer> absentWeeks = attendances.get(lesson);
+
+            for (Integer weekNo : absentWeeks) {
+                weeksNotPresent.append(" ").append(weekNo);
+            }
+
+            weeksNotPresent.append("\n");
+        }
+
         String message = String.format(MESSAGE_SUCCESS, targetStudent.getName().fullName,
                 targetModuleClass.getName().fullName, avgParticipationScore, weeksNotPresent);
         return new CommandResult(message);

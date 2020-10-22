@@ -23,6 +23,10 @@ import static tutorspet.testutil.TypicalStudent.ALICE;
 import static tutorspet.testutil.TypicalStudent.BENSON;
 import static tutorspet.testutil.TypicalStudent.CARL;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 import org.junit.jupiter.api.Test;
@@ -135,7 +139,7 @@ public class LessonUtilTest {
 
     @Test
     public void getParticipationScoreFromLesson_validParameter_success() throws CommandException {
-        int avgParticipationScoreAlice = 51;
+        double avgParticipationScoreAlice = 51.0;
         assertEquals(avgParticipationScoreAlice,
                 getParticipationScoreFromLesson(DEFAULT_LESSON, ALICE));
     }
@@ -159,8 +163,8 @@ public class LessonUtilTest {
 
     @Test
     public void getAbsentWeekFromLesson_validParameter_success() {
-        String expectedString = " 1";
-        assertEquals(expectedString,
+        List<Integer> result = new ArrayList<>(Collections.singletonList(1));
+        assertEquals(result,
                 getAbsentWeekFromLesson(DEFAULT_LESSON, ALICE));
     }
 
@@ -169,8 +173,8 @@ public class LessonUtilTest {
         Lesson lesson =
                 insertAttendanceRecords(new LessonBuilder().withNumberOfOccurrences(2).build(),
                         RECORD_EMPTY, RECORD_EMPTY);
-        String expectedString = " 1 2";
-        assertEquals(expectedString,
+        List<Integer> result = new ArrayList<>(Arrays.asList(1, 2));
+        assertEquals(result,
                 getAbsentWeekFromLesson(lesson, ALICE));
     }
 

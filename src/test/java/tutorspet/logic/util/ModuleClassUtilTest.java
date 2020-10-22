@@ -31,7 +31,10 @@ import static tutorspet.testutil.TypicalStudent.ALICE;
 import static tutorspet.testutil.TypicalStudent.CARL;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
@@ -85,7 +88,7 @@ public class ModuleClassUtilTest {
     }
 
     @Test
-    public void editLessonInModuleClass_duplicateLesson_throwsCommandException() throws CommandException {
+    public void editLessonInModuleClass_duplicateLesson_throwsCommandException() {
         List<Lesson> updatedLessons = new ArrayList<>(CS2103T_TUTORIAL.getLessons());
         updatedLessons.add(DEFAULT_LESSON);
         Lesson lessonToEdit = updatedLessons.get(0);
@@ -317,7 +320,7 @@ public class ModuleClassUtilTest {
 
     @Test
     public void getParticipationScore_validParameter_success() throws CommandException {
-        int avgParticipationScoreAlice = 65;
+        double avgParticipationScoreAlice = 65.0;
         assertEquals(avgParticipationScoreAlice,
                 getParticipationScore(CS2103T_TUTORIAL, ALICE));
     }
@@ -344,8 +347,10 @@ public class ModuleClassUtilTest {
 
     @Test
     public void getAbsentWeek_validParameter_success() throws CommandException {
-        String expectedString = "Thursday 10:00 to 11:00: 3 4 5 6 7 8 9 10\n";
-        assertEquals(expectedString, getAbsentWeek(CS2103T_TUTORIAL, ALICE));
+        Map<Lesson, List<Integer>> result = new HashMap<>();
+        result.put(CS2103T_TUTORIAL.getLessons().get(0),
+                new ArrayList<>(Arrays.asList(3, 4, 5, 6, 7, 8, 9, 10)));
+        assertEquals(result, getAbsentWeek(CS2103T_TUTORIAL, ALICE));
     }
 
     @Test

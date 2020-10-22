@@ -128,7 +128,7 @@ public class AttendanceRecordListUtil {
     /**
      * Returns the average participation score for {@code targetStudent}.
      */
-    public static int getScoreFromAttendance(AttendanceRecordList targetAttendanceRecordList, Student targetStudent)
+    public static double getScoreFromAttendance(AttendanceRecordList targetAttendanceRecordList, Student targetStudent)
             throws CommandException {
         requireAllNonNull(targetAttendanceRecordList, targetStudent);
 
@@ -154,22 +154,22 @@ public class AttendanceRecordListUtil {
     /**
      * Returns a string containing lessons in which {@code targetStudent} did not attend.
      */
-    public static String getAbsentWeekFromAttendance(AttendanceRecordList targetAttendanceRecordList,
+    public static List<Integer> getAbsentWeekFromAttendance(AttendanceRecordList targetAttendanceRecordList,
                                                 Student targetStudent) {
         requireAllNonNull(targetAttendanceRecordList, targetStudent);
 
         List<Optional<Attendance>> listOfAttendance = getAttendances(targetAttendanceRecordList, targetStudent);
-        StringBuilder weeksNotPresent = new StringBuilder();
         int weekNo = 1;
+        List<Integer> weeksNotPresent = new ArrayList<>();
 
         for (Optional<Attendance> attendance : listOfAttendance) {
             if (attendance.isEmpty()) {
-                weeksNotPresent.append(" ").append(weekNo);
+                weeksNotPresent.add(weekNo);
             }
             weekNo++;
         }
 
-        return weeksNotPresent.toString();
+        return weeksNotPresent;
     }
 
     private static AttendanceRecordList replaceAttendanceRecordInList(AttendanceRecordList attendanceRecordList,

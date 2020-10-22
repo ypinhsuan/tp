@@ -9,6 +9,7 @@ import static tutorspet.logic.util.AttendanceRecordListUtil.getScoreFromAttendan
 import static tutorspet.logic.util.AttendanceRecordListUtil.removeAttendanceFromAttendanceRecordList;
 
 import java.time.LocalTime;
+import java.util.List;
 
 import tutorspet.logic.commands.exceptions.CommandException;
 import tutorspet.model.attendance.Attendance;
@@ -129,7 +130,7 @@ public class LessonUtil {
     /**
      * Returns the average participation score for {@code targetStudent} for a lesson.
      */
-    public static int getParticipationScoreFromLesson(Lesson targetLesson, Student targetStudent)
+    public static double getParticipationScoreFromLesson(Lesson targetLesson, Student targetStudent)
             throws CommandException {
         requireAllNonNull(targetLesson, targetStudent);
 
@@ -141,7 +142,7 @@ public class LessonUtil {
     /**
      * Returns a string containing lessons in which {@code targetStudent} did not attend.
      */
-    public static String getAbsentWeekFromLesson(Lesson targetLesson, Student targetStudent) {
+    public static List<Integer> getAbsentWeekFromLesson(Lesson targetLesson, Student targetStudent) {
         requireAllNonNull(targetLesson, targetStudent);
 
         AttendanceRecordList targetAttendanceRecordList = targetLesson.getAttendanceRecordList();
