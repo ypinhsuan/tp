@@ -20,30 +20,24 @@ import static tutorspet.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static tutorspet.logic.commands.CommandTestUtil.showModuleClassAtIndex;
 import static tutorspet.logic.commands.CommandTestUtil.showStudentAtIndex;
 import static tutorspet.logic.commands.EditAttendanceCommand.MESSAGE_EDIT_ATTENDANCE_SUCCESS;
+import static tutorspet.logic.util.ModuleClassUtil.editAttendanceInModuleClass;
+import static tutorspet.logic.util.ModuleClassUtil.getAttendanceFromModuleClass;
 import static tutorspet.testutil.Assert.assertThrows;
-import static tutorspet.testutil.ModuleClassTestUtil.manualReplaceLessonToModuleClass;
 import static tutorspet.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 import static tutorspet.testutil.TypicalIndexes.INDEX_SECOND_ITEM;
 import static tutorspet.testutil.TypicalIndexes.INDEX_THIRD_ITEM;
 import static tutorspet.testutil.TypicalTutorsPet.getTypicalTutorsPet;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-
 import org.junit.jupiter.api.Test;
 
 import tutorspet.commons.core.index.Index;
 import tutorspet.logic.commands.EditAttendanceCommand.EditAttendanceDescriptor;
+import tutorspet.logic.commands.exceptions.CommandException;
 import tutorspet.model.Model;
 import tutorspet.model.ModelManager;
 import tutorspet.model.TutorsPet;
 import tutorspet.model.UserPrefs;
 import tutorspet.model.attendance.Attendance;
-import tutorspet.model.attendance.AttendanceRecord;
-import tutorspet.model.attendance.AttendanceRecordList;
 import tutorspet.model.attendance.Week;
 import tutorspet.model.lesson.Lesson;
 import tutorspet.model.moduleclass.ModuleClass;
@@ -98,7 +92,7 @@ public class EditAttendanceCommandTest {
     }
 
     @Test
-    public void execute_allFieldsSpecifiedUnfilteredList_success() {
+    public void execute_allFieldsSpecifiedUnfilteredList_success() throws CommandException {
         Index moduleClassIndex = INDEX_FIRST_ITEM;
         Index lessonIndex = INDEX_FIRST_ITEM;
         Index studentIndex = INDEX_FIRST_ITEM;
@@ -109,13 +103,11 @@ public class EditAttendanceCommandTest {
         EditAttendanceCommand editAttendanceCommand = new EditAttendanceCommand(
                 moduleClassIndex, lessonIndex, studentIndex, targetWeek, editAttendanceDescriptor);
 
-        // manually edit attendance
         ModuleClass moduleClass = model.getFilteredModuleClassList().get(moduleClassIndex.getZeroBased());
-        Lesson lesson = moduleClass.getLessons().get(lessonIndex.getZeroBased());
         Student student = model.getFilteredStudentList().get(studentIndex.getZeroBased());
         Attendance editedAttendance = new Attendance(VALID_PARTICIPATION_SCORE_33);
         ModuleClass editedModuleClass =
-                manualEditAttendance(moduleClass, lesson, student, targetWeek, editedAttendance);
+                editAttendanceInModuleClass(moduleClass, lessonIndex, targetWeek, student, editedAttendance);
 
         String expectedMessage = String.format(MESSAGE_EDIT_ATTENDANCE_SUCCESS,
                 student.getName(), targetWeek, editedAttendance);
@@ -128,7 +120,7 @@ public class EditAttendanceCommandTest {
     }
 
     @Test
-    public void execute_noFieldSpecifiedUnfilteredList_success() {
+    public void execute_noFieldSpecifiedUnfilteredList_success() throws CommandException {
         Index moduleClassIndex = INDEX_FIRST_ITEM;
         Index lessonIndex = INDEX_FIRST_ITEM;
         Index studentIndex = INDEX_FIRST_ITEM;
@@ -138,10 +130,9 @@ public class EditAttendanceCommandTest {
                 studentIndex, targetWeek, new EditAttendanceDescriptor());
 
         Student student = model.getFilteredStudentList().get(moduleClassIndex.getZeroBased());
-        Attendance editedAttendance = model.getFilteredModuleClassList().get(moduleClassIndex.getZeroBased())
-                .getLessons().get(lessonIndex.getZeroBased())
-                .getAttendanceRecordList()
-                .getAttendance(student, targetWeek);
+        ModuleClass targetModuleClass = model.getFilteredModuleClassList().get(moduleClassIndex.getZeroBased());
+        Attendance editedAttendance = getAttendanceFromModuleClass(
+                targetModuleClass, lessonIndex, targetWeek, student);
 
         String expectedMessage = String.format(MESSAGE_EDIT_ATTENDANCE_SUCCESS,
                 student.getName(), targetWeek, editedAttendance);
@@ -153,7 +144,7 @@ public class EditAttendanceCommandTest {
     }
 
     @Test
-    public void execute_filteredList_success() {
+    public void execute_filteredList_success() throws CommandException {
         showModuleClassAtIndex(model, INDEX_FIRST_ITEM);
         showStudentAtIndex(model, INDEX_FIRST_ITEM);
 
@@ -167,14 +158,12 @@ public class EditAttendanceCommandTest {
         EditAttendanceCommand editAttendanceCommand = new EditAttendanceCommand(
                 moduleClassIndex, lessonIndex, studentIndex, targetWeek, editAttendanceDescriptor);
 
-        // manually edit attendance
         ModuleClass moduleClassInFilteredList = model.getFilteredModuleClassList().get(moduleClassIndex.getZeroBased());
-        Lesson lesson = moduleClassInFilteredList.getLessons().get(lessonIndex.getZeroBased());
         Student studentInFilteredList = model.getFilteredStudentList().get(studentIndex.getZeroBased());
         Attendance editedAttendance = new Attendance(VALID_PARTICIPATION_SCORE_33);
 
-        ModuleClass editedModuleClass = manualEditAttendance(moduleClassInFilteredList, lesson,
-                studentInFilteredList, targetWeek, editedAttendance);
+        ModuleClass editedModuleClass = editAttendanceInModuleClass(moduleClassInFilteredList, lessonIndex,
+                targetWeek, studentInFilteredList, editedAttendance);
 
         String expectedMessage = String.format(MESSAGE_EDIT_ATTENDANCE_SUCCESS,
                 studentInFilteredList.getName(), targetWeek, editedAttendance);
@@ -315,24 +304,5 @@ public class EditAttendanceCommandTest {
         // different descriptor -> returns false
         assertFalse(standardCommand.equals(new EditAttendanceCommand(INDEX_FIRST_ITEM, INDEX_FIRST_ITEM,
                 INDEX_FIRST_ITEM, VALID_WEEK_1, DESC_ATTENDANCE_80)));
-    }
-
-    private ModuleClass manualEditAttendance(
-            ModuleClass moduleClass, Lesson lesson, Student student, Week week, Attendance toEdit) {
-        AttendanceRecordList attendanceRecordList = lesson.getAttendanceRecordList();
-        AttendanceRecord attendanceRecord = attendanceRecordList.getAttendanceRecord(week);
-
-        Map<UUID, Attendance> editedAttendanceRecordMap = new HashMap<>(attendanceRecord.getAttendanceRecord());
-        editedAttendanceRecordMap.put(student.getUuid(), toEdit);
-        AttendanceRecord updatedAttendanceRecord = new AttendanceRecord(editedAttendanceRecordMap);
-        List<AttendanceRecord> updatedAttendanceRecordList =
-                new ArrayList<>(attendanceRecordList.getAttendanceRecordList());
-        updatedAttendanceRecordList.set(week.getZeroBasedWeekIndex(), updatedAttendanceRecord);
-        Lesson editedLesson = new Lesson(lesson.getStartTime(), lesson.getEndTime(), lesson.getDay(),
-                lesson.getNumberOfOccurrences(), lesson.getVenue(),
-                new AttendanceRecordList(updatedAttendanceRecordList));
-        ModuleClass editedModuleClass = manualReplaceLessonToModuleClass(moduleClass, lesson, editedLesson);
-
-        return editedModuleClass;
     }
 }

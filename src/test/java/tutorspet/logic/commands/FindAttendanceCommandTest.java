@@ -15,6 +15,7 @@ import static tutorspet.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static tutorspet.logic.commands.CommandTestUtil.showModuleClassAtIndex;
 import static tutorspet.logic.commands.CommandTestUtil.showStudentAtIndex;
 import static tutorspet.logic.commands.FindAttendanceCommand.MESSAGE_SUCCESS;
+import static tutorspet.logic.util.ModuleClassUtil.getAttendanceFromModuleClass;
 import static tutorspet.testutil.Assert.assertThrows;
 import static tutorspet.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 import static tutorspet.testutil.TypicalIndexes.INDEX_THIRD_ITEM;
@@ -23,6 +24,7 @@ import static tutorspet.testutil.TypicalTutorsPet.getTypicalTutorsPet;
 import org.junit.jupiter.api.Test;
 
 import tutorspet.commons.core.index.Index;
+import tutorspet.logic.commands.exceptions.CommandException;
 import tutorspet.model.Model;
 import tutorspet.model.ModelManager;
 import tutorspet.model.UserPrefs;
@@ -56,27 +58,17 @@ public class FindAttendanceCommandTest {
     }
 
     @Test
-    public void execute_unfilteredList_success() {
+    public void execute_unfilteredList_success() throws CommandException {
         Index moduleClassIndex = INDEX_FIRST_ITEM;
         Index lessonIndex = INDEX_FIRST_ITEM;
         Index studentIndex = INDEX_FIRST_ITEM;
         Week targetWeek = VALID_WEEK_1;
 
-        assert moduleClassIndex.getZeroBased() < model.getFilteredModuleClassList().size();
-        assert studentIndex.getZeroBased() < model.getFilteredStudentList().size();
-
         ModuleClass moduleClass = model.getFilteredModuleClassList().get(moduleClassIndex.getZeroBased());
         Student student = model.getFilteredStudentList().get(studentIndex.getZeroBased());
 
-        assert lessonIndex.getZeroBased() < moduleClass.getLessons().size();
+        Attendance attendance = getAttendanceFromModuleClass(moduleClass, lessonIndex, targetWeek, student);
 
-        Lesson lesson = moduleClass.getLessons().get(lessonIndex.getZeroBased());
-
-        assert moduleClass.hasLesson(lesson);
-        assert moduleClass.hasStudentUuid(student.getUuid());
-        assert lesson.getAttendanceRecordList().hasAttendance(student, targetWeek);
-
-        Attendance attendance = lesson.getAttendanceRecordList().getAttendance(student, targetWeek);
         String expectedMessage = String.format(MESSAGE_SUCCESS, student.getName(),
                 targetWeek, attendance);
         Model expectedModel = new ModelManager(model.getTutorsPet(), new UserPrefs());
@@ -87,7 +79,7 @@ public class FindAttendanceCommandTest {
     }
 
     @Test
-    public void execute_filteredList_success() {
+    public void execute_filteredList_success() throws CommandException {
         showModuleClassAtIndex(model, INDEX_FIRST_ITEM);
         showStudentAtIndex(model, INDEX_FIRST_ITEM);
 
@@ -96,21 +88,10 @@ public class FindAttendanceCommandTest {
         Index studentIndex = INDEX_FIRST_ITEM;
         Week targetWeek = VALID_WEEK_1;
 
-        assert moduleClassIndex.getZeroBased() < model.getFilteredModuleClassList().size();
-        assert studentIndex.getZeroBased() < model.getFilteredStudentList().size();
-
         ModuleClass moduleClass = model.getFilteredModuleClassList().get(moduleClassIndex.getZeroBased());
         Student student = model.getFilteredStudentList().get(studentIndex.getZeroBased());
 
-        assert lessonIndex.getZeroBased() < moduleClass.getLessons().size();
-
-        Lesson lesson = moduleClass.getLessons().get(lessonIndex.getZeroBased());
-
-        assert moduleClass.hasLesson(lesson);
-        assert moduleClass.hasStudentUuid(student.getUuid());
-        assert lesson.getAttendanceRecordList().hasAttendance(student, targetWeek);
-
-        Attendance attendance = lesson.getAttendanceRecordList().getAttendance(student, targetWeek);
+        Attendance attendance = getAttendanceFromModuleClass(moduleClass, lessonIndex, targetWeek, student);
         String expectedMessage = String.format(MESSAGE_SUCCESS, student.getName(),
                 targetWeek, attendance);
         Model expectedModel = new ModelManager(model.getTutorsPet(), new UserPrefs());

@@ -1,11 +1,11 @@
 @startuml
 !include style.puml
+show members
+hide empty members
+skinparam classAttributeFontColor #FFFFFF
 skinparam arrowThickness 1.1
-skinparam arrowColor black
-skinparam classBackgroundColor ATTENDANCE_COLOR
-skinparam classFontColor black
-show member
-hide method
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
 
 Package Attendance <<Rectangle>>{
 

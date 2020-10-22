@@ -7,16 +7,15 @@ import static tutorspet.logic.commands.AddLessonCommand.MESSAGE_EXISTING_LESSON;
 import static tutorspet.logic.commands.AddLessonCommand.MESSAGE_SUCCESS;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static tutorspet.logic.util.ModuleClassUtil.addLessonToModuleClass;
 import static tutorspet.testutil.Assert.assertThrows;
 import static tutorspet.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 import static tutorspet.testutil.TypicalTutorsPet.getOnlyModuleClassTutorsPet;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.jupiter.api.Test;
 
 import tutorspet.commons.core.index.Index;
+import tutorspet.logic.commands.exceptions.CommandException;
 import tutorspet.model.Model;
 import tutorspet.model.ModelManager;
 import tutorspet.model.UserPrefs;
@@ -41,13 +40,12 @@ public class AddLessonCommandTest {
     }
 
     @Test
-    public void execute_unfilteredList_success() {
+    public void execute_unfilteredList_success() throws CommandException {
         Index moduleClassIndex = INDEX_FIRST_ITEM;
 
-        // manually add first lesson to first class
         ModuleClass moduleClass = model.getFilteredModuleClassList().get(moduleClassIndex.getZeroBased());
         Lesson lesson = new LessonBuilder().build();
-        ModuleClass modifiedModuleClass = manualAddLessonToModuleClass(moduleClass, lesson);
+        ModuleClass modifiedModuleClass = addLessonToModuleClass(moduleClass, lesson);
 
         String expectedMessage = String.format(MESSAGE_SUCCESS, lesson);
         Model expectedModel = new ModelManager(model.getTutorsPet(), new UserPrefs());
@@ -58,13 +56,12 @@ public class AddLessonCommandTest {
     }
 
     @Test
-    public void execute_existingLesson_failure() {
+    public void execute_existingLesson_failure() throws CommandException {
         Index moduleClassIndex = INDEX_FIRST_ITEM;
 
-        // manually add first lesson to first class
         ModuleClass moduleClass = model.getFilteredModuleClassList().get(moduleClassIndex.getZeroBased());
         Lesson lesson = new LessonBuilder().build();
-        ModuleClass modifiedModuleClass = manualAddLessonToModuleClass(moduleClass, lesson);
+        ModuleClass modifiedModuleClass = addLessonToModuleClass(moduleClass, lesson);
 
         // update model with modified class
         model.setModuleClass(moduleClass, modifiedModuleClass);
@@ -107,20 +104,5 @@ public class AddLessonCommandTest {
 
         // different lessons -> returns false
         assertFalse(addLessonCom1Command.equals(addLessonCom2Command));
-    }
-
-    /**
-     * Returns a new {@code ModuleClass} based on the given {@code moduleClass} but with the specified {@code lesson}
-     * added.
-     * {@code lesson} must not be found in {@code moduleClass}.
-     */
-    private static ModuleClass manualAddLessonToModuleClass(ModuleClass moduleClass, Lesson lesson) {
-        List<Lesson> lessons = new ArrayList<>(moduleClass.getLessons());
-
-        assertFalse(lessons.contains(lesson), "Test precondition error: The selected module class"
-                + " already contains the selected lesson.");
-
-        lessons.add(lesson);
-        return new ModuleClass(moduleClass.getName(), moduleClass.getStudentUuids(), lessons);
     }
 }

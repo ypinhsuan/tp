@@ -7,6 +7,7 @@ import static tutorspet.commons.core.Messages.MESSAGE_INVALID_MODULE_CLASS_DISPL
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static tutorspet.logic.commands.DeleteLessonCommand.MESSAGE_DELETE_LESSON_SUCCESS;
+import static tutorspet.logic.util.ModuleClassUtil.deleteLessonFromModuleClass;
 import static tutorspet.testutil.Assert.assertThrows;
 import static tutorspet.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 import static tutorspet.testutil.TypicalIndexes.INDEX_SECOND_ITEM;
@@ -20,7 +21,6 @@ import tutorspet.model.ModelManager;
 import tutorspet.model.UserPrefs;
 import tutorspet.model.lesson.Lesson;
 import tutorspet.model.moduleclass.ModuleClass;
-import tutorspet.testutil.ModuleClassBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -46,10 +46,10 @@ public class DeleteLessonCommandTest {
         Index lessonIndex = INDEX_FIRST_ITEM;
 
         ModuleClass moduleClass = model.getFilteredModuleClassList().get(moduleClassIndex.getZeroBased());
-        ModuleClass editedModuleClass = new ModuleClassBuilder(moduleClass).withLessons().build();
         Lesson lessonToDelete = moduleClass.getLessons().get(lessonIndex.getZeroBased());
-        DeleteLessonCommand deleteLessonCommand = new DeleteLessonCommand(moduleClassIndex, lessonIndex);
+        ModuleClass editedModuleClass = deleteLessonFromModuleClass(moduleClass, lessonToDelete);
 
+        DeleteLessonCommand deleteLessonCommand = new DeleteLessonCommand(moduleClassIndex, lessonIndex);
         String expectedMessage = String.format(MESSAGE_DELETE_LESSON_SUCCESS, lessonToDelete, moduleClass);
 
         ModelManager expectedModel = new ModelManager(model.getTutorsPet(), new UserPrefs());

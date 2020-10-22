@@ -14,30 +14,24 @@ import static tutorspet.logic.commands.CommandTestUtil.VALID_WEEK_1;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_WEEK_5;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static tutorspet.logic.util.ModuleClassUtil.addAttendanceToModuleClass;
 import static tutorspet.testutil.Assert.assertThrows;
-import static tutorspet.testutil.ModuleClassTestUtil.manualReplaceLessonToModuleClass;
 import static tutorspet.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 import static tutorspet.testutil.TypicalIndexes.INDEX_THIRD_ITEM;
 import static tutorspet.testutil.TypicalTutorsPet.getTypicalTutorsPet;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import org.junit.jupiter.api.Test;
 
 import tutorspet.commons.core.index.Index;
+import tutorspet.logic.commands.exceptions.CommandException;
 import tutorspet.model.Model;
 import tutorspet.model.ModelManager;
 import tutorspet.model.UserPrefs;
 import tutorspet.model.attendance.Attendance;
-import tutorspet.model.attendance.AttendanceRecord;
-import tutorspet.model.attendance.AttendanceRecordList;
 import tutorspet.model.attendance.Week;
 import tutorspet.model.lesson.Lesson;
 import tutorspet.model.moduleclass.ModuleClass;
 import tutorspet.model.student.Student;
-import tutorspet.testutil.LessonBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code AddAttendanceCommand}.
@@ -88,7 +82,7 @@ public class AddAttendanceCommandTest {
     }
 
     @Test
-    public void execute_success() {
+    public void execute_success() throws CommandException {
         Index moduleClassIndex = INDEX_FIRST_ITEM;
         Index lessonIndex = INDEX_FIRST_ITEM;
         Index studentIndex = INDEX_FIRST_ITEM;
@@ -97,14 +91,8 @@ public class AddAttendanceCommandTest {
 
         ModuleClass moduleClass = model.getFilteredModuleClassList().get(moduleClassIndex.getZeroBased());
         Student student = model.getFilteredStudentList().get(studentIndex.getZeroBased());
-        Lesson lesson = moduleClass.getLessons().get(lessonIndex.getZeroBased());
-        AttendanceRecord attendanceRecord = new AttendanceRecord(Map.of(student.getUuid(), targetAttendance));
-        List<AttendanceRecord> attendanceRecords =
-                new ArrayList<>(lesson.getAttendanceRecordList().getAttendanceRecordList());
-        attendanceRecords.set(targetWeek.getZeroBasedWeekIndex(), attendanceRecord);
-        Lesson modifiedLesson = new LessonBuilder(lesson)
-                .withAttendanceRecordList(new AttendanceRecordList(attendanceRecords)).build();
-        ModuleClass modifiedModuleClass = manualReplaceLessonToModuleClass(moduleClass, lesson, modifiedLesson);
+        ModuleClass modifiedModuleClass = addAttendanceToModuleClass(
+                moduleClass, lessonIndex, targetWeek, student, targetAttendance);
 
         String expectedMessage =
                 String.format(MESSAGE_SUCCESS, student.getName(), targetWeek, targetAttendance);
@@ -125,20 +113,6 @@ public class AddAttendanceCommandTest {
         Index studentIndex = INDEX_FIRST_ITEM;
         Week targetWeek = VALID_WEEK_1;
         Attendance targetAttendance = VALID_ATTENDANCE;
-
-        ModuleClass moduleClass = model.getFilteredModuleClassList().get(moduleClassIndex.getZeroBased());
-        Student student = model.getFilteredStudentList().get(studentIndex.getZeroBased());
-        Lesson lesson = moduleClass.getLessons().get(lessonIndex.getZeroBased());
-        AttendanceRecord attendanceRecord = new AttendanceRecord(Map.of(student.getUuid(), targetAttendance));
-        List<AttendanceRecord> attendanceRecords =
-                new ArrayList<>(lesson.getAttendanceRecordList().getAttendanceRecordList());
-        attendanceRecords.set(targetWeek.getZeroBasedWeekIndex(), attendanceRecord);
-        Lesson modifiedLesson = new LessonBuilder(lesson)
-                .withAttendanceRecordList(new AttendanceRecordList(attendanceRecords)).build();
-        ModuleClass modifiedModuleClass =
-                manualReplaceLessonToModuleClass(moduleClass, lesson, modifiedLesson);
-
-        model.setModuleClass(moduleClass, modifiedModuleClass);
 
         AddAttendanceCommand addAttendanceCommand =
                 new AddAttendanceCommand(moduleClassIndex, lessonIndex, studentIndex, targetWeek, targetAttendance);
