@@ -15,6 +15,7 @@ import static tutorspet.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static tutorspet.logic.commands.CommandTestUtil.showModuleClassAtIndex;
 import static tutorspet.logic.commands.EditLessonCommand.MESSAGE_DUPLICATE_LESSON;
 import static tutorspet.logic.commands.EditLessonCommand.MESSAGE_EDIT_LESSON_SUCCESS;
+import static tutorspet.logic.util.ModuleClassUtil.editLessonInModuleClass;
 import static tutorspet.model.lesson.Lesson.MESSAGE_CONSTRAINTS;
 import static tutorspet.testutil.Assert.assertThrows;
 import static tutorspet.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
@@ -23,13 +24,11 @@ import static tutorspet.testutil.TypicalIndexes.INDEX_THIRD_ITEM;
 import static tutorspet.testutil.TypicalLesson.LESSON_FRI_8_TO_10;
 import static tutorspet.testutil.TypicalTutorsPet.getTypicalTutorsPet;
 
-import java.util.Arrays;
-import java.util.List;
-
 import org.junit.jupiter.api.Test;
 
 import tutorspet.commons.core.index.Index;
 import tutorspet.logic.commands.EditLessonCommand.EditLessonDescriptor;
+import tutorspet.logic.commands.exceptions.CommandException;
 import tutorspet.model.Model;
 import tutorspet.model.ModelManager;
 import tutorspet.model.TutorsPet;
@@ -61,20 +60,23 @@ public class EditLessonCommandTest {
     }
 
     @Test
-    public void execute_allFieldsSpecifiedUnfilteredList_success() {
+    public void execute_allFieldsSpecifiedUnfilteredList_success() throws CommandException {
+        Index moduleClassIndex = INDEX_FIRST_ITEM;
+        Index lessonIndex = INDEX_FIRST_ITEM;
+
         EditLessonDescriptor editLessonDescriptor =
                 new EditLessonDescriptorBuilder(DESC_LESSON_FRI_8_TO_10).build();
         EditLessonCommand editLessonCommand = new EditLessonCommand(
-                INDEX_FIRST_ITEM, INDEX_FIRST_ITEM, editLessonDescriptor);
+                moduleClassIndex, lessonIndex, editLessonDescriptor);
 
-        ModuleClass moduleClass = model.getFilteredModuleClassList().get(INDEX_FIRST_ITEM.getZeroBased());
-        AttendanceRecordList attendanceRecordList = getAttendanceRecordList(moduleClass, INDEX_FIRST_ITEM);
+        ModuleClass moduleClass = model.getFilteredModuleClassList().get(moduleClassIndex.getZeroBased());
+        Lesson lessonToEdit = moduleClass.getLessons().get(lessonIndex.getZeroBased());
+        AttendanceRecordList attendanceRecordList =
+                moduleClass.getLessons().get(lessonIndex.getZeroBased()).getAttendanceRecordList();
         Lesson editedLesson = new LessonBuilder(LESSON_FRI_8_TO_10)
                 .withAttendanceRecordList(attendanceRecordList).build();
 
-        List<Lesson> editedLessonList = Arrays.asList(editedLesson);
-        ModuleClass updatedModuleClass = new ModuleClass(
-                moduleClass.getName(), moduleClass.getStudentUuids(), editedLessonList);
+        ModuleClass updatedModuleClass = editLessonInModuleClass(moduleClass, lessonToEdit, editedLesson);
 
         String expectedMessage = String.format(MESSAGE_EDIT_LESSON_SUCCESS, editedLesson);
 
@@ -86,25 +88,22 @@ public class EditLessonCommandTest {
     }
 
     @Test
-    public void execute_someFieldsSpecifiedUnfilteredList_success() {
+    public void execute_someFieldsSpecifiedUnfilteredList_success() throws CommandException {
+        Index moduleClassIndex = INDEX_FIRST_ITEM;
+        Index lessonIndex = INDEX_FIRST_ITEM;
+
         EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder()
                 .withDay(VALID_DAY_FRI_LESSON_FRI_8_TO_10.toString())
                 .withVenue(VALID_VENUE_S17_0302_LESSON_FRI_8_TO_10).build();
-        EditLessonCommand editLessonCommand = new EditLessonCommand(INDEX_FIRST_ITEM, INDEX_FIRST_ITEM, descriptor);
+        EditLessonCommand editLessonCommand = new EditLessonCommand(moduleClassIndex, lessonIndex, descriptor);
 
-        ModuleClass firstModuleClass = model.getFilteredModuleClassList()
-                .get(INDEX_FIRST_ITEM.getZeroBased());
-        LessonBuilder firstLessonInList = new LessonBuilder(firstModuleClass.getLessons()
-                .get(INDEX_FIRST_ITEM.getZeroBased()));
-        AttendanceRecordList attendanceRecordList = getAttendanceRecordList(firstModuleClass, INDEX_FIRST_ITEM);
+        ModuleClass firstModuleClass = model.getFilteredModuleClassList().get(moduleClassIndex.getZeroBased());
+        Lesson firstLessonInList = firstModuleClass.getLessons().get(lessonIndex.getZeroBased());
 
-        Lesson editedLesson = firstLessonInList
+        Lesson editedLesson = new LessonBuilder(firstLessonInList)
                 .withDay(VALID_DAY_FRI_LESSON_FRI_8_TO_10)
-                .withVenue(VALID_VENUE_S17_0302_LESSON_FRI_8_TO_10)
-                .withAttendanceRecordList(attendanceRecordList).build();
-        List<Lesson> editedLessonList = Arrays.asList(editedLesson);
-        ModuleClass updatedModuleClass = new ModuleClass(
-                firstModuleClass.getName(), firstModuleClass.getStudentUuids(), editedLessonList);
+                .withVenue(VALID_VENUE_S17_0302_LESSON_FRI_8_TO_10).build();
+        ModuleClass updatedModuleClass = editLessonInModuleClass(firstModuleClass, firstLessonInList, editedLesson);
 
         String expectedMessage = String.format(MESSAGE_EDIT_LESSON_SUCCESS, editedLesson);
 
@@ -117,11 +116,14 @@ public class EditLessonCommandTest {
 
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
-        EditLessonCommand editLessonCommand = new EditLessonCommand(
-                INDEX_FIRST_ITEM, INDEX_FIRST_ITEM, new EditLessonCommand.EditLessonDescriptor());
+        Index moduleClassIndex = INDEX_FIRST_ITEM;
+        Index lessonIndex = INDEX_FIRST_ITEM;
 
-        Lesson editedLesson = model.getFilteredModuleClassList().get(INDEX_FIRST_ITEM.getZeroBased())
-                .getLessons().get(INDEX_FIRST_ITEM.getZeroBased());
+        EditLessonCommand editLessonCommand = new EditLessonCommand(
+                moduleClassIndex, lessonIndex, new EditLessonCommand.EditLessonDescriptor());
+
+        Lesson editedLesson = model.getFilteredModuleClassList().get(moduleClassIndex.getZeroBased())
+                .getLessons().get(lessonIndex.getZeroBased());
 
         String expectedMessage = String.format(MESSAGE_EDIT_LESSON_SUCCESS, editedLesson);
 
@@ -132,29 +134,26 @@ public class EditLessonCommandTest {
     }
 
     @Test
-    public void execute_filteredList_success() {
+    public void execute_filteredList_success() throws CommandException {
         showModuleClassAtIndex(model, INDEX_SECOND_ITEM);
 
-        EditLessonCommand editLessonCommand = new EditLessonCommand(INDEX_FIRST_ITEM, INDEX_SECOND_ITEM,
+        Index moduleClassIndex = INDEX_FIRST_ITEM;
+        Index lessonIndex = INDEX_SECOND_ITEM;
+
+        EditLessonCommand editLessonCommand = new EditLessonCommand(moduleClassIndex, lessonIndex,
                 new EditLessonDescriptorBuilder().withVenue(VALID_VENUE_S17_0302_LESSON_FRI_8_TO_10).build());
 
         ModuleClass moduleClassInFilteredList = model.getFilteredModuleClassList()
-                .get(INDEX_FIRST_ITEM.getZeroBased());
-        Lesson lessonToEdit = moduleClassInFilteredList.getLessons().get(INDEX_SECOND_ITEM.getZeroBased());
-        AttendanceRecordList attendanceRecordList =
-                getAttendanceRecordList(moduleClassInFilteredList, INDEX_SECOND_ITEM);
+                .get(moduleClassIndex.getZeroBased());
+        Lesson lessonToEdit = moduleClassInFilteredList.getLessons().get(lessonIndex.getZeroBased());
 
         Lesson editedLesson = new LessonBuilder(lessonToEdit)
-                .withVenue(VALID_VENUE_S17_0302_LESSON_FRI_8_TO_10)
-                .withAttendanceRecordList(attendanceRecordList).build();
+                .withVenue(VALID_VENUE_S17_0302_LESSON_FRI_8_TO_10).build();
 
         String expectedMessage = String.format(MESSAGE_EDIT_LESSON_SUCCESS, editedLesson);
 
-        List<Lesson> editedLessonList = Arrays.asList(
-                moduleClassInFilteredList.getLessons().get(INDEX_FIRST_ITEM.getZeroBased()),
-                editedLesson);
-        ModuleClass updatedModuleClass = new ModuleClass(
-                moduleClassInFilteredList.getName(), moduleClassInFilteredList.getStudentUuids(), editedLessonList);
+        ModuleClass updatedModuleClass = editLessonInModuleClass(
+                moduleClassInFilteredList, lessonToEdit, editedLesson);
 
         Model expectedModel = new ModelManager(new TutorsPet(model.getTutorsPet()), new UserPrefs());
         expectedModel.setModuleClass(moduleClassInFilteredList, updatedModuleClass);
@@ -165,12 +164,15 @@ public class EditLessonCommandTest {
 
     @Test
     public void execute_duplicateLessonUnfilteredList_failure() {
-        ModuleClass secondModuleClass = model.getFilteredModuleClassList().get(INDEX_SECOND_ITEM.getZeroBased());
+        Index moduleClassIndex = INDEX_SECOND_ITEM;
+        Index lessonIndex = INDEX_SECOND_ITEM;
+
+        ModuleClass secondModuleClass = model.getFilteredModuleClassList().get(moduleClassIndex.getZeroBased());
         Lesson secondClassFirstLesson = secondModuleClass.getLessons().get(INDEX_FIRST_ITEM.getZeroBased());
 
         EditLessonDescriptor descriptor =
                 new EditLessonDescriptorBuilder(secondClassFirstLesson).build();
-        EditLessonCommand editLessonCommand = new EditLessonCommand(INDEX_SECOND_ITEM, INDEX_SECOND_ITEM, descriptor);
+        EditLessonCommand editLessonCommand = new EditLessonCommand(moduleClassIndex, lessonIndex, descriptor);
 
         assertCommandFailure(editLessonCommand, model, MESSAGE_DUPLICATE_LESSON);
     }
@@ -267,9 +269,5 @@ public class EditLessonCommandTest {
         // different descriptor -> returns false
         assertFalse(standardCommand.equals(new EditLessonCommand(
                 INDEX_FIRST_ITEM, INDEX_FIRST_ITEM, DESC_LESSON_WED_2_TO_4)));
-    }
-
-    private AttendanceRecordList getAttendanceRecordList(ModuleClass moduleClass, Index index) {
-        return moduleClass.getLessons().get(index.getZeroBased()).getAttendanceRecordList();
     }
 }
