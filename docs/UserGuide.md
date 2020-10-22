@@ -230,53 +230,83 @@ There is no need for you to save manually.
 
 #### Adding a student : `add-student`
 
-Adds a student to the list of students.
+If you would like to add a student to Tutor's Pet use this command.
 
-Format: `add-student n/NAME t/TELEGRAM_USERNAME e/EMAIL [tag/TAG]…​`
+Format: `add-student n\NAME t\TELEGRAM_USERNAME e\EMAIL [tag\TAG]…​`
+
+For example:
+* You would like to add a new student, `Joel Lee` to Tutor's Pet. 
+Type in `add-student n\Joel Lee t\joeleee e\jlee@example.com`
+
+  ![AddStudentBefore](images/ugimages/AddStudentBefore.png)
+
+* Scrolling down the list of students, you will see that `Joel Lee` has been added to Tutor's Pet.
+
+  ![AddStudentAfter](images/ugimages/AddStudentAfter.png)
+
+Other examples:
+* `add-student n\Betsy Crowe t\betsycrowe e\betsycrowe@example.com tag\excellent` \
+Adds `Betsy` to Tutor's Pet along with an `excellent` tag.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A student can have any number of tags (including 0)
 </div>
 
-Examples:
-* `add-student n/John Doe t/johndoe e/johnd@example.com`
-* `add-student n/Betsy Crowe t/betsycrowe e/betsycrowe@example.com tag/student`
-
 #### Listing all students : `list-student`
 
-Shows a list of all students in the application.
+If you would like to view all students you teach, use this command.
 
 Format: `list-student`
 
 #### Editing a student : `edit-student`
 
-Edits an existing student in the application.
+If you would like to change a student's particulars, use this command.
 
-Format: `edit-student INDEX [n/NAME] [t/TELEGRAM_USERNAME] [e/EMAIL] [tag/TAG]…​`
+Format: `edit-student INDEX [n\NAME] [t\TELEGRAM_USERNAME] [e\EMAIL] [tag\TAG]…​`
 
-* Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive whole number** 1, 2, 3, …​
+For example:
+* `Charlotte Oliveiro` gave you the wrong email address on the first day of class. You need to replace her email address. Key in `edit-student 3 e\charlotteolive@example.com` and press <kbd>Enter</kbd>.
+
+  ![EditStudentBefore](images/ugimages/EditStudentBefore.png)
+
+* Scrolling down the list of students, you can see that `Charlotte`'s email has changed to `charlotteolive@example.com`.
+
+  ![EditStudentAfter](images/ugimages/EditStudentAfter.png)
+
+Constraints:
+* The index refers to the index number shown in the displayed student list.
+* The index **must be a positive whole number** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the student will be removed i.e adding of tags is not cumulative.
-* You can remove all the student’s tags by typing `tag/` without
+* When editing tags, the existing tags of the student will be removed.
+* You can remove all the student’s tags by typing `tag\` without
     specifying any tags after it.
 
-Examples:
-*  `edit-student 1 t/johndoe e/johndoe@example.com` Edits the telegram username and email address of the 1st student to be `johndoe` and `johndoe@example.com` respectively.
-*  `edit-student 2 n/Betsy Crower tag/` Edits the name of the 2nd student to be `Betsy Crower` and clears all existing tags.
+More examples:
+*  `edit-student 1 t\smartlex e\yeohalex@example.com` Edits the telegram username and email address of the 1st student to `smartlex` and `yeohalex@example.com` respectively.
+*  `edit-student 2 n/Betsy Yu tag/` Edits the name of the 2nd student to be `Betsy Yu` and clears all existing tags.
 
 #### Finding student by name : `find-student`
 
-Finds students whose names contain any of the given keywords.
+If you would like to search for a student by name, use this command.
 
 Format: `find-student KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+For example:
+* `Roy` requested for supplementary notes in class today. You want to find his email address.
+Type `find-student roy` and press <kbd>Enter</kbd>. 
+
+  ![DeleteStudentBefore](images/ugimages/DeleteStudentBefore.png)
+
+  ![DeleteStudentAfter](images/ugimages/DeleteStudentAfter.png)
+
+Constraints:
+* The search is case-insensitive. e.g `roy` will match `Roy`
+* The order of the keywords does not matter. e.g. `Yeoh Alex` will match `Alex Yeoh`
 * Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* Only full words will be matched e.g. `Irfa` will not match `Irfan`
 * Students matching at least one keyword will be returned (i.e. **OR** search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+  e.g. `Alex Li` will return `Alex Yeoh`, `David Li`
 
 Examples:
 * `find-student John` returns `john` and `John Doe`
@@ -284,20 +314,25 @@ Examples:
 
 #### Deleting a student : `delete-student`
 
-Deletes the specified student from the application.
+If you would like to delete a class, you can make use of this command.
 
 Format: `delete-student INDEX`
 * Deletes the student at the specified `INDEX`.
 * The index refers to the index number shown in the displayed student list.
 * The index **must be a positive whole number** 1, 2, 3, …​
 
-Examples:
-* `list` followed by `delete-student 2` deletes the 2nd student in the application.
-* `find-student Betsy` followed by `delete-student 1` deletes the 1st student in the results of the `find-student` command.
+For example:
+* One of your students, `Bernice`, has swapped `CS203T Tutorial` slots and you no longer teach her. 
+Hence, you want to delete her entry from Tutor's Pet. You type in `delete-student 2` and press <kbd>Enter</kbd>.
+
+  ![DeleteStudentBefore](images/ugimages/DeleteStudentBefore.png)
+
+* Notice that the number of students in `CS2103T Tutorial` decreases from 3 to 2.
+  ![DeleteStudentAfter](images/ugimages/DeleteStudentAfter.png)
 
 #### Clearing all students : `clear-student`
 
-Clears all students from the application.
+If you would like to delete all students in the application, you can use this command.
 
 Format: `clear-student`
 
