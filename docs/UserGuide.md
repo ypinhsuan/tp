@@ -629,12 +629,6 @@ You can use this command to edit the attendance of a student.
 
 Format: `edit-attendance c\CLASS_INDEX l\LESSON_INDEX s\STUDENT_INDEX w\WEEK p\PARTICIPATION_SCORE`
 
-Constraints:
-* Edits the participation score of the attendance record at the specified `CLASS_INDEX` + `LESSON_INDEX` + `STUDENT_INDEX` + `WEEK`.
-* The indexes **must be positive whole numbers** 1, 2, 3, …​
-* The `WEEK` must be a positive whole number** 1, 2, 3, …​
-* The `PARTICIPATION_SCORE` **must be a non-negative whole number** 0, 1, 2, …​
-
 For example:
 * Alex is a student in your CS2103T class. After your lesson in week 1, you wish to give him a participation score of 45.
 However, you made a typo error and gave him 35 instead. Hence, you can type in the command `edit-attendance c\1 l\1 s\1 w\1 p\45`
@@ -643,6 +637,11 @@ and press <kbd>Enter</kbd>.
   ![Edit attendance after](images/ugimages/EditAttendanceAfter.png)
 
 * Now you have successfully edited Alex's participation score from 35 to 45 points.
+
+Constraints:
+* The indexes **must be positive whole numbers** 1, 2, 3, …​
+* The `WEEK` must be a positive whole number** 1, 2, 3, …​
+* The `PARTICIPATION_SCORE` **must be a non-negative whole number** 0, 1, 2, …​
 
 Other examples:
 *  `edit-attendance c\1 l\1 s\1 w\1 p\10` Edits the 1st week's participation score of the 1st student of the 1st lesson of the 1st class to 10 points.
