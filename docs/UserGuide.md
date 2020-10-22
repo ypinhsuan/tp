@@ -121,16 +121,16 @@ The utility area consists of three tabs: **File**, **Theme**, **Help**.
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add-student n/NAME`, `NAME` is a parameter which can be used as `add-student n/John Doe`.
+  e.g. in `add-student n\NAME`, `NAME` is a parameter which can be used as `add-student n\John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [tag/TAG]` can be used as `n/John Doe tag/student` or as `n/John Doe`.
+  e.g `n\NAME [tag\TAG]` can be used as `n\John Doe tag\student` or as `n\John Doe`.
 
 * Items with `…​` after them can be used multiple times including zero times.<br>
-  e.g. `[tag/TAG]…​` can be used as ` ` (i.e. 0 times), `tag/student`, `tag/average tag/TA candidate` etc.
+  e.g. `[tag\TAG]…​` can be used as ` ` (i.e. 0 times), `tag\student`, `tag\average tag\TA candidate` etc.
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME t/TELEGRAM_USERNAME`, `t/TELEGRAM_USERNAME n/NAME` is also acceptable.
+  e.g. if the command specifies `n\NAME t\TELEGRAM_USERNAME`, `t\TELEGRAM_USERNAME n\NAME` is also acceptable.
 
 </div>
 
@@ -173,9 +173,9 @@ The utility area consists of three tabs: **File**, **Theme**, **Help**.
 
 ### General
 
-### Viewing help : `help`
+#### Viewing help : `help`
 
-Shows a message explaining how to access the help page.
+If you wish to view the user guide, you can use this command to get the link.
 
 Format: `help`
 
@@ -217,9 +217,19 @@ Format: `exit`
 
 #### Resetting the program : `reset`
 
-Resets the program and clears all the data.
+You can use this command to reset Tutor's Pet and all data will be cleared.
 
 Format: `reset`
+
+For example:
+* It is the start of a new semester and you want to delete all students and classes. You can type in the 
+command `reset` and press <kbd>Enter</kbd>.
+
+  ![Reset before](images/ugimages/ResetBefore.png)
+
+* Now all students and classes have been deleted.
+
+  ![Reset after](images/ugimages/ResetAfter.png)
 
 #### Saving the data
 
@@ -442,9 +452,19 @@ For example:
 
 #### Listing all students and classes : `list`
 
-Shows a list of all students and classes in the application.
+You can use this command to see the entire list of students and classes.
 
 Format: `list`
+
+For example:
+* After finding the class CS2103T and student Alex, you wish to view all your students and classes.
+Hence, you can type in the command `list` and and press <kbd>Enter</kbd>.
+  
+  ![List before](images/ugimages/ListBefore.png)
+  
+* Now you can see all your students and classes.
+
+  ![List after](images/ugimages/ListAfter.png)
 
 #### Linking a student to a class : `link`
 
@@ -614,17 +634,26 @@ Other Examples:
 
 #### Editing an attendance record : `edit-attendance`
 
-Edits an existing attendance record in the application.
+You can use this command to edit the attendance of a student.
 
-Format: `edit-attendance c/CLASS_INDEX l/LESSON_INDEX s/STUDENT_INDEX w/WEEK p/PARTICIPATION_SCORE`
+Format: `edit-attendance c\CLASS_INDEX l\LESSON_INDEX s\STUDENT_INDEX w\WEEK p\PARTICIPATION_SCORE`
 
-* Edits the participation score of the attendance record at the specified `CLASS_INDEX` + `LESSON_INDEX` + `STUDENT_INDEX` + `WEEK`.
+For example:
+* Alex is a student in your CS2103T class. After your lesson in week 1, you wish to give him a participation score of 45.
+However, you made a typo error and gave him 35 instead. Hence, you can type in the command `edit-attendance c\1 l\1 s\1 w\1 p\45`
+and press <kbd>Enter</kbd>.
+
+  ![Edit attendance after](images/ugimages/EditAttendanceAfter.png)
+
+* Now you have successfully edited Alex's participation score from 35 to 45 points.
+
+Constraints:
 * The indexes **must be positive whole numbers** 1, 2, 3, …​
 * The `WEEK` must be a positive whole number** 1, 2, 3, …​
 * The `PARTICIPATION_SCORE` **must be a non-negative whole number** 0, 1, 2, …​
 
-Examples:
-*  `edit-attendance c/1 l/1 s/1 w/1 p/10` Edits the 1st week's participation score of the 1st student of the 1st lesson of the 1st class to 10 points.
+Other examples:
+*  `edit-attendance c\1 l\1 s\1 w\1 p\10` Edits the 1st week's participation score of the 1st student of the 1st lesson of the 1st class to 10 points.
 
 #### Finding attendance record by indexes: `find-attendance`
 
