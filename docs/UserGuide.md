@@ -505,14 +505,15 @@ Other examples:
 
 #### Adding a lesson : `add-lesson`
 
-If you would like to add a lesson in a class, you can make use of this command.
+If you would like to add a lesson to a class, you can make use of this command.
 
 Format: `add-lesson c\CLASS_INDEX d\DAY st\START_TIME et\END_TIME v\VENUE r\NO_OF_TIMES`
 * Adds a lesson at a specified `CLASS_INDEX`+ `DAY` + `START_TIME` + `END_TIME` + `VENUE` + `NO_OF_TIMES`.
 
 For example:
-* You receive news that you will be teaching `CS2103T Tutorial` on `Tuesday 10:00-11:00` at `COM2 #02-02` hence 
-you type in the command `add-lesson c\1 d\TUESDAY st\10:00 et\11:00 v\COM2 #02-02 r\13` and press <kbd>Enter</kbd>.
+* * You receive news that you will be teaching `CS2103T Tutorial` on `Tuesday 10:00-11:00` at `COM2 #02-02` from week 1 to 13.
+Hence, you type in the command `add-lesson c\1 d\TUESDAY st\10:00 et\11:00 v\COM2 #02-02 r\13`and press
+<kbd>Enter</kbd>.
 
     ![Add lesson before](images/ugimages/AddLessonBefore.png)
 
@@ -547,7 +548,7 @@ For example:
 
     ![Delete lesson before](images/ugimages/DeleteLessonBefore.png)
 
-* You have one lesser lesson to teach now.
+* You have one less lesson to teach now.
 
     ![Delete lesson after](images/ugimages/DeleteLessonAfter.png)
 
@@ -661,7 +662,7 @@ Other Examples:
 
 #### Deleting an attendance record : `delete-attendance`
 
-If you would like to delete a specific attendance record from a lesson, you can make use of this command.
+If you would like to delete a specific student's attendance from a lesson, you can make use of this command.
 
 Format: `delete-attendance c\CLASS_INDEX l\LESSON_INDEX s\STUDENT_INDEX w\WEEK`
 
@@ -669,17 +670,17 @@ Format: `delete-attendance c\CLASS_INDEX l\LESSON_INDEX s\STUDENT_INDEX w\WEEK`
 * The indexes **must be positive whole numbers** 1, 2, 3, …​
 * The `WEEK` **must be a positive whole number** 1, 2, 3, …​
 
-For example"
-* You would like to delete Alice's attendance record in Week 1. Hence, you type in the command 
-`delete-attendance c\1 l\1 s\1 w\1` and press <kbd>Enter</kbd>.
+For example:
+* You would like to delete Alice's attendance for the Thursday 10.00am to 11.00am lesson of CS2103T Tutorial
+in Week 1. Hence, you type in the command `delete-attendance c\1 l\1 s\1 w\1` and press <kbd>Enter</kbd>.
 
     ![Delete attendance before](images/ugimages/DeleteAttendanceBefore.png)
 
-* Alex's attendance record has been deleted.
+* Alice's attendance for week 1 has been deleted.
 
     ![Delete attendance after](images/ugimages/DeleteAttendanceAfter.png)
 
-### Display Statistics : `stats`
+#### Display Statistics : `stats`
 
 Gives you an overall summary of a student's attendance and participation scores.
 
