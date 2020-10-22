@@ -18,8 +18,8 @@ solution for teaching assistants, by students._
 
 ## About
 
-This user guide provides documentation on the installation and usage of Tutor's Pet. 
-It also provides a comprehensive description of features available to you and 
+This user guide provides documentation on the installation and usage of Tutor's Pet.
+It also provides a comprehensive description of features available to you and
 includes a [quick-start](#quick-start) section that helps you get started.
 
 ### Using This Guide
@@ -139,6 +139,11 @@ The utility area consists of three tabs: **File**, **Theme**, **Help**.
 | Action                            | Format, Examples                                                                                                                                                          |
 |-----------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Help**                          | `help`                                                                                                                                                                    |
+| **Undo**                          | `undo`                                                                                                                                                                    |
+| **Redo**                          | `redo`                                                                                                                                                                    |
+| **View Change History**           | `view-history`                                                                                                                                                            |
+| **Exit**                          | `exit`                                                                                                                                                                    |
+| **Reset**                         | `reset`                                                                                                                                                                   |
 | **Add Student**                   | `add-student n\NAME t\TELEGRAM_USERNAME e\EMAIL [tag\TAG]…​` <br> e.g., `add-student n\John Doe t\johndoe e\johnd@example.com tag\student`                             |
 | **List All Students**             | `list-student`                                                                                                                                                            |
 | **Edit Student**                  | `edit-student INDEX [n\NAME] [t\TELEGRAM_USERNAME] [e\EMAIL] [tag\TAG]…​`<br> e.g., `edit-student 2 n\James Lee e\jameslee@example.com`                                |
@@ -158,23 +163,68 @@ The utility area consists of three tabs: **File**, **Theme**, **Help**.
 | **Add Lesson**                    | `add-lesson c\CLASS_INDEX d\DAY st\START_TIME et\END_TIME v\VENUE r\NO_OF_TIMES` <br> e.g., `add-lesson c\1 d\MONDAY st\0800 et\1000 v\COM1 #01-01 r\13`                  |
 | **Edit Lesson**                   | `edit-lesson c\CLASS_INDEX l\LESSON_INDEX [d\DAY] [st\START_TIME] [et\END_TIME] [v\VENUE]` <br> e.g., `edit-lesson c\1 l\1 d\TUESDAY st\1000 et\1200 v\COM2 #02-02`       |
 | **Delete Lesson**                 | `delete-lesson c\CLASS_INDEX l\LESSON_INDEX` <br> e.g., `delete-lesson c\1 l\1`                                                                                           |
+| **Display Venue**                 | `display-venue c\CLASS_INDEX l\LESSON_INDEX`<br> e.g., `display-venue c\1 l\1`
 | **Add Attendance Record**         | `add-attendance c\CLASS_INDEX l\LESSON_INDEX s\STUDENT_INDEX w\WEEK p\PARTICIPATION_SCORE` <br> e.g., `add-attendance c\1 l\1 s\1 w\1 p\1`                                |
 | **Edit Attendance Record**        | `edit-attendance c\CLASS_INDEX l\LESSON_INDEX s\STUDENT_INDEX w\WEEK p\PARTICIPATION_SCORE` <br> e.g., `edit-attendance c\1 l\1 s\1 w\1 p\10`                             |
 | **Find Attendance Record**        | `find-attendance c\CLASS_INDEX l\LESSON_INDEX s\STUDENT_INDEX w\WEEK` <br> e.g., `find-attendance c\1 l\1 s\1 w\1`                                                        |
 | **Delete Attendance Record**      | `delete-attendance c\CLASS_INDEX l\LESSON_INDEX s\STUDENT_INDEX w\WEEK` <br> e.g., `delete-attendance c\1 l\1 s\1 w\1`                                                    |
-| **Undo**                          | `undo`                                                                                                                                                                    |
-| **Redo**                          | `redo`                                                                                                                                                                    |
-| **View Action History**           | `view-history`                                                                                                                                                            |
 | **Display Statistics**            | `stats c\CLASS_INDEX s\STUDENT_INDEX`<br> e.g., `stats c\1 s\1`
-| **Display Venue**                 | `display-venue c\CLASS_INDEX l\LESSON_INDEX`<br> e.g., `display-venue c\1 l\1`
-| **Exit**                          | `exit`                                                                                                                                                                    |
-| **Reset**                         | `reset`                                                                                                                                                                   |
+
+
+### General
 
 ### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
 
 Format: `help`
+
+#### Undoing previous commands : `undo`
+
+If you have accidentally entered a command that permanently changes the data in your Tutor's Pet,
+you can use this command to undo the changes.
+
+Format: `undo`
+
+For example:
+* You want to delete Alex from your Tutor's Pet, however you accidentally deleted Bernice instead of Alex.
+  You type in the command `undo` and press <kbd>Enter</kbd>.
+
+![Undo before](images/ugimages/UndoBefore.png)
+
+* Bernice has been undeleted and now you can delete Alex.
+
+![Undo after](images/ugimages/UndoAfter.png)
+
+#### Redoing previously undone commands : `redo`
+
+If you decide that you did not need to undo a command, instead of typing out the command again, you can use
+this command to redo the changes.
+
+Format : `redo`
+
+#### View change history : `view-history`
+
+You can use this command to see a list of changes that can be undone and redone.
+
+Format : `view-history`
+
+#### Exiting the program : `exit`
+
+Exits the program.
+
+Format: `exit`
+
+#### Resetting the program : `reset`
+
+Resets the program and clears all the data.
+
+Format: `reset`
+
+#### Saving the data
+
+Tutor's Pet automatically saves your data to your home folder after any changes are made.
+There is no need for you to save manually.
 
 ### Managing Students
 
@@ -408,7 +458,7 @@ Format: `link s\STUDENT_INDEX c\CLASS_INDEX`
 * The `CLASS_INDEX` refers to the index number shown in the displayed class list.
 
 For example:
-* You have a new student, David Li, who has transferred into one of your classes, CS2103T Tutorial. 
+* You have a new student, David Li, who has transferred into one of your classes, CS2103T Tutorial.
   You have already [added](#adding-a-student--add-student) this student to your Tutor's Pet, and want
   to link him to the class. Hence, you type in the command `link s\4 c\1` and press <kbd>Enter</kbd>.
 
@@ -441,7 +491,7 @@ For example:
   You type in the command `unlink s\1 c\1` and press <kbd>Enter</kbd>.
 
 ![Unlink before](images/ugimages/UnlinkBefore.png)
-  
+
 * Your Tutor's Pet displays the remaining students in CS2103T Tutorial to confirm that you have successfully unlinked
   Alex from the class.
 
@@ -452,7 +502,7 @@ For example:
 Constraints:
 * The indexes **must be positive whole numbers** 1, 2, 3, …​
 
-Other examples: 
+Other examples:
 * `list-student c\2`
   `unlink s\1 c\1`
   Lists the students of the 2nd class in the displayed class list, and unlinks the 2nd student of that class.
@@ -506,6 +556,27 @@ Other examples:
 * `find-class CS2030 lab`<br>
   `delete-lesson c\1 l\1`<br>
   Deletes the 1st lesson of the 1st class in the results of the find class command.
+
+#### Display venue : `display`
+
+Gives you the venue of a lesson.
+
+Format: `display-venue c\1 l\1`
+* Gives the venue of the lesson specified at `CLASS_INDEX` + `LESSON_INDEX`.
+
+For example:
+* Due to covid, most of your physical lessons have been converted to zoom lessons and thus all the venues are
+ in the form of zoom links. Your lesson is starting in 10 minutes and it is time to start the session. Hence, you
+ input the command `display-venue c\1 l\2` and press <kbd>Enter</kbd>.
+
+    ![Display venue before](images/ugimages/DisplayVenueBefore.png)
+
+* You can now proceed to copy the link to that zoom session from the command result box.
+
+    ![Display venue after](images/ugimages/DisplayVenueAfter.png)
+
+Constraints:
+* The indexes **must be positive whole numbers** 1, 2, 3, …​
 
 ### Managing Attendance Records
 
@@ -599,25 +670,7 @@ Format: `delete-attendance c/CLASS_INDEX l/LESSON_INDEX s/STUDENT_INDEX w/WEEK`
 Examples:
 * `delete-attendance c/1 l/1 s/1 w/1` Deletes the 1st week's attendance record of the 1st student of the 1st lesson of the 1st class.
 
-### Undo previous command : `undo`
-
-Undo most recent command.
-
-Format: `undo`
-
-### Redo an undo : `redo`
-
-Redo the most recent undo command.
-
-Format : `redo`
-
-### View action history : `view-history`
-
-View a list of actions that can be undone or redone.
-
-Format : `view-history`
-
-### Statistics : `stats`
+#### Statistics : `stats`
 
 Gives you an overall summary of a student's attendance and participation scores.
 
@@ -634,44 +687,6 @@ For example:
 
 Constraints:
 * The indexes **must be positive whole numbers** 1, 2, 3, …​
-
-### Display venue : `display`
-
-Gives you the venue of a lesson.
-
-Format: `display-venue c\1 l\1`
-* Gives the venue of the lesson specified at `CLASS_INDEX` + `LESSON_INDEX`.
-
-For example:
-* Due to covid, most of your physical lessons have been converted to zoom lessons and thus all the venues are
- in the form of zoom links. Your lesson is starting in 10 minutes and it is time to start the session. Hence, you
- input the command `display-venue c\1 l\2` and press <kbd>Enter</kbd>.
-
-    ![Display venue before](images/ugimages/DisplayVenueBefore.png)
-
-* You can now proceed to copy the link to that zoom session from the command result box.
-
-    ![Display venue after](images/ugimages/DisplayVenueAfter.png)
-
-Constraints:
-* The indexes **must be positive whole numbers** 1, 2, 3, …​
-
-### Exiting the program : `exit`
-
-Exits the program.
-
-Format: `exit`
-
-### Resetting the program : `reset`
-
-Resets the program and clears all the data.
-
-Format: `reset`
-
-### Saving the data
-
-Tutor's Pet automatically saves your data to your hard disk after any changes are made.
-There is no need to save manually.
 
 --------------------------------------------------------------------------------------------------------------------
 
