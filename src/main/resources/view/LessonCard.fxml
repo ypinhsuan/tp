@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<?import javafx.scene.text.Font?>
+<HBox xmlns:fx="http://javafx.com/fxml/1" fx:id="lessonCard">
+    <VBox.margin>
+        <Insets bottom="5.0" />
+    </VBox.margin>
+    <children>
+        <VBox>
+            <Label fx:id="dayAndTime" wrapText="true">
+                <padding>
+                    <Insets bottom="5.0" />
+                </padding>
+                <font>
+                    <Font name="Segoe UI Semibold" size="14" />
+                </font>
+            </Label>
+            <Label fx:id="venue" wrapText="true">
+                <padding>
+                    <Insets bottom="3.0" />
+                </padding>
+            </Label>
+            <Label fx:id="occurrence" wrapText="true" />
+        </VBox>
+    </children>
+</HBox>

@@ -74,3 +74,21 @@
     -fx-background-color: -style-pane-background-color;
     -fx-background-insets: 3;
 }
+
+.cell_lesson_label_odd {
+     -fx-border-style: solid inside;
+     -fx-border-radius: 8;
+     -fx-border-width: 8;
+     -fx-border-color: #B2C1D3;
+     -fx-background-color: #B2C1D3;
+     -fx-background-radius: 8;
+}
+
+.cell_lesson_label_even {
+    -fx-border-style: solid inside;
+    -fx-border-radius: 8;
+    -fx-border-width: 8;
+    -fx-border-color: #A0ADBD;
+    -fx-background-color: #A0ADBD;
+    -fx-background-radius: 8;
+}

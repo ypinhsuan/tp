@@ -41,6 +41,10 @@
     -fx-border-color: #be3251;
 }
 
+.list-cell:filled:selected #dayAndTime, #venue, #occurrence {
+    -fx-text-fill: black;
+}
+
 .cell_big_label {
     -fx-font-family: "Segoe UI Semibold";
     -fx-font-size: 16px;
@@ -51,5 +55,25 @@
 .cell_small_label {
     -fx-font-size: 13px;
     -fx-wrap-text: true;
+    -fx-text-fill: black;
+}
+
+.cell_lesson_label_odd {
+     -fx-border-style: solid inside;
+     -fx-border-radius: 8;
+     -fx-border-width: 8;
+     -fx-border-color: #C9D3EE;
+     -fx-background-color: #C9D3EE;
+     -fx-background-radius: 8;
+     -fx-text-fill: black;
+}
+
+.cell_lesson_label_even {
+    -fx-border-style: solid inside;
+    -fx-border-radius: 8;
+    -fx-border-width: 8;
+    -fx-border-color: #B5C7F5;
+    -fx-background-color: #B5C7F5;
+    -fx-background-radius: 8;
     -fx-text-fill: black;
 }
