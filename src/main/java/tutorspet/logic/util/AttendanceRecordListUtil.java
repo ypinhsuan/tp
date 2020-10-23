@@ -5,12 +5,14 @@ import static tutorspet.commons.core.Messages.MESSAGE_MISSING_STUDENT_ATTENDANCE
 import static tutorspet.commons.core.Messages.MESSAGE_NO_LESSON_ATTENDED;
 import static tutorspet.commons.util.CollectionUtil.requireAllNonNull;
 import static tutorspet.logic.util.AttendanceRecordUtil.addAttendance;
+import static tutorspet.logic.util.AttendanceRecordUtil.removeAttendance;
 import static tutorspet.logic.util.AttendanceRecordUtil.setAttendance;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import tutorspet.logic.commands.exceptions.CommandException;
 import tutorspet.model.attendance.Attendance;
@@ -23,6 +25,40 @@ import tutorspet.model.student.Student;
  * Contains utility methods for modifying {@code Attendance}s in {@code AttendanceRecordList}.
  */
 public class AttendanceRecordListUtil {
+
+    /**
+     * Returns an {@code AttendanceRecordList} where the {@code Attendance}s of the {@code studentToRemove}
+     * have been removed.
+     */
+    public static AttendanceRecordList removeStudentFromAttendanceRecordList(
+            AttendanceRecordList targetAttendanceRecordList, Student studentToRemove) {
+        requireAllNonNull(targetAttendanceRecordList, studentToRemove);
+
+        List<AttendanceRecord> attendanceRecords = targetAttendanceRecordList.getAttendanceRecordList();
+
+        List<AttendanceRecord> updatedAttendanceRecords =
+                attendanceRecords.stream().map(attendanceRecord ->
+                        removeStudentFromAttendanceRecord(attendanceRecord, studentToRemove))
+                        .collect(Collectors.toUnmodifiableList());
+
+        return new AttendanceRecordList(updatedAttendanceRecords);
+    }
+
+    /**
+     * Returns an {@code AttendanceRecordList} where the {@code Attendance}s of all {@code Student}s have been removed.
+     */
+    public static AttendanceRecordList removeAllStudentsFromAttendanceRecordList(
+            AttendanceRecordList targetAttendanceRecordList) {
+        requireAllNonNull(targetAttendanceRecordList);
+
+        List<AttendanceRecord> attendanceRecords = targetAttendanceRecordList.getAttendanceRecordList();
+
+        List<AttendanceRecord> updatedAttendanceRecords =
+                attendanceRecords.stream().map(attendanceRecord -> new AttendanceRecord())
+                        .collect(Collectors.toUnmodifiableList());
+
+        return new AttendanceRecordList(updatedAttendanceRecords);
+    }
 
     /**
      * Returns an {@code AttendanceRecord} where the {@code attendanceToAdd} has been added to the
@@ -95,7 +131,7 @@ public class AttendanceRecordListUtil {
         AttendanceRecord targetAttendanceRecord = targetAttendanceRecordList.getAttendanceRecord(targetWeek);
 
         AttendanceRecord editedWeekAttendanceRecord =
-                AttendanceRecordUtil.removeAttendance(targetAttendanceRecord, targetStudent);
+                removeAttendance(targetAttendanceRecord, targetStudent);
 
         return replaceAttendanceRecordInList(targetAttendanceRecordList, targetWeek, editedWeekAttendanceRecord);
     }
@@ -179,6 +215,24 @@ public class AttendanceRecordListUtil {
                 new ArrayList<>(attendanceRecordList.getAttendanceRecordList());
         modifiedAttendanceRecordList.set(week.getZeroBasedWeekIndex(), attendanceRecordToSet);
         return new AttendanceRecordList(modifiedAttendanceRecordList);
+    }
+
+    /**
+     * Returns an {@code AttendanceRecord} where the {@code Attendance} of the {@code studentToRemove} has been removed.
+     * If the {@code studentToRemove} does not exist in the {@code attendanceRecord}, the {@code attendanceRecord}
+     * remains unchanged.
+     */
+    private static AttendanceRecord removeStudentFromAttendanceRecord(
+            AttendanceRecord attendanceRecord, Student studentToRemove) {
+        if (!attendanceRecord.hasAttendance(studentToRemove.getUuid())) {
+            return attendanceRecord;
+        }
+
+        try {
+            return removeAttendance(attendanceRecord, studentToRemove);
+        } catch (CommandException e) {
+            return attendanceRecord;
+        }
     }
 
     private static List<Optional<Attendance>> getAttendances(AttendanceRecordList targetAttendanceRecordList,

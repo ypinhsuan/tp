@@ -10,7 +10,9 @@ import static tutorspet.logic.commands.CommandTestUtil.VALID_PARTICIPATION_SCORE
 import static tutorspet.logic.commands.CommandTestUtil.VALID_WEEK_1;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_WEEK_5;
 import static tutorspet.logic.util.LessonUtil.addAttendanceToLesson;
+import static tutorspet.logic.util.LessonUtil.deleteAllStudentsFromLesson;
 import static tutorspet.logic.util.LessonUtil.deleteAttendanceFromLesson;
+import static tutorspet.logic.util.LessonUtil.deleteStudentFromLesson;
 import static tutorspet.logic.util.LessonUtil.editAttendanceInLesson;
 import static tutorspet.logic.util.LessonUtil.getAbsentWeekFromLesson;
 import static tutorspet.logic.util.LessonUtil.getAttendanceFromLesson;
@@ -44,6 +46,43 @@ public class LessonUtilTest {
     private static final Lesson DEFAULT_LESSON =
             insertAttendanceRecords(new LessonBuilder().withNumberOfOccurrences(2).build(),
                     RECORD_EMPTY, RECORD_ALICE_51_BENSON_33);
+
+    @Test
+    public void deleteStudentFromLesson_validParameters_success() {
+        AttendanceRecord record =
+                new AttendanceRecord(Map.of(BENSON.getUuid(), VALID_ATTENDANCE_33));
+        Lesson expectedLesson = insertAttendanceRecords(new LessonBuilder().withNumberOfOccurrences(2).build(),
+                RECORD_EMPTY, record);
+
+        assertEquals(expectedLesson, deleteStudentFromLesson(DEFAULT_LESSON, ALICE));
+    }
+
+    @Test
+    public void deleteStudentFromLesson_noExistingStudent_success() {
+        assertEquals(DEFAULT_LESSON, deleteStudentFromLesson(DEFAULT_LESSON, CARL));
+    }
+
+    @Test
+    public void deleteStudentFromLesson_nullParameters_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () ->
+                deleteStudentFromLesson(null, ALICE));
+        assertThrows(NullPointerException.class, () ->
+                deleteStudentFromLesson(DEFAULT_LESSON, null));
+    }
+
+    @Test
+    public void deleteAllStudentFromLesson_validParameters_success() {
+        Lesson expectedLesson = insertAttendanceRecords(new LessonBuilder().withNumberOfOccurrences(2).build(),
+                RECORD_EMPTY, new AttendanceRecord());
+
+        assertEquals(expectedLesson, deleteAllStudentsFromLesson(DEFAULT_LESSON));
+    }
+
+    @Test
+    public void deleteAllStudentFromLesson_nullLesson_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () ->
+                deleteAllStudentsFromLesson(null));
+    }
 
     @Test
     public void addAttendanceToLesson_validParameters_success() throws Exception {

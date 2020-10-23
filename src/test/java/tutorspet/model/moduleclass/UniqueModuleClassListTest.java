@@ -1,27 +1,34 @@
 package tutorspet.model.moduleclass;
 
-import static java.util.UUID.randomUUID;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static tutorspet.logic.util.LessonUtil.deleteStudentFromLesson;
 import static tutorspet.testutil.Assert.assertThrows;
 import static tutorspet.testutil.TypicalModuleClass.CS2100_LAB;
 import static tutorspet.testutil.TypicalModuleClass.CS2103T_TUTORIAL;
+import static tutorspet.testutil.TypicalModuleClass.CS2103T_TUTORIAL_NO_STUDENTS;
+import static tutorspet.testutil.TypicalStudent.ALICE;
 import static tutorspet.testutil.TypicalStudent.AMY;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import tutorspet.model.lesson.Lesson;
 import tutorspet.model.moduleclass.exceptions.DuplicateModuleClassException;
 import tutorspet.model.moduleclass.exceptions.ModuleClassNotFoundException;
+import tutorspet.model.student.Student;
 import tutorspet.testutil.ModuleClassBuilder;
+import tutorspet.testutil.StudentBuilder;
 
 public class UniqueModuleClassListTest {
 
@@ -121,20 +128,23 @@ public class UniqueModuleClassListTest {
 
     @Test
     public void removeUuid_nullUuid_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueModuleClassList.removeUuid(null));
+        assertThrows(NullPointerException.class, () -> uniqueModuleClassList.removeStudent(null));
     }
 
     @Test
     public void removeUuid_existingUuid_updatesModuleClasses() {
         uniqueModuleClassList.add(CS2103T_TUTORIAL);
-        UUID uuidToRemove = CS2103T_TUTORIAL.getStudentUuids().iterator().next();
-        uniqueModuleClassList.removeUuid(uuidToRemove);
+        uniqueModuleClassList.removeStudent(ALICE);
 
         UniqueModuleClassList expectedUniqueModuleClassList = new UniqueModuleClassList();
         Set<UUID> modifiedUuids = new HashSet<>(CS2103T_TUTORIAL.getStudentUuids());
+        UUID uuidToRemove = CS2103T_TUTORIAL.getStudentUuids().iterator().next();
         modifiedUuids.remove(uuidToRemove);
+        List<Lesson> lessons = new ArrayList<>(CS2103T_TUTORIAL.getLessons());
+        List<Lesson> modifiedLessons = lessons.stream().map(lesson ->
+                        deleteStudentFromLesson(lesson, ALICE)).collect(Collectors.toUnmodifiableList());
         ModuleClass modifiedModuleClass = new ModuleClass(CS2103T_TUTORIAL.getName(), modifiedUuids,
-                CS2103T_TUTORIAL.getLessons());
+                modifiedLessons);
         expectedUniqueModuleClassList.add(modifiedModuleClass);
 
         assertEquals(expectedUniqueModuleClassList, uniqueModuleClassList);
@@ -143,8 +153,10 @@ public class UniqueModuleClassListTest {
     @Test
     public void removeUuid_nonExistingUuid_sameModuleClasses() {
         uniqueModuleClassList.add(CS2100_LAB);
-        UUID uuidToRemove = randomUUID();
-        uniqueModuleClassList.removeUuid(uuidToRemove);
+        Student targetStudentToRemove = new StudentBuilder().withUuid("4e13dcba-047d-4da7-9860-981493f1884e")
+                .withName("Random Student").withTelegram("random_student")
+                .withEmail("randomstudent@randomemail.com").build();
+        uniqueModuleClassList.removeStudent(targetStudentToRemove);
 
         UniqueModuleClassList expectedUniqueModuleClassList = new UniqueModuleClassList();
         expectedUniqueModuleClassList.add(CS2100_LAB);
@@ -156,9 +168,9 @@ public class UniqueModuleClassListTest {
     public void removeAllStudentUuids() {
         uniqueModuleClassList.add(CS2103T_TUTORIAL);
         uniqueModuleClassList.add(CS2100_LAB);
-        uniqueModuleClassList.removeAllStudentUuids();
+        uniqueModuleClassList.removeAllStudents();
         UniqueModuleClassList expectedUniqueModuleClassList = new UniqueModuleClassList();
-        expectedUniqueModuleClassList.add(new ModuleClassBuilder(CS2103T_TUTORIAL)
+        expectedUniqueModuleClassList.add(new ModuleClassBuilder(CS2103T_TUTORIAL_NO_STUDENTS)
                 .withStudentUuids().build());
         expectedUniqueModuleClassList.add(new ModuleClassBuilder(CS2100_LAB)
                 .withStudentUuids().build());

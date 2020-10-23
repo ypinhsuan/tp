@@ -10,15 +10,20 @@ import static tutorspet.logic.commands.CommandTestUtil.showModuleClassAtIndex;
 import static tutorspet.logic.commands.CommandTestUtil.showStudentAtIndex;
 import static tutorspet.logic.commands.UnlinkCommand.MESSAGE_MISSING_LINK;
 import static tutorspet.logic.commands.UnlinkCommand.MESSAGE_UNLINK_SUCCESS;
+import static tutorspet.logic.util.LessonUtil.deleteStudentFromLesson;
 import static tutorspet.testutil.Assert.assertThrows;
 import static tutorspet.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 import static tutorspet.testutil.TypicalIndexes.INDEX_SECOND_ITEM;
 import static tutorspet.testutil.TypicalIndexes.INDEX_THIRD_ITEM;
+import static tutorspet.testutil.TypicalStudent.ALICE;
 import static tutorspet.testutil.TypicalTutorsPet.getTypicalTutorsPet;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
@@ -26,6 +31,7 @@ import tutorspet.commons.core.index.Index;
 import tutorspet.model.Model;
 import tutorspet.model.ModelManager;
 import tutorspet.model.UserPrefs;
+import tutorspet.model.lesson.Lesson;
 import tutorspet.model.moduleclass.ModuleClass;
 import tutorspet.model.student.Student;
 
@@ -187,6 +193,9 @@ public class UnlinkCommandTest {
                         + " does not contain the selected student.");
 
         studentUuids.remove(student.getUuid());
-        return new ModuleClass(moduleClass.getName(), studentUuids, moduleClass.getLessons());
+        List<Lesson> lessons = new ArrayList<>(moduleClass.getLessons());
+        List<Lesson> modifiedLessons = lessons.stream().map(lesson ->
+                deleteStudentFromLesson(lesson, ALICE)).collect(Collectors.toUnmodifiableList());
+        return new ModuleClass(moduleClass.getName(), studentUuids, modifiedLessons);
     }
 }

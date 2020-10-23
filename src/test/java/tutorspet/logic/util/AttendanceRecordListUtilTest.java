@@ -14,7 +14,9 @@ import static tutorspet.logic.util.AttendanceRecordListUtil.editAttendanceInAtte
 import static tutorspet.logic.util.AttendanceRecordListUtil.getAbsentWeekFromAttendance;
 import static tutorspet.logic.util.AttendanceRecordListUtil.getAttendanceFromAttendanceRecordList;
 import static tutorspet.logic.util.AttendanceRecordListUtil.getScoreFromAttendance;
+import static tutorspet.logic.util.AttendanceRecordListUtil.removeAllStudentsFromAttendanceRecordList;
 import static tutorspet.logic.util.AttendanceRecordListUtil.removeAttendanceFromAttendanceRecordList;
+import static tutorspet.logic.util.AttendanceRecordListUtil.removeStudentFromAttendanceRecordList;
 import static tutorspet.logic.util.AttendanceRecordUtil.addAttendance;
 import static tutorspet.logic.util.AttendanceRecordUtil.setAttendance;
 import static tutorspet.testutil.Assert.assertThrows;
@@ -40,6 +42,69 @@ public class AttendanceRecordListUtilTest {
 
     private static final Student DEFAULT_STUDENT = new StudentBuilder().build();
     private static final Attendance DEFAULT_ATTENDANCE = new Attendance(VALID_PARTICIPATION_SCORE_33);
+
+    @Test
+    public void removeStudent_validParameters_success() {
+        Attendance attendance = new Attendance(VALID_PARTICIPATION_SCORE_33);
+        Student student = new StudentBuilder().build();
+        AttendanceRecord record = new AttendanceRecordBuilder().withEntry(student.getUuid(), attendance).build();
+        AttendanceRecordList recordList = new AttendanceRecordList(Collections.singletonList(record));
+
+        AttendanceRecord expectedRecord = new AttendanceRecord();
+        AttendanceRecordList expectedRecordList = new AttendanceRecordList(Collections.singletonList(expectedRecord));
+
+        AttendanceRecordList actualRecordList =
+                removeStudentFromAttendanceRecordList(recordList, student);
+        assertEquals(expectedRecordList, actualRecordList);
+    }
+
+    @Test
+    public void removeStudent_noExistingAttendance_success() {
+        AttendanceRecord record = new AttendanceRecordBuilder().build();
+        AttendanceRecordList recordList = new AttendanceRecordList(Collections.singletonList(record));
+
+        AttendanceRecordList actualRecordList =
+                removeStudentFromAttendanceRecordList(recordList, DEFAULT_STUDENT);
+        assertEquals(recordList, actualRecordList);
+    }
+
+    @Test
+    public void removeStudent_nullAttendanceRecordList_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () ->
+                removeStudentFromAttendanceRecordList(null, DEFAULT_STUDENT));
+    }
+
+    @Test
+    public void removeStudent_nullStudent_throwsNullPointerException() {
+        Attendance attendance = new Attendance(VALID_PARTICIPATION_SCORE_33);
+        Student student = new StudentBuilder().build();
+        AttendanceRecord record = new AttendanceRecordBuilder().withEntry(student.getUuid(), attendance).build();
+        AttendanceRecordList recordList = new AttendanceRecordList(Collections.singletonList(record));
+
+        assertThrows(NullPointerException.class, () ->
+                removeStudentFromAttendanceRecordList(recordList, null));
+    }
+
+    @Test
+    public void removeAllStudents_validParameters_success() {
+        Attendance attendance = new Attendance(VALID_PARTICIPATION_SCORE_33);
+        Student student = new StudentBuilder().build();
+        AttendanceRecord record = new AttendanceRecordBuilder().withEntry(student.getUuid(), attendance).build();
+        AttendanceRecordList recordList = new AttendanceRecordList(Collections.singletonList(record));
+
+        AttendanceRecord expectedRecord = new AttendanceRecord();
+        AttendanceRecordList expectedRecordList = new AttendanceRecordList(Collections.singletonList(expectedRecord));
+
+        AttendanceRecordList actualRecordList =
+                removeAllStudentsFromAttendanceRecordList(recordList);
+        assertEquals(expectedRecordList, actualRecordList);
+    }
+
+    @Test
+    public void removeAllStudents_nullAttendanceRecordList_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () ->
+                removeAllStudentsFromAttendanceRecordList(null));
+    }
 
     @Test
     public void addAttendance_validParameters_success() throws CommandException {

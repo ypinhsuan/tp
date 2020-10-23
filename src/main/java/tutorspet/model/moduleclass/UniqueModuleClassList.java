@@ -2,19 +2,18 @@ package tutorspet.model.moduleclass;
 
 import static java.util.Objects.requireNonNull;
 import static tutorspet.commons.util.CollectionUtil.requireAllNonNull;
+import static tutorspet.logic.util.ModuleClassUtil.deleteAllStudentsFromModuleClass;
+import static tutorspet.logic.util.ModuleClassUtil.deleteStudentFromModuleClass;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import tutorspet.model.moduleclass.exceptions.DuplicateModuleClassException;
 import tutorspet.model.moduleclass.exceptions.ModuleClassNotFoundException;
+import tutorspet.model.student.Student;
 
 /**
  * A list of {@code ModuleClass} that enforces uniqueness between its elements and does not allow nulls.
@@ -58,6 +57,7 @@ public class UniqueModuleClassList implements Iterable<ModuleClass> {
         if (contains(toAdd)) {
             throw new DuplicateModuleClassException();
         }
+
         internalList.add(toAdd);
     }
 
@@ -76,6 +76,7 @@ public class UniqueModuleClassList implements Iterable<ModuleClass> {
         requireAllNonNull(target, editedModuleClass);
 
         int index = internalList.indexOf(target);
+
         if (index == -1) {
             throw new ModuleClassNotFoundException();
         }
@@ -127,27 +128,22 @@ public class UniqueModuleClassList implements Iterable<ModuleClass> {
     }
 
     /**
-     * Removes the specified {@code UUID} from all {@code ModuleClass}es in the class list.
+     * Removes the specified {@code Student} from all {@code ModuleClass}es in the class list.
      */
-    public void removeUuid(UUID uuidToRemove) {
-        requireNonNull(uuidToRemove);
+    public void removeStudent(Student student) {
+        requireNonNull(student);
 
         internalList.setAll(internalList.stream()
-                .map(moduleClass -> {
-                    Set<UUID> modifiedUuids = new HashSet<>(moduleClass.getStudentUuids());
-                    modifiedUuids.remove(uuidToRemove);
-                    return new ModuleClass(moduleClass.getName(), modifiedUuids, moduleClass.getLessons());
-                })
+                .map(moduleClass -> deleteStudentFromModuleClass(moduleClass, student))
                 .collect(Collectors.toList()));
     }
 
     /**
-     * Removes all {@code Student UUID}s from every {@code ModuleClass} in the class list.
+     * Removes all {@code Student}s from every {@code ModuleClass} in the class list.
      */
-    public void removeAllStudentUuids() {
+    public void removeAllStudents() {
         internalList.setAll(internalList.stream()
-                .map(moduleClass ->
-                        new ModuleClass(moduleClass.getName(), Collections.emptySet(), moduleClass.getLessons()))
+                .map(moduleClass -> deleteAllStudentsFromModuleClass(moduleClass))
                 .collect(Collectors.toList()));
     }
 

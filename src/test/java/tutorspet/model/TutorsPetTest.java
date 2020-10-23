@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_TAG_AVERAGE;
+import static tutorspet.logic.util.LessonUtil.deleteStudentFromLesson;
 import static tutorspet.testutil.Assert.assertThrows;
 import static tutorspet.testutil.TypicalModuleClass.CS2100_LAB;
 import static tutorspet.testutil.TypicalModuleClass.CS2103T_TUTORIAL;
@@ -13,6 +14,7 @@ import static tutorspet.testutil.TypicalStudent.BENSON;
 import static tutorspet.testutil.TypicalStudent.GEORGE;
 import static tutorspet.testutil.TypicalTutorsPet.getTypicalTutorsPet;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -20,11 +22,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import tutorspet.model.lesson.Lesson;
 import tutorspet.model.moduleclass.ModuleClass;
 import tutorspet.model.moduleclass.exceptions.DuplicateModuleClassException;
 import tutorspet.model.moduleclass.exceptions.ModuleClassNotFoundException;
@@ -117,8 +121,11 @@ public class TutorsPetTest {
         // manually remove UUID
         Set<UUID> modifiedUuids = new HashSet<>(CS2103T_TUTORIAL.getStudentUuids());
         modifiedUuids.remove(ALICE.getUuid());
+        List<Lesson> lessons = new ArrayList<>(CS2103T_TUTORIAL.getLessons());
+        List<Lesson> modifiedLessons = lessons.stream().map(lesson ->
+                deleteStudentFromLesson(lesson, ALICE)).collect(Collectors.toUnmodifiableList());
         ModuleClass modifiedTutorial = new ModuleClass(CS2103T_TUTORIAL.getName(), modifiedUuids,
-                CS2103T_TUTORIAL.getLessons());
+                modifiedLessons);
 
         TutorsPet expectedTutorsPet =
                 new TutorsPetBuilder().withStudent(BENSON).withModuleClass(modifiedTutorial).build();
