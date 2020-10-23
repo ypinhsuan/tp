@@ -1,11 +1,8 @@
 package tutorspet.ui;
 
-import static tutorspet.model.lesson.Lesson.TIME_FORMATTER;
-
 import java.util.List;
 
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -36,7 +33,7 @@ public class ModuleClassCard extends UiPart<Region> {
     private Label lesson;
 
     /**
-     * Creates a {@code ModuleCode} with the given {@code ModuleClass} and index to display.
+     * Creates a {@code ModuleClassCard} with the given {@code moduleClass} and {@code displayedIndex}.
      */
     public ModuleClassCard(ModuleClass moduleClass, int displayedIndex) {
         super(FXML);
@@ -55,25 +52,9 @@ public class ModuleClassCard extends UiPart<Region> {
 
     private void createLessonLabel(List<Lesson> lessons) {
         int index = 1;
+
         for (Lesson lesson: lessons) {
-            final StringBuilder builder = new StringBuilder();
-            builder.append(index)
-                    .append(". ")
-                    .append(lesson.getDay())
-                    .append(" ")
-                    .append(TIME_FORMATTER.format(lesson.getStartTime()))
-                    .append(" to ")
-                    .append(TIME_FORMATTER.format(lesson.getEndTime()))
-                    .append("\nVenue: ")
-                    .append(lesson.getVenue())
-                    .append("\nNumber of occurrences: ")
-                    .append(lesson.getNumberOfOccurrences());
-
-            Label label = new Label(builder.toString());
-            label.setPadding(new Insets(0, 0, 15, 0));
-            label.getStyleClass().add("cell_small_label");
-            vBox.getChildren().add(label);
-
+            vBox.getChildren().add(new LessonCard(lesson, index).getRoot());
             index++;
         }
     }
