@@ -33,7 +33,7 @@ public class ModuleClassCard extends UiPart<Region> {
     private Label lesson;
 
     /**
-     * Creates a {@code ModuleCode} with the given {@code ModuleClass} and index to display.
+     * Creates a {@code ModuleClassCard} with the given {@code moduleClass} and {@code displayedIndex}.
      */
     public ModuleClassCard(ModuleClass moduleClass, int displayedIndex) {
         super(FXML);

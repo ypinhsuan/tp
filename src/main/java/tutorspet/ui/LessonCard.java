@@ -29,7 +29,7 @@ public class LessonCard extends UiPart<Region> {
     private Label occurrence;
 
     /**
-     * Creates a {@code Lesson} with the given {@code lesson} and index to display.
+     * Creates a {@code LessonCard} with the given {@code lesson} and {@code displayedIndex}.
      */
     public LessonCard(Lesson lesson, int displayedIndex) {
         super(FXML);
