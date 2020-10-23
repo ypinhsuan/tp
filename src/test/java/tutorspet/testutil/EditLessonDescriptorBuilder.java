@@ -2,7 +2,7 @@ package tutorspet.testutil;
 
 import java.time.LocalTime;
 
-import tutorspet.logic.commands.EditLessonCommand.EditLessonDescriptor;
+import tutorspet.logic.commands.lesson.EditLessonCommand.EditLessonDescriptor;
 import tutorspet.model.lesson.Day;
 import tutorspet.model.lesson.Lesson;
 import tutorspet.model.lesson.Venue;

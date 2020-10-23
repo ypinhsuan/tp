@@ -2,8 +2,8 @@ package tutorspet.testutil;
 
 import static tutorspet.logic.parser.CliSyntax.PREFIX_NAME;
 
-import tutorspet.logic.commands.AddModuleClassCommand;
-import tutorspet.logic.commands.EditModuleClassCommand.EditModuleClassDescriptor;
+import tutorspet.logic.commands.moduleclass.AddModuleClassCommand;
+import tutorspet.logic.commands.moduleclass.EditModuleClassCommand.EditModuleClassDescriptor;
 import tutorspet.model.moduleclass.ModuleClass;
 
 /**

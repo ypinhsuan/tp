@@ -4,7 +4,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import tutorspet.logic.commands.EditStudentCommand.EditStudentDescriptor;
+import tutorspet.logic.commands.student.EditStudentCommand.EditStudentDescriptor;
 import tutorspet.model.components.name.Name;
 import tutorspet.model.components.tag.Tag;
 import tutorspet.model.student.Email;

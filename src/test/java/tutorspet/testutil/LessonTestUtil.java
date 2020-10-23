@@ -1,6 +1,6 @@
 package tutorspet.testutil;
 
-import static tutorspet.logic.commands.EditLessonCommand.EditLessonDescriptor;
+import static tutorspet.logic.commands.lesson.EditLessonCommand.EditLessonDescriptor;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_CLASS_INDEX;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_DAY;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_END_TIME;
@@ -9,7 +9,7 @@ import static tutorspet.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_VENUE;
 
 import tutorspet.commons.core.index.Index;
-import tutorspet.logic.commands.AddLessonCommand;
+import tutorspet.logic.commands.lesson.AddLessonCommand;
 import tutorspet.model.lesson.Lesson;
 
 /**
