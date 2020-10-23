@@ -17,7 +17,7 @@ import static tutorspet.logic.commands.CommandTestUtil.VALID_VENUE_COM1_B111_LES
 import static tutorspet.logic.commands.CommandTestUtil.VALID_VENUE_S17_0302_LESSON_FRI_8_TO_10;
 import static tutorspet.logic.commands.CommandTestUtil.VENUE_DESC_LESSON_FRI_8_TO_10;
 import static tutorspet.logic.commands.CommandTestUtil.VENUE_DESC_LESSON_WED_2_TO_4;
-import static tutorspet.logic.commands.EditLessonCommand.MESSAGE_USAGE;
+import static tutorspet.logic.commands.lesson.EditLessonCommand.MESSAGE_USAGE;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_CLASS_INDEX;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_LESSON_INDEX;
 import static tutorspet.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -28,8 +28,8 @@ import static tutorspet.testutil.TypicalIndexes.INDEX_SECOND_ITEM;
 import org.junit.jupiter.api.Test;
 
 import tutorspet.commons.core.index.Index;
-import tutorspet.logic.commands.EditLessonCommand;
-import tutorspet.logic.commands.EditLessonCommand.EditLessonDescriptor;
+import tutorspet.logic.commands.lesson.EditLessonCommand;
+import tutorspet.logic.commands.lesson.EditLessonCommand.EditLessonDescriptor;
 import tutorspet.model.lesson.Day;
 import tutorspet.model.lesson.Venue;
 import tutorspet.testutil.EditLessonDescriptorBuilder;

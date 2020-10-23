@@ -1,6 +1,6 @@
 package tutorspet.testutil;
 
-import tutorspet.logic.commands.EditAttendanceCommand.EditAttendanceDescriptor;
+import tutorspet.logic.commands.attendance.EditAttendanceCommand.EditAttendanceDescriptor;
 import tutorspet.model.attendance.Attendance;
 
 public class EditAttendanceDescriptorBuilder {

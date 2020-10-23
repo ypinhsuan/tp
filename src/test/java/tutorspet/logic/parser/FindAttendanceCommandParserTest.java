@@ -7,7 +7,7 @@ import static tutorspet.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_WEEK_VALUE_5;
 import static tutorspet.logic.commands.CommandTestUtil.WEEK_DESC_WEEK_VALUE_3;
 import static tutorspet.logic.commands.CommandTestUtil.WEEK_DESC_WEEK_VALUE_5;
-import static tutorspet.logic.commands.FindAttendanceCommand.MESSAGE_USAGE;
+import static tutorspet.logic.commands.attendance.FindAttendanceCommand.MESSAGE_USAGE;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_CLASS_INDEX;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_LESSON_INDEX;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_STUDENT_INDEX;
@@ -20,7 +20,7 @@ import static tutorspet.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 import org.junit.jupiter.api.Test;
 
 import tutorspet.commons.core.index.Index;
-import tutorspet.logic.commands.FindAttendanceCommand;
+import tutorspet.logic.commands.attendance.FindAttendanceCommand;
 import tutorspet.model.attendance.Week;
 
 public class FindAttendanceCommandParserTest {

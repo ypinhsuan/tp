@@ -1,14 +1,14 @@
 package tutorspet.logic.parser;
 
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static tutorspet.logic.commands.DeleteStudentCommand.MESSAGE_USAGE;
+import static tutorspet.logic.commands.student.DeleteStudentCommand.MESSAGE_USAGE;
 import static tutorspet.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static tutorspet.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static tutorspet.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 
 import org.junit.jupiter.api.Test;
 
-import tutorspet.logic.commands.DeleteStudentCommand;
+import tutorspet.logic.commands.student.DeleteStudentCommand;
 
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations

@@ -1,19 +1,19 @@
 package tutorspet.logic.parser;
 
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static tutorspet.logic.commands.AddModuleClassCommand.MESSAGE_USAGE;
 import static tutorspet.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static tutorspet.logic.commands.CommandTestUtil.NAME_DESC_CS2100_LAB;
 import static tutorspet.logic.commands.CommandTestUtil.NAME_DESC_CS2103T_TUTORIAL;
 import static tutorspet.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_NAME_CS2100_LAB;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_NAME_CS2103T_TUTORIAL;
+import static tutorspet.logic.commands.moduleclass.AddModuleClassCommand.MESSAGE_USAGE;
 import static tutorspet.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static tutorspet.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import org.junit.jupiter.api.Test;
 
-import tutorspet.logic.commands.AddModuleClassCommand;
+import tutorspet.logic.commands.moduleclass.AddModuleClassCommand;
 import tutorspet.model.components.name.Name;
 import tutorspet.model.moduleclass.ModuleClass;
 import tutorspet.testutil.ModuleClassBuilder;

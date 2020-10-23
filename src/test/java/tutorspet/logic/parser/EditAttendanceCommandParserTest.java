@@ -5,7 +5,7 @@ import static tutorspet.logic.commands.CommandTestUtil.INVALID_PARTICIPATION_SCO
 import static tutorspet.logic.commands.CommandTestUtil.VALID_PARTICIPATION_SCORE_33;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_PARTICIPATION_SCORE_80;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_WEEK_1;
-import static tutorspet.logic.commands.EditAttendanceCommand.MESSAGE_USAGE;
+import static tutorspet.logic.commands.attendance.EditAttendanceCommand.MESSAGE_USAGE;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_CLASS_INDEX;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_LESSON_INDEX;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_PARTICIPATION_SCORE;
@@ -18,8 +18,8 @@ import static tutorspet.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 import org.junit.jupiter.api.Test;
 
 import tutorspet.commons.core.index.Index;
-import tutorspet.logic.commands.EditAttendanceCommand;
-import tutorspet.logic.commands.EditAttendanceCommand.EditAttendanceDescriptor;
+import tutorspet.logic.commands.attendance.EditAttendanceCommand;
+import tutorspet.logic.commands.attendance.EditAttendanceCommand.EditAttendanceDescriptor;
 import tutorspet.model.attendance.Attendance;
 import tutorspet.model.attendance.Week;
 import tutorspet.testutil.EditAttendanceDescriptorBuilder;

@@ -6,8 +6,8 @@ import static tutorspet.logic.commands.CommandTestUtil.NAME_DESC_CS2100_LAB;
 import static tutorspet.logic.commands.CommandTestUtil.NAME_DESC_CS2103T_TUTORIAL;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_NAME_CS2100_LAB;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_NAME_CS2103T_TUTORIAL;
-import static tutorspet.logic.commands.EditModuleClassCommand.MESSAGE_NOT_EDITED;
-import static tutorspet.logic.commands.EditModuleClassCommand.MESSAGE_USAGE;
+import static tutorspet.logic.commands.moduleclass.EditModuleClassCommand.MESSAGE_NOT_EDITED;
+import static tutorspet.logic.commands.moduleclass.EditModuleClassCommand.MESSAGE_USAGE;
 import static tutorspet.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static tutorspet.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static tutorspet.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
@@ -16,8 +16,8 @@ import static tutorspet.testutil.TypicalIndexes.INDEX_SECOND_ITEM;
 import org.junit.jupiter.api.Test;
 
 import tutorspet.commons.core.index.Index;
-import tutorspet.logic.commands.EditModuleClassCommand;
-import tutorspet.logic.commands.EditModuleClassCommand.EditModuleClassDescriptor;
+import tutorspet.logic.commands.moduleclass.EditModuleClassCommand;
+import tutorspet.logic.commands.moduleclass.EditModuleClassCommand.EditModuleClassDescriptor;
 import tutorspet.model.components.name.Name;
 import tutorspet.testutil.EditModuleClassDescriptorBuilder;
 

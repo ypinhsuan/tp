@@ -2,7 +2,7 @@ package tutorspet.logic.parser;
 
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static tutorspet.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
-import static tutorspet.logic.commands.StatisticsCommand.MESSAGE_USAGE;
+import static tutorspet.logic.commands.attendance.StatisticsCommand.MESSAGE_USAGE;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_CLASS_INDEX;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_STUDENT_INDEX;
 import static tutorspet.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -11,7 +11,7 @@ import static tutorspet.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 
 import org.junit.jupiter.api.Test;
 
-import tutorspet.logic.commands.StatisticsCommand;
+import tutorspet.logic.commands.attendance.StatisticsCommand;
 
 public class StatisticsCommandParserTest {
 

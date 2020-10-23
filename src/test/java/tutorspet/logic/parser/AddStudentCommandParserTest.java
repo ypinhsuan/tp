@@ -1,7 +1,6 @@
 package tutorspet.logic.parser;
 
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static tutorspet.logic.commands.AddStudentCommand.MESSAGE_USAGE;
 import static tutorspet.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static tutorspet.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static tutorspet.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
@@ -21,6 +20,7 @@ import static tutorspet.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_TAG_AVERAGE;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_TAG_EXPERIENCED;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_TELEGRAM_BOB;
+import static tutorspet.logic.commands.student.AddStudentCommand.MESSAGE_USAGE;
 import static tutorspet.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static tutorspet.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static tutorspet.testutil.TypicalStudent.AMY;
@@ -28,8 +28,8 @@ import static tutorspet.testutil.TypicalStudent.BOB;
 
 import org.junit.jupiter.api.Test;
 
-import tutorspet.logic.commands.AddStudentCommand;
 import tutorspet.logic.commands.CommandTestUtil;
+import tutorspet.logic.commands.student.AddStudentCommand;
 import tutorspet.model.components.name.Name;
 import tutorspet.model.components.tag.Tag;
 import tutorspet.model.student.Email;

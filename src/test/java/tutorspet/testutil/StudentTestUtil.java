@@ -7,8 +7,8 @@ import static tutorspet.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 
 import java.util.Set;
 
-import tutorspet.logic.commands.AddStudentCommand;
-import tutorspet.logic.commands.EditStudentCommand;
+import tutorspet.logic.commands.student.AddStudentCommand;
+import tutorspet.logic.commands.student.EditStudentCommand;
 import tutorspet.model.components.tag.Tag;
 import tutorspet.model.student.Student;
 

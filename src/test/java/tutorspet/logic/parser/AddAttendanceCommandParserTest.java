@@ -1,7 +1,6 @@
 package tutorspet.logic.parser;
 
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static tutorspet.logic.commands.AddAttendanceCommand.MESSAGE_USAGE;
 import static tutorspet.logic.commands.CommandTestUtil.INVALID_PARTICIPATION_LOWER_BOUND_SCORE_DESC;
 import static tutorspet.logic.commands.CommandTestUtil.INVALID_PARTICIPATION_UPPER_BOUND_SCORE_DESC;
 import static tutorspet.logic.commands.CommandTestUtil.INVALID_WEEK_LOWER_BOUND_DESC;
@@ -13,6 +12,7 @@ import static tutorspet.logic.commands.CommandTestUtil.VALID_PARTICIPATION_SCORE
 import static tutorspet.logic.commands.CommandTestUtil.VALID_WEEK_VALUE_5;
 import static tutorspet.logic.commands.CommandTestUtil.WEEK_DESC_WEEK_VALUE_3;
 import static tutorspet.logic.commands.CommandTestUtil.WEEK_DESC_WEEK_VALUE_5;
+import static tutorspet.logic.commands.attendance.AddAttendanceCommand.MESSAGE_USAGE;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_CLASS_INDEX;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_LESSON_INDEX;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_PARTICIPATION_SCORE;
@@ -25,7 +25,7 @@ import static tutorspet.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 import org.junit.jupiter.api.Test;
 
 import tutorspet.commons.core.index.Index;
-import tutorspet.logic.commands.AddAttendanceCommand;
+import tutorspet.logic.commands.attendance.AddAttendanceCommand;
 import tutorspet.model.attendance.Attendance;
 import tutorspet.model.attendance.Week;
 

@@ -9,7 +9,7 @@ import static tutorspet.logic.parser.CliSyntax.PREFIX_WEEK;
 import static tutorspet.logic.parser.ParserUtil.arePrefixesPresent;
 
 import tutorspet.commons.core.index.Index;
-import tutorspet.logic.commands.DeleteAttendanceCommand;
+import tutorspet.logic.commands.attendance.DeleteAttendanceCommand;
 import tutorspet.logic.parser.exceptions.ParseException;
 import tutorspet.model.attendance.Week;
 

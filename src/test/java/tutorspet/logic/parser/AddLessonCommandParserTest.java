@@ -1,7 +1,6 @@
 package tutorspet.logic.parser;
 
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static tutorspet.logic.commands.AddLessonCommand.MESSAGE_USAGE;
 import static tutorspet.logic.commands.CommandTestUtil.DAY_DESC_LESSON_FRI_8_TO_10;
 import static tutorspet.logic.commands.CommandTestUtil.DAY_DESC_LESSON_WED_2_TO_4;
 import static tutorspet.logic.commands.CommandTestUtil.END_TIME_DESC_LESSON_FRI_8_TO_10;
@@ -23,6 +22,7 @@ import static tutorspet.logic.commands.CommandTestUtil.VALID_START_TIME_0800_LES
 import static tutorspet.logic.commands.CommandTestUtil.VALID_VENUE_S17_0302_LESSON_FRI_8_TO_10;
 import static tutorspet.logic.commands.CommandTestUtil.VENUE_DESC_LESSON_FRI_8_TO_10;
 import static tutorspet.logic.commands.CommandTestUtil.VENUE_DESC_LESSON_WED_2_TO_4;
+import static tutorspet.logic.commands.lesson.AddLessonCommand.MESSAGE_USAGE;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_CLASS_INDEX;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_STUDENT_INDEX;
 import static tutorspet.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -33,7 +33,7 @@ import static tutorspet.testutil.TypicalLesson.LESSON_FRI_8_TO_10;
 
 import org.junit.jupiter.api.Test;
 
-import tutorspet.logic.commands.AddLessonCommand;
+import tutorspet.logic.commands.lesson.AddLessonCommand;
 import tutorspet.model.lesson.Day;
 import tutorspet.model.lesson.Lesson;
 import tutorspet.model.lesson.NumberOfOccurrences;

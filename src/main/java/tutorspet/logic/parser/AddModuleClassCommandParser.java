@@ -4,7 +4,7 @@ import static tutorspet.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_NAME;
 import static tutorspet.logic.parser.ParserUtil.arePrefixesPresent;
 
-import tutorspet.logic.commands.AddModuleClassCommand;
+import tutorspet.logic.commands.moduleclass.AddModuleClassCommand;
 import tutorspet.logic.parser.exceptions.ParseException;
 import tutorspet.model.components.name.Name;
 import tutorspet.model.moduleclass.ModuleClass;

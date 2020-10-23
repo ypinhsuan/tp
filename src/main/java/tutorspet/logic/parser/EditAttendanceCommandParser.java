@@ -2,8 +2,8 @@ package tutorspet.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static tutorspet.logic.commands.EditAttendanceCommand.MESSAGE_NOT_EDITED;
-import static tutorspet.logic.commands.EditAttendanceCommand.MESSAGE_USAGE;
+import static tutorspet.logic.commands.attendance.EditAttendanceCommand.MESSAGE_NOT_EDITED;
+import static tutorspet.logic.commands.attendance.EditAttendanceCommand.MESSAGE_USAGE;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_CLASS_INDEX;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_LESSON_INDEX;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_PARTICIPATION_SCORE;
@@ -14,8 +14,8 @@ import static tutorspet.logic.parser.ParserUtil.parseParticipationScore;
 import static tutorspet.logic.parser.ParserUtil.parseWeek;
 
 import tutorspet.commons.core.index.Index;
-import tutorspet.logic.commands.EditAttendanceCommand;
-import tutorspet.logic.commands.EditAttendanceCommand.EditAttendanceDescriptor;
+import tutorspet.logic.commands.attendance.EditAttendanceCommand;
+import tutorspet.logic.commands.attendance.EditAttendanceCommand.EditAttendanceDescriptor;
 import tutorspet.logic.parser.exceptions.ParseException;
 import tutorspet.model.attendance.Week;
 

@@ -1,7 +1,7 @@
 package tutorspet.logic.parser;
 
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static tutorspet.logic.commands.DeleteLessonCommand.MESSAGE_USAGE;
+import static tutorspet.logic.commands.lesson.DeleteLessonCommand.MESSAGE_USAGE;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_CLASS_INDEX;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_LESSON_INDEX;
 import static tutorspet.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -11,7 +11,7 @@ import static tutorspet.testutil.TypicalIndexes.INDEX_SECOND_ITEM;
 
 import org.junit.jupiter.api.Test;
 
-import tutorspet.logic.commands.DeleteLessonCommand;
+import tutorspet.logic.commands.lesson.DeleteLessonCommand;
 
 /**
  * As we are only doing white-box testing, out test cases do not cover path variations

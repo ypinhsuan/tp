@@ -2,8 +2,8 @@ package tutorspet.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static tutorspet.logic.commands.EditLessonCommand.EditLessonDescriptor;
-import static tutorspet.logic.commands.EditLessonCommand.MESSAGE_USAGE;
+import static tutorspet.logic.commands.lesson.EditLessonCommand.EditLessonDescriptor;
+import static tutorspet.logic.commands.lesson.EditLessonCommand.MESSAGE_USAGE;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_CLASS_INDEX;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_DAY;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_END_TIME;
@@ -12,7 +12,7 @@ import static tutorspet.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_VENUE;
 
 import tutorspet.commons.core.index.Index;
-import tutorspet.logic.commands.EditLessonCommand;
+import tutorspet.logic.commands.lesson.EditLessonCommand;
 import tutorspet.logic.parser.exceptions.ParseException;
 
 /**

@@ -1,7 +1,7 @@
 package tutorspet.logic.parser;
 
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static tutorspet.logic.commands.FindModuleClassCommand.MESSAGE_USAGE;
+import static tutorspet.logic.commands.moduleclass.FindModuleClassCommand.MESSAGE_USAGE;
 import static tutorspet.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static tutorspet.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -9,7 +9,7 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
-import tutorspet.logic.commands.FindModuleClassCommand;
+import tutorspet.logic.commands.moduleclass.FindModuleClassCommand;
 import tutorspet.model.components.name.NameContainsKeywordsPredicate;
 
 public class FindModuleClassCommandParserTest {

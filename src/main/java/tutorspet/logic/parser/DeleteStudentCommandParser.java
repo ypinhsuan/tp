@@ -3,7 +3,7 @@ package tutorspet.logic.parser;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import tutorspet.commons.core.index.Index;
-import tutorspet.logic.commands.DeleteStudentCommand;
+import tutorspet.logic.commands.student.DeleteStudentCommand;
 import tutorspet.logic.parser.exceptions.ParseException;
 
 /**

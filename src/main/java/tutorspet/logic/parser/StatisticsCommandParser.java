@@ -2,14 +2,14 @@ package tutorspet.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static tutorspet.logic.commands.StatisticsCommand.MESSAGE_USAGE;
+import static tutorspet.logic.commands.attendance.StatisticsCommand.MESSAGE_USAGE;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_CLASS_INDEX;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_STUDENT_INDEX;
 import static tutorspet.logic.parser.ParserUtil.arePrefixesPresent;
 import static tutorspet.logic.parser.ParserUtil.parseIndex;
 
 import tutorspet.commons.core.index.Index;
-import tutorspet.logic.commands.StatisticsCommand;
+import tutorspet.logic.commands.attendance.StatisticsCommand;
 import tutorspet.logic.parser.exceptions.ParseException;
 
 /**

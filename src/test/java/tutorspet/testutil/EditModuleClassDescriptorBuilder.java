@@ -1,6 +1,6 @@
 package tutorspet.testutil;
 
-import tutorspet.logic.commands.EditModuleClassCommand.EditModuleClassDescriptor;
+import tutorspet.logic.commands.moduleclass.EditModuleClassCommand.EditModuleClassDescriptor;
 import tutorspet.model.components.name.Name;
 import tutorspet.model.moduleclass.ModuleClass;
 

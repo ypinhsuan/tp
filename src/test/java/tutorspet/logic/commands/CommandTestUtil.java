@@ -2,10 +2,10 @@ package tutorspet.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static tutorspet.logic.commands.EditAttendanceCommand.EditAttendanceDescriptor;
-import static tutorspet.logic.commands.EditLessonCommand.EditLessonDescriptor;
-import static tutorspet.logic.commands.EditModuleClassCommand.EditModuleClassDescriptor;
-import static tutorspet.logic.commands.EditStudentCommand.EditStudentDescriptor;
+import static tutorspet.logic.commands.attendance.EditAttendanceCommand.EditAttendanceDescriptor;
+import static tutorspet.logic.commands.lesson.EditLessonCommand.EditLessonDescriptor;
+import static tutorspet.logic.commands.moduleclass.EditModuleClassCommand.EditModuleClassDescriptor;
+import static tutorspet.logic.commands.student.EditStudentCommand.EditStudentDescriptor;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_DAY;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_END_TIME;

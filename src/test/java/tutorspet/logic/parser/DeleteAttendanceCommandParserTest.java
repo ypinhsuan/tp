@@ -3,7 +3,7 @@ package tutorspet.logic.parser;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_WEEK_1;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_WEEK_5;
-import static tutorspet.logic.commands.DeleteAttendanceCommand.MESSAGE_USAGE;
+import static tutorspet.logic.commands.attendance.DeleteAttendanceCommand.MESSAGE_USAGE;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_CLASS_INDEX;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_LESSON_INDEX;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_STUDENT_INDEX;
@@ -16,7 +16,7 @@ import static tutorspet.testutil.TypicalIndexes.INDEX_SECOND_ITEM;
 
 import org.junit.jupiter.api.Test;
 
-import tutorspet.logic.commands.DeleteAttendanceCommand;
+import tutorspet.logic.commands.attendance.DeleteAttendanceCommand;
 
 /**
  * As we are only doing white-box testing, out test cases do not cover path variations

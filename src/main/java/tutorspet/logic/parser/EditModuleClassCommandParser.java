@@ -2,13 +2,13 @@ package tutorspet.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static tutorspet.logic.commands.EditModuleClassCommand.EditModuleClassDescriptor;
-import static tutorspet.logic.commands.EditModuleClassCommand.MESSAGE_NOT_EDITED;
-import static tutorspet.logic.commands.EditModuleClassCommand.MESSAGE_USAGE;
+import static tutorspet.logic.commands.moduleclass.EditModuleClassCommand.EditModuleClassDescriptor;
+import static tutorspet.logic.commands.moduleclass.EditModuleClassCommand.MESSAGE_NOT_EDITED;
+import static tutorspet.logic.commands.moduleclass.EditModuleClassCommand.MESSAGE_USAGE;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_NAME;
 
 import tutorspet.commons.core.index.Index;
-import tutorspet.logic.commands.EditModuleClassCommand;
+import tutorspet.logic.commands.moduleclass.EditModuleClassCommand;
 import tutorspet.logic.parser.exceptions.ParseException;
 
 /**

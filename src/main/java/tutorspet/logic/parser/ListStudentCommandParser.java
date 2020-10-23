@@ -5,8 +5,8 @@ import static tutorspet.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_CLASS_INDEX;
 
 import tutorspet.commons.core.index.Index;
-import tutorspet.logic.commands.ListStudentCommand;
-import tutorspet.logic.commands.ListStudentInClassCommand;
+import tutorspet.logic.commands.student.ListStudentCommand;
+import tutorspet.logic.commands.student.ListStudentInClassCommand;
 import tutorspet.logic.parser.exceptions.ParseException;
 
 /**

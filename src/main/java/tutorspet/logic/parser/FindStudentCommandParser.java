@@ -4,7 +4,7 @@ import static tutorspet.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.Arrays;
 
-import tutorspet.logic.commands.FindStudentCommand;
+import tutorspet.logic.commands.student.FindStudentCommand;
 import tutorspet.logic.parser.exceptions.ParseException;
 import tutorspet.model.components.name.NameContainsKeywordsPredicate;
 

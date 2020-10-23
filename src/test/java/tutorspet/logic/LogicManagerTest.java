@@ -4,12 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 import static tutorspet.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static tutorspet.logic.LogicManager.FILE_OPS_ERROR_MESSAGE;
-import static tutorspet.logic.commands.AddStudentCommand.COMMAND_WORD;
-import static tutorspet.logic.commands.AddStudentCommand.MESSAGE_SUCCESS;
 import static tutorspet.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static tutorspet.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static tutorspet.logic.commands.CommandTestUtil.TELEGRAM_DESC_AMY;
-import static tutorspet.logic.commands.ListStudentCommand.MESSAGE_LIST_ALL_SUCCESS;
+import static tutorspet.logic.commands.student.AddStudentCommand.COMMAND_WORD;
+import static tutorspet.logic.commands.student.AddStudentCommand.MESSAGE_SUCCESS;
+import static tutorspet.logic.commands.student.ListStudentCommand.MESSAGE_LIST_ALL_SUCCESS;
 import static tutorspet.testutil.Assert.assertThrows;
 import static tutorspet.testutil.TypicalStudent.AMY;
 
@@ -21,8 +21,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import tutorspet.logic.commands.CommandResult;
-import tutorspet.logic.commands.ListStudentCommand;
 import tutorspet.logic.commands.exceptions.CommandException;
+import tutorspet.logic.commands.student.ListStudentCommand;
 import tutorspet.logic.parser.exceptions.ParseException;
 import tutorspet.model.Model;
 import tutorspet.model.ModelManager;

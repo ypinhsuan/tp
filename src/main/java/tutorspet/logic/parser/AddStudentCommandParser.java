@@ -9,7 +9,7 @@ import static tutorspet.logic.parser.ParserUtil.arePrefixesPresent;
 
 import java.util.Set;
 
-import tutorspet.logic.commands.AddStudentCommand;
+import tutorspet.logic.commands.student.AddStudentCommand;
 import tutorspet.logic.parser.exceptions.ParseException;
 import tutorspet.model.components.name.Name;
 import tutorspet.model.components.tag.Tag;
