@@ -8,6 +8,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import tutorspet.model.lesson.Lesson;
 
+/**
+ * A UI component that displays information of a {@code Lesson}.
+ */
 public class LessonCard extends UiPart<Region> {
 
     private static final String FXML = "LessonCard.fxml";
