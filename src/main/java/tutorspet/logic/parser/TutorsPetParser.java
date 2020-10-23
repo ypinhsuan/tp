@@ -37,7 +37,25 @@ import tutorspet.logic.commands.student.DeleteStudentCommand;
 import tutorspet.logic.commands.student.EditStudentCommand;
 import tutorspet.logic.commands.student.FindStudentCommand;
 import tutorspet.logic.commands.student.ListStudentCommand;
+import tutorspet.logic.parser.attendance.AddAttendanceCommandParser;
+import tutorspet.logic.parser.attendance.DeleteAttendanceCommandParser;
+import tutorspet.logic.parser.attendance.EditAttendanceCommandParser;
+import tutorspet.logic.parser.attendance.FindAttendanceCommandParser;
+import tutorspet.logic.parser.attendance.StatisticsCommandParser;
 import tutorspet.logic.parser.exceptions.ParseException;
+import tutorspet.logic.parser.lesson.AddLessonCommandParser;
+import tutorspet.logic.parser.lesson.DeleteLessonCommandParser;
+import tutorspet.logic.parser.lesson.DisplayVenueCommandParser;
+import tutorspet.logic.parser.lesson.EditLessonCommandParser;
+import tutorspet.logic.parser.moduleclass.AddModuleClassCommandParser;
+import tutorspet.logic.parser.moduleclass.DeleteModuleClassCommandParser;
+import tutorspet.logic.parser.moduleclass.EditModuleClassCommandParser;
+import tutorspet.logic.parser.moduleclass.FindModuleClassCommandParser;
+import tutorspet.logic.parser.student.AddStudentCommandParser;
+import tutorspet.logic.parser.student.DeleteStudentCommandParser;
+import tutorspet.logic.parser.student.EditStudentCommandParser;
+import tutorspet.logic.parser.student.FindStudentCommandParser;
+import tutorspet.logic.parser.student.ListStudentCommandParser;
 
 /**
  * Parses user input.
