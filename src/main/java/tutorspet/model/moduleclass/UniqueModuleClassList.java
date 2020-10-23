@@ -57,6 +57,7 @@ public class UniqueModuleClassList implements Iterable<ModuleClass> {
         if (contains(toAdd)) {
             throw new DuplicateModuleClassException();
         }
+
         internalList.add(toAdd);
     }
 
@@ -75,6 +76,7 @@ public class UniqueModuleClassList implements Iterable<ModuleClass> {
         requireAllNonNull(target, editedModuleClass);
 
         int index = internalList.indexOf(target);
+
         if (index == -1) {
             throw new ModuleClassNotFoundException();
         }
@@ -128,7 +130,7 @@ public class UniqueModuleClassList implements Iterable<ModuleClass> {
     /**
      * Removes the specified {@code Student} from all {@code ModuleClass}es in the class list.
      */
-    public void removeUuid(Student student) {
+    public void removeStudent(Student student) {
         requireNonNull(student);
 
         internalList.setAll(internalList.stream()
@@ -137,9 +139,9 @@ public class UniqueModuleClassList implements Iterable<ModuleClass> {
     }
 
     /**
-     * Removes all {@code Student UUID}s from every {@code ModuleClass} in the class list.
+     * Removes all {@code Student}s from every {@code ModuleClass} in the class list.
      */
-    public void removeAllStudentUuids() {
+    public void removeAllStudents() {
         internalList.setAll(internalList.stream()
                 .map(moduleClass -> deleteAllStudentsFromModuleClass(moduleClass))
                 .collect(Collectors.toList()));

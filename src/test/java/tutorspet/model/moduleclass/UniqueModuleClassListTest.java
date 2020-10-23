@@ -128,13 +128,13 @@ public class UniqueModuleClassListTest {
 
     @Test
     public void removeUuid_nullUuid_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueModuleClassList.removeUuid(null));
+        assertThrows(NullPointerException.class, () -> uniqueModuleClassList.removeStudent(null));
     }
 
     @Test
     public void removeUuid_existingUuid_updatesModuleClasses() {
         uniqueModuleClassList.add(CS2103T_TUTORIAL);
-        uniqueModuleClassList.removeUuid(ALICE);
+        uniqueModuleClassList.removeStudent(ALICE);
 
         UniqueModuleClassList expectedUniqueModuleClassList = new UniqueModuleClassList();
         Set<UUID> modifiedUuids = new HashSet<>(CS2103T_TUTORIAL.getStudentUuids());
@@ -156,7 +156,7 @@ public class UniqueModuleClassListTest {
         Student targetStudentToRemove = new StudentBuilder().withUuid("4e13dcba-047d-4da7-9860-981493f1884e")
                 .withName("Random Student").withTelegram("random_student")
                 .withEmail("randomstudent@randomemail.com").build();
-        uniqueModuleClassList.removeUuid(targetStudentToRemove);
+        uniqueModuleClassList.removeStudent(targetStudentToRemove);
 
         UniqueModuleClassList expectedUniqueModuleClassList = new UniqueModuleClassList();
         expectedUniqueModuleClassList.add(CS2100_LAB);
@@ -168,7 +168,7 @@ public class UniqueModuleClassListTest {
     public void removeAllStudentUuids() {
         uniqueModuleClassList.add(CS2103T_TUTORIAL);
         uniqueModuleClassList.add(CS2100_LAB);
-        uniqueModuleClassList.removeAllStudentUuids();
+        uniqueModuleClassList.removeAllStudents();
         UniqueModuleClassList expectedUniqueModuleClassList = new UniqueModuleClassList();
         expectedUniqueModuleClassList.add(new ModuleClassBuilder(CS2103T_TUTORIAL_NO_STUDENTS)
                 .withStudentUuids().build());
