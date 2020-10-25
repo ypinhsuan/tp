@@ -699,7 +699,10 @@ Other Examples:
   Attendance shown is for week 5.
 
 <div markdown="span" class="alert alert-info">
-:information_source: **Notes:** The `WEEK` **must be a positive whole number** 1, 2, 3, …​
+
+**:information_source: Notes about the command:**<br>
+  * The `WEEK` **must be a positive whole number** 1, 2, 3, …​
+
 </div>
 
 #### Deleting an attendance record : `delete-attendance`
@@ -726,14 +729,17 @@ Format: `stats c\CLASS_INDEX s\STUDENT_INDEX`
 For example:
 * It is the end of the semester and time for you to grade a student's class participation. You would like to find out
  if Alex has been participative throughout the semester and hence you type in the command `stats c\1 s\1` and press
- <kbd>Enter<\kbd>.
+ <kbd>Enter</kbd>.
 * Now you can see his average participation score and overall attendance to give a corresponding grade.
 
     ![Display_stats after](images/ugimages/DisplayStatsAfter.png)
 
 <div markdown="span" class="alert alert-info">
-:information_source: **Notes:** Lesson(s) not attended displays all lessons that the student did not attend. This
- means that future lessons would also be displayed in the results.
+
+**:information_source: Notes about the command:**<br>
+  * Lesson(s) not attended displays all lessons that the student did not attend. This means that future lessons 
+    would also be displayed in the results.
+ 
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
