@@ -73,8 +73,7 @@ public class MainWindow extends UiPart<Stage> {
         // configure the UI
         GuiSettings guiSettings = logic.getGuiSettings();
         setWindowDefaultSize(guiSettings);
-        this.stylesheet = constructStylesheet(guiSettings.getStylesheet());
-        toggleStylesheet();
+        applyStylesheet(constructStylesheet(guiSettings.getStylesheet()));
 
         setAccelerators();
 
@@ -167,13 +166,14 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.show();
     }
 
-    private void toggleStylesheet() {
+    private void applyStylesheet(Stylesheet newStylesheet) {
         ObservableList<String> uiStyleSheet = primaryStage.getScene().getStylesheets();
         uiStyleSheet.clear();
         try {
-            String switchedStyleSheet = stylesheet.getStylesheet();
+            String switchedStyleSheet = newStylesheet.getStylesheet();
             uiStyleSheet.add(switchedStyleSheet);
             uiStyleSheet.add(Stylesheet.EXTENSION.getStylesheet());
+            stylesheet = newStylesheet;
             logger.info(Stylesheet.SUCCESS_MESSAGE + stylesheet.toString());
         } catch (StylesheetException e) {
             logger.info(e.getMessage());
@@ -182,23 +182,20 @@ public class MainWindow extends UiPart<Stage> {
 
     /** Sets stylesheet to Light Theme. */
     @FXML
-    public void toggleLightTheme() {
-        stylesheet = Stylesheet.LIGHT;
-        toggleStylesheet();
+    public void applyLightTheme() {
+        applyStylesheet(Stylesheet.LIGHT);
     }
 
     /** Sets stylesheet to Alternate Theme. */
     @FXML
-    public void toggleAlternateTheme() {
-        stylesheet = Stylesheet.ALTERNATE;
-        toggleStylesheet();
+    public void applyAlternateTheme() {
+        applyStylesheet(Stylesheet.ALTERNATE);
     }
 
     /** Sets stylesheet to Dark Theme. */
     @FXML
-    public void toggleDarkTheme() {
-        stylesheet = Stylesheet.DARK;
-        toggleStylesheet();
+    public void applyDarkTheme() {
+        applyStylesheet(Stylesheet.DARK);
     }
 
     /**
