@@ -328,25 +328,25 @@ of a `StatisticsCommand`:
 * **Alternative 1 (current choice):** Extract the methods out to another class
 (`ModuleClassUtil` and `LessonClassUtil`).
     * Pros:
-        * Does not violate the law of demeter. Increases cohesion and thus increase maintainability.
+      * Does not violate the law of demeter. Increases cohesion and thus increase maintainability and testability.
     * Cons:
-        * Requires more wrapper methods to carry information.
-        * More effort to implement.
+      * Requires more wrapper methods to carry information.
+      * More effort to implement.
 
 * **Alternative 2:** Obtain all attendance information within `StatisticsCommand#execute()`.
     * Pros:
-        * Easy, straightforward to implement.
+      * Easy, straightforward to implement.
     * Cons:
-        * Violates the law of demeter to a large extent.
+      * Violates the law of demeter to a large extent.
 
 ##### Aspect 2: Responsibility of relevant methods
 
 * **Alternative 1 (current choice):** Allow `ModuleClassUtil#getParticipationScore` and
 `ModuleClassUtil#getAbsentWeek` to return intermediate values.
-    * Pros:
-        * Reduce the responsibilities of `ModuleClassUtil#getParticipationScore` and `ModuleClassUtil#getAbsentWeek`.
-    * Cons:
-        * Additional processing required to process the results of the method calls in `StatisticsCommand#execute()`.
+  * Pros:
+    * Reduce the responsibilities of `ModuleClassUtil#getParticipationScore` and `ModuleClassUtil#getAbsentWeek`.
+  * Cons:
+    * Additional processing required to process the results of the method calls in `StatisticsCommand#execute()`.
 
 * **Alternative 2:** Allow `ModuleClassUtil#getParticipationScore` and
 `ModuleClassUtil#getAbsentWeek` to return a `String` representation directly.
@@ -404,13 +404,18 @@ The following activity diagram shows how the `add attendance` operation works.
  attendances.
 </div>
 
-* **Alternative 2:** User can add multiple attendances for a specific week's lesson at the same time.
+* **Alternative 2:** User can add multiple student's attendances for a specific week's lesson at the same time.
   * Pros:
     * Provides greater convenience for users as they can add attendances for the whole class in a single command.
     * Greater flexibility as users can choose whether to key in attendance one at a time or all at once.
   * Cons:
-    * More complex code leading to higher possibility of bugs. In addition, usage would be low as it is unlikely for
-     multiple students to have same partcipation score.
+    * More complex code leading to higher possibility of bugs.
+
+**Justification**
+Alternative 1 was chosen because the cons of implementing alternative 2 outweighs the benefits derived from it. It is
+unlikely for multiple students to have the same participation score and hence the use of this command with multiple
+students is expected to be low. In addition, users can make use of the `recall` feature to speed up the process of
+recording attendances.
 
 ### Command Recall Feature
 
