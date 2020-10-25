@@ -1,5 +1,7 @@
 package tutorspet.ui;
 
+import static tutorspet.ui.stylesheet.Stylesheet.constructStylesheet;
+
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -38,6 +40,7 @@ public class MainWindow extends UiPart<Stage> {
     private ModuleClassListPanel moduleClassListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private Stylesheet stylesheet;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -68,7 +71,10 @@ public class MainWindow extends UiPart<Stage> {
         this.logic = logic;
 
         // configure the UI
-        setWindowDefaultSize(logic.getGuiSettings());
+        GuiSettings guiSettings = logic.getGuiSettings();
+        setWindowDefaultSize(guiSettings);
+        this.stylesheet = constructStylesheet(guiSettings.getStylesheet());
+        toggleStylesheet();
 
         setAccelerators();
 
@@ -161,7 +167,7 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.show();
     }
 
-    private void toggleStylesheet(Stylesheet stylesheet) {
+    private void toggleStylesheet() {
         ObservableList<String> uiStyleSheet = primaryStage.getScene().getStylesheets();
         uiStyleSheet.clear();
         try {
@@ -174,19 +180,25 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /** Sets stylesheet to Light Theme. */
     @FXML
     public void toggleLightTheme() {
-        toggleStylesheet(Stylesheet.LIGHT);
+        stylesheet = Stylesheet.LIGHT;
+        toggleStylesheet();
     }
 
+    /** Sets stylesheet to Alternate Theme. */
     @FXML
     public void toggleAlternateTheme() {
-        toggleStylesheet(Stylesheet.ALTERNATE);
+        stylesheet = Stylesheet.ALTERNATE;
+        toggleStylesheet();
     }
 
+    /** Sets stylesheet to Dark Theme. */
     @FXML
     public void toggleDarkTheme() {
-        toggleStylesheet(Stylesheet.DARK);
+        stylesheet = Stylesheet.DARK;
+        toggleStylesheet();
     }
 
     /**
@@ -195,7 +207,7 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private void handleExit() {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
-                (int) primaryStage.getX(), (int) primaryStage.getY());
+                (int) primaryStage.getX(), (int) primaryStage.getY(), stylesheet.toString());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();

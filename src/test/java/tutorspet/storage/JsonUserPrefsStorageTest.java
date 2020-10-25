@@ -15,6 +15,7 @@ import org.junit.jupiter.api.io.TempDir;
 import tutorspet.commons.core.GuiSettings;
 import tutorspet.commons.exceptions.DataConversionException;
 import tutorspet.model.UserPrefs;
+import tutorspet.ui.stylesheet.Stylesheet;
 
 public class JsonUserPrefsStorageTest {
 
@@ -74,7 +75,7 @@ public class JsonUserPrefsStorageTest {
 
     private UserPrefs getTypicalUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
-        userPrefs.setGuiSettings(new GuiSettings(1000, 500, 300, 100));
+        userPrefs.setGuiSettings(new GuiSettings(1000, 500, 300, 100, Stylesheet.LIGHT.toString()));
         userPrefs.setTutorsPetFilePath(Paths.get("tutorspet.json"));
         return userPrefs;
     }
@@ -105,7 +106,7 @@ public class JsonUserPrefsStorageTest {
     public void saveUserPrefs_allInOrder_success() throws DataConversionException, IOException {
 
         UserPrefs original = new UserPrefs();
-        original.setGuiSettings(new GuiSettings(1200, 200, 0, 2));
+        original.setGuiSettings(new GuiSettings(1200, 200, 0, 2, Stylesheet.DARK.toString()));
 
         Path pefsFilePath = testFolder.resolve("TempPrefs.json");
         JsonUserPrefsStorage jsonUserPrefsStorage = new JsonUserPrefsStorage(pefsFilePath);
@@ -116,7 +117,7 @@ public class JsonUserPrefsStorageTest {
         assertEquals(original, readBack);
 
         //Try saving when the file exists
-        original.setGuiSettings(new GuiSettings(5, 5, 5, 5));
+        original.setGuiSettings(new GuiSettings(5, 5, 5, 5, ""));
         jsonUserPrefsStorage.saveUserPrefs(original);
         readBack = jsonUserPrefsStorage.readUserPrefs().get();
         assertEquals(original, readBack);

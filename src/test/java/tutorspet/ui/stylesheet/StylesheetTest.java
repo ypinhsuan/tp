@@ -1,6 +1,8 @@
 package tutorspet.ui.stylesheet;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
+import static tutorspet.ui.stylesheet.Stylesheet.constructStylesheet;
 
 import org.junit.jupiter.api.Test;
 
@@ -42,5 +44,13 @@ class StylesheetTest {
         } catch (StylesheetException e) {
             fail();
         }
+    }
+
+    @Test
+    public void testConstructStyleSheet() {
+        assertEquals(Stylesheet.LIGHT, constructStylesheet("LightTheme.css"));
+        assertEquals(Stylesheet.ALTERNATE, constructStylesheet("AlternateTheme.css"));
+        assertEquals(Stylesheet.DARK, constructStylesheet("DarkTheme.css"));
+        assertEquals(Stylesheet.DEFAULT_STYLESHEET, constructStylesheet("invalid"));
     }
 }
