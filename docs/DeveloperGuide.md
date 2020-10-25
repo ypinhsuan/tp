@@ -318,7 +318,7 @@ of a `StatisticsCommand`:
 1. As seen above, `ModuleClassUtil` then iterates through the list of lessons to calculate the student's participation
  score and absent weeks by using `LessonUtil#getParticipationScoreFromLesson(lesson, student)` and
  `LessonUtil#getAbsentWeekFromLesson(lesson, student)` respectively.
-1.`StatisticsCommand` takes the results from the previous step and processed the values.
+1. `StatisticsCommand` takes the results from the previous step and processed the values.
 1. `StatisticsCommand`encapsulates the result into a `CommandResult` object which is passed back to the `Ui`.
 
 ### Design Considerations
@@ -342,7 +342,7 @@ of a `StatisticsCommand`:
 #### Aspect 2: Responsibility of relevant methods
 
 * **Alternative 1 (current choice):** Allow `ModuleClassUtil#getParticipationScore` and
-`ModuleClassUtil#getAbsentWeek` to return relevant values.
+`ModuleClassUtil#getAbsentWeek` to return intermediate values.
     * Pros:
         * Reduce the responsibilities of `ModuleClassUtil#getParticipationScore` and `ModuleClassUtil#getAbsentWeek`.
     * Cons:
@@ -361,8 +361,8 @@ of a `StatisticsCommand`:
 
 #### Implementation
 
-The add attendance mechanism is facilitated by `AddAttendanceCommand`. It extends `Command`. This feature records the
- attendance of a specific student for a specific week lesson.
+This feature records the attendance of a specific student for a specific week's lesson.
+The add attendance mechanism is facilitated by `AddAttendanceCommand`. It extends `Command`.
 
 * AddAttendanceCommand#execute(): Do validity check and adds a student's attendance for a particular week's lesson if
  all validations passed.
@@ -397,8 +397,7 @@ The following activity diagram shows how the `add attendance` operation works.
     * Pros:
         * Less complex code reduces the possibility of bugs.
     * Cons:
-        * Less convenient for users as they have to users would have to add attendances for the whole class one at a
-         time.
+        * Less convenient for users as they would have to add attendances for the whole class one at a time.
 
 <div markdown="span" class="alert alert-info">
 :information_source: **Note:** Users can make use of the command recall feature to speed up the recording of
