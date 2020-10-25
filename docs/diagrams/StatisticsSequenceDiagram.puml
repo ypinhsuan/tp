@@ -9,7 +9,6 @@ participant ":StatisticsCommand" as StatisticsCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 participant "<<Class>>\nModuleClassUtil" as ModuleClassUtil LOGIC_COLOR
 participant "<<Class>>\nLessonUtil" as LessonUtil LOGIC_COLOR
-
 end box
 
 [-> LogicManager : execute("stats c\1 s\1")
@@ -32,29 +31,43 @@ create StatisticsCommand
 StatisticsCommandParser -> StatisticsCommand
 activate StatisticsCommand
 
-StatisticsCommand --> StatisticsCommandParser : s
+StatisticsCommand --> StatisticsCommandParser :
 deactivate StatisticsCommand
 
-StatisticsCommandParser --> TutorsPetParser : s
+StatisticsCommandParser --> TutorsPetParser :
 deactivate StatisticsCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
 StatisticsCommandParser -[hidden]-> TutorsPetParser
 destroy StatisticsCommandParser
 
-TutorsPetParser --> LogicManager : s
+TutorsPetParser --> LogicManager :
 deactivate TutorsPetParser
 
 LogicManager -> StatisticsCommand : execute()
 activate StatisticsCommand
 
-StatisticsCommand -> ModuleClassUtil : getAttendanceFromModuleClass(lesson, student)
+StatisticsCommand -> ModuleClassUtil : getParticipationScore(moduleClass, student)
 activate ModuleClassUtil
 
 loop hasLesson
-    ModuleClassUtil -> LessonUtil : getAttendanceFromLesson(lesson, student)
+    ModuleClassUtil -> LessonUtil : getParticipationScoreFromLesson(lesson, student)
     activate LessonUtil
 
-    LessonUtil -> ModuleClassUtil : attendances
+    LessonUtil -> ModuleClassUtil : participationScore
+    deactivate LessonUtil
+end
+
+ModuleClassUtil --> StatisticsCommand
+deactivate ModuleClassUtil
+
+StatisticsCommand -> ModuleClassUtil : getAbsentWeek(moduleClass, student)
+activate ModuleClassUtil
+
+loop hasLesson
+    ModuleClassUtil -> LessonUtil : getAbsentWeekFromLesson(lesson, student)
+    activate LessonUtil
+
+    LessonUtil -> ModuleClassUtil : absentWeeks
     deactivate LessonUtil
 end
 

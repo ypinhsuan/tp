@@ -300,8 +300,7 @@ The display statistics mechanism is facilitated by `StatisticsCommand`. It exten
 * DisplayStatisticsCommand#execute(): Do validity check and returns a specific student's statistics if all
  validations passed.
 
-The following class diagram shows the relationship between classes within the `Logic` component during the execution
-of a `StatisticsCommand`:
+The following class diagram shows the relationship between classes during the execution of a `StatisticsCommand`:
 
 ![StatisticsClassDiagram](images/StatisticsClassDiagram.png)
 
@@ -316,20 +315,105 @@ of a `StatisticsCommand`:
 1. `TutorsPetParser` encapsulates the `StatisticsCommand` object as a `Command` object which is executed by
  the `LogicManager`.
 1. The command execution calls static methods from the `ModuleClassUtil` and `LessonUtil` classes.
-1. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
+1. As seen above, `ModuleClassUtil` then iterates through the list of lessons to calculate the student's participation
+ score and absent weeks by using `LessonUtil#getParticipationScoreFromLesson(lesson, student)` and
+ `LessonUtil#getAbsentWeekFromLesson(lesson, student)` respectively.
+1.`StatisticsCommand` takes the results from the previous step and processed the values.
+1. `StatisticsCommand`encapsulates the result into a `CommandResult` object which is passed back to the `Ui`.
 
 ### Design Considerations
 
 #### Aspect 1: How statistics feature executes
 
-* **Alternative 1:** Obtain all attendance information within `StatisticsCommand#execute()`.
-    * Pros: Easy to implement.
-    * Cons: Violates the law of demeter to a large extent.
-
-* **Alternative 2 (current choice):** Extract the methods out to another class
+* **Alternative 1 (current choice):** Extract the methods out to another class
 (`ModuleClassUtil` and `LessonClassUtil`).
-    * Pros: Does not violate the law of demeter. Increases cohesion and thus increase maintainability.
-    * Cons: Requires more wrapper methods to carry information. More effort to implement.
+    * Pros:
+        * Does not violate the law of demeter. Increases cohesion and thus increase maintainability.
+    * Cons:
+        * Requires more wrapper methods to carry information.
+        * More effort to implement.
+
+* **Alternative 2:** Obtain all attendance information within `StatisticsCommand#execute()`.
+    * Pros:
+        * Easy, straightforward to implement.
+    * Cons:
+        * Violates the law of demeter to a large extent.
+
+#### Aspect 2: Responsibility of relevant methods
+
+* **Alternative 1 (current choice):** Allow `ModuleClassUtil#getParticipationScore` and
+`ModuleClassUtil#getAbsentWeek` to return relevant values.
+    * Pros:
+        * Reduce the responsibilities of `ModuleClassUtil#getParticipationScore` and `ModuleClassUtil#getAbsentWeek`.
+    * Cons:
+        * Additional processing required to process the results of the method calls in `StatisticsCommand#execute()`.
+
+* **Alternative 2:** Allow `ModuleClassUtil#getParticipationScore` and
+`ModuleClassUtil#getAbsentWeek` to return a `String` representation directly.
+    * Pros:
+        * Easy, straightforward to implement.
+        * Do not need to iterate through scores and weeks in `StatisticsCommand`.
+    * Cons:
+        * `ModuleClassUtil#getParticipationScore` and `ModuleClassUtil#getAbsentWeek` would have too many
+         responsibilities. Violates the Single Responsibility Principle.
+
+### Add Attendance Feature
+
+#### Implementation
+
+The add attendance mechanism is facilitated by `AddAttendanceCommand`. It extends `Command`. This feature records the
+ attendance of a specific student for a specific week lesson.
+
+* AddAttendanceCommand#execute(): Do validity check and adds a student's attendance for a particular week's lesson if
+ all validations passed.
+
+The following sequence diagram shows the interactions between the `Model` and `Logic` components during the execution
+ of a `AddAttendanceCommand`:
+
+![AddAttendanceSequenceDiagram](images/AddAttendanceSequenceDiagram.png)
+
+1. `Logic` uses the `TutorsPetParser` class to parse the user command.
+1. A new instance of a `AddAttendanceCommand` object would be created by the `AddAttendanceCommandParser` and returns
+ to `TutorsPetParser`.
+1. `TutorsPetParser` encapsulates the `AddAttendanceCommand` object as a `Command` object which is executed by
+ the `LogicManager`.
+1. The command execution calls `getFilteredStudentList` and `getFilteredModuleClassList` to get the `targetStudent` and
+ `targetModuleClass` respectively using indexes from the user input.
+1. As seen from the diagram above, `ModuleClassUtil#addAttendanceToModuleClass()` is then called. Execution of that
+ method returns a new `ModuleClass` object with the new attendance of the `targetStudent` added.
+1. The `targetModuleClass` in the `model` is then updated with the new `ModuleClass` object.
+1. The results of the command execution is committed using `commit()` method for `undo/redo` functionalities.
+1. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
+
+The following activity diagram shows how the `add attendance` operation works.
+
+![AddAttendanceActivityDiagram](images/AddAttendanceActivityDiagram.png)
+
+### Design Considerations
+
+#### Aspect 1: How `add attendance` feature executes
+
+* **Alternative 1 (current choice):** User can only add one attendance at a time.
+    * Pros:
+        * Less complex code reduces the possibility of bugs.
+    * Cons:
+        * Less convenient for users as they have to users would have to add attendances for the whole class one at a
+         time.
+
+<div markdown="span" class="alert alert-info">
+:information_source: **Note:** Users can make use of the command recall feature to speed up the recording of
+ attendances.
+</div>
+
+* **Alternative 2:** User can add multiple attendances for a specific week's lesson at the same time.
+    * Pros:
+        * Provides greater convenience for users as they can add attendances for the whole class in a single command.
+        * Greater flexibility as users can choose whether to key in attendance one at a time or all at once.
+    * Cons:
+        * More complex code leading to higher possibility of bugs.
+        * Might have to change implementation of parser as currently, the last value input is accepted.
+        For example, if user input `add-attendance c\1 l\1 s\1 c\2`, the class at index 2 would be taken instead.
+        This implementation might have to be changed.
 
 ### Command Recall Feature
 
