@@ -116,7 +116,7 @@ public class JsonUserPrefsStorageTest {
         UserPrefs readBack = jsonUserPrefsStorage.readUserPrefs().get();
         assertEquals(original, readBack);
 
-        //Try saving when the file exists
+        // try saving when the file exists
         original.setGuiSettings(new GuiSettings(5, 5, 5, 5, ""));
         jsonUserPrefsStorage.saveUserPrefs(original);
         readBack = jsonUserPrefsStorage.readUserPrefs().get();
