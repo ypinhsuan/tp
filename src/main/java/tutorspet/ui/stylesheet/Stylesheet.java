@@ -11,11 +11,28 @@ public enum Stylesheet {
     public static final String ERROR_MESSAGE = "Stylesheet cannot be found: ";
     public static final String SUCCESS_MESSAGE = "Stylesheet switched to: ";
 
+    public static final Stylesheet DEFAULT_STYLESHEET = LIGHT;
+
     private static final String DIRECTORY = "/view/";
     private final String path;
 
     Stylesheet(String path) {
         this.path = path;
+    }
+
+    /**
+     * Creates a {@code Stylesheet} object given a {@code String}.
+     *
+     * If the given {@code String} does not match any of the stylesheets,
+     * return the default stylesheet instead.
+     */
+    public static Stylesheet constructStylesheet(String stylesheetString) {
+        for (Stylesheet stylesheet : values()) {
+            if (stylesheet.path.equals(stylesheetString)) {
+                return stylesheet;
+            }
+        }
+        return DEFAULT_STYLESHEET;
     }
 
     @Override

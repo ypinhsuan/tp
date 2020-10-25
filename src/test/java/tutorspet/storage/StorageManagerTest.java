@@ -15,6 +15,7 @@ import tutorspet.commons.core.GuiSettings;
 import tutorspet.model.ReadOnlyTutorsPet;
 import tutorspet.model.TutorsPet;
 import tutorspet.model.UserPrefs;
+import tutorspet.ui.stylesheet.Stylesheet;
 
 public class StorageManagerTest {
 
@@ -42,7 +43,8 @@ public class StorageManagerTest {
          * More extensive testing of UserPref saving/reading is done in {@link JsonUserPrefsStorageTest} class.
          */
         UserPrefs original = new UserPrefs();
-        original.setGuiSettings(new GuiSettings(300, 600, 4, 6));
+        original.setGuiSettings(new GuiSettings(300, 600, 4, 6,
+                Stylesheet.DARK.toString()));
         storageManager.saveUserPrefs(original);
         UserPrefs retrieved = storageManager.readUserPrefs().get();
         assertEquals(original, retrieved);

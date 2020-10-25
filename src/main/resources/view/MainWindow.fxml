@@ -30,9 +30,9 @@
             <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
           </Menu>
           <Menu mnemonicParsing="false" text="Theme">
-            <MenuItem mnemonicParsing="false" onAction="#toggleLightTheme" text="Light" />
-            <MenuItem mnemonicParsing="false" onAction="#toggleAlternateTheme" text="Alternate" />
-            <MenuItem mnemonicParsing="false" onAction="#toggleDarkTheme" text="Dark" />
+            <MenuItem mnemonicParsing="false" onAction="#applyLightTheme" text="Light" />
+            <MenuItem mnemonicParsing="false" onAction="#applyAlternateTheme" text="Alternate" />
+            <MenuItem mnemonicParsing="false" onAction="#applyDarkTheme" text="Dark" />
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />

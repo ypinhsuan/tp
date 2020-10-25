@@ -1,5 +1,7 @@
 package tutorspet.commons.core;
 
+import static tutorspet.ui.stylesheet.Stylesheet.DEFAULT_STYLESHEET;
+
 import java.awt.Point;
 import java.io.Serializable;
 import java.util.Objects;
@@ -16,6 +18,7 @@ public class GuiSettings implements Serializable {
     private final double windowWidth;
     private final double windowHeight;
     private final Point windowCoordinates;
+    private final String stylesheet;
 
     /**
      * Constructs a {@code GuiSettings} with the default height, width and position.
@@ -24,15 +27,18 @@ public class GuiSettings implements Serializable {
         windowWidth = DEFAULT_WIDTH;
         windowHeight = DEFAULT_HEIGHT;
         windowCoordinates = null; // null represent no coordinates
+        stylesheet = DEFAULT_STYLESHEET.toString();
     }
 
     /**
      * Constructs a {@code GuiSettings} with the specified height, width and position.
      */
-    public GuiSettings(double windowWidth, double windowHeight, int xPosition, int yPosition) {
+    public GuiSettings(
+            double windowWidth, double windowHeight, int xPosition, int yPosition, String stylesheet) {
         this.windowWidth = windowWidth;
         this.windowHeight = windowHeight;
         windowCoordinates = new Point(xPosition, yPosition);
+        this.stylesheet = stylesheet;
     }
 
     public double getWindowWidth() {
@@ -45,6 +51,10 @@ public class GuiSettings implements Serializable {
 
     public Point getWindowCoordinates() {
         return windowCoordinates != null ? new Point(windowCoordinates) : null;
+    }
+
+    public String getStylesheet() {
+        return stylesheet;
     }
 
     @Override
@@ -60,12 +70,13 @@ public class GuiSettings implements Serializable {
 
         return windowWidth == o.windowWidth
                 && windowHeight == o.windowHeight
-                && Objects.equals(windowCoordinates, o.windowCoordinates);
+                && Objects.equals(windowCoordinates, o.windowCoordinates)
+                && Objects.equals(stylesheet, o.stylesheet);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(windowWidth, windowHeight, windowCoordinates);
+        return Objects.hash(windowWidth, windowHeight, windowCoordinates, stylesheet);
     }
 
     @Override
@@ -73,7 +84,8 @@ public class GuiSettings implements Serializable {
         StringBuilder sb = new StringBuilder();
         sb.append("Width : " + windowWidth + "\n");
         sb.append("Height : " + windowHeight + "\n");
-        sb.append("Position : " + windowCoordinates);
+        sb.append("Position : " + windowCoordinates + "\n");
+        sb.append("Stylesheet : " + stylesheet);
         return sb.toString();
     }
 }

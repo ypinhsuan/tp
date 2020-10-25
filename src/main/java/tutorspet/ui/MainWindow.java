@@ -1,5 +1,7 @@
 package tutorspet.ui;
 
+import static tutorspet.ui.stylesheet.Stylesheet.constructStylesheet;
+
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -38,6 +40,7 @@ public class MainWindow extends UiPart<Stage> {
     private ModuleClassListPanel moduleClassListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private Stylesheet stylesheet;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -68,7 +71,9 @@ public class MainWindow extends UiPart<Stage> {
         this.logic = logic;
 
         // configure the UI
-        setWindowDefaultSize(logic.getGuiSettings());
+        GuiSettings guiSettings = logic.getGuiSettings();
+        setWindowDefaultSize(guiSettings);
+        applyStylesheet(constructStylesheet(guiSettings.getStylesheet()));
 
         setAccelerators();
 
@@ -161,32 +166,36 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.show();
     }
 
-    private void toggleStylesheet(Stylesheet stylesheet) {
+    private void applyStylesheet(Stylesheet newStylesheet) {
         ObservableList<String> uiStyleSheet = primaryStage.getScene().getStylesheets();
         uiStyleSheet.clear();
         try {
-            String switchedStyleSheet = stylesheet.getStylesheet();
+            String switchedStyleSheet = newStylesheet.getStylesheet();
             uiStyleSheet.add(switchedStyleSheet);
             uiStyleSheet.add(Stylesheet.EXTENSION.getStylesheet());
+            stylesheet = newStylesheet;
             logger.info(Stylesheet.SUCCESS_MESSAGE + stylesheet.toString());
         } catch (StylesheetException e) {
             logger.info(e.getMessage());
         }
     }
 
+    /** Sets stylesheet to Light Theme. */
     @FXML
-    public void toggleLightTheme() {
-        toggleStylesheet(Stylesheet.LIGHT);
+    public void applyLightTheme() {
+        applyStylesheet(Stylesheet.LIGHT);
     }
 
+    /** Sets stylesheet to Alternate Theme. */
     @FXML
-    public void toggleAlternateTheme() {
-        toggleStylesheet(Stylesheet.ALTERNATE);
+    public void applyAlternateTheme() {
+        applyStylesheet(Stylesheet.ALTERNATE);
     }
 
+    /** Sets stylesheet to Dark Theme. */
     @FXML
-    public void toggleDarkTheme() {
-        toggleStylesheet(Stylesheet.DARK);
+    public void applyDarkTheme() {
+        applyStylesheet(Stylesheet.DARK);
     }
 
     /**
@@ -195,7 +204,7 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private void handleExit() {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
-                (int) primaryStage.getX(), (int) primaryStage.getY());
+                (int) primaryStage.getX(), (int) primaryStage.getY(), stylesheet.toString());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();
