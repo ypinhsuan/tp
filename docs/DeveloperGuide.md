@@ -394,6 +394,7 @@ The following activity diagram shows how the `add attendance` operation works.
 ##### Aspect 1: How `add attendance` feature executes
 
 * **Alternative 1 (current choice):** User can only add one attendance at a time.
+
   * Pros:
     * Less complex code reduces the possibility of bugs.
   * Cons:
@@ -405,6 +406,7 @@ The following activity diagram shows how the `add attendance` operation works.
 </div>
 
 * **Alternative 2:** User can add multiple student's attendances for a specific week's lesson at the same time.
+
   * Pros:
     * Provides greater convenience for users as they can add attendances for the whole class in a single command.
     * Greater flexibility as users can choose whether to key in attendance one at a time or all at once.
@@ -412,6 +414,7 @@ The following activity diagram shows how the `add attendance` operation works.
     * More complex code leading to higher possibility of bugs.
 
 **Justification**
+
 Alternative 1 was chosen because the cons of implementing alternative 2 outweighs the benefits derived from it. It is
 unlikely for multiple students to have the same participation score and hence the use of this command with multiple
 students is expected to be low. In addition, users can make use of the `recall` feature to speed up the process of
