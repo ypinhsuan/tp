@@ -37,16 +37,17 @@ The following features are used in this guide to make it easier for you to navig
 
 Here are a few steps to get you started on Tutor's Pet:
 
-1. Ensure you have Java **11** or above installed in your Computer.
+1. Ensure you have **Java 11** or above installed in your Computer.
 
 2. Download the latest **tutorspet.jar** [here](https://github.com/AY2021S1-CS2103T-T10-4/tp/releases).
 
 3. Copy the file to the folder you want to use as the home folder for your Tutor's Pet.
 
-4. Double-click the file to start the application. The GUI similar to the below should appear in a few seconds.<br>
+4. Double-click the file to start the application. An application similar to the one below should appear in a few
+   seconds.<br>
 
    ![Ui](images/Ui.png)
-   Figure 1. GUI for Tutor's Pet.
+   Figure 1. Tutor's Pet application.
 
 ### Using Tutor's Pet
 
@@ -132,6 +133,8 @@ The utility area consists of three tabs: **File**, **Theme**, **Help**.
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n\NAME t\TELEGRAM_USERNAME`, `t\TELEGRAM_USERNAME n\NAME` is also acceptable.
 
+* Indexes **must be a positive whole number** 1, 2, 3, …​
+
 </div>
 
 ## Command Overview
@@ -146,16 +149,16 @@ The utility area consists of three tabs: **File**, **Theme**, **Help**.
 | **Reset**                         | `reset`                                                                                                                                                                   |
 | **Add Student**                   | `add-student n\NAME t\TELEGRAM_USERNAME e\EMAIL [tag\TAG]…​` <br> e.g., `add-student n\John Doe t\johndoe e\johnd@example.com tag\student`                             |
 | **List All Students**             | `list-student`                                                                                                                                                            |
-| **Edit Student**                  | `edit-student INDEX [n\NAME] [t\TELEGRAM_USERNAME] [e\EMAIL] [tag\TAG]…​`<br> e.g., `edit-student 2 n\James Lee e\jameslee@example.com`                                |
+| **Edit Student**                  | `edit-student STUDENT_INDEX [n\NAME] [t\TELEGRAM_USERNAME] [e\EMAIL] [tag\TAG]…​`<br> e.g., `edit-student 2 n\James Lee e\jameslee@example.com`                                |
 | **Find Student**                  | `find-student KEYWORD [MORE_KEYWORDS]`<br> e.g., `find-student James Jake`                                                                                                |
-| **Delete Student**                | `delete-student INDEX`<br> e.g., `delete-student 3`                                                                                                                       |
+| **Delete Student**                | `delete-student STUDENT_INDEX`<br> e.g., `delete-student 3`                                                                                                                       |
 | **Clear All Students**            | `clear-student`                                                                                                                                                           |
 | **Add Class**                     | `add-class n\CLASS_NAME`<br> e.g., `add-class n\CS2103T Tutorial T10`                                                                                                     |
 | **List All Classes**              | `list-class`                                                                                                                                                              |
-| **List Students In A Class**      | `list-students c\INDEX`<br> e.g., `list-students c\3`                                                                                                                     |
-| **Edit Class**                    | `edit-class INDEX n\CLASS_NAME` <br> e.g., `edit-class 1 n\CS2103T Tutorial T10`                                                                                          |
+| **List Students In A Class**      | `list-students c\CLASS_INDEX`<br> e.g., `list-students c\3`                                                                                                                     |
+| **Edit Class**                    | `edit-class CLASS_INDEX n\CLASS_NAME` <br> e.g., `edit-class 1 n\CS2103T Tutorial T10`                                                                                          |
 | **Find Class**                    | `find-class KEYWORD [MORE_KEYWORDS]`<br> e.g., `find-class CS2103T`                                                                                                       |
-| **Delete Class**                  | `delete-class INDEX` <br> e.g., `delete-class 2`                                                                                                                          |
+| **Delete Class**                  | `delete-class CLASS_INDEX` <br> e.g., `delete-class 2`                                                                                                                          |
 | **Clear All Classes**             | `clear-class`                                                                                                                                                             |
 | **List All Students And Classes** | `list`                                                                                                                                                                    |
 | **Linking Student To A Class**    | `link s\STUDENT_INDEX c\CLASS_INDEX`<br> e.g., `link s\1 c\2`                                                                                                             |
@@ -247,9 +250,6 @@ Format: `add-student n\NAME t\TELEGRAM_USERNAME e\EMAIL [tag\TAG]…​`
 For example:
 * You would like to add a new student, `Joel Lee` to Tutor's Pet.
 Type in `add-student n\Joel Lee t\joeleee e\jlee@example.com`
-
-  ![AddStudentBefore](images/ugimages/AddStudentBefore.png)
-
 * Scrolling down the list of students, you will see that `Joel Lee` has been added to Tutor's Pet.
 
   ![AddStudentAfter](images/ugimages/AddStudentAfter.png)
@@ -272,20 +272,15 @@ Format: `list-student`
 
 If you would like to change a student's particulars, use this command.
 
-Format: `edit-student INDEX [n\NAME] [t\TELEGRAM_USERNAME] [e\EMAIL] [tag\TAG]…​`
+Format: `edit-student STUDENT_INDEX [n\NAME] [t\TELEGRAM_USERNAME] [e\EMAIL] [tag\TAG]…​`
 
 For example:
 * `Charlotte Oliveiro` gave you the wrong email address on the first day of class. You need to replace her email address. Key in `edit-student 3 e\charlotteolive@example.com` and press <kbd>Enter</kbd>.
-
-  ![EditStudentBefore](images/ugimages/EditStudentBefore.png)
-
 * Scrolling down the list of students, you can see that `Charlotte`'s email has changed to `charlotteolive@example.com`.
 
   ![EditStudentAfter](images/ugimages/EditStudentAfter.png)
 
 Constraints:
-* The index refers to the number shown in the displayed student list.
-* This index **must be a positive whole number** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * When editing tags, the existing tags of the student will be removed and replaced by the newly typed in tags.
 * You can remove all the tags of a student by typing `tag\` without
@@ -308,8 +303,6 @@ For example:
 You want to email him these notes.
 Type `find-student roy` and press <kbd>Enter</kbd>.
 
-  ![FindStudentBefore](images/ugimages/FindStudentBefore.png)
-
   ![FindStudentAfter](images/ugimages/FindStudentAfter.png)
 
 Constraints:
@@ -323,20 +316,14 @@ Constraints:
 
 If you would like to delete a student, you can make use of this command.
 
-Format: `delete-student INDEX`
+Format: `delete-student STUDENT_INDEX`
 
 For example:
 * `Bernice`, the 2nd student displayed in Tutor's Pet, has swapped `CS2103T Tutorial` slots and you no longer teach her.
 Hence, you want to delete her entry from Tutor's Pet. You type in `delete-student 2` and press <kbd>Enter</kbd>.
-
-  ![DeleteStudentBefore](images/ugimages/DeleteStudentBefore.png)
-
 * Notice that the number of students in `CS2103T Tutorial` decreases from 3 to 2.
-  ![DeleteStudentAfter](images/ugimages/DeleteStudentAfter.png)
 
-Constraints:
-* The index refers to the index number shown in the displayed student list.
-* The index **must be a positive whole number** 1, 2, 3, …​
+  ![DeleteStudentAfter](images/ugimages/DeleteStudentAfter.png)
 
 #### Clearing all students : `clear-student`
 
@@ -379,7 +366,6 @@ Format: `list-class`
 Shows a list of all students within a particular class in the application.
 
 Format: `list-students c/INDEX`
-* The index refers to the index number shown in the displayed class list.
 
 Examples:
 * `list-students c/3`
@@ -388,29 +374,29 @@ Examples:
 
 If you entered the wrong class name or would like to change the name of a class, you can make use of this command.
 
-Format: `edit-class INDEX n\CLASS_NAME`
+Format: `edit-class CLASS_INDEX n\CLASS_NAME`
 * Edits the class at the specified `INDEX`.
 
 For example:
 * Your module coordinator decides to allocate another class to you and you want to be able to distinguish between
  the two classes. Hence you decide to edit the `CS2103T Tutorial` class to `CS2103T Tutorial T10`. You type the
  command `edit-class 1 n\CS2103T Tutorial T10` and press <kbd>Enter</kbd>.
-
-    ![Edit class before](images/ugimages/EditClassBefore.png)
-
 * The class has been renamed from `CS2103T Tutorial` to `CS2103T Tutorial 10`.
 
     ![Edit class after](images/ugimages/EditClassAfter.png)
 
 Constraints:
-* The index refers to the index number shown in the displayed class list.
-* The index **must be a positive whole number** 1, 2, 3, …​
 * A new class name must be provided.
 
 Other examples:
 * `find-class CS2030 lab`<br>
   `edit-class 1 n\CS2030 lab L05`<br>
   Edits the name of the 1st class in the results of the find command.
+
+<div markdown="span" class="alert alert-info">
+:information_source: **Tips:** Make use of the find-class command to filter the displayed student class list to your 
+desired class. You can now type in index 1 directly to edit the name of that class.
+</div>
 
 #### Finding class by name : `find-class`
 
@@ -421,20 +407,9 @@ Format: `find-class KEYWORD [MORE_KEYWORDS]`
 For example:
 * You would like to find out how many `Tutorial` classes you are currently teaching. You type the command
  `find-class Tutorial` and press <kbd>Enter</kbd>.
-
-    ![Find class before](images/ugimages/FindClassBefore.png)
-
 * You find out that you are only teaching 2 tutorials this semester and hence decide to accept more classes.
 
     ![Find class after](images/ugimages/FindClassAfter.png)
-
-Constraints:
-* The search is case-insensitive. e.g `cs2103t` will match `CS2103T`
-* The order of the keywords does not matter. e.g. `lab CS2100` will match `CS2100 lab`
-* Only the name is searched.
-* Only full words will be matched e.g. `CS` will not match `CS2100`
-* Students matching at least one keyword will be returned (i.e. **OR** search).
-  e.g. `CS2103T lab` will return `CS2103T tut`, `CS2100 lab`
 
 Other examples:
 * `find-class CS2100`<br>
@@ -442,14 +417,24 @@ Other examples:
 * `find-class tut CS2030`<br>
     Returns `CS2103T tut`, `CS2030 lab`
 
+<div markdown="span" class="alert alert-info">
+  
+**:information_source: Notes about the command:**<br>
+  * The search is case-insensitive. e.g `cs2103t` will match `CS2103T`.
+  * The order of the keywords does not matter. e.g. `lab CS2100` will match `CS2100 lab`.
+  * Only the name is searched.
+  * Only full words will be matched e.g. `CS` will not match `CS2100`.
+  * Students matching at least one keyword will be returned (i.e. **OR** search).
+    e.g. `CS2103T lab` will return `CS2103T tut`, `CS2100 lab`.
+  
+</div>
+
 #### Deleting a class : `delete-class`
 
 If you would like to delete a class, you can make use of this command.
 
 Format: `delete-class INDEX`
 * Deletes the class at the specified `INDEX`.
-* The index refers to the index number shown in the displayed class list.
-* The index **must be a positive whole number** 1, 2, 3, …​
 
 For example:
 * You have just received news that one of your classes, CS2100 Lab, has been permanently removed due to low enrollment.
@@ -476,8 +461,6 @@ Format: `clear-class`
 For example:
 * It is the start of a new semester. You would like to delete all information of all the classes you taught last
  semester to start anew. You type the command `clear-class` and press <kbd>Enter</kbd>.
-
-    ![Clear class before](images/ugimages/ClearClassBefore.png)
 
 * All classes have been cleared. You can start managing your new classes.
 
@@ -518,9 +501,6 @@ For example:
 
 ![Link after](images/ugimages/LinkAfter.png)
 
-Constraints:
-* The indexes **must be positive whole numbers** 1, 2, 3, …​
-
 Other examples:
 * `find-student Alex`
   `link s\1 c\2`
@@ -546,9 +526,6 @@ For example:
 
 * Note that all of Alex's attendance in the class was also deleted.
 
-Constraints:
-* The indexes **must be positive whole numbers** 1, 2, 3, …​
-
 Other examples:
 * `list-student c\2`
   `unlink s\1 c\1`
@@ -567,9 +544,6 @@ For example:
 * * You receive news that you will be teaching `CS2103T Tutorial` on `Tuesday 10:00-11:00` at `COM2 #02-02` from week 1 to 13.
 Hence, you type in the command `add-lesson c\1 d\TUESDAY st\10:00 et\11:00 v\COM2 #02-02 r\13`and press
 <kbd>Enter</kbd>.
-
-    ![Add lesson before](images/ugimages/AddLessonBefore.png)
-
 * You have added a lesson to teach.
 
     ![Add lesson after](images/ugimages/AddLessonAfter.png)
@@ -590,7 +564,6 @@ For example:
   ![Edit lesson after](images/ugimages/EditLessonAfter.png)
 
 Constraints:
-* The indexes **must be positive whole numbers** 1, 2, 3, …​
 * The day entered must be typed out in full.
 * The start time and end time must follow the form `hh:mm`. For instance, `11:00` is allowed, but not `1100`.
 * You have to specify at least one field (DAY, START_TIME, END_TIME, VENUE) to be changed.
@@ -612,41 +585,34 @@ For example:
 * You receive news that the `Tuesday 10:00-11:00` `CS2103T Tutorial` would be cancelled permanently. You decide to
  remove that lesson from your Tutor's Pet and hence you type in the command `delete-lesson c\1 l\2` and press
  <kbd>Enter</kbd>.
-
-    ![Delete lesson before](images/ugimages/DeleteLessonBefore.png)
-
 * You have one less lesson to teach now.
 
     ![Delete lesson after](images/ugimages/DeleteLessonAfter.png)
-
-Constraints:
-* The indexes **must be positive whole numbers** 1, 2, 3, …​
 
 Other examples:
 * `find-class CS2030 lab`<br>
   `delete-lesson c\1 l\1`<br>
   Deletes the 1st lesson of the 1st class in the results of the find class command.
 
+<div markdown="span" class="alert alert-info">
+:information_source: **Tips:** If you accidentally delete the wrong lesson, you can retrieve it back immediately using 
+the `undo` command. However, you cannot `undo` once you exit the application!
+</div>
+
 #### Display venue : `display-venue`
 
 Gives you the venue of a lesson.
 
-Format: `display-venue c\1 l\1`
+Format: `display-venue c\CLASS_INDEX l\LESSON_INDEX`
 * Gives the venue of the lesson specified at `CLASS_INDEX` + `LESSON_INDEX`.
 
 For example:
 * Due to covid, most of your physical lessons have been converted to zoom lessons and thus all the venues are
- in the form of zoom links. Your lesson is starting in 10 minutes and it is time to start the session. Hence, you
- input the command `display-venue c\1 l\2` and press <kbd>Enter</kbd>.
-
-    ![Display venue before](images/ugimages/DisplayVenueBefore.png)
-
+  in the form of zoom links. Your lesson is starting in 10 minutes and it is time to start the session. Hence, you
+  input the command `display-venue c\1 l\2` and press <kbd>Enter</kbd>.
 * You can now proceed to copy the link to that zoom session from the command result box.
 
     ![Display venue after](images/ugimages/DisplayVenueAfter.png)
-
-Constraints:
-* The indexes **must be positive whole numbers** 1, 2, 3, …​
 
 ### Managing Attendance Records
 
@@ -658,11 +624,8 @@ Format: `add-attendance c\CLASS_INDEX l\LESSON_INDEX s\STUDENT_INDEX w\WEEK p\PA
 
 For example:
 * Your `CS2103T Tutorial` lesson in week 10 has just ended and you would like to give participation scores to the
- students. You decide to start with Alex. Hence, you type in the command `add-attendance c\1 l\1 s\1 w\10 p\80` and
- press <kbd>Enter</kbd>.
-
-    ![Add attendance before](images/ugimages/AddAttendanceBefore.png)
-
+  students. You decide to start with Alex. Hence, you type in the command `add-attendance c\1 l\1 s\1 w\10 p\80` and
+  press <kbd>Enter</kbd>.
 * You have successfully recorded Alex's attendance. You have another 2 more students' attendance to record.
 
     ![Add attendance after](images/ugimages/AddAttendanceAfter.png)
@@ -678,6 +641,12 @@ Other Examples:
   `add-attendance c\1 l\1 s\2 w\5 p\50`<br>
   Adds the attendance of the 2nd student in the results of the list command to the 1st lesson of the 1st class.<br>
   Attendance recorded is for week 5 and student's participation score is 50.
+
+<div markdown="span" class="alert alert-info">
+:information_source: **Tips:** If you are planning to add multiple attendances consecutively, click on the command
+ box and make use of the `recall` function by pressing <kbd>up</kbd> arrow key. This `recall` function automatically
+ inputs your most recent command into the command box allowing you to type less!
+</div>
 
 #### Editing an attendance record : `edit-attendance`
 
@@ -713,16 +682,9 @@ For example:
 * It is the end of a semester and it's time to key in your students' attendance into luminus. You would like to find
  out if Alex attended week 1 lesson and hence you type in the command `find-attendance c\1 l\1 s\1 w\1` and press
  <kbd>Enter</kbd>.
-
-    ![Find attendance before](images/ugimages/FindAttendanceBefore.png)
-
 * Now you can find out if Alex attended the first lesson and how participative he was in week 1.
 
     ![Find attendance after](images/ugimages/FindAttendanceAfter.png)
-
-Constraints:
-* The indexes **must be positive whole numbers** 1, 2, 3, …​
-* The `WEEK` **must be a positive whole number** 1, 2, 3, …​
 
 Other Examples:
 * `find-class CS2100 lab`<br>
@@ -736,22 +698,20 @@ Other Examples:
   Shows the attendance of the 2nd student in the 1st lesson of the first class in the results of the list command.
   Attendance shown is for week 5.
 
+<div markdown="span" class="alert alert-info">
+:information_source: **Notes:** The `WEEK` **must be a positive whole number** 1, 2, 3, …​
+</div>
+
 #### Deleting an attendance record : `delete-attendance`
 
 If you would like to delete a specific student's attendance from a lesson, you can make use of this command.
 
 Format: `delete-attendance c\CLASS_INDEX l\LESSON_INDEX s\STUDENT_INDEX w\WEEK`
-
 * Deletes the attendance record at the specified `CLASS_INDEX` + `LESSON_INDEX` + `STUDENT_INDEX` + `WEEK`.
-* The indexes **must be positive whole numbers** 1, 2, 3, …​
-* The `WEEK` **must be a positive whole number** 1, 2, 3, …​
 
 For example:
 * You would like to delete Alice's attendance for the Thursday 10.00am to 11.00am lesson of CS2103T Tutorial
 in Week 1. Hence, you type in the command `delete-attendance c\1 l\1 s\1 w\1` and press <kbd>Enter</kbd>.
-
-    ![Delete attendance before](images/ugimages/DeleteAttendanceBefore.png)
-
 * Alice's attendance for week 1 has been deleted.
 
     ![Delete attendance after](images/ugimages/DeleteAttendanceAfter.png)
@@ -760,19 +720,21 @@ in Week 1. Hence, you type in the command `delete-attendance c\1 l\1 s\1 w\1` an
 
 Gives you an overall summary of a student's attendance and participation scores.
 
-Format: `stats c\1 s\1`
-* Gives a summary of the student's attendance at the specified `CLASS_INDEX` + `LESSON_INDEX` + `STUDENT_INDEX
-` + `WEEK`.
+Format: `stats c\CLASS_INDEX s\STUDENT_INDEX`
+* Gives a summary of the student's attendance at the specified `CLASS_INDEX` + `STUDENT_INDEX`.
 
 For example:
 * It is the end of the semester and time for you to grade a student's class participation. You would like to find out
  if Alex has been participative throughout the semester and hence you type in the command `stats c\1 s\1` and press
  <kbd>Enter<\kbd>.
-
 * Now you can see his average participation score and overall attendance to give a corresponding grade.
 
-Constraints:
-* The indexes **must be positive whole numbers** 1, 2, 3, …​
+    ![Display_stats after](images/ugimages/DisplayStatsAfter.png)
+
+<div markdown="span" class="alert alert-info">
+:information_source: **Notes:** Lesson(s) not attended displays all lessons that the student did not attend. This
+ means that future lessons would also be displayed in the results.
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -784,6 +746,8 @@ Constraints:
 --------------------------------------------------------------------------------------------------------------------
 
 ## Glossary
+
+This glossary aims to provide a definition for the special vocabulary used in this user guide.
 
 * The `STUDENT_INDEX` refers to the index number shown in the displayed student list.
 * The `CLASS_INDEX` refers to the index number shown in the displayed class list.
