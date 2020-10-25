@@ -394,6 +394,7 @@ The following activity diagram shows how the `add attendance` operation works.
 #### Aspect 1: How `add attendance` feature executes
 
 * **Alternative 1 (current choice):** User can only add one attendance at a time.
+
     * Pros:
         * Less complex code reduces the possibility of bugs.
     * Cons:
@@ -405,12 +406,13 @@ The following activity diagram shows how the `add attendance` operation works.
 </div>
 
 * **Alternative 2:** User can add multiple attendances for a specific week's lesson at the same time.
+
     * Pros:
         * Provides greater convenience for users as they can add attendances for the whole class in a single command.
         * Greater flexibility as users can choose whether to key in attendance one at a time or all at once.
     * Cons:
         * More complex code leading to higher possibility of bugs.
-        * Might have to change implementation of parser as currently, the last value input is accepted.
+        * Might have to change implementation of parser as currently, the last value input is accepted.<br>
         For example, if user input `add-attendance c\1 l\1 s\1 c\2`, the class at index 2 would be taken instead.
         This implementation might have to be changed.
 
