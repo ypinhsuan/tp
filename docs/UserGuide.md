@@ -222,7 +222,7 @@ You can use this command to reset Tutor's Pet and all data will be cleared.
 Format: `reset`
 
 For example:
-* It is the start of a new semester and you want to delete all students and classes. You can type in the 
+* It is the start of a new semester and you want to delete all students and classes. You can type in the
 command `reset` and press <kbd>Enter</kbd>.
 
   ![Reset before](images/ugimages/ResetBefore.png)
@@ -492,9 +492,9 @@ Format: `list`
 For example:
 * After finding the class CS2103T and student Alex, you wish to view all your students and classes.
 Hence, you can type in the command `list` and and press <kbd>Enter</kbd>.
-  
+
   ![List before](images/ugimages/ListBefore.png)
-  
+
 * Now you can see all your students and classes.
 
   ![List after](images/ugimages/ListAfter.png)
