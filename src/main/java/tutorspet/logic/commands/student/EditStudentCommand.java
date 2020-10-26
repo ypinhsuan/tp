@@ -48,7 +48,7 @@ public class EditStudentCommand extends Command {
             + PREFIX_TELEGRAM + "johnDO3 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Edited Student: %1$s";
+    public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Edited student:\n%1$s.";
 
     private final Index index;
     private final EditStudentDescriptor editStudentDescriptor;

@@ -37,7 +37,7 @@ public class EditModuleClassCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_NAME + "CS2103T Tutorial T10";
 
-    public static final String MESSAGE_EDIT_MODULE_CLASS_SUCCESS = "Edited Class: %1$s";
+    public static final String MESSAGE_EDIT_MODULE_CLASS_SUCCESS = "Edited class:\n%1$s.";
 
     private final Index index;
     private final EditModuleClassDescriptor editModuleClassDescriptor;

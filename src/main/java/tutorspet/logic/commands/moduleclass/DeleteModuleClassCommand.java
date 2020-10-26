@@ -24,7 +24,7 @@ public class DeleteModuleClassCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_MODULE_CLASS_SUCCESS = "Deleted Class: %1$s";
+    public static final String MESSAGE_DELETE_MODULE_CLASS_SUCCESS = "Deleted Class:\n%1$s.";
 
     private final Index targetIndex;
 

@@ -38,7 +38,7 @@ public class LinkCommand extends Command {
             + PREFIX_STUDENT_INDEX + "1"
             + PREFIX_CLASS_INDEX + "1";
 
-    public static final String MESSAGE_LINK_SUCCESS = "Linked %1$s to %2$s";
+    public static final String MESSAGE_LINK_SUCCESS = "Linked %1$s to %2$s.";
 
     private final Index moduleClassIndex;
     private final Index studentIndex;

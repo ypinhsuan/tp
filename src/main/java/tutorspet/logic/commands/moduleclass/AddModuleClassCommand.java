@@ -23,7 +23,7 @@ public class AddModuleClassCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "CS2103T Tutorial";
 
-    public static final String MESSAGE_SUCCESS = "New class added: %1$s";
+    public static final String MESSAGE_SUCCESS = "New class added:\n%1$s.";
 
     private final ModuleClass toAdd;
 

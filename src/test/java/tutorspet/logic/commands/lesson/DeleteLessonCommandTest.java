@@ -50,7 +50,7 @@ public class DeleteLessonCommandTest {
         ModuleClass editedModuleClass = deleteLessonFromModuleClass(moduleClass, lessonToDelete);
 
         DeleteLessonCommand deleteLessonCommand = new DeleteLessonCommand(moduleClassIndex, lessonIndex);
-        String expectedMessage = String.format(MESSAGE_DELETE_LESSON_SUCCESS, lessonToDelete, moduleClass);
+        String expectedMessage = String.format(MESSAGE_DELETE_LESSON_SUCCESS, moduleClass, lessonToDelete);
 
         ModelManager expectedModel = new ModelManager(model.getTutorsPet(), new UserPrefs());
         expectedModel.setModuleClass(moduleClass, editedModuleClass);

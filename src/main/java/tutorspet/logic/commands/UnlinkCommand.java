@@ -36,7 +36,7 @@ public class UnlinkCommand extends Command {
             + PREFIX_STUDENT_INDEX + "1"
             + PREFIX_CLASS_INDEX + "1";
 
-    public static final String MESSAGE_UNLINK_SUCCESS = "Unlinked %1$s from %2$s";
+    public static final String MESSAGE_UNLINK_SUCCESS = "Unlinked %1$s from %2$s.";
 
     private final Index moduleClassIndex;
     private final Index studentIndex;

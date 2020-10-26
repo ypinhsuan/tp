@@ -12,7 +12,7 @@ import tutorspet.model.Model;
 public class ClearModuleClassCommand extends Command {
 
     public static final String COMMAND_WORD = "clear-class";
-    public static final String MESSAGE_SUCCESS = "All classes in Tutor's Pet have been cleared!";
+    public static final String MESSAGE_SUCCESS = "All classes in Tutor's Pet have been cleared.";
 
     @Override
     public CommandResult execute(Model model) {

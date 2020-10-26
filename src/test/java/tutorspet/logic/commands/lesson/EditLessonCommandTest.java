@@ -78,7 +78,7 @@ public class EditLessonCommandTest {
 
         ModuleClass updatedModuleClass = editLessonInModuleClass(moduleClass, lessonToEdit, editedLesson);
 
-        String expectedMessage = String.format(MESSAGE_EDIT_LESSON_SUCCESS, editedLesson);
+        String expectedMessage = String.format(MESSAGE_EDIT_LESSON_SUCCESS, moduleClass.getName(), editedLesson);
 
         Model expectedModel = new ModelManager(new TutorsPet(model.getTutorsPet()), new UserPrefs());
         expectedModel.setModuleClass(moduleClass, updatedModuleClass);
@@ -105,7 +105,7 @@ public class EditLessonCommandTest {
                 .withVenue(VALID_VENUE_S17_0302_LESSON_FRI_8_TO_10).build();
         ModuleClass updatedModuleClass = editLessonInModuleClass(firstModuleClass, firstLessonInList, editedLesson);
 
-        String expectedMessage = String.format(MESSAGE_EDIT_LESSON_SUCCESS, editedLesson);
+        String expectedMessage = String.format(MESSAGE_EDIT_LESSON_SUCCESS, updatedModuleClass.getName(), editedLesson);
 
         Model expectedModel = new ModelManager(new TutorsPet(model.getTutorsPet()), new UserPrefs());
         expectedModel.setModuleClass(firstModuleClass, updatedModuleClass);
@@ -122,10 +122,11 @@ public class EditLessonCommandTest {
         EditLessonCommand editLessonCommand = new EditLessonCommand(
                 moduleClassIndex, lessonIndex, new EditLessonCommand.EditLessonDescriptor());
 
-        Lesson editedLesson = model.getFilteredModuleClassList().get(moduleClassIndex.getZeroBased())
-                .getLessons().get(lessonIndex.getZeroBased());
+        ModuleClass targetModuleClass = model.getFilteredModuleClassList().get(moduleClassIndex.getZeroBased());
 
-        String expectedMessage = String.format(MESSAGE_EDIT_LESSON_SUCCESS, editedLesson);
+        Lesson editedLesson = targetModuleClass.getLessons().get(lessonIndex.getZeroBased());
+
+        String expectedMessage = String.format(MESSAGE_EDIT_LESSON_SUCCESS, targetModuleClass.getName(), editedLesson);
 
         Model expectedModel = new ModelManager(new TutorsPet(model.getTutorsPet()), new UserPrefs());
         expectedModel.commit(expectedMessage);
@@ -150,10 +151,11 @@ public class EditLessonCommandTest {
         Lesson editedLesson = new LessonBuilder(lessonToEdit)
                 .withVenue(VALID_VENUE_S17_0302_LESSON_FRI_8_TO_10).build();
 
-        String expectedMessage = String.format(MESSAGE_EDIT_LESSON_SUCCESS, editedLesson);
-
         ModuleClass updatedModuleClass = editLessonInModuleClass(
                 moduleClassInFilteredList, lessonToEdit, editedLesson);
+
+        String expectedMessage = String.format(MESSAGE_EDIT_LESSON_SUCCESS,
+                updatedModuleClass.getName(), editedLesson);
 
         Model expectedModel = new ModelManager(new TutorsPet(model.getTutorsPet()), new UserPrefs());
         expectedModel.setModuleClass(moduleClassInFilteredList, updatedModuleClass);

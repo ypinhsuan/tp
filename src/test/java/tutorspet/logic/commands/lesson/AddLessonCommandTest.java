@@ -47,7 +47,7 @@ public class AddLessonCommandTest {
         Lesson lesson = new LessonBuilder().build();
         ModuleClass modifiedModuleClass = addLessonToModuleClass(moduleClass, lesson);
 
-        String expectedMessage = String.format(MESSAGE_SUCCESS, lesson);
+        String expectedMessage = String.format(MESSAGE_SUCCESS, modifiedModuleClass, lesson);
         Model expectedModel = new ModelManager(model.getTutorsPet(), new UserPrefs());
         expectedModel.setModuleClass(moduleClass, modifiedModuleClass);
         expectedModel.commit(expectedMessage);

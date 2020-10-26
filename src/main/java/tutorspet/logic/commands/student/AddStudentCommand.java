@@ -33,7 +33,7 @@ public class AddStudentCommand extends Command {
             + PREFIX_TAG + "CS2103 Tutorial "
             + PREFIX_TAG + "Experienced";
 
-    public static final String MESSAGE_SUCCESS = "New student added: %1$s";
+    public static final String MESSAGE_SUCCESS = "New student added:\n%1$s.";
 
     private final Student toAdd;
 
