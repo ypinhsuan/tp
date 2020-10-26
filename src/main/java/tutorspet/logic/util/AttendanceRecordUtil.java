@@ -1,8 +1,8 @@
 package tutorspet.logic.util;
 
+import static tutorspet.commons.core.Messages.MESSAGE_DUPLICATE_ATTENDANCE;
 import static tutorspet.commons.core.Messages.MESSAGE_MISSING_STUDENT_ATTENDANCE;
 import static tutorspet.commons.util.CollectionUtil.requireAllNonNull;
-import static tutorspet.logic.commands.attendance.AddAttendanceCommand.MESSAGE_DUPLICATE_ATTENDANCE;
 
 import java.util.HashMap;
 import java.util.Map;

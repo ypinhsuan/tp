@@ -9,7 +9,6 @@ import static tutorspet.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static tutorspet.logic.commands.CommandTestUtil.TELEGRAM_DESC_AMY;
 import static tutorspet.logic.commands.student.AddStudentCommand.COMMAND_WORD;
 import static tutorspet.logic.commands.student.AddStudentCommand.MESSAGE_SUCCESS;
-import static tutorspet.logic.commands.student.ListStudentCommand.MESSAGE_LIST_ALL_SUCCESS;
 import static tutorspet.testutil.Assert.assertThrows;
 import static tutorspet.testutil.TypicalStudent.AMY;
 
@@ -68,7 +67,7 @@ public class LogicManagerTest {
     @Test
     public void execute_validCommand_success() throws Exception {
         String listCommand = ListStudentCommand.COMMAND_WORD;
-        assertCommandSuccess(listCommand, MESSAGE_LIST_ALL_SUCCESS, model);
+        assertCommandSuccess(listCommand, ListStudentCommand.MESSAGE_SUCCESS, model);
     }
 
     @Test

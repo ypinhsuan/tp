@@ -15,14 +15,14 @@ public class ListStudentCommand extends Command {
 
     public static final String COMMAND_WORD = "list-student";
 
-    public static final String MESSAGE_LIST_ALL_SUCCESS = "Listed all students.";
+    public static final String MESSAGE_SUCCESS = "Listed all students.";
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
-        return new CommandResult(MESSAGE_LIST_ALL_SUCCESS);
+        return new CommandResult(MESSAGE_SUCCESS);
     }
 
     @Override

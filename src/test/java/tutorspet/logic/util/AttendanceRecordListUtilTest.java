@@ -1,6 +1,7 @@
 package tutorspet.logic.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static tutorspet.commons.core.Messages.MESSAGE_DUPLICATE_ATTENDANCE;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_WEEK;
 import static tutorspet.commons.core.Messages.MESSAGE_MISSING_STUDENT_ATTENDANCE;
 import static tutorspet.commons.core.Messages.MESSAGE_NO_LESSON_ATTENDED;
@@ -8,7 +9,6 @@ import static tutorspet.logic.commands.CommandTestUtil.VALID_PARTICIPATION_SCORE
 import static tutorspet.logic.commands.CommandTestUtil.VALID_PARTICIPATION_SCORE_51;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_WEEK_1;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_WEEK_5;
-import static tutorspet.logic.commands.attendance.AddAttendanceCommand.MESSAGE_DUPLICATE_ATTENDANCE;
 import static tutorspet.logic.util.AttendanceRecordListUtil.addAttendanceToAttendanceRecordList;
 import static tutorspet.logic.util.AttendanceRecordListUtil.editAttendanceInAttendanceRecordList;
 import static tutorspet.logic.util.AttendanceRecordListUtil.getAbsentWeekFromAttendance;

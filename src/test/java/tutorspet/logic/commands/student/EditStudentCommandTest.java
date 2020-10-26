@@ -2,6 +2,7 @@ package tutorspet.logic.commands.student;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static tutorspet.commons.core.Messages.MESSAGE_DUPLICATE_STUDENT;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 import static tutorspet.logic.commands.CommandTestUtil.DESC_AMY;
 import static tutorspet.logic.commands.CommandTestUtil.DESC_BOB;
@@ -11,8 +12,7 @@ import static tutorspet.logic.commands.CommandTestUtil.VALID_TELEGRAM_BOB;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static tutorspet.logic.commands.CommandTestUtil.showStudentAtIndex;
-import static tutorspet.logic.commands.student.EditStudentCommand.MESSAGE_DUPLICATE_STUDENT;
-import static tutorspet.logic.commands.student.EditStudentCommand.MESSAGE_EDIT_STUDENT_SUCCESS;
+import static tutorspet.logic.commands.student.EditStudentCommand.MESSAGE_SUCCESS;
 import static tutorspet.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 import static tutorspet.testutil.TypicalIndexes.INDEX_SECOND_ITEM;
 import static tutorspet.testutil.TypicalTutorsPet.getTypicalTutorsPet;
@@ -43,7 +43,7 @@ public class EditStudentCommandTest {
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder(editedStudent).build();
         EditStudentCommand editStudentCommand = new EditStudentCommand(INDEX_FIRST_ITEM, descriptor);
 
-        String expectedMessage = String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent);
+        String expectedMessage = String.format(MESSAGE_SUCCESS, editedStudent);
 
         Model expectedModel = new ModelManager(new TutorsPet(model.getTutorsPet()), new UserPrefs());
         expectedModel.setStudent(model.getFilteredStudentList().get(0), editedStudent);
@@ -67,7 +67,7 @@ public class EditStudentCommandTest {
                 .withTags(VALID_TAG_AVERAGE).build();
         EditStudentCommand editStudentCommand = new EditStudentCommand(indexLastStudent, descriptor);
 
-        String expectedMessage = String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent);
+        String expectedMessage = String.format(MESSAGE_SUCCESS, editedStudent);
 
         Model expectedModel = new ModelManager(new TutorsPet(model.getTutorsPet()), new UserPrefs());
         expectedModel.setStudent(lastStudent, editedStudent);
@@ -82,7 +82,7 @@ public class EditStudentCommandTest {
                 new EditStudentCommand(INDEX_FIRST_ITEM, new EditStudentDescriptor());
         Student editedStudent = model.getFilteredStudentList().get(INDEX_FIRST_ITEM.getZeroBased());
 
-        String expectedMessage = String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent);
+        String expectedMessage = String.format(MESSAGE_SUCCESS, editedStudent);
 
         Model expectedModel = new ModelManager(new TutorsPet(model.getTutorsPet()), new UserPrefs());
         expectedModel.commit(expectedMessage);
@@ -101,7 +101,7 @@ public class EditStudentCommandTest {
         EditStudentCommand editStudentCommand = new EditStudentCommand(INDEX_FIRST_ITEM,
                 new EditStudentDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
-        String expectedMessage = String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent);
+        String expectedMessage = String.format(MESSAGE_SUCCESS, editedStudent);
 
         Model expectedModel = new ModelManager(new TutorsPet(model.getTutorsPet()), new UserPrefs());
         expectedModel.setStudent(model.getFilteredStudentList().get(0), editedStudent);

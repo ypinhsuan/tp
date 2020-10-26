@@ -7,7 +7,7 @@ import static tutorspet.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static tutorspet.logic.commands.CommandTestUtil.showModuleClassAtIndex;
 import static tutorspet.logic.commands.CommandTestUtil.showStudentAtIndex;
-import static tutorspet.logic.commands.student.ListStudentInClassCommand.MESSAGE_LIST_CLASS_SPECIFIC_SUCCESS;
+import static tutorspet.logic.commands.student.ListStudentInClassCommand.MESSAGE_SUCCESS;
 import static tutorspet.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 import static tutorspet.testutil.TypicalIndexes.INDEX_SECOND_ITEM;
 import static tutorspet.testutil.TypicalTutorsPet.getTypicalTutorsPet;
@@ -43,7 +43,7 @@ public class ListStudentInClassCommandTest {
         ModuleClass selectedClass = showStudentsInModuleClassAtIndex(expectedModel, INDEX_FIRST_ITEM);
 
         assertCommandSuccess(listStudentInClassCommand, model,
-                String.format(MESSAGE_LIST_CLASS_SPECIFIC_SUCCESS, selectedClass),
+                String.format(MESSAGE_SUCCESS, selectedClass),
                 expectedModel);
     }
 
@@ -55,7 +55,7 @@ public class ListStudentInClassCommandTest {
         ModuleClass selectedClass = showStudentsInModuleClassAtIndex(expectedModel, INDEX_FIRST_ITEM);
 
         assertCommandSuccess(listStudentInClassCommand, model,
-                String.format(MESSAGE_LIST_CLASS_SPECIFIC_SUCCESS, selectedClass),
+                String.format(MESSAGE_SUCCESS, selectedClass),
                 expectedModel);
     }
 
@@ -68,7 +68,7 @@ public class ListStudentInClassCommandTest {
         ModuleClass selectedClass = showStudentsInModuleClassAtIndex(expectedModel, INDEX_FIRST_ITEM);
 
         assertCommandSuccess(listStudentInClassCommand, model,
-                String.format(MESSAGE_LIST_CLASS_SPECIFIC_SUCCESS, selectedClass),
+                String.format(MESSAGE_SUCCESS, selectedClass),
                 expectedModel);
     }
 

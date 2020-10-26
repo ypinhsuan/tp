@@ -1,6 +1,9 @@
 package tutorspet.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static tutorspet.commons.core.Messages.MESSAGE_EXISTING_LINK;
+import static tutorspet.commons.core.Messages.MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX;
+import static tutorspet.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 import static tutorspet.commons.util.CollectionUtil.requireAllNonNull;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_CLASS_INDEX;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_STUDENT_INDEX;
@@ -10,7 +13,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-import tutorspet.commons.core.Messages;
 import tutorspet.commons.core.index.Index;
 import tutorspet.logic.commands.exceptions.CommandException;
 import tutorspet.model.Model;
@@ -38,8 +40,7 @@ public class LinkCommand extends Command {
             + PREFIX_STUDENT_INDEX + "1"
             + PREFIX_CLASS_INDEX + "1";
 
-    public static final String MESSAGE_LINK_SUCCESS = "Linked %1$s to %2$s";
-    public static final String MESSAGE_EXISTING_LINK = "This student is already linked to this class.";
+    public static final String MESSAGE_SUCCESS = "Linked %1$s to %2$s.";
 
     private final Index moduleClassIndex;
     private final Index studentIndex;
@@ -63,11 +64,11 @@ public class LinkCommand extends Command {
         List<ModuleClass> lastShownModuleClassList = model.getFilteredModuleClassList();
 
         if (studentIndex.getOneBased() > lastShownStudentList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+            throw new CommandException(MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
 
         if (moduleClassIndex.getOneBased() > lastShownModuleClassList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX);
+            throw new CommandException(MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX);
         }
 
         Student studentToLink = lastShownStudentList.get(studentIndex.getZeroBased());
@@ -78,7 +79,7 @@ public class LinkCommand extends Command {
         model.updateFilteredModuleClassList(new SameModuleClassPredicate(modifiedModuleClass));
         model.updateFilteredStudentList(new StudentInUuidCollectionPredicate(modifiedModuleClass.getStudentUuids()));
 
-        String message = String.format(MESSAGE_LINK_SUCCESS, studentToLink.getName(), moduleClassToLink);
+        String message = String.format(MESSAGE_SUCCESS, studentToLink.getName(), moduleClassToLink);
         model.commit(message);
         return new CommandResult(message);
     }

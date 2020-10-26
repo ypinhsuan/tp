@@ -3,7 +3,7 @@ package tutorspet.logic.commands.attendance;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX;
-import static tutorspet.commons.core.Messages.MESSAGE_INVALID_STUDENT_IN_MODULE_CLASS;
+import static tutorspet.commons.core.Messages.MESSAGE_MISSING_LINK;
 import static tutorspet.commons.core.Messages.MESSAGE_NO_LESSONS_IN_MODULE_CLASS;
 import static tutorspet.commons.core.Messages.MESSAGE_NO_LESSON_ATTENDED;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_NAME_CS2030_TUTORIAL;
@@ -119,7 +119,7 @@ public class StatisticsCommandTest {
 
         StatisticsCommand statisticsCommand = new StatisticsCommand(moduleClassIndex, outOfBoundIndex);
 
-        assertCommandFailure(statisticsCommand, model, MESSAGE_INVALID_STUDENT_IN_MODULE_CLASS);
+        assertCommandFailure(statisticsCommand, model, MESSAGE_MISSING_LINK);
     }
 
     @Test
@@ -129,7 +129,7 @@ public class StatisticsCommandTest {
 
         StatisticsCommand statisticsCommand = new StatisticsCommand(moduleClassIndex, outOfBoundIndex);
 
-        assertCommandFailure(statisticsCommand, model, MESSAGE_INVALID_STUDENT_IN_MODULE_CLASS);
+        assertCommandFailure(statisticsCommand, model, MESSAGE_MISSING_LINK);
     }
 
     @Test

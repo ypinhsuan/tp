@@ -2,19 +2,20 @@ package tutorspet.logic.commands.attendance;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static tutorspet.commons.core.Messages.MESSAGE_DUPLICATE_ATTENDANCE;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
-import static tutorspet.commons.core.Messages.MESSAGE_INVALID_STUDENT_IN_MODULE_CLASS;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_WEEK;
+import static tutorspet.commons.core.Messages.MESSAGE_MISSING_LINK;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_ATTENDANCE;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_WEEK_1;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_WEEK_5;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static tutorspet.logic.commands.attendance.AddAttendanceCommand.MESSAGE_DUPLICATE_ATTENDANCE;
 import static tutorspet.logic.commands.attendance.AddAttendanceCommand.MESSAGE_SUCCESS;
 import static tutorspet.logic.util.ModuleClassUtil.addAttendanceToModuleClass;
+import static tutorspet.logic.util.ModuleClassUtil.getLessonFromModuleClass;
 import static tutorspet.testutil.Assert.assertThrows;
 import static tutorspet.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 import static tutorspet.testutil.TypicalIndexes.INDEX_THIRD_ITEM;
@@ -90,12 +91,13 @@ public class AddAttendanceCommandTest {
         Attendance targetAttendance = VALID_ATTENDANCE;
 
         ModuleClass moduleClass = model.getFilteredModuleClassList().get(moduleClassIndex.getZeroBased());
+        Lesson lesson = getLessonFromModuleClass(moduleClass, lessonIndex);
         Student student = model.getFilteredStudentList().get(studentIndex.getZeroBased());
         ModuleClass modifiedModuleClass = addAttendanceToModuleClass(
                 moduleClass, lessonIndex, targetWeek, student, targetAttendance);
 
-        String expectedMessage =
-                String.format(MESSAGE_SUCCESS, student.getName(), targetWeek, targetAttendance);
+        String expectedMessage = String.format(MESSAGE_SUCCESS,
+                student.getName(), moduleClass.getName(), lesson, targetWeek, targetAttendance);
         Model expectedModel = new ModelManager(model.getTutorsPet(), new UserPrefs());
         expectedModel.setModuleClass(moduleClass, modifiedModuleClass);
         expectedModel.commit(expectedMessage);
@@ -131,7 +133,7 @@ public class AddAttendanceCommandTest {
         AddAttendanceCommand addAttendanceCommand = new AddAttendanceCommand(moduleClassIndex, lessonIndex,
                 studentIndex, targetWeek, targetAttendance);
 
-        assertCommandFailure(addAttendanceCommand, model, MESSAGE_INVALID_STUDENT_IN_MODULE_CLASS);
+        assertCommandFailure(addAttendanceCommand, model, MESSAGE_MISSING_LINK);
     }
 
     @Test

@@ -1,6 +1,7 @@
 package tutorspet.logic.commands.lesson;
 
 import static java.util.Objects.requireNonNull;
+import static tutorspet.commons.core.Messages.MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX;
 import static tutorspet.commons.util.CollectionUtil.requireAllNonNull;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_CLASS_INDEX;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_DAY;
@@ -18,7 +19,6 @@ import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
-import tutorspet.commons.core.Messages;
 import tutorspet.commons.core.index.Index;
 import tutorspet.commons.util.CollectionUtil;
 import tutorspet.logic.commands.Command;
@@ -56,9 +56,7 @@ public class EditLessonCommand extends Command {
             + PREFIX_DAY + "Wednesday "
             + PREFIX_END_TIME + "18:00";
 
-    public static final String MESSAGE_EDIT_LESSON_SUCCESS = "Edited Lesson: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_LESSON = "This lesson already exists.";
+    public static final String MESSAGE_SUCCESS = "Edited Lesson:\n%1$s %2$s.";
 
     private final Index moduleClassIndex;
     private final Index lessonIndex;
@@ -85,7 +83,7 @@ public class EditLessonCommand extends Command {
         List<ModuleClass> lastShownModuleClassList = model.getFilteredModuleClassList();
 
         if (moduleClassIndex.getOneBased() > lastShownModuleClassList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX);
+            throw new CommandException(MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX);
         }
 
         ModuleClass targetModuleClass = lastShownModuleClassList.get(moduleClassIndex.getZeroBased());
@@ -96,7 +94,7 @@ public class EditLessonCommand extends Command {
 
         model.setModuleClass(targetModuleClass, modifiedModuleClass);
         model.updateFilteredModuleClassList(PREDICATE_SHOW_ALL_MODULE_CLASS);
-        String message = String.format(MESSAGE_EDIT_LESSON_SUCCESS, editedLesson);
+        String message = String.format(MESSAGE_SUCCESS, targetModuleClass.getName(), editedLesson);
         model.commit(message);
         return new CommandResult(message);
     }

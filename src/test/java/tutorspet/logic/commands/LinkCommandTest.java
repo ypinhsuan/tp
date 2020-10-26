@@ -2,13 +2,14 @@ package tutorspet.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static tutorspet.commons.core.Messages.MESSAGE_EXISTING_LINK;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static tutorspet.logic.commands.CommandTestUtil.showModuleClassAtIndex;
 import static tutorspet.logic.commands.CommandTestUtil.showStudentAtIndex;
-import static tutorspet.logic.commands.LinkCommand.MESSAGE_LINK_SUCCESS;
+import static tutorspet.logic.commands.LinkCommand.MESSAGE_SUCCESS;
 import static tutorspet.logic.commands.UnlinkCommandTest.copyModelWithModuleClassAndShowStudents;
 import static tutorspet.model.Model.PREDICATE_SHOW_ALL_MODULE_CLASS;
 import static tutorspet.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
@@ -58,7 +59,7 @@ public class LinkCommandTest {
         ModuleClass modifiedModuleClass = manualLinkStudentToModuleClass(moduleClass, student);
 
         String expectedMessage =
-                String.format(MESSAGE_LINK_SUCCESS, student.getName(), modifiedModuleClass);
+                String.format(MESSAGE_SUCCESS, student.getName(), modifiedModuleClass);
         Model expectedModel = copyModelWithModuleClassAndShowStudents(model, moduleClass, modifiedModuleClass);
         expectedModel.commit(expectedMessage);
 
@@ -78,7 +79,7 @@ public class LinkCommandTest {
         Student student = model.getFilteredStudentList().get(studentIndex.getZeroBased());
         ModuleClass modifiedModuleClass = manualLinkStudentToModuleClass(moduleClass, student);
 
-        String expectedMessage = String.format(MESSAGE_LINK_SUCCESS, student.getName(), modifiedModuleClass);
+        String expectedMessage = String.format(MESSAGE_SUCCESS, student.getName(), modifiedModuleClass);
         Model expectedModel = copyModelWithModuleClassAndShowStudents(model, moduleClass, modifiedModuleClass);
         expectedModel.commit(expectedMessage);
 
@@ -102,7 +103,7 @@ public class LinkCommandTest {
 
         LinkCommand linkCommand = new LinkCommand(INDEX_FIRST_ITEM, INDEX_FIRST_ITEM);
 
-        assertCommandFailure(linkCommand, model, LinkCommand.MESSAGE_EXISTING_LINK);
+        assertCommandFailure(linkCommand, model, MESSAGE_EXISTING_LINK);
     }
 
     @Test

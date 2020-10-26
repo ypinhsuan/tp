@@ -24,7 +24,7 @@ public class DeleteModuleClassCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_MODULE_CLASS_SUCCESS = "Deleted Class: %1$s";
+    public static final String MESSAGE_SUCCESS = "Deleted Class:\n%1$s.";
 
     private final Index targetIndex;
 
@@ -44,7 +44,7 @@ public class DeleteModuleClassCommand extends Command {
 
         ModuleClass moduleClassToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteModuleClass(moduleClassToDelete);
-        String message = String.format(MESSAGE_DELETE_MODULE_CLASS_SUCCESS, moduleClassToDelete);
+        String message = String.format(MESSAGE_SUCCESS, moduleClassToDelete);
         model.commit(message);
         return new CommandResult(message);
     }

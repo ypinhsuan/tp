@@ -9,6 +9,7 @@ import static tutorspet.logic.parser.CliSyntax.PREFIX_LESSON_INDEX;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_STUDENT_INDEX;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_WEEK;
 import static tutorspet.logic.util.ModuleClassUtil.getAttendanceFromModuleClass;
+import static tutorspet.logic.util.ModuleClassUtil.getLessonFromModuleClass;
 
 import java.util.List;
 
@@ -19,6 +20,7 @@ import tutorspet.logic.commands.exceptions.CommandException;
 import tutorspet.model.Model;
 import tutorspet.model.attendance.Attendance;
 import tutorspet.model.attendance.Week;
+import tutorspet.model.lesson.Lesson;
 import tutorspet.model.moduleclass.ModuleClass;
 import tutorspet.model.student.Student;
 
@@ -39,7 +41,9 @@ public class FindAttendanceCommand extends Command {
             + PREFIX_STUDENT_INDEX + "STUDENT_INDEX "
             + PREFIX_WEEK + "WEEK_NUMBER";
 
-    public static final String MESSAGE_SUCCESS = "%1$s attended week %2$s lesson with a participation score of %3$s";
+    public static final String MESSAGE_SUCCESS = "Found attendance:\n"
+            + "%1$s attended %2$s %3$s in week %4$s\n"
+            + "with a participation score of %5$s.";
 
     private final Index moduleClassIndex;
     private final Index lessonIndex;
@@ -50,10 +54,10 @@ public class FindAttendanceCommand extends Command {
      * Creates a FindAttendanceCommand to find a student's attendance for a specified lesson
      * on a specified week in the student manager.
      */
-    public FindAttendanceCommand(Index moduleCLassIndex, Index lessonIndex, Index studentIndex, Week week) {
-        requireAllNonNull(moduleCLassIndex, lessonIndex, studentIndex, week);
+    public FindAttendanceCommand(Index moduleClassIndex, Index lessonIndex, Index studentIndex, Week week) {
+        requireAllNonNull(moduleClassIndex, lessonIndex, studentIndex, week);
 
-        this.moduleClassIndex = moduleCLassIndex;
+        this.moduleClassIndex = moduleClassIndex;
         this.lessonIndex = lessonIndex;
         this.studentIndex = studentIndex;
         this.week = week;
@@ -76,10 +80,12 @@ public class FindAttendanceCommand extends Command {
 
         Student targetStudent = lastShownStudentList.get(studentIndex.getZeroBased());
         ModuleClass targetModuleClass = lastShownModuleClassList.get(moduleClassIndex.getZeroBased());
+        Lesson targetLesson = getLessonFromModuleClass(targetModuleClass, lessonIndex);
 
         Attendance attendance = getAttendanceFromModuleClass(targetModuleClass, lessonIndex, week, targetStudent);
 
-        String message = String.format(MESSAGE_SUCCESS, targetStudent.getName(), week, attendance);
+        String message = String.format(MESSAGE_SUCCESS,
+                targetStudent.getName(), targetModuleClass.getName(), targetLesson, week, attendance);
         return new CommandResult(message);
     }
 

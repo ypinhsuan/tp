@@ -1,6 +1,7 @@
 package tutorspet.logic.commands.moduleclass;
 
 import static java.util.Objects.requireNonNull;
+import static tutorspet.commons.core.Messages.MESSAGE_DUPLICATE_MODULE_CLASS;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_NAME;
 
 import tutorspet.logic.commands.Command;
@@ -22,8 +23,7 @@ public class AddModuleClassCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "CS2103T Tutorial";
 
-    public static final String MESSAGE_SUCCESS = "New class added: %1$s";
-    public static final String MESSAGE_DUPLICATE_MODULE_CLASS = "This class already exists.";
+    public static final String MESSAGE_SUCCESS = "New class added:\n%1$s.";
 
     private final ModuleClass toAdd;
 

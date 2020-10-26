@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
-import static tutorspet.commons.core.Messages.MESSAGE_INVALID_STUDENT_IN_MODULE_CLASS;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_WEEK;
+import static tutorspet.commons.core.Messages.MESSAGE_MISSING_LINK;
 import static tutorspet.commons.core.Messages.MESSAGE_MISSING_STUDENT_ATTENDANCE;
 import static tutorspet.logic.commands.CommandTestUtil.DESC_ATTENDANCE_33;
 import static tutorspet.logic.commands.CommandTestUtil.DESC_ATTENDANCE_80;
@@ -19,9 +19,10 @@ import static tutorspet.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static tutorspet.logic.commands.CommandTestUtil.showModuleClassAtIndex;
 import static tutorspet.logic.commands.CommandTestUtil.showStudentAtIndex;
-import static tutorspet.logic.commands.attendance.EditAttendanceCommand.MESSAGE_EDIT_ATTENDANCE_SUCCESS;
+import static tutorspet.logic.commands.attendance.EditAttendanceCommand.MESSAGE_SUCCESS;
 import static tutorspet.logic.util.ModuleClassUtil.editAttendanceInModuleClass;
 import static tutorspet.logic.util.ModuleClassUtil.getAttendanceFromModuleClass;
+import static tutorspet.logic.util.ModuleClassUtil.getLessonFromModuleClass;
 import static tutorspet.testutil.Assert.assertThrows;
 import static tutorspet.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 import static tutorspet.testutil.TypicalIndexes.INDEX_SECOND_ITEM;
@@ -105,12 +106,13 @@ public class EditAttendanceCommandTest {
 
         ModuleClass moduleClass = model.getFilteredModuleClassList().get(moduleClassIndex.getZeroBased());
         Student student = model.getFilteredStudentList().get(studentIndex.getZeroBased());
+        Lesson lesson = getLessonFromModuleClass(moduleClass, lessonIndex);
         Attendance editedAttendance = new Attendance(VALID_PARTICIPATION_SCORE_33);
         ModuleClass editedModuleClass =
                 editAttendanceInModuleClass(moduleClass, lessonIndex, targetWeek, student, editedAttendance);
 
-        String expectedMessage = String.format(MESSAGE_EDIT_ATTENDANCE_SUCCESS,
-                student.getName(), targetWeek, editedAttendance);
+        String expectedMessage = String.format(MESSAGE_SUCCESS,
+                student.getName(), editedModuleClass.getName(), lesson, targetWeek, editedAttendance);
 
         Model expectedModel = new ModelManager(new TutorsPet(model.getTutorsPet()), new UserPrefs());
         expectedModel.setModuleClass(moduleClass, editedModuleClass);
@@ -131,11 +133,12 @@ public class EditAttendanceCommandTest {
 
         Student student = model.getFilteredStudentList().get(moduleClassIndex.getZeroBased());
         ModuleClass targetModuleClass = model.getFilteredModuleClassList().get(moduleClassIndex.getZeroBased());
+        Lesson lesson = getLessonFromModuleClass(targetModuleClass, lessonIndex);
         Attendance editedAttendance = getAttendanceFromModuleClass(
                 targetModuleClass, lessonIndex, targetWeek, student);
 
-        String expectedMessage = String.format(MESSAGE_EDIT_ATTENDANCE_SUCCESS,
-                student.getName(), targetWeek, editedAttendance);
+        String expectedMessage = String.format(MESSAGE_SUCCESS,
+                student.getName(), targetModuleClass.getName(), lesson, targetWeek, editedAttendance);
 
         Model expectedModel = new ModelManager(new TutorsPet(model.getTutorsPet()), new UserPrefs());
         expectedModel.commit(expectedMessage);
@@ -159,14 +162,15 @@ public class EditAttendanceCommandTest {
                 moduleClassIndex, lessonIndex, studentIndex, targetWeek, editAttendanceDescriptor);
 
         ModuleClass moduleClassInFilteredList = model.getFilteredModuleClassList().get(moduleClassIndex.getZeroBased());
+        Lesson lesson = getLessonFromModuleClass(moduleClassInFilteredList, lessonIndex);
         Student studentInFilteredList = model.getFilteredStudentList().get(studentIndex.getZeroBased());
         Attendance editedAttendance = new Attendance(VALID_PARTICIPATION_SCORE_33);
 
         ModuleClass editedModuleClass = editAttendanceInModuleClass(moduleClassInFilteredList, lessonIndex,
                 targetWeek, studentInFilteredList, editedAttendance);
 
-        String expectedMessage = String.format(MESSAGE_EDIT_ATTENDANCE_SUCCESS,
-                studentInFilteredList.getName(), targetWeek, editedAttendance);
+        String expectedMessage = String.format(MESSAGE_SUCCESS,
+                studentInFilteredList.getName(), editedModuleClass.getName(), lesson, targetWeek, editedAttendance);
 
         Model expectedModel = new ModelManager(new TutorsPet(model.getTutorsPet()), new UserPrefs());
         expectedModel.updateFilteredStudentList(s -> s.equals(studentInFilteredList));
@@ -250,7 +254,7 @@ public class EditAttendanceCommandTest {
         EditAttendanceCommand editAttendanceCommand = new EditAttendanceCommand(moduleClassIndex, lessonIndex,
                 INDEX_THIRD_ITEM, VALID_WEEK_1, DESC_ATTENDANCE_33);
 
-        assertCommandFailure(editAttendanceCommand, model, MESSAGE_INVALID_STUDENT_IN_MODULE_CLASS);
+        assertCommandFailure(editAttendanceCommand, model, MESSAGE_MISSING_LINK);
     }
 
     @Test

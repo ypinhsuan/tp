@@ -1,6 +1,8 @@
 package tutorspet.logic.commands.attendance;
 
 import static java.util.Objects.requireNonNull;
+import static tutorspet.commons.core.Messages.MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX;
+import static tutorspet.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 import static tutorspet.commons.util.CollectionUtil.requireAllNonNull;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_CLASS_INDEX;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_LESSON_INDEX;
@@ -9,12 +11,12 @@ import static tutorspet.logic.parser.CliSyntax.PREFIX_STUDENT_INDEX;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_WEEK;
 import static tutorspet.logic.util.ModuleClassUtil.editAttendanceInModuleClass;
 import static tutorspet.logic.util.ModuleClassUtil.getAttendanceFromModuleClass;
+import static tutorspet.logic.util.ModuleClassUtil.getLessonFromModuleClass;
 import static tutorspet.model.Model.PREDICATE_SHOW_ALL_MODULE_CLASS;
 
 import java.util.List;
 import java.util.Optional;
 
-import tutorspet.commons.core.Messages;
 import tutorspet.commons.core.index.Index;
 import tutorspet.commons.util.CollectionUtil;
 import tutorspet.logic.commands.Command;
@@ -23,6 +25,7 @@ import tutorspet.logic.commands.exceptions.CommandException;
 import tutorspet.model.Model;
 import tutorspet.model.attendance.Attendance;
 import tutorspet.model.attendance.Week;
+import tutorspet.model.lesson.Lesson;
 import tutorspet.model.moduleclass.ModuleClass;
 import tutorspet.model.student.Student;
 
@@ -52,9 +55,9 @@ public class EditAttendanceCommand extends Command {
             + PREFIX_WEEK + "2 "
             + PREFIX_PARTICIPATION_SCORE + "80";
 
-    public static final String MESSAGE_EDIT_ATTENDANCE_SUCCESS = "Edited attendance: %1$s attended week %2$s lesson "
-            + "with participation score of %3$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
+    public static final String MESSAGE_SUCCESS = "Edited attendance:\n"
+            + "%1$s attended %2$s %3$s in week %4$s"
+            + "with participation score of %5$s.";
 
     private final Index moduleClassIndex;
     private final Index lessonIndex;
@@ -88,15 +91,16 @@ public class EditAttendanceCommand extends Command {
         List<ModuleClass> lastShownModuleClassList = model.getFilteredModuleClassList();
 
         if (studentIndex.getOneBased() > lastShownStudentList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+            throw new CommandException(MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
 
         if (moduleClassIndex.getOneBased() > lastShownModuleClassList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX);
+            throw new CommandException(MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX);
         }
 
         Student targetStudent = lastShownStudentList.get(studentIndex.getZeroBased());
         ModuleClass targetModuleClass = lastShownModuleClassList.get(moduleClassIndex.getZeroBased());
+        Lesson targetLesson = getLessonFromModuleClass(targetModuleClass, lessonIndex);
 
         Attendance attendanceToEdit = getAttendanceFromModuleClass(targetModuleClass, lessonIndex, week, targetStudent);
         Attendance editedAttendance = createEditedAttendance(attendanceToEdit, editAttendanceDescriptor);
@@ -106,8 +110,8 @@ public class EditAttendanceCommand extends Command {
         model.setModuleClass(targetModuleClass, modifiedModuleClass);
         model.updateFilteredModuleClassList(PREDICATE_SHOW_ALL_MODULE_CLASS);
 
-        String message =
-                String.format(MESSAGE_EDIT_ATTENDANCE_SUCCESS, targetStudent.getName(), week, editedAttendance);
+        String message = String.format(MESSAGE_SUCCESS,
+                targetStudent.getName(), modifiedModuleClass.getName(), targetLesson, week, editedAttendance);
         model.commit(message);
         return new CommandResult(message);
     }

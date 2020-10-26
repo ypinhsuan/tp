@@ -1,10 +1,10 @@
 package tutorspet.logic.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static tutorspet.commons.core.Messages.MESSAGE_DUPLICATE_ATTENDANCE;
 import static tutorspet.commons.core.Messages.MESSAGE_MISSING_STUDENT_ATTENDANCE;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_PARTICIPATION_SCORE_33;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_PARTICIPATION_SCORE_51;
-import static tutorspet.logic.commands.attendance.AddAttendanceCommand.MESSAGE_DUPLICATE_ATTENDANCE;
 import static tutorspet.logic.util.AttendanceRecordUtil.addAttendance;
 import static tutorspet.logic.util.AttendanceRecordUtil.removeAttendance;
 import static tutorspet.logic.util.AttendanceRecordUtil.setAttendance;

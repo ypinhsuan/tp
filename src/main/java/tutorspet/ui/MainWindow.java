@@ -174,7 +174,7 @@ public class MainWindow extends UiPart<Stage> {
             uiStyleSheet.add(switchedStyleSheet);
             uiStyleSheet.add(Stylesheet.EXTENSION.getStylesheet());
             stylesheet = newStylesheet;
-            logger.info(Stylesheet.SUCCESS_MESSAGE + stylesheet.toString());
+            logger.info(String.format(Stylesheet.SUCCESS_MESSAGE, stylesheet));
         } catch (StylesheetException e) {
             logger.info(e.getMessage());
         }

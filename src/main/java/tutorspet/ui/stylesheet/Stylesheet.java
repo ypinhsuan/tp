@@ -8,8 +8,8 @@ public enum Stylesheet {
     DARK("DarkTheme.css"),
     EXTENSION("Extensions.css");
 
-    public static final String ERROR_MESSAGE = "Stylesheet cannot be found: ";
-    public static final String SUCCESS_MESSAGE = "Stylesheet switched to: ";
+    public static final String ERROR_MESSAGE = "Stylesheet cannot be found: %1$s.";
+    public static final String SUCCESS_MESSAGE = "Stylesheet switched to: %1$s.";
 
     public static final Stylesheet DEFAULT_STYLESHEET = LIGHT;
 
@@ -44,7 +44,7 @@ public enum Stylesheet {
         try {
             return getClass().getResource(DIRECTORY + path).toExternalForm();
         } catch (NullPointerException e) {
-            throw new StylesheetException(ERROR_MESSAGE + path);
+            throw new StylesheetException(String.format(ERROR_MESSAGE, path));
         }
     }
 }

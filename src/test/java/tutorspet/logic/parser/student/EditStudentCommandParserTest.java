@@ -1,6 +1,7 @@
 package tutorspet.logic.parser.student;
 
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static tutorspet.commons.core.Messages.MESSAGE_NOT_EDITED;
 import static tutorspet.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static tutorspet.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static tutorspet.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
@@ -19,7 +20,6 @@ import static tutorspet.logic.commands.CommandTestUtil.VALID_TAG_AVERAGE;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_TAG_EXPERIENCED;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_TELEGRAM_AMY;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_TELEGRAM_BOB;
-import static tutorspet.logic.commands.student.EditStudentCommand.MESSAGE_NOT_EDITED;
 import static tutorspet.logic.commands.student.EditStudentCommand.MESSAGE_USAGE;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_TAG;
 import static tutorspet.logic.parser.CommandParserTestUtil.assertParseFailure;

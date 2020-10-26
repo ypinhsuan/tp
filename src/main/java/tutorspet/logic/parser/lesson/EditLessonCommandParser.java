@@ -2,6 +2,7 @@ package tutorspet.logic.parser.lesson;
 
 import static java.util.Objects.requireNonNull;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static tutorspet.commons.core.Messages.MESSAGE_NOT_EDITED;
 import static tutorspet.logic.commands.lesson.EditLessonCommand.EditLessonDescriptor;
 import static tutorspet.logic.commands.lesson.EditLessonCommand.MESSAGE_USAGE;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_CLASS_INDEX;
@@ -68,7 +69,7 @@ public class EditLessonCommandParser implements Parser<EditLessonCommand> {
         }
 
         if (!editLessonDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditLessonCommand.MESSAGE_NOT_EDITED);
+            throw new ParseException(MESSAGE_NOT_EDITED);
         }
 
         return new EditLessonCommand(moduleClassIndex, lessonIndex, editLessonDescriptor);

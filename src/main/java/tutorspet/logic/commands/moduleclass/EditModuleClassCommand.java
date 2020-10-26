@@ -1,6 +1,8 @@
 package tutorspet.logic.commands.moduleclass;
 
 import static java.util.Objects.requireNonNull;
+import static tutorspet.commons.core.Messages.MESSAGE_DUPLICATE_MODULE_CLASS;
+import static tutorspet.commons.core.Messages.MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX;
 import static tutorspet.commons.util.CollectionUtil.requireAllNonNull;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_NAME;
 import static tutorspet.model.Model.PREDICATE_SHOW_ALL_MODULE_CLASS;
@@ -10,7 +12,6 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
-import tutorspet.commons.core.Messages;
 import tutorspet.commons.core.index.Index;
 import tutorspet.commons.util.CollectionUtil;
 import tutorspet.logic.commands.Command;
@@ -36,9 +37,7 @@ public class EditModuleClassCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_NAME + "CS2103T Tutorial T10";
 
-    public static final String MESSAGE_EDIT_MODULE_CLASS_SUCCESS = "Edited Class: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_MODULE_CLASS = "This class already exists.";
+    public static final String MESSAGE_SUCCESS = "Edited class:\n%1$s.";
 
     private final Index index;
     private final EditModuleClassDescriptor editModuleClassDescriptor;
@@ -61,7 +60,7 @@ public class EditModuleClassCommand extends Command {
         List<ModuleClass> lastShownList = model.getFilteredModuleClassList();
 
         if (index.getOneBased() > lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX);
+            throw new CommandException(MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX);
         }
 
         ModuleClass moduleClassToEdit = lastShownList.get(index.getZeroBased());
@@ -73,7 +72,7 @@ public class EditModuleClassCommand extends Command {
 
         model.setModuleClass(moduleClassToEdit, editedModuleClass);
         model.updateFilteredModuleClassList(PREDICATE_SHOW_ALL_MODULE_CLASS);
-        String message = String.format(MESSAGE_EDIT_MODULE_CLASS_SUCCESS, editedModuleClass);
+        String message = String.format(MESSAGE_SUCCESS, editedModuleClass);
         model.commit(message);
         return new CommandResult(message);
     }

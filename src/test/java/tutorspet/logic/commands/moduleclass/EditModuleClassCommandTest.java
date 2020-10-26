@@ -2,6 +2,7 @@ package tutorspet.logic.commands.moduleclass;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static tutorspet.commons.core.Messages.MESSAGE_DUPLICATE_MODULE_CLASS;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX;
 import static tutorspet.logic.commands.CommandTestUtil.DESC_CS2100_LAB;
 import static tutorspet.logic.commands.CommandTestUtil.DESC_CS2103T_TUTORIAL;
@@ -9,8 +10,7 @@ import static tutorspet.logic.commands.CommandTestUtil.VALID_NAME_CS2030_TUTORIA
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static tutorspet.logic.commands.CommandTestUtil.showModuleClassAtIndex;
-import static tutorspet.logic.commands.moduleclass.EditModuleClassCommand.MESSAGE_DUPLICATE_MODULE_CLASS;
-import static tutorspet.logic.commands.moduleclass.EditModuleClassCommand.MESSAGE_EDIT_MODULE_CLASS_SUCCESS;
+import static tutorspet.logic.commands.moduleclass.EditModuleClassCommand.MESSAGE_SUCCESS;
 import static tutorspet.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 import static tutorspet.testutil.TypicalIndexes.INDEX_SECOND_ITEM;
 import static tutorspet.testutil.TypicalModuleClass.CS2103T_TUTORIAL;
@@ -43,7 +43,7 @@ public class EditModuleClassCommandTest {
                 new EditModuleClassDescriptorBuilder(editedModuleClass).build();
         EditModuleClassCommand editModuleClassCommand = new EditModuleClassCommand(INDEX_FIRST_ITEM, descriptor);
 
-        String expectedMessage = String.format(MESSAGE_EDIT_MODULE_CLASS_SUCCESS, editedModuleClass);
+        String expectedMessage = String.format(MESSAGE_SUCCESS, editedModuleClass);
 
         Model expectedModel = new ModelManager(new TutorsPet(model.getTutorsPet()), new UserPrefs());
         expectedModel.setModuleClass(model.getFilteredModuleClassList().get(0), editedModuleClass);
@@ -64,7 +64,7 @@ public class EditModuleClassCommandTest {
                 .withName(VALID_NAME_CS2030_TUTORIAL).build();
         EditModuleClassCommand editModuleClassCommand = new EditModuleClassCommand(indexLastModuleClass, descriptor);
 
-        String expectedMessage = String.format(MESSAGE_EDIT_MODULE_CLASS_SUCCESS, editedModuleClass);
+        String expectedMessage = String.format(MESSAGE_SUCCESS, editedModuleClass);
 
         Model expectedModel = new ModelManager(new TutorsPet(model.getTutorsPet()), new UserPrefs());
         expectedModel.setModuleClass(lastModuleClass, editedModuleClass);
@@ -84,7 +84,7 @@ public class EditModuleClassCommandTest {
         EditModuleClassCommand editModuleClassCommand = new EditModuleClassCommand(INDEX_FIRST_ITEM,
                 new EditModuleClassDescriptorBuilder().withName(VALID_NAME_CS2030_TUTORIAL).build());
 
-        String expectedMessage = String.format(MESSAGE_EDIT_MODULE_CLASS_SUCCESS, editedModuleClass);
+        String expectedMessage = String.format(MESSAGE_SUCCESS, editedModuleClass);
 
         Model expectedModel = new ModelManager(new TutorsPet(model.getTutorsPet()), new UserPrefs());
         expectedModel.setModuleClass(model.getFilteredModuleClassList().get(0), editedModuleClass);

@@ -1,13 +1,13 @@
 package tutorspet.logic.commands.student;
 
 import static java.util.Objects.requireNonNull;
+import static tutorspet.commons.core.Messages.MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_CLASS_INDEX;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
-import tutorspet.commons.core.Messages;
 import tutorspet.commons.core.index.Index;
 import tutorspet.logic.commands.CommandResult;
 import tutorspet.logic.commands.exceptions.CommandException;
@@ -25,7 +25,7 @@ public class ListStudentInClassCommand extends ListStudentCommand {
             + "Parameters: " + "[" + PREFIX_CLASS_INDEX + "CLASS_INDEX]\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_CLASS_INDEX + "1";
 
-    public static final String MESSAGE_LIST_CLASS_SPECIFIC_SUCCESS = "Listed all students in %1$s.";
+    public static final String MESSAGE_SUCCESS = "Listed all students in %1$s.";
 
     private final Index moduleClassIndex;
 
@@ -43,13 +43,13 @@ public class ListStudentInClassCommand extends ListStudentCommand {
         List<ModuleClass> lastShownModuleClassList = model.getFilteredModuleClassList();
 
         if (moduleClassIndex.getOneBased() > lastShownModuleClassList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX);
+            throw new CommandException(MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX);
         }
 
         ModuleClass moduleClass = lastShownModuleClassList.get(moduleClassIndex.getZeroBased());
         Collection<UUID> studentUuids = moduleClass.getStudentUuids();
         model.updateFilteredStudentList(new StudentInUuidCollectionPredicate(studentUuids));
-        return new CommandResult(String.format(MESSAGE_LIST_CLASS_SPECIFIC_SUCCESS, moduleClass));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, moduleClass));
     }
 
     @Override

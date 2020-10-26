@@ -44,8 +44,7 @@ public class AddLessonCommand extends Command {
             + PREFIX_VENUE + "COM1-0211 "
             + PREFIX_NUMBER_OF_OCCURRENCES + "13";
 
-    public static final String MESSAGE_SUCCESS = "New lesson added: %1$s";
-    public static final String MESSAGE_EXISTING_LESSON = "This lesson already exists";
+    public static final String MESSAGE_SUCCESS = "New lesson added:\n%1$s %2$s.";
 
     private final Index moduleClassIndex;
     private final Lesson toAdd;
@@ -56,7 +55,7 @@ public class AddLessonCommand extends Command {
     public AddLessonCommand(Index moduleClassIndex, Lesson lesson) {
         requireAllNonNull(moduleClassIndex, lesson);
 
-        this.toAdd = lesson;
+        toAdd = lesson;
         this.moduleClassIndex = moduleClassIndex;
     }
 
@@ -75,7 +74,7 @@ public class AddLessonCommand extends Command {
         ModuleClass modifiedModuleClass = addLessonToModuleClass(moduleClassToAddTo, toAdd);
         model.setModuleClass(moduleClassToAddTo, modifiedModuleClass);
 
-        String message = String.format(MESSAGE_SUCCESS, toAdd);
+        String message = String.format(MESSAGE_SUCCESS, modifiedModuleClass.getName(), toAdd);
         model.commit(message);
         return new CommandResult(message);
     }

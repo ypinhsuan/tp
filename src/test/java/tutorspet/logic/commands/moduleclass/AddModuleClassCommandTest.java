@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static tutorspet.logic.commands.moduleclass.AddModuleClassCommand.MESSAGE_DUPLICATE_MODULE_CLASS;
+import static tutorspet.commons.core.Messages.MESSAGE_DUPLICATE_MODULE_CLASS;
 import static tutorspet.logic.commands.moduleclass.AddModuleClassCommand.MESSAGE_SUCCESS;
 import static tutorspet.testutil.Assert.assertThrows;
 

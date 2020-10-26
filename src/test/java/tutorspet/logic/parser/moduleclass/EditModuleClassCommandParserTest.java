@@ -1,12 +1,12 @@
 package tutorspet.logic.parser.moduleclass;
 
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static tutorspet.commons.core.Messages.MESSAGE_NOT_EDITED;
 import static tutorspet.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static tutorspet.logic.commands.CommandTestUtil.NAME_DESC_CS2100_LAB;
 import static tutorspet.logic.commands.CommandTestUtil.NAME_DESC_CS2103T_TUTORIAL;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_NAME_CS2100_LAB;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_NAME_CS2103T_TUTORIAL;
-import static tutorspet.logic.commands.moduleclass.EditModuleClassCommand.MESSAGE_NOT_EDITED;
 import static tutorspet.logic.commands.moduleclass.EditModuleClassCommand.MESSAGE_USAGE;
 import static tutorspet.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static tutorspet.logic.parser.CommandParserTestUtil.assertParseSuccess;

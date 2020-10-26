@@ -1,6 +1,9 @@
 package tutorspet.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static tutorspet.commons.core.Messages.MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX;
+import static tutorspet.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
+import static tutorspet.commons.core.Messages.MESSAGE_MISSING_LINK;
 import static tutorspet.commons.util.CollectionUtil.requireAllNonNull;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_CLASS_INDEX;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_STUDENT_INDEX;
@@ -9,7 +12,6 @@ import static tutorspet.logic.util.ModuleClassUtil.deleteStudentFromModuleClass;
 import java.util.List;
 import java.util.UUID;
 
-import tutorspet.commons.core.Messages;
 import tutorspet.commons.core.index.Index;
 import tutorspet.logic.commands.exceptions.CommandException;
 import tutorspet.model.Model;
@@ -35,8 +37,7 @@ public class UnlinkCommand extends Command {
             + PREFIX_STUDENT_INDEX + "1"
             + PREFIX_CLASS_INDEX + "1";
 
-    public static final String MESSAGE_UNLINK_SUCCESS = "Unlinked %1$s from %2$s";
-    public static final String MESSAGE_MISSING_LINK = "This student is not linked to this class.";
+    public static final String MESSAGE_SUCCESS = "Unlinked %1$s from %2$s.";
 
     private final Index moduleClassIndex;
     private final Index studentIndex;
@@ -60,11 +61,11 @@ public class UnlinkCommand extends Command {
         List<ModuleClass> lastShownModuleClassList = model.getFilteredModuleClassList();
 
         if (studentIndex.getOneBased() > lastShownStudentList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+            throw new CommandException(MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
 
         if (moduleClassIndex.getOneBased() > lastShownModuleClassList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX);
+            throw new CommandException(MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX);
         }
 
         Student studentToUnlink = lastShownStudentList.get(studentIndex.getZeroBased());
@@ -75,7 +76,7 @@ public class UnlinkCommand extends Command {
         model.updateFilteredModuleClassList(new SameModuleClassPredicate(modifiedModuleClass));
         model.updateFilteredStudentList(new StudentInUuidCollectionPredicate(modifiedModuleClass.getStudentUuids()));
 
-        String message = String.format(MESSAGE_UNLINK_SUCCESS, studentToUnlink.getName(), moduleClassToUnlink);
+        String message = String.format(MESSAGE_SUCCESS, studentToUnlink.getName(), moduleClassToUnlink);
         model.commit(message);
         return new CommandResult(message);
     }

@@ -2,6 +2,7 @@ package tutorspet.logic.commands.lesson;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static tutorspet.commons.core.Messages.MESSAGE_DUPLICATE_LESSON;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX;
 import static tutorspet.logic.commands.CommandTestUtil.DESC_LESSON_FRI_8_TO_10;
@@ -13,8 +14,7 @@ import static tutorspet.logic.commands.CommandTestUtil.VALID_VENUE_S17_0302_LESS
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static tutorspet.logic.commands.CommandTestUtil.showModuleClassAtIndex;
-import static tutorspet.logic.commands.lesson.EditLessonCommand.MESSAGE_DUPLICATE_LESSON;
-import static tutorspet.logic.commands.lesson.EditLessonCommand.MESSAGE_EDIT_LESSON_SUCCESS;
+import static tutorspet.logic.commands.lesson.EditLessonCommand.MESSAGE_SUCCESS;
 import static tutorspet.logic.util.ModuleClassUtil.editLessonInModuleClass;
 import static tutorspet.model.lesson.Lesson.MESSAGE_CONSTRAINTS;
 import static tutorspet.testutil.Assert.assertThrows;
@@ -78,7 +78,7 @@ public class EditLessonCommandTest {
 
         ModuleClass updatedModuleClass = editLessonInModuleClass(moduleClass, lessonToEdit, editedLesson);
 
-        String expectedMessage = String.format(MESSAGE_EDIT_LESSON_SUCCESS, editedLesson);
+        String expectedMessage = String.format(MESSAGE_SUCCESS, moduleClass.getName(), editedLesson);
 
         Model expectedModel = new ModelManager(new TutorsPet(model.getTutorsPet()), new UserPrefs());
         expectedModel.setModuleClass(moduleClass, updatedModuleClass);
@@ -105,7 +105,7 @@ public class EditLessonCommandTest {
                 .withVenue(VALID_VENUE_S17_0302_LESSON_FRI_8_TO_10).build();
         ModuleClass updatedModuleClass = editLessonInModuleClass(firstModuleClass, firstLessonInList, editedLesson);
 
-        String expectedMessage = String.format(MESSAGE_EDIT_LESSON_SUCCESS, editedLesson);
+        String expectedMessage = String.format(MESSAGE_SUCCESS, updatedModuleClass.getName(), editedLesson);
 
         Model expectedModel = new ModelManager(new TutorsPet(model.getTutorsPet()), new UserPrefs());
         expectedModel.setModuleClass(firstModuleClass, updatedModuleClass);
@@ -122,10 +122,11 @@ public class EditLessonCommandTest {
         EditLessonCommand editLessonCommand = new EditLessonCommand(
                 moduleClassIndex, lessonIndex, new EditLessonCommand.EditLessonDescriptor());
 
-        Lesson editedLesson = model.getFilteredModuleClassList().get(moduleClassIndex.getZeroBased())
-                .getLessons().get(lessonIndex.getZeroBased());
+        ModuleClass targetModuleClass = model.getFilteredModuleClassList().get(moduleClassIndex.getZeroBased());
 
-        String expectedMessage = String.format(MESSAGE_EDIT_LESSON_SUCCESS, editedLesson);
+        Lesson editedLesson = targetModuleClass.getLessons().get(lessonIndex.getZeroBased());
+
+        String expectedMessage = String.format(MESSAGE_SUCCESS, targetModuleClass.getName(), editedLesson);
 
         Model expectedModel = new ModelManager(new TutorsPet(model.getTutorsPet()), new UserPrefs());
         expectedModel.commit(expectedMessage);
@@ -150,10 +151,11 @@ public class EditLessonCommandTest {
         Lesson editedLesson = new LessonBuilder(lessonToEdit)
                 .withVenue(VALID_VENUE_S17_0302_LESSON_FRI_8_TO_10).build();
 
-        String expectedMessage = String.format(MESSAGE_EDIT_LESSON_SUCCESS, editedLesson);
-
         ModuleClass updatedModuleClass = editLessonInModuleClass(
                 moduleClassInFilteredList, lessonToEdit, editedLesson);
+
+        String expectedMessage = String.format(MESSAGE_SUCCESS,
+                updatedModuleClass.getName(), editedLesson);
 
         Model expectedModel = new ModelManager(new TutorsPet(model.getTutorsPet()), new UserPrefs());
         expectedModel.setModuleClass(moduleClassInFilteredList, updatedModuleClass);

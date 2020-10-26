@@ -9,7 +9,7 @@ import static tutorspet.logic.commands.CommandTestUtil.VALID_WEEK_1;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_WEEK_5;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static tutorspet.logic.commands.attendance.DeleteAttendanceCommand.MESSAGE_DELETE_ATTENDANCE_SUCCESS;
+import static tutorspet.logic.commands.attendance.DeleteAttendanceCommand.MESSAGE_SUCCESS;
 import static tutorspet.logic.util.ModuleClassUtil.deleteAttendanceFromModuleClass;
 import static tutorspet.testutil.Assert.assertThrows;
 import static tutorspet.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
@@ -74,9 +74,8 @@ public class DeleteAttendanceCommandTest {
                 deleteAttendanceFromModuleClass(moduleClass, lessonIndex, targetWeek, student);
         Lesson modifiedLesson = modifiedModuleClass.getLessons().get(lessonIndex.getZeroBased());
 
-        String expectedMessage = String.format(
-                MESSAGE_DELETE_ATTENDANCE_SUCCESS, targetWeek,
-                student.getName(), modifiedLesson);
+        String expectedMessage = String.format(MESSAGE_SUCCESS,
+                student.getName(), modifiedModuleClass, modifiedLesson, targetWeek);
         Model expectedModel = new ModelManager(model.getTutorsPet(), new UserPrefs());
         expectedModel.setModuleClass(moduleClass, modifiedModuleClass);
         expectedModel.commit(expectedMessage);

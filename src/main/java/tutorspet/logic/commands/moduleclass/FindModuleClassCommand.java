@@ -1,8 +1,8 @@
 package tutorspet.logic.commands.moduleclass;
 
 import static java.util.Objects.requireNonNull;
+import static tutorspet.commons.core.Messages.MESSAGE_MODULE_CLASS_LISTED_OVERVIEW;
 
-import tutorspet.commons.core.Messages;
 import tutorspet.logic.commands.Command;
 import tutorspet.logic.commands.CommandResult;
 import tutorspet.model.Model;
@@ -33,7 +33,7 @@ public class FindModuleClassCommand extends Command {
         requireNonNull(model);
 
         model.updateFilteredModuleClassList(predicate);
-        return new CommandResult(String.format(Messages.MESSAGE_MODULE_CLASS_LISTED_OVERVIEW,
+        return new CommandResult(String.format(MESSAGE_MODULE_CLASS_LISTED_OVERVIEW,
                 model.getFilteredModuleClassList().size()));
     }
 

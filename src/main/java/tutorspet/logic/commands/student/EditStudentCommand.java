@@ -1,6 +1,8 @@
 package tutorspet.logic.commands.student;
 
 import static java.util.Objects.requireNonNull;
+import static tutorspet.commons.core.Messages.MESSAGE_DUPLICATE_STUDENT;
+import static tutorspet.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 import static tutorspet.commons.util.CollectionUtil.requireAllNonNull;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_NAME;
@@ -15,7 +17,6 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
-import tutorspet.commons.core.Messages;
 import tutorspet.commons.core.index.Index;
 import tutorspet.commons.util.CollectionUtil;
 import tutorspet.logic.commands.Command;
@@ -47,9 +48,7 @@ public class EditStudentCommand extends Command {
             + PREFIX_TELEGRAM + "johnDO3 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Edited Student: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists.";
+    public static final String MESSAGE_SUCCESS = "Edited student:\n%1$s.";
 
     private final Index index;
     private final EditStudentDescriptor editStudentDescriptor;
@@ -72,7 +71,7 @@ public class EditStudentCommand extends Command {
         List<Student> lastShownList = model.getFilteredStudentList();
 
         if (index.getOneBased() > lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+            throw new CommandException(MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
 
         Student studentToEdit = lastShownList.get(index.getZeroBased());
@@ -84,7 +83,7 @@ public class EditStudentCommand extends Command {
 
         model.setStudent(studentToEdit, editedStudent);
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
-        String message = String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent);
+        String message = String.format(MESSAGE_SUCCESS, editedStudent);
         model.commit(message);
         return new CommandResult(message);
     }

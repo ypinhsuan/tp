@@ -1,10 +1,10 @@
 package tutorspet.logic.commands.student;
 
 import static java.util.Objects.requireNonNull;
+import static tutorspet.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 
 import java.util.List;
 
-import tutorspet.commons.core.Messages;
 import tutorspet.commons.core.index.Index;
 import tutorspet.logic.commands.Command;
 import tutorspet.logic.commands.CommandResult;
@@ -24,7 +24,7 @@ public class DeleteStudentCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_STUDENT_SUCCESS = "Deleted Student: %1$s";
+    public static final String MESSAGE_SUCCESS = "Deleted Student:\n%1$s.";
 
     private final Index targetIndex;
 
@@ -39,12 +39,12 @@ public class DeleteStudentCommand extends Command {
         List<Student> lastShownList = model.getFilteredStudentList();
 
         if (targetIndex.getOneBased() > lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+            throw new CommandException(MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
 
         Student studentToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteStudent(studentToDelete);
-        String message = String.format(MESSAGE_DELETE_STUDENT_SUCCESS, studentToDelete);
+        String message = String.format(MESSAGE_SUCCESS, studentToDelete);
         model.commit(message);
         return new CommandResult(message);
     }

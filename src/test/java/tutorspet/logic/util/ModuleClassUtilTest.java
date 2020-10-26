@@ -1,15 +1,14 @@
 package tutorspet.logic.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static tutorspet.commons.core.Messages.MESSAGE_DUPLICATE_LESSON;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX;
-import static tutorspet.commons.core.Messages.MESSAGE_INVALID_STUDENT_IN_MODULE_CLASS;
+import static tutorspet.commons.core.Messages.MESSAGE_MISSING_LINK;
 import static tutorspet.commons.core.Messages.MESSAGE_NO_LESSONS_IN_MODULE_CLASS;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_ATTENDANCE;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_PARTICIPATION_SCORE_80;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_WEEK_1;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_WEEK_5;
-import static tutorspet.logic.commands.lesson.AddLessonCommand.MESSAGE_EXISTING_LESSON;
-import static tutorspet.logic.commands.lesson.EditLessonCommand.MESSAGE_DUPLICATE_LESSON;
 import static tutorspet.logic.util.LessonUtil.addAttendanceToLesson;
 import static tutorspet.logic.util.LessonUtil.deleteAllStudentsFromLesson;
 import static tutorspet.logic.util.LessonUtil.deleteAttendanceFromLesson;
@@ -109,7 +108,7 @@ public class ModuleClassUtilTest {
     public void addLessonToModuleClass_duplicateLesson_throwsCommandException() {
         Lesson lessonToAdd = CS2103T_TUTORIAL.getLessons().get(0);
 
-        assertThrows(CommandException.class, MESSAGE_EXISTING_LESSON, () ->
+        assertThrows(CommandException.class, MESSAGE_DUPLICATE_LESSON, () ->
                 addLessonToModuleClass(CS2103T_TUTORIAL, lessonToAdd));
     }
 
@@ -212,7 +211,7 @@ public class ModuleClassUtilTest {
         Attendance attendanceToAdd = new Attendance(VALID_PARTICIPATION_SCORE_80);
         Index lessonIndex = Index.fromZeroBased(0);
 
-        assertThrows(CommandException.class, MESSAGE_INVALID_STUDENT_IN_MODULE_CLASS, () ->
+        assertThrows(CommandException.class, MESSAGE_MISSING_LINK, () ->
                 addAttendanceToModuleClass(CS2103T_TUTORIAL, lessonIndex, VALID_WEEK_5, CARL, attendanceToAdd));
     }
 
@@ -258,7 +257,7 @@ public class ModuleClassUtilTest {
         Attendance attendanceToSet = new Attendance(VALID_PARTICIPATION_SCORE_80);
         Index lessonIndex = Index.fromZeroBased(0);
 
-        assertThrows(CommandException.class, MESSAGE_INVALID_STUDENT_IN_MODULE_CLASS, () ->
+        assertThrows(CommandException.class, MESSAGE_MISSING_LINK, () ->
                 editAttendanceInModuleClass(CS2103T_TUTORIAL, lessonIndex, VALID_WEEK_1, CARL, attendanceToSet));
     }
 
@@ -302,7 +301,7 @@ public class ModuleClassUtilTest {
     public void deleteAttendanceFromModuleClass_invalidStudent_throwsCommandException() {
         Index lessonIndex = Index.fromZeroBased(0);
 
-        assertThrows(CommandException.class, MESSAGE_INVALID_STUDENT_IN_MODULE_CLASS, () ->
+        assertThrows(CommandException.class, MESSAGE_MISSING_LINK, () ->
                 deleteAttendanceFromModuleClass(CS2103T_TUTORIAL, lessonIndex, VALID_WEEK_1, CARL));
     }
 
@@ -338,7 +337,7 @@ public class ModuleClassUtilTest {
     public void getAttendanceFromModuleClass_invalidStudent_throwsCommandException() {
         Index lessonIndex = Index.fromZeroBased(0);
 
-        assertThrows(CommandException.class, MESSAGE_INVALID_STUDENT_IN_MODULE_CLASS, () ->
+        assertThrows(CommandException.class, MESSAGE_MISSING_LINK, () ->
                 getAttendanceFromModuleClass(CS2103T_TUTORIAL, lessonIndex, VALID_WEEK_1, CARL));
     }
 
@@ -371,7 +370,7 @@ public class ModuleClassUtilTest {
 
     @Test
     public void getParticipationScore_invalidStudent_throwsCommandException() {
-        assertThrows(CommandException.class, MESSAGE_INVALID_STUDENT_IN_MODULE_CLASS, () ->
+        assertThrows(CommandException.class, MESSAGE_MISSING_LINK, () ->
                 getParticipationScore(CS2103T_TUTORIAL, CARL));
     }
 
@@ -399,7 +398,7 @@ public class ModuleClassUtilTest {
 
     @Test
     public void getAbsentWeek_invalidStudent_throwsCommandException() {
-        assertThrows(CommandException.class, MESSAGE_INVALID_STUDENT_IN_MODULE_CLASS, () ->
+        assertThrows(CommandException.class, MESSAGE_MISSING_LINK, () ->
                 getAbsentWeek(CS2103T_TUTORIAL, CARL));
     }
 

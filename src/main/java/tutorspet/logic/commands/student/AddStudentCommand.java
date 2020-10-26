@@ -1,6 +1,7 @@
 package tutorspet.logic.commands.student;
 
 import static java.util.Objects.requireNonNull;
+import static tutorspet.commons.core.Messages.MESSAGE_DUPLICATE_STUDENT;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_NAME;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_TAG;
@@ -32,8 +33,7 @@ public class AddStudentCommand extends Command {
             + PREFIX_TAG + "CS2103 Tutorial "
             + PREFIX_TAG + "Experienced";
 
-    public static final String MESSAGE_SUCCESS = "New student added: %1$s";
-    public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists.";
+    public static final String MESSAGE_SUCCESS = "New student added:\n%1$s.";
 
     private final Student toAdd;
 

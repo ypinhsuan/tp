@@ -27,8 +27,8 @@ import tutorspet.model.student.Telegram;
  */
 public class ParserUtil {
 
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-    public static final String MESSAGE_INVALID_TIME = "Time format provided is invalid.";
+    public static final String MESSAGE_INVALID_INDEX = "The index provided is not a positive whole number.";
+    public static final String MESSAGE_INVALID_TIME = "The time format provided is invalid.";
 
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given

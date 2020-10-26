@@ -1,6 +1,8 @@
 package tutorspet.logic.commands.attendance;
 
 import static java.util.Objects.requireNonNull;
+import static tutorspet.commons.core.Messages.MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX;
+import static tutorspet.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 import static tutorspet.commons.util.CollectionUtil.requireAllNonNull;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_CLASS_INDEX;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_LESSON_INDEX;
@@ -11,7 +13,6 @@ import static tutorspet.logic.util.ModuleClassUtil.getLessonFromModuleClass;
 
 import java.util.List;
 
-import tutorspet.commons.core.Messages;
 import tutorspet.commons.core.index.Index;
 import tutorspet.logic.commands.Command;
 import tutorspet.logic.commands.CommandResult;
@@ -45,9 +46,8 @@ public class DeleteAttendanceCommand extends Command {
             + PREFIX_STUDENT_INDEX + "1 "
             + PREFIX_WEEK + "1";
 
-    public static final String MESSAGE_DELETE_ATTENDANCE_SUCCESS =
-            "Deleted week %1$s attendance of student %2$s from lesson %3$s";
-    public static final String MESSAGE_MISSING_ATTENDANCE = "Attendance of this student does not exist!";
+    public static final String MESSAGE_SUCCESS = "Deleted attendance:\n"
+            + "%1$s %2$s %3$s attendance in week %4$s.";
 
     private final Index moduleClassIndex;
     private final Index lessonIndex;
@@ -78,11 +78,11 @@ public class DeleteAttendanceCommand extends Command {
         List<ModuleClass> lastShownModuleClassList = model.getFilteredModuleClassList();
 
         if (studentIndex.getOneBased() > lastShownStudentList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+            throw new CommandException(MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
 
         if (moduleClassIndex.getOneBased() > lastShownModuleClassList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX);
+            throw new CommandException(MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX);
         }
 
         Student targetStudent = lastShownStudentList.get(studentIndex.getZeroBased());
@@ -95,7 +95,8 @@ public class DeleteAttendanceCommand extends Command {
 
         model.setModuleClass(targetModuleClass, modifiedModuleClass);
 
-        String message = String.format(MESSAGE_DELETE_ATTENDANCE_SUCCESS, week, targetStudent.getName(), lesson);
+        String message = String.format(MESSAGE_SUCCESS,
+                targetStudent.getName(), modifiedModuleClass, lesson, week);
         model.commit(message);
         return new CommandResult(message);
     }
