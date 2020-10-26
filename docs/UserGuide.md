@@ -111,7 +111,7 @@ The utility area consists of three tabs: **File**, **Theme**, **Help**.
  given and paste it into any web browsers. Alternatively, press <kbd>F1</kbd> to bring up the help window.
 
    ![Utility area](images/ugimages/UtilityArea.png)
-   <br>Figure 5. The Theme tab.
+   <br>Figure 5. The utility area.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -214,7 +214,8 @@ Format : `view-history`
 
 #### Exiting the program : `exit`
 
-Exits the program.
+You can exit Tutor's Pet by typing this command.
+All changes you have made in the application would have been saved.
 
 Format: `exit`
 
@@ -249,7 +250,7 @@ Format: `add-student n\NAME t\TELEGRAM_USERNAME e\EMAIL [tag\TAG]…​`
 
 For example:
 * You would like to add a new student, `Joel Lee` to Tutor's Pet.
-Type in `add-student n\Joel Lee t\joeleee e\jlee@example.com`
+  Type in `add-student n\Joel Lee t\joeleee e\jlee@example.com`
 * Scrolling down the list of students, you will see that `Joel Lee` has been added to Tutor's Pet.
 
   ![AddStudentAfter](images/ugimages/AddStudentAfter.png)
@@ -275,22 +276,22 @@ If you would like to change a student's particulars, use this command.
 Format: `edit-student STUDENT_INDEX [n\NAME] [t\TELEGRAM_USERNAME] [e\EMAIL] [tag\TAG]…​`
 
 For example:
-* `Charlotte Oliveiro` gave you the wrong email address on the first day of class. You need to replace her email address. Key in `edit-student 3 e\charlotteolive@example.com` and press <kbd>Enter</kbd>.
+* `Charlotte Oliveiro` gave you the wrong email address on the first day of class. You need to replace her email address.
+  Type in `edit-student 3 e\charlotteolive@example.com` and press <kbd>Enter</kbd>.
 * Scrolling down the list of students, you can see that `Charlotte`'s email has changed to `charlotteolive@example.com`.
 
   ![EditStudentAfter](images/ugimages/EditStudentAfter.png)
 
 Constraints:
-* At least one of the optional fields must be provided.
+* You must provide at least one of the optional fields.
 * When editing tags, the existing tags of the student will be removed and replaced by the newly typed in tags.
-* You can remove all the tags of a student by typing `tag\` without
-    specifying any tags after it.
+* You can remove all the tags of a student by typing `tag\` without specifying any tags after it.
 
 Other examples:
 *  `edit-student 1 t\smartlex e\yeohalex@example.com` \
 Edits the telegram username and email address of the 1st student to `smartlex` and `yeohalex@example.com` respectively.
-*  `edit-student 2 n/Betsy Yu tag/` \
-Edits the name of the 2nd student to `Betsy Yu` and clears all existing tags.
+*  `edit-student 2 n\Betsy Yu tag\` \
+Edits the name of the 2nd student to `Betsy Yu` and deletes all existing tags.
 
 #### Finding student by name : `find-student`
 
@@ -301,16 +302,16 @@ Format: `find-student KEYWORD [MORE_KEYWORDS]`
 For example:
 * `Roy` requested for supplementary notes in class today.
 You want to email him these notes.
-Type `find-student roy` and press <kbd>Enter</kbd>.
+  Type `find-student roy` and press <kbd>Enter</kbd>.
 
   ![FindStudentAfter](images/ugimages/FindStudentAfter.png)
 
 Constraints:
-* The search is case-insensitive. For instance, `roy` will match `Roy`.
-* The order of the keywords does not matter. e.g. `Yeoh Alex` will match `Alex Yeoh`.
+* The search is case-insensitive. You will receive `Roy` if you type in `roy`.
+* The order of the keywords does not matter. You will receive `Alex Yeoh` if you type in `Yeoh Alex`.
 * Only the name is searched.
-* Only full words will be matched. For instance, `Irfa` will not match `Irfan`.
-* Students matching at least one keyword will be returned. For instance, `Alex Li` will return `Alex Yeoh` and `David Li`
+* Only full words will be matched. You will not receive `Irfan` if you only typed in `Irfa`.
+* Students matching at least one keyword will be returned. You will receive both `Alex Yeoh` and `David Li` if you type in `Alex Li`.
 
 #### Deleting a student : `delete-student`
 
@@ -320,8 +321,9 @@ Format: `delete-student STUDENT_INDEX`
 
 For example:
 * `Bernice`, the 2nd student displayed in Tutor's Pet, has swapped `CS2103T Tutorial` slots and you no longer teach her.
-Hence, you want to delete her entry from Tutor's Pet. You type in `delete-student 2` and press <kbd>Enter</kbd>.
-* Notice that the number of students in `CS2103T Tutorial` decreases from 3 to 2.
+Hence, you want to delete her entry from Tutor's Pet.
+  You type in `delete-student 2` and press <kbd>Enter</kbd>.
+* Notice that the number of students in `CS2103T Tutorial` decreases to 2.
 
   ![DeleteStudentAfter](images/ugimages/DeleteStudentAfter.png)
 
@@ -394,7 +396,7 @@ Other examples:
   Edits the name of the 1st class in the results of the find command.
 
 <div markdown="span" class="alert alert-info">
-:information_source: **Tips:** Make use of the find-class command to filter the displayed student class list to your 
+:information_source: **Tips:** Make use of the find-class command to filter the displayed student class list to your
 desired class. You can now type in index 1 directly to edit the name of that class.
 </div>
 
@@ -418,7 +420,7 @@ Other examples:
     Returns `CS2103T tut`, `CS2030 lab`
 
 <div markdown="span" class="alert alert-info">
-  
+
 **:information_source: Notes about the command:**<br>
   * The search is case-insensitive. e.g `cs2103t` will match `CS2103T`.
   * The order of the keywords does not matter. e.g. `lab CS2100` will match `CS2100 lab`.
@@ -426,7 +428,7 @@ Other examples:
   * Only full words will be matched e.g. `CS` will not match `CS2100`.
   * Students matching at least one keyword will be returned (i.e. **OR** search).
     e.g. `CS2103T lab` will return `CS2103T tut`, `CS2100 lab`.
-  
+
 </div>
 
 #### Deleting a class : `delete-class`
@@ -541,9 +543,8 @@ Format: `add-lesson c\CLASS_INDEX d\DAY st\START_TIME et\END_TIME v\VENUE r\NO_O
 * Adds a lesson at a specified `CLASS_INDEX`+ `DAY` + `START_TIME` + `END_TIME` + `VENUE` + `NO_OF_TIMES`.
 
 For example:
-* * You receive news that you will be teaching `CS2103T Tutorial` on `Tuesday 10:00-11:00` at `COM2 #02-02` from week 1 to 13.
-Hence, you type in the command `add-lesson c\1 d\TUESDAY st\10:00 et\11:00 v\COM2 #02-02 r\13`and press
-<kbd>Enter</kbd>.
+* You receive news that you will be teaching `CS2103T Tutorial` on `Tuesday 10:00-11:00` at `COM2 #02-02` from week 1 to 13.
+Hence, you type in the command `add-lesson c\1 d\TUESDAY st\10:00 et\11:00 v\COM2 #02-02 r\13` and press <kbd>Enter</kbd>.
 * You have added a lesson to teach.
 
     ![Add lesson after](images/ugimages/AddLessonAfter.png)
@@ -557,16 +558,14 @@ Format: `edit-lesson c\CLASS_INDEX l\LESSON_INDEX [d\DAY] [st\START_TIME] [et\EN
 For example:
 * You made an error while entering the `CS2103T Tutorial` lesson. It should be `Tuesday` and not `Thursday`. You type the command `edit-lesson c\1 l\1 d\Tuesday` and press <kbd>Enter</kbd>.
 
-  ![Edit lesson before](images/ugimages/EditLessonBefore.png)
-
-* The day of the lesson has been changed from `Thursday` to `Tuesday`.
+* The day of the lesson has been changed to `Tuesday`.
 
   ![Edit lesson after](images/ugimages/EditLessonAfter.png)
 
 Constraints:
-* The day entered must be typed out in full.
-* The start time and end time must follow the form `hh:mm`. For instance, `11:00` is allowed, but not `1100`.
-* You have to specify at least one field (DAY, START_TIME, END_TIME, VENUE) to be changed.
+* You must type out the day in full.
+* When typing the start and end times, you must follow the form `hh:mm`. For example, `11:00` is allowed, but not `1100`.
+* You must specify at least one field (DAY, START_TIME, END_TIME, VENUE) to be changed.
 * You are not able to change the Number of occurrences.
 
 Other examples:
@@ -595,7 +594,7 @@ Other examples:
   Deletes the 1st lesson of the 1st class in the results of the find class command.
 
 <div markdown="span" class="alert alert-info">
-:information_source: **Tips:** If you accidentally delete the wrong lesson, you can retrieve it back immediately using 
+:information_source: **Tips:** If you accidentally delete the wrong lesson, you can retrieve it back immediately using
 the `undo` command. However, you cannot `undo` once you exit the application!
 </div>
 
@@ -737,9 +736,9 @@ For example:
 <div markdown="span" class="alert alert-info">
 
 **:information_source: Notes about the command:**<br>
-  * `Lesson(s) not attended` displays all lessons not attended by the student. This means that future lessons 
+  * `Lesson(s) not attended` displays all lessons not attended by the student. This means that future lessons
     are also displayed.
- 
+
 </div>
 
 --------------------------------------------------------------------------------------------------------------------

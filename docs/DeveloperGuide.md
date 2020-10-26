@@ -534,8 +534,8 @@ These information are stored as a `Map` with `Student` `UUID` as keys.
 `AttendanceRecordList` refers to the list of all `AttendanceRecord` instances.
 The size of this list is fixed and is determined by the `NumberOfOccurences` in `Lesson`.
 
-<div markdown="span" class="alert alert-primary">
-Note that all classes in the `Attendance` package are designed to be immutable.
+<div markdown="span" class="alert alert-primary">:information_source:
+**Note:** All classes in the `Attendance` package are designed to be immutable.
 </div>
 
 ### Design Considerations
@@ -546,33 +546,49 @@ It only has a `participationScore` attribute.
 
 #### Aspect 2: Maintaining immutability and optimising `AttendanceRecord`
 * **Alternative 1 (current choice):** Dynamically updating `AttendanceRecord` whenever there is a change to attendance.
-    * Pros: Guarantees immutability.
-    * Cons: Requires re-instantiation of a `Map` object whenever a user adds/edits/deletes an `Attendance`.
+  * Pros:
+    * Guarantees immutability.
+  * Cons:
+    * Requires re-instantiation of a `Map` object whenever a user adds/edits/deletes an `Attendance`.
 
-* **Alternative 2:** Initialising empty `Attendance`s for all students on call to constructor method. \
-This would mean that each `Attendance` is set to a particular value, rather than having to copy the entire `Map` object, whenever a user adds/edits/deletes it.
-    * Pros: Less overhead in modifying `Attendance`.
-    * Cons:
-      * Violates immutability.
-      * Incurs greater memory use.
+* **Alternative 2:** Initialising empty `Attendance` instances for all students on call to constructor method. \
+This would mean each `Attendance` is set to a particular value, whenever there is a change to an `AttendanceRecord`.
+  * Pros:
+    * Less overhead in modifying `Attendance`.
+  * Cons:
+    * Violates immutability.
+    * Incurs greater memory use.
+
+Alternative 1 was chosen as we prioritized immutability.
+The main benefit of Alternative 2 is that the entire `Map` object need not be copied every time everytime a user adds/edits/deletes an `Attendance`.
+However, this would violate immutability of the `Attendance` package.
+So, we have decided to implement Alternative 1.
 
 #### Aspect 3: Handling of invalid `Week` number
-* **Alternative 1 (current choice):** Fixed size `List`.
-    * Pros:
-      * Handles exceptions easily when a user inputs a week number greater than the total number of lessons.
-      * Provides constant time access as the week number is used as an index to the `List`.
-      * Easier to iterate over for `StatisticsCommand`.
-    * Cons: Requires additional methods to ensure the size of the `List` is fixed.
+* **Alternative 1 (current choice):** Store `AttendanceRecord`s in a fixed size `List`.
+  * Pros:
+    * Handles exceptions easily when a user inputs a week number greater than the total number of lessons.
+    * Provides constant time access as the week number is used as an index to the `List`.
+    * Easier to iterate over for `StatisticsCommand`.
+  * Cons:
+    * Requires additional methods to ensure the size of the `List` is fixed.
 
-* **Alternative 2:** `Map` of `Week` number to `AttendanceRecord`.
-    * Pros: Incurs less memory use.
-    * Cons:
-      * More difficult to iterate over for `StatisticsCommand`.
-      * More difficult to implement as each `Week` number must be checked to ensure it does not exceed `NumberOfOccurences` in `Lesson`.
+* **Alternative 2:** Store a `Map` of `Week` number to `AttendanceRecord`.
+  * Pros:
+    * Incurs less memory use.
+  * Cons:
+    * More difficult to iterate over for `StatisticsCommand`.
+    * More difficult to implement as each `Week` number must be checked to ensure it does not exceed `NumberOfOccurrences` in `Lesson`.
+
+Alternative 1 was chosen as it was easier to check for invalid week numbers.
+To check for invalid week numbers in Alternative 2, additional checks have to be done within the `AttendanceRecordList` class to ensure the week numbers do not exceed the `NumberOfOccurrences`.
 
 The sequence diagram below shows how an `Attendance` instance is retrieved.
 
 ![AttendanceRetrievalSequenceDiagram](images/AttendanceRetrievalSequenceDiagram.png)
+
+To avoid implementing add, edit and delete methods in the `Attendance` package, we created utility classes instead to handle these operations.
+These utility classes are `ModuleClassUtil`, `LessonUtil` and `AttendanceRecordListUtil`.
 
 --------------------------------------------------------------------------------------------------------------------
 
