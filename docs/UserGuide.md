@@ -359,7 +359,7 @@ Constraints:
 
 #### Listing all classes : `list-class`
 
-If you would like to see a list of all students in the application, make use of this command.
+If you would like to see a list of all classes in the application, make use of this command.
 
 Format: `list-class`
 
