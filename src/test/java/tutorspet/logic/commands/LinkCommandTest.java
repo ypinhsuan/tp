@@ -2,6 +2,7 @@ package tutorspet.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static tutorspet.commons.core.Messages.MESSAGE_EXISTING_LINK;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandFailure;
@@ -23,7 +24,6 @@ import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
 
-import tutorspet.commons.core.Messages;
 import tutorspet.commons.core.index.Index;
 import tutorspet.model.Model;
 import tutorspet.model.ModelManager;
@@ -103,7 +103,7 @@ public class LinkCommandTest {
 
         LinkCommand linkCommand = new LinkCommand(INDEX_FIRST_ITEM, INDEX_FIRST_ITEM);
 
-        assertCommandFailure(linkCommand, model, Messages.MESSAGE_EXISTING_LINK);
+        assertCommandFailure(linkCommand, model, MESSAGE_EXISTING_LINK);
     }
 
     @Test
