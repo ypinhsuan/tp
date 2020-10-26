@@ -15,6 +15,7 @@ import static tutorspet.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static tutorspet.logic.commands.attendance.AddAttendanceCommand.MESSAGE_SUCCESS;
 import static tutorspet.logic.util.ModuleClassUtil.addAttendanceToModuleClass;
+import static tutorspet.logic.util.ModuleClassUtil.getLessonFromModuleClass;
 import static tutorspet.testutil.Assert.assertThrows;
 import static tutorspet.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 import static tutorspet.testutil.TypicalIndexes.INDEX_THIRD_ITEM;
@@ -90,12 +91,13 @@ public class AddAttendanceCommandTest {
         Attendance targetAttendance = VALID_ATTENDANCE;
 
         ModuleClass moduleClass = model.getFilteredModuleClassList().get(moduleClassIndex.getZeroBased());
+        Lesson lesson = getLessonFromModuleClass(moduleClass, lessonIndex);
         Student student = model.getFilteredStudentList().get(studentIndex.getZeroBased());
         ModuleClass modifiedModuleClass = addAttendanceToModuleClass(
                 moduleClass, lessonIndex, targetWeek, student, targetAttendance);
 
-        String expectedMessage =
-                String.format(MESSAGE_SUCCESS, student.getName(), targetWeek, targetAttendance);
+        String expectedMessage = String.format(MESSAGE_SUCCESS,
+                student.getName(), moduleClass.getName(), lesson, targetWeek, targetAttendance);
         Model expectedModel = new ModelManager(model.getTutorsPet(), new UserPrefs());
         expectedModel.setModuleClass(moduleClass, modifiedModuleClass);
         expectedModel.commit(expectedMessage);

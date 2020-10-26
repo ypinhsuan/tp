@@ -10,6 +10,7 @@ import static tutorspet.logic.parser.CliSyntax.PREFIX_PARTICIPATION_SCORE;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_STUDENT_INDEX;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_WEEK;
 import static tutorspet.logic.util.ModuleClassUtil.addAttendanceToModuleClass;
+import static tutorspet.logic.util.ModuleClassUtil.getLessonFromModuleClass;
 
 import java.util.List;
 
@@ -20,6 +21,7 @@ import tutorspet.logic.commands.exceptions.CommandException;
 import tutorspet.model.Model;
 import tutorspet.model.attendance.Attendance;
 import tutorspet.model.attendance.Week;
+import tutorspet.model.lesson.Lesson;
 import tutorspet.model.moduleclass.ModuleClass;
 import tutorspet.model.student.Student;
 
@@ -40,8 +42,8 @@ public class AddAttendanceCommand extends Command {
             + PREFIX_WEEK + "WEEK_NUMBER"
             + PREFIX_PARTICIPATION_SCORE + "PARTICIPATION_SCORE (must be an integer between 0 and 100)";
 
-    public static final String MESSAGE_SUCCESS = "New attendance added: %1$s attended week %2$s lesson with "
-            + "participation score of %3$s";
+    public static final String MESSAGE_SUCCESS = "New attendance added:\n"
+            + "%1$s attended %2$s %3$s in week $4$s\n with participation score of %5$s.";
 
     private final Index moduleClassIndex;
     private final Index lessonIndex;
@@ -80,12 +82,14 @@ public class AddAttendanceCommand extends Command {
 
         Student targetStudent = lastShownStudentList.get(studentIndex.getZeroBased());
         ModuleClass targetModuleClass = lastShownModuleClassList.get(moduleClassIndex.getZeroBased());
+        Lesson targetLesson = getLessonFromModuleClass(targetModuleClass, lessonIndex);
 
         ModuleClass modifiedModuleClass =
                 addAttendanceToModuleClass(targetModuleClass, lessonIndex, week, targetStudent, toAdd);
         model.setModuleClass(targetModuleClass, modifiedModuleClass);
 
-        String message = String.format(MESSAGE_SUCCESS, targetStudent.getName(), week, toAdd);
+        String message = String.format(MESSAGE_SUCCESS,
+                targetStudent.getName(), modifiedModuleClass.getName(), targetLesson, week, toAdd);
         model.commit(message);
         return new CommandResult(message);
     }

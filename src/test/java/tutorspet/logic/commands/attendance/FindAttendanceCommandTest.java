@@ -16,6 +16,7 @@ import static tutorspet.logic.commands.CommandTestUtil.showModuleClassAtIndex;
 import static tutorspet.logic.commands.CommandTestUtil.showStudentAtIndex;
 import static tutorspet.logic.commands.attendance.FindAttendanceCommand.MESSAGE_SUCCESS;
 import static tutorspet.logic.util.ModuleClassUtil.getAttendanceFromModuleClass;
+import static tutorspet.logic.util.ModuleClassUtil.getLessonFromModuleClass;
 import static tutorspet.testutil.Assert.assertThrows;
 import static tutorspet.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 import static tutorspet.testutil.TypicalIndexes.INDEX_THIRD_ITEM;
@@ -65,12 +66,13 @@ public class FindAttendanceCommandTest {
         Week targetWeek = VALID_WEEK_1;
 
         ModuleClass moduleClass = model.getFilteredModuleClassList().get(moduleClassIndex.getZeroBased());
+        Lesson lesson = getLessonFromModuleClass(moduleClass, lessonIndex);
         Student student = model.getFilteredStudentList().get(studentIndex.getZeroBased());
 
         Attendance attendance = getAttendanceFromModuleClass(moduleClass, lessonIndex, targetWeek, student);
 
-        String expectedMessage = String.format(MESSAGE_SUCCESS, student.getName(),
-                targetWeek, attendance);
+        String expectedMessage = String.format(MESSAGE_SUCCESS,
+                student.getName(), moduleClass.getName(), lesson, targetWeek, attendance);
         Model expectedModel = new ModelManager(model.getTutorsPet(), new UserPrefs());
         FindAttendanceCommand findAttendanceCommand =
                 new FindAttendanceCommand(moduleClassIndex, lessonIndex, studentIndex, targetWeek);
@@ -89,11 +91,12 @@ public class FindAttendanceCommandTest {
         Week targetWeek = VALID_WEEK_1;
 
         ModuleClass moduleClass = model.getFilteredModuleClassList().get(moduleClassIndex.getZeroBased());
+        Lesson lesson = getLessonFromModuleClass(moduleClass, lessonIndex);
         Student student = model.getFilteredStudentList().get(studentIndex.getZeroBased());
 
         Attendance attendance = getAttendanceFromModuleClass(moduleClass, lessonIndex, targetWeek, student);
-        String expectedMessage = String.format(MESSAGE_SUCCESS, student.getName(),
-                targetWeek, attendance);
+        String expectedMessage = String.format(MESSAGE_SUCCESS,
+                student.getName(), moduleClass.getName(), lesson, targetWeek, attendance);
         Model expectedModel = new ModelManager(model.getTutorsPet(), new UserPrefs());
         expectedModel.updateFilteredModuleClassList(c -> c.isSameModuleClass(moduleClass));
         expectedModel.updateFilteredStudentList(s -> s.isSameStudent(student));
