@@ -3,6 +3,7 @@ package tutorspet.logic.util;
 import static tutorspet.commons.core.Messages.MESSAGE_DUPLICATE_LESSON;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX;
 import static tutorspet.commons.core.Messages.MESSAGE_MISSING_LINK;
+import static tutorspet.commons.core.Messages.MESSAGE_NO_LESSONS_IN_MODULE_CLASS;
 import static tutorspet.commons.util.CollectionUtil.requireAllNonNull;
 import static tutorspet.logic.util.LessonUtil.addAttendanceToLesson;
 import static tutorspet.logic.util.LessonUtil.deleteAllStudentsFromLesson;
@@ -23,7 +24,6 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-import tutorspet.commons.core.Messages;
 import tutorspet.commons.core.index.Index;
 import tutorspet.logic.commands.exceptions.CommandException;
 import tutorspet.model.attendance.Attendance;
@@ -303,7 +303,7 @@ public class ModuleClassUtil {
         requireAllNonNull(targetModuleClass, targetStudent);
 
         if (targetModuleClass.getLessons().isEmpty()) {
-            throw new CommandException(Messages.MESSAGE_NO_LESSONS_IN_MODULE_CLASS);
+            throw new CommandException(MESSAGE_NO_LESSONS_IN_MODULE_CLASS);
         }
 
         if (!targetModuleClass.hasStudentUuid(targetStudent.getUuid())) {
@@ -332,7 +332,7 @@ public class ModuleClassUtil {
         requireAllNonNull(targetModuleClass, targetStudent);
 
         if (targetModuleClass.getLessons().isEmpty()) {
-            throw new CommandException(Messages.MESSAGE_NO_LESSONS_IN_MODULE_CLASS);
+            throw new CommandException(MESSAGE_NO_LESSONS_IN_MODULE_CLASS);
         }
 
         if (!targetModuleClass.hasStudentUuid(targetStudent.getUuid())) {

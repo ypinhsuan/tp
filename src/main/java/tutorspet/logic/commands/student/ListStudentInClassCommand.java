@@ -1,13 +1,13 @@
 package tutorspet.logic.commands.student;
 
 import static java.util.Objects.requireNonNull;
+import static tutorspet.commons.core.Messages.MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_CLASS_INDEX;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
-import tutorspet.commons.core.Messages;
 import tutorspet.commons.core.index.Index;
 import tutorspet.logic.commands.CommandResult;
 import tutorspet.logic.commands.exceptions.CommandException;
@@ -43,7 +43,7 @@ public class ListStudentInClassCommand extends ListStudentCommand {
         List<ModuleClass> lastShownModuleClassList = model.getFilteredModuleClassList();
 
         if (moduleClassIndex.getOneBased() > lastShownModuleClassList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX);
+            throw new CommandException(MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX);
         }
 
         ModuleClass moduleClass = lastShownModuleClassList.get(moduleClassIndex.getZeroBased());

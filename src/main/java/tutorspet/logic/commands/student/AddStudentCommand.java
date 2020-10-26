@@ -1,12 +1,12 @@
 package tutorspet.logic.commands.student;
 
 import static java.util.Objects.requireNonNull;
+import static tutorspet.commons.core.Messages.MESSAGE_DUPLICATE_STUDENT;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_NAME;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_TAG;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 
-import tutorspet.commons.core.Messages;
 import tutorspet.logic.commands.Command;
 import tutorspet.logic.commands.CommandResult;
 import tutorspet.logic.commands.exceptions.CommandException;
@@ -51,7 +51,7 @@ public class AddStudentCommand extends Command {
         requireNonNull(model);
 
         if (model.hasStudent(toAdd)) {
-            throw new CommandException(Messages.MESSAGE_DUPLICATE_STUDENT);
+            throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
         }
 
         model.addStudent(toAdd);

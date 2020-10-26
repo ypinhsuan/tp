@@ -1,9 +1,9 @@
 package tutorspet.logic.commands.moduleclass;
 
 import static java.util.Objects.requireNonNull;
+import static tutorspet.commons.core.Messages.MESSAGE_DUPLICATE_MODULE_CLASS;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_NAME;
 
-import tutorspet.commons.core.Messages;
 import tutorspet.logic.commands.Command;
 import tutorspet.logic.commands.CommandResult;
 import tutorspet.logic.commands.exceptions.CommandException;
@@ -41,7 +41,7 @@ public class AddModuleClassCommand extends Command {
         requireNonNull(model);
 
         if (model.hasModuleClass(toAdd)) {
-            throw new CommandException(Messages.MESSAGE_DUPLICATE_MODULE_CLASS);
+            throw new CommandException(MESSAGE_DUPLICATE_MODULE_CLASS);
         }
 
         model.addModuleClass(toAdd);

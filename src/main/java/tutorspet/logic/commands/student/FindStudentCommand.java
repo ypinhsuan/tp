@@ -1,8 +1,8 @@
 package tutorspet.logic.commands.student;
 
 import static java.util.Objects.requireNonNull;
+import static tutorspet.commons.core.Messages.MESSAGE_STUDENTS_LISTED_OVERVIEW;
 
-import tutorspet.commons.core.Messages;
 import tutorspet.logic.commands.Command;
 import tutorspet.logic.commands.CommandResult;
 import tutorspet.model.Model;
@@ -34,7 +34,7 @@ public class FindStudentCommand extends Command {
 
         model.updateFilteredStudentList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_STUDENTS_LISTED_OVERVIEW, model.getFilteredStudentList().size()));
+                String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, model.getFilteredStudentList().size()));
     }
 
     @Override
