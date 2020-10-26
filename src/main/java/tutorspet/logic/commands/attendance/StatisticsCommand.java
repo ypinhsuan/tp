@@ -36,7 +36,7 @@ public class StatisticsCommand extends Command {
             + PREFIX_STUDENT_INDEX + "STUDENT_INDEX ";
 
     public static final String MESSAGE_SUCCESS = "%1$s attendance summary for %2$s:\n"
-            + "Average participation: %3$s\n"
+            + "Average participation: %3$.2f\n"
             + "Lesson(s) not attended:\n"
             + "%4$s";
 
