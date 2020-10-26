@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-* Table of Contents
+1. Table of Contents
 {:toc}
 
 ## Introduction
@@ -28,7 +28,27 @@ The following features are used in this guide to make it easier for you to navig
 
 * You can click on [blue words](#using-this-guide) to jump to the related section.
 * `Words with a grey background` refer to keywords used as part of commands or responses from your Tutor's Pet.
-* Words in <kbd>block font</kbd> refer to keyboard keys that you can press.
+* <kbd>Words in block font</kbd> refer to keyboard keys that you can press.
+
+<br/>
+
+<div markdown="block" class="alert alert-info">
+
+:information_source: Boxes with the :information_source: icon contain additional useful information.
+
+</div>
+
+<div markdown="block" class="alert alert-primary">
+
+:bulb: Boxes with the :bulb: icon contain additional tips and tricks to help you get the most out of your Tutor's Pet.
+
+</div>
+
+<div markdown="block" class="alert alert-warning">
+
+:warning: Boxes with the :warning: icon contain important information about how to keep your Tutor's Pet data safe.
+
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -184,7 +204,13 @@ If you require any assistance, you can use this command which shows you the link
 
 Format: `help`
 
-#### Undoing previous commands : `undo`
+#### Recalling previously entered commands
+
+If you have to repeatedly enter a similar command multiple times, you can use this feature to type less.
+
+When the command box is selected, press the <kbd>UP</kbd> and <kbd>DOWN</kbd> arrow keys to view previously entered commands.
+
+#### Undoing previous changes : `undo`
 
 If you have accidentally entered a command that permanently changes the data in your Tutor's Pet,
 you can use this command to undo the changes.
@@ -201,7 +227,13 @@ For example:
 
 ![Undo after](images/ugimages/UndoAfter.png)
 
-#### Redoing previously undone commands : `redo`
+<div markdown="block" class="alert alert-primary">
+
+:bulb: **Tip:** To view a list of changes that can be undone, use the `view-history` command.
+
+</div>
+
+#### Redoing previously undone changes : `redo`
 
 If you decide that you did not need to undo a command, instead of typing out the command again, you can use
 this command to redo the changes.
@@ -228,7 +260,7 @@ You can use this command to reset Tutor's Pet and all data will be cleared.
 Format: `reset`
 
 For example:
-* It is the start of a new semester and you want to delete all students and classes. 
+* It is the start of a new semester and you want to delete all students and classes.
   You can type in the command `reset` and press <kbd>Enter</kbd>.
 
 * You can see that all students and classes have been deleted.
@@ -259,8 +291,10 @@ Other examples:
 * `add-student n\Betsy Crowe t\betsycrowe e\betsycrowe@example.com tag\excellent` \
 Adds `Betsy` to Tutor's Pet along with an `excellent` tag.
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A student can have any number of tags (including 0)
+<div markdown="block" class="alert alert-primary">
+
+:bulb: **Tip:** A student can have any number of tags (including 0)
+
 </div>
 
 #### Listing all students : `list-student`
@@ -353,9 +387,13 @@ You type `add-class n\CS1231 Tutorial 3` and press <kbd>Enter</kbd>.
 
 ![AddClassAfter](images/ugimages/AddClassAfter.png)
 
-Constraints:
+<div markdown="block" class="alert alert-info">
+
+:information_source: **Notes about the command:**
 * The class name can only contain alphabets, numbers and spaces.
 * The class name cannot be the same as an existing class in your Tutor's Pet.
+
+</div>
 
 #### Listing all classes : `list-class`
 
@@ -370,11 +408,11 @@ If you would like to see a list of all students in a particular class, make use 
 Format: `list-student c\CLASS_INDEX`
 
 For example:
-* You want to send an email to students in your `CS2103T Tutorial` and hence would want to see a list of students in 
+* You want to send an email to students in your `CS2103T Tutorial` and hence would want to see a list of students in
 this class. You type in the command `list-student c\1` and and press <kbd>Enter</kbd>.
 
 * You can see that the 3 students in your `CS2103T Tutorial` have been listed.
-  
+
   ![List students in class after](images/ugimages/ListStudentsInClass.png)
 
 Other examples:
@@ -404,9 +442,11 @@ Other examples:
   `edit-class 1 n\CS2030 lab L05`<br>
   Edits the name of the 1st class in the results of the find command.
 
-<div markdown="span" class="alert alert-info">
-:information_source: **Tips:** Make use of the find-class command to filter the displayed student class list to your
+<div markdown="block" class="alert alert-primary">
+
+:bulb: **Tip:** Make use of the find-class command to filter the displayed student class list to your
 desired class. You can now type in index 1 directly to edit the name of that class.
+
 </div>
 
 #### Finding class by name : `find-class`
@@ -428,14 +468,19 @@ Other examples:
 * `find-class tut CS2030`<br>
     Returns `CS2103T tut`, `CS2030 lab`
 
-<div markdown="span" class="alert alert-info">
+<div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command:**<br>
-  * The search is case-insensitive. e.g `cs2103t` will match `CS2103T`.
-  * The order of the keywords does not matter. e.g. `lab CS2100` will match `CS2100 lab`.
-  * Only the name is searched.
-  * Only full words will be matched e.g. `CS` will not match `CS2100`.
-  * Students matching at least one keyword will be returned (i.e. **OR** search).
+
+* The search is case-insensitive. e.g `cs2103t` will match `CS2103T`.
+
+* The order of the keywords does not matter. e.g. `lab CS2100` will match `CS2100 lab`.
+
+* Only the name is searched.
+
+* Only full words will be matched e.g. `CS` will not match `CS2100`.
+
+* Students matching at least one keyword will be returned (i.e. **OR** search).
     e.g. `CS2103T lab` will return `CS2103T tut`, `CS2100 lab`.
 
 </div>
@@ -512,6 +557,13 @@ For example:
 
 ![Link after](images/ugimages/LinkAfter.png)
 
+<div markdown="block" class="alert alert-primary">
+
+:bulb: **Tip:** When linking multiple students to a class, you can press the <kbd>UP</kbd> arrow key to retrieve previously
+entered commands. This prevents you from needing to type `list-student` repeatedly to reset the displayed student list.
+
+</div>
+
 Other examples:
 * `find-student Alex`
   `link s\1 c\2`
@@ -535,7 +587,11 @@ For example:
 
 ![Unlink after](images/ugimages/UnlinkAfter.png)
 
-* Note that all of Alex's attendance in the class was also deleted.
+<div markdown="block" class="alert alert-warning">
+
+:warning: **Caution:** The student's attendance in the class will also be deleted.
+
+</div>
 
 Other examples:
 * `list-student c\2`
@@ -602,9 +658,11 @@ Other examples:
   `delete-lesson c\1 l\1`<br>
   Deletes the 1st lesson of the 1st class in the results of the find class command.
 
-<div markdown="span" class="alert alert-info">
-:information_source: **Tips:** If you accidentally delete the wrong lesson, you can retrieve it back immediately using
+<div markdown="block" class="alert alert-primary">
+
+:bulb: **Tip:** If you accidentally delete the wrong lesson, you can retrieve it back immediately using
 the `undo` command. However, you cannot `undo` once you exit the application!
+
 </div>
 
 #### Display venue : `display-venue`
@@ -650,10 +708,12 @@ Other Examples:
   Adds the attendance of the 2nd student in the results of the list command to the 1st lesson of the 1st class.<br>
   Attendance recorded is for week 5 and student's participation score is 50.
 
-<div markdown="span" class="alert alert-info">
-:information_source: **Tips:** If you are planning to add multiple attendances consecutively, click on the command
- box and make use of the `recall` function by pressing <kbd>up</kbd> arrow key. This `recall` function automatically
- inputs your most recent command into the command box allowing you to type less!
+<div markdown="block" class="alert alert-primary">
+
+:bulb: **Tip:** If you are planning to add multiple attendances consecutively, click on the command
+box and make use of the `recall` function by pressing <kbd>up</kbd> arrow key. This `recall` function automatically
+inputs your most recent command into the command box allowing you to type less!
+
 </div>
 
 #### Editing an attendance record : `edit-attendance`
@@ -675,7 +735,7 @@ Other examples:
 * `edit-attendance c\1 l\1 s\1 w\1 p\10` <br>
   Edits the 1st week's participation score of the 1st student of the 1st lesson of the 1st class to 10 points.
 
-<div markdown="span" class="alert alert-info">
+<div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command:**<br>
   * The `WEEK` **must be a positive whole number** 1, 2, 3, …​
@@ -710,7 +770,7 @@ Other Examples:
   Shows the attendance of the 2nd student in the 1st lesson of the first class in the results of the list command.
   Attendance shown is for week 5.
 
-<div markdown="span" class="alert alert-info">
+<div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command:**<br>
   * The `WEEK` **must be a positive whole number** 1, 2, 3, …​
@@ -746,7 +806,7 @@ For example:
 
     ![Display_stats after](images/ugimages/DisplayStatsAfter.png)
 
-<div markdown="span" class="alert alert-info">
+<div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command:**<br>
   * `Lesson(s) not attended` displays all lessons not attended by the student. This means that future lessons
