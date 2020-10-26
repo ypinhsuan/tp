@@ -12,6 +12,27 @@ Interface TutorsPetStorage <<Interface>>
 Class StorageManager
 Class JsonUserPrefsStorage
 Class JsonTutorsPetStorage
+Class JsonSerializableTutorsPet
+
+Package JsonAdaptedStudent <<Rectangle>> {
+Class JsonAdaptedStudent
+Class JsonAdaptedTag
+Class JsonAdaptedName
+}
+
+Class JsonAdaptedModuleClass
+
+Package JsonAdaptedLesson <<Rectangle>> {
+Class JsonAdaptedLesson
+Class JsonAdaptedAttendanceRecordList
+Class JsonAdaptedAttendanceRecord
+Class JsonAdaptedStudentAttendance
+Class JsonAdaptedAttendance
+}
+
+Class JsonAdaptedUuid
+
+}
 
 StorageManager .left.|> Storage
 StorageManager *-right-> UserPrefsStorage
@@ -20,17 +41,16 @@ StorageManager *-down-> TutorsPetStorage
 JsonUserPrefsStorage .left.|> UserPrefsStorage
 JsonTutorsPetStorage .left.|> TutorsPetStorage
 JsonTutorsPetStorage .down.> JsonSerializableTutorsPet
-JsonSerializableTutorsPet *-down-> JsonAdaptedStudent
-JsonSerializableTutorsPet *-right-> JsonAdaptedModuleClass
-JsonAdaptedStudent *-down-> JsonAdaptedName
-JsonAdaptedStudent *-down-> JsonAdaptedTag
-JsonAdaptedModuleClass *-down-> JsonAdaptedName
-JsonAdaptedModuleClass *-down-> JsonAdaptedUuid
-JsonAdaptedModuleClass *-right-> JsonAdaptedLesson
-JsonAdaptedLesson *-down-> JsonAdaptedAttendanceRecordList
-JsonAdaptedAttendanceRecordList *-down-> JsonAdaptedAttendanceRecord
-JsonAdaptedAttendanceRecord *-down-> JsonAdaptedStudentAttendance
-JsonAdaptedStudentAttendance *-down-> JsonAdaptedUuid
-JsonAdaptedStudentAttendance *-down-> JsonAdaptedAttendance
-}
+JsonSerializableTutorsPet *-down->"*" JsonAdaptedStudent
+JsonSerializableTutorsPet *-down->"*" JsonAdaptedModuleClass
+JsonAdaptedStudent *-down->"1" JsonAdaptedName
+JsonAdaptedStudent *-down->"*" JsonAdaptedTag
+JsonAdaptedModuleClass *-down->"1" JsonAdaptedName
+JsonAdaptedModuleClass *-down->"*" JsonAdaptedUuid
+JsonAdaptedModuleClass *-right->"*" JsonAdaptedLesson
+JsonAdaptedLesson *-down->"1" JsonAdaptedAttendanceRecordList
+JsonAdaptedAttendanceRecordList *-down->"0..52" JsonAdaptedAttendanceRecord
+JsonAdaptedAttendanceRecord *-down->"*" JsonAdaptedStudentAttendance
+JsonAdaptedStudentAttendance *-down->"1" JsonAdaptedUuid
+JsonAdaptedStudentAttendance *-down->"1" JsonAdaptedAttendance
 @enduml
