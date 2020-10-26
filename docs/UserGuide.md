@@ -249,7 +249,7 @@ If you would like to add a student to Tutor's Pet, use this command.
 Format: `add-student n\NAME t\TELEGRAM_USERNAME e\EMAIL [tag\TAG]…​`
 
 For example:
-* You would like to add a new student, `Joel Lee` to Tutor's Pet. 
+* You would like to add a new student, `Joel Lee` to Tutor's Pet.
   Type in `add-student n\Joel Lee t\joeleee e\jlee@example.com`
 * Scrolling down the list of students, you will see that `Joel Lee` has been added to Tutor's Pet.
 
@@ -276,7 +276,7 @@ If you would like to change a student's particulars, use this command.
 Format: `edit-student STUDENT_INDEX [n\NAME] [t\TELEGRAM_USERNAME] [e\EMAIL] [tag\TAG]…​`
 
 For example:
-* `Charlotte Oliveiro` gave you the wrong email address on the first day of class. You need to replace her email address. 
+* `Charlotte Oliveiro` gave you the wrong email address on the first day of class. You need to replace her email address.
   Type in `edit-student 3 e\charlotteolive@example.com` and press <kbd>Enter</kbd>.
 * Scrolling down the list of students, you can see that `Charlotte`'s email has changed to `charlotteolive@example.com`.
 
@@ -301,7 +301,7 @@ Format: `find-student KEYWORD [MORE_KEYWORDS]`
 
 For example:
 * `Roy` requested for supplementary notes in class today.
-You want to email him these notes. 
+You want to email him these notes.
   Type `find-student roy` and press <kbd>Enter</kbd>.
 
   ![FindStudentAfter](images/ugimages/FindStudentAfter.png)
@@ -321,7 +321,7 @@ Format: `delete-student STUDENT_INDEX`
 
 For example:
 * `Bernice`, the 2nd student displayed in Tutor's Pet, has swapped `CS2103T Tutorial` slots and you no longer teach her.
-Hence, you want to delete her entry from Tutor's Pet. 
+Hence, you want to delete her entry from Tutor's Pet.
   You type in `delete-student 2` and press <kbd>Enter</kbd>.
 * Notice that the number of students in `CS2103T Tutorial` decreases to 2.
 
@@ -396,7 +396,7 @@ Other examples:
   Edits the name of the 1st class in the results of the find command.
 
 <div markdown="span" class="alert alert-info">
-:information_source: **Tips:** Make use of the find-class command to filter the displayed student class list to your 
+:information_source: **Tips:** Make use of the find-class command to filter the displayed student class list to your
 desired class. You can now type in index 1 directly to edit the name of that class.
 </div>
 

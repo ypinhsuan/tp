@@ -534,7 +534,7 @@ These information are stored as a `Map` with `Student` `UUID` as keys.
 `AttendanceRecordList` refers to the list of all `AttendanceRecord` instances.
 The size of this list is fixed and is determined by the `NumberOfOccurences` in `Lesson`.
 
-<div markdown="span" class="alert alert-primary">:information_source: 
+<div markdown="span" class="alert alert-primary">:information_source:
 **Note:** All classes in the `Attendance` package are designed to be immutable.
 </div>
 
@@ -546,7 +546,7 @@ It only has a `participationScore` attribute.
 
 #### Aspect 2: Maintaining immutability and optimising `AttendanceRecord`
 * **Alternative 1 (current choice):** Dynamically updating `AttendanceRecord` whenever there is a change to attendance.
-  * Pros: 
+  * Pros:
     * Guarantees immutability.
   * Cons:
     * Requires re-instantiation of a `Map` object whenever a user adds/edits/deletes an `Attendance`.
@@ -570,7 +570,7 @@ So, we have decided to implement Alternative 1.
     * Handles exceptions easily when a user inputs a week number greater than the total number of lessons.
     * Provides constant time access as the week number is used as an index to the `List`.
     * Easier to iterate over for `StatisticsCommand`.
-  * Cons: 
+  * Cons:
     * Requires additional methods to ensure the size of the `List` is fixed.
 
 * **Alternative 2:** Store a `Map` of `Week` number to `AttendanceRecord`.
