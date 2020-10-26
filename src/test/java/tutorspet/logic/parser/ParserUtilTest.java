@@ -7,6 +7,7 @@ import static tutorspet.logic.parser.ParserUtil.parseDay;
 import static tutorspet.logic.parser.ParserUtil.parseEmail;
 import static tutorspet.logic.parser.ParserUtil.parseIndex;
 import static tutorspet.logic.parser.ParserUtil.parseNumberOfOccurrences;
+import static tutorspet.logic.parser.ParserUtil.parseParticipationScore;
 import static tutorspet.logic.parser.ParserUtil.parseTag;
 import static tutorspet.logic.parser.ParserUtil.parseTags;
 import static tutorspet.logic.parser.ParserUtil.parseTime;
@@ -41,6 +42,9 @@ public class ParserUtilTest {
     private static final String INVALID_TIME = "123412x";
     private static final String INVALID_VENUE = "&&&&&&";
     private static final String INVALID_NUMBER_OF_OCCURRENCES = "asd";
+    private static final String OUT_OF_BOUNDS_NUMBER_OF_OCCURRENCES = "0";
+    private static final String INVALID_PARTICIPATION_SCORE = "asd";
+    private static final String OUT_OF_BOUNDS_PARTICIPATION_SCORE = "-1";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_TELEGRAM = "rachelW4lker";
@@ -51,6 +55,7 @@ public class ParserUtilTest {
     private static final String VALID_TIME = "08:00";
     private static final String VALID_VENUE = "S17-0302";
     private static final String VALID_NUMBER_OF_OCCURRENCES = "13";
+    private static final String VALID_PARTICIPATION_SCORE = "13";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -269,6 +274,11 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseNumberOfOccurrences_outOfBounds_throwsParseException() {
+        assertThrows(ParseException.class, () -> parseNumberOfOccurrences(OUT_OF_BOUNDS_NUMBER_OF_OCCURRENCES));
+    }
+
+    @Test
     public void parseNumberOfOccurrences_validValueWithoutWhitespace_returnsNumberOfOccurrences() throws Exception {
         NumberOfOccurrences expectedNumberOfOccurrences =
                 new NumberOfOccurrences(Integer.parseInt(VALID_NUMBER_OF_OCCURRENCES));
@@ -282,5 +292,34 @@ public class ParserUtilTest {
                 new NumberOfOccurrences(Integer.parseInt(VALID_NUMBER_OF_OCCURRENCES));
         assertEquals(expectedNumberOfOccurrences,
                parseNumberOfOccurrences(numberOfOccurrencesWithWhitespace));
+    }
+
+    @Test
+    public void parseParticipationScore_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> parseParticipationScore((String) null));
+    }
+
+    @Test
+    public void parseParticipationScore_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> parseParticipationScore(INVALID_PARTICIPATION_SCORE));
+    }
+
+    @Test
+    public void parseParticipationScore_outOfBounds_throwsParseException() {
+        assertThrows(ParseException.class, () -> parseParticipationScore(OUT_OF_BOUNDS_PARTICIPATION_SCORE));
+    }
+
+    @Test
+    public void parseParticipationScore_validValueWithoutWhitespace_returnsParticipationScore() throws Exception {
+        int expectedParticipationScore = Integer.parseInt(VALID_PARTICIPATION_SCORE);
+        assertEquals(expectedParticipationScore, parseParticipationScore(VALID_PARTICIPATION_SCORE));
+    }
+
+    @Test
+    public void parseParticipationScore_validValueWithWhitespace_returnsTrimmedParticipationScore() throws Exception {
+        String participationScoreWithWhitespace = WHITESPACE + VALID_PARTICIPATION_SCORE + WHITESPACE;
+        int expectedParticipationScore = Integer.parseInt(VALID_PARTICIPATION_SCORE);
+        assertEquals(expectedParticipationScore,
+                parseParticipationScore(participationScoreWithWhitespace));
     }
 }

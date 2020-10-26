@@ -1,6 +1,8 @@
 package tutorspet;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.nio.file.Paths;
 import java.util.Collections;
@@ -35,6 +37,32 @@ public class AppParametersTest {
         parametersStub.namedParameters.put("config", "a\0");
         expected.setConfigPath(null);
         assertEquals(expected, AppParameters.parse(parametersStub));
+    }
+
+    @Test
+    public void equals() {
+        // same object -> returns true
+        assertTrue(expected.equals(expected));
+
+        // null -> returns false
+        assertFalse(expected.equals(null));
+
+        // different objects -> returns false
+        assertFalse(expected.equals(parametersStub));
+    }
+
+    @Test
+    public void hashCode_sameContents_sameHashCode() {
+        expected.setConfigPath(Paths.get("config.json"));
+        AppParameters expectedCopy = new AppParameters();
+        expectedCopy.setConfigPath(Paths.get("config.json"));
+        assertTrue(expected.hashCode() == expectedCopy.hashCode());
+    }
+
+    @Test
+    public void hashCode_differentObjects_differentHashCode() {
+        expected.setConfigPath(Paths.get("config.json"));
+        assertFalse(expected.hashCode() == parametersStub.hashCode());
     }
 
     private static class ParametersStub extends Application.Parameters {
