@@ -53,4 +53,5 @@ JsonAdaptedAttendanceRecordList *-down->"0..52" JsonAdaptedAttendanceRecord
 JsonAdaptedAttendanceRecord *-down->"*" JsonAdaptedStudentAttendance
 JsonAdaptedStudentAttendance *-down->"1" JsonAdaptedUuid
 JsonAdaptedStudentAttendance *-down->"1" JsonAdaptedAttendance
+
 @enduml

@@ -133,7 +133,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Student Universally Unique Identifier (UUID)
+### Student Model and Student Universally Unique Identifier (UUID)
 
 A `UUID` is a unique 128-bit number to identify a unique `Student` within Tutor’s Pet.
 In Tutor’s Pet, every `Student` upon construction is assigned a randomly generated `UUID` that is used to
@@ -143,6 +143,12 @@ uniquely identify a `Student` across `Classes` and `Lessons`. This is important 
 `Student` data is modified by the user.
 
 #### Implementation
+
+The class diagram below shows the current implementation of `Student` model.
+
+![Student Model](images/StudentModelClassDiagram.png)
+
+Every `Student` contains a `UUID`, `Name`, `Telegram`, `Email`, and a list of `Tags`.
 
 ![StudentUUID](images/StudentUUID.png)
 
@@ -174,6 +180,29 @@ solutions.
     * The `Email` field is editable while the unique identifier of each `Student` should not be editable to prevent
       the need to cascade a change in the identifier of the `Student`.
 
+### ModuleClass Model
+This section explains the design considerations of the `ModuleClass` model.
+
+#### Implementation
+The class diagram below shows the current implementation of `ModuleClass` model.
+
+![ModuleClass Model](images/ModuleClassModelClassDiagram.png)
+
+A `ModuleClass` contains a `Name`, and also a set of `studentUuids` that is enrolled in the class.
+A `ModuleClass` can also contain any number of `Lesson` objects.
+
+#### Design Considerations
+
+##### Aspect 1: Student UUID storage
+
+* **Alternative 1 (current choice):** Stores `UUID` object in `ModuleClass` HashSet.
+
+  This implementation ensures that there are no duplicate students found in a class.
+  * Pros:
+    * Ensures that all students within a class are unique.
+  * Cons:
+    * There is a possibility of UUID collision, even though the probability is very low.
+
 ### Lesson Model
 This section explains the design considerations of the `Lesson` model.
 
@@ -186,6 +215,9 @@ A `ModuleClass` can contain any number of `Lesson` objects. Every `Lesson` conta
 `NumberOfOccurrences`, `Venue` and `AttendanceRecordList`.
 
 #### Design Considerations
+
+##### Aspect 1: Lesson storage
+
 * **Alternative 1 (current choice):** Stores `Lesson` object in `ModuleClass`
 
   This implementation allows duplicate lessons in different classes.
@@ -227,6 +259,7 @@ The size of this list is fixed and is determined by the `NumberOfOccurences` in 
 </div>
 
 ### Design Considerations
+
 ##### Aspect 1: Reducing user input
 Users should not have to type in attendance-related commands when the student is absent from a lesson.
 Therefore, the `Attendance` class does not have, for example, a `boolean hasAttended` attribute.
