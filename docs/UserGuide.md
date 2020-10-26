@@ -359,7 +359,7 @@ Constraints:
 
 #### Listing all classes : `list-class`
 
-If you would like to see a list of all classes in the application, make use of this command.
+If you would like to see a list of all classes in your Tutor's Pet, make use of this command.
 
 Format: `list-class`
 
@@ -665,9 +665,7 @@ Format: `edit-attendance c\CLASS_INDEX l\LESSON_INDEX s\STUDENT_INDEX w\WEEK p\P
 
 For example:
 * Alex is a student in your CS2103T class. After your lesson in week 1, you wish to give him a participation score of 45.
-  However, you made a typo error and gave him 35 instead. 
-
-* Hence, you can type in the command `edit-attendance c\1 l\1 s\1 w\1 p\45` and press <kbd>Enter</kbd>.
+  However, you accidentally gave him 35 instead. Hence, you can type in the command `edit-attendance c\1 l\1 s\1 w\1 p\45` and press <kbd>Enter</kbd>.
 
 * Now you have successfully edited Alex's participation score from 35 to 45 points.
 
