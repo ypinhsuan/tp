@@ -155,7 +155,7 @@ The utility area consists of three tabs: **File**, **Theme**, **Help**.
 | **Clear All Students**            | `clear-student`                                                                                                                                                           |
 | **Add Class**                     | `add-class n\CLASS_NAME`<br> e.g., `add-class n\CS2103T Tutorial T10`                                                                                                     |
 | **List All Classes**              | `list-class`                                                                                                                                                              |
-| **List Students In A Class**      | `list-students c\CLASS_INDEX`<br> e.g., `list-students c\3`                                                                                                                     |
+| **List Students In A Class**      | `list-student c\CLASS_INDEX`<br> e.g., `list-student c\3`                                                                                                                     |
 | **Edit Class**                    | `edit-class CLASS_INDEX n\CLASS_NAME` <br> e.g., `edit-class 1 n\CS2103T Tutorial T10`                                                                                          |
 | **Find Class**                    | `find-class KEYWORD [MORE_KEYWORDS]`<br> e.g., `find-class CS2103T`                                                                                                       |
 | **Delete Class**                  | `delete-class CLASS_INDEX` <br> e.g., `delete-class 2`                                                                                                                          |
@@ -178,7 +178,9 @@ The utility area consists of three tabs: **File**, **Theme**, **Help**.
 
 #### Viewing help : `help`
 
-If you wish to view the user guide, you can use this command to get the link.
+If you require any assistance, you can use this command which shows you the link to user guide.
+
+![Help window](images/ugimages/Help.png)
 
 Format: `help`
 
@@ -226,12 +228,10 @@ You can use this command to reset Tutor's Pet and all data will be cleared.
 Format: `reset`
 
 For example:
-* It is the start of a new semester and you want to delete all students and classes. You can type in the
-command `reset` and press <kbd>Enter</kbd>.
+* It is the start of a new semester and you want to delete all students and classes. 
+  You can type in the command `reset` and press <kbd>Enter</kbd>.
 
-  ![Reset before](images/ugimages/ResetBefore.png)
-
-* Now all students and classes have been deleted.
+* You can see that all students and classes have been deleted.
 
   ![Reset after](images/ugimages/ResetAfter.png)
 
@@ -359,18 +359,27 @@ Constraints:
 
 #### Listing all classes : `list-class`
 
-Shows a list of all classes in the application.
+If you would like to see a list of all classes in your Tutor's Pet, make use of this command.
 
 Format: `list-class`
 
-#### Listing all students within a class : `list-students`
+#### Listing all students within a class : `list-student`
 
-Shows a list of all students within a particular class in the application.
+If you would like to see a list of all students in a particular class, make use of this command.
 
-Format: `list-students c/INDEX`
+Format: `list-student c\CLASS_INDEX`
 
-Examples:
-* `list-students c/3`
+For example:
+* You want to send an email to students in your `CS2103T Tutorial` and hence would want to see a list of students in 
+this class. You type in the command `list-student c\1` and and press <kbd>Enter</kbd>.
+
+* You can see that the 3 students in your `CS2103T Tutorial` have been listed.
+  
+  ![List students in class after](images/ugimages/ListStudentsInClass.png)
+
+Other examples:
+* `list-student c\3` <br>
+  Lists all students in 3rd class.
 
 #### Editing a class : `edit-class`
 
@@ -652,23 +661,27 @@ Other Examples:
 You can use this command to edit the attendance of a student.
 
 Format: `edit-attendance c\CLASS_INDEX l\LESSON_INDEX s\STUDENT_INDEX w\WEEK p\PARTICIPATION_SCORE`
+* Edits the attendance record at the specified `CLASS_INDEX` + `LESSON_INDEX` + `STUDENT_INDEX` + `WEEK`.
 
 For example:
 * Alex is a student in your CS2103T class. After your lesson in week 1, you wish to give him a participation score of 45.
-However, you made a typo error and gave him 35 instead. Hence, you can type in the command `edit-attendance c\1 l\1 s\1 w\1 p\45`
-and press <kbd>Enter</kbd>.
-
-  ![Edit attendance after](images/ugimages/EditAttendanceAfter.png)
+  However, you accidentally gave him 35 instead. Hence, you can type in the command `edit-attendance c\1 l\1 s\1 w\1 p\45` and press <kbd>Enter</kbd>.
 
 * Now you have successfully edited Alex's participation score from 35 to 45 points.
 
-Constraints:
-* The indexes **must be positive whole numbers** 1, 2, 3, …​
-* The `WEEK` must be a positive whole number** 1, 2, 3, …​
-* The `PARTICIPATION_SCORE` **must be a non-negative whole number** 0, 1, 2, …​
+  ![Edit attendance after](images/ugimages/EditAttendanceAfter.png)
 
 Other examples:
-*  `edit-attendance c\1 l\1 s\1 w\1 p\10` Edits the 1st week's participation score of the 1st student of the 1st lesson of the 1st class to 10 points.
+* `edit-attendance c\1 l\1 s\1 w\1 p\10` <br>
+  Edits the 1st week's participation score of the 1st student of the 1st lesson of the 1st class to 10 points.
+
+<div markdown="span" class="alert alert-info">
+
+**:information_source: Notes about the command:**<br>
+  * The `WEEK` **must be a positive whole number** 1, 2, 3, …​
+  * The `PARTICIPATION_SCORE` **must be a non-negative whole number** 0, 1, 2, …​
+
+</div>
 
 #### Finding attendance record by indexes: `find-attendance`
 
