@@ -28,6 +28,7 @@ Class TutorsPetParser
 package Util {
 Class LessonUtil
 Class ModuleClassUtil
+Class AttendanceRecordListUtil
 }
 
 LogicManager .up.|> Logic
@@ -38,7 +39,8 @@ StatisticsCommandParser ..> StatisticsCommand : creates >
 StatisticsCommandParser ..|> Parser
 StatisticsCommand -up-|> Command
 StatisticsCommand ..> ModuleClassUtil
-ModuleClassUtil .right..> LessonUtil
+ModuleClassUtil .left..> LessonUtil
+LessonUtil .left..> AttendanceRecordListUtil
 LogicManager .left.> Command : executes >
 
 Logic ..> CommandResult

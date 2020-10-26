@@ -1,0 +1,86 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":TutorsPetParser" as TutorsPetParser LOGIC_COLOR
+participant ":AddAttendanceCommandParser" as AddAttendanceCommandParser LOGIC_COLOR
+participant ":AddAttendanceCommand" as AddAttendanceCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+participant "<<Class>>\nModuleClassUtil" as ModuleClassUtil LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("add-attendance c\1 l\1 s\1")
+activate LogicManager
+
+LogicManager -> TutorsPetParser : parseCommand("add-attendance c\1 l\1 s\1")
+activate TutorsPetParser
+
+create AddAttendanceCommandParser
+TutorsPetParser -> AddAttendanceCommandParser
+activate AddAttendanceCommandParser
+
+AddAttendanceCommandParser --> TutorsPetParser
+deactivate AddAttendanceCommandParser
+
+TutorsPetParser -> AddAttendanceCommandParser: parse("c\1 l\1 s\1")
+activate AddAttendanceCommandParser
+
+create AddAttendanceCommand
+AddAttendanceCommandParser -> AddAttendanceCommand
+activate AddAttendanceCommand
+
+AddAttendanceCommand --> AddAttendanceCommandParser
+deactivate AddAttendanceCommand
+
+AddAttendanceCommandParser --> TutorsPetParser
+deactivate AddAttendanceCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddAttendanceCommandParser -[hidden]-> TutorsPetParser
+destroy AddAttendanceCommandParser
+
+TutorsPetParser --> LogicManager
+deactivate TutorsPetParser
+
+LogicManager -> AddAttendanceCommand : execute()
+activate AddAttendanceCommand
+
+AddAttendanceCommand -> Model : getFilteredStudentList()
+activate Model
+deactivate Model
+
+AddAttendanceCommand -> Model : getFilteredModuleClassList()
+activate Model
+deactivate Model
+
+AddAttendanceCommand -> ModuleClassUtil : addAttendanceToModuleClass()
+activate ModuleClassUtil
+
+ModuleClassUtil -> AddAttendanceCommand : updatedModuleClass
+deactivate ModuleClassUtil
+
+AddAttendanceCommand -> Model : setModuleClass(moduleClass, updatedModuleClass)
+activate Model
+deactivate Model
+
+AddAttendanceCommand -> Model : commit()
+activate Model
+deactivate Model
+
+create CommandResult
+AddAttendanceCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddAttendanceCommand
+deactivate CommandResult
+
+AddAttendanceCommand --> LogicManager : result
+deactivate AddAttendanceCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
