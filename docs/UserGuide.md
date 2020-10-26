@@ -229,7 +229,7 @@ For example:
 
 <div markdown="block" class="alert alert-primary">
 
-:bulb: **Tip:** To view a list of changes that can be undone, use the `view-history` command. 
+:bulb: **Tip:** To view a list of changes that can be undone, use the `view-history` command.
 
 </div>
 
@@ -260,7 +260,7 @@ You can use this command to reset Tutor's Pet and all data will be cleared.
 Format: `reset`
 
 For example:
-* It is the start of a new semester and you want to delete all students and classes. 
+* It is the start of a new semester and you want to delete all students and classes.
   You can type in the command `reset` and press <kbd>Enter</kbd>.
 
 * You can see that all students and classes have been deleted.
@@ -408,11 +408,11 @@ If you would like to see a list of all students in a particular class, make use 
 Format: `list-student c\CLASS_INDEX`
 
 For example:
-* You want to send an email to students in your `CS2103T Tutorial` and hence would want to see a list of students in 
+* You want to send an email to students in your `CS2103T Tutorial` and hence would want to see a list of students in
 this class. You type in the command `list-student c\1` and and press <kbd>Enter</kbd>.
 
 * You can see that the 3 students in your `CS2103T Tutorial` have been listed.
-  
+
   ![List students in class after](images/ugimages/ListStudentsInClass.png)
 
 Other examples:
@@ -560,7 +560,7 @@ For example:
 <div markdown="block" class="alert alert-primary">
 
 :bulb: **Tip:** When linking multiple students to a class, you can press the <kbd>UP</kbd> arrow key to retrieve previously
-entered commands. This prevents you from needing to type `list-student` repeatedly to reset the displayed student list.  
+entered commands. This prevents you from needing to type `list-student` repeatedly to reset the displayed student list.
 
 </div>
 
