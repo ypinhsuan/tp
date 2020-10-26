@@ -737,8 +737,8 @@ For example:
 <div markdown="span" class="alert alert-info">
 
 **:information_source: Notes about the command:**<br>
-  * Lesson(s) not attended displays all lessons that the student did not attend. This means that future lessons 
-    would also be displayed in the results.
+  * `Lesson(s) not attended` displays all lessons not attended by the student. This means that future lessons 
+    are also displayed.
  
 </div>
 
@@ -753,7 +753,7 @@ For example:
 
 ## Glossary
 
-This glossary aims to provide a definition for the special vocabulary used in this user guide.
+This glossary provides definitions for the special terms used in this user guide.
 
 * The `STUDENT_INDEX` refers to the index number shown in the displayed student list.
 * The `CLASS_INDEX` refers to the index number shown in the displayed class list.

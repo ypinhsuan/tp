@@ -327,17 +327,17 @@ of a `StatisticsCommand`:
 
 * **Alternative 1 (current choice):** Extract the methods out to another class
 (`ModuleClassUtil` and `LessonClassUtil`).
-    * Pros:
-      * Does not violate the law of demeter. Increases cohesion and thus increase maintainability and testability.
-    * Cons:
-      * Requires more wrapper methods to carry information.
-      * More effort to implement.
+  * Pros:
+    * Does not violate the law of demeter. Increases cohesion and thus increase maintainability and testability.
+  * Cons:
+    * Requires more wrapper methods to carry information.
+    * More effort to implement.
 
 * **Alternative 2:** Obtain all attendance information within `StatisticsCommand#execute()`.
-    * Pros:
-      * Easy, straightforward to implement.
-    * Cons:
-      * Violates the law of demeter to a large extent.
+  * Pros:
+    * Easy, straightforward to implement.
+  * Cons:
+    * Violates the law of demeter to a large extent.
 
 ##### Aspect 2: Responsibility of relevant methods
 
