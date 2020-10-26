@@ -6,7 +6,7 @@ import static tutorspet.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static tutorspet.logic.commands.CommandTestUtil.showStudentAtIndex;
-import static tutorspet.logic.commands.student.DeleteStudentCommand.MESSAGE_DELETE_STUDENT_SUCCESS;
+import static tutorspet.logic.commands.student.DeleteStudentCommand.MESSAGE_SUCCESS;
 import static tutorspet.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 import static tutorspet.testutil.TypicalIndexes.INDEX_SECOND_ITEM;
 import static tutorspet.testutil.TypicalTutorsPet.getTypicalTutorsPet;
@@ -33,7 +33,7 @@ public class DeleteStudentCommandTest {
         Student studentToDelete = model.getFilteredStudentList().get(INDEX_FIRST_ITEM.getZeroBased());
         DeleteStudentCommand deleteStudentCommand = new DeleteStudentCommand(INDEX_FIRST_ITEM);
 
-        String expectedMessage = String.format(MESSAGE_DELETE_STUDENT_SUCCESS, studentToDelete);
+        String expectedMessage = String.format(MESSAGE_SUCCESS, studentToDelete);
 
         ModelManager expectedModel = new ModelManager(model.getTutorsPet(), new UserPrefs());
         expectedModel.deleteStudent(studentToDelete);
@@ -57,7 +57,7 @@ public class DeleteStudentCommandTest {
         Student studentToDelete = model.getFilteredStudentList().get(INDEX_FIRST_ITEM.getZeroBased());
         DeleteStudentCommand deleteStudentCommand = new DeleteStudentCommand(INDEX_FIRST_ITEM);
 
-        String expectedMessage = String.format(MESSAGE_DELETE_STUDENT_SUCCESS, studentToDelete);
+        String expectedMessage = String.format(MESSAGE_SUCCESS, studentToDelete);
 
         Model expectedModel = new ModelManager(model.getTutorsPet(), new UserPrefs());
         expectedModel.deleteStudent(studentToDelete);

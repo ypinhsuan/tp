@@ -13,7 +13,7 @@ public class Attendance {
     public static final int LOWER_BOUND = 0;
     public static final int UPPER_BOUND = 100;
     public static final String MESSAGE_CONSTRAINTS =
-            String.format("The participation score must be a number between %d to %d.", LOWER_BOUND, UPPER_BOUND);
+            String.format("Participation scores must be a whole number between %d to %d.", LOWER_BOUND, UPPER_BOUND);
     private final int participationScore;
 
     /**

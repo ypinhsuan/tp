@@ -16,7 +16,7 @@ import tutorspet.model.attendance.AttendanceRecordList;
 public class Lesson {
 
     public static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
-    public static final String MESSAGE_CONSTRAINTS = "Start time must be earlier than end time";
+    public static final String MESSAGE_CONSTRAINTS = "Start time must be earlier than end time.";
 
     // identity fields
     private final LocalTime startTime;

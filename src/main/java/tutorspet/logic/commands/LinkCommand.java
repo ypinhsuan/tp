@@ -38,7 +38,7 @@ public class LinkCommand extends Command {
             + PREFIX_STUDENT_INDEX + "1"
             + PREFIX_CLASS_INDEX + "1";
 
-    public static final String MESSAGE_LINK_SUCCESS = "Linked %1$s to %2$s.";
+    public static final String MESSAGE_SUCCESS = "Linked %1$s to %2$s.";
 
     private final Index moduleClassIndex;
     private final Index studentIndex;
@@ -77,7 +77,7 @@ public class LinkCommand extends Command {
         model.updateFilteredModuleClassList(new SameModuleClassPredicate(modifiedModuleClass));
         model.updateFilteredStudentList(new StudentInUuidCollectionPredicate(modifiedModuleClass.getStudentUuids()));
 
-        String message = String.format(MESSAGE_LINK_SUCCESS, studentToLink.getName(), moduleClassToLink);
+        String message = String.format(MESSAGE_SUCCESS, studentToLink.getName(), moduleClassToLink);
         model.commit(message);
         return new CommandResult(message);
     }

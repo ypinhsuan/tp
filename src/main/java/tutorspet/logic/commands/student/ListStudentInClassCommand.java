@@ -25,7 +25,7 @@ public class ListStudentInClassCommand extends ListStudentCommand {
             + "Parameters: " + "[" + PREFIX_CLASS_INDEX + "CLASS_INDEX]\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_CLASS_INDEX + "1";
 
-    public static final String MESSAGE_LIST_CLASS_SPECIFIC_SUCCESS = "Listed all students in %1$s.";
+    public static final String MESSAGE_SUCCESS = "Listed all students in %1$s.";
 
     private final Index moduleClassIndex;
 
@@ -49,7 +49,7 @@ public class ListStudentInClassCommand extends ListStudentCommand {
         ModuleClass moduleClass = lastShownModuleClassList.get(moduleClassIndex.getZeroBased());
         Collection<UUID> studentUuids = moduleClass.getStudentUuids();
         model.updateFilteredStudentList(new StudentInUuidCollectionPredicate(studentUuids));
-        return new CommandResult(String.format(MESSAGE_LIST_CLASS_SPECIFIC_SUCCESS, moduleClass));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, moduleClass));
     }
 
     @Override

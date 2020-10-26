@@ -56,7 +56,7 @@ public class EditLessonCommand extends Command {
             + PREFIX_DAY + "Wednesday "
             + PREFIX_END_TIME + "18:00";
 
-    public static final String MESSAGE_EDIT_LESSON_SUCCESS = "Edited Lesson:\n%1$s %2$s.";
+    public static final String MESSAGE_SUCCESS = "Edited Lesson:\n%1$s %2$s.";
 
     private final Index moduleClassIndex;
     private final Index lessonIndex;
@@ -94,7 +94,7 @@ public class EditLessonCommand extends Command {
 
         model.setModuleClass(targetModuleClass, modifiedModuleClass);
         model.updateFilteredModuleClassList(PREDICATE_SHOW_ALL_MODULE_CLASS);
-        String message = String.format(MESSAGE_EDIT_LESSON_SUCCESS, targetModuleClass.getName(), editedLesson);
+        String message = String.format(MESSAGE_SUCCESS, targetModuleClass.getName(), editedLesson);
         model.commit(message);
         return new CommandResult(message);
     }

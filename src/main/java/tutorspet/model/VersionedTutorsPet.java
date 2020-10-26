@@ -12,7 +12,7 @@ import tutorspet.model.exception.UndoStateException;
 
 public class VersionedTutorsPet extends TutorsPet {
 
-    public static final String INITIAL_COMMIT_MESSAGE = "Loaded save data!";
+    public static final String INITIAL_COMMIT_MESSAGE = "Loaded save data.";
 
     private List<TutorsPetState> tutorsPetStateList;
     private int statePointer;

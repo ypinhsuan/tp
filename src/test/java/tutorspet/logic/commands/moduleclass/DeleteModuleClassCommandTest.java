@@ -6,7 +6,7 @@ import static tutorspet.commons.core.Messages.MESSAGE_INVALID_MODULE_CLASS_DISPL
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static tutorspet.logic.commands.CommandTestUtil.showModuleClassAtIndex;
-import static tutorspet.logic.commands.moduleclass.DeleteModuleClassCommand.MESSAGE_DELETE_MODULE_CLASS_SUCCESS;
+import static tutorspet.logic.commands.moduleclass.DeleteModuleClassCommand.MESSAGE_SUCCESS;
 import static tutorspet.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 import static tutorspet.testutil.TypicalIndexes.INDEX_SECOND_ITEM;
 import static tutorspet.testutil.TypicalTutorsPet.getTypicalTutorsPet;
@@ -34,7 +34,7 @@ public class DeleteModuleClassCommandTest {
         DeleteModuleClassCommand deleteModuleClassCommand =
                 new DeleteModuleClassCommand(INDEX_FIRST_ITEM);
 
-        String expectedMessage = String.format(MESSAGE_DELETE_MODULE_CLASS_SUCCESS, moduleClassToDelete);
+        String expectedMessage = String.format(MESSAGE_SUCCESS, moduleClassToDelete);
 
         ModelManager expectedModel = new ModelManager(model.getTutorsPet(), new UserPrefs());
         expectedModel.deleteModuleClass(moduleClassToDelete);
@@ -58,7 +58,7 @@ public class DeleteModuleClassCommandTest {
         ModuleClass moduleClassToDelete = model.getFilteredModuleClassList().get(INDEX_FIRST_ITEM.getZeroBased());
         DeleteModuleClassCommand deleteModuleClassCommand = new DeleteModuleClassCommand(INDEX_FIRST_ITEM);
 
-        String expectedMessage = String.format(MESSAGE_DELETE_MODULE_CLASS_SUCCESS, moduleClassToDelete);
+        String expectedMessage = String.format(MESSAGE_SUCCESS, moduleClassToDelete);
 
         Model expectedModel = new ModelManager(model.getTutorsPet(), new UserPrefs());
         expectedModel.deleteModuleClass(moduleClassToDelete);

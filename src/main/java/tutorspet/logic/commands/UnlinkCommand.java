@@ -36,7 +36,7 @@ public class UnlinkCommand extends Command {
             + PREFIX_STUDENT_INDEX + "1"
             + PREFIX_CLASS_INDEX + "1";
 
-    public static final String MESSAGE_UNLINK_SUCCESS = "Unlinked %1$s from %2$s.";
+    public static final String MESSAGE_SUCCESS = "Unlinked %1$s from %2$s.";
 
     private final Index moduleClassIndex;
     private final Index studentIndex;
@@ -75,7 +75,7 @@ public class UnlinkCommand extends Command {
         model.updateFilteredModuleClassList(new SameModuleClassPredicate(modifiedModuleClass));
         model.updateFilteredStudentList(new StudentInUuidCollectionPredicate(modifiedModuleClass.getStudentUuids()));
 
-        String message = String.format(MESSAGE_UNLINK_SUCCESS, studentToUnlink.getName(), moduleClassToUnlink);
+        String message = String.format(MESSAGE_SUCCESS, studentToUnlink.getName(), moduleClassToUnlink);
         model.commit(message);
         return new CommandResult(message);
     }

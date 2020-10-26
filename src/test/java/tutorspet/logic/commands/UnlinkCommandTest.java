@@ -9,7 +9,7 @@ import static tutorspet.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static tutorspet.logic.commands.CommandTestUtil.showModuleClassAtIndex;
 import static tutorspet.logic.commands.CommandTestUtil.showStudentAtIndex;
-import static tutorspet.logic.commands.UnlinkCommand.MESSAGE_UNLINK_SUCCESS;
+import static tutorspet.logic.commands.UnlinkCommand.MESSAGE_SUCCESS;
 import static tutorspet.logic.util.LessonUtil.deleteStudentFromLesson;
 import static tutorspet.testutil.Assert.assertThrows;
 import static tutorspet.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
@@ -63,7 +63,7 @@ public class UnlinkCommandTest {
         ModuleClass modifiedModuleClass = manualUnlinkStudentFromModuleClass(moduleClass, student);
 
         String expectedMessage =
-                String.format(MESSAGE_UNLINK_SUCCESS, student.getName(), modifiedModuleClass);
+                String.format(MESSAGE_SUCCESS, student.getName(), modifiedModuleClass);
         Model expectedModel = copyModelWithModuleClassAndShowStudents(model, moduleClass, modifiedModuleClass);
         expectedModel.commit(expectedMessage);
 
@@ -84,7 +84,7 @@ public class UnlinkCommandTest {
         ModuleClass modifiedModuleClass = manualUnlinkStudentFromModuleClass(moduleClass, student);
 
         String expectedMessage =
-                String.format(MESSAGE_UNLINK_SUCCESS, student.getName(), modifiedModuleClass);
+                String.format(MESSAGE_SUCCESS, student.getName(), modifiedModuleClass);
         Model expectedModel = copyModelWithModuleClassAndShowStudents(model, moduleClass, modifiedModuleClass);
         expectedModel.commit(expectedMessage);
 

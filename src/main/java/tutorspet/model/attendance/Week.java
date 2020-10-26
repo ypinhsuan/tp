@@ -17,7 +17,7 @@ public class Week {
     public static final int LOWER_BOUND = NumberOfOccurrences.LOWER_BOUND;
     public static final int UPPER_BOUND = NumberOfOccurrences.UPPER_BOUND;
     public static final String MESSAGE_CONSTRAINTS =
-            String.format("The week number must be a number between %d to %d.", LOWER_BOUND, UPPER_BOUND);
+            String.format("Week numbers must be a whole number between %d to %d.", LOWER_BOUND, UPPER_BOUND);
     private final Index week;
 
     /**
