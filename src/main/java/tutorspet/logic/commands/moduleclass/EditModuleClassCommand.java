@@ -1,6 +1,7 @@
 package tutorspet.logic.commands.moduleclass;
 
 import static java.util.Objects.requireNonNull;
+import static tutorspet.commons.core.Messages.MESSAGE_DUPLICATE_MODULE_CLASS;
 import static tutorspet.commons.util.CollectionUtil.requireAllNonNull;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_NAME;
 import static tutorspet.model.Model.PREDICATE_SHOW_ALL_MODULE_CLASS;
@@ -37,8 +38,6 @@ public class EditModuleClassCommand extends Command {
             + PREFIX_NAME + "CS2103T Tutorial T10";
 
     public static final String MESSAGE_EDIT_MODULE_CLASS_SUCCESS = "Edited Class: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_MODULE_CLASS = "This class already exists.";
 
     private final Index index;
     private final EditModuleClassDescriptor editModuleClassDescriptor;

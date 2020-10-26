@@ -47,7 +47,6 @@ public class DeleteAttendanceCommand extends Command {
 
     public static final String MESSAGE_DELETE_ATTENDANCE_SUCCESS =
             "Deleted week %1$s attendance of student %2$s from lesson %3$s";
-    public static final String MESSAGE_MISSING_ATTENDANCE = "Attendance of this student does not exist!";
 
     private final Index moduleClassIndex;
     private final Index lessonIndex;

@@ -2,6 +2,7 @@ package tutorspet.logic.commands.lesson;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static tutorspet.commons.core.Messages.MESSAGE_DUPLICATE_LESSON;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX;
 import static tutorspet.logic.commands.CommandTestUtil.DESC_LESSON_FRI_8_TO_10;
@@ -13,7 +14,6 @@ import static tutorspet.logic.commands.CommandTestUtil.VALID_VENUE_S17_0302_LESS
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static tutorspet.logic.commands.CommandTestUtil.showModuleClassAtIndex;
-import static tutorspet.logic.commands.lesson.EditLessonCommand.MESSAGE_DUPLICATE_LESSON;
 import static tutorspet.logic.commands.lesson.EditLessonCommand.MESSAGE_EDIT_LESSON_SUCCESS;
 import static tutorspet.logic.util.ModuleClassUtil.editLessonInModuleClass;
 import static tutorspet.model.lesson.Lesson.MESSAGE_CONSTRAINTS;

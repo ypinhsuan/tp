@@ -1,6 +1,7 @@
 package tutorspet.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static tutorspet.commons.core.Messages.MESSAGE_MISSING_LINK;
 import static tutorspet.commons.util.CollectionUtil.requireAllNonNull;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_CLASS_INDEX;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_STUDENT_INDEX;
@@ -36,7 +37,6 @@ public class UnlinkCommand extends Command {
             + PREFIX_CLASS_INDEX + "1";
 
     public static final String MESSAGE_UNLINK_SUCCESS = "Unlinked %1$s from %2$s";
-    public static final String MESSAGE_MISSING_LINK = "This student is not linked to this class.";
 
     private final Index moduleClassIndex;
     private final Index studentIndex;

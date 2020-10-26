@@ -2,9 +2,9 @@ package tutorspet.logic.commands.moduleclass;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static tutorspet.commons.core.Messages.MESSAGE_DUPLICATE_MODULE_CLASS;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static tutorspet.logic.commands.moduleclass.AddModuleClassCommand.MESSAGE_DUPLICATE_MODULE_CLASS;
 import static tutorspet.logic.commands.moduleclass.AddModuleClassCommand.MESSAGE_SUCCESS;
 import static tutorspet.testutil.TypicalTutorsPet.getTypicalTutorsPet;
 

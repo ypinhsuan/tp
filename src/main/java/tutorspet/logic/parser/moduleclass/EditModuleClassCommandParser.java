@@ -2,8 +2,8 @@ package tutorspet.logic.parser.moduleclass;
 
 import static java.util.Objects.requireNonNull;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static tutorspet.commons.core.Messages.MESSAGE_NOT_EDITED;
 import static tutorspet.logic.commands.moduleclass.EditModuleClassCommand.EditModuleClassDescriptor;
-import static tutorspet.logic.commands.moduleclass.EditModuleClassCommand.MESSAGE_NOT_EDITED;
 import static tutorspet.logic.commands.moduleclass.EditModuleClassCommand.MESSAGE_USAGE;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_NAME;
 

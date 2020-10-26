@@ -6,6 +6,7 @@ import static tutorspet.logic.parser.CliSyntax.PREFIX_NAME;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_TAG;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 
+import tutorspet.commons.core.Messages;
 import tutorspet.logic.commands.Command;
 import tutorspet.logic.commands.CommandResult;
 import tutorspet.logic.commands.exceptions.CommandException;
@@ -33,7 +34,6 @@ public class AddStudentCommand extends Command {
             + PREFIX_TAG + "Experienced";
 
     public static final String MESSAGE_SUCCESS = "New student added: %1$s";
-    public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists.";
 
     private final Student toAdd;
 
@@ -51,7 +51,7 @@ public class AddStudentCommand extends Command {
         requireNonNull(model);
 
         if (model.hasStudent(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
+            throw new CommandException(Messages.MESSAGE_DUPLICATE_STUDENT);
         }
 
         model.addStudent(toAdd);

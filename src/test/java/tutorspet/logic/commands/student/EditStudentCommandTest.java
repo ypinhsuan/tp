@@ -2,6 +2,7 @@ package tutorspet.logic.commands.student;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static tutorspet.commons.core.Messages.MESSAGE_DUPLICATE_STUDENT;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 import static tutorspet.logic.commands.CommandTestUtil.DESC_AMY;
 import static tutorspet.logic.commands.CommandTestUtil.DESC_BOB;
@@ -11,7 +12,6 @@ import static tutorspet.logic.commands.CommandTestUtil.VALID_TELEGRAM_BOB;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static tutorspet.logic.commands.CommandTestUtil.showStudentAtIndex;
-import static tutorspet.logic.commands.student.EditStudentCommand.MESSAGE_DUPLICATE_STUDENT;
 import static tutorspet.logic.commands.student.EditStudentCommand.MESSAGE_EDIT_STUDENT_SUCCESS;
 import static tutorspet.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 import static tutorspet.testutil.TypicalIndexes.INDEX_SECOND_ITEM;

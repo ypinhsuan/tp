@@ -39,7 +39,6 @@ public class LinkCommand extends Command {
             + PREFIX_CLASS_INDEX + "1";
 
     public static final String MESSAGE_LINK_SUCCESS = "Linked %1$s to %2$s";
-    public static final String MESSAGE_EXISTING_LINK = "This student is already linked to this class.";
 
     private final Index moduleClassIndex;
     private final Index studentIndex;
@@ -99,7 +98,7 @@ public class LinkCommand extends Command {
         UUID studentUuid = studentToLink.getUuid();
 
         if (moduleClassToLink.hasStudentUuid(studentUuid)) {
-            throw new CommandException(MESSAGE_EXISTING_LINK);
+            throw new CommandException(Messages.MESSAGE_EXISTING_LINK);
         }
 
         Name moduleClassName = moduleClassToLink.getName();

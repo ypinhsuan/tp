@@ -23,6 +23,7 @@ import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
 
+import tutorspet.commons.core.Messages;
 import tutorspet.commons.core.index.Index;
 import tutorspet.model.Model;
 import tutorspet.model.ModelManager;
@@ -102,7 +103,7 @@ public class LinkCommandTest {
 
         LinkCommand linkCommand = new LinkCommand(INDEX_FIRST_ITEM, INDEX_FIRST_ITEM);
 
-        assertCommandFailure(linkCommand, model, LinkCommand.MESSAGE_EXISTING_LINK);
+        assertCommandFailure(linkCommand, model, Messages.MESSAGE_EXISTING_LINK);
     }
 
     @Test

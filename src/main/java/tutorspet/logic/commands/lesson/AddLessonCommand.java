@@ -45,7 +45,6 @@ public class AddLessonCommand extends Command {
             + PREFIX_NUMBER_OF_OCCURRENCES + "13";
 
     public static final String MESSAGE_SUCCESS = "New lesson added: %1$s";
-    public static final String MESSAGE_EXISTING_LESSON = "This lesson already exists";
 
     private final Index moduleClassIndex;
     private final Lesson toAdd;
@@ -56,7 +55,7 @@ public class AddLessonCommand extends Command {
     public AddLessonCommand(Index moduleClassIndex, Lesson lesson) {
         requireAllNonNull(moduleClassIndex, lesson);
 
-        this.toAdd = lesson;
+        toAdd = lesson;
         this.moduleClassIndex = moduleClassIndex;
     }
 

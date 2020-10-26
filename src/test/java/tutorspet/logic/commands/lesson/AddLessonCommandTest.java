@@ -2,10 +2,10 @@ package tutorspet.logic.commands.lesson;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static tutorspet.commons.core.Messages.MESSAGE_DUPLICATE_LESSON;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static tutorspet.logic.commands.lesson.AddLessonCommand.MESSAGE_EXISTING_LESSON;
 import static tutorspet.logic.commands.lesson.AddLessonCommand.MESSAGE_SUCCESS;
 import static tutorspet.logic.util.ModuleClassUtil.addLessonToModuleClass;
 import static tutorspet.testutil.Assert.assertThrows;
@@ -68,7 +68,7 @@ public class AddLessonCommandTest {
 
         AddLessonCommand addLessonCommand = new AddLessonCommand(moduleClassIndex, lesson);
 
-        assertCommandFailure(addLessonCommand, model, MESSAGE_EXISTING_LESSON);
+        assertCommandFailure(addLessonCommand, model, MESSAGE_DUPLICATE_LESSON);
     }
 
     @Test

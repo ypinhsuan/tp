@@ -57,8 +57,6 @@ public class EditLessonCommand extends Command {
             + PREFIX_END_TIME + "18:00";
 
     public static final String MESSAGE_EDIT_LESSON_SUCCESS = "Edited Lesson: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_LESSON = "This lesson already exists.";
 
     private final Index moduleClassIndex;
     private final Index lessonIndex;

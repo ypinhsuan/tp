@@ -42,7 +42,6 @@ public class AddAttendanceCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New attendance added: %1$s attended week %2$s lesson with "
             + "participation score of %3$s";
-    public static final String MESSAGE_DUPLICATE_ATTENDANCE = "Attendance have been recorded previously.";
 
     private final Index moduleClassIndex;
     private final Index lessonIndex;

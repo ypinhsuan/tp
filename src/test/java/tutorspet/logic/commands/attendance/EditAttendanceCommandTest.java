@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
-import static tutorspet.commons.core.Messages.MESSAGE_INVALID_STUDENT_IN_MODULE_CLASS;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_WEEK;
+import static tutorspet.commons.core.Messages.MESSAGE_MISSING_LINK;
 import static tutorspet.commons.core.Messages.MESSAGE_MISSING_STUDENT_ATTENDANCE;
 import static tutorspet.logic.commands.CommandTestUtil.DESC_ATTENDANCE_33;
 import static tutorspet.logic.commands.CommandTestUtil.DESC_ATTENDANCE_80;
@@ -250,7 +250,7 @@ public class EditAttendanceCommandTest {
         EditAttendanceCommand editAttendanceCommand = new EditAttendanceCommand(moduleClassIndex, lessonIndex,
                 INDEX_THIRD_ITEM, VALID_WEEK_1, DESC_ATTENDANCE_33);
 
-        assertCommandFailure(editAttendanceCommand, model, MESSAGE_INVALID_STUDENT_IN_MODULE_CLASS);
+        assertCommandFailure(editAttendanceCommand, model, MESSAGE_MISSING_LINK);
     }
 
     @Test
