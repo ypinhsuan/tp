@@ -155,7 +155,7 @@ fields providing information of the `Student`.
 This section elaborates further on the reason why we eventually chose to adopt a `UUID` over other potential
 solutions.
 
-##### Aspect: How to uniquely identify Students across models.
+##### Aspect 1: How to uniquely identify Students across models.
 
 * **Alternative 1 (current choice):** Assign a `UUID` tag to each `Student`
   * Pros:
@@ -173,6 +173,239 @@ solutions.
   * Cons:
     * The `Email` field is editable while the unique identifier of each `Student` should not be editable to prevent
       the need to cascade a change in the identifier of the `Student`.
+
+### Lesson Model
+This section explains the design considerations of the `Lesson` model.
+
+#### Implementation
+The class diagram below shows the current implementation of `Lesson` model.
+
+![Lesson Model](images/LessonModelClassDiagram.png)
+
+A `ModuleClass` can contain any number of `Lesson` objects. Every `Lesson` contains a `startTime`, `endTime`, `Day`,
+`NumberOfOccurrences`, `Venue` and `AttendanceRecordList`.
+
+#### Design Considerations
+* **Alternative 1 (current choice):** Stores `Lesson` object in `ModuleClass`
+
+  This implementation allows duplicate lessons in different classes.
+  * Pros:
+    * Easy to implement.
+  * Cons:
+    * Difficult to check for duplicate lessons when adding or editing lessons.
+
+* **Alternative 2:** Have UUID field for `Lesson` and `ModuleClass` stores UUID
+
+  This is similar to how `Student` is implemented. It would be a better alternative if we want all lessons to be unique
+  as we can have a `UniqueLessonList` to store all lessons as shown below.
+
+  ![Lesson Model](images/UniqueLessonListClassDiagram.png)
+
+  * Pros:
+    * Easy to check for duplicate lessons.
+  * Cons:
+    * There is a possibility of UUID collision, even though the probability is very low.
+    * Harder to implement.
+
+### Attendance Model
+This section explains the design considerations of the `Attendance` model.
+
+#### Implementation
+The `Attendance`, `AttendanceRecord` and `AttendanceRecordList` models are implemented as follows:
+
+![AttendanceClassDiagram](images/AttendanceClassDiagram.png)
+
+`Attendance` encapsulates the information of a particular student's attendance in a specific lesson he/she has attended.
+`AttendanceRecord` refers to the actual attendance roster of a particular lesson event.
+It contains the `Attendance`s of all `Student`s who have attended the particular lesson.
+These information are stored as a `Map` with `Student` `UUID` as keys.
+`AttendanceRecordList` refers to the list of all `AttendanceRecord` instances.
+The size of this list is fixed and is determined by the `NumberOfOccurences` in `Lesson`.
+
+<div markdown="span" class="alert alert-primary">:information_source:
+**Note:** All classes in the `Attendance` package are designed to be immutable.
+</div>
+
+### Design Considerations
+##### Aspect 1: Reducing user input
+Users should not have to type in attendance-related commands when the student is absent from a lesson.
+Therefore, the `Attendance` class does not have, for example, a `boolean hasAttended` attribute.
+It only has a `participationScore` attribute.
+
+##### Aspect 2: Maintaining immutability and optimising `AttendanceRecord`
+* **Alternative 1 (current choice):** Dynamically updating `AttendanceRecord` whenever there is a change to attendance.
+  * Pros:
+    * Guarantees immutability.
+  * Cons:
+    * Requires re-instantiation of a `Map` object whenever a user adds/edits/deletes an `Attendance`.
+
+* **Alternative 2:** Initialising empty `Attendance` instances for all students on call to constructor method. \
+This would mean each `Attendance` is set to a particular value, whenever there is a change to an `AttendanceRecord`.
+  * Pros:
+    * Less overhead in modifying `Attendance`.
+  * Cons:
+    * Violates immutability.
+    * Incurs greater memory use.
+
+Alternative 1 was chosen as we prioritized immutability.
+The main benefit of Alternative 2 is that the entire `Map` object need not be copied every time everytime a user adds/edits/deletes an `Attendance`.
+However, this would violate immutability of the `Attendance` package.
+So, we have decided to implement Alternative 1.
+
+##### Aspect 3: Handling of invalid `Week` number
+* **Alternative 1 (current choice):** Store `AttendanceRecord`s in a fixed size `List`.
+  * Pros:
+    * Handles exceptions easily when a user inputs a week number greater than the total number of lessons.
+    * Provides constant time access as the week number is used as an index to the `List`.
+    * Easier to iterate over for `StatisticsCommand`.
+  * Cons:
+    * Requires additional methods to ensure the size of the `List` is fixed.
+
+* **Alternative 2:** Store a `Map` of `Week` number to `AttendanceRecord`.
+  * Pros:
+    * Incurs less memory use.
+  * Cons:
+    * More difficult to iterate over for `StatisticsCommand`.
+    * More difficult to implement as each `Week` number must be checked to ensure it does not exceed `NumberOfOccurrences` in `Lesson`.
+
+Alternative 1 was chosen as it was easier to check for invalid week numbers.
+To check for invalid week numbers in Alternative 2, additional checks have to be done within the `AttendanceRecordList` class to ensure the week numbers do not exceed the `NumberOfOccurrences`.
+
+The sequence diagram below shows how an `Attendance` instance is retrieved.
+
+![AttendanceRetrievalSequenceDiagram](images/AttendanceRetrievalSequenceDiagram.png)
+
+To avoid implementing add, edit and delete methods in the `Attendance` package, we created utility classes instead to handle these operations.
+These utility classes are `ModuleClassUtil`, `LessonUtil` and `AttendanceRecordListUtil`.
+
+### Add Attendance Feature
+
+#### Implementation
+
+This feature records the attendance of a specific student for a specific week's lesson.
+The add attendance mechanism is facilitated by `AddAttendanceCommand`. It extends `Command`.
+
+* AddAttendanceCommand#execute(): Do validity check and adds a student's attendance for a particular week's lesson if
+ all validations passed.
+
+The following sequence diagram shows the interactions between the `Model` and `Logic` components during the execution
+ of a `AddAttendanceCommand`:
+
+![AddAttendanceSequenceDiagram](images/AddAttendanceSequenceDiagram.png)
+
+1. `Logic` uses the `TutorsPetParser` class to parse the user command.
+1. A new instance of a `AddAttendanceCommand` object would be created by the `AddAttendanceCommandParser` and returns
+ to `TutorsPetParser`.
+1. `TutorsPetParser` encapsulates the `AddAttendanceCommand` object as a `Command` object which is executed by
+ the `LogicManager`.
+1. The command execution calls `getFilteredStudentList` and `getFilteredModuleClassList` to get the `targetStudent` and
+ `targetModuleClass` respectively using indexes from the user input.
+1. As seen from the diagram above, `ModuleClassUtil#addAttendanceToModuleClass()` is then called. Execution of that
+ method returns a new `ModuleClass` object with the new attendance of the `targetStudent` added.
+1. The `targetModuleClass` in the `model` is then updated with the new `ModuleClass` object.
+1. The results of the command execution is committed using `commit()` method for `undo/redo` functionalities.
+1. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
+
+The following activity diagram shows how the `add attendance` operation works.
+
+![AddAttendanceActivityDiagram](images/AddAttendanceActivityDiagram.png)
+
+#### Design Considerations
+
+##### Aspect 1: How `add attendance` feature executes
+
+* **Alternative 1 (current choice):** User can only add one attendance at a time.
+
+  * Pros:
+    * Less complex code reduces the possibility of bugs.
+  * Cons:
+    * Less convenient for users as they would have to add attendances for the whole class one at a time.
+
+<div markdown="span" class="alert alert-info">
+:information_source: **Note:** Users can make use of the command recall feature to speed up the recording of
+ attendances.
+</div>
+
+* **Alternative 2:** User can add multiple student's attendances for a specific week's lesson at the same time.
+
+  * Pros:
+    * Provides greater convenience for users as they can add attendances for the whole class in a single command.
+    * Greater flexibility as users can choose whether to key in attendance one at a time or all at once.
+  * Cons:
+    * More complex code leading to higher possibility of bugs.
+
+**Justification**
+
+Alternative 1 was chosen because the cons of implementing alternative 2 outweighs the benefits derived from it. It is
+unlikely for multiple students to have the same participation score and hence the use of this command with multiple
+students is expected to be low. In addition, users can make use of the `recall` feature to speed up the process of
+recording attendances.
+
+### Display Statistics Feature
+
+#### Implementation
+
+The display statistics mechanism is facilitated by `StatisticsCommand`. It extends `Command`.
+
+* DisplayStatisticsCommand#execute(): Do validity check and returns a specific student's statistics if all
+ validations passed.
+
+The following class diagram shows the relationship between classes during the execution of a `StatisticsCommand`:
+
+![StatisticsClassDiagram](images/StatisticsClassDiagram.png)
+
+The following sequence diagram shows the interactions within the `Logic` component during the execution
+of a `StatisticsCommand`:
+
+![StatisticsSequenceDiagram](images/StatisticsSequenceDiagram.png)
+
+1. `Logic` uses the `TutorsPetParser` class to parse the user command.
+1. A new instance of a `StatisticsCommand` object would be created by the `StatisticsCommandParser` and returns to
+   `TutorsPetParser`.
+1. `TutorsPetParser` encapsulates the `StatisticsCommand` object as a `Command` object which is executed by
+   the `LogicManager`.
+1. The command execution calls static methods from the `ModuleClassUtil` and `LessonUtil` classes.
+1. As seen above, `ModuleClassUtil` then iterates through the list of lessons to calculate the student's participation
+   score and absent weeks by using `LessonUtil#getParticipationScoreFromLesson(lesson, student)` and
+   `LessonUtil#getAbsentWeekFromLesson(lesson, student)` respectively.
+1. `StatisticsCommand` takes the results from the previous step and processed the values.
+1. `StatisticsCommand`encapsulates the result into a `CommandResult` object which is passed back to the `Ui`.
+
+#### Design Considerations
+
+##### Aspect 1: How statistics feature executes
+
+* **Alternative 1 (current choice):** Extract the methods out to another class
+(`ModuleClassUtil` and `LessonClassUtil`).
+  * Pros:
+    * Does not violate the law of demeter. Increases cohesion and thus increase maintainability and testability.
+  * Cons:
+    * Requires more wrapper methods to carry information.
+    * More effort to implement.
+
+* **Alternative 2:** Obtain all attendance information within `StatisticsCommand#execute()`.
+  * Pros:
+    * Easy, straightforward to implement.
+  * Cons:
+    * Violates the law of demeter to a large extent.
+
+##### Aspect 2: Responsibility of relevant methods
+
+* **Alternative 1 (current choice):** Allow `ModuleClassUtil#getParticipationScore` and
+`ModuleClassUtil#getAbsentWeek` to return intermediate values.
+  * Pros:
+    * Reduce the responsibilities of `ModuleClassUtil#getParticipationScore` and `ModuleClassUtil#getAbsentWeek`.
+  * Cons:
+    * Additional processing required to process the results of the method calls in `StatisticsCommand#execute()`.
+
+* **Alternative 2:** Allow `ModuleClassUtil#getParticipationScore` and
+`ModuleClassUtil#getAbsentWeek` to return a `String` representation directly.
+  * Pros:
+    * Easy, straightforward to implement.
+    * Do not need to iterate through scores and weeks in `StatisticsCommand`.
+  * Cons:
+    * `ModuleClassUtil#getParticipationScore` and `ModuleClassUtil#getAbsentWeek` would have too many
+       responsibilities. Violates the Single Responsibility Principle.
 
 ### Undo/Redo Feature
 
@@ -272,7 +505,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 #### Design Considerations
 
-##### Aspect: How undo & redo executes
+##### Aspect 1: How undo & redo executes
 
 Two possible implementations the undo/redo mechanism were considered.
 
@@ -284,141 +517,12 @@ Two possible implementations the undo/redo mechanism were considered.
   * Pros: Will use less memory (e.g. for `delete-student`, save only the student deleted, so that it can be restored when undo is called).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-##### Aspect: Commands to support for undo/redo
+##### Aspect 2: Commands to support for undo/redo
 
 A key purpose of the undo/redo feature is to prevent the accidental loss of data due to wrongly executed commands.
 
 As such, it was decided that only commands that alter the data in Tutor's Pet would have their state saved, since commands
 that do not alter the data of Tutor's Pet would not have any data that would be irrecoverable from an earlier state.
-
-### Display Statistics Feature
-
-#### Implementation
-
-The display statistics mechanism is facilitated by `StatisticsCommand`. It extends `Command`.
-
-* DisplayStatisticsCommand#execute(): Do validity check and returns a specific student's statistics if all
- validations passed.
-
-The following class diagram shows the relationship between classes during the execution of a `StatisticsCommand`:
-
-![StatisticsClassDiagram](images/StatisticsClassDiagram.png)
-
-The following sequence diagram shows the interactions within the `Logic` component during the execution
-of a `StatisticsCommand`:
-
-![StatisticsSequenceDiagram](images/StatisticsSequenceDiagram.png)
-
-1. `Logic` uses the `TutorsPetParser` class to parse the user command.
-1. A new instance of a `StatisticsCommand` object would be created by the `StatisticsCommandParser` and returns to
-   `TutorsPetParser`.
-1. `TutorsPetParser` encapsulates the `StatisticsCommand` object as a `Command` object which is executed by
-   the `LogicManager`.
-1. The command execution calls static methods from the `ModuleClassUtil` and `LessonUtil` classes.
-1. As seen above, `ModuleClassUtil` then iterates through the list of lessons to calculate the student's participation
-   score and absent weeks by using `LessonUtil#getParticipationScoreFromLesson(lesson, student)` and
-   `LessonUtil#getAbsentWeekFromLesson(lesson, student)` respectively.
-1. `StatisticsCommand` takes the results from the previous step and processed the values.
-1. `StatisticsCommand`encapsulates the result into a `CommandResult` object which is passed back to the `Ui`.
-
-#### Design Considerations
-
-##### Aspect 1: How statistics feature executes
-
-* **Alternative 1 (current choice):** Extract the methods out to another class
-(`ModuleClassUtil` and `LessonClassUtil`).
-  * Pros:
-    * Does not violate the law of demeter. Increases cohesion and thus increase maintainability and testability.
-  * Cons:
-    * Requires more wrapper methods to carry information.
-    * More effort to implement.
-
-* **Alternative 2:** Obtain all attendance information within `StatisticsCommand#execute()`.
-  * Pros:
-    * Easy, straightforward to implement.
-  * Cons:
-    * Violates the law of demeter to a large extent.
-
-##### Aspect 2: Responsibility of relevant methods
-
-* **Alternative 1 (current choice):** Allow `ModuleClassUtil#getParticipationScore` and
-`ModuleClassUtil#getAbsentWeek` to return intermediate values.
-  * Pros:
-    * Reduce the responsibilities of `ModuleClassUtil#getParticipationScore` and `ModuleClassUtil#getAbsentWeek`.
-  * Cons:
-    * Additional processing required to process the results of the method calls in `StatisticsCommand#execute()`.
-
-* **Alternative 2:** Allow `ModuleClassUtil#getParticipationScore` and
-`ModuleClassUtil#getAbsentWeek` to return a `String` representation directly.
-  * Pros:
-    * Easy, straightforward to implement.
-    * Do not need to iterate through scores and weeks in `StatisticsCommand`.
-  * Cons:
-    * `ModuleClassUtil#getParticipationScore` and `ModuleClassUtil#getAbsentWeek` would have too many
-       responsibilities. Violates the Single Responsibility Principle.
-
-### Add Attendance Feature
-
-#### Implementation
-
-This feature records the attendance of a specific student for a specific week's lesson.
-The add attendance mechanism is facilitated by `AddAttendanceCommand`. It extends `Command`.
-
-* AddAttendanceCommand#execute(): Do validity check and adds a student's attendance for a particular week's lesson if
- all validations passed.
-
-The following sequence diagram shows the interactions between the `Model` and `Logic` components during the execution
- of a `AddAttendanceCommand`:
-
-![AddAttendanceSequenceDiagram](images/AddAttendanceSequenceDiagram.png)
-
-1. `Logic` uses the `TutorsPetParser` class to parse the user command.
-1. A new instance of a `AddAttendanceCommand` object would be created by the `AddAttendanceCommandParser` and returns
- to `TutorsPetParser`.
-1. `TutorsPetParser` encapsulates the `AddAttendanceCommand` object as a `Command` object which is executed by
- the `LogicManager`.
-1. The command execution calls `getFilteredStudentList` and `getFilteredModuleClassList` to get the `targetStudent` and
- `targetModuleClass` respectively using indexes from the user input.
-1. As seen from the diagram above, `ModuleClassUtil#addAttendanceToModuleClass()` is then called. Execution of that
- method returns a new `ModuleClass` object with the new attendance of the `targetStudent` added.
-1. The `targetModuleClass` in the `model` is then updated with the new `ModuleClass` object.
-1. The results of the command execution is committed using `commit()` method for `undo/redo` functionalities.
-1. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
-
-The following activity diagram shows how the `add attendance` operation works.
-
-![AddAttendanceActivityDiagram](images/AddAttendanceActivityDiagram.png)
-
-#### Design Considerations
-
-##### Aspect 1: How `add attendance` feature executes
-
-* **Alternative 1 (current choice):** User can only add one attendance at a time.
-
-  * Pros:
-    * Less complex code reduces the possibility of bugs.
-  * Cons:
-    * Less convenient for users as they would have to add attendances for the whole class one at a time.
-
-<div markdown="span" class="alert alert-info">
-:information_source: **Note:** Users can make use of the command recall feature to speed up the recording of
- attendances.
-</div>
-
-* **Alternative 2:** User can add multiple student's attendances for a specific week's lesson at the same time.
-
-  * Pros:
-    * Provides greater convenience for users as they can add attendances for the whole class in a single command.
-    * Greater flexibility as users can choose whether to key in attendance one at a time or all at once.
-  * Cons:
-    * More complex code leading to higher possibility of bugs.
-
-**Justification**
-
-Alternative 1 was chosen because the cons of implementing alternative 2 outweighs the benefits derived from it. It is
-unlikely for multiple students to have the same participation score and hence the use of this command with multiple
-students is expected to be low. In addition, users can make use of the `recall` feature to speed up the process of
-recording attendances.
 
 ### Command Recall Feature
 
@@ -474,7 +578,7 @@ The activity diagram above provides a summary of the recall command mechanism.
 
 #### Design Considerations
 
-##### Aspect: Behaviour when returning from most recent recalled command
+##### Aspect 3: Behaviour when returning from most recent recalled command
 
 Two possible behaviours were considered when designing the recall command feature.
 
@@ -485,110 +589,6 @@ Two possible behaviours were considered when designing the recall command featur
 * **Alternative 2:** Reset the command box to its blank state.
   * Pros: Easy to implement.
   * Cons: The user looses any partially typed commands.
-
-### Lesson Model
-This section explains the design considerations of the `Lesson` model.
-
-#### Implementation
-The class diagram below shows the current implementation of `Lesson` model.
-
-![Lesson Model](images/LessonModelClassDiagram.png)
-
-A `ModuleClass` can contain any number of `Lesson` objects. Every `Lesson` contains a `startTime`, `endTime`, `Day`,
-`NumberOfOccurrences`, `Venue` and `AttendanceRecordList`.
-
-#### Design Considerations
-* **Alternative 1 (current choice):** Stores `Lesson` object in `ModuleClass`
-
-  This implementation allows duplicate lessons in different classes.
-  * Pros:
-    * Easy to implement.
-  * Cons:
-    * Difficult to check for duplicate lessons when adding or editing lessons.
-
-* **Alternative 2:** Have UUID field for `Lesson` and `ModuleClass` stores UUID
-
-  This is similar to how `Student` is implemented. It would be a better alternative if we want all lessons to be unique
-  as we can have a `UniqueLessonList` to store all lessons as shown below.
-
-  ![Lesson Model](images/UniqueLessonListClassDiagram.png)
-
-  * Pros:
-    * Easy to check for duplicate lessons.
-  * Cons:
-    * There is a possibility of UUID collision, even though the probability is very low.
-    * Harder to implement.
-
-### Attendance Model
-This section explains the design considerations of the `Attendance` model.
-
-#### Implementation
-The `Attendance`, `AttendanceRecord` and `AttendanceRecordList` models are implemented as follows:
-
-![AttendanceClassDiagram](images/AttendanceClassDiagram.png)
-
-`Attendance` encapsulates the information of a particular student's attendance in a specific lesson he/she has attended.
-`AttendanceRecord` refers to the actual attendance roster of a particular lesson event.
-It contains the `Attendance`s of all `Student`s who have attended the particular lesson.
-These information are stored as a `Map` with `Student` `UUID` as keys.
-`AttendanceRecordList` refers to the list of all `AttendanceRecord` instances.
-The size of this list is fixed and is determined by the `NumberOfOccurences` in `Lesson`.
-
-<div markdown="span" class="alert alert-primary">:information_source:
-**Note:** All classes in the `Attendance` package are designed to be immutable.
-</div>
-
-### Design Considerations
-#### Aspect 1: Reducing user input
-Users should not have to type in attendance-related commands when the student is absent from a lesson.
-Therefore, the `Attendance` class does not have, for example, a `boolean hasAttended` attribute.
-It only has a `participationScore` attribute.
-
-#### Aspect 2: Maintaining immutability and optimising `AttendanceRecord`
-* **Alternative 1 (current choice):** Dynamically updating `AttendanceRecord` whenever there is a change to attendance.
-  * Pros:
-    * Guarantees immutability.
-  * Cons:
-    * Requires re-instantiation of a `Map` object whenever a user adds/edits/deletes an `Attendance`.
-
-* **Alternative 2:** Initialising empty `Attendance` instances for all students on call to constructor method. \
-This would mean each `Attendance` is set to a particular value, whenever there is a change to an `AttendanceRecord`.
-  * Pros:
-    * Less overhead in modifying `Attendance`.
-  * Cons:
-    * Violates immutability.
-    * Incurs greater memory use.
-
-Alternative 1 was chosen as we prioritized immutability.
-The main benefit of Alternative 2 is that the entire `Map` object need not be copied every time everytime a user adds/edits/deletes an `Attendance`.
-However, this would violate immutability of the `Attendance` package.
-So, we have decided to implement Alternative 1.
-
-#### Aspect 3: Handling of invalid `Week` number
-* **Alternative 1 (current choice):** Store `AttendanceRecord`s in a fixed size `List`.
-  * Pros:
-    * Handles exceptions easily when a user inputs a week number greater than the total number of lessons.
-    * Provides constant time access as the week number is used as an index to the `List`.
-    * Easier to iterate over for `StatisticsCommand`.
-  * Cons:
-    * Requires additional methods to ensure the size of the `List` is fixed.
-
-* **Alternative 2:** Store a `Map` of `Week` number to `AttendanceRecord`.
-  * Pros:
-    * Incurs less memory use.
-  * Cons:
-    * More difficult to iterate over for `StatisticsCommand`.
-    * More difficult to implement as each `Week` number must be checked to ensure it does not exceed `NumberOfOccurrences` in `Lesson`.
-
-Alternative 1 was chosen as it was easier to check for invalid week numbers.
-To check for invalid week numbers in Alternative 2, additional checks have to be done within the `AttendanceRecordList` class to ensure the week numbers do not exceed the `NumberOfOccurrences`.
-
-The sequence diagram below shows how an `Attendance` instance is retrieved.
-
-![AttendanceRetrievalSequenceDiagram](images/AttendanceRetrievalSequenceDiagram.png)
-
-To avoid implementing add, edit and delete methods in the `Attendance` package, we created utility classes instead to handle these operations.
-These utility classes are `ModuleClassUtil`, `LessonUtil` and `AttendanceRecordListUtil`.
 
 --------------------------------------------------------------------------------------------------------------------
 
