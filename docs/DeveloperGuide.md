@@ -97,7 +97,7 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 
 This section explains the high level design of the `Model` component of the application.
 
-The `Model` component manages the data stored in the application during runtime. 
+The `Model` component manages the data stored in the application during runtime.
 
 The `Model` stores:
 * a `UserPref` object that represents the user’s preferences.
@@ -119,7 +119,7 @@ The class diagram below gives an overview of the model package.<br/>
 
 ![Structure of the Model Component](images/ModelClassDiagram.png)
 
-**API** : 
+**API** :
 [`Model.java`](https://github.com/AY2021S1-CS2103T-T10-4/tp/blob/master/src/main/java/tutorspet/model/Model.java)
 
 The class diagram below shows the design of the `Student` and `ModuleClass` packages.
@@ -495,20 +495,20 @@ Given below is an example usage scenario and how the undo/redo mechanism behaves
 
 1. The user launches the application for the first time. The `VersionedTutorsPet` will be initialized with the initial Tutor's Pet state.
    This initial state will be saved into the `tutorsPetStateList`, and the `statePointer` will point to this initial `TutorsPetState`.
-   
+
    ![UndoRedoState0](images/UndoRedoState0.png)
-   
+
 2. The user executes `delete-student 5` command to delete the 5th student in Tutor's Pet.
    The `delete-student` command calls `Model#commit(String commitMessage)` after it has deleted the student.
    This causes the modified state of Tutor's Pet, after the `delete-student 5` command has executed, to be saved in the `tutorsPetStateList`.
    The `statePointer` will be updated to point to the newly inserted `TutorsPetState`.
-  
+
    ![UndoRedoState1](images/UndoRedoState1.png)
-   
+
 3. The user executes `add-student n/David …` to add a new student.
    The `add-student` command also calls `Model#commit(String commitMessage)` after it has added the new student.
    This causes another modified Tutor's Pet state to be saved into the `tutorsPetStateList`.
-  
+
    ![UndoRedoState2](images/UndoRedoState2.png)
 
     <div markdown="span" class="alert alert-info">
@@ -583,12 +583,12 @@ Two possible implementations the undo/redo mechanism were considered.
 * **Alternative 2:** Commands are designed such that they can reverse the result of their execution.
   * Pros: Will use less memory (e.g. for `delete-student`, save only the student deleted, so that it can be restored when undo is called).
   * Cons: We must ensure that the implementation of each individual command are correct.
-  
+
 Alternative 1 was chosen due to the limited time that was available for this project. The integrity of data was deemed to be
 more important than the performance of the application since the product was designed for single user scenarios and
-modern machines should be more than capable of handling the potential performance impact of alternative 1. 
+modern machines should be more than capable of handling the potential performance impact of alternative 1.
 
-In addition, the immutable property of the data within the application made it significantly easier for alternative 1 to be implemented. 
+In addition, the immutable property of the data within the application made it significantly easier for alternative 1 to be implemented.
 
 ##### Aspect 2: Commands to support for undo/redo
 
@@ -643,9 +643,9 @@ If the `pointer` is not currently pointing to an entry in the list, i.e. it is i
 the current text in the command box is stored in the cache.
 
 ![CommandRecallStoresCache](images/CommandRecallStoresCache.png)
- 
+
 Otherwise, there is no change to the cached value. Subsequently, `CommandHistory` decreases its `pointer` by one,
-and the respective `String` in the list is returned. The text in the command box is then set to the returned `String`. 
+and the respective `String` in the list is returned. The text in the command box is then set to the returned `String`.
 
 If there are no earlier commands to recall, then there is no change to the text in the command box.
 
@@ -681,7 +681,7 @@ Two possible behaviours were considered when designing the recall command featur
 * **Alternative 2:** Reset the command box to its blank state.
   * Pros: Easy to implement.
   * Cons: The user looses any partially typed commands.
-  
+
 Alternative 1 was chosen as it followed the behaviour of common tools, such as the unix terminal and Windows Command Prompt,
 that our target users were familiar with.
 
