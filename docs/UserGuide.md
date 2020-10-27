@@ -603,7 +603,7 @@ Other examples:
 
 ### Managing Lessons
 
-#### Adding a lesson : `add-lesson`
+#### Adding a lesson : `add-lesson` --- Jun Long
 
 If you would like to add a lesson to a class, you can make use of this command.
 
@@ -780,7 +780,7 @@ Other Examples:
 
 </div>
 
-#### Deleting an attendance record : `delete-attendance`
+#### Deleting an attendance record : `delete-attendance` -- Jun Long
 
 If you would like to delete a specific student's attendance from a lesson, you can make use of this command.
 
