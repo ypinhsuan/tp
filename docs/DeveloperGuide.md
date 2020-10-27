@@ -133,7 +133,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Student Universally Unique Identifier (UUID)
+### Student Model and Student Universally Unique Identifier (UUID)
 
 A `UUID` is a unique 128-bit number to identify a unique `Student` within Tutor’s Pet.
 In Tutor’s Pet, every `Student` upon construction is assigned a randomly generated `UUID` that is used to
@@ -143,6 +143,12 @@ uniquely identify a `Student` across `Classes` and `Lessons`. This is important 
 `Student` data is modified by the user.
 
 #### Implementation
+
+The class diagram below shows the current implementation of `Student` model.
+
+![Student Model](images/StudentModelClassDiagram.png)
+
+Every `Student` contains a `UUID`, `Name`, `Telegram`, `Email`, and a set of `Tags`.
 
 ![StudentUUID](images/StudentUUID.png)
 
@@ -155,7 +161,7 @@ fields providing information of the `Student`.
 This section elaborates further on the reason why we eventually chose to adopt a `UUID` over other potential
 solutions.
 
-##### Aspect: How to uniquely identify Students across models.
+##### Aspect 1: How to uniquely identify Students across models.
 
 * **Alternative 1 (current choice):** Assign a `UUID` tag to each `Student`
   * Pros:
@@ -173,6 +179,34 @@ solutions.
   * Cons:
     * The `Email` field is editable while the unique identifier of each `Student` should not be editable to prevent
       the need to cascade a change in the identifier of the `Student`.
+
+### ModuleClass Model
+This section explains the design considerations of the `ModuleClass` model.
+
+#### Implementation
+The class diagram below shows the current implementation of `ModuleClass` model.
+
+![ModuleClass Model](images/ModuleClassModelClassDiagram.png)
+
+A `ModuleClass` contains a `Name`, and also a set of `studentUuids` that is enrolled in the class.
+A `ModuleClass` can also contain any number of `Lesson` objects.
+
+#### Design Considerations
+
+##### Aspect 1: Student storage
+
+* **Alternative 1 (current choice):** Stores `Student` `UUID` object in `ModuleClass` as a Set.
+  This implementation ensures that there are no duplicate students found in a class.
+  * Pros:
+    * Ensures that all students within a class are unique.
+  * Cons:
+    * There is a possibility of UUID collision, even though the probability is very low.
+
+* **Alternative 2:** Stores `Student` object in `ModuleClass`.
+   * Pros:
+     * Easy to implement.
+   * Cons:
+     * Difficult to check for duplicate students when adding or editing students in classes.
 
 ### Undo/Redo Feature
 
@@ -272,7 +306,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 #### Design Considerations
 
-##### Aspect: How undo & redo executes
+##### Aspect 1: How undo & redo executes
 
 Two possible implementations the undo/redo mechanism were considered.
 
@@ -284,7 +318,7 @@ Two possible implementations the undo/redo mechanism were considered.
   * Pros: Will use less memory (e.g. for `delete-student`, save only the student deleted, so that it can be restored when undo is called).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-##### Aspect: Commands to support for undo/redo
+##### Aspect 2: Commands to support for undo/redo
 
 A key purpose of the undo/redo feature is to prevent the accidental loss of data due to wrongly executed commands.
 
@@ -474,7 +508,7 @@ The activity diagram above provides a summary of the recall command mechanism.
 
 #### Design Considerations
 
-##### Aspect: Behaviour when returning from most recent recalled command
+##### Aspect 3: Behaviour when returning from most recent recalled command
 
 Two possible behaviours were considered when designing the recall command feature.
 
@@ -498,6 +532,9 @@ A `ModuleClass` can contain any number of `Lesson` objects. Every `Lesson` conta
 `NumberOfOccurrences`, `Venue` and `AttendanceRecordList`.
 
 #### Design Considerations
+
+##### Aspect 1: Lesson storage
+
 * **Alternative 1 (current choice):** Stores `Lesson` object in `ModuleClass`
 
   This implementation allows duplicate lessons in different classes.
@@ -538,13 +575,14 @@ The size of this list is fixed and is determined by the `NumberOfOccurences` in 
 **Note:** All classes in the `Attendance` package are designed to be immutable.
 </div>
 
-### Design Considerations
-#### Aspect 1: Reducing user input
+#### Design Considerations
+
+##### Aspect 1: Reducing user input
 Users should not have to type in attendance-related commands when the student is absent from a lesson.
 Therefore, the `Attendance` class does not have, for example, a `boolean hasAttended` attribute.
 It only has a `participationScore` attribute.
 
-#### Aspect 2: Maintaining immutability and optimising `AttendanceRecord`
+##### Aspect 2: Maintaining immutability and optimising `AttendanceRecord`
 * **Alternative 1 (current choice):** Dynamically updating `AttendanceRecord` whenever there is a change to attendance.
   * Pros:
     * Guarantees immutability.
@@ -564,7 +602,7 @@ The main benefit of Alternative 2 is that the entire `Map` object need not be co
 However, this would violate immutability of the `Attendance` package.
 So, we have decided to implement Alternative 1.
 
-#### Aspect 3: Handling of invalid `Week` number
+##### Aspect 3: Handling of invalid `Week` number
 * **Alternative 1 (current choice):** Store `AttendanceRecord`s in a fixed size `List`.
   * Pros:
     * Handles exceptions easily when a user inputs a week number greater than the total number of lessons.
@@ -608,55 +646,60 @@ These utility classes are `ModuleClassUtil`, `LessonUtil` and `AttendanceRecordL
 
 **Target user profile**:
 
-* has a need to manage students enrolled in classes
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* Has a need to manage students enrolled in classes
+* Prefer desktop apps over other types
+* Can type fast
+* Prefers typing to mouse interactions
+* Is reasonably comfortable using CLI apps
 
-**Value proposition**: manage students and classes faster than a typical mouse/GUI driven app
+**Value proposition**: Manage students and classes faster than a typical mouse/GUI driven app
 
 
-### User stories
+### User stories (Completed)
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​ | I want to... | So that I can... |
-| --- | --- | --- | --- |
-| `* * *` | Tutor with many students | Store my students' contact info/emails | Contact them easily |
-| `* * *` | Tutor with many classes | Create classes | Put my students in the appropriate classes |
-| `* * *` | Tutor with many classes | Insert my students into the appropriate classes | Organise my students via classes
-| `* * *` | New Tutor | View the help menu | Be familiar with app usage |
-| `* * *` | Tutor | Delete student entries | Update my list of students if a student were to drop the class |
-| `* *` | Tutor | View my students' test scores easily | Gauge my teaching efficiency |
-| `* *` | Tutor | Mark my student's attendance and participation | Gauge each student's participation level |
-| `* *` | Tutor teaching CS modules | View my students' GitHub | Gauge my student's progress in their coding assignment |
-| `* *` | Tutor | View all my lessons | Manage my time more efficiently |
-| `* *` | Tutor | Record my feedback for my students | Give participation points |
-| `* *` | Forgetful Tutor | Track all my tasks | Know which is of greater urgency |
-| `* *` | Busy Tutor | Store zoom links | Retrieve these zoom links for my lessons, consultations, etc. |
-| `* *` | Busy Tutor | Store class rooms | Be reminded of my lesson venues |
-| `* *` | Tutor with many students | Keep notes on each student's performance | Track their progress over time |
-| `* *` | Careless tutor | Undo my commands | Correct any errors when I input things wrongly |
-| `* *` | Tutor | Set recurring events (eg. lessons for every week) | Avoid typing the same events |
-| `* *` | Tutor | Calculate the mean, median, mode of my students' scores | Gauge the overall performance of my class |
-| `* *` | Tutor | Store the questions asked by students | Provide students with answers immediately, for questions that were asked before |
-| `* *` | Tutor | Be reminded of my lessons | Attend them |
-| `* *` | Tutor | Update the information of my students | Update my understanding of the progress of my students |
-| `* *` | Tutor | Categorise my students into how well they are doing | Dedicate more time towards the weaker students |
-| `* *` | Careless Tutor | Redo my undone actions | Easily reverse my accidental undos. |
-| `*` | Caring tutor | Take note of student's special needs, if any | Cater my teaching toward them |
-| `*` | Tutor for many semesters | Archive my past semesters | Avoid cluttering the app |
-| `*` | Tutor | Store teaching feedback given by my students | Improve my teaching |
-| `*` | Tutor | Prioritise my tasks | Work on important tasks first |
-| `*` | Tutor | Keep track of the hours I have spent teaching/preparing for class | Be aware of how much time I have spent on teaching |
-| `*` | Tutor | Store teaching feedback given by Professors | Improve my teaching |
-| `*` | Forgetful Tutor | Set an alert for task deadlines | Complete my tasks on time |
-| `*` | Forgetful Tutor | Store picture of my students | Easily match their faces to their names |
-| `*` | Tutor with many classes | See all tasks related to a class | Easily tell which task belongs to which class |
-| `*` | Tutor teaching modules that require many written assignments | View my student's written submissions | Mark/review their homework |
-| `*` | Tutor | Manage my teaching materials | Find them easily |
-| `*` | Tutor | Find free time | Provide consultation for students |
+| Priority | As a …                   | I want to...                                        | So that I can...                                               |   Status  |
+|----------|--------------------------|-----------------------------------------------------|----------------------------------------------------------------|:---------:|
+| * * *    | Tutor with many students | Store my students' contact info/emails              | Contact them easily                                            | COMPLETED |
+| * * *    | Tutor with many classes  | Insert my students into the appropriate classes     | Organise my students via classes                               | COMPLETED |
+| * * *    | Tutor                    | Delete student entries                              | Update my list of students if a student were to drop the class | COMPLETED |
+| * * *    | Tutor with many classes  | Create classes                                      | Put my students in the appropriate classes                     | COMPLETED |
+| * * *    | New Tutor                | View the help menu                                  | Be familiar with app usage                                     | COMPLETED |
+| * *      | Tutor with many students | Keep notes on each student's performance            | Track their progress over time                                 | COMPLETED |
+| * *      | Tutor                    | Mark my student's attendance and participation      | Gauge each student's participation level                       | COMPLETED |
+| * *      | Tutor                    | Update the information of my students               | Update my understanding of the progress of my students         | COMPLETED |
+| * *      | Tutor                    | Categorise my students into how well they are doing | Dedicate more time towards the weaker students                 | COMPLETED |
+| * *      | Tutor                    | View all my lessons                                 | Manage my time more efficiently                                | COMPLETED |
+| * *      | Tutor                    | Set recurring events (eg. lessons for every week)   | Avoid typing the same events                                   | COMPLETED |
+| * *      | Busy Tutor               | Store zoom links                                    | Retrieve these zoom links for my lessons, consultations, etc.  | COMPLETED |
+| * *      | Busy Tutor               | Store class rooms                                   | Be reminded of my lesson venues                                | COMPLETED |
+| * *      | Careless tutor           | Undo my commands                                    | Correct any errors when I input things wrongly                 | COMPLETED |
+| * *      | Careless Tutor           | Redo my undone actions                              | Easily reverse my accidental undos.                            | COMPLETED |
+| *        | Caring tutor             | Take note of student's special needs, if any        | Cater my teaching toward them                                  | COMPLETED |
+### User stories (Not Implemented)
+
+Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+
+| Priority | As a …                                                       | I want to...                                                      | So that I can...                                                                |      Status     |
+|----------|--------------------------------------------------------------|-------------------------------------------------------------------|---------------------------------------------------------------------------------|:---------------:|
+| * *      | Tutor                                                        | View my students' test scores easily                              | Gauge my teaching efficiency                                                    | NOT IMPLEMENTED |
+| * *      | Tutor teaching CS modules                                    | View my students' GitHub                                          | Gauge my student's progress in their coding assignment                          | NOT IMPLEMENTED |
+| * *      | Tutor                                                        | Record my feedback for my students                                | Give participation points                                                       | NOT IMPLEMENTED |
+| * *      | Tutor                                                        | Calculate the mean, median, mode of my students' scores           | Gauge the overall performance of my class                                       | NOT IMPLEMENTED |
+| * *      | Tutor                                                        | Store the questions asked by students                             | Provide students with answers immediately, for questions that were asked before | NOT IMPLEMENTED |
+| * *      | Tutor                                                        | Be reminded of my lessons                                         | Attend them                                                                     | NOT IMPLEMENTED |
+| * *      | Forgetful Tutor                                              | Track all my tasks                                                | Know which is of greater urgency                                                | NOT IMPLEMENTED |
+| *        | Tutor                                                        | Store teaching feedback given by my students                      | Improve my teaching                                                             | NOT IMPLEMENTED |
+| *        | Tutor teaching modules that require many written assignments | View my student's written submissions                             | Mark/review their homework                                                      | NOT IMPLEMENTED |
+| *        | Forgetful Tutor                                              | Store picture of my students                                      | Easily match their faces to their names                                         | NOT IMPLEMENTED |
+| *        | Tutor                                                        | Prioritise my tasks                                               | Work on important tasks first                                                   | NOT IMPLEMENTED |
+| *        | Forgetful Tutor                                              | Set an alert for task deadlines                                   | Complete my tasks on time                                                       | NOT IMPLEMENTED |
+| *        | Tutor                                                        | Find free time                                                    | Provide consultation for students                                               | NOT IMPLEMENTED |
+| *        | Tutor                                                        | Store teaching feedback given by Professors                       | Improve my teaching                                                             | NOT IMPLEMENTED |
+| *        | Tutor                                                        | Manage my teaching materials                                      | Find them easily                                                                | NOT IMPLEMENTED |
+| *        | Tutor                                                        | Keep track of the hours I have spent teaching/preparing for class | Be aware of how much time I have spent on teaching                              | NOT IMPLEMENTED |
+| *        | Tutor for many semesters                                     | Archive my past semesters                                         | Avoid cluttering the app                                                        | NOT IMPLEMENTED |
 
 ### Use cases
 

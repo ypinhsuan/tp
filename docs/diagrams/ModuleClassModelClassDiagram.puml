@@ -1,0 +1,29 @@
+@startuml
+!include style.puml
+show members
+hide empty members
+skinparam classAttributeFontColor #FFFFFF
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Class ModuleClass
+
+package ModuleClass <<Rectangle>> {
+    class ModuleClass {
+        studentUuids : Set<UUID>
+    }
+}
+
+package Components <<Rectangle>> {
+    class Name {
+        fullName : String
+    }
+}
+
+class Lesson
+
+ModuleClass *-down->"1" Name
+ModuleClass *-down->"*" Lesson
+
+@enduml

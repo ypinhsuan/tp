@@ -4,21 +4,47 @@ skinparam arrowThickness 1.1
 skinparam arrowColor STORAGE_COLOR
 skinparam classBackgroundColor STORAGE_COLOR
 
+package Storage <<Rectangle>> {
 Interface Storage <<Interface>>
 Interface UserPrefsStorage <<Interface>>
-Interface AddressBookStorage <<Interface>>
+Interface TutorsPetStorage <<Interface>>
+class StorageManager
+class JsonUserPrefsStorage
+class JsonTutorsPetStorage
+class JsonSerializableTutorsPet
+class JsonAdaptedStudent
+class JsonAdaptedTag
+class JsonAdaptedName
+class JsonAdaptedModuleClass
+class JsonAdaptedLesson
 
-Class StorageManager
-Class JsonUserPrefsStorage
-Class JsonAddressBookStorage
+package Attendance <<Rectangle>> {
+class JsonAdaptedAttendanceRecordList
+class JsonAdaptedAttendanceRecord
+class JsonAdaptedStudentAttendance
+class JsonAdaptedAttendance
+}
+class JsonAdaptedUuid
+}
 
 StorageManager .left.|> Storage
-StorageManager o-right-> UserPrefsStorage
-StorageManager o--> AddressBookStorage
+StorageManager *-right-> UserPrefsStorage
+StorageManager *-down-> TutorsPetStorage
 
 JsonUserPrefsStorage .left.|> UserPrefsStorage
-JsonAddressBookStorage .left.|> AddressBookStorage
-JsonAddressBookStorage .down.> JsonSerializableAddressBookStorage
-JsonSerializableAddressBookStorage .right.> JsonSerializablePerson
-JsonSerializablePerson .right.> JsonAdaptedTag
+JsonTutorsPetStorage .left.|> TutorsPetStorage
+JsonTutorsPetStorage .down.> JsonSerializableTutorsPet
+JsonSerializableTutorsPet *-down-> JsonAdaptedStudent
+JsonSerializableTutorsPet *-right-> JsonAdaptedModuleClass
+JsonAdaptedStudent *-down-> JsonAdaptedName
+JsonAdaptedStudent *-down-> JsonAdaptedTag
+JsonAdaptedModuleClass *-down-> JsonAdaptedName
+JsonAdaptedModuleClass *-down-> JsonAdaptedUuid
+JsonAdaptedModuleClass *-down-> JsonAdaptedLesson
+JsonAdaptedLesson *-down-> JsonAdaptedAttendanceRecordList
+JsonAdaptedAttendanceRecordList *-down-> JsonAdaptedAttendanceRecord
+JsonAdaptedAttendanceRecord *-down-> JsonAdaptedStudentAttendance
+JsonAdaptedStudentAttendance *-down-> JsonAdaptedUuid
+JsonAdaptedStudentAttendance *-down-> JsonAdaptedAttendance
+
 @enduml

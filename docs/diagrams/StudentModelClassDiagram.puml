@@ -1,0 +1,39 @@
+@startuml
+!include style.puml
+show members
+hide empty members
+skinparam classAttributeFontColor #FFFFFF
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+package Student <<Rectangle>> {
+    class Student {
+        uuid : UUID
+    }
+
+    class Telegram {
+        value : String
+    }
+
+    class Email {
+        value : String
+    }
+}
+
+package Components <<Rectangle>> {
+    class Name {
+        fullName : String
+    }
+
+    class Tag {
+        tagName : String
+    }
+}
+
+Student *-down->"1" Name
+Student *-down->"1" Telegram
+Student *-down->"1" Email
+Student *-down->"*" Tag
+
+@enduml
