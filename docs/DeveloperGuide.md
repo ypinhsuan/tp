@@ -208,131 +208,6 @@ A `ModuleClass` can also contain any number of `Lesson` objects.
    * Cons:
      * Difficult to check for duplicate students when adding or editing students in classes.
 
-### Undo/Redo Feature
-
-The Undo/Redo feature allows users to revert wrongly executed commands.
-
-This section explains the implementation of the Undo and Redo mechanism and highlights the design considerations taken into account when implementing this feature.
-
-#### Implementation
-
-The Undo/Redo mechanism is designed around maintaining a history of `TutorsPet` states, and restoring a particular state when the user triggers an undo or redo command.
-
-The undo and redo mechanism is facilitated by `VersionedTutorsPet`. It extends `TutorsPet` with a history of Tutor's Pet states,
-stored internally as a list of `TutorsPetState`. It also maintains a `statePointer` to keep track of the undo/redo history.
-
-A `TutorsPetState` object contains a Tutor's Pet state, represented as a `ReadOnlyTutorsPet`, along with a message that describes the changes relevant to this state.
-
-![TutorsPetState](images/TutorsPetState.png)
-
-Additionally, it implements the following operations:
-
-* `VersionedTutorsPet#commit(String commitMessage)` – Saves the current Tutor's Pet state, along with the corresponding commit message, in its history.
-* `VersionedTutorsPet#undo()` – Restores the previous Tutor's Pet state from its history.
-* `VersionedTutorsPet#redo()` – Restores a previously undone Tutor's Pet state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commit(String commitMessage)`, `Model#undo()` and `Model#redo()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step:
-
-1. The user launches the application for the first time. The `VersionedTutorsPet` will be initialized with the initial Tutor's Pet state.
-   This initial state will be saved into the `tutorsPetStateList`, and the `statePointer` will point to this initial `TutorsPetState`.
-   
-   ![UndoRedoState0](images/UndoRedoState0.png)
-   
-2. The user executes `delete-student 5` command to delete the 5th student in Tutor's Pet.
-   The `delete-student` command calls `Model#commit(String commitMessage)` after it has deleted the student.
-   This causes the modified state of Tutor's Pet, after the `delete-student 5` command has executed, to be saved in the `tutorsPetStateList`.
-   The `statePointer` will be updated to point to the newly inserted `TutorsPetState`.
-  
-   ![UndoRedoState1](images/UndoRedoState1.png)
-   
-3. The user executes `add-student n/David …` to add a new student.
-   The `add-student` command also calls `Model#commit(String commitMessage)` after it has added the new student.
-   This causes another modified Tutor's Pet state to be saved into the `tutorsPetStateList`.
-  
-   ![UndoRedoState2](images/UndoRedoState2.png)
-
-    <div markdown="span" class="alert alert-info">
-    :information_source: **Note:** If a command fails its execution, it will not call `Model#commit(String commitMessage)`.
-    This prevents an erroneous duplicate state to be saved into `tutorsPetStateList`.
-    </div>
-
-4. The user now decides that adding the student was a mistake, and decides to undo that action by executing the `undo` command.
-   The `undo` command will call `Model#undo()`, which shifts the `statePointer` once to the left, pointing it to the previous state, and restores Tutor's Pet to that state.
-
-   ![UndoRedoState3](images/UndoRedoState3.png)
-
-    <div markdown="span" class="alert alert-info">
-    :information_source: **Note:** If the `statePointer` is at index 0, pointing to the initial Tutor's Pet state, then there are no previous Tutor's Pet states to restore.
-    The `undo` command uses `Model#canUndo()` to check if this is the case.
-    If so, it will return an error to the user rather than attempting to perform the undo.
-    </div>
-
-5. The user decides to execute the command `list`.
-   Commands that do not modify the contents of Tutor's Pet, such as `list`, do not call `Model#commit(String commitMessage)`,
-   `Model#undo()` or `Model#redo()`. Thus, the `tutorsPetStateList` remains unchanged.
-
-   ![UndoRedoState4](images/UndoRedoState4.png)
-
-6. The user then executes `clear`, which calls `Model#commit(String commitMessage)`.
-   Since the `statePointer` is not pointing to the last entry of `tutorsPetStateList`, all Tutor's Pet states after the `statePointer` will be purged,
-   and the new Tutor's Pet state after the `clear` command has executed will be saved into the `tutorsPetStateList`.
-
-   Future states after the `statePointer` are purged when saving a new state in order to maintain a linear history of revertible commands.
-   This is the behavior that most modern desktop applications follow.
-
-   ![UndoRedoState5](images/UndoRedoState5.png)
-
-<br/>
-
-The following sequence diagram shows how the undo operation works:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">
-:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-</div>
-
-<br/>
-
-The `redo` command does the opposite — it calls `Model#redo()`, which shifts the `statePointer` once to the right, pointing to the previously undone state, and restores Tutor's Pet to that state.
-
-<div markdown="span" class="alert alert-info">
-
-:information_source: **Note:** If the `statePointer` is at index `tutorsPetStateList.size() - 1`, pointing to the latest Tutor's Pet state, then there are no undone Tutor's Pet states to restore.
-The `redo` command uses `Model#canRedo()` to check if this is the case.
-If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-<br/>
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-![CommitActivityDiagram](images/CommitActivityDiagram.png)
-
-#### Design Considerations
-
-##### Aspect 1: How undo & redo executes
-
-Two possible implementations the undo/redo mechanism were considered.
-
-* **Alternative 1 (current choice):** Save all data stored in Tutor's Pet at a given state.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Commands are designed such that they can reverse the result of their execution.
-  * Pros: Will use less memory (e.g. for `delete-student`, save only the student deleted, so that it can be restored when undo is called).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-##### Aspect 2: Commands to support for undo/redo
-
-A key purpose of the undo/redo feature is to prevent the accidental loss of data due to wrongly executed commands.
-
-As such, it was decided that only commands that alter the data in Tutor's Pet would have their state saved, since commands
-that do not alter the data of Tutor's Pet would not have any data that would be irrecoverable from an earlier state.
-
 ### Display Statistics Feature
 
 #### Implementation
@@ -462,91 +337,6 @@ unlikely for multiple students to have the same participation score and hence th
 students is expected to be low. In addition, users can make use of the `recall` feature to speed up the process of
 recording attendances.
 
-### Command Recall Feature
-
-The command recall feature reduces the effort required by users when frequently entering similar commands.
-It allows users to view and reuse previously edited commands through the <kbd>UP</kbd> and <kbd>DOWN</kbd> arrow keys
-when the command box is focused.
-
-This section explains the implementation of the Command Recall feature and highlights the design considerations taken into
-account when implementing this feature.
-
-#### Implementation
-
-The command recall mechanism is designed around maintaining a list of previously executed commands, and traversing this list
-when the user requests to recall a previous command.
-
-The command recall mechanism is facilitated by `CommandHistory`, which consists of a list of previously executed commands,
-stored internally as a list of `String`, and a `pointer` to determine the location of the currently recalled command.
-In addition, it also consists of a cache, which is used to store the user's existing input.
-
-<div markdown="span" class="alert alert-info">
-
-:information_source: **Note:** The data stored in `CommandHistory` does not persist when the application is exited.
-
-</div>
-
-When the application is started, the `CommandHistory` is initialized with an empty list, and the `pointer` is set to
-the size of the list, currently zero. After each successful command has been executed, the user input used to trigger the command
-will be appended to the list and the `pointer` will be set to the current size of the list (henceforth known as the **default position**),
-after the update regardless of its original position. The cache will also be cleared.
-
-![CommandRecallAfterAdd](images/CommandRecallAfterAdd.png)
-
-<div markdown="block" class="alert alert-info">
-
-:information_source: **Note:** With this implementation of the default position of the pointer,
-if the text contained in the command box is a new user input,
-then the `pointer` index is one greater than the last stored command.
-This makes it easier to identify when the current text should be cached.
-
-</div>
-
-When the user presses the <kbd>UP</kbd> arrow key, a check is performed to determine if there is a next available command to recall.
-If there is a previous command available, `CommandHistory` next checks if the `pointer` is currently pointing to an entry in its list.
-If the `pointer` is not currently pointing to an entry in the list, i.e. it is in its default position,
-the current text in the command box is stored in the cache.
-
-![CommandRecallStoresCache](images/CommandRecallStoresCache.png)
- 
-Otherwise, there is no change to the cached value. Subsequently, `CommandHistory` decreases its `pointer` by one,
-and the respective `String` in the list is returned. The text in the command box is then set to the returned `String`. 
-
-If there are no earlier commands to recall, then there is no change to the text in the command box.
-
-<div markdown="span" class="alert alert-info">
-
-:information_source: **Note:** Any edits made by the user to recalled commands are not stored.
-
-</div>
-
-When the user presses the <kbd>DOWN</kbd> arrow key, a check is performed to determine if there is a next available command to recall.
-If there is a next available command, the `pointer` index is increased and the respective `String` in the list is returned.
-
-![CommandRecallNoNext](images/CommandRecallReturnsCache.png)
-
-Otherwise, if there is no available next command, i.e. the pointer index is at the last element in the list, then the cached value (if there is one) is returned instead.
-
-<br/>
-
-The activity diagram below provides a summary of the recall command mechanism.
-
-![CommandRecallActivityDiagram](images/CommandRecallActivityDiagram.png)
-
-#### Design Considerations
-
-##### Aspect 1: Behaviour when returning from most recent recalled command
-
-Two possible behaviours were considered when designing the recall command feature.
-
-* **Alternative 1 (current choice):** Display any text the user had entered before recalling commands.
-  * Pros: The user does not loose any progress to partially typed commands.
-  * Cons: Difficult to implement.
-
-* **Alternative 2:** Reset the command box to its blank state.
-  * Pros: Easy to implement.
-  * Cons: The user looses any partially typed commands.
-
 ### Lesson Model
 This section explains the design considerations of the `Lesson` model.
 
@@ -654,6 +444,225 @@ The sequence diagram below shows how an `Attendance` instance is retrieved.
 
 To avoid implementing add, edit and delete methods in the `Attendance` package, we created utility classes instead to handle these operations.
 These utility classes are `ModuleClassUtil`, `LessonUtil` and `AttendanceRecordListUtil`.
+
+### Undo/Redo Feature
+
+The Undo/Redo feature allows users to revert wrongly executed commands.
+
+This section explains the implementation of the Undo and Redo mechanism and highlights the design considerations taken into account when implementing this feature.
+
+#### Implementation
+
+The Undo/Redo mechanism is designed around maintaining a history of `TutorsPet` states, and restoring a particular state when the user triggers an undo or redo command.
+
+The undo and redo mechanism is facilitated by `VersionedTutorsPet`. It extends `TutorsPet` with a history of Tutor's Pet states,
+stored internally as a list of `TutorsPetState`. It also maintains a `statePointer` to keep track of the undo/redo history.
+
+A `TutorsPetState` object contains a Tutor's Pet state, represented as a `ReadOnlyTutorsPet`, along with a message that describes the changes relevant to this state.
+
+![TutorsPetState](images/TutorsPetState.png)
+
+Additionally, it implements the following operations:
+
+* `VersionedTutorsPet#commit(String commitMessage)` – Saves the current Tutor's Pet state, along with the corresponding commit message, in its history.
+* `VersionedTutorsPet#undo()` – Restores the previous Tutor's Pet state from its history.
+* `VersionedTutorsPet#redo()` – Restores a previously undone Tutor's Pet state from its history.
+
+These operations are exposed in the `Model` interface as `Model#commit(String commitMessage)`, `Model#undo()` and `Model#redo()` respectively.
+
+Given below is an example usage scenario and how the undo/redo mechanism behaves at each step:
+
+1. The user launches the application for the first time. The `VersionedTutorsPet` will be initialized with the initial Tutor's Pet state.
+   This initial state will be saved into the `tutorsPetStateList`, and the `statePointer` will point to this initial `TutorsPetState`.
+   
+   ![UndoRedoState0](images/UndoRedoState0.png)
+   
+2. The user executes `delete-student 5` command to delete the 5th student in Tutor's Pet.
+   The `delete-student` command calls `Model#commit(String commitMessage)` after it has deleted the student.
+   This causes the modified state of Tutor's Pet, after the `delete-student 5` command has executed, to be saved in the `tutorsPetStateList`.
+   The `statePointer` will be updated to point to the newly inserted `TutorsPetState`.
+  
+   ![UndoRedoState1](images/UndoRedoState1.png)
+   
+3. The user executes `add-student n/David …` to add a new student.
+   The `add-student` command also calls `Model#commit(String commitMessage)` after it has added the new student.
+   This causes another modified Tutor's Pet state to be saved into the `tutorsPetStateList`.
+  
+   ![UndoRedoState2](images/UndoRedoState2.png)
+
+    <div markdown="span" class="alert alert-info">
+    :information_source: **Note:** If a command fails its execution, it will not call `Model#commit(String commitMessage)`.
+    This prevents an erroneous duplicate state to be saved into `tutorsPetStateList`.
+    </div>
+
+4. The user now decides that adding the student was a mistake, and decides to undo that action by executing the `undo` command.
+   The `undo` command will call `Model#undo()`, which shifts the `statePointer` once to the left, pointing it to the previous state, and restores Tutor's Pet to that state.
+
+   ![UndoRedoState3](images/UndoRedoState3.png)
+
+    <div markdown="span" class="alert alert-info">
+    :information_source: **Note:** If the `statePointer` is at index 0, pointing to the initial Tutor's Pet state, then there are no previous Tutor's Pet states to restore.
+    The `undo` command uses `Model#canUndo()` to check if this is the case.
+    If so, it will return an error to the user rather than attempting to perform the undo.
+    </div>
+
+5. The user decides to execute the command `list`.
+   Commands that do not modify the contents of Tutor's Pet, such as `list`, do not call `Model#commit(String commitMessage)`,
+   `Model#undo()` or `Model#redo()`. Thus, the `tutorsPetStateList` remains unchanged.
+
+   ![UndoRedoState4](images/UndoRedoState4.png)
+
+6. The user then executes `clear`, which calls `Model#commit(String commitMessage)`.
+   Since the `statePointer` is not pointing to the last entry of `tutorsPetStateList`, all Tutor's Pet states after the `statePointer` will be purged,
+   and the new Tutor's Pet state after the `clear` command has executed will be saved into the `tutorsPetStateList`.
+
+   Future states after the `statePointer` are purged when saving a new state in order to maintain a linear history of revertible commands.
+   This is the behavior that most modern desktop applications follow.
+
+   ![UndoRedoState5](images/UndoRedoState5.png)
+
+<br/>
+
+The following sequence diagram shows how the undo operation works:
+
+![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">
+:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
+<br/>
+
+The `redo` command does the opposite — it calls `Model#redo()`, which shifts the `statePointer` once to the right, pointing to the previously undone state, and restores Tutor's Pet to that state.
+
+<div markdown="span" class="alert alert-info">
+
+:information_source: **Note:** If the `statePointer` is at index `tutorsPetStateList.size() - 1`, pointing to the latest Tutor's Pet state, then there are no undone Tutor's Pet states to restore.
+The `redo` command uses `Model#canRedo()` to check if this is the case.
+If so, it will return an error to the user rather than attempting to perform the redo.
+
+</div>
+
+<br/>
+
+The following activity diagram summarizes what happens when a user executes a new command:
+
+![CommitActivityDiagram](images/CommitActivityDiagram.png)
+
+#### Design Considerations
+
+##### Aspect 1: How undo & redo executes
+
+Two possible implementations the undo/redo mechanism were considered.
+
+* **Alternative 1 (current choice):** Save all data stored in Tutor's Pet at a given state.
+  * Pros: Easy to implement.
+  * Cons: May have performance issues in terms of memory usage.
+
+* **Alternative 2:** Commands are designed such that they can reverse the result of their execution.
+  * Pros: Will use less memory (e.g. for `delete-student`, save only the student deleted, so that it can be restored when undo is called).
+  * Cons: We must ensure that the implementation of each individual command are correct.
+  
+Alternative 1 was chosen due to the limited time that was available for this project. The integrity of data was deemed to be
+more important than the performance of the application since the product was designed for single user scenarios and
+modern machines should be more than capable of handling the potential performance impact of alternative 1. 
+
+In addition, the immutable property of the data within the application made it significantly easier for alternative 1 to be implemented. 
+
+##### Aspect 2: Commands to support for undo/redo
+
+A key purpose of the undo/redo feature is to prevent the accidental loss of data due to wrongly executed commands.
+
+As such, it was decided that only commands that alter the data in Tutor's Pet would have their state saved, since commands
+that do not alter the data of Tutor's Pet would not have any data that would be irrecoverable from an earlier state.
+
+### Command Recall Feature
+
+The command recall feature reduces the effort required by users when frequently entering similar commands.
+It allows users to view and reuse previously edited commands through the <kbd>UP</kbd> and <kbd>DOWN</kbd> arrow keys
+when the command box is focused.
+
+This section explains the implementation of the Command Recall feature and highlights the design considerations taken into
+account when implementing this feature.
+
+#### Implementation
+
+The command recall mechanism is designed around maintaining a list of previously executed commands, and traversing this list
+when the user requests to recall a previous command.
+
+The command recall mechanism is facilitated by `CommandHistory`, which consists of a list of previously executed commands,
+stored internally as a list of `String`, and a `pointer` to determine the location of the currently recalled command.
+In addition, it also consists of a cache, which is used to store the user's existing input.
+
+<div markdown="span" class="alert alert-info">
+
+:information_source: **Note:** The data stored in `CommandHistory` does not persist when the application is exited.
+
+</div>
+
+When the application is started, the `CommandHistory` is initialized with an empty list, and the `pointer` is set to
+the size of the list, currently zero. After each successful command has been executed, the user input used to trigger the command
+will be appended to the list and the `pointer` will be set to the current size of the list (henceforth known as the **default position**),
+after the update regardless of its original position. The cache will also be cleared.
+
+![CommandRecallAfterAdd](images/CommandRecallAfterAdd.png)
+
+<div markdown="block" class="alert alert-info">
+
+:information_source: **Note:** With this implementation of the default position of the pointer,
+if the text contained in the command box is a new user input,
+then the `pointer` index is one greater than the last stored command.
+This makes it easier to identify when the current text should be cached.
+
+</div>
+
+When the user presses the <kbd>UP</kbd> arrow key, a check is performed to determine if there is a next available command to recall.
+If there is a previous command available, `CommandHistory` next checks if the `pointer` is currently pointing to an entry in its list.
+If the `pointer` is not currently pointing to an entry in the list, i.e. it is in its default position,
+the current text in the command box is stored in the cache.
+
+![CommandRecallStoresCache](images/CommandRecallStoresCache.png)
+ 
+Otherwise, there is no change to the cached value. Subsequently, `CommandHistory` decreases its `pointer` by one,
+and the respective `String` in the list is returned. The text in the command box is then set to the returned `String`. 
+
+If there are no earlier commands to recall, then there is no change to the text in the command box.
+
+<div markdown="span" class="alert alert-info">
+
+:information_source: **Note:** Any edits made by the user to recalled commands are not stored.
+
+</div>
+
+When the user presses the <kbd>DOWN</kbd> arrow key, a check is performed to determine if there is a next available command to recall.
+If there is a next available command, the `pointer` index is increased and the respective `String` in the list is returned.
+
+![CommandRecallNoNext](images/CommandRecallReturnsCache.png)
+
+Otherwise, if there is no available next command, i.e. the pointer index is at the last element in the list, then the cached value (if there is one) is returned instead.
+
+<br/>
+
+The activity diagram below provides a summary of the recall command mechanism.
+
+![CommandRecallActivityDiagram](images/CommandRecallActivityDiagram.png)
+
+#### Design Considerations
+
+##### Aspect 1: Behaviour when returning from most recent recalled command
+
+Two possible behaviours were considered when designing the recall command feature.
+
+* **Alternative 1 (current choice):** Display any text the user had entered before recalling commands.
+  * Pros: The user does not loose any progress to partially typed commands.
+  * Cons: Difficult to implement.
+
+* **Alternative 2:** Reset the command box to its blank state.
+  * Pros: Easy to implement.
+  * Cons: The user looses any partially typed commands.
+  
+Alternative 1 was chosen as it followed the behaviour of common tools, such as the unix terminal and Windows Command Prompt,
+that our target users were familiar with.
 
 --------------------------------------------------------------------------------------------------------------------
 
