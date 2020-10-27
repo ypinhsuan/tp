@@ -1,0 +1,50 @@
+@startuml
+!include style.puml
+show members
+hide empty members
+skinparam classAttributeFontColor #FFFFFF
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Package "Model (Lesson & Attendance)" {
+
+Class Student
+Class ModuleClass
+
+Package Lesson <<Rectangle>>{
+Class Lesson
+Class Day
+Class Venue
+Class NumberOfOccurrences
+}
+
+Package Attendance <<Rectangle>>{
+
+Class AttendanceRecordList {
+}
+
+Class AttendanceRecord {
+}
+
+Class Attendance {
+}
+
+Class Week {
+}
+
+ModuleClass *--> Lesson
+ModuleClass --[hidden]left--> Student
+
+Lesson *-down-> "1" AttendanceRecordList
+Lesson *--> Day
+Lesson *--> NumberOfOccurrences
+Lesson *--> Venue
+
+AttendanceRecord <-down- AttendanceRecordList
+AttendanceRecordList ..> Week
+AttendanceRecord *--> Attendance
+Attendance --up----> Student
+}
+}
+@enduml

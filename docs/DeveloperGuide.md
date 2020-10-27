@@ -93,25 +93,46 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
-### Model component
+### Model Component
+
+This section explains the high level design of the `Model` component of the application.
+
+The `Model` component manages the data stored in the application during runtime. 
+
+The `Model` stores:
+* a `UserPref` object that represents the user’s preferences.
+* the Tutor's Pet data, stored internally as `VersionedTutorsPet`.
+
+There are four packages in the component, each representing a corresponding 'physical' entity:
+* The `Student` package contains classes that represent a student.
+* The `ModuleClass` package contains classes that represent a class (a group of students that attend the same lessons).<br/>
+  *The package name `ModuleClass` was chosen as `class` is a reserved keyword in Java.*
+* The `Lesson` package contains classes that represent a series of lessons.
+* The `Attendance` package contains classes that represent the attendance and participation records of students.
+
+It also exposes two unmodifiable `ObservableList<>`, one each for `Student` and `ModuleClass`, that can be 'observed'.
+This allows the UI component to automatically update when the data in these lists change.
+
+The class diagram below gives an overview of the model package.<br/>
+*Details of the `Student`, `ModuleClass`, `Lesson`, and `Attendance` packages have be omitted for brevity.
+ Please refer to the [Student & ModuleClass](#structure-of-student-class-model) and [Lesson & Attendance](#structure-of-lesson-attendance-model) diagrams for more information.*
 
 ![Structure of the Model Component](images/ModelClassDiagram.png)
 
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : 
+[`Model.java`](https://github.com/AY2021S1-CS2103T-T10-4/tp/blob/master/src/main/java/tutorspet/model/Model.java)
 
-The `Model`,
+The class diagram below shows the design of the `Student` and `ModuleClass` packages.
 
-* stores a `UserPref` object that represents the user’s preferences.
-* stores the address book data.
-* exposes an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* does not depend on any of the other three components.
+<a name="structure-of-student-class-model"/>
 
+![Structure of Student Class Model](images/ClassStudentClassDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique `Tag`, instead of each `Person` needing their own `Tag` object.<br>
-![BetterModelClassDiagram](images/BetterModelClassDiagram.png)
+The class diagram below shows the design of the `Lesson` and `Attendance` packages.
 
-</div>
+<a name="structure-of-lesson-attendance-model"/>
 
+![Structure of Lesson Attendance Model](images/LessonAttendanceClassDiagram.png)
 
 ### Storage component
 

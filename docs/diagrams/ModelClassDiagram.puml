@@ -4,53 +4,69 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
-Package Model <<Rectangle>>{
-Interface ReadOnlyAddressBook <<Interface>>
+Package "Model (Overview)" <<Rectangle>>{
+Interface ReadOnlyTutorsPet <<Interface>>
 Interface Model <<Interface>>
 Interface ObservableList <<Interface>>
-Class AddressBook
-Class ReadOnlyAddressBook
+Class TutorsPet
+Class VersionedTutorsPet
+Class ReadOnlyTutorsPet
 Class Model
 Class ModelManager
 Class UserPrefs
 Class ReadOnlyUserPrefs
+Class TutorsPetState
 
-Package Person {
-Class Person
-Class Address
-Class Email
-Class Name
-Class Phone
-Class UniquePersonList
+Package Student {
+Class Student
+Class UniqueStudentList
 }
 
-Package Tag {
-Class Tag
+Package ModuleClass {
+Class ModuleClass
+Class UniqueModuleClassList
+}
+
+Package Lesson {
+Class Lesson
+}
+
+Package Attendance {
+}
+
+Package Components {
 }
 }
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
-AddressBook .up.|> ReadOnlyAddressBook
+VersionedTutorsPet *--right--> "*" TutorsPetState : "    "
+TutorsPetState -down-> ReadOnlyTutorsPet
+VersionedTutorsPet --|> TutorsPet
+TutorsPet .left.|> ReadOnlyTutorsPet : "    "
 
 ModelManager .up.|> Model
 Model .right.> ObservableList
-ModelManager o--> "1" AddressBook
+ModelManager o-right-> "1" VersionedTutorsPet : "                     "
 ModelManager o-left-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
-UniquePersonList o--> "*" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+TutorsPet *---> "1" UniqueStudentList
+UniqueStudentList o--> "*" Student
+Student *--> Components
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+TutorsPet *---> "1" UniqueModuleClassList
+UniqueModuleClassList o--> "*" ModuleClass
+ModuleClass ..right.> Student
+ModuleClass *--> Components
+ModuleClass *-right-> Lesson
 
-ModelManager -->"1" Person : filtered list
+Lesson *-down-> Attendance
+
+Attendance -[hidden]left-> Components
+
+ModelManager --> Student : filtered\nstudent list
+ModelManager --> ModuleClass : filtered\nclass list
+
 @enduml
