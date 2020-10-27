@@ -28,7 +28,7 @@ public class StatisticsCommand extends Command {
 
     public static final String COMMAND_WORD = "stats";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + "Gives a summary of a student's attendance"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Gives a summary of a student's attendance"
             + "for a specific class\n"
             + "Note: All indexes and numbers must be positive integers.\n"
             + "Parameters: "

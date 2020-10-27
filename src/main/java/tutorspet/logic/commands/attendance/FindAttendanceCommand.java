@@ -32,7 +32,7 @@ public class FindAttendanceCommand extends Command {
 
     public static final String COMMAND_WORD = "find-attendance";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + "Finds the attendance of a student in a specified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds the attendance of a student in a specified "
             + "lesson on a specified week.\n"
             + "Note: All indexes and numbers must be positive integers.\n"
             + "Parameters: "
