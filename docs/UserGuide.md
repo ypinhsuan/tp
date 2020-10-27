@@ -3,27 +3,8 @@ layout: page
 title: Tutor's Pet - User Guide
 ---
 ![Logo](images/ugimages/Logo.png)
-<center>
 
-**National University of Singapore**
-
-**CS2101: Effective Communication for Computing Professionals**
-
-**Tutor's Pet: User Guide**
-
-**Academic Year: AY2020/2021 Semester 1**
-
-**Low Shu Min <ins>Samantha</ins>**
-
-**Tan <ins>Rui Xuan</ins>**
-
-**Tan Ying Jie, <ins>Dexter</ins>**
-
-**Wong <ins>Jun Long</ins>**
-
-**Yen <ins>Pin Hsuan</ins>**
-
-</center>
+**Tutor's Pet - User Guide**
 
 1. Table of Contents
 {:toc}
@@ -183,37 +164,37 @@ The utility area consists of three tabs: **File**, **Theme**, **Help**.
 
 | Action                            | Format, Examples                                                                                                                                                          |
 |-----------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Help**                          | `help`                                                                                                                                                                    |
-| **Undo**                          | `undo`                                                                                                                                                                    |
-| **Redo**                          | `redo`                                                                                                                                                                    |
-| **View Change History**           | `view-history`                                                                                                                                                            |
-| **Exit**                          | `exit`                                                                                                                                                                    |
-| **Reset**                         | `reset`                                                                                                                                                                   |
-| **Add Student**                   | `add-student n\NAME t\TELEGRAM_USERNAME e\EMAIL [tag\TAG]…​` <br> e.g., `add-student n\John Doe t\johndoe e\johnd@example.com tag\student`                             |
-| **List All Students**             | `list-student`                                                                                                                                                            |
-| **Edit Student**                  | `edit-student STUDENT_INDEX [n\NAME] [t\TELEGRAM_USERNAME] [e\EMAIL] [tag\TAG]…​`<br> e.g., `edit-student 2 n\James Lee e\jameslee@example.com`                                |
-| **Find Student**                  | `find-student KEYWORD [MORE_KEYWORDS]`<br> e.g., `find-student James Jake`                                                                                                |
-| **Delete Student**                | `delete-student STUDENT_INDEX`<br> e.g., `delete-student 3`                                                                                                                       |
-| **Clear All Students**            | `clear-student`                                                                                                                                                           |
-| **Add Class**                     | `add-class n\CLASS_NAME`<br> e.g., `add-class n\CS2103T Tutorial T10`                                                                                                     |
-| **List All Classes**              | `list-class`                                                                                                                                                              |
-| **List Students In A Class**      | `list-student c\CLASS_INDEX`<br> e.g., `list-student c\3`                                                                                                                     |
-| **Edit Class**                    | `edit-class CLASS_INDEX n\CLASS_NAME` <br> e.g., `edit-class 1 n\CS2103T Tutorial T10`                                                                                          |
-| **Find Class**                    | `find-class KEYWORD [MORE_KEYWORDS]`<br> e.g., `find-class CS2103T`                                                                                                       |
-| **Delete Class**                  | `delete-class CLASS_INDEX` <br> e.g., `delete-class 2`                                                                                                                          |
-| **Clear All Classes**             | `clear-class`                                                                                                                                                             |
-| **List All Students And Classes** | `list`                                                                                                                                                                    |
-| **Linking Student To A Class**    | `link s\STUDENT_INDEX c\CLASS_INDEX`<br> e.g., `link s\1 c\2`                                                                                                             |
-| **Unlink Student From A Class**   | `unlink s\STUDENT_INDEX c\CLASS_INDEX` <br> e.g., `unlink s\1 c\2`                                                                                                        |
-| **Add Lesson**                    | `add-lesson c\CLASS_INDEX d\DAY st\START_TIME et\END_TIME v\VENUE r\NO_OF_TIMES` <br> e.g., `add-lesson c\1 d\MONDAY st\0800 et\1000 v\COM1 #01-01 r\13`                  |
-| **Edit Lesson**                   | `edit-lesson c\CLASS_INDEX l\LESSON_INDEX [d\DAY] [st\START_TIME] [et\END_TIME] [v\VENUE]` <br> e.g., `edit-lesson c\1 l\1 d\TUESDAY st\1000 et\1200 v\COM2 #02-02`       |
-| **Delete Lesson**                 | `delete-lesson c\CLASS_INDEX l\LESSON_INDEX` <br> e.g., `delete-lesson c\1 l\1`                                                                                           |
-| **Display Venue**                 | `display-venue c\CLASS_INDEX l\LESSON_INDEX`<br> e.g., `display-venue c\1 l\1`
 | **Add Attendance Record**         | `add-attendance c\CLASS_INDEX l\LESSON_INDEX s\STUDENT_INDEX w\WEEK p\PARTICIPATION_SCORE` <br> e.g., `add-attendance c\1 l\1 s\1 w\1 p\1`                                |
-| **Edit Attendance Record**        | `edit-attendance c\CLASS_INDEX l\LESSON_INDEX s\STUDENT_INDEX w\WEEK p\PARTICIPATION_SCORE` <br> e.g., `edit-attendance c\1 l\1 s\1 w\1 p\10`                             |
-| **Find Attendance Record**        | `find-attendance c\CLASS_INDEX l\LESSON_INDEX s\STUDENT_INDEX w\WEEK` <br> e.g., `find-attendance c\1 l\1 s\1 w\1`                                                        |
+| **Add Class**                     | `add-class n\CLASS_NAME`<br> e.g., `add-class n\CS2103T Tutorial T10`                                                                                                     |
+| **Add Lesson**                    | `add-lesson c\CLASS_INDEX d\DAY st\START_TIME et\END_TIME v\VENUE r\NO_OF_TIMES` <br> e.g., `add-lesson c\1 d\MONDAY st\0800 et\1000 v\COM1 #01-01 r\13`                  |
+| **Add Student**                   | `add-student n\NAME t\TELEGRAM_USERNAME e\EMAIL [tag\TAG]…​` <br> e.g., `add-student n\John Doe t\johndoe e\johnd@example.com tag\student`                             |
+| **Clear All Classes**             | `clear-class`                                                                                                                                                             |
+| **Clear All Students**            | `clear-student`                                                                                                                                                           |
 | **Delete Attendance Record**      | `delete-attendance c\CLASS_INDEX l\LESSON_INDEX s\STUDENT_INDEX w\WEEK` <br> e.g., `delete-attendance c\1 l\1 s\1 w\1`                                                    |
+| **Delete Class**                  | `delete-class CLASS_INDEX` <br> e.g., `delete-class 2`                                                                                                                          |
+| **Delete Lesson**                 | `delete-lesson c\CLASS_INDEX l\LESSON_INDEX` <br> e.g., `delete-lesson c\1 l\1`                                                                                           |
+| **Delete Student**                | `delete-student STUDENT_INDEX`<br> e.g., `delete-student 3`                                                                                                                       |
 | **Display Statistics**            | `stats c\CLASS_INDEX s\STUDENT_INDEX`<br> e.g., `stats c\1 s\1`
+| **Display Venue**                 | `display-venue c\CLASS_INDEX l\LESSON_INDEX`<br> e.g., `display-venue c\1 l\1`
+| **Edit Attendance Record**        | `edit-attendance c\CLASS_INDEX l\LESSON_INDEX s\STUDENT_INDEX w\WEEK p\PARTICIPATION_SCORE` <br> e.g., `edit-attendance c\1 l\1 s\1 w\1 p\10`                             |
+| **Edit Class**                    | `edit-class CLASS_INDEX n\CLASS_NAME` <br> e.g., `edit-class 1 n\CS2103T Tutorial T10`                                                                                          |
+| **Edit Lesson**                   | `edit-lesson c\CLASS_INDEX l\LESSON_INDEX [d\DAY] [st\START_TIME] [et\END_TIME] [v\VENUE]` <br> e.g., `edit-lesson c\1 l\1 d\TUESDAY st\1000 et\1200 v\COM2 #02-02`       |
+| **Edit Student**                  | `edit-student STUDENT_INDEX [n\NAME] [t\TELEGRAM_USERNAME] [e\EMAIL] [tag\TAG]…​`<br> e.g., `edit-student 2 n\James Lee e\jameslee@example.com`                                |
+| **Exit**                          | `exit`                                                                                                                                                                    |
+| **Find Attendance Record**        | `find-attendance c\CLASS_INDEX l\LESSON_INDEX s\STUDENT_INDEX w\WEEK` <br> e.g., `find-attendance c\1 l\1 s\1 w\1`                                                        |
+| **Find Class**                    | `find-class KEYWORD [MORE_KEYWORDS]`<br> e.g., `find-class CS2103T`                                                                                                       |
+| **Find Student**                  | `find-student KEYWORD [MORE_KEYWORDS]`<br> e.g., `find-student James Jake`                                                                                                |
+| **Help**                          | `help`                                                                                                                                                                    |
+| **Linking Student To A Class**    | `link s\STUDENT_INDEX c\CLASS_INDEX`<br> e.g., `link s\1 c\2`                                                                                                             |
+| **List All Classes**              | `list-class`                                                                                                                                                              |
+| **List All Students**             | `list-student`                                                                                                                                                            |
+| **List All Students And Classes** | `list`                                                                                                                                                                    |
+| **List Students In A Class**      | `list-student c\CLASS_INDEX`<br> e.g., `list-student c\3`                                                                                                                     |
+| **Redo**                          | `redo`                                                                                                                                                                    |
+| **Reset**                         | `reset`                                                                                                                                                                   |
+| **Undo**                          | `undo`                                                                                                                                                                    |
+| **Unlink Student From A Class**   | `unlink s\STUDENT_INDEX c\CLASS_INDEX` <br> e.g., `unlink s\1 c\2`                                                                                                        |
+| **View Change History**           | `view-history`                                                                                                                                                            |
 
 
 ### General
