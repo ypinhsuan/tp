@@ -71,4 +71,9 @@ public class StorageManagerTest {
     public void getTutorsPetFilePath() {
         assertNotNull(storageManager.getTutorsPetFilePath());
     }
+
+    @Test
+    public void getUserPrefsFilePath() {
+        assertNotNull(storageManager.getUserPrefsFilePath());
+    }
 }

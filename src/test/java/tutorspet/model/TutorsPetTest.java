@@ -289,6 +289,20 @@ public class TutorsPetTest {
         assertFalse(tutorsPet.equals(tutorsPetDifferentClasses));
     }
 
+    @Test
+    public void hashCode_sameContents_sameHashCode() {
+        TutorsPet tutorsPetCopy = new TutorsPet();
+        assertTrue(tutorsPet.hashCode() == tutorsPetCopy.hashCode());
+    }
+
+    @Test
+    public void hashCode_differentObjects_differentHashCode() {
+        List<Student> defaultStudents = TypicalStudent.getTypicalStudents();
+        List<ModuleClass> defaultModuleClasses = TypicalModuleClass.getTypicalModuleClasses();
+        TutorsPetStub newData = new TutorsPetStub(defaultStudents, defaultModuleClasses);
+        assertFalse(tutorsPet.hashCode() == newData.hashCode());
+    }
+
     /**
      * A stub ReadOnlyTutorsPet whose students list can violate interface constraints.
      */

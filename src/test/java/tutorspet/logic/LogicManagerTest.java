@@ -19,6 +19,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import tutorspet.commons.core.GuiSettings;
 import tutorspet.logic.commands.CommandResult;
 import tutorspet.logic.commands.exceptions.CommandException;
 import tutorspet.logic.commands.student.ListStudentCommand;
@@ -41,6 +42,9 @@ public class LogicManagerTest {
     public Path temporaryFolder;
 
     private Model model = new ModelManager();
+    private ReadOnlyTutorsPet tutorsPet = model.getTutorsPet();
+    private Path tutorsPetFilePath = model.getTutorsPetFilePath();
+    private GuiSettings guiSetting = model.getGuiSettings();
     private Logic logic;
 
     @BeforeEach
@@ -98,6 +102,21 @@ public class LogicManagerTest {
     @Test
     public void getFilteredModuleClassList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredModuleClassList().remove(0));
+    }
+
+    @Test
+    public void constructor_getTutorsPet_success() {
+        assertEquals(logic.getTutorsPet(), tutorsPet);
+    }
+
+    @Test
+    public void constructor_getTutorsPetFilePath_success() {
+        assertEquals(logic.getTutorsPetFilePath(), tutorsPetFilePath);
+    }
+
+    @Test
+    public void constructor_getGuiSettings_success() {
+        assertEquals(logic.getGuiSettings(), guiSetting);
     }
 
     /**
