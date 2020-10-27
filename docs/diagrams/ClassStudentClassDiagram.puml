@@ -1,0 +1,50 @@
+@startuml
+!include style.puml
+show members
+hide empty members
+skinparam classAttributeFontColor #FFFFFF
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Package "Model (Student & ModuleClass)" {
+
+Class TutorsPet
+
+Package Student <<Rectangle>>{
+Class UniqueStudentList
+Class Student
+Class Telegram
+Class Email
+}
+
+Package ModuleClass <<Rectangle>>{
+Class UniqueModuleClassList
+Class ModuleClass
+}
+
+Package Lesson <<Rectangle>>{
+Class Lesson
+}
+
+Package Components {
+Class Name
+Class Tag
+}
+
+TutorsPet --> "1" UniqueModuleClassList
+TutorsPet --> "1" UniqueStudentList
+
+UniqueModuleClassList *--> "*" ModuleClass
+ModuleClass *--> Name
+ModuleClass .left.> Student
+ModuleClass *--> "*" Lesson
+
+UniqueStudentList *--> "*" Student
+Student *--> Name
+Student *--> "*" Tag
+Student *--> Email
+Student *--> Telegram
+
+}
+@enduml

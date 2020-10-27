@@ -1,0 +1,53 @@
+@startuml
+
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+skinparam ClassFontColor<<Transparent>> #FFFFFF
+skinparam ClassBorderColor<<Transparent>> #FFFFFF
+skinparam ClassBackgroundColor<<Transparent>> #FFFFFF
+
+title Cache current command box text
+
+package "Before" {
+    class Hidden1
+    class Cache1 as "  Cache:                 "
+    package "History" as BEFORE <<Rectangle>>{
+        class State1 as "  __command0:String__  "
+        class State2 as "  __command1:String__  "
+        class State3 as "  __command2:String__  " <<Transparent>>
+    }
+    class Pointer as "  Pointer  " #FFFFFF
+}
+
+package "After" <<Rectangle>>{
+    note "The current text is cached" as N1
+    note "The previous command\nwas retrieved and\nreturned" as N2
+    class Hidden2
+    class Cache2 as "  Cache: [Current text]  "
+    package "History" as AFTER <<Rectangle>>{
+        class State4 as "  __command0:String__  "
+        class State5 as "  __command1:String__  "
+        class State6 as "  __command2:String__  " <<Transparent>>
+    }
+    class Pointer2 as "  Pointer  " #FFFFFF
+}
+
+State1 -[hidden]right-> State2
+State2 -[hidden]right-> State3
+State4 -[hidden]right-> State5
+State5 -[hidden]right-> State6
+Hidden1 -[hidden]down- BEFORE
+Hidden2 -[hidden]down- AFTER
+Hidden1 -[hidden]right-> Cache1
+Hidden2 -[hidden]right-> Cache2
+hide Hidden1
+hide Hidden2
+
+N1 -left- Cache2
+N2 -left- Pointer2
+
+Pointer -up-> State3
+Pointer2 -up-> State5
+
+@enduml
