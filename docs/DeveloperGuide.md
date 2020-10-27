@@ -101,7 +101,7 @@ The `Model` component manages the data stored in the application during runtime.
 
 The `Model` stores:
 * a `UserPref` object that represents the user’s preferences.
-* the Tutor's Pet data, stored internally as `VersionedTutorsPet`.
+* a `VersionedTutorsPet` object that contains Tutor's Pet data.
 
 There are four packages in the component, each representing a corresponding 'physical' entity:
 * The `Student` package contains classes that represent a student.
@@ -115,24 +115,18 @@ This allows the UI component to automatically update when the data in these list
 
 The class diagram below gives an overview of the model package.<br/>
 *Details of the `Student`, `ModuleClass`, `Lesson`, and `Attendance` packages have be omitted for brevity.
- Please refer to the [Student & ModuleClass](#structure-of-student-class-model) and [Lesson & Attendance](#structure-of-lesson-attendance-model) diagrams for more information.*
+ Please refer to the [Student & ModuleClass](#structure-of-student-class-model), [Lesson](#lesson-class-diagram) and [Attendance](#attendance-class-diagram) diagrams for more information.*
 
 ![Structure of the Model Component](images/ModelClassDiagram.png)
 
 **API** :
 [`Model.java`](https://github.com/AY2021S1-CS2103T-T10-4/tp/blob/master/src/main/java/tutorspet/model/Model.java)
 
-The class diagram below shows the design of the `Student` and `ModuleClass` packages.
-
 <a name="structure-of-student-class-model"/>
 
+The class diagram below shows the design of the `Student` and `ModuleClass` packages.
+
 ![Structure of Student Class Model](images/ClassStudentClassDiagram.png)
-
-The class diagram below shows the design of the `Lesson` and `Attendance` packages.
-
-<a name="structure-of-lesson-attendance-model"/>
-
-![Structure of Lesson Attendance Model](images/LessonAttendanceClassDiagram.png)
 
 ### Storage component
 
@@ -362,6 +356,9 @@ recording attendances.
 This section explains the design considerations of the `Lesson` model.
 
 #### Implementation
+
+<a name="lesson-class-diagram"/>
+
 The class diagram below shows the current implementation of `Lesson` model.
 
 ![Lesson Model](images/LessonModelClassDiagram.png)
@@ -399,6 +396,8 @@ This section explains the design considerations of the `Attendance` model.
 
 #### Implementation
 The `Attendance`, `AttendanceRecord` and `AttendanceRecordList` models are implemented as follows:
+
+<a name="attendance-class-diagram"/>
 
 ![AttendanceClassDiagram](images/AttendanceClassDiagram.png)
 
