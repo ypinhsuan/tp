@@ -1,0 +1,31 @@
+@startuml
+
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+skinparam ClassFontColor<<Transparent>> #FFFFFF
+skinparam ClassBorderColor<<Transparent>> #FFFFFF
+skinparam ClassBackgroundColor<<Transparent>> #FFFFFF
+
+title After saving a command
+
+class Hidden1
+
+class Cache1 as " Cache:              "
+
+package "History" <<Rectangle>>{
+    class State1 as "  __command0:String__  "
+    class State2 as "  __command1:String__  " <<Transparent>>
+    class State3 as "  __command2:String__  " <<Transparent>>
+}
+
+State1 -[hidden]right-> State2
+State2 -[hidden]right-> State3
+Hidden1 -[hidden]down- "History"
+Hidden1 -[hidden]right-> Cache1
+hide Hidden1
+
+class Pointer as "  Pointer  " #FFFFFF
+Pointer -up-> State2
+
+@enduml
