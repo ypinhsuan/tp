@@ -19,6 +19,9 @@ As a teaching assistant, administrative chores such as attendance taking and gra
 can be troublesome with existing solutions such as spreadsheets. This is why we have created _Tutor's Pet, a
 solution for teaching assistants, by students._
 
+   ![Ui](images/Ui.png)
+   Figure 1. Tutor's Pet application.
+
 ## About
 
 This user guide provides documentation on the installation and usage of Tutor's Pet.
@@ -70,7 +73,7 @@ Here are a few steps to get you started on Tutor's Pet:
    seconds.<br>
 
    ![Ui](images/Ui.png)
-   Figure 1. Tutor's Pet application.
+   Figure 2. Tutor's Pet application.
 
 ### Using Tutor's Pet
 
@@ -88,7 +91,7 @@ The command box is the area for you to enter your commands. The result of each c
 display box, which is located immediately below the command box.
 
    ![Command box and result display box](images/ugimages/CommandAndDisplayBox.png)
-   <br>Figure 2. The command box and result display box.
+   <br>Figure 3. The command box and result display box.
 
 * Type a command in the command box and press <kbd>Enter</kbd> to execute it.<br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.<br>
@@ -114,13 +117,13 @@ The main viewing area consists of two sections: **Classes** and **Students**.
  classes in Tutor's Pet, make use of the **`list-class`** command.
 
     ![Class_section](images/ugimages/ClassPanel.png)
-    <br>Figure 3. The class section.
+    <br>Figure 4. The class section.
 
 * The **Students** section displays contains information about students in Tutor's Pet. To view the list of all
  students in Tutor's Pet, make use of the **`list-student`** command.
 
     ![Student_section](images/ugimages/StudentPanel.png)
-    <br>Figure 4. The student section.
+    <br>Figure 5. The student section.
 
 The utility area consists of three tabs: **File**, **Theme**, **Help**.
 
@@ -134,7 +137,7 @@ The utility area consists of three tabs: **File**, **Theme**, **Help**.
  given and paste it into any web browsers. Alternatively, press <kbd>F1</kbd> to bring up the help window.
 
    ![Utility area](images/ugimages/UtilityArea.png)
-   <br>Figure 5. The utility area.
+   <br>Figure 6. The utility area.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -205,7 +208,7 @@ If you require any assistance, you can use this command which shows you the link
 
 ![Help window](images/ugimages/Help.png)
 
-Format: `help`
+**Format**: `help`
 
 #### Recalling previously entered commands
 
@@ -218,7 +221,7 @@ When the command box is selected, press the <kbd>UP</kbd> and <kbd>DOWN</kbd> ar
 If you have accidentally entered a command that permanently changes the data in your Tutor's Pet,
 you can use this command to undo the changes.
 
-Format: `undo`
+**Format**: `undo`
 
 For example:
 * You want to delete Alex from your Tutor's Pet, however you accidentally deleted Bernice instead of Alex.
@@ -241,26 +244,26 @@ For example:
 If you decide that you did not need to undo a command, instead of typing out the command again, you can use
 this command to redo the changes.
 
-Format : `redo`
+**Format** : `redo`
 
 #### View change history : `view-history`
 
 You can use this command to see a list of changes that can be undone and redone.
 
-Format : `view-history`
+**Format** : `view-history`
 
 #### Exiting the program : `exit`
 
 You can exit Tutor's Pet by typing this command.
 All changes you have made in the application would have been saved.
 
-Format: `exit`
+**Format**: `exit`
 
 #### Resetting the program : `reset`
 
 You can use this command to reset Tutor's Pet and all data will be cleared.
 
-Format: `reset`
+**Format**: `reset`
 
 For example:
 * It is the start of a new semester and you want to delete all students and classes.
@@ -281,7 +284,7 @@ There is no need for you to save manually.
 
 If you would like to add a student to Tutor's Pet, use this command.
 
-Format: `add-student n\NAME t\TELEGRAM_USERNAME e\EMAIL [tag\TAG]…​`
+**Format**: `add-student n\NAME t\TELEGRAM_USERNAME e\EMAIL [tag\TAG]…​`
 
 For example:
 * You would like to add a new student, `Joel Lee` to Tutor's Pet.
@@ -304,13 +307,13 @@ Adds `Betsy` to Tutor's Pet along with an `excellent` tag.
 
 If you would like to view all students you teach, use this command.
 
-Format: `list-student`
+**Format**: `list-student`
 
 #### Editing a student : `edit-student`
 
 If you would like to change a student's particulars, use this command.
 
-Format: `edit-student STUDENT_INDEX [n\NAME] [t\TELEGRAM_USERNAME] [e\EMAIL] [tag\TAG]…​`
+**Format**: `edit-student STUDENT_INDEX [n\NAME] [t\TELEGRAM_USERNAME] [e\EMAIL] [tag\TAG]…​`
 
 For example:
 * `Charlotte Oliveiro` gave you the wrong email address on the first day of class. You need to replace her email address.
@@ -334,7 +337,7 @@ Edits the name of the 2nd student to `Betsy Yu` and deletes all existing tags.
 
 If you would like to search for a student by name, use this command.
 
-Format: `find-student KEYWORD [MORE_KEYWORDS]`
+**Format**: `find-student KEYWORD [MORE_KEYWORDS]`
 
 For example:
 * `Roy` requested for supplementary notes in class today.
@@ -354,7 +357,7 @@ Constraints:
 
 If you would like to delete a student, you can make use of this command.
 
-Format: `delete-student STUDENT_INDEX`
+**Format**: `delete-student STUDENT_INDEX`
 
 For example:
 * `Bernice`, the 2nd student displayed in Tutor's Pet, has swapped `CS2103T Tutorial` slots and you no longer teach her.
@@ -368,7 +371,7 @@ Hence, you want to delete her entry from Tutor's Pet.
 
 If you would like to delete all students in the application, you can use this command.
 
-Format: `clear-student`
+**Format**: `clear-student`
 
 ### Managing Classes
 
@@ -376,7 +379,7 @@ Format: `clear-student`
 
 If you would like to add a new class, you can make use of this command.
 
-Format: `add-class n\CLASS_NAME`
+**Format**: `add-class n\CLASS_NAME`
 * Adds a class with the specified `CLASS_NAME`.
 
 For example:
@@ -402,13 +405,13 @@ You type `add-class n\CS1231 Tutorial 3` and press <kbd>Enter</kbd>.
 
 If you would like to see a list of all classes in your Tutor's Pet, make use of this command.
 
-Format: `list-class`
+**Format**: `list-class`
 
 #### Listing all students within a class : `list-student`
 
 If you would like to see a list of all students in a particular class, make use of this command.
 
-Format: `list-student c\CLASS_INDEX`
+**Format**: `list-student c\CLASS_INDEX`
 
 For example:
 * You want to send an email to students in your `CS2103T Tutorial` and hence would want to see a list of students in
@@ -426,7 +429,7 @@ Other examples:
 
 If you entered the wrong class name or would like to change the name of a class, you can make use of this command.
 
-Format: `edit-class CLASS_INDEX n\CLASS_NAME`
+**Format**: `edit-class CLASS_INDEX n\CLASS_NAME`
 * Edits the class at the specified `INDEX`.
 
 For example:
@@ -456,7 +459,7 @@ desired class. You can now type in index 1 directly to edit the name of that cla
 
 If you would like to find classes that contain any of the given keywords in their name, make use of this command.
 
-Format: `find-class KEYWORD [MORE_KEYWORDS]`
+**Format**: `find-class KEYWORD [MORE_KEYWORDS]`
 
 For example:
 * You would like to find out how many `Tutorial` classes you are currently teaching. You type the command
@@ -492,7 +495,7 @@ Other examples:
 
 If you would like to delete a class, you can make use of this command.
 
-Format: `delete-class INDEX`
+**Format**: `delete-class INDEX`
 * Deletes the class at the specified `INDEX`.
 
 For example:
@@ -515,7 +518,7 @@ Other examples:
 
 If you would like to delete all the classes in Tutor's Pet, make use of this command.
 
-Format: `clear-class`
+**Format**: `clear-class`
 
 For example:
 * It is the start of a new semester. You would like to delete all information of all the classes you taught last
@@ -529,7 +532,7 @@ For example:
 
 You can use this command to see the entire list of students and classes.
 
-Format: `list`
+**Format**: `list`
 
 For example:
 * After finding the class CS2103T and student Alex, you wish to view all your students and classes.
@@ -545,7 +548,7 @@ Hence, you can type in the command `list` and and press <kbd>Enter</kbd>.
 
 You can link a student to a class using this command.
 
-Format: `link s\STUDENT_INDEX c\CLASS_INDEX`
+**Format**: `link s\STUDENT_INDEX c\CLASS_INDEX`
 * Links the student at the specified `STUDENT_INDEX` to the class at the specified `CLASS_INDEX`.
 
 For example:
@@ -576,7 +579,7 @@ Other examples:
 
 You can remove a student from a class using this command.
 
-Format: `unlink s\STUDENT_INDEX c\CLASS_INDEX`
+**Format**: `unlink s\STUDENT_INDEX c\CLASS_INDEX`
 * Unlinks the student at the specified `STUDENT_INDEX` from the class at the specified `CLASS_INDEX`.
 
 For example:
@@ -607,7 +610,7 @@ Other examples:
 
 If you would like to add a lesson to a class, you can make use of this command.
 
-Format: `add-lesson c\CLASS_INDEX d\DAY st\START_TIME et\END_TIME v\VENUE r\NO_OF_TIMES`
+**Format**: `add-lesson c\CLASS_INDEX d\DAY st\START_TIME et\END_TIME v\VENUE r\NO_OF_TIMES`
 * Adds a lesson at a specified `CLASS_INDEX`+ `DAY` + `START_TIME` + `END_TIME` + `VENUE` + `NO_OF_TIMES`.
 
 For example:
@@ -621,7 +624,7 @@ Hence, you type in the command `add-lesson c\1 d\TUESDAY st\10:00 et\11:00 v\COM
 
 If you entered wrong details pertaining to your lesson and would like to change it, you can make use of this command.
 
-Format: `edit-lesson c\CLASS_INDEX l\LESSON_INDEX [d\DAY] [st\START_TIME] [et\END_TIME] [v\VENUE]`
+**Format**: `edit-lesson c\CLASS_INDEX l\LESSON_INDEX [d\DAY] [st\START_TIME] [et\END_TIME] [v\VENUE]`
 
 For example:
 * You made an error while entering the `CS2103T Tutorial` lesson. It should be `Tuesday` and not `Thursday`. You type the command `edit-lesson c\1 l\1 d\Tuesday` and press <kbd>Enter</kbd>.
@@ -645,7 +648,7 @@ Edits the 1st lesson of the CS2100 lab to be held on Tuesdays, 10.00AM to 12.00P
 
 If you would like to delete a lesson in a class, you can make use of this command.
 
-Format: `delete-lesson c\CLASS_INDEX l\LESSON_INDEX`
+**Format**: `delete-lesson c\CLASS_INDEX l\LESSON_INDEX`
 * Deletes the lesson at the specified `CLASS_INDEX` + `LESSON_INDEX`.
 
 For example:
@@ -672,7 +675,7 @@ the `undo` command. However, you cannot `undo` once you exit the application!
 
 Gives you the venue of a lesson.
 
-Format: `display-venue c\CLASS_INDEX l\LESSON_INDEX`
+**Format**: `display-venue c\CLASS_INDEX l\LESSON_INDEX`
 * Gives the venue of the lesson specified at `CLASS_INDEX` + `LESSON_INDEX`.
 
 For example:
@@ -689,7 +692,7 @@ For example:
 
 If you would like to record a new attendance for a student, you can make use of this command.
 
-Format: `add-attendance c\CLASS_INDEX l\LESSON_INDEX s\STUDENT_INDEX w\WEEK p\PARTICIPATION_SCORE`
+**Format**: `add-attendance c\CLASS_INDEX l\LESSON_INDEX s\STUDENT_INDEX w\WEEK p\PARTICIPATION_SCORE`
 
 For example:
 * Your `CS2103T Tutorial` lesson in week 10 has just ended and you would like to give participation scores to the
@@ -723,7 +726,7 @@ inputs your most recent command into the command box allowing you to type less!
 
 You can use this command to edit the attendance of a student.
 
-Format: `edit-attendance c\CLASS_INDEX l\LESSON_INDEX s\STUDENT_INDEX w\WEEK p\PARTICIPATION_SCORE`
+**Format**: `edit-attendance c\CLASS_INDEX l\LESSON_INDEX s\STUDENT_INDEX w\WEEK p\PARTICIPATION_SCORE`
 * Edits the attendance record at the specified `CLASS_INDEX` + `LESSON_INDEX` + `STUDENT_INDEX` + `WEEK`.
 
 For example:
@@ -750,7 +753,7 @@ Other examples:
 
 If you need to find out a specific student's attendance for a specific week, make use of this command.
 
-Format: `find-attendance c\CLASS_INDEX l\LESSON_INDEX s\STUDENT_INDEX w\WEEK`
+**Format**: `find-attendance c\CLASS_INDEX l\LESSON_INDEX s\STUDENT_INDEX w\WEEK`
 * Finds the attendance record at the specified `CLASS_INDEX` + `LESSON_INDEX` + `STUDENT_INDEX` + `WEEK`.
 
 For example:
@@ -784,7 +787,7 @@ Other Examples:
 
 If you would like to delete a specific student's attendance from a lesson, you can make use of this command.
 
-Format: `delete-attendance c\CLASS_INDEX l\LESSON_INDEX s\STUDENT_INDEX w\WEEK`
+**Format**: `delete-attendance c\CLASS_INDEX l\LESSON_INDEX s\STUDENT_INDEX w\WEEK`
 * Deletes the attendance record at the specified `CLASS_INDEX` + `LESSON_INDEX` + `STUDENT_INDEX` + `WEEK`.
 
 For example:
@@ -798,7 +801,7 @@ in Week 1. Hence, you type in the command `delete-attendance c\1 l\1 s\1 w\1` an
 
 Gives you an overall summary of a student's attendance and participation scores.
 
-Format: `stats c\CLASS_INDEX s\STUDENT_INDEX`
+**Format**: `stats c\CLASS_INDEX s\STUDENT_INDEX`
 * Gives a summary of the student's attendance at the specified `CLASS_INDEX` + `STUDENT_INDEX`.
 
 For example:
