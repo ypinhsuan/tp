@@ -4,38 +4,27 @@ skinparam arrowThickness 1.1
 skinparam arrowColor STORAGE_COLOR
 skinparam classBackgroundColor STORAGE_COLOR
 
-Package Storage <<Rectangle>> {
+package Storage <<Rectangle>> {
 Interface Storage <<Interface>>
 Interface UserPrefsStorage <<Interface>>
 Interface TutorsPetStorage <<Interface>>
+class StorageManager
+class JsonUserPrefsStorage
+class JsonTutorsPetStorage
+class JsonSerializableTutorsPet
+class JsonAdaptedStudent
+class JsonAdaptedTag
+class JsonAdaptedName
+class JsonAdaptedModuleClass
+class JsonAdaptedLesson
 
-Class StorageManager
-Class JsonUserPrefsStorage
-Class JsonTutorsPetStorage
-Class JsonSerializableTutorsPet
-
-Package JsonAdaptedStudent <<Rectangle>> {
-Class JsonAdaptedStudent
-Class JsonAdaptedTag
-Class JsonAdaptedName
+package Attendance <<Rectangle>> {
+class JsonAdaptedAttendanceRecordList
+class JsonAdaptedAttendanceRecord
+class JsonAdaptedStudentAttendance
+class JsonAdaptedAttendance
 }
-
-Package JsonAdaptedModuleClass <<Rectangle>> {
-Class JsonAdaptedModuleClass
-
-Package JsonAdaptedLesson <<Rectangle>> {
-Class JsonAdaptedLesson
-Class JsonAdaptedAttendanceRecordList
-Class JsonAdaptedAttendanceRecord
-Class JsonAdaptedStudentAttendance
-Class JsonAdaptedAttendance
-}
-
-}
-
-
-Class JsonAdaptedUuid
-
+class JsonAdaptedUuid
 }
 
 StorageManager .left.|> Storage
@@ -45,17 +34,17 @@ StorageManager *-down-> TutorsPetStorage
 JsonUserPrefsStorage .left.|> UserPrefsStorage
 JsonTutorsPetStorage .left.|> TutorsPetStorage
 JsonTutorsPetStorage .down.> JsonSerializableTutorsPet
-JsonSerializableTutorsPet *-down->"*" JsonAdaptedStudent
-JsonSerializableTutorsPet *-down->"*" JsonAdaptedModuleClass
-JsonAdaptedStudent *-down->"1" JsonAdaptedName
-JsonAdaptedStudent *-down->"*" JsonAdaptedTag
-JsonAdaptedModuleClass *-down->"1" JsonAdaptedName
-JsonAdaptedModuleClass *-down->"*" JsonAdaptedUuid
-JsonAdaptedModuleClass *-right->"*" JsonAdaptedLesson
-JsonAdaptedLesson *-down->"1" JsonAdaptedAttendanceRecordList
-JsonAdaptedAttendanceRecordList *-down->"0..52" JsonAdaptedAttendanceRecord
-JsonAdaptedAttendanceRecord *-down->"*" JsonAdaptedStudentAttendance
-JsonAdaptedStudentAttendance *-down->"1" JsonAdaptedUuid
-JsonAdaptedStudentAttendance *-down->"1" JsonAdaptedAttendance
+JsonSerializableTutorsPet *-down-> JsonAdaptedStudent
+JsonSerializableTutorsPet *-right-> JsonAdaptedModuleClass
+JsonAdaptedStudent *-down-> JsonAdaptedName
+JsonAdaptedStudent *-down-> JsonAdaptedTag
+JsonAdaptedModuleClass *-down-> JsonAdaptedName
+JsonAdaptedModuleClass *-down-> JsonAdaptedUuid
+JsonAdaptedModuleClass *-down-> JsonAdaptedLesson
+JsonAdaptedLesson *-down-> JsonAdaptedAttendanceRecordList
+JsonAdaptedAttendanceRecordList *-down-> JsonAdaptedAttendanceRecord
+JsonAdaptedAttendanceRecord *-down-> JsonAdaptedStudentAttendance
+JsonAdaptedStudentAttendance *-down-> JsonAdaptedUuid
+JsonAdaptedStudentAttendance *-down-> JsonAdaptedAttendance
 
 @enduml

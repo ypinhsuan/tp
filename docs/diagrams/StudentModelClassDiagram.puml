@@ -11,10 +11,24 @@ package Student <<Rectangle>> {
     class Student {
         uuid : UUID
     }
-    Class Name
-    Class Telegram
-    Class Email
-    Class Tag
+
+    class Telegram {
+        value : String
+    }
+
+    class Email {
+        value : String
+    }
+}
+
+package Components <<Rectangle>> {
+    class Name {
+        fullName : String
+    }
+
+    class Tag {
+        tagName : String
+    }
 }
 
 Student *-down->"1" Name

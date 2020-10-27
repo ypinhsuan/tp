@@ -13,11 +13,15 @@ package ModuleClass <<Rectangle>> {
     class ModuleClass {
         studentUuids : Set<UUID>
     }
+}
+
+package Components <<Rectangle>> {
     class Name {
         fullName : String
     }
-    class Lesson
 }
+
+class Lesson
 
 ModuleClass *-down->"1" Name
 ModuleClass *-down->"*" Lesson

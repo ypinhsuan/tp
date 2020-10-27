@@ -193,15 +193,20 @@ A `ModuleClass` can also contain any number of `Lesson` objects.
 
 #### Design Considerations
 
-##### Aspect 1: Student UUID storage
+##### Aspect 1: Student storage
 
-* **Alternative 1 (current choice):** Stores `UUID` object in `ModuleClass` as a Set.
-
+* **Alternative 1 (current choice):** Stores `Student` `UUID` object in `ModuleClass` as a Set.
   This implementation ensures that there are no duplicate students found in a class.
   * Pros:
     * Ensures that all students within a class are unique.
   * Cons:
     * There is a possibility of UUID collision, even though the probability is very low.
+
+* **Alternative 2:** Stores `Student` object in `ModuleClass`.
+   * Pros:
+     * Easy to implement.
+   * Cons:
+     * Difficult to check for duplicate students when adding or editing students in classes.
 
 ### Undo/Redo Feature
 
@@ -570,7 +575,7 @@ The size of this list is fixed and is determined by the `NumberOfOccurences` in 
 **Note:** All classes in the `Attendance` package are designed to be immutable.
 </div>
 
-### Design Considerations
+#### Design Considerations
 
 ##### Aspect 1: Reducing user input
 Users should not have to type in attendance-related commands when the student is absent from a lesson.
@@ -654,49 +659,47 @@ These utility classes are `ModuleClassUtil`, `LessonUtil` and `AttendanceRecordL
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | Status          |                            As a …                            |                            I want to...                           |                                 So that I can...                                |
-|:--------:|-----------------|:------------------------------------------------------------:|:-----------------------------------------------------------------:|:-------------------------------------------------------------------------------:|
-| * * *    | COMPLETED       | Tutor with many students                                     | Store my students' contact info/emails                            | Contact them easily                                                             |
-| * * *    | COMPLETED       | Tutor with many classes                                      | Insert my students into the appropriate classes                   | Organise my students via classes                                                |
-| * * *    | COMPLETED       | Tutor                                                        | Delete student entries                                            | Update my list of students if a student were to drop the class                  |
-| * * *    | COMPLETED       | Tutor with many classes                                      | Create classes                                                    | Put my students in the appropriate classes                                      |
-| * * *    | COMPLETED       | New Tutor                                                    | View the help menu                                                | Be familiar with app usage                                                      |
-| * *      | COMPLETED       | Tutor with many students                                     | Keep notes on each student's performance                          | Track their progress over time                                                  |
-| * *      | COMPLETED       | Tutor                                                        | Mark my student's attendance and participation                    | Gauge each student's participation level                                        |
-| * *      | COMPLETED       | Tutor                                                        | Update the information of my students                             | Update my understanding of the progress of my students                          |
-| * *      | COMPLETED       | Tutor                                                        | Categorise my students into how well they are doing               | Dedicate more time towards the weaker students                                  |
-| * *      | COMPLETED       | Tutor                                                        | View all my lessons                                               | Manage my time more efficiently                                                 |
-| * *      | COMPLETED       | Tutor                                                        | Set recurring events (eg. lessons for every week)                 | Avoid typing the same events                                                    |
-| * *      | COMPLETED       | Busy Tutor                                                   | Store zoom links                                                  | Retrieve these zoom links for my lessons, consultations, etc.                   |
-| * *      | COMPLETED       | Busy Tutor                                                   | Store class rooms                                                 | Be reminded of my lesson venues                                                 |
-| * *      | COMPLETED       | Careless tutor                                               | Undo my commands                                                  | Correct any errors when I input things wrongly                                  |
-| * *      | COMPLETED       | Careless Tutor                                               | Redo my undone actions                                            | Easily reverse my accidental undos.                                             |
-| *        | COMPLETED       | Caring tutor                                                 | Take note of student's special needs, if any                      | Cater my teaching toward them                                                   |
-
+| Priority | As a …                   | I want to...                                        | So that I can...                                               |   Status  |
+|----------|--------------------------|-----------------------------------------------------|----------------------------------------------------------------|:---------:|
+| * * *    | Tutor with many students | Store my students' contact info/emails              | Contact them easily                                            | COMPLETED |
+| * * *    | Tutor with many classes  | Insert my students into the appropriate classes     | Organise my students via classes                               | COMPLETED |
+| * * *    | Tutor                    | Delete student entries                              | Update my list of students if a student were to drop the class | COMPLETED |
+| * * *    | Tutor with many classes  | Create classes                                      | Put my students in the appropriate classes                     | COMPLETED |
+| * * *    | New Tutor                | View the help menu                                  | Be familiar with app usage                                     | COMPLETED |
+| * *      | Tutor with many students | Keep notes on each student's performance            | Track their progress over time                                 | COMPLETED |
+| * *      | Tutor                    | Mark my student's attendance and participation      | Gauge each student's participation level                       | COMPLETED |
+| * *      | Tutor                    | Update the information of my students               | Update my understanding of the progress of my students         | COMPLETED |
+| * *      | Tutor                    | Categorise my students into how well they are doing | Dedicate more time towards the weaker students                 | COMPLETED |
+| * *      | Tutor                    | View all my lessons                                 | Manage my time more efficiently                                | COMPLETED |
+| * *      | Tutor                    | Set recurring events (eg. lessons for every week)   | Avoid typing the same events                                   | COMPLETED |
+| * *      | Busy Tutor               | Store zoom links                                    | Retrieve these zoom links for my lessons, consultations, etc.  | COMPLETED |
+| * *      | Busy Tutor               | Store class rooms                                   | Be reminded of my lesson venues                                | COMPLETED |
+| * *      | Careless tutor           | Undo my commands                                    | Correct any errors when I input things wrongly                 | COMPLETED |
+| * *      | Careless Tutor           | Redo my undone actions                              | Easily reverse my accidental undos.                            | COMPLETED |
+| *        | Caring tutor             | Take note of student's special needs, if any        | Cater my teaching toward them                                  | COMPLETED |
 ### User stories (Not Implemented)
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | Status          |                            As a …                            |                            I want to...                           |                                 So that I can...                                |
-|:--------:|-----------------|:------------------------------------------------------------:|:-----------------------------------------------------------------:|:-------------------------------------------------------------------------------:|
-| * *      | NOT IMPLEMENTED | Tutor                                                        | View my students' test scores easily                              | Gauge my teaching efficiency                                                    |
-| * *      | NOT IMPLEMENTED | Tutor teaching CS modules                                    | View my students' GitHub                                          | Gauge my student's progress in their coding assignment                          |
-| * *      | NOT IMPLEMENTED | Tutor                                                        | Record my feedback for my students                                | Give participation points                                                       |
-| * *      | NOT IMPLEMENTED | Tutor                                                        | Calculate the mean, median, mode of my students' scores           | Gauge the overall performance of my class                                       |
-| * *      | NOT IMPLEMENTED | Tutor                                                        | Store the questions asked by students                             | Provide students with answers immediately, for questions that were asked before |
-| * *      | NOT IMPLEMENTED | Tutor                                                        | Be reminded of my lessons                                         | Attend them                                                                     |
-| * *      | NOT IMPLEMENTED | Forgetful Tutor                                              | Track all my tasks                                                | Know which is of greater urgency                                                |
-| *        | NOT IMPLEMENTED | Tutor                                                        | Store teaching feedback given by my students                      | Improve my teaching                                                             |
-| *        | NOT IMPLEMENTED | Tutor teaching modules that require many written assignments | View my student's written submissions                             | Mark/review their homework                                                      |
-| *        | NOT IMPLEMENTED | Forgetful Tutor                                              | Store picture of my students                                      | Easily match their faces to their names                                         |
-| *        | NOT IMPLEMENTED | Tutor                                                        | Prioritise my tasks                                               | Work on important tasks first                                                   |
-| *        | NOT IMPLEMENTED | Forgetful Tutor                                              | Set an alert for task deadlines                                   | Complete my tasks on time                                                       |
-| *        | NOT IMPLEMENTED | Tutor                                                        | Find free time                                                    | Provide consultation for students                                               |
-| *        | NOT IMPLEMENTED | Tutor                                                        | Store teaching feedback given by Professors                       | Improve my teaching                                                             |
-| *        | NOT IMPLEMENTED | Tutor                                                        | Manage my teaching materials                                      | Find them easily                                                                |
-| *        | NOT IMPLEMENTED | Tutor                                                        | Keep track of the hours I have spent teaching/preparing for class | Be aware of how much time I have spent on teaching                              |
-| *        | NOT IMPLEMENTED | Tutor for many semesters                                     | Archive my past semesters                                         | Avoid cluttering the app                                                        |
-
+| Priority | As a …                                                       | I want to...                                                      | So that I can...                                                                |      Status     |
+|----------|--------------------------------------------------------------|-------------------------------------------------------------------|---------------------------------------------------------------------------------|:---------------:|
+| * *      | Tutor                                                        | View my students' test scores easily                              | Gauge my teaching efficiency                                                    | NOT IMPLEMENTED |
+| * *      | Tutor teaching CS modules                                    | View my students' GitHub                                          | Gauge my student's progress in their coding assignment                          | NOT IMPLEMENTED |
+| * *      | Tutor                                                        | Record my feedback for my students                                | Give participation points                                                       | NOT IMPLEMENTED |
+| * *      | Tutor                                                        | Calculate the mean, median, mode of my students' scores           | Gauge the overall performance of my class                                       | NOT IMPLEMENTED |
+| * *      | Tutor                                                        | Store the questions asked by students                             | Provide students with answers immediately, for questions that were asked before | NOT IMPLEMENTED |
+| * *      | Tutor                                                        | Be reminded of my lessons                                         | Attend them                                                                     | NOT IMPLEMENTED |
+| * *      | Forgetful Tutor                                              | Track all my tasks                                                | Know which is of greater urgency                                                | NOT IMPLEMENTED |
+| *        | Tutor                                                        | Store teaching feedback given by my students                      | Improve my teaching                                                             | NOT IMPLEMENTED |
+| *        | Tutor teaching modules that require many written assignments | View my student's written submissions                             | Mark/review their homework                                                      | NOT IMPLEMENTED |
+| *        | Forgetful Tutor                                              | Store picture of my students                                      | Easily match their faces to their names                                         | NOT IMPLEMENTED |
+| *        | Tutor                                                        | Prioritise my tasks                                               | Work on important tasks first                                                   | NOT IMPLEMENTED |
+| *        | Forgetful Tutor                                              | Set an alert for task deadlines                                   | Complete my tasks on time                                                       | NOT IMPLEMENTED |
+| *        | Tutor                                                        | Find free time                                                    | Provide consultation for students                                               | NOT IMPLEMENTED |
+| *        | Tutor                                                        | Store teaching feedback given by Professors                       | Improve my teaching                                                             | NOT IMPLEMENTED |
+| *        | Tutor                                                        | Manage my teaching materials                                      | Find them easily                                                                | NOT IMPLEMENTED |
+| *        | Tutor                                                        | Keep track of the hours I have spent teaching/preparing for class | Be aware of how much time I have spent on teaching                              | NOT IMPLEMENTED |
+| *        | Tutor for many semesters                                     | Archive my past semesters                                         | Avoid cluttering the app                                                        | NOT IMPLEMENTED |
 
 ### Use cases
 
