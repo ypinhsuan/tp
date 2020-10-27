@@ -20,6 +20,7 @@ Class JsonAdaptedTag
 Class JsonAdaptedName
 }
 
+Package JsonAdaptedModuleClass <<Rectangle>> {
 Class JsonAdaptedModuleClass
 
 Package JsonAdaptedLesson <<Rectangle>> {
@@ -29,6 +30,9 @@ Class JsonAdaptedAttendanceRecord
 Class JsonAdaptedStudentAttendance
 Class JsonAdaptedAttendance
 }
+
+}
+
 
 Class JsonAdaptedUuid
 
