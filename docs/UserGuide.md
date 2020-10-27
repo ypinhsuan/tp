@@ -1,7 +1,29 @@
 ---
 layout: page
-title: User Guide
+title: Tutor's Pet - User Guide
 ---
+![Logo](images/ugimages/Logo.png)
+<center>
+
+**National University of Singapore**
+
+**CS2101: Effective Communication for Computing Professionals**
+
+**Tutor's Pet: User Guide**
+
+**Academic Year: AY2020/2021 Semester 1**
+
+**Low Shu Min <ins>Samantha</ins>**
+
+**Tan <ins>Rui Xuan</ins>**
+
+**Tan Ying Jie, <ins>Dexter</ins>**
+
+**Wong <ins>Jun Long</ins>**
+
+**Yen <ins>Pin Hsuan</ins>**
+
+</center>
 
 1. Table of Contents
 {:toc}
