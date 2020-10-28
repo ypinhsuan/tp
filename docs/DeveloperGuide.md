@@ -223,6 +223,77 @@ A `ModuleClass` can also contain any number of `Lesson` objects.
    * Cons:
      * Difficult to check for duplicate students when adding or editing students in classes.
 
+### Lesson Model
+This section explains the design considerations of the `Lesson` model.
+
+#### Implementation
+
+<a name="lesson-class-diagram"/>
+
+The class diagram below shows the current implementation of `Lesson` model.
+
+![Lesson Model](images/LessonModelClassDiagram.png)
+
+Every `Lesson` contains `startTime`, `endTime`, `Day`, `NumberOfOccurrences`, `Venue` and `AttendanceRecordList`.
+The `NumberOfOccurrences` represents the number of weeks the lesson last and the `AttendanceRecordList` stores the
+attendance of students. The implementation of `Attendance` model is explained in the next section.
+
+<div markdown="span" class="alert alert-primary">:information_source:
+**Note:** All classes in the `Lesson` package are designed to be immutable.
+</div>
+
+A `ModuleClass` can contain any number of `Lesson` objects, but cannot contain duplicate `Lesson`s.
+`Lesson`s are considered duplicate if they have the same start time, end time, day and venue.<br>
+
+The sequence diagram below shows the interaction between `Logic` and `Model` when a `Lesson` is added to `ModuleClass`.
+The utility methods for modifying `Lesson` in `ModuleClass` are in `ModuleClassUtil` to avoid handling add, edit and
+delete in the `Model` component. 
+
+![Add Lesson Sequence Diagram](images/AddLessonSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">
+:information_source: **Note:** The lifeline for `AddLessonCommand` should end at the destroy marker (X) but due to a
+limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
+1. The `AddLessonCommand` execution will call static methods from `ModuleClassUtil`.
+1. `ModuleClassUtil` will check whether `lesson` already exists in `targetModuleClass` by calling
+   `ModuleClass#hasLesson(lesson)`. (This part is omitted in the diagram for brevity)
+1. If `lesson` does not exists in `targetModuleClass`, a new `ModuleClass` with `lesson` will be created. Otherwise,
+   a `CommandException` will be thrown.
+
+#### Design Considerations
+
+##### Aspect 1: Uniqueness of `Lesson`
+
+Two possible implementations were considered
+
+* **Alternative 1 (current choice):** Stores `Lesson` object in `ModuleClass`
+
+  This implementation allows duplicate lessons in different classes.
+  * Pros:
+    * Easy to implement.
+  * Cons:
+    * Difficult to check for duplicate lessons when adding or editing lessons as we will need to iterate through all
+      classes.
+
+* **Alternative 2:** Have UUID field for `Lesson` and `ModuleClass` stores UUID
+
+  This is similar to how `Student` is implemented. It would be a better alternative if we want all lessons to be unique
+  as we can have a `UniqueLessonList` to store all lessons as shown below.
+
+  ![Lesson Model](images/UniqueLessonListClassDiagram.png)
+
+  * Pros:
+    * Easy to check for duplicate lessons in different classes.
+  * Cons:
+    * There is a possibility of UUID collision, even though the probability is very low.
+    * Harder to implement.
+
+Alternative 1 was chosen because it is possible to have the same lesson in different classes if users do not delete
+the data for previous semesters. Hence, we want to allow duplicate lessons only in different classes. Furthermore,
+since users need to specify the class index when editing or deleting lessons, it makes alternative 1 easier to implement.
+
 ### Display Statistics Feature
 
 #### Implementation
@@ -351,45 +422,6 @@ Alternative 1 was chosen because the cons of implementing alternative 2 outweigh
 unlikely for multiple students to have the same participation score and hence the use of this command with multiple
 students is expected to be low. In addition, users can make use of the `recall` feature to speed up the process of
 recording attendances.
-
-### Lesson Model
-This section explains the design considerations of the `Lesson` model.
-
-#### Implementation
-
-<a name="lesson-class-diagram"/>
-
-The class diagram below shows the current implementation of `Lesson` model.
-
-![Lesson Model](images/LessonModelClassDiagram.png)
-
-A `ModuleClass` can contain any number of `Lesson` objects. Every `Lesson` contains a `startTime`, `endTime`, `Day`,
-`NumberOfOccurrences`, `Venue` and `AttendanceRecordList`.
-
-#### Design Considerations
-
-##### Aspect 1: Lesson storage
-
-* **Alternative 1 (current choice):** Stores `Lesson` object in `ModuleClass`
-
-  This implementation allows duplicate lessons in different classes.
-  * Pros:
-    * Easy to implement.
-  * Cons:
-    * Difficult to check for duplicate lessons when adding or editing lessons.
-
-* **Alternative 2:** Have UUID field for `Lesson` and `ModuleClass` stores UUID
-
-  This is similar to how `Student` is implemented. It would be a better alternative if we want all lessons to be unique
-  as we can have a `UniqueLessonList` to store all lessons as shown below.
-
-  ![Lesson Model](images/UniqueLessonListClassDiagram.png)
-
-  * Pros:
-    * Easy to check for duplicate lessons.
-  * Cons:
-    * There is a possibility of UUID collision, even though the probability is very low.
-    * Harder to implement.
 
 ### Attendance Model
 This section explains the design considerations of the `Attendance` model.
