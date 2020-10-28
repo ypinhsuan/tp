@@ -8,6 +8,7 @@ import static tutorspet.storage.JsonAdaptedUuid.MESSAGE_INVALID_UUID;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -74,6 +75,11 @@ public class JsonAdaptedStudent {
      */
     public Student toModelType() throws IllegalValueException {
         final List<Tag> studentTags = new ArrayList<>();
+
+        if (tagged.stream().anyMatch(Objects::isNull)) {
+            throw new IllegalValueException(Tag.MESSAGE_CONSTRAINTS);
+        }
+
         for (JsonAdaptedTag tag : tagged) {
             studentTags.add(tag.toModelType());
         }

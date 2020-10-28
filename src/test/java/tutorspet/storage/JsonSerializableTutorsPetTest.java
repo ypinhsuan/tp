@@ -36,15 +36,34 @@ public class JsonSerializableTutorsPetTest {
     private static final Path TYPICAL_TUTORS_PET_FILE =
             TEST_DATA_FOLDER.resolve("typicalTutorsPet.json");
 
-    private static final Path INVALID_STUDENT_FILE = STUDENT_TEST_DATA_FOLDER.resolve("invalidStudentTutorsPet.json");
     private static final Path DUPLICATE_STUDENT_NAME_AND_TELEGRAM_FILE =
             STUDENT_TEST_DATA_FOLDER.resolve("duplicateStudentNameAndTelegramTutorsPet.json");
     private static final Path DUPLICATE_STUDENT_NAME_AND_EMAIL_FILE =
             STUDENT_TEST_DATA_FOLDER.resolve("duplicateStudentNameAndEmailTutorsPet.json");
     private static final Path DUPLICATE_STUDENT_UUID_FILE =
             STUDENT_TEST_DATA_FOLDER.resolve("duplicateStudentUuidTutorsPet.json");
+    private static final Path INVALID_EMAIL_FILE = STUDENT_TEST_DATA_FOLDER.resolve("invalidEmailTutorsPet.json");
+    private static final Path INVALID_TAG_VALUE_FILE =
+            STUDENT_TEST_DATA_FOLDER.resolve("invalidTagValueTutorsPet.json");
+    private static final Path INVALID_TAG_FILE =
+            STUDENT_TEST_DATA_FOLDER.resolve("invalidTagTutorsPet.json");
+    private static final Path INVALID_NAME_FILE =
+            STUDENT_TEST_DATA_FOLDER.resolve("invalidNameTutorsPet.json");
+    private static final Path INVALID_TELEGRAM_FILE =
+            STUDENT_TEST_DATA_FOLDER.resolve("invalidTelegramTutorsPet.json");
+    private static final Path NULL_EMAIL_FILE =
+            STUDENT_TEST_DATA_FOLDER.resolve("nullEmailTutorsPet.json");
+    private static final Path NULL_NAME_FILE =
+            STUDENT_TEST_DATA_FOLDER.resolve("nullNameTutorsPet.json");
+    private static final Path NULL_TAG_VALUE_FILE =
+            STUDENT_TEST_DATA_FOLDER.resolve("nullTagValueTutorsPet.json");
+    private static final Path NULL_TAG_FILE =
+            STUDENT_TEST_DATA_FOLDER.resolve("nullTagTutorsPet.json");
+    private static final Path NULL_TELEGRAM_FILE =
+            STUDENT_TEST_DATA_FOLDER.resolve("nullTelegramTutorsPet.json");
 
-    private static final Path INVALID_CLASS_FILE = CLASS_TEST_DATA_FOLDER.resolve("invalidClassTutorsPet.json");
+    private static final Path NULL_STUDENT_UUID_IN_CLASS_FILE =
+            CLASS_TEST_DATA_FOLDER.resolve("nullStudentUuidsTutorsPet.json");
     private static final Path INVALID_STUDENT_UUID_IN_CLASS_FILE_1 =
             CLASS_TEST_DATA_FOLDER.resolve("invalidStudentUuidInClass1.json");
     private static final Path INVALID_STUDENT_UUID_IN_CLASS_FILE_2 =
@@ -52,8 +71,9 @@ public class JsonSerializableTutorsPetTest {
     private static final Path DUPLICATE_CLASS_FILE = CLASS_TEST_DATA_FOLDER.resolve("duplicateClassTutorsPet.json");
     private static final Path DUPLICATE_STUDENT_UUID_IN_CLASS_FILE =
             CLASS_TEST_DATA_FOLDER.resolve("duplicateStudentUuidInClass.json");
-    private static final Path INVALID_STUDENT_UUID_IN_LESSON_FILE =
-            CLASS_TEST_DATA_FOLDER.resolve("invalidStudentUuidInLesson.json");
+    private static final Path INVALID_CLASS_NAME_FILE =
+            CLASS_TEST_DATA_FOLDER.resolve("invalidClassNameTutorsPet.json");
+    private static final Path NULL_CLASS_NAME_FILE = CLASS_TEST_DATA_FOLDER.resolve("nullClassNameTutorsPet.json");
 
     private static final Path DUPLICATE_LESSON_FILE =
             LESSON_TEST_DATA_FOLDER.resolve("duplicateLessonTutorsPet.json");
@@ -61,6 +81,8 @@ public class JsonSerializableTutorsPetTest {
             LESSON_TEST_DATA_FOLDER.resolve("invalidLessonTutorsPet.json");
     private static final Path NULL_LESSON_FILE =
             LESSON_TEST_DATA_FOLDER.resolve("nullLessonTutorsPet.json");
+    private static final Path INVALID_STUDENT_UUID_IN_LESSON_FILE =
+            LESSON_TEST_DATA_FOLDER.resolve("invalidStudentUuidInLesson.json");
 
     private static final Path INVALID_PARTICIPATION_VALUE_FILE =
             ATTENDANCE_TEST_DATA_FOLDER.resolve("invalidParticipationValue.json");
@@ -103,8 +125,57 @@ public class JsonSerializableTutorsPetTest {
     }
 
     @Test
-    public void toModelType_invalidStudentFile_throwsIllegalValueException() throws Exception {
-        JsonSerializableTutorsPet dataFromFile = JsonUtil.readJsonFile(INVALID_STUDENT_FILE,
+    public void toModelType_invalidEmail_throwsIllegalValueException() throws Exception {
+        JsonSerializableTutorsPet dataFromFile = JsonUtil.readJsonFile(INVALID_EMAIL_FILE,
+                JsonSerializableTutorsPet.class).get();
+        assertThrows(IllegalValueException.class, dataFromFile::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidTagValue_throwsIllegalValueException() throws Exception {
+        JsonSerializableTutorsPet dataFromFile = JsonUtil.readJsonFile(INVALID_TAG_VALUE_FILE,
+                JsonSerializableTutorsPet.class).get();
+        assertThrows(IllegalValueException.class, dataFromFile::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidName_throwsIllegalValueException() throws Exception {
+        JsonSerializableTutorsPet dataFromFile = JsonUtil.readJsonFile(INVALID_NAME_FILE,
+                JsonSerializableTutorsPet.class).get();
+        assertThrows(IllegalValueException.class, dataFromFile::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidTelegram_throwsIllegalValueException() throws Exception {
+        JsonSerializableTutorsPet dataFromFile = JsonUtil.readJsonFile(INVALID_TELEGRAM_FILE,
+                JsonSerializableTutorsPet.class).get();
+        assertThrows(IllegalValueException.class, dataFromFile::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullEmail_throwsIllegalValueException() throws Exception {
+        JsonSerializableTutorsPet dataFromFile = JsonUtil.readJsonFile(NULL_EMAIL_FILE,
+                JsonSerializableTutorsPet.class).get();
+        assertThrows(IllegalValueException.class, dataFromFile::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullName_throwsIllegalValueException() throws Exception {
+        JsonSerializableTutorsPet dataFromFile = JsonUtil.readJsonFile(NULL_NAME_FILE,
+                JsonSerializableTutorsPet.class).get();
+        assertThrows(IllegalValueException.class, dataFromFile::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullTagValue_throwsIllegalValueException() throws Exception {
+        JsonSerializableTutorsPet dataFromFile = JsonUtil.readJsonFile(NULL_TAG_VALUE_FILE,
+                JsonSerializableTutorsPet.class).get();
+        assertThrows(IllegalValueException.class, dataFromFile::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullTelegram_throwsIllegalValueException() throws Exception {
+        JsonSerializableTutorsPet dataFromFile = JsonUtil.readJsonFile(NULL_TELEGRAM_FILE,
                 JsonSerializableTutorsPet.class).get();
         assertThrows(IllegalValueException.class, dataFromFile::toModelType);
     }
@@ -139,7 +210,7 @@ public class JsonSerializableTutorsPetTest {
 
     @Test
     public void toModelType_invalidClassFile_throwsIllegalValueException() throws Exception {
-        JsonSerializableTutorsPet dataFromFile = JsonUtil.readJsonFile(INVALID_CLASS_FILE,
+        JsonSerializableTutorsPet dataFromFile = JsonUtil.readJsonFile(NULL_STUDENT_UUID_IN_CLASS_FILE,
                 JsonSerializableTutorsPet.class).get();
         assertThrows(IllegalValueException.class, dataFromFile::toModelType);
     }
@@ -187,11 +258,17 @@ public class JsonSerializableTutorsPetTest {
     }
 
     @Test
-    public void toModelType_invalidStudentUuidInLesson_throwsIllegalValueException() throws Exception {
-        JsonSerializableTutorsPet dataFromFile = JsonUtil.readJsonFile(INVALID_STUDENT_UUID_IN_LESSON_FILE,
+    public void toModelType_invalidClassName_throwsIllegalValueException() throws Exception {
+        JsonSerializableTutorsPet dataFromFile = JsonUtil.readJsonFile(INVALID_CLASS_NAME_FILE,
                 JsonSerializableTutorsPet.class).get();
-        assertThrows(IllegalValueException.class, JsonAdaptedModuleClass.MESSAGE_INVALID_STUDENTS_IN_LESSON,
-                dataFromFile::toModelType);
+        assertThrows(IllegalValueException.class, dataFromFile::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullClassName_throwsIllegalValueException() throws Exception {
+        JsonSerializableTutorsPet dataFromFile = JsonUtil.readJsonFile(NULL_CLASS_NAME_FILE,
+                JsonSerializableTutorsPet.class).get();
+        assertThrows(IllegalValueException.class, dataFromFile::toModelType);
     }
 
     @Test
@@ -199,6 +276,14 @@ public class JsonSerializableTutorsPetTest {
         JsonSerializableTutorsPet dataFromFile = JsonUtil.readJsonFile(INVALID_LESSON_FILE,
                 JsonSerializableTutorsPet.class).get();
         assertThrows(IllegalValueException.class, dataFromFile::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidStudentUuidInLesson_throwsIllegalValueException() throws Exception {
+        JsonSerializableTutorsPet dataFromFile = JsonUtil.readJsonFile(INVALID_STUDENT_UUID_IN_LESSON_FILE,
+                JsonSerializableTutorsPet.class).get();
+        assertThrows(IllegalValueException.class, JsonAdaptedModuleClass.MESSAGE_INVALID_STUDENTS_IN_LESSON,
+                dataFromFile::toModelType);
     }
 
     /**
