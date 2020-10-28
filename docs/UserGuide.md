@@ -125,7 +125,7 @@ classes in Tutor's Pet.
     <br>Figure 5. The student section.
 
 The utility area consists of three tabs: **File**, **Theme**, **Help**.
-   
+
   ![Utility area](images/ugimages/UtilityArea.png)
   <br>Figure 6. The utility area.
 
