@@ -1422,7 +1422,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Displaying a lesson's venue
 
-   1. Prerequisites: List all classes using the `list-class` command. Using default tutor's pet data.
+   1. Prerequisites: List all classes using the `list-class` command. Uses default tutor's pet data.
 
    1. Test case: `display-venue c\1 l\1`<br>
       Expected: Venue for the first lesson in the first class of the class list found. Details of the venue shown in
@@ -1438,7 +1438,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Adding an attendance
 
-   1. Prerequisites: List all classes and students using the `list` command. Using default tutor's pet data.
+   1. Prerequisites: List all classes and students using the `list` command. Uses default tutor's pet data.
 
    1. Test case: `add-attendance c\1 l\1 s\1 w\3 p\70`<br>
       Expected: Attendance added. Details of the attendance shown in the status message.
@@ -1454,7 +1454,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Find an attendance
 
-   1. Prerequisites: List all classes and students using the `list` command. Using default tutor's pet data.
+   1. Prerequisites: List all classes and students using the `list` command. Uses default tutor's pet data.
 
    1. Test case: `find-attendance c\1 l\1 s\1 w\1`<br>
       Expected: Attendance found. Attendance details of the student shown in the status message.
@@ -1473,7 +1473,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Displaying a student's statistics
 
-   1. Prerequisites: List all classes and students using the `list` command. Using default tutor's pet data.
+   1. Prerequisites: List all classes and students using the `list` command. Uses default tutor's pet data.
 
    1. Test case: `stats c\1 s\1`<br>
       Expected: Statistics for the first student in the first class of the student list and class list respectively
