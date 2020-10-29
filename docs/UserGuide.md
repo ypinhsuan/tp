@@ -1,10 +1,10 @@
 ---
 layout: page
-title: Tutor's Pet - User Guide
+title: User Guide
 ---
 ![Logo](images/ugimages/Logo.png)
 
-**Tutor's Pet - User Guide**
+# Tutor's Pet - User Guide
 
 1. Table of Contents
 {:toc}
