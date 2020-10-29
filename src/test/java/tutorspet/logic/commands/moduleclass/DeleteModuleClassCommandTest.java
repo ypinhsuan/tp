@@ -6,6 +6,7 @@ import static tutorspet.commons.core.Messages.MESSAGE_INVALID_MODULE_CLASS_DISPL
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static tutorspet.logic.commands.CommandTestUtil.showModuleClassAtIndex;
+import static tutorspet.logic.commands.moduleclass.DeleteModuleClassCommand.MESSAGE_COMMIT;
 import static tutorspet.logic.commands.moduleclass.DeleteModuleClassCommand.MESSAGE_SUCCESS;
 import static tutorspet.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 import static tutorspet.testutil.TypicalIndexes.INDEX_SECOND_ITEM;
@@ -34,11 +35,12 @@ public class DeleteModuleClassCommandTest {
         DeleteModuleClassCommand deleteModuleClassCommand =
                 new DeleteModuleClassCommand(INDEX_FIRST_ITEM);
 
+        String commitMessage = String.format(MESSAGE_COMMIT, moduleClassToDelete.getName());
         String expectedMessage = String.format(MESSAGE_SUCCESS, moduleClassToDelete);
 
         ModelManager expectedModel = new ModelManager(model.getTutorsPet(), new UserPrefs());
         expectedModel.deleteModuleClass(moduleClassToDelete);
-        expectedModel.commit(expectedMessage);
+        expectedModel.commit(commitMessage);
 
         assertCommandSuccess(deleteModuleClassCommand, model, expectedMessage, expectedModel);
     }
@@ -58,11 +60,12 @@ public class DeleteModuleClassCommandTest {
         ModuleClass moduleClassToDelete = model.getFilteredModuleClassList().get(INDEX_FIRST_ITEM.getZeroBased());
         DeleteModuleClassCommand deleteModuleClassCommand = new DeleteModuleClassCommand(INDEX_FIRST_ITEM);
 
+        String commitMessage = String.format(MESSAGE_COMMIT, moduleClassToDelete.getName());
         String expectedMessage = String.format(MESSAGE_SUCCESS, moduleClassToDelete);
 
         Model expectedModel = new ModelManager(model.getTutorsPet(), new UserPrefs());
         expectedModel.deleteModuleClass(moduleClassToDelete);
-        expectedModel.commit(expectedMessage);
+        expectedModel.commit(commitMessage);
         showNoModuleClass(expectedModel);
 
         assertCommandSuccess(deleteModuleClassCommand, model, expectedMessage, expectedModel);

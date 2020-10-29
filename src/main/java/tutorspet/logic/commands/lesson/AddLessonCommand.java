@@ -45,6 +45,7 @@ public class AddLessonCommand extends Command {
             + PREFIX_NUMBER_OF_OCCURRENCES + "13";
 
     public static final String MESSAGE_SUCCESS = "New lesson added:\n%1$s %2$s.";
+    public static final String MESSAGE_COMMIT = "New lesson added: %1$s %2$s.";
 
     private final Index moduleClassIndex;
     private final Lesson toAdd;
@@ -74,9 +75,8 @@ public class AddLessonCommand extends Command {
         ModuleClass modifiedModuleClass = addLessonToModuleClass(moduleClassToAddTo, toAdd);
         model.setModuleClass(moduleClassToAddTo, modifiedModuleClass);
 
-        String message = String.format(MESSAGE_SUCCESS, modifiedModuleClass.getName(), toAdd);
-        model.commit(message);
-        return new CommandResult(message);
+        model.commit(String.format(MESSAGE_COMMIT, modifiedModuleClass.getName(), toAdd.printLesson()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, modifiedModuleClass.getName(), toAdd));
     }
 
     @Override

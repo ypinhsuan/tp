@@ -6,6 +6,7 @@ import static tutorspet.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static tutorspet.logic.commands.CommandTestUtil.showStudentAtIndex;
+import static tutorspet.logic.commands.student.DeleteStudentCommand.MESSAGE_COMMIT;
 import static tutorspet.logic.commands.student.DeleteStudentCommand.MESSAGE_SUCCESS;
 import static tutorspet.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 import static tutorspet.testutil.TypicalIndexes.INDEX_SECOND_ITEM;
@@ -33,11 +34,12 @@ public class DeleteStudentCommandTest {
         Student studentToDelete = model.getFilteredStudentList().get(INDEX_FIRST_ITEM.getZeroBased());
         DeleteStudentCommand deleteStudentCommand = new DeleteStudentCommand(INDEX_FIRST_ITEM);
 
+        String commitMessage = String.format(MESSAGE_COMMIT, studentToDelete.getName());
         String expectedMessage = String.format(MESSAGE_SUCCESS, studentToDelete);
 
         ModelManager expectedModel = new ModelManager(model.getTutorsPet(), new UserPrefs());
         expectedModel.deleteStudent(studentToDelete);
-        expectedModel.commit(expectedMessage);
+        expectedModel.commit(commitMessage);
 
         assertCommandSuccess(deleteStudentCommand, model, expectedMessage, expectedModel);
     }
@@ -57,11 +59,12 @@ public class DeleteStudentCommandTest {
         Student studentToDelete = model.getFilteredStudentList().get(INDEX_FIRST_ITEM.getZeroBased());
         DeleteStudentCommand deleteStudentCommand = new DeleteStudentCommand(INDEX_FIRST_ITEM);
 
+        String commitMessage = String.format(MESSAGE_COMMIT, studentToDelete.getName());
         String expectedMessage = String.format(MESSAGE_SUCCESS, studentToDelete);
 
         Model expectedModel = new ModelManager(model.getTutorsPet(), new UserPrefs());
         expectedModel.deleteStudent(studentToDelete);
-        expectedModel.commit(expectedMessage);
+        expectedModel.commit(commitMessage);
         showNoStudent(expectedModel);
 
         assertCommandSuccess(deleteStudentCommand, model, expectedMessage, expectedModel);

@@ -37,6 +37,7 @@ public class DeleteLessonCommand extends Command {
             + PREFIX_LESSON_INDEX + "1";
 
     public static final String MESSAGE_SUCCESS = "Deleted lesson:\n%1$s %2$s.";
+    public static final String MESSAGE_COMMIT = "Deleted lesson: %1$s %2$s.";
 
     private final Index moduleClassIndex;
     private final Index lessonIndex;
@@ -72,9 +73,9 @@ public class DeleteLessonCommand extends Command {
         ModuleClass modifiedModuleClass = deleteLessonFromModuleClass(targetModuleClass, lessonToDelete);
         model.setModuleClass(targetModuleClass, modifiedModuleClass);
 
-        String message = String.format(MESSAGE_SUCCESS, targetModuleClass, lessonToDelete);
-        model.commit(message);
-        return new CommandResult(message);
+        model.commit(String.format(MESSAGE_COMMIT, targetModuleClass.getName(), lessonToDelete.printLesson()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS,
+                targetModuleClass.getName(), lessonToDelete.printLesson()));
     }
 
     @Override

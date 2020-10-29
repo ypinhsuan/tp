@@ -38,6 +38,7 @@ public class EditModuleClassCommand extends Command {
             + PREFIX_NAME + "CS2103T Tutorial T10";
 
     public static final String MESSAGE_SUCCESS = "Edited class:\n%1$s.";
+    public static final String MESSAGE_COMMIT = "Edited class: %1$s.";
 
     private final Index index;
     private final EditModuleClassDescriptor editModuleClassDescriptor;
@@ -72,9 +73,8 @@ public class EditModuleClassCommand extends Command {
 
         model.setModuleClass(moduleClassToEdit, editedModuleClass);
         model.updateFilteredModuleClassList(PREDICATE_SHOW_ALL_MODULE_CLASS);
-        String message = String.format(MESSAGE_SUCCESS, editedModuleClass);
-        model.commit(message);
-        return new CommandResult(message);
+        model.commit(String.format(MESSAGE_COMMIT, editedModuleClass.getName()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, editedModuleClass));
     }
 
     /**

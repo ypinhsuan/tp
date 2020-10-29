@@ -34,6 +34,7 @@ public class AddStudentCommand extends Command {
             + PREFIX_TAG + "Experienced";
 
     public static final String MESSAGE_SUCCESS = "New student added:\n%1$s.";
+    public static final String MESSAGE_COMMIT = "New student added: %1$s.";
 
     private final Student toAdd;
 
@@ -55,9 +56,8 @@ public class AddStudentCommand extends Command {
         }
 
         model.addStudent(toAdd);
-        String message = String.format(MESSAGE_SUCCESS, toAdd);
-        model.commit(message);
-        return new CommandResult(message);
+        model.commit(String.format(MESSAGE_COMMIT, toAdd.getName()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 
     @Override

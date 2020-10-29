@@ -10,6 +10,7 @@ import static tutorspet.logic.commands.CommandTestUtil.VALID_NAME_CS2030_TUTORIA
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static tutorspet.logic.commands.CommandTestUtil.showModuleClassAtIndex;
+import static tutorspet.logic.commands.moduleclass.EditModuleClassCommand.MESSAGE_COMMIT;
 import static tutorspet.logic.commands.moduleclass.EditModuleClassCommand.MESSAGE_SUCCESS;
 import static tutorspet.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 import static tutorspet.testutil.TypicalIndexes.INDEX_SECOND_ITEM;
@@ -43,11 +44,12 @@ public class EditModuleClassCommandTest {
                 new EditModuleClassDescriptorBuilder(editedModuleClass).build();
         EditModuleClassCommand editModuleClassCommand = new EditModuleClassCommand(INDEX_FIRST_ITEM, descriptor);
 
+        String commitMessage = String.format(MESSAGE_COMMIT, editedModuleClass.getName());
         String expectedMessage = String.format(MESSAGE_SUCCESS, editedModuleClass);
 
         Model expectedModel = new ModelManager(new TutorsPet(model.getTutorsPet()), new UserPrefs());
         expectedModel.setModuleClass(model.getFilteredModuleClassList().get(0), editedModuleClass);
-        expectedModel.commit(expectedMessage);
+        expectedModel.commit(commitMessage);
 
         assertCommandSuccess(editModuleClassCommand, model, expectedMessage, expectedModel);
     }
@@ -64,11 +66,12 @@ public class EditModuleClassCommandTest {
                 .withName(VALID_NAME_CS2030_TUTORIAL).build();
         EditModuleClassCommand editModuleClassCommand = new EditModuleClassCommand(indexLastModuleClass, descriptor);
 
+        String commitMessage = String.format(MESSAGE_COMMIT, editedModuleClass.getName());
         String expectedMessage = String.format(MESSAGE_SUCCESS, editedModuleClass);
 
         Model expectedModel = new ModelManager(new TutorsPet(model.getTutorsPet()), new UserPrefs());
         expectedModel.setModuleClass(lastModuleClass, editedModuleClass);
-        expectedModel.commit(expectedMessage);
+        expectedModel.commit(commitMessage);
 
         assertCommandSuccess(editModuleClassCommand, model, expectedMessage, expectedModel);
     }
@@ -84,11 +87,12 @@ public class EditModuleClassCommandTest {
         EditModuleClassCommand editModuleClassCommand = new EditModuleClassCommand(INDEX_FIRST_ITEM,
                 new EditModuleClassDescriptorBuilder().withName(VALID_NAME_CS2030_TUTORIAL).build());
 
+        String commitMessage = String.format(MESSAGE_COMMIT, editedModuleClass.getName());
         String expectedMessage = String.format(MESSAGE_SUCCESS, editedModuleClass);
 
         Model expectedModel = new ModelManager(new TutorsPet(model.getTutorsPet()), new UserPrefs());
         expectedModel.setModuleClass(model.getFilteredModuleClassList().get(0), editedModuleClass);
-        expectedModel.commit(expectedMessage);
+        expectedModel.commit(commitMessage);
 
         assertCommandSuccess(editModuleClassCommand, model, expectedMessage, expectedModel);
     }

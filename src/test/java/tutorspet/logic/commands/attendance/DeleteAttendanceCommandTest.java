@@ -9,6 +9,7 @@ import static tutorspet.logic.commands.CommandTestUtil.VALID_WEEK_1;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_WEEK_5;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static tutorspet.logic.commands.attendance.DeleteAttendanceCommand.MESSAGE_COMMIT;
 import static tutorspet.logic.commands.attendance.DeleteAttendanceCommand.MESSAGE_SUCCESS;
 import static tutorspet.logic.util.ModuleClassUtil.deleteAttendanceFromModuleClass;
 import static tutorspet.testutil.Assert.assertThrows;
@@ -74,11 +75,13 @@ public class DeleteAttendanceCommandTest {
                 deleteAttendanceFromModuleClass(moduleClass, lessonIndex, targetWeek, student);
         Lesson modifiedLesson = modifiedModuleClass.getLessons().get(lessonIndex.getZeroBased());
 
-        String expectedMessage = String.format(MESSAGE_SUCCESS,
-                student.getName(), modifiedModuleClass, modifiedLesson, targetWeek);
+        String commitMessage = String.format(MESSAGE_COMMIT, student.getName(), modifiedModuleClass.getName(),
+                modifiedLesson.printLesson(), targetWeek);
+        String expectedMessage = String.format(MESSAGE_SUCCESS, student.getName(), modifiedModuleClass.getName(),
+                modifiedLesson.printLesson(), targetWeek);
         Model expectedModel = new ModelManager(model.getTutorsPet(), new UserPrefs());
         expectedModel.setModuleClass(moduleClass, modifiedModuleClass);
-        expectedModel.commit(expectedMessage);
+        expectedModel.commit(commitMessage);
 
         DeleteAttendanceCommand deleteAttendanceCommand =
                 new DeleteAttendanceCommand(moduleClassIndex, lessonIndex, studentIndex, targetWeek);

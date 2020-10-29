@@ -12,6 +12,7 @@ import static tutorspet.logic.commands.CommandTestUtil.VALID_TELEGRAM_BOB;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static tutorspet.logic.commands.CommandTestUtil.showStudentAtIndex;
+import static tutorspet.logic.commands.student.EditStudentCommand.MESSAGE_COMMIT;
 import static tutorspet.logic.commands.student.EditStudentCommand.MESSAGE_SUCCESS;
 import static tutorspet.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 import static tutorspet.testutil.TypicalIndexes.INDEX_SECOND_ITEM;
@@ -43,11 +44,12 @@ public class EditStudentCommandTest {
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder(editedStudent).build();
         EditStudentCommand editStudentCommand = new EditStudentCommand(INDEX_FIRST_ITEM, descriptor);
 
+        String commitMessage = String.format(MESSAGE_COMMIT, editedStudent.getName());
         String expectedMessage = String.format(MESSAGE_SUCCESS, editedStudent);
 
         Model expectedModel = new ModelManager(new TutorsPet(model.getTutorsPet()), new UserPrefs());
         expectedModel.setStudent(model.getFilteredStudentList().get(0), editedStudent);
-        expectedModel.commit(expectedMessage);
+        expectedModel.commit(commitMessage);
 
         assertCommandSuccess(editStudentCommand, model, expectedMessage, expectedModel);
     }
@@ -67,11 +69,12 @@ public class EditStudentCommandTest {
                 .withTags(VALID_TAG_AVERAGE).build();
         EditStudentCommand editStudentCommand = new EditStudentCommand(indexLastStudent, descriptor);
 
+        String commitMessage = String.format(MESSAGE_COMMIT, editedStudent.getName());
         String expectedMessage = String.format(MESSAGE_SUCCESS, editedStudent);
 
         Model expectedModel = new ModelManager(new TutorsPet(model.getTutorsPet()), new UserPrefs());
         expectedModel.setStudent(lastStudent, editedStudent);
-        expectedModel.commit(expectedMessage);
+        expectedModel.commit(commitMessage);
 
         assertCommandSuccess(editStudentCommand, model, expectedMessage, expectedModel);
     }
@@ -82,10 +85,11 @@ public class EditStudentCommandTest {
                 new EditStudentCommand(INDEX_FIRST_ITEM, new EditStudentDescriptor());
         Student editedStudent = model.getFilteredStudentList().get(INDEX_FIRST_ITEM.getZeroBased());
 
+        String commitMessage = String.format(MESSAGE_COMMIT, editedStudent.getName());
         String expectedMessage = String.format(MESSAGE_SUCCESS, editedStudent);
 
         Model expectedModel = new ModelManager(new TutorsPet(model.getTutorsPet()), new UserPrefs());
-        expectedModel.commit(expectedMessage);
+        expectedModel.commit(commitMessage);
 
         assertCommandSuccess(editStudentCommand, model, expectedMessage, expectedModel);
     }
@@ -101,11 +105,12 @@ public class EditStudentCommandTest {
         EditStudentCommand editStudentCommand = new EditStudentCommand(INDEX_FIRST_ITEM,
                 new EditStudentDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
+        String commitMessage = String.format(MESSAGE_COMMIT, editedStudent.getName());
         String expectedMessage = String.format(MESSAGE_SUCCESS, editedStudent);
 
         Model expectedModel = new ModelManager(new TutorsPet(model.getTutorsPet()), new UserPrefs());
         expectedModel.setStudent(model.getFilteredStudentList().get(0), editedStudent);
-        expectedModel.commit(expectedMessage);
+        expectedModel.commit(commitMessage);
 
         assertCommandSuccess(editStudentCommand, model, expectedMessage, expectedModel);
     }

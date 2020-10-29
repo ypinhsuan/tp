@@ -3,6 +3,7 @@ package tutorspet.logic.commands.student;
 import static tutorspet.commons.core.Messages.MESSAGE_DUPLICATE_STUDENT;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static tutorspet.logic.commands.student.AddStudentCommand.MESSAGE_COMMIT;
 import static tutorspet.logic.commands.student.AddStudentCommand.MESSAGE_SUCCESS;
 import static tutorspet.testutil.TypicalTutorsPet.getTypicalTutorsPet;
 
@@ -31,10 +32,11 @@ public class AddStudentCommandIntegrationTest {
     public void execute_newStudent_success() {
         Student validStudent = new StudentBuilder().build();
 
+        String commitMessage = String.format(MESSAGE_COMMIT, validStudent.getName());
         String expectedMessage = String.format(MESSAGE_SUCCESS, validStudent);
         Model expectedModel = new ModelManager(model.getTutorsPet(), new UserPrefs());
         expectedModel.addStudent(validStudent);
-        expectedModel.commit(expectedMessage);
+        expectedModel.commit(commitMessage);
 
         assertCommandSuccess(new AddStudentCommand(validStudent), model, expectedMessage, expectedModel);
     }
