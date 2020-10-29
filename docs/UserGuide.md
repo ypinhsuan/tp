@@ -209,7 +209,7 @@ The following subsections will elaborate on the specific details of each Tutor's
 
 If you require any assistance, you can use this command which shows you the link to user guide.
 
-![Help window](images/ugimages/Help.png)
+  ![Help window](images/ugimages/Help.png)
 
 **Format**: `help`
 
@@ -225,10 +225,12 @@ For example:
 * You want to delete Alex from your Tutor's Pet, however you accidentally deleted Bernice instead of Alex.
 
 * You type in the command `undo` and press <kbd>Enter</kbd>.
-   ![Undo before](images/ugimages/UndoBefore.png)
+
+  ![Undo before](images/ugimages/UndoBefore.png)
 
 * Bernice has been undeleted and now you can [delete](#deleting-a-student--delete-student) Alex.
-   ![Undo after](images/ugimages/UndoAfter.png)
+
+  ![Undo after](images/ugimages/UndoAfter.png)
 
 <div markdown="block" class="alert alert-primary">
 
@@ -270,7 +272,7 @@ You can use this feature to check if there are any changes that you can undo or 
 The diagram below shows an example where the last change has been undone.<br/>
 *Notice how the `>` indicator now points to the second change listed.*
 
-![View History After Undo](images/ugimages/ViewHistoryAfterUndo.png)
+  ![View History After Undo](images/ugimages/ViewHistoryAfterUndo.png)
 
 </div>
 
@@ -328,6 +330,9 @@ If you would like to add a student to Tutor's Pet, use this command.
 For example:
 * You would like to add a new student, `Joel Lee` to Tutor's Pet.
   Type in `add-student n\Joel Lee t\joeleee e\jlee@example.com`
+
+  ![AddStudentBefore](images/ugimages/AddStudentBefore.png)  
+
 * Scrolling down the list of students, you will see that `Joel Lee` has been added to Tutor's Pet.
 
   ![AddStudentAfter](images/ugimages/AddStudentAfter.png)
@@ -357,6 +362,9 @@ If you would like to change a student's particulars, use this command.
 For example:
 * `Charlotte Oliveiro` gave you the wrong email address on the first day of class. You need to replace her email address.
   Type in `edit-student 3 e\charlotteolive@example.com` and press <kbd>Enter</kbd>.
+
+  ![EditStudentBefore](images/ugimages/EditStudentBefore.png)
+
 * Scrolling down the list of students, you can see that `Charlotte`'s email has changed to `charlotteolive@example.com`.
 
   ![EditStudentAfter](images/ugimages/EditStudentAfter.png)
@@ -383,6 +391,10 @@ For example:
 You want to email him these notes.
   Type `find-student roy` and press <kbd>Enter</kbd>.
 
+  ![FindStudentBefore](images/ugimages/FindStudentBefore.png)
+
+* You can now retrieve `Roy`'s email and send him the notes.
+
   ![FindStudentAfter](images/ugimages/FindStudentAfter.png)
 
 Constraints:
@@ -402,6 +414,9 @@ For example:
 * `Bernice`, the 2nd student displayed in Tutor's Pet, has swapped `CS2103T Tutorial` slots and you no longer teach her.
 Hence, you want to delete her entry from Tutor's Pet.
   You type in `delete-student 2` and press <kbd>Enter</kbd>.
+
+  ![DeleteStudentBefore](images/ugimages/DeleteStudentBefore.png)  
+
 * Notice that the number of students in `CS2103T Tutorial` decreases to 2.
 
   ![DeleteStudentAfter](images/ugimages/DeleteStudentAfter.png)
@@ -426,11 +441,11 @@ For example:
 Hence, you decide to add this new tutorial class to your Tutor's Pet.
 You type `add-class n\CS1231 Tutorial 3` and press <kbd>Enter</kbd>.
 
-![AddClassBefore](images/ugimages/AddClassBefore.png)
+  ![AddClassBefore](images/ugimages/AddClassBefore.png)
 
 * The class has been added, and you can see it in the displayed class list.
 
-![AddClassAfter](images/ugimages/AddClassAfter.png)
+  ![AddClassAfter](images/ugimages/AddClassAfter.png)
 
 <div markdown="block" class="alert alert-info">
 
@@ -456,9 +471,11 @@ For example:
 * You want to send an email to students in your `CS2103T Tutorial` and hence would want to see a list of students in
 this class. You type in the command `list-student c\1` and and press <kbd>Enter</kbd>.
 
+  ![List students in class before](images/ugimages/ListStudentsInClassBefore.png)
+
 * You can see that the 3 students in your `CS2103T Tutorial` have been listed.
 
-  ![List students in class after](images/ugimages/ListStudentsInClass.png)
+  ![List students in class after](images/ugimages/ListStudentsInClassAfter.png)
 
 Other examples:
 * `list-student c\3` <br>
@@ -475,9 +492,12 @@ For example:
 * Your module coordinator decides to allocate another class to you and you want to be able to distinguish between
  the two classes. Hence you decide to edit the `CS2103T Tutorial` class to `CS2103T Tutorial T10`. You type the
  command `edit-class 1 n\CS2103T Tutorial T10` and press <kbd>Enter</kbd>.
+
+  ![Edit class before](images/ugimages/EditClassBefore.png) 
+
 * The class has been renamed from `CS2103T Tutorial` to `CS2103T Tutorial 10`.
 
-    ![Edit class after](images/ugimages/EditClassAfter.png)
+  ![Edit class after](images/ugimages/EditClassAfter.png)
 
 Constraints:
 * A new class name must be provided.
@@ -503,9 +523,12 @@ If you would like to find classes that contain any of the given keywords in thei
 For example:
 * You would like to find out how many `Tutorial` classes you are currently teaching. You type the command
  `find-class Tutorial` and press <kbd>Enter</kbd>.
+
+  ![Find class before](images/ugimages/FindClassBefore.png)
+
 * You find out that you are only teaching 2 tutorials this semester and hence decide to accept more classes.
 
-    ![Find class after](images/ugimages/FindClassAfter.png)
+  ![Find class after](images/ugimages/FindClassAfter.png)
 
 Other examples:
 * `find-class CS2100`<br>
@@ -542,11 +565,11 @@ For example:
 Hence, you want to delete the class from your Tutor's Pet.
 You type the command `delete-class 2` and press <kbd>Enter</kbd>.
 
-![DeleteClassBefore](images/ugimages/DeleteClassBefore.png)
+  ![DeleteClassBefore](images/ugimages/DeleteClassBefore.png)
 
 * The class has been successfully deleted.
 
-![DeleteClassAfter](images/ugimages/DeleteClassAfter.png)
+  ![DeleteClassAfter](images/ugimages/DeleteClassAfter.png)
 
 Other examples:
 * `find-class CS2030 lab`<br/>
@@ -563,9 +586,11 @@ For example:
 * It is the start of a new semester. You would like to delete all information of all the classes you taught last
  semester to start anew. You type the command `clear-class` and press <kbd>Enter</kbd>.
 
+  ![Clear class before](images/ugimages/ClearClassBefore.png)
+
 * All classes have been cleared. You can start managing your new classes.
 
-    ![Clear class after](images/ugimages/ClearClassAfter.png)
+  ![Clear class after](images/ugimages/ClearClassAfter.png)
 
 #### Listing all students and classes : `list`
 
@@ -658,9 +683,12 @@ If you would like to add a lesson to a class, you can make use of this command.
 For example:
 * You receive news that you will be teaching `CS2103T Tutorial` on `Tuesday 10:00-11:00` at `COM2 #02-02` from week 1 to 13.
 Hence, you type in the command `add-lesson c\1 d\TUESDAY st\10:00 et\11:00 v\COM2 #02-02 r\13` and press <kbd>Enter</kbd>.
+
+  ![Add lesson before](images/ugimages/AddLessonBefore.png)
+
 * You have added a lesson to teach.
 
-    ![Add lesson after](images/ugimages/AddLessonAfter.png)
+  ![Add lesson after](images/ugimages/AddLessonAfter.png)
 
 #### Editing a lesson : `edit-lesson`
 
@@ -671,6 +699,9 @@ If you entered wrong details pertaining to your lesson and would like to change 
 For example:
 * You made an error while entering the `CS2103T Tutorial` lesson. It should be `Tuesday` and not `Thursday`.
 * Type the command `edit-lesson c\1 l\1 d\Tuesday` and press <kbd>Enter</kbd>.
+
+  ![Edit lesson before](images/ugimages/EditLessonBefore.png)
+
 * The day of the lesson has been changed to `Tuesday`.
 
   ![Edit lesson after](images/ugimages/EditLessonAfter.png)
@@ -697,9 +728,12 @@ For example:
 * You receive news that the `Tuesday 10:00-11:00` `CS2103T Tutorial` would be cancelled permanently. You decide to
  remove that lesson from your Tutor's Pet and hence you type in the command `delete-lesson c\1 l\2` and press
  <kbd>Enter</kbd>.
+
+  ![Delete lesson before](images/ugimages/DeleteLessonBefore.png)
+
 * You have one less lesson to teach now.
 
-    ![Delete lesson after](images/ugimages/DeleteLessonAfter.png)
+  ![Delete lesson after](images/ugimages/DeleteLessonAfter.png)
 
 Other examples:
 * `find-class CS2030 lab`<br>
@@ -723,10 +757,13 @@ Gives you the venue of a lesson.
 For example:
 * Due to covid, most of your physical lessons have been converted to zoom lessons and thus all the venues are
   in the form of zoom links. Your lesson is starting in 10 minutes and it is time to start the session. Hence, you
-  input the command `display-venue c\1 l\2` and press <kbd>Enter</kbd>.
+  input the command `display-venue c\2 l\1` and press <kbd>Enter</kbd>.
+
+  ![Display venue before](images/ugimages/DisplayVenueBefore.png)  
+
 * You can now proceed to copy the link to that zoom session from the command result box.
 
-    ![Display venue after](images/ugimages/DisplayVenueAfter.png)
+  ![Display venue after](images/ugimages/DisplayVenueAfter.png)
 
 ### Managing attendance records
 
@@ -740,9 +777,12 @@ For example:
 * Your `CS2103T Tutorial` lesson in week 10 has just ended and you would like to give participation scores to the
   students. You decide to start with Alex. Hence, you type in the command `add-attendance c\1 l\1 s\1 w\10 p\80` and
   press <kbd>Enter</kbd>.
+
+  ![Add attendance before](images/ugimages/AddAttendanceBefore.png)
+
 * You have successfully recorded Alex's attendance. You have another 2 more students' attendance to record.
 
-    ![Add attendance after](images/ugimages/AddAttendanceAfter.png)
+  ![Add attendance after](images/ugimages/AddAttendanceAfter.png)
 
 Other Examples:
 * `find-class CS2100 lab`<br>
@@ -775,6 +815,8 @@ For example:
 * Alex is a student in your CS2103T class. After your lesson in week 1, you wish to give him a participation score of 45.
   However, you accidentally gave him 35 instead. Hence, you can type in the command `edit-attendance c\1 l\1 s\1 w\1 p\45` and press <kbd>Enter</kbd>.
 
+  ![Edit attendance before](images/ugimages/EditAttendanceBefore.png)
+
 * Now you have successfully edited Alex's participation score from 35 to 45 points.
 
   ![Edit attendance after](images/ugimages/EditAttendanceAfter.png)
@@ -802,9 +844,12 @@ For example:
 * It is the end of a semester and it's time to key in your students' attendance into luminus. You would like to find
  out if Alex attended week 1 lesson and hence you type in the command `find-attendance c\1 l\1 s\1 w\1` and press
  <kbd>Enter</kbd>.
+
+  ![Find attendance before](images/ugimages/FindAttendanceBefore.png) 
+
 * Now you can find out if Alex attended the first lesson and how participative he was in week 1.
 
-    ![Find attendance after](images/ugimages/FindAttendanceAfter.png)
+  ![Find attendance after](images/ugimages/FindAttendanceAfter.png)
 
 Other Examples:
 * `find-class CS2100 lab`<br>
@@ -835,9 +880,12 @@ If you would like to delete a specific student's attendance from a lesson, you c
 For example:
 * You would like to delete Alice's attendance for the Thursday 10.00am to 11.00am lesson of CS2103T Tutorial
 in Week 1. Hence, you type in the command `delete-attendance c\1 l\1 s\1 w\1` and press <kbd>Enter</kbd>.
+
+  ![Delete attendance before](images/ugimages/DeleteAttendanceBefore.png)
+
 * Alice's attendance for week 1 has been deleted.
 
-    ![Delete attendance after](images/ugimages/DeleteAttendanceAfter.png)
+  ![Delete attendance after](images/ugimages/DeleteAttendanceAfter.png)
 
 #### Display statistics : `stats`
 
@@ -850,9 +898,12 @@ For example:
 * It is the end of the semester and time for you to grade a student's class participation. You would like to find out
  if Alex has been participative throughout the semester and hence you type in the command `stats c\1 s\1` and press
  <kbd>Enter</kbd>.
+
+  ![Display_stats before](images/ugimages/DisplayStatsBefore.png)
+
 * Now you can see his average participation score and overall attendance to give a corresponding grade.
 
-    ![Display_stats after](images/ugimages/DisplayStatsAfter.png)
+  ![Display_stats after](images/ugimages/DisplayStatsAfter.png)
 
 <div markdown="block" class="alert alert-info">
 
