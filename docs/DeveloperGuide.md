@@ -266,7 +266,7 @@ limitation of PlantUML, the lifeline reaches the end of diagram.
 
 ##### Aspect 1: Maintaining immutability
 A new `Lesson` object will be created whenever there is a change to any of the attributes. This is to guarantee
-the immutability `Lesson`.
+the immutability of `Lesson`.
 
 ##### Aspect 2: Uniqueness of `Lesson`
 
