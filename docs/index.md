@@ -5,6 +5,8 @@ title: Tutor's Pet
 [![CI Status](https://github.com/AY2021S1-CS2103T-T10-4/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2021S1-CS2103T-T10-4/tp/actions)
 [![codecov](https://codecov.io/gh/AY2021S1-CS2103T-T10-4/tp/branch/master/graph/badge.svg)](https://codecov.io/gh/AY2021S1-CS2103T-T10-4/tp)
 
+![Logo](images/Logo.png)
+
 ![Ui](images/Ui.png)
 
 **Tutor's Pet is a desktop application for managing your students and classes.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
