@@ -134,6 +134,9 @@ The utility area consists of three tabs: **File**, **Theme**, **Help**.
 * The **Theme** tab consist of 3 different themes: **Light**, **Alternate** and **Dark**. To change the theme of
  your Tutor's Pet, click on one of these buttons.
 
+     ![Utility area](images/ugimages/ThemeTab.png)
+     <br>Figure 7. The theme tab.
+
 * The **Help** tab consists of a help button. If you require any assistance, click on the help button, copy the link
  given and paste it into any web browser. Alternatively, press <kbd>F1</kbd> to bring up the help window.
 
