@@ -19,6 +19,7 @@ import static tutorspet.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static tutorspet.logic.commands.CommandTestUtil.showModuleClassAtIndex;
 import static tutorspet.logic.commands.CommandTestUtil.showStudentAtIndex;
+import static tutorspet.logic.commands.attendance.EditAttendanceCommand.MESSAGE_COMMIT;
 import static tutorspet.logic.commands.attendance.EditAttendanceCommand.MESSAGE_SUCCESS;
 import static tutorspet.logic.util.ModuleClassUtil.editAttendanceInModuleClass;
 import static tutorspet.logic.util.ModuleClassUtil.getAttendanceFromModuleClass;
@@ -111,12 +112,14 @@ public class EditAttendanceCommandTest {
         ModuleClass editedModuleClass =
                 editAttendanceInModuleClass(moduleClass, lessonIndex, targetWeek, student, editedAttendance);
 
+        String commitMessage = String.format(MESSAGE_COMMIT, student.getName(), editedModuleClass.getName(),
+                lesson.printLesson(), targetWeek);
         String expectedMessage = String.format(MESSAGE_SUCCESS,
                 student.getName(), editedModuleClass.getName(), lesson.printLesson(), targetWeek, editedAttendance);
 
         Model expectedModel = new ModelManager(new TutorsPet(model.getTutorsPet()), new UserPrefs());
         expectedModel.setModuleClass(moduleClass, editedModuleClass);
-        expectedModel.commit(expectedMessage);
+        expectedModel.commit(commitMessage);
 
         assertCommandSuccess(editAttendanceCommand, model, expectedMessage, expectedModel);
     }
@@ -137,11 +140,13 @@ public class EditAttendanceCommandTest {
         Attendance editedAttendance = getAttendanceFromModuleClass(
                 targetModuleClass, lessonIndex, targetWeek, student);
 
+        String commitMessage = String.format(MESSAGE_COMMIT, student.getName(), targetModuleClass.getName(),
+                lesson.printLesson(), targetWeek);
         String expectedMessage = String.format(MESSAGE_SUCCESS,
                 student.getName(), targetModuleClass.getName(), lesson.printLesson(), targetWeek, editedAttendance);
 
         Model expectedModel = new ModelManager(new TutorsPet(model.getTutorsPet()), new UserPrefs());
-        expectedModel.commit(expectedMessage);
+        expectedModel.commit(commitMessage);
 
         assertCommandSuccess(editAttendanceCommand, model, expectedMessage, expectedModel);
     }
@@ -169,13 +174,15 @@ public class EditAttendanceCommandTest {
         ModuleClass editedModuleClass = editAttendanceInModuleClass(moduleClassInFilteredList, lessonIndex,
                 targetWeek, studentInFilteredList, editedAttendance);
 
+        String commitMessage = String.format(MESSAGE_COMMIT, studentInFilteredList.getName(),
+                editedModuleClass.getName(), lesson.printLesson(), targetWeek);
         String expectedMessage = String.format(MESSAGE_SUCCESS, studentInFilteredList.getName(),
                 editedModuleClass.getName(), lesson.printLesson(), targetWeek, editedAttendance);
 
         Model expectedModel = new ModelManager(new TutorsPet(model.getTutorsPet()), new UserPrefs());
         expectedModel.updateFilteredStudentList(s -> s.equals(studentInFilteredList));
         expectedModel.setModuleClass(moduleClassInFilteredList, editedModuleClass);
-        expectedModel.commit(expectedMessage);
+        expectedModel.commit(commitMessage);
 
         assertCommandSuccess(editAttendanceCommand, model, expectedMessage, expectedModel);
     }

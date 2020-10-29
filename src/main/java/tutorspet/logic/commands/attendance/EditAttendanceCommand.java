@@ -58,6 +58,7 @@ public class EditAttendanceCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Edited attendance:\n"
             + "%1$s attended %2$s %3$s in week %4$s"
             + "with participation score of %5$s.";
+    public static final String MESSAGE_COMMIT = "Edited attendance: %1$s (%2$s %3$s in week %4$s).";
 
     private final Index moduleClassIndex;
     private final Index lessonIndex;
@@ -110,10 +111,10 @@ public class EditAttendanceCommand extends Command {
         model.setModuleClass(targetModuleClass, modifiedModuleClass);
         model.updateFilteredModuleClassList(PREDICATE_SHOW_ALL_MODULE_CLASS);
 
-        String message = String.format(MESSAGE_SUCCESS, targetStudent.getName(), modifiedModuleClass.getName(),
-                targetLesson.printLesson(), week, editedAttendance);
-        model.commit(message);
-        return new CommandResult(message);
+        model.commit(String.format(MESSAGE_COMMIT, targetStudent.getName(), modifiedModuleClass.getName(),
+                targetLesson.printLesson(), week));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, targetStudent.getName(), modifiedModuleClass.getName(),
+                targetLesson.printLesson(), week, editedAttendance));
     }
 
     /**

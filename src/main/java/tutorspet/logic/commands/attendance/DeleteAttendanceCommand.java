@@ -48,6 +48,7 @@ public class DeleteAttendanceCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Deleted attendance:\n"
             + "%1$s %2$s %3$s attendance in week %4$s.";
+    public static final String MESSAGE_COMMIT = "Deleted attendance: %1$s (%2$s %3$s in week %4$s).";
 
     private final Index moduleClassIndex;
     private final Index lessonIndex;
@@ -95,10 +96,10 @@ public class DeleteAttendanceCommand extends Command {
 
         model.setModuleClass(targetModuleClass, modifiedModuleClass);
 
-        String message = String.format(MESSAGE_SUCCESS,
-                targetStudent.getName(), modifiedModuleClass, lesson.printLesson(), week);
-        model.commit(message);
-        return new CommandResult(message);
+        model.commit(String.format(MESSAGE_COMMIT, targetStudent.getName(), targetModuleClass.getName(),
+                lesson.printLesson(), week));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, targetStudent.getName(), modifiedModuleClass.getName(),
+                lesson.printLesson(), week));
     }
 
     @Override
