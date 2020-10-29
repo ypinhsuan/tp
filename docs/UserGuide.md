@@ -293,6 +293,8 @@ For example:
 * It is the start of a new semester and you want to delete all students and classes.
   You can type in the command `reset` and press <kbd>Enter</kbd>.
 
+  ![Reset before](images/ugimages/ResetBefore.png)
+
 * You can see that all students and classes have been deleted.
 
   ![Reset after](images/ugimages/ResetAfter.png)
