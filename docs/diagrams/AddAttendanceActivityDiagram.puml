@@ -3,7 +3,7 @@
 
 start
 
-:user enters 'add-attendance c\1 l\1 s\1' in
+:user enters an add-attendance command in
 the command box;
 
 :AddAttendanceCommandParser parses the argument;
