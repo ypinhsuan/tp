@@ -148,7 +148,7 @@ The utility area consists of three tabs: **File**, **Theme**, **Help**.
 
 This section details the format of the commands available in Tutor's Pet. We will adhere to the following:
 
-* Words in `↑PER_CASE` are the parameters to be supplied by the user.<br>
+* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add-student n\NAME`, `NAME` is a parameter which can be used as `add-student n\John Doe`.
 
 * Items in square brackets are optional.<br>
