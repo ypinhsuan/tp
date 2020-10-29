@@ -14,6 +14,7 @@ import static tutorspet.logic.commands.CommandTestUtil.VALID_VENUE_S17_0302_LESS
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static tutorspet.logic.commands.CommandTestUtil.showModuleClassAtIndex;
+import static tutorspet.logic.commands.lesson.EditLessonCommand.MESSAGE_COMMIT;
 import static tutorspet.logic.commands.lesson.EditLessonCommand.MESSAGE_SUCCESS;
 import static tutorspet.logic.util.ModuleClassUtil.editLessonInModuleClass;
 import static tutorspet.model.lesson.Lesson.MESSAGE_CONSTRAINTS;
@@ -78,11 +79,12 @@ public class EditLessonCommandTest {
 
         ModuleClass updatedModuleClass = editLessonInModuleClass(moduleClass, lessonToEdit, editedLesson);
 
+        String commitMessage = String.format(MESSAGE_COMMIT, moduleClass.getName(), editedLesson.printLesson());
         String expectedMessage = String.format(MESSAGE_SUCCESS, moduleClass.getName(), editedLesson);
 
         Model expectedModel = new ModelManager(new TutorsPet(model.getTutorsPet()), new UserPrefs());
         expectedModel.setModuleClass(moduleClass, updatedModuleClass);
-        expectedModel.commit(expectedMessage);
+        expectedModel.commit(commitMessage);
 
         assertCommandSuccess(editLessonCommand, model, expectedMessage, expectedModel);
     }
@@ -105,11 +107,12 @@ public class EditLessonCommandTest {
                 .withVenue(VALID_VENUE_S17_0302_LESSON_FRI_8_TO_10).build();
         ModuleClass updatedModuleClass = editLessonInModuleClass(firstModuleClass, firstLessonInList, editedLesson);
 
+        String commitMessage = String.format(MESSAGE_COMMIT, updatedModuleClass.getName(), editedLesson.printLesson());
         String expectedMessage = String.format(MESSAGE_SUCCESS, updatedModuleClass.getName(), editedLesson);
 
         Model expectedModel = new ModelManager(new TutorsPet(model.getTutorsPet()), new UserPrefs());
         expectedModel.setModuleClass(firstModuleClass, updatedModuleClass);
-        expectedModel.commit(expectedMessage);
+        expectedModel.commit(commitMessage);
 
         assertCommandSuccess(editLessonCommand, model, expectedMessage, expectedModel);
     }
@@ -126,10 +129,11 @@ public class EditLessonCommandTest {
 
         Lesson editedLesson = targetModuleClass.getLessons().get(lessonIndex.getZeroBased());
 
+        String commitMessage = String.format(MESSAGE_COMMIT, targetModuleClass.getName(), editedLesson.printLesson());
         String expectedMessage = String.format(MESSAGE_SUCCESS, targetModuleClass.getName(), editedLesson);
 
         Model expectedModel = new ModelManager(new TutorsPet(model.getTutorsPet()), new UserPrefs());
-        expectedModel.commit(expectedMessage);
+        expectedModel.commit(commitMessage);
 
         assertCommandSuccess(editLessonCommand, model, expectedMessage, expectedModel);
     }
@@ -154,12 +158,13 @@ public class EditLessonCommandTest {
         ModuleClass updatedModuleClass = editLessonInModuleClass(
                 moduleClassInFilteredList, lessonToEdit, editedLesson);
 
+        String commitMessage = String.format(MESSAGE_COMMIT, updatedModuleClass.getName(), editedLesson.printLesson());
         String expectedMessage = String.format(MESSAGE_SUCCESS,
                 updatedModuleClass.getName(), editedLesson);
 
         Model expectedModel = new ModelManager(new TutorsPet(model.getTutorsPet()), new UserPrefs());
         expectedModel.setModuleClass(moduleClassInFilteredList, updatedModuleClass);
-        expectedModel.commit(expectedMessage);
+        expectedModel.commit(commitMessage);
 
         assertCommandSuccess(editLessonCommand, model, expectedMessage, expectedModel);
     }

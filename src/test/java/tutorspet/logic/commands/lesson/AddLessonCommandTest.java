@@ -6,6 +6,7 @@ import static tutorspet.commons.core.Messages.MESSAGE_DUPLICATE_LESSON;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static tutorspet.logic.commands.lesson.AddLessonCommand.MESSAGE_COMMIT;
 import static tutorspet.logic.commands.lesson.AddLessonCommand.MESSAGE_SUCCESS;
 import static tutorspet.logic.util.ModuleClassUtil.addLessonToModuleClass;
 import static tutorspet.testutil.Assert.assertThrows;
@@ -47,10 +48,11 @@ public class AddLessonCommandTest {
         Lesson lesson = new LessonBuilder().build();
         ModuleClass modifiedModuleClass = addLessonToModuleClass(moduleClass, lesson);
 
-        String expectedMessage = String.format(MESSAGE_SUCCESS, modifiedModuleClass, lesson);
+        String commitMessage = String.format(MESSAGE_COMMIT, modifiedModuleClass.getName(), lesson.printLesson());
+        String expectedMessage = String.format(MESSAGE_SUCCESS, modifiedModuleClass.getName(), lesson);
         Model expectedModel = new ModelManager(model.getTutorsPet(), new UserPrefs());
         expectedModel.setModuleClass(moduleClass, modifiedModuleClass);
-        expectedModel.commit(expectedMessage);
+        expectedModel.commit(commitMessage);
 
         assertCommandSuccess(new AddLessonCommand(moduleClassIndex, lesson), model, expectedMessage, expectedModel);
     }
