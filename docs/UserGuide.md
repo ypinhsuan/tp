@@ -299,14 +299,14 @@ For example:
 
 If you have to enter a similar command repeatedly, you can use this feature to type less.
 
-When the [command box](#using-tutors-pet) is selected, press the <kbd>↑</kbd> and <kbd>↓</kbd> arrow keys to cycle through previously entered commands.
+When the [command box](#using-tutors-pet) is selected, press the <kbd>↑</kbd> and <kbd>↓</kbd> keys to cycle through previously entered commands.
 
 For example:
 
 * You are taking the attendance for one of your lessons, CS2103T Tutorial.
   You have just [recorded the attendance](#adding-an-attendance-record--add-attendance) of the first student.
 
-* Instead of typing the whole command from the beginning, you can **press** the <kbd>↑</kbd> arrow key.
+* Instead of typing the whole command from the beginning, you can **press** the <kbd>↑</kbd> key.
 
 * The previous command will be displayed in the command box.
 
@@ -607,7 +607,7 @@ For example:
 
 <div markdown="block" class="alert alert-primary">
 
-:bulb: **Tip:** When linking multiple students to a class, you can press the <kbd>↑</kbd> arrow key to retrieve previously
+:bulb: **Tip:** When linking multiple students to a class, you can press the <kbd>↑</kbd> key to retrieve previously
 entered commands. This reduces the amount you need to type.
 
 </div>
@@ -760,7 +760,7 @@ Other Examples:
 <div markdown="block" class="alert alert-primary">
 
 :bulb: **Tip:** If you are planning to add multiple attendances consecutively, click on the command
-box and make use of the `recall` function by pressing <kbd>up</kbd> arrow key. This `recall` function automatically
+box and make use of the `recall` function by pressing <kbd>↑</kbd> key. This `recall` function automatically
 inputs your most recent command into the command box allowing you to type less!
 
 </div>
