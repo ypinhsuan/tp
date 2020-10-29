@@ -28,7 +28,7 @@ This user guide provides documentation on the installation and usage of Tutor's 
 It also provides a comprehensive description of features available to you and
 includes a [quick-start](#quick-start) section that helps you get started.
 
-### Using This Guide
+### Using this guide
 
 The following features are used in this guide to make it easier for you to navigate around:
 
@@ -58,7 +58,7 @@ The following features are used in this guide to make it easier for you to navig
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick Start
+## Quick start
 ### Installing Tutor's Pet
 
 Here are a few steps to get you started on Tutor's Pet:
@@ -94,7 +94,7 @@ display box, which is located immediately below the command box.
    <br>Figure 3. The command box and result display box.
 
 * Type a command in the command box and press <kbd>Enter</kbd> to execute it.<br>
-   e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window.<br>
+   e.g. Type **`help`** and press <kbd>Enter</kbd> to open the help window.<br>
 
    Some example commands you can try:
 
@@ -113,39 +113,42 @@ display box, which is located immediately below the command box.
 
 The main viewing area consists of two sections: **Classes** and **Students**.
 
-* The **Classes** section contains information about classes and lessons in Tutor's Pet. To view the list of all
- classes in Tutor's Pet, make use of the **`list-class`** command.
+* The **Classes** section contains information about classes and lessons in Tutor's Pet. Use the **`list-class`** command to view the list of all
+classes in Tutor's Pet.
 
     ![Class_section](images/ugimages/ClassPanel.png)
     <br>Figure 4. The class section.
 
-* The **Students** section displays contains information about students in Tutor's Pet. To view the list of all
- students in Tutor's Pet, make use of the **`list-student`** command.
+* The **Students** section displays contains information about students in Tutor's Pet. Use the **`list-student`** command to view the list of all students in Tutor's Pet.
 
     ![Student_section](images/ugimages/StudentPanel.png)
     <br>Figure 5. The student section.
 
 The utility area consists of three tabs: **File**, **Theme**, **Help**.
 
-* The **File** tab consists of an exit button. To exit Tutor's Pet, click on the exit button. Alternatively, make
- use of the `exit` command to exit the application.
+  ![Utility area](images/ugimages/UtilityArea.png)
+  <br>Figure 6. The utility area.
 
-* The **Theme** tab consist of 3 different themes, mainly **Light**, **Alternate** and **Dark**. To change the theme of
+* The **File** tab consists of an exit button. To exit Tutor's Pet, click on the exit button. Alternatively, use the `exit` command to exit the application.
+
+* The **Theme** tab consist of 3 different themes: **Light**, **Alternate** and **Dark**. To change the theme of
  your Tutor's Pet, click on one of these buttons.
 
-* The **Help** tab consists of a help button. If you require any assistance, click on the help button, copy the link
- given and paste it into any web browsers. Alternatively, press <kbd>F1</kbd> to bring up the help window.
+     ![Theme tab](images/ugimages/ThemeTab.png)
+     <br>Figure 7. The theme tab.
 
-   ![Utility area](images/ugimages/UtilityArea.png)
-   <br>Figure 6. The utility area.
+* The **Help** tab consists of a help button. If you require any assistance, click on the help button, copy the link
+ given and paste it into any web browser. Alternatively, press <kbd>F1</kbd> to bring up the help window.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+## Command format
 
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command format:**<br>
+
+This section details the format of the commands available in Tutor's Pet. We will adhere to the following:
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add-student n\NAME`, `NAME` is a parameter which can be used as `add-student n\John Doe`.
@@ -163,7 +166,8 @@ The utility area consists of three tabs: **File**, **Theme**, **Help**.
 
 </div>
 
-## Command Overview
+## Command overview
+This section provides an overview of all commands in Tutor's Pet and illustrates the usage of each command in detail.
 
 | Action                            | Format, Examples                                                                                                                                                          |
 |-----------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -199,6 +203,8 @@ The utility area consists of three tabs: **File**, **Theme**, **Help**.
 | **Unlink Student From A Class**   | `unlink s\STUDENT_INDEX c\CLASS_INDEX` <br> e.g., `unlink s\1 c\2`                                                                                                        |
 | **View Change History**           | `view-history`                                                                                                                                                            |
 
+
+The following subsections will elaborate on the specific details of each Tutor's Pet command.
 
 ### General
 
@@ -278,7 +284,7 @@ For example:
 Tutor's Pet automatically saves your data to your home folder after any changes are made.
 There is no need for you to save manually.
 
-### Managing Students
+### Managing students
 
 #### Adding a student : `add-student`
 
@@ -373,7 +379,7 @@ If you would like to delete all students in the application, you can use this co
 
 **Format**: `clear-student`
 
-### Managing Classes
+### Managing classes
 
 #### Adding a class : `add-class`
 
@@ -604,7 +610,7 @@ Other examples:
   `unlink s\1 c\1`
   Lists the students of the 2nd class in the displayed class list, and unlinks the 2nd student of that class.
 
-### Managing Lessons
+### Managing lessons
 
 #### Adding a lesson : `add-lesson` --- Jun Long
 
@@ -627,8 +633,8 @@ If you entered wrong details pertaining to your lesson and would like to change 
 **Format**: `edit-lesson c\CLASS_INDEX l\LESSON_INDEX [d\DAY] [st\START_TIME] [et\END_TIME] [v\VENUE]`
 
 For example:
-* You made an error while entering the `CS2103T Tutorial` lesson. It should be `Tuesday` and not `Thursday`. You type the command `edit-lesson c\1 l\1 d\Tuesday` and press <kbd>Enter</kbd>.
-
+* You made an error while entering the `CS2103T Tutorial` lesson. It should be `Tuesday` and not `Thursday`.
+* Type the command `edit-lesson c\1 l\1 d\Tuesday` and press <kbd>Enter</kbd>.
 * The day of the lesson has been changed to `Tuesday`.
 
   ![Edit lesson after](images/ugimages/EditLessonAfter.png)
@@ -686,7 +692,7 @@ For example:
 
     ![Display venue after](images/ugimages/DisplayVenueAfter.png)
 
-### Managing Attendance Records
+### Managing attendance records
 
 #### Adding an attendance record : `add-attendance`
 
@@ -797,7 +803,7 @@ in Week 1. Hence, you type in the command `delete-attendance c\1 l\1 s\1 w\1` an
 
     ![Delete attendance after](images/ugimages/DeleteAttendanceAfter.png)
 
-#### Display Statistics : `stats`
+#### Display statistics : `stats`
 
 Gives you an overall summary of a student's attendance and participation scores.
 

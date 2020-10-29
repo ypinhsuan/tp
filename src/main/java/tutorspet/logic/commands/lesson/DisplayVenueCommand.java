@@ -24,7 +24,7 @@ public class DisplayVenueCommand extends Command {
 
     public static final String COMMAND_WORD = "display-venue";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + "Displays the venue for a lesson.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Displays the venue for a lesson.\n"
             + "Note: All indexes must be positive integers.\n"
             + "Parameters: "
             + PREFIX_CLASS_INDEX + "CLASS_INDEX "
