@@ -222,7 +222,7 @@ you can use this command to undo the changes.
 
 For example:
 
-* You want to delete Alex from your Tutor's Pet, however you accidentally deleted Bernice instead of Alex. 
+* You want to delete Alex from your Tutor's Pet, however you accidentally deleted Bernice instead of Alex.
 
 * You type in the command `undo` and press <kbd>Enter</kbd>.
    ![Undo before](images/ugimages/UndoBefore.png)
@@ -305,7 +305,7 @@ For example:
 
 * You are taking the attendance for one of your lessons, CS2103T Tutorial.
   You have just [recorded the attendance](#adding-an-attendance-record--add-attendance) of the first student.
-  
+
 * Instead of typing the whole command from the beginning, you can **press** the <kbd>↑</kbd> arrow key.
 
 * The previous command will be displayed in the command box.
@@ -626,7 +626,7 @@ You can unlink a student from a class using this command.
 
 For example:
 * One of your students, Alex Yeoh, has transferred out of your class, CS2103T Tutorial, and you decide to remove him from the class.
-  
+
 * Type in the command `unlink s\1 c\1` and press <kbd>Enter</kbd>.
 
   ![Unlink before](images/ugimages/UnlinkBefore.png)
