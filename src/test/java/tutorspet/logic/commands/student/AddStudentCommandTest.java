@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tutorspet.commons.core.Messages.MESSAGE_DUPLICATE_STUDENT;
+import static tutorspet.logic.commands.student.AddStudentCommand.MESSAGE_COMMIT;
 import static tutorspet.logic.commands.student.AddStudentCommand.MESSAGE_SUCCESS;
 import static tutorspet.testutil.Assert.assertThrows;
 
@@ -37,7 +38,7 @@ public class AddStudentCommandTest {
 
         assertEquals(String.format(MESSAGE_SUCCESS, validStudent), commandResult.getFeedbackToUser());
         assertEquals(Collections.singletonList(validStudent), modelStub.studentsAdded);
-        assertEquals(Collections.singletonList(String.format(MESSAGE_SUCCESS, validStudent)),
+        assertEquals(Collections.singletonList(String.format(MESSAGE_COMMIT, validStudent.getName())),
                 modelStub.commitMessages);
     }
 

@@ -8,7 +8,7 @@ import static tutorspet.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static tutorspet.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static tutorspet.logic.commands.CommandTestUtil.TELEGRAM_DESC_AMY;
 import static tutorspet.logic.commands.student.AddStudentCommand.COMMAND_WORD;
-import static tutorspet.logic.commands.student.AddStudentCommand.MESSAGE_SUCCESS;
+import static tutorspet.logic.commands.student.AddStudentCommand.MESSAGE_COMMIT;
 import static tutorspet.testutil.Assert.assertThrows;
 import static tutorspet.testutil.TypicalStudent.AMY;
 
@@ -89,7 +89,7 @@ public class LogicManagerTest {
         Student expectedStudent = new StudentBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addStudent(expectedStudent);
-        expectedModel.commit(String.format(MESSAGE_SUCCESS, expectedStudent));
+        expectedModel.commit(String.format(MESSAGE_COMMIT, expectedStudent.getName()));
         String expectedMessage = FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
         assertCommandFailure(addStudentCommand, CommandException.class, expectedMessage, expectedModel);
     }

@@ -49,6 +49,7 @@ public class EditStudentCommand extends Command {
             + PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String MESSAGE_SUCCESS = "Edited student:\n%1$s.";
+    public static final String MESSAGE_COMMIT = "Edited student: %1$s.";
 
     private final Index index;
     private final EditStudentDescriptor editStudentDescriptor;
@@ -83,9 +84,8 @@ public class EditStudentCommand extends Command {
 
         model.setStudent(studentToEdit, editedStudent);
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
-        String message = String.format(MESSAGE_SUCCESS, editedStudent);
-        model.commit(message);
-        return new CommandResult(message);
+        model.commit(String.format(MESSAGE_COMMIT, editedStudent.getName()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, editedStudent));
     }
 
     /**
