@@ -56,8 +56,7 @@ public class EditAttendanceCommand extends Command {
             + PREFIX_PARTICIPATION_SCORE + "80";
 
     public static final String MESSAGE_SUCCESS = "Edited attendance:\n"
-            + "%1$s attended %2$s %3$s in week %4$s"
-            + "with participation score of %5$s.";
+            + "%1$s attended %2$s %3$s in week %4$s\nwith participation score of %5$s.";
     public static final String MESSAGE_COMMIT = "Edited attendance: %1$s (%2$s %3$s in week %4$s).";
 
     private final Index moduleClassIndex;
