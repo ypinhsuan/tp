@@ -386,7 +386,7 @@ taken into account when implementing this feature.
 
 The display statistics mechanism is facilitated by `StatisticsCommand`. It extends `Command`.
 
-* `DisplayStatisticsCommand#execute()`: Do validity check and returns a specific student's statistics if all
+* `DisplayStatisticsCommand#execute()`: Performs a validity check and returns a specific student's statistics if all
  validations passed.
 
 The following class diagram shows the relationship between classes during the execution of a `StatisticsCommand`:
@@ -394,7 +394,7 @@ The following class diagram shows the relationship between classes during the ex
 ![StatisticsClassDiagram](images/StatisticsClassDiagram.png)
 
 The following sequence diagram shows the interactions within the `Logic` component during the execution
-of a `StatisticsCommand`:
+of a `StatisticsCommand` with user input `stats c\1 s\1`:
 
 ![StatisticsSequenceDiagram](images/StatisticsSequenceDiagram.png)
 
@@ -426,9 +426,10 @@ of a `StatisticsCommand`:
     * Easy, straightforward to implement.
   * Cons:
     * Violates the law of demeter to a large extent.
-    
-Alternative 1 was chosen because we want to maintain the testability of our code. Testing would be harder with
-alternative 2 since everything is done within `StatisticsCommand#execute()`.
+
+Alternative 1 was chosen to maintain the testability of our code. In addition, abstracting out the
+methods helps to increase reusability of the code. This provides `StatisticsCommand#execute()` the ability to compute
+the relevant results without knowing the low level implementations.
 
 ##### Aspect 2: Responsibility of relevant methods
 
@@ -458,11 +459,12 @@ taken into account when implementing this feature.
 #### Implementation
 The add attendance mechanism is facilitated by `AddAttendanceCommand`. It extends `Command`.
 
-* `AddAttendanceCommand#execute()`: Do validity check and adds a student's attendance for a particular week's lesson if
+* `AddAttendanceCommand#execute()`: Performs a validity check and adds a student's attendance for a particular week's
+ lesson if
  all validations passed.
 
 The following sequence diagram shows the interactions between the `Model` and `Logic` components during the execution
- of a `AddAttendanceCommand`:
+ of a `AddAttendanceCommand` with user input `add-attendance c\1 l\1 s\1`:
 
 ![AddAttendanceSequenceDiagram](images/AddAttendanceSequenceDiagram.png)
 
@@ -1344,23 +1346,6 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Adding an attendance
-
-1. Adding an attendance
-
-   1. Prerequisites: List all classes and students using the `list` command. Using default tutor's pet data.
-
-   1. Test case: `add-attendance c\1 l\1 s\1 w\3 p\70`<br>
-      Expected: Attendance added. Details of the attendance shown in the status message.
-
-   1. Test case: `add-attendance c\1 l\1 s\1 w\2 p\70`<br>
-      Expected: No attendance added. Reason stated in the status message.
-
-   1. Other incorrect add commands to try: `add-attendance c\1 l\1 s\1 w\3 p\100`, `add-attendance c\x l\1 s\1 w\3
-      p\70` (where x is larger than the size of class list)<br>
-      Expected: No attendance added. Error details shown in the status message.
-
-
 ### Deleting a student
 
 1. Deleting a student while all students are being shown
@@ -1376,55 +1361,7 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete-student`, `delete-student x` (where x is larger than the
       size of student list)<br>
       Expected: No student is deleted. Error details shown in the status message.
-
-1. Deleting a lesson
-
-   1. Prerequisites: List all classes using the `list-class` command. The first class contains at least one lesson.
-
-   1. Test case: `delete-lesson c\1 l\1`<br>
-      Expected: First lesson in first class has been deleted from the list. Details of the deleted lesson shown in the
-      status message.
-
-   1. Test case: `delete-lesson c\1 l\0`<br>
-      Expected: No lesson is deleted. Error details shown in the status message.
-
-   1. Other incorrect delete commands to try: `delete-lesson`, `delete-lesson x` (where x is larger than the
-      number of lesson in a specific class)<br>
-      Expected: No lesson is deleted. Error details shown in the status message.
-
-### Displaying a student's statistics
-
-1. Displaying a student's statistics
-
-   1. Prerequisites: List all classes and students using the `list` command. Using default tutor's pet data.
-
-   1. Test case: `stats c\1 s\1`<br>
-      Expected: Statistics for the first student in the first class of the student list and class list respectively
-      found. Details of the statistics shown in the status message.
-
-   1. Test case: `stats c\1 s\4`<br>
-      Expected: Statistics not found. Reason stated in the status message.
-
-   1. Other incorrect display stats commands to try: `stats c\1 s\a`, `stats c\1 s\x`, `...` (where x is larger than the
-      size of student list)<br>
-      Expected: Statistics not found. Error details shown in the status message.
-
-### Displaying a lesson's venue
-
-1. Displaying a lesson's venue
-
-   1. Prerequisites: List all classes using the `list-class` command. Using default tutor's pet data.
-
-   1. Test case: `display-venue c\1 l\1`<br>
-      Expected: Venue for the first lesson in the first class of the class list found. Details of the venue shown in
-      the status message.
-
-   1. Test case: `display-venue c\1 l\2`<br>
-      Expected: Venue not found. Error details shown in the status message.
-
-   1. Other incorrect display venue commands to try: `display-venue c\1 l\a`<br>
-      Expected: Venue not found. Error details shown in the status message.
-
+  
 ### Editing a class
 
 1. Editing a class
@@ -1442,7 +1379,7 @@ testers are expected to do more *exploratory* testing.
       (where x is larger than the size of class list)<br>
       Expected: No class is edited. Error details shown in the status message.
 
-### Finding a class or attendance
+### Finding a class
 
 1. Find a class
 
@@ -1454,6 +1391,66 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `find-class 2103T`<br>
       Expected: No class displayed.
+
+### Clearing all classes
+
+1. Clearing all classes
+
+   1. Prerequisites: List all classes using the `list-class` command. At least one class in the class list.
+
+   1. Test case: `clear-class`<br>
+      Expected: All classes cleared.
+
+### Deleting a lesson
+
+1. Deleting a lesson while all lessons are being shown
+
+   1. Prerequisites: List all classes using the `list-class` command. The first class contains at least one lesson.
+
+   1. Test case: `delete-lesson c\1 l\1`<br>
+      Expected: First lesson in first class has been deleted from the list. Details of the deleted lesson shown in the
+      status message.
+
+   1. Test case: `delete-lesson c\1 l\0`<br>
+      Expected: No lesson is deleted. Error details shown in the status message.
+
+   1. Other incorrect delete commands to try: `delete-lesson`, `delete-lesson x` (where x is larger than the
+      number of lesson in a specific class)<br>
+      Expected: No lesson is deleted. Error details shown in the status message.
+
+### Displaying a lesson's venue
+
+1. Displaying a lesson's venue
+
+   1. Prerequisites: List all classes using the `list-class` command. Using default tutor's pet data.
+
+   1. Test case: `display-venue c\1 l\1`<br>
+      Expected: Venue for the first lesson in the first class of the class list found. Details of the venue shown in
+      the status message.
+
+   1. Test case: `display-venue c\1 l\2`<br>
+      Expected: Venue not found. Error details shown in the status message.
+
+   1. Other incorrect display venue commands to try: `display-venue c\1 l\a`<br>
+      Expected: Venue not found. Error details shown in the status message.
+
+### Adding an attendance
+
+1. Adding an attendance
+
+   1. Prerequisites: List all classes and students using the `list` command. Using default tutor's pet data.
+
+   1. Test case: `add-attendance c\1 l\1 s\1 w\3 p\70`<br>
+      Expected: Attendance added. Details of the attendance shown in the status message.
+
+   1. Test case: `add-attendance c\1 l\1 s\1 w\2 p\70`<br>
+      Expected: No attendance added. Reason stated in the status message.
+
+   1. Other incorrect add commands to try: `add-attendance c\1 l\1 s\1 w\3 p\100`, `add-attendance c\x l\1 s\1 w\3
+      p\70` (where x is larger than the size of class list)<br>
+      Expected: No attendance added. Error details shown in the status message.
+
+### Finding an attendance
 
 1. Find an attendance
 
@@ -1472,14 +1469,22 @@ testers are expected to do more *exploratory* testing.
       (where x is larger than the size of class list)<br>
       Expected: Attendance not found. Error details shown in the status message.
 
-### Clearing Tutor's Pet
+### Displaying a student's statistics
 
-1. Clearing all classes
+1. Displaying a student's statistics
 
-   1. Prerequisites: List all classes using the `list-class` command. At least one class in the class list.
+   1. Prerequisites: List all classes and students using the `list` command. Using default tutor's pet data.
 
-   1. Test case: `clear-class`<br>
-      Expected: All classes cleared.
+   1. Test case: `stats c\1 s\1`<br>
+      Expected: Statistics for the first student in the first class of the student list and class list respectively
+      found. Details of the statistics shown in the status message.
+
+   1. Test case: `stats c\1 s\4`<br>
+      Expected: Statistics not found. Reason stated in the status message.
+
+   1. Other incorrect display stats commands to try: `stats c\1 s\a`, `stats c\1 s\x`, `...` (where x is larger than the
+      size of student list)<br>
+      Expected: Statistics not found. Error details shown in the status message.
 
 ### Saving data
 

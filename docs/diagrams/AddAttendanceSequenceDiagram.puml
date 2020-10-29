@@ -14,10 +14,10 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute()
+[-> LogicManager : execute("add-attendance c\1 l\1 s\1")
 activate LogicManager
 
-LogicManager -> TutorsPetParser : parseCommand()
+LogicManager -> TutorsPetParser : parseCommand("add-attendance c\1 l\1 s\1")
 activate TutorsPetParser
 
 create AddAttendanceCommandParser
@@ -27,7 +27,7 @@ activate AddAttendanceCommandParser
 AddAttendanceCommandParser --> TutorsPetParser
 deactivate AddAttendanceCommandParser
 
-TutorsPetParser -> AddAttendanceCommandParser: parse()
+TutorsPetParser -> AddAttendanceCommandParser: parse("c\1 l\1 s\1")
 activate AddAttendanceCommandParser
 
 create AddAttendanceCommand
