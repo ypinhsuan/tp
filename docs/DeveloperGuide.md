@@ -250,7 +250,7 @@ A `ModuleClass` can contain any number of `Lesson` objects, but cannot contain d
 
 The sequence diagram below shows the interaction between `Logic` and `Model` when a `Lesson` is added to `ModuleClass`.
 The utility methods for modifying `Lesson` in `ModuleClass` are in `ModuleClassUtil` to avoid handling add, edit and
-delete in the `Model` component. 
+delete in the `Model` component.
 
 ![Add Lesson Sequence Diagram](images/AddLessonSequenceDiagram.png)
 

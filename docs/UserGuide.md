@@ -2,7 +2,7 @@
 layout: page
 title: Tutor's Pet - User Guide
 ---
-![Logo](images/ugimages/Logo.png)
+![Logo](images/Logo.png)
 
 **Tutor's Pet - User Guide**
 
