@@ -38,7 +38,7 @@ The following features are used in this guide to make it easier for you to navig
 
 <div markdown="block" class="alert alert-info">
 
-:information_source: Boxes with the :information_source: icon contain additional useful information.
+:information_source: Boxes wi the :information_source: icon contain additional useful information.
 
 </div>
 
@@ -173,6 +173,7 @@ This section provides an overview of all commands in Tutor's Pet and illustrates
 | **Add Class**                     | `add-class n\CLASS_NAME`                                                                    | `add-class n\CS2103T Tutorial T10`                                 |
 | **Add Lesson**                    | `add-lesson c\CLASS_INDEX d\DAY st\START_TIME et\END_TIME v\VENUE r\NO_OF_TIMES`            | `add-lesson c\1 d\MONDAY st\0800 et\1000 v\COM1 #01-01 r\13`       |
 | **Add Student**                   | `add-student n\NAME t\TELEGRAM_USERNAME e\EMAIL [tag\TAG]…`                                 | `add-student n\John Doe t\johndoe e\johnd@example.com tag\student` |
+| **Add Student To A Class**        | `link s\STUDENT_INDEX c\CLASS_INDEX`                                                        | `link s\1 c\2`                                                     |
 | **Clear All Classes**             | `clear-class`                                                                               |                                                                    |
 | **Clear All Students**            | `clear-student`                                                                             |                                                                    |
 | **Delete Attendance Record**      | `delete-attendance c\CLASS_INDEX l\LESSON_INDEX s\STUDENT_INDEX w\WEEK`                     | `delete-attendance c\1 l\1 s\1 w\1`                                |
@@ -190,15 +191,14 @@ This section provides an overview of all commands in Tutor's Pet and illustrates
 | **Find Class**                    | `find-class KEYWORD [MORE_KEYWORDS]`                                                        | `find-class CS2103T`                                               |
 | **Find Student**                  | `find-student KEYWORD [MORE_KEYWORDS]`                                                      | `find-student James Jake`                                          |
 | **Help**                          | `help`                                                                                      |                                                                    |
-| **Linking Student To A Class**    | `link s\STUDENT_INDEX c\CLASS_INDEX`                                                        | `link s\1 c\2`                                                     |
 | **List All Classes**              | `list-class`                                                                                |                                                                    |
 | **List All Students**             | `list-student`                                                                              |                                                                    |
 | **List All Students And Classes** | `list`                                                                                      |                                                                    |
 | **List Students In A Class**      | `list-student c\CLASS_INDEX`                                                                | `list-student c\3`                                                 |
 | **Redo**                          | `redo`                                                                                      |                                                                    |
+| **Remove Student From A Class**   | `unlink s\STUDENT_INDEX c\CLASS_INDEX`                                                      | `unlink s\1 c\2`                                                   |
 | **Reset**                         | `reset`                                                                                     |                                                                    |
 | **Undo**                          | `undo`                                                                                      |                                                                    |
-| **Unlink Student From A Class**   | `unlink s\STUDENT_INDEX c\CLASS_INDEX`                                                      | `unlink s\1 c\2`                                                   |
 | **View Change History**           | `view-history`                                                                              |                                                                    |
 
 The following subsections will elaborate on the specific details of each Tutor's Pet command.
@@ -583,31 +583,30 @@ Hence, you can type in the command `list` and and press <kbd>Enter</kbd>.
 
   ![List after](images/ugimages/ListAfter.png)
 
-#### Linking a student to a class : `link`
+#### Adding a student to a class : `link`
 
-You can organise students into their classes using this command.
-In Tutor's Pet this is known as "linking" a student to a class.
+You can add students into their classes using this command.
 
 **Format**: `link s\STUDENT_INDEX c\CLASS_INDEX`
-* Links the student at the specified `STUDENT_INDEX` to the class at the specified `CLASS_INDEX`.
+* Adds the student at the specified `STUDENT_INDEX` to the class at the specified `CLASS_INDEX`.
 
 For example:
 * You have a new student, David Li, who has transferred into one of your classes, CS2103T Tutorial.
   You have already [added](#adding-a-student--add-student) him to your Tutor's Pet, and want
-  to link him to the class.
+  to add him to the class.
 
 * Type in the command `link s\4 c\1` and press <kbd>Enter</kbd>.
 
   ![Link before](images/ugimages/LinkBefore.png)
 
-* Your Tutor's Pet displays the students in CS2103T Tutorial to confirm that you have successfully linked
+* Your Tutor's Pet displays the students in CS2103T Tutorial to confirm that you have successfully added
   David to the class.
 
   ![Link after](images/ugimages/LinkAfter.png)
 
 <div markdown="block" class="alert alert-primary">
 
-:bulb: **Tip:** When linking multiple students to a class, you can press the <kbd>↑</kbd> key to retrieve previously
+:bulb: **Tip:** When adding multiple students to a class, you can press the <kbd>↑</kbd> key to retrieve previously
 entered commands. This reduces the amount you need to type.
 
 </div>
@@ -615,14 +614,14 @@ entered commands. This reduces the amount you need to type.
 Other examples:
 * `find-student Alex`<br/>
   `link s\1 c\2`<br/>
-  Links the 1st result of the find student command to the 2nd class in the displayed class list.
+  Adds the 1st result of the find student command to the 2nd class in the displayed class list.
 
-#### Unlinking a student from a class : `unlink`
+#### Removing a student from a class : `unlink`
 
-You can unlink a student from a class using this command.
+You can remove students from their classes using this command.
 
 **Format**: `unlink s\STUDENT_INDEX c\CLASS_INDEX`
-* Unlinks the student at the specified `STUDENT_INDEX` from the class at the specified `CLASS_INDEX`.
+* Removes the student at the specified `STUDENT_INDEX` from the class at the specified `CLASS_INDEX`.
 
 For example:
 * One of your students, Alex Yeoh, has transferred out of your class, CS2103T Tutorial, and you decide to remove him from the class.
@@ -631,7 +630,7 @@ For example:
 
   ![Unlink before](images/ugimages/UnlinkBefore.png)
 
-* Your Tutor's Pet displays the remaining students in CS2103T Tutorial to confirm that you have successfully unlinked
+* Your Tutor's Pet displays the remaining students in CS2103T Tutorial to confirm that you have successfully removed
   Alex from the class.
 
   ![Unlink after](images/ugimages/UnlinkAfter.png)
@@ -645,7 +644,7 @@ For example:
 Other examples:
 * `list-student c\2`<br/>
   `unlink s\1 c\1`<br/>
-  [Lists the students](#listing-all-students-within-a-class--list-student) of the 2nd class in the displayed class list, and unlinks the 2nd student of that class.
+  [Lists the students](#listing-all-students-within-a-class--list-student) of the 2nd class in the displayed class list, and removes the 2nd student of that class.
 
 ### Managing lessons
 
