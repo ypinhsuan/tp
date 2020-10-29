@@ -32,11 +32,9 @@ includes a [quick-start](#quick-start) section that helps you get started.
 
 The following features are used in this guide to make it easier for you to navigate around:
 
-* You can click on [blue words](#using-this-guide) to jump to the related section.
-* `Words with a grey background` refer to keywords used as part of commands or responses from your Tutor's Pet.
-* <kbd>Words in block font</kbd> refer to keyboard keys that you can press.
-
-<br/>
+* Words that look like [this](#using-this-guide) can be clicked to jump to the related section.
+* Words that look like `this` refer to keywords used as part of commands or responses from your Tutor's Pet.
+* Words that look like <kbd>this</kbd> refer to keyboard keys that you can press.
 
 <div markdown="block" class="alert alert-info">
 
@@ -150,59 +148,58 @@ The utility area consists of three tabs: **File**, **Theme**, **Help**.
 
 This section details the format of the commands available in Tutor's Pet. We will adhere to the following:
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+* Words in `↑PER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add-student n\NAME`, `NAME` is a parameter which can be used as `add-student n\John Doe`.
 
 * Items in square brackets are optional.<br>
   e.g `n\NAME [tag\TAG]` can be used as `n\John Doe tag\student` or as `n\John Doe`.
 
-* Items with `…​` after them can be used multiple times including zero times.<br>
-  e.g. `[tag\TAG]…​` can be used as ` ` (i.e. 0 times), `tag\student`, `tag\average tag\TA candidate` etc.
+* Items with `…` after them can be used multiple times including zero times.<br>
+  e.g. `[tag\TAG]…` can be used as ` ` (i.e. 0 times), `tag\student`, `tag\average tag\TA candidate` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n\NAME t\TELEGRAM_USERNAME`, `t\TELEGRAM_USERNAME n\NAME` is also acceptable.
 
-* Indexes **must be a positive whole number** 1, 2, 3, …​
+* Indexes **must be a positive whole number** 1, 2, 3, …
 
 </div>
 
 ## Command overview
 This section provides an overview of all commands in Tutor's Pet and illustrates the usage of each command in detail.
 
-| Action                            | Format, Examples                                                                                                                                                          |
-|-----------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add Attendance Record**         | `add-attendance c\CLASS_INDEX l\LESSON_INDEX s\STUDENT_INDEX w\WEEK p\PARTICIPATION_SCORE` <br> e.g., `add-attendance c\1 l\1 s\1 w\1 p\1`                                |
-| **Add Class**                     | `add-class n\CLASS_NAME`<br> e.g., `add-class n\CS2103T Tutorial T10`                                                                                                     |
-| **Add Lesson**                    | `add-lesson c\CLASS_INDEX d\DAY st\START_TIME et\END_TIME v\VENUE r\NO_OF_TIMES` <br> e.g., `add-lesson c\1 d\MONDAY st\0800 et\1000 v\COM1 #01-01 r\13`                  |
-| **Add Student**                   | `add-student n\NAME t\TELEGRAM_USERNAME e\EMAIL [tag\TAG]…​` <br> e.g., `add-student n\John Doe t\johndoe e\johnd@example.com tag\student`                             |
-| **Clear All Classes**             | `clear-class`                                                                                                                                                             |
-| **Clear All Students**            | `clear-student`                                                                                                                                                           |
-| **Delete Attendance Record**      | `delete-attendance c\CLASS_INDEX l\LESSON_INDEX s\STUDENT_INDEX w\WEEK` <br> e.g., `delete-attendance c\1 l\1 s\1 w\1`                                                    |
-| **Delete Class**                  | `delete-class CLASS_INDEX` <br> e.g., `delete-class 2`                                                                                                                          |
-| **Delete Lesson**                 | `delete-lesson c\CLASS_INDEX l\LESSON_INDEX` <br> e.g., `delete-lesson c\1 l\1`                                                                                           |
-| **Delete Student**                | `delete-student STUDENT_INDEX`<br> e.g., `delete-student 3`                                                                                                                       |
-| **Display Statistics**            | `stats c\CLASS_INDEX s\STUDENT_INDEX`<br> e.g., `stats c\1 s\1`
-| **Display Venue**                 | `display-venue c\CLASS_INDEX l\LESSON_INDEX`<br> e.g., `display-venue c\1 l\1`
-| **Edit Attendance Record**        | `edit-attendance c\CLASS_INDEX l\LESSON_INDEX s\STUDENT_INDEX w\WEEK p\PARTICIPATION_SCORE` <br> e.g., `edit-attendance c\1 l\1 s\1 w\1 p\10`                             |
-| **Edit Class**                    | `edit-class CLASS_INDEX n\CLASS_NAME` <br> e.g., `edit-class 1 n\CS2103T Tutorial T10`                                                                                          |
-| **Edit Lesson**                   | `edit-lesson c\CLASS_INDEX l\LESSON_INDEX [d\DAY] [st\START_TIME] [et\END_TIME] [v\VENUE]` <br> e.g., `edit-lesson c\1 l\1 d\TUESDAY st\1000 et\1200 v\COM2 #02-02`       |
-| **Edit Student**                  | `edit-student STUDENT_INDEX [n\NAME] [t\TELEGRAM_USERNAME] [e\EMAIL] [tag\TAG]…​`<br> e.g., `edit-student 2 n\James Lee e\jameslee@example.com`                                |
-| **Exit**                          | `exit`                                                                                                                                                                    |
-| **Find Attendance Record**        | `find-attendance c\CLASS_INDEX l\LESSON_INDEX s\STUDENT_INDEX w\WEEK` <br> e.g., `find-attendance c\1 l\1 s\1 w\1`                                                        |
-| **Find Class**                    | `find-class KEYWORD [MORE_KEYWORDS]`<br> e.g., `find-class CS2103T`                                                                                                       |
-| **Find Student**                  | `find-student KEYWORD [MORE_KEYWORDS]`<br> e.g., `find-student James Jake`                                                                                                |
-| **Help**                          | `help`                                                                                                                                                                    |
-| **Linking Student To A Class**    | `link s\STUDENT_INDEX c\CLASS_INDEX`<br> e.g., `link s\1 c\2`                                                                                                             |
-| **List All Classes**              | `list-class`                                                                                                                                                              |
-| **List All Students**             | `list-student`                                                                                                                                                            |
-| **List All Students And Classes** | `list`                                                                                                                                                                    |
-| **List Students In A Class**      | `list-student c\CLASS_INDEX`<br> e.g., `list-student c\3`                                                                                                                     |
-| **Redo**                          | `redo`                                                                                                                                                                    |
-| **Reset**                         | `reset`                                                                                                                                                                   |
-| **Undo**                          | `undo`                                                                                                                                                                    |
-| **Unlink Student From A Class**   | `unlink s\STUDENT_INDEX c\CLASS_INDEX` <br> e.g., `unlink s\1 c\2`                                                                                                        |
-| **View Change History**           | `view-history`                                                                                                                                                            |
-
+| Action                            | Format                                                                                      | Example (if applicable)                                            |
+|-----------------------------------|---------------------------------------------------------------------------------------------|--------------------------------------------------------------------|
+| **Add Attendance Record**         | `add-attendance c\CLASS_INDEX l\LESSON_INDEX s\STUDENT_INDEX w\WEEK p\PARTICIPATION_SCORE`  | `add-attendance c\1 l\1 s\1 w\1 p\1`                               |
+| **Add Class**                     | `add-class n\CLASS_NAME`                                                                    | `add-class n\CS2103T Tutorial T10`                                 |
+| **Add Lesson**                    | `add-lesson c\CLASS_INDEX d\DAY st\START_TIME et\END_TIME v\VENUE r\NO_OF_TIMES`            | `add-lesson c\1 d\MONDAY st\0800 et\1000 v\COM1 #01-01 r\13`       |
+| **Add Student**                   | `add-student n\NAME t\TELEGRAM_USERNAME e\EMAIL [tag\TAG]…`                                 | `add-student n\John Doe t\johndoe e\johnd@example.com tag\student` |
+| **Clear All Classes**             | `clear-class`                                                                               |                                                                    |
+| **Clear All Students**            | `clear-student`                                                                             |                                                                    |
+| **Delete Attendance Record**      | `delete-attendance c\CLASS_INDEX l\LESSON_INDEX s\STUDENT_INDEX w\WEEK`                     | `delete-attendance c\1 l\1 s\1 w\1`                                |
+| **Delete Class**                  | `delete-class CLASS_INDEX`                                                                  | `delete-class 2`                                                   |
+| **Delete Lesson**                 | `delete-lesson c\CLASS_INDEX l\LESSON_INDEX`                                                | `delete-lesson c\1 l\1`                                            |
+| **Delete Student**                | `delete-student STUDENT_INDEX`                                                              | `delete-student 3`                                                 |
+| **Display Statistics**            | `stats c\CLASS_INDEX s\STUDENT_INDEX`                                                       | `stats c\1 s\1`                                                    |
+| **Display Venue**                 | `display-venue c\CLASS_INDEX l\LESSON_INDEX`                                                | `display-venue c\1 l\1`                                            |
+| **Edit Attendance Record**        | `edit-attendance c\CLASS_INDEX l\LESSON_INDEX s\STUDENT_INDEX w\WEEK p\PARTICIPATION_SCORE` | `edit-attendance c\1 l\1 s\1 w\1 p\10`                             |
+| **Edit Class**                    | `edit-class CLASS_INDEX n\CLASS_NAME`                                                       | `edit-class 1 n\CS2103T Tutorial T10`                              |
+| **Edit Lesson**                   | `edit-lesson c\CLASS_INDEX l\LESSON_INDEX [d\DAY] [st\START_TIME] [et\END_TIME] [v\VENUE]`  | `edit-lesson c\1 l\1 d\TUESDAY st\1000 et\1200 v\COM2 #02-02`      |
+| **Edit Student**                  | `edit-student STUDENT_INDEX [n\NAME] [t\TELEGRAM_USERNAME] [e\EMAIL] [tag\TAG]…`            | `edit-student 2 n\James Lee e\jameslee@example.com`                |
+| **Exit**                          | `exit`                                                                                      |                                                                    |
+| **Find Attendance Record**        | `find-attendance c\CLASS_INDEX l\LESSON_INDEX s\STUDENT_INDEX w\WEEK`                       | `find-attendance c\1 l\1 s\1 w\1`                                  |
+| **Find Class**                    | `find-class KEYWORD [MORE_KEYWORDS]`                                                        | `find-class CS2103T`                                               |
+| **Find Student**                  | `find-student KEYWORD [MORE_KEYWORDS]`                                                      | `find-student James Jake`                                          |
+| **Help**                          | `help`                                                                                      |                                                                    |
+| **Linking Student To A Class**    | `link s\STUDENT_INDEX c\CLASS_INDEX`                                                        | `link s\1 c\2`                                                     |
+| **List All Classes**              | `list-class`                                                                                |                                                                    |
+| **List All Students**             | `list-student`                                                                              |                                                                    |
+| **List All Students And Classes** | `list`                                                                                      |                                                                    |
+| **List Students In A Class**      | `list-student c\CLASS_INDEX`                                                                | `list-student c\3`                                                 |
+| **Redo**                          | `redo`                                                                                      |                                                                    |
+| **Reset**                         | `reset`                                                                                     |                                                                    |
+| **Undo**                          | `undo`                                                                                      |                                                                    |
+| **Unlink Student From A Class**   | `unlink s\STUDENT_INDEX c\CLASS_INDEX`                                                      | `unlink s\1 c\2`                                                   |
+| **View Change History**           | `view-history`                                                                              |                                                                    |
 
 The following subsections will elaborate on the specific details of each Tutor's Pet command.
 
@@ -216,12 +213,6 @@ If you require any assistance, you can use this command which shows you the link
 
 **Format**: `help`
 
-#### Recalling previously entered commands
-
-If you have to repeatedly enter a similar command multiple times, you can use this feature to type less.
-
-When the command box is selected, press the <kbd>UP</kbd> and <kbd>DOWN</kbd> arrow keys to view previously entered commands.
-
 #### Undoing previous changes : `undo`
 
 If you have accidentally entered a command that permanently changes the data in your Tutor's Pet,
@@ -230,18 +221,18 @@ you can use this command to undo the changes.
 **Format**: `undo`
 
 For example:
-* You want to delete Alex from your Tutor's Pet, however you accidentally deleted Bernice instead of Alex.
-  You type in the command `undo` and press <kbd>Enter</kbd>.
 
-![Undo before](images/ugimages/UndoBefore.png)
+* You want to delete Alex from your Tutor's Pet, however you accidentally deleted Bernice instead of Alex. 
 
-* Bernice has been undeleted and now you can delete Alex.
+* You type in the command `undo` and press <kbd>Enter</kbd>.
+   ![Undo before](images/ugimages/UndoBefore.png)
 
-![Undo after](images/ugimages/UndoAfter.png)
+* Bernice has been undeleted and now you can [delete](#deleting-a-student--delete-student) Alex.
+   ![Undo after](images/ugimages/UndoAfter.png)
 
 <div markdown="block" class="alert alert-primary">
 
-:bulb: **Tip:** To view a list of changes that can be undone, use the `view-history` command.
+:bulb: **Tip:** To view a list of changes that can be undone, use the [`view-history` command](#view-change-history--view-history).
 
 </div>
 
@@ -258,10 +249,35 @@ You can use this command to see a list of changes that can be undone and redone.
 
 **Format** : `view-history`
 
+For example:
+
+* You are marking the attendance of your students but accidentally lost track of which student you were at.
+
+* Type `view-history` into the command box and press <kbd>Enter</kbd>.
+
+  ![View History After](images/ugimages/ViewHistoryBefore.png)
+
+* The result box will display a list of changes with the latest shown at the top.
+
+  ![View History After](images/ugimages/ViewHistoryAfter.png)
+
+<div markdown="block" class="alert alert-primary">
+
+:bulb: **Tip:**
+The `>` indicator shows which point of your Tutor's Pet history is currently being displayed.
+You can use this feature to check if there are any changes that you can undo or redo.
+
+The diagram below shows an example where the last change has been undone.<br/>
+*Notice how the `>` indicator now points to the second change listed.*
+
+![View History After Undo](images/ugimages/ViewHistoryAfterUndo.png)
+
+</div>
+
 #### Exiting the program : `exit`
 
 You can exit Tutor's Pet by typing this command.
-All changes you have made in the application would have been saved.
+All changes you have made to your Tutor's Pet would have been saved.
 
 **Format**: `exit`
 
@@ -278,6 +294,23 @@ For example:
 * You can see that all students and classes have been deleted.
 
   ![Reset after](images/ugimages/ResetAfter.png)
+
+#### Recalling previously entered commands
+
+If you have to enter a similar command repeatedly, you can use this feature to type less.
+
+When the [command box](#using-tutors-pet) is selected, press the <kbd>↑</kbd> and <kbd>↓</kbd> arrow keys to cycle through previously entered commands.
+
+For example:
+
+* You are taking the attendance for one of your lessons, CS2103T Tutorial.
+  You have just [recorded the attendance](#adding-an-attendance-record--add-attendance) of the first student.
+  
+* Instead of typing the whole command from the beginning, you can **press** the <kbd>↑</kbd> arrow key.
+
+* The previous command will be displayed in the command box.
+
+* Now you can edit the command to record the attendance of other students.
 
 #### Saving the data
 
@@ -552,52 +585,56 @@ Hence, you can type in the command `list` and and press <kbd>Enter</kbd>.
 
 #### Linking a student to a class : `link`
 
-You can link a student to a class using this command.
+You can organise students into their classes using this command.
+In Tutor's Pet this is known as "linking" a student to a class.
 
 **Format**: `link s\STUDENT_INDEX c\CLASS_INDEX`
 * Links the student at the specified `STUDENT_INDEX` to the class at the specified `CLASS_INDEX`.
 
 For example:
 * You have a new student, David Li, who has transferred into one of your classes, CS2103T Tutorial.
-  You have already [added](#adding-a-student--add-student) this student to your Tutor's Pet, and want
-  to link him to the class. Hence, you type in the command `link s\4 c\1` and press <kbd>Enter</kbd>.
+  You have already [added](#adding-a-student--add-student) him to your Tutor's Pet, and want
+  to link him to the class.
 
-![Link before](images/ugimages/LinkBefore.png)
+* Type in the command `link s\4 c\1` and press <kbd>Enter</kbd>.
+
+  ![Link before](images/ugimages/LinkBefore.png)
 
 * Your Tutor's Pet displays the students in CS2103T Tutorial to confirm that you have successfully linked
   David to the class.
 
-![Link after](images/ugimages/LinkAfter.png)
+  ![Link after](images/ugimages/LinkAfter.png)
 
 <div markdown="block" class="alert alert-primary">
 
-:bulb: **Tip:** When linking multiple students to a class, you can press the <kbd>UP</kbd> arrow key to retrieve previously
-entered commands. This prevents you from needing to type `list-student` repeatedly to reset the displayed student list.
+:bulb: **Tip:** When linking multiple students to a class, you can press the <kbd>↑</kbd> arrow key to retrieve previously
+entered commands. This reduces the amount you need to type.
 
 </div>
 
 Other examples:
-* `find-student Alex`
-  `link s\1 c\2`
+* `find-student Alex`<br/>
+  `link s\1 c\2`<br/>
   Links the 1st result of the find student command to the 2nd class in the displayed class list.
 
 #### Unlinking a student from a class : `unlink`
 
-You can remove a student from a class using this command.
+You can unlink a student from a class using this command.
 
 **Format**: `unlink s\STUDENT_INDEX c\CLASS_INDEX`
 * Unlinks the student at the specified `STUDENT_INDEX` from the class at the specified `CLASS_INDEX`.
 
 For example:
-* One of your students, Alex Yeoh, has transferred out of your class and you decide to unlink him from his class.
-  You type in the command `unlink s\1 c\1` and press <kbd>Enter</kbd>.
+* One of your students, Alex Yeoh, has transferred out of your class, CS2103T Tutorial, and you decide to remove him from the class.
+  
+* Type in the command `unlink s\1 c\1` and press <kbd>Enter</kbd>.
 
-![Unlink before](images/ugimages/UnlinkBefore.png)
+  ![Unlink before](images/ugimages/UnlinkBefore.png)
 
 * Your Tutor's Pet displays the remaining students in CS2103T Tutorial to confirm that you have successfully unlinked
   Alex from the class.
 
-![Unlink after](images/ugimages/UnlinkAfter.png)
+  ![Unlink after](images/ugimages/UnlinkAfter.png)
 
 <div markdown="block" class="alert alert-warning">
 
@@ -606,9 +643,9 @@ For example:
 </div>
 
 Other examples:
-* `list-student c\2`
-  `unlink s\1 c\1`
-  Lists the students of the 2nd class in the displayed class list, and unlinks the 2nd student of that class.
+* `list-student c\2`<br/>
+  `unlink s\1 c\1`<br/>
+  [Lists the students](#listing-all-students-within-a-class--list-student) of the 2nd class in the displayed class list, and unlinks the 2nd student of that class.
 
 ### Managing lessons
 
