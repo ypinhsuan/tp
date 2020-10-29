@@ -650,7 +650,7 @@ that do not alter the data of Tutor's Pet would not have any data that would be 
 ### Command Recall Feature
 
 The command recall feature reduces the effort required by users when frequently entering similar commands.
-It allows users to view and reuse previously edited commands through the <kbd>UP</kbd> and <kbd>DOWN</kbd> arrow keys
+It allows users to view and reuse previously edited commands through the <kbd>↑</kbd> and <kbd>↓</kbd> keys
 when the command box is focused.
 
 This section explains the implementation of the Command Recall feature and highlights the design considerations taken into
@@ -687,7 +687,7 @@ This makes it easier to identify when the current text should be cached.
 
 </div>
 
-When the user presses the <kbd>UP</kbd> arrow key, a check is performed to determine if there is a next available command to recall.
+When the user presses the <kbd>↑</kbd> key, a check is performed to determine if there is a next available command to recall.
 If there is a previous command available, `CommandHistory` next checks if the `pointer` is currently pointing to an entry in its list.
 If the `pointer` is not currently pointing to an entry in the list, i.e. it is in its default position,
 the current text in the command box is stored in the cache.
@@ -705,7 +705,7 @@ If there are no earlier commands to recall, then there is no change to the text 
 
 </div>
 
-When the user presses the <kbd>DOWN</kbd> arrow key, a check is performed to determine if there is a next available command to recall.
+When the user presses the <kbd>↓</kbd> key, a check is performed to determine if there is a next available command to recall.
 If there is a next available command, the `pointer` index is increased and the respective `String` in the list is returned.
 
 ![CommandRecallNoNext](images/CommandRecallReturnsCache.png)
