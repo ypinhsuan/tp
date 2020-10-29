@@ -96,7 +96,7 @@ public class DeleteAttendanceCommand extends Command {
         model.setModuleClass(targetModuleClass, modifiedModuleClass);
 
         String message = String.format(MESSAGE_SUCCESS,
-                targetStudent.getName(), modifiedModuleClass, lesson, week);
+                targetStudent.getName(), modifiedModuleClass, lesson.printLesson(), week);
         model.commit(message);
         return new CommandResult(message);
     }

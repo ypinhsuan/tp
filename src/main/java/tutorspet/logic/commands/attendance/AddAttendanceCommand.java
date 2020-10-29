@@ -43,7 +43,7 @@ public class AddAttendanceCommand extends Command {
             + PREFIX_PARTICIPATION_SCORE + "PARTICIPATION_SCORE (must be an integer between 0 and 100)";
 
     public static final String MESSAGE_SUCCESS = "New attendance added:\n"
-            + "%1$s attended %2$s %3$s in week $4$s\n with participation score of %5$s.";
+            + "%1$s attended %2$s %3$s in week %4$s\nwith a participation score of %5$s.";
 
     private final Index moduleClassIndex;
     private final Index lessonIndex;
@@ -89,7 +89,7 @@ public class AddAttendanceCommand extends Command {
         model.setModuleClass(targetModuleClass, modifiedModuleClass);
 
         String message = String.format(MESSAGE_SUCCESS,
-                targetStudent.getName(), modifiedModuleClass.getName(), targetLesson, week, toAdd);
+                targetStudent.getName(), modifiedModuleClass.getName(), targetLesson.printLesson(), week, toAdd);
         model.commit(message);
         return new CommandResult(message);
     }

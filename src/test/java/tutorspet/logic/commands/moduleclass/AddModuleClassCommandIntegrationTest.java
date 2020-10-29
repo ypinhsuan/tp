@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tutorspet.commons.core.Messages.MESSAGE_DUPLICATE_MODULE_CLASS;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static tutorspet.logic.commands.moduleclass.AddModuleClassCommand.MESSAGE_COMMIT;
 import static tutorspet.logic.commands.moduleclass.AddModuleClassCommand.MESSAGE_SUCCESS;
 import static tutorspet.testutil.TypicalTutorsPet.getTypicalTutorsPet;
 
@@ -33,10 +34,11 @@ public class AddModuleClassCommandIntegrationTest {
     public void execute_newModuleClass_success() {
         ModuleClass validModuleClass = new ModuleClassBuilder().build();
 
+        String commitMessage = String.format(MESSAGE_COMMIT, validModuleClass.getName());
         String expectedMessage = String.format(MESSAGE_SUCCESS, validModuleClass);
         Model expectedModel = new ModelManager(model.getTutorsPet(), new UserPrefs());
         expectedModel.addModuleClass(validModuleClass);
-        expectedModel.commit(expectedMessage);
+        expectedModel.commit(commitMessage);
 
         assertCommandSuccess(new AddModuleClassCommand(validModuleClass), model, expectedMessage, expectedModel);
         assertTrue(model.canUndo());

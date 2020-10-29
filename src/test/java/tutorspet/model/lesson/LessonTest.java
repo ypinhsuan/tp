@@ -147,7 +147,8 @@ public class LessonTest {
                 .append(TIME_FORMATTER.format(VALID_START_TIME))
                 .append(" to ")
                 .append(TIME_FORMATTER.format(VALID_END_TIME))
-                .append(" Venue: ")
+                .append("\n")
+                .append("Venue: ")
                 .append(VALID_VENUE.venue)
                 .append(" Number of occurrences: ")
                 .append(VALID_NUMBER_OF_OCCURRENCES.value).toString();

@@ -85,7 +85,7 @@ public class FindAttendanceCommand extends Command {
         Attendance attendance = getAttendanceFromModuleClass(targetModuleClass, lessonIndex, week, targetStudent);
 
         String message = String.format(MESSAGE_SUCCESS,
-                targetStudent.getName(), targetModuleClass.getName(), targetLesson, week, attendance);
+                targetStudent.getName(), targetModuleClass.getName(), targetLesson.printLesson(), week, attendance);
         return new CommandResult(message);
     }
 

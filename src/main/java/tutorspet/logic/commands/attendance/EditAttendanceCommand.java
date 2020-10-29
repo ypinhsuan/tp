@@ -110,8 +110,8 @@ public class EditAttendanceCommand extends Command {
         model.setModuleClass(targetModuleClass, modifiedModuleClass);
         model.updateFilteredModuleClassList(PREDICATE_SHOW_ALL_MODULE_CLASS);
 
-        String message = String.format(MESSAGE_SUCCESS,
-                targetStudent.getName(), modifiedModuleClass.getName(), targetLesson, week, editedAttendance);
+        String message = String.format(MESSAGE_SUCCESS, targetStudent.getName(), modifiedModuleClass.getName(),
+                targetLesson.printLesson(), week, editedAttendance);
         model.commit(message);
         return new CommandResult(message);
     }

@@ -97,7 +97,7 @@ public class AddAttendanceCommandTest {
                 moduleClass, lessonIndex, targetWeek, student, targetAttendance);
 
         String expectedMessage = String.format(MESSAGE_SUCCESS,
-                student.getName(), moduleClass.getName(), lesson, targetWeek, targetAttendance);
+                student.getName(), moduleClass.getName(), lesson.printLesson(), targetWeek, targetAttendance);
         Model expectedModel = new ModelManager(model.getTutorsPet(), new UserPrefs());
         expectedModel.setModuleClass(moduleClass, modifiedModuleClass);
         expectedModel.commit(expectedMessage);

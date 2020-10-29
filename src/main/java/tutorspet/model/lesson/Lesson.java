@@ -156,7 +156,8 @@ public class Lesson {
                 .append(TIME_FORMATTER.format(getStartTime()))
                 .append(" to ")
                 .append(TIME_FORMATTER.format(getEndTime()))
-                .append(" Venue: ")
+                .append("\n")
+                .append("Venue: ")
                 .append(getVenue())
                 .append(" Number of occurrences: ")
                 .append(getNumberOfOccurrences());

@@ -72,7 +72,7 @@ public class FindAttendanceCommandTest {
         Attendance attendance = getAttendanceFromModuleClass(moduleClass, lessonIndex, targetWeek, student);
 
         String expectedMessage = String.format(MESSAGE_SUCCESS,
-                student.getName(), moduleClass.getName(), lesson, targetWeek, attendance);
+                student.getName(), moduleClass.getName(), lesson.printLesson(), targetWeek, attendance);
         Model expectedModel = new ModelManager(model.getTutorsPet(), new UserPrefs());
         FindAttendanceCommand findAttendanceCommand =
                 new FindAttendanceCommand(moduleClassIndex, lessonIndex, studentIndex, targetWeek);
@@ -96,7 +96,7 @@ public class FindAttendanceCommandTest {
 
         Attendance attendance = getAttendanceFromModuleClass(moduleClass, lessonIndex, targetWeek, student);
         String expectedMessage = String.format(MESSAGE_SUCCESS,
-                student.getName(), moduleClass.getName(), lesson, targetWeek, attendance);
+                student.getName(), moduleClass.getName(), lesson.printLesson(), targetWeek, attendance);
         Model expectedModel = new ModelManager(model.getTutorsPet(), new UserPrefs());
         expectedModel.updateFilteredModuleClassList(c -> c.isSameModuleClass(moduleClass));
         expectedModel.updateFilteredStudentList(s -> s.isSameStudent(student));

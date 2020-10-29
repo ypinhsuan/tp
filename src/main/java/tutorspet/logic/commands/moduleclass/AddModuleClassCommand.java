@@ -24,6 +24,7 @@ public class AddModuleClassCommand extends Command {
             + PREFIX_NAME + "CS2103T Tutorial";
 
     public static final String MESSAGE_SUCCESS = "New class added:\n%1$s.";
+    public static final String MESSAGE_COMMIT = "New class added: %1$s.";
 
     private final ModuleClass toAdd;
 
@@ -45,9 +46,8 @@ public class AddModuleClassCommand extends Command {
         }
 
         model.addModuleClass(toAdd);
-        String message = String.format(MESSAGE_SUCCESS, toAdd);
-        model.commit(message);
-        return new CommandResult(message);
+        model.commit(String.format(MESSAGE_COMMIT, toAdd.getName()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 
     @Override

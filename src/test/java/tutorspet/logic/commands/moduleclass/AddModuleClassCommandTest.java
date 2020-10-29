@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tutorspet.commons.core.Messages.MESSAGE_DUPLICATE_MODULE_CLASS;
+import static tutorspet.logic.commands.moduleclass.AddModuleClassCommand.MESSAGE_COMMIT;
 import static tutorspet.logic.commands.moduleclass.AddModuleClassCommand.MESSAGE_SUCCESS;
 import static tutorspet.testutil.Assert.assertThrows;
 
@@ -38,7 +39,7 @@ public class AddModuleClassCommandTest {
         assertEquals(String.format(MESSAGE_SUCCESS, validModuleClass),
                 commandResult.getFeedbackToUser());
         assertEquals(Collections.singletonList(validModuleClass), modelStub.moduleClassesAdded);
-        assertEquals(Collections.singletonList(String.format(MESSAGE_SUCCESS, validModuleClass)),
+        assertEquals(Collections.singletonList(String.format(MESSAGE_COMMIT, validModuleClass.getName())),
                 modelStub.commitMessages);
     }
 

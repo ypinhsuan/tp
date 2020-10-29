@@ -75,7 +75,7 @@ public class DeleteAttendanceCommandTest {
         Lesson modifiedLesson = modifiedModuleClass.getLessons().get(lessonIndex.getZeroBased());
 
         String expectedMessage = String.format(MESSAGE_SUCCESS,
-                student.getName(), modifiedModuleClass, modifiedLesson, targetWeek);
+                student.getName(), modifiedModuleClass, modifiedLesson.printLesson(), targetWeek);
         Model expectedModel = new ModelManager(model.getTutorsPet(), new UserPrefs());
         expectedModel.setModuleClass(moduleClass, modifiedModuleClass);
         expectedModel.commit(expectedMessage);

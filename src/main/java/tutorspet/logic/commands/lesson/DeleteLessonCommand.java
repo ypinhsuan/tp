@@ -72,7 +72,7 @@ public class DeleteLessonCommand extends Command {
         ModuleClass modifiedModuleClass = deleteLessonFromModuleClass(targetModuleClass, lessonToDelete);
         model.setModuleClass(targetModuleClass, modifiedModuleClass);
 
-        String message = String.format(MESSAGE_SUCCESS, targetModuleClass, lessonToDelete);
+        String message = String.format(MESSAGE_SUCCESS, targetModuleClass, lessonToDelete.printLesson());
         model.commit(message);
         return new CommandResult(message);
     }

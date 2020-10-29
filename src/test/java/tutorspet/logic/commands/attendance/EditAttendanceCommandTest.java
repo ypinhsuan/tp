@@ -112,7 +112,7 @@ public class EditAttendanceCommandTest {
                 editAttendanceInModuleClass(moduleClass, lessonIndex, targetWeek, student, editedAttendance);
 
         String expectedMessage = String.format(MESSAGE_SUCCESS,
-                student.getName(), editedModuleClass.getName(), lesson, targetWeek, editedAttendance);
+                student.getName(), editedModuleClass.getName(), lesson.printLesson(), targetWeek, editedAttendance);
 
         Model expectedModel = new ModelManager(new TutorsPet(model.getTutorsPet()), new UserPrefs());
         expectedModel.setModuleClass(moduleClass, editedModuleClass);
@@ -138,7 +138,7 @@ public class EditAttendanceCommandTest {
                 targetModuleClass, lessonIndex, targetWeek, student);
 
         String expectedMessage = String.format(MESSAGE_SUCCESS,
-                student.getName(), targetModuleClass.getName(), lesson, targetWeek, editedAttendance);
+                student.getName(), targetModuleClass.getName(), lesson.printLesson(), targetWeek, editedAttendance);
 
         Model expectedModel = new ModelManager(new TutorsPet(model.getTutorsPet()), new UserPrefs());
         expectedModel.commit(expectedMessage);
@@ -169,8 +169,8 @@ public class EditAttendanceCommandTest {
         ModuleClass editedModuleClass = editAttendanceInModuleClass(moduleClassInFilteredList, lessonIndex,
                 targetWeek, studentInFilteredList, editedAttendance);
 
-        String expectedMessage = String.format(MESSAGE_SUCCESS,
-                studentInFilteredList.getName(), editedModuleClass.getName(), lesson, targetWeek, editedAttendance);
+        String expectedMessage = String.format(MESSAGE_SUCCESS, studentInFilteredList.getName(),
+                editedModuleClass.getName(), lesson.printLesson(), targetWeek, editedAttendance);
 
         Model expectedModel = new ModelManager(new TutorsPet(model.getTutorsPet()), new UserPrefs());
         expectedModel.updateFilteredStudentList(s -> s.equals(studentInFilteredList));
