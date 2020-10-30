@@ -417,7 +417,7 @@ For example:
 Hence, you want to delete her entry from Tutor's Pet.
   You type in `delete-student 2` and press <kbd>Enter</kbd>.
 
-  ![DeleteStudentBefore](images/ugimages/DeleteStudentBefore.png)  
+  ![DeleteStudentBefore](images/ugimages/DeleteStudentBefore.png)
 
 * Notice that the number of students in `CS2103T Tutorial` decreases to 2.
 
