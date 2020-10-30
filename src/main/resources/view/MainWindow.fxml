@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.stage.Stage?>
 
-<fx:root minHeight="600" minWidth="770" onCloseRequest="#handleExit" title="Tutor's Pet" type="javafx.stage.Stage" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root minHeight="620" minWidth="770" onCloseRequest="#handleExit" title="Tutor's Pet" type="javafx.stage.Stage" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/tutors_pet_32.png" />
   </icons>
@@ -45,7 +45,7 @@
           </padding>
         </StackPane>
 
-        <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100" minHeight="100" prefHeight="100" styleClass="pane-with-border" VBox.vgrow="NEVER">
+        <StackPane fx:id="resultDisplayPlaceholder" maxHeight="120" minHeight="120" prefHeight="120" styleClass="pane-with-border" VBox.vgrow="NEVER">
           <padding>
             <Insets bottom="5" left="10" right="10" top="5" />
           </padding>

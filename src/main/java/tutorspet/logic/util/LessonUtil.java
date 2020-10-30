@@ -171,8 +171,9 @@ public class LessonUtil {
 
     /**
      * Returns {@code targetStudent}'s average participation score for a lesson.
+     * @return
      */
-    public static double getParticipationScoreFromLesson(Lesson targetLesson, Student targetStudent)
+    public static int getParticipationScoreFromLesson(Lesson targetLesson, Student targetStudent)
             throws CommandException {
         requireAllNonNull(targetLesson, targetStudent);
 
