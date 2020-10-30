@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.stage.Stage?>
 
-<fx:root minHeight="650" minWidth="770" onCloseRequest="#handleExit" title="Tutor's Pet" type="javafx.stage.Stage" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root minHeight="620" minWidth="770" onCloseRequest="#handleExit" title="Tutor's Pet" type="javafx.stage.Stage" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/tutors_pet_32.png" />
   </icons>
