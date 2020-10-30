@@ -163,8 +163,9 @@ public class AttendanceRecordListUtil {
 
     /**
      * Returns {@code targetStudent}'s average participation score.
+     * @return
      */
-    public static double getScoreFromAttendance(AttendanceRecordList targetAttendanceRecordList, Student targetStudent)
+    public static int getScoreFromAttendance(AttendanceRecordList targetAttendanceRecordList, Student targetStudent)
             throws CommandException {
         requireAllNonNull(targetAttendanceRecordList, targetStudent);
 
@@ -184,7 +185,7 @@ public class AttendanceRecordListUtil {
             throw new CommandException(MESSAGE_NO_LESSON_ATTENDED);
         }
 
-        return (double) totalScore / numOfWeeksParticipated;
+        return totalScore;
     }
 
     /**

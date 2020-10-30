@@ -4,6 +4,7 @@ import static tutorspet.commons.core.Messages.MESSAGE_DUPLICATE_LESSON;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX;
 import static tutorspet.commons.core.Messages.MESSAGE_MISSING_LINK;
 import static tutorspet.commons.core.Messages.MESSAGE_NO_LESSONS_IN_MODULE_CLASS;
+import static tutorspet.commons.core.Messages.MESSAGE_NO_LESSON_ATTENDED;
 import static tutorspet.commons.util.CollectionUtil.requireAllNonNull;
 import static tutorspet.logic.util.LessonUtil.addAttendanceToLesson;
 import static tutorspet.logic.util.LessonUtil.deleteAllStudentsFromLesson;
@@ -311,15 +312,35 @@ public class ModuleClassUtil {
         }
 
         List<Lesson> listOfLesson = targetModuleClass.getLessons();
-        double totalParticipationScore = 0;
         int totalLesson = listOfLesson.size();
 
-        for (Lesson lesson : listOfLesson) {
-            totalParticipationScore = totalParticipationScore
-                    + getParticipationScoreFromLesson(lesson, targetStudent);
+        List<Boolean> scores = listOfLesson.stream().map(lesson -> {
+            try {
+                getParticipationScoreFromLesson(lesson, targetStudent);
+                return true;
+            } catch (CommandException e) {
+                return false;
+            }
+        }).collect(Collectors.toUnmodifiableList());
+
+        if (scores.stream().noneMatch(bool -> bool)) {
+            throw new CommandException(MESSAGE_NO_LESSON_ATTENDED);
         }
 
-        return totalParticipationScore / totalLesson;
+        int totalParticipationScore = 0;
+        int totalWeeks = 0;
+
+        for (Lesson lesson : listOfLesson) {
+            try {
+                totalParticipationScore += getParticipationScoreFromLesson(lesson, targetStudent);
+                totalWeeks +=
+                        lesson.getNumberOfOccurrences().value - getAbsentWeekFromLesson(lesson, targetStudent).size();
+            } catch (CommandException e) {
+                // We continue to calculate the total participation score for the rest of the lessons.
+            }
+        }
+
+        return (double) totalParticipationScore / totalWeeks;
     }
 
     /**
