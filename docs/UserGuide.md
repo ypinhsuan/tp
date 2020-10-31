@@ -171,7 +171,7 @@ This section provides an overview of all commands in Tutor's Pet and illustrates
 |-----------------------------------|---------------------------------------------------------------------------------------------|--------------------------------------------------------------------|
 | **Add Attendance Record**         | `add-attendance c\CLASS_INDEX l\LESSON_INDEX s\STUDENT_INDEX w\WEEK p\PARTICIPATION_SCORE`  | `add-attendance c\1 l\1 s\1 w\1 p\1`                               |
 | **Add Class**                     | `add-class n\CLASS_NAME`                                                                    | `add-class n\CS2103T Tutorial T10`                                 |
-| **Add Lesson**                    | `add-lesson c\CLASS_INDEX d\DAY st\START_TIME et\END_TIME v\VENUE r\NO_OF_TIMES`            | `add-lesson c\1 d\MONDAY st\0800 et\1000 v\COM1 #01-01 r\13`       |
+| **Add Lesson**                    | `add-lesson c\CLASS_INDEX d\DAY st\START_TIME et\END_TIME v\VENUE r\NO_OF_TIMES`            | `add-lesson c\1 d\MONDAY st\08:00 et\10:00 v\COM1 #01-01 r\13`     |
 | **Add Student**                   | `add-student n\NAME t\TELEGRAM_USERNAME e\EMAIL [tag\TAG]…`                                 | `add-student n\John Doe t\johndoe e\johnd@example.com tag\student` |
 | **Add Student To A Class**        | `link s\STUDENT_INDEX c\CLASS_INDEX`                                                        | `link s\1 c\2`                                                     |
 | **Clear All Classes**             | `clear-class`                                                                               |                                                                    |
@@ -184,7 +184,7 @@ This section provides an overview of all commands in Tutor's Pet and illustrates
 | **Display Venue**                 | `display-venue c\CLASS_INDEX l\LESSON_INDEX`                                                | `display-venue c\1 l\1`                                            |
 | **Edit Attendance Record**        | `edit-attendance c\CLASS_INDEX l\LESSON_INDEX s\STUDENT_INDEX w\WEEK p\PARTICIPATION_SCORE` | `edit-attendance c\1 l\1 s\1 w\1 p\10`                             |
 | **Edit Class**                    | `edit-class CLASS_INDEX n\CLASS_NAME`                                                       | `edit-class 1 n\CS2103T Tutorial T10`                              |
-| **Edit Lesson**                   | `edit-lesson c\CLASS_INDEX l\LESSON_INDEX [d\DAY] [st\START_TIME] [et\END_TIME] [v\VENUE]`  | `edit-lesson c\1 l\1 d\TUESDAY st\1000 et\1200 v\COM2 #02-02`      |
+| **Edit Lesson**                   | `edit-lesson c\CLASS_INDEX l\LESSON_INDEX [d\DAY] [st\START_TIME] [et\END_TIME] [v\VENUE]`  | `edit-lesson c\1 l\1 d\TUESDAY st\10:00 et\12:00 v\COM2 #02-02`    |
 | **Edit Student**                  | `edit-student STUDENT_INDEX [n\NAME] [t\TELEGRAM_USERNAME] [e\EMAIL] [tag\TAG]…`            | `edit-student 2 n\James Lee e\jameslee@example.com`                |
 | **Exit**                          | `exit`                                                                                      |                                                                    |
 | **Find Attendance Record**        | `find-attendance c\CLASS_INDEX l\LESSON_INDEX s\STUDENT_INDEX w\WEEK`                       | `find-attendance c\1 l\1 s\1 w\1`                                  |
@@ -692,6 +692,11 @@ Hence, you type in the command `add-lesson c\1 d\TUESDAY st\10:00 et\11:00 v\COM
 
   ![Add lesson after](images/ugimages/AddLessonAfter.png)
 
+Constraints:
+* You must type out the day in full.
+* When typing the start and end times, you must follow the form `hh:mm`. For example, `11:00` is allowed, but not `1100`.
+* Overnight lessons are not allowed. For example, a lesson cannot start at `23:59` and end at `00:01`.
+
 #### Editing a lesson : `edit-lesson`
 
 If you entered wrong details pertaining to your lesson and would like to change it, you can make use of this command.
@@ -711,6 +716,7 @@ For example:
 Constraints:
 * You must type out the day in full.
 * When typing the start and end times, you must follow the form `hh:mm`. For example, `11:00` is allowed, but not `1100`.
+* Overnight lessons are not allowed. For example, a lesson cannot start at `23:59` and end at `00:01`.
 * You must specify at least one field (DAY, START_TIME, END_TIME, VENUE) to be changed.
 * You are not able to change the Number of occurrences.
 
