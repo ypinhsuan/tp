@@ -716,6 +716,7 @@ For example:
 Constraints:
 * You must type out the day in full.
 * When typing the start and end times, you must follow the form `hh:mm`. For example, `11:00` is allowed, but not `1100`.
+* Overnight lessons are not allowed. For example, a lesson cannot start at `23:59` and end at `00:01`.
 * You must specify at least one field (DAY, START_TIME, END_TIME, VENUE) to be changed.
 * You are not able to change the Number of occurrences.
 
