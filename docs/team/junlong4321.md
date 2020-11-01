@@ -46,8 +46,8 @@ This section documents both major and minor enhancements I have made to Tutor's 
       some time.
   * 3.1.3 Introduced `Add Lesson` and `Delete AttendanceRecord` commands.
   [#129](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/129)
-  [#152](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/152) 
-    * These commands are required so that we can add lessons to tutorial classes and delete attendance records of 
+  [#152](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/152)
+    * These commands are required so that we can add lessons to tutorial classes and delete attendance records of
       students. It is a big enhancement as it involves the creation of many new Java classes, and because
       a lot of test cases have to be written to thoroughly test these two commands.
   * 3.1.4 Cascade Deletion of `Student`s. [#182](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/185)
@@ -56,10 +56,10 @@ This section documents both major and minor enhancements I have made to Tutor's 
       code to introduce the behaviour.
 * 3.2 Minor Enhancements
   * 3.2.1 Change Token Delimiter
-    * Fixed a minor bug by changing token delimiter from backward to forward slash so that parsing of 
+    * Fixed a minor bug by changing token delimiter from backward to forward slash so that parsing of
     command is not rendered faulty when a URL is added to `Lesson` venue. Simple to fix actual code but troublesome
     to fix test cases as we had to extract all the test case command strings out into variables to prevent test cases
-    from breaking again in the event that we change the token delimiter.
+    from breaking again in the event that we change the token delimiter again.
 
 
 ## 4. User Guide Contributions
@@ -77,7 +77,7 @@ Add cover page).
 ## 5. Developer Guide Contributions
 * Refined storage class diagram in Section 2.5 - Storage Component.
 
-* Documented Section 3.1 - Student Model and Student Universally Unique Identifier (UUID) and 
+* Documented Section 3.1 - Student Model and Student Universally Unique Identifier (UUID) and
 Section 3.2 - ModuleClass Model. These sections detail how the team implemented Student and ModuleClass models
 with the use of Java UUIDs.
 
@@ -108,5 +108,5 @@ This section showcases my contributions to CS2103T beyond the team project.
 and
 [#179](https://github.com/nus-cs2103-AY2021S1/forum/issues/179).
 
-* Assisted the team [TaskMania](https://github.com/AY2021S1-CS2103T-W10-3/tp/) in testing and reporting 
+* Assisted the team [TaskMania](https://github.com/AY2021S1-CS2103T-W10-3/tp/) in testing and reporting
 bugs found in their product [here](https://github.com/junlong4321/ped/issues).
