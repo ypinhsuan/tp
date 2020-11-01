@@ -55,7 +55,8 @@ This section documents both major and minor enhancements I have made to Tutor's 
       the `Student` has been deleted from the application. There was a need to refactor a large part of the deletion
       code to introduce the behaviour.
 * 3.2 Minor Enhancements
-  * 3.2.1 Change Token Delimiter
+  * 3.2.1 Change Token Delimiter.
+  [#167](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/167)
     * Fixed a minor bug by changing token delimiter from backward to forward slash so that parsing of
     command is not rendered faulty when a URL is added to `Lesson` venue. Simple to fix actual code but troublesome
     to fix test cases as we had to extract all the test case command strings out into variables to prevent test cases
