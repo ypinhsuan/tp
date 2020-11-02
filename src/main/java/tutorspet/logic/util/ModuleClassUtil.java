@@ -4,7 +4,6 @@ import static tutorspet.commons.core.Messages.MESSAGE_DUPLICATE_LESSON;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX;
 import static tutorspet.commons.core.Messages.MESSAGE_MISSING_LINK;
 import static tutorspet.commons.core.Messages.MESSAGE_NO_LESSONS_IN_MODULE_CLASS;
-import static tutorspet.commons.core.Messages.MESSAGE_NO_LESSON_ATTENDED;
 import static tutorspet.commons.util.CollectionUtil.requireAllNonNull;
 import static tutorspet.logic.util.LessonUtil.addAttendanceToLesson;
 import static tutorspet.logic.util.LessonUtil.deleteAllStudentsFromLesson;
@@ -299,7 +298,7 @@ public class ModuleClassUtil {
     /**
      * Returns {@code targetStudent}'s average participation score for a class.
      */
-    public static double getParticipationScore(ModuleClass targetModuleClass, Student targetStudent)
+    public static Map<Lesson, List<Integer>> getParticipationScore(ModuleClass targetModuleClass, Student targetStudent)
             throws CommandException {
         requireAllNonNull(targetModuleClass, targetStudent);
 
@@ -312,35 +311,14 @@ public class ModuleClassUtil {
         }
 
         List<Lesson> listOfLesson = targetModuleClass.getLessons();
-        int totalLesson = listOfLesson.size();
-
-        List<Boolean> scores = listOfLesson.stream().map(lesson -> {
-            try {
-                getParticipationScoreFromLesson(lesson, targetStudent);
-                return true;
-            } catch (CommandException e) {
-                return false;
-            }
-        }).collect(Collectors.toUnmodifiableList());
-
-        if (scores.stream().noneMatch(bool -> bool)) {
-            throw new CommandException(MESSAGE_NO_LESSON_ATTENDED);
-        }
-
-        int totalParticipationScore = 0;
-        int totalWeeks = 0;
+        Map<Lesson, List<Integer>> listOfScores = new HashMap<>();
 
         for (Lesson lesson : listOfLesson) {
-            try {
-                totalParticipationScore += getParticipationScoreFromLesson(lesson, targetStudent);
-                totalWeeks +=
-                        lesson.getNumberOfOccurrences().value - getAbsentWeekFromLesson(lesson, targetStudent).size();
-            } catch (CommandException e) {
-                // We continue to calculate the total participation score for the rest of the lessons.
-            }
+            List<Integer> score = getParticipationScoreFromLesson(lesson, targetStudent);
+            listOfScores.put(lesson, score);
         }
 
-        return (double) totalParticipationScore / totalWeeks;
+        return listOfScores;
     }
 
     /**
