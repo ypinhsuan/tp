@@ -29,8 +29,8 @@ You can find samples of code I have written
 
 ## 3. Enhancements Implemented
 This section documents both major and minor enhancements I have made to Tutor's Pet.
-* 3.1 Major Enhancements
-  * 3.1.1 Introduced Student Universally Unique Identifier (UUID) into Student model.
+* **Major Enhancements**
+  * Introduced Student Universally Unique Identifier (UUID) into Student model.
   [#58](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/58)
     * A `UUID` is a unique 128-bit number to identify a unique `Student` within Tutor’s Pet.
       In Tutor’s Pet, every `Student` upon construction is assigned a randomly generated `UUID` that is used to
@@ -39,23 +39,23 @@ This section documents both major and minor enhancements I have made to Tutor's 
       `Student` `UUID` will help to ensure referential integrity of `Student` data across different models when
       `Student` data is modified by the user. It is challenging to introduce a `UUID` fields as it breaks many
       existing test cases. Time and effort has to be allocated to fix these test cases.
-  * 3.1.2 Introduced ModuleClass to Storage. [#75](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/75)
+  * Introduced ModuleClass to Storage. [#75](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/75)
     * Introduced the Java classes `JsonAdaptedUuid` and `JsonAdaptedModuleClass` into Storage. The two Java classes are
       required in Tutor's Pet so that we can allocate `Student`s to the respective tutorial classes that they are
       enrolled in. Integration of these 2 Java classes into Storage and writing test cases for them took quite
       some time.
-  * 3.1.3 Introduced `Add Lesson` and `Delete AttendanceRecord` commands.
+  * Introduced `Add Lesson` and `Delete AttendanceRecord` commands.
   [#129](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/129)
   [#152](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/152)
     * These commands are required so that we can add lessons to tutorial classes and delete attendance records of
       students. It is a big enhancement as it involves the creation of many new Java classes, and because
       a lot of test cases have to be written to thoroughly test these two commands.
-  * 3.1.4 Cascade Deletion of `Student`s. [#182](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/185)
+  * Cascade Deletion of `Student`s. [#182](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/185)
     * Fixed a major bug where a `Student`'s data can still be found in `Lesson`s and `AttendanceRecord`s even after
       the `Student` has been deleted from the application. There was a need to refactor a large part of the deletion
       code to introduce the behaviour.
-* 3.2 Minor Enhancements
-  * 3.2.1 Change Token Delimiter.
+* **Minor Enhancements**
+  * Change Token Delimiter.
   [#167](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/167)
     * Fixed a minor bug by changing token delimiter from backward to forward slash so that parsing of
     command is not rendered faulty when a URL is added to `Lesson` venue. Simple to fix actual code but troublesome
