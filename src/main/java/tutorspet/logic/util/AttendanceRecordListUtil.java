@@ -2,7 +2,6 @@ package tutorspet.logic.util;
 
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_WEEK;
 import static tutorspet.commons.core.Messages.MESSAGE_MISSING_STUDENT_ATTENDANCE;
-import static tutorspet.commons.core.Messages.MESSAGE_NO_LESSON_ATTENDED;
 import static tutorspet.commons.util.CollectionUtil.requireAllNonNull;
 import static tutorspet.logic.util.AttendanceRecordUtil.addAttendance;
 import static tutorspet.logic.util.AttendanceRecordUtil.removeAttendance;
@@ -165,27 +164,21 @@ public class AttendanceRecordListUtil {
      * Returns {@code targetStudent}'s average participation score.
      * @return
      */
-    public static int getScoreFromAttendance(AttendanceRecordList targetAttendanceRecordList, Student targetStudent)
-            throws CommandException {
+    public static List<Integer> getScoreFromAttendance(AttendanceRecordList targetAttendanceRecordList,
+                                                 Student targetStudent) {
         requireAllNonNull(targetAttendanceRecordList, targetStudent);
 
         List<Optional<Attendance>> listOfAttendance = getAttendances(targetAttendanceRecordList, targetStudent);
 
-        int totalScore = 0;
-        int numOfWeeksParticipated = 0;
+        List<Integer> scores = new ArrayList<>();
 
         for (Optional<Attendance> attendance : listOfAttendance) {
             if (attendance.isPresent()) {
-                totalScore = totalScore + attendance.get().getParticipationScore();
-                numOfWeeksParticipated++;
+                scores.add(attendance.get().getParticipationScore());
             }
         }
 
-        if (numOfWeeksParticipated == 0) {
-            throw new CommandException(MESSAGE_NO_LESSON_ATTENDED);
-        }
-
-        return totalScore;
+        return scores;
     }
 
     /**

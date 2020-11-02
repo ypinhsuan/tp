@@ -3,6 +3,7 @@ package tutorspet.logic.commands.attendance;
 import static java.util.Objects.requireNonNull;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
+import static tutorspet.commons.core.Messages.MESSAGE_NO_LESSON_ATTENDED;
 import static tutorspet.commons.util.CollectionUtil.requireAllNonNull;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_CLASS_INDEX;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_STUDENT_INDEX;
@@ -72,12 +73,13 @@ public class StatisticsCommand extends Command {
         ModuleClass targetModuleClass = lastShownModuleClassList.get(moduleClassIndex.getZeroBased());
         Student targetStudent = lastShownStudentList.get(studentIndex.getZeroBased());
 
-        double avgParticipationScore = getParticipationScore(targetModuleClass, targetStudent);
+        Map<Lesson, List<Integer>> scores = getParticipationScore(targetModuleClass, targetStudent);
+        double averageScore = getAverageParticipationScore(scores);
         Map<Lesson, List<Integer>> attendances = getAbsentWeek(targetModuleClass, targetStudent);
         String weeksNotPresent = printStats(attendances);
 
         String message = String.format(MESSAGE_SUCCESS, targetStudent.getName().fullName,
-                targetModuleClass.getName().fullName, avgParticipationScore, weeksNotPresent);
+                targetModuleClass.getName().fullName, averageScore, weeksNotPresent);
         return new CommandResult(message);
     }
 
@@ -87,6 +89,26 @@ public class StatisticsCommand extends Command {
                 || (other instanceof StatisticsCommand // instanceof handles nulls
                 && moduleClassIndex.equals(((StatisticsCommand) other).moduleClassIndex)
                 && studentIndex.equals(((StatisticsCommand) other).studentIndex));
+    }
+
+    private double getAverageParticipationScore(Map<Lesson, List<Integer>> scores) throws CommandException {
+        int totalScore = 0;
+        double numOfWeeksAttended = 0;
+
+        for (Lesson lesson : scores.keySet()) {
+            List<Integer> lessonScore = scores.get(lesson);
+
+            for (Integer score : lessonScore) {
+                totalScore += score;
+                numOfWeeksAttended += 1;
+            }
+        }
+
+        if (numOfWeeksAttended == 0) {
+            throw new CommandException(MESSAGE_NO_LESSON_ATTENDED);
+        }
+
+        return totalScore / numOfWeeksAttended;
     }
 
     private String printStats(Map<Lesson, List<Integer>> attendances) {

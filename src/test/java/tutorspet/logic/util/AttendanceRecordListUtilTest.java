@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static tutorspet.commons.core.Messages.MESSAGE_DUPLICATE_ATTENDANCE;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_WEEK;
 import static tutorspet.commons.core.Messages.MESSAGE_MISSING_STUDENT_ATTENDANCE;
-import static tutorspet.commons.core.Messages.MESSAGE_NO_LESSON_ATTENDED;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_PARTICIPATION_SCORE_33;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_PARTICIPATION_SCORE_51;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_WEEK_1;
@@ -383,22 +382,23 @@ public class AttendanceRecordListUtilTest {
     }
 
     @Test
-    public void getScoreFromAttendance_validParameters_success() throws CommandException {
+    public void getScoreFromAttendance_validParameters_success() {
         AttendanceRecord recordWeekOne = new AttendanceRecordBuilder().build();
         Attendance attendance = new Attendance(VALID_PARTICIPATION_SCORE_33);
         AttendanceRecord recordWeekTwo = new AttendanceRecordBuilder().withEntry(ALICE.getUuid(), attendance).build();
         AttendanceRecordList recordList = new AttendanceRecordList(Arrays.asList(recordWeekOne, recordWeekTwo));
+        List<Integer> result = new ArrayList<>(Collections.singletonList(VALID_PARTICIPATION_SCORE_33));
 
-        assertEquals(VALID_PARTICIPATION_SCORE_33, getScoreFromAttendance(recordList, ALICE));
+        assertEquals(result, getScoreFromAttendance(recordList, ALICE));
     }
 
     @Test
-    public void getScoreFromAttendance_noLessonAttended_throwsCommandException() throws CommandException {
+    public void getScoreFromAttendance_noLessonAttended_success() {
         AttendanceRecord record = new AttendanceRecordBuilder().build();
         AttendanceRecordList recordList = new AttendanceRecordList(Arrays.asList(record, record));
+        List<Integer> result = new ArrayList<>();
 
-        assertThrows(CommandException.class, MESSAGE_NO_LESSON_ATTENDED, () ->
-                getScoreFromAttendance(recordList, ALICE));
+        assertEquals(result, getScoreFromAttendance(recordList, ALICE));
     }
 
     @Test
