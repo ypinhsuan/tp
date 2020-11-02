@@ -2,6 +2,7 @@ package tutorspet.logic.parser.student;
 
 import static java.util.Objects.requireNonNull;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static tutorspet.logic.commands.student.ListStudentInClassCommand.MESSAGE_USAGE;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_CLASS_INDEX;
 
 import tutorspet.commons.core.index.Index;
@@ -29,6 +30,10 @@ public class ListStudentCommandParser implements Parser<ListStudentCommand> {
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_CLASS_INDEX);
 
+        if (!argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
+        }
+
         if (argMultimap.getValue(PREFIX_CLASS_INDEX).isEmpty()) {
             return new ListStudentCommand();
         }
@@ -38,7 +43,7 @@ public class ListStudentCommandParser implements Parser<ListStudentCommand> {
             return new ListStudentInClassCommand(moduleClassIndex);
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListStudentInClassCommand.MESSAGE_USAGE), pe);
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE), pe);
         }
     }
 }
