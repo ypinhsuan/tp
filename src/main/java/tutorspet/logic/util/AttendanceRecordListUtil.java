@@ -142,9 +142,9 @@ public class AttendanceRecordListUtil {
      * @throws CommandException if the {@code targetWeek} does not exist in the {@code targetAttendanceRecordList} or
      * if the {@code Attendance} of the {@code targetStudent} in the {@code targetWeek} does not exist.
      */
-    public static Attendance getAttendanceFromAttendanceRecordList(
-            AttendanceRecordList targetAttendanceRecordList, Student targetStudent,
-            Week targetWeek) throws CommandException {
+    public static Attendance getAttendanceFromAttendanceRecordList(AttendanceRecordList targetAttendanceRecordList,
+                                                                   Student targetStudent, Week targetWeek)
+            throws CommandException {
         requireAllNonNull(targetAttendanceRecordList, targetStudent, targetWeek);
 
         if (!targetAttendanceRecordList.isWeekContained(targetWeek)) {
@@ -165,7 +165,7 @@ public class AttendanceRecordListUtil {
      * @return
      */
     public static List<Integer> getScoreFromAttendance(AttendanceRecordList targetAttendanceRecordList,
-                                                 Student targetStudent) {
+                                                       Student targetStudent) {
         requireAllNonNull(targetAttendanceRecordList, targetStudent);
 
         List<Optional<Attendance>> listOfAttendance = getAttendances(targetAttendanceRecordList, targetStudent);
@@ -185,7 +185,7 @@ public class AttendanceRecordListUtil {
      * Returns a {@code List<Integer>} containing weeks in which {@code targetStudent} did not attend.
      */
     public static List<Integer> getAbsentWeekFromAttendance(AttendanceRecordList targetAttendanceRecordList,
-                                                Student targetStudent) {
+                                                            Student targetStudent) {
         requireAllNonNull(targetAttendanceRecordList, targetStudent);
 
         List<Optional<Attendance>> listOfAttendance = getAttendances(targetAttendanceRecordList, targetStudent);
