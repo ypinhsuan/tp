@@ -3,7 +3,7 @@
   "students" : [ {
     "uuid" : "0c527a3f-8a6f-4c16-b57d-563a9c43cf6b",
     "name" : "Alice Pauline",
-    "telegram" : "4Lice_P",
+    "telegram" : "A1ice_P",
     "email" : "alice@example.com",
     "tagged" : [ "Average" ]
   }, {
@@ -27,7 +27,7 @@
   }, {
     "uuid" : "abb96663-589f-4553-bc25-fa93fed7459c",
     "name" : "Elle Meyer",
-    "telegram" : "4114_my",
+    "telegram" : "E114_my",
     "email" : "werner@example.com",
     "tagged" : [ ]
   }, {
