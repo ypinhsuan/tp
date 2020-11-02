@@ -74,16 +74,6 @@ public class JsonAdaptedStudent {
      * @throws IllegalValueException if there were any data constraints violated in the adapted student.
      */
     public Student toModelType() throws IllegalValueException {
-        final List<Tag> studentTags = new ArrayList<>();
-
-        if (tagged.stream().anyMatch(Objects::isNull)) {
-            throw new IllegalValueException(Tag.MESSAGE_CONSTRAINTS);
-        }
-
-        for (JsonAdaptedTag tag : tagged) {
-            studentTags.add(tag.toModelType());
-        }
-
         if (uuid == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "UUID"));
         }
@@ -118,6 +108,15 @@ public class JsonAdaptedStudent {
         }
         final Email modelEmail = new Email(email);
 
+        final List<Tag> studentTags = new ArrayList<>();
+
+        if (tagged.stream().anyMatch(Objects::isNull)) {
+            throw new IllegalValueException(Tag.MESSAGE_CONSTRAINTS);
+        }
+
+        for (JsonAdaptedTag tag : tagged) {
+            studentTags.add(tag.toModelType());
+        }
         final Set<Tag> modelTags = new HashSet<>(studentTags);
 
         return new Student(modelUuid, modelName, modelTelegram, modelEmail, modelTags);

@@ -3,6 +3,7 @@ package tutorspet.storage;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -26,6 +27,8 @@ class JsonSerializableTutorsPet {
 
     public static final String MESSAGE_DUPLICATE_STUDENT = "Students list contains duplicate student(s).";
     public static final String MESSAGE_DUPLICATE_MODULE_CLASS = "Class list contains duplicate class(es).";
+    public static final String MESSAGE_INVALID_STUDENT = "Invalid student.";
+    public static final String MESSAGE_INVALID_MODULE_CLASS = "Invalid class.";
     public static final String MESSAGE_INVALID_STUDENTS_IN_CLASS = "Invalid student(s) found in class(es).";
 
     private final List<JsonAdaptedStudent> students = new ArrayList<>();
@@ -58,6 +61,10 @@ class JsonSerializableTutorsPet {
      * @throws IllegalValueException if there were any data constraints violated.
      */
     private void studentsToModelType(TutorsPet tutorsPet) throws IllegalValueException {
+        if (students.stream().anyMatch(Objects::isNull)) {
+            throw new IllegalValueException(MESSAGE_INVALID_STUDENT);
+        }
+
         for (JsonAdaptedStudent jsonAdaptedStudent : students) {
             Student student = jsonAdaptedStudent.toModelType();
             if (tutorsPet.hasStudent(student) || tutorsPet.hasStudentUuid(student)) {
@@ -73,6 +80,10 @@ class JsonSerializableTutorsPet {
      * @throws IllegalValueException if there were any data constraints violated.
      */
     private void classesToModelType(TutorsPet tutorsPet) throws IllegalValueException {
+        if (classes.stream().anyMatch(Objects::isNull)) {
+            throw new IllegalValueException(MESSAGE_INVALID_MODULE_CLASS);
+        }
+
         // Get all UUIDs under "students" field in tutorspet.json.
         ObservableList<Student> students = tutorsPet.getStudentList();
         Set<UUID> uniqueStudentUuids = new HashSet<>();
