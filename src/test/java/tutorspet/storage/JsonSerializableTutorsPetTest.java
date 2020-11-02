@@ -161,7 +161,7 @@ public class JsonSerializableTutorsPetTest {
         assertEquals(typicalStudentsTutorsPet, tutorsPetFromFile);
     }
 
-    // Students-related tests
+    // students-related tests
     @Test
     public void toModelType_nullStudent_throwsIllegalValueException() throws Exception {
         JsonSerializableTutorsPet dataFromFile = JsonUtil.readJsonFile(NULL_STUDENT_FILE,
@@ -260,7 +260,7 @@ public class JsonSerializableTutorsPetTest {
                 dataFromFile::toModelType);
     }
 
-    // Classes-related tests
+    // classes-related tests
     @Test
     public void toModelType_invalidClassName_throwsIllegalValueException() throws Exception {
         JsonSerializableTutorsPet dataFromFile = JsonUtil.readJsonFile(INVALID_CLASS_NAME_FILE,
@@ -331,7 +331,7 @@ public class JsonSerializableTutorsPetTest {
         assertEquals(tutorsPetFromFile, typicalStudentsTutorsPet);
     }
 
-    // Lessons-related tests
+    // lessons-related tests
     @Test
     public void toModelType_invalidLessonFile_throwsIllegalValueException() throws Exception {
         JsonSerializableTutorsPet dataFromFile = JsonUtil.readJsonFile(INVALID_LESSON_FILE,
@@ -367,7 +367,7 @@ public class JsonSerializableTutorsPetTest {
         assertThrows(IllegalValueException.class, dataFromFile::toModelType);
     }
 
-    // Attendances-related tests
+    // attendances-related tests
     @Test
     public void toModelType_emptyRecordList_throwsIllegalValueException() throws Exception {
         JsonSerializableTutorsPet dataFromFile = JsonUtil.readJsonFile(EMPTY_RECORD_LIST_FILE,
@@ -435,7 +435,7 @@ public class JsonSerializableTutorsPetTest {
                 dataFromFile::toModelType);
     }
 
-    // Weeks-related tests
+    // weeks-related tests
     @Test
     public void toModelType_incorrectWeek_throwsIllegalValueException() throws Exception {
         JsonSerializableTutorsPet dataFromFile = JsonUtil.readJsonFile(INCORRECT_WEEK_FILE,
@@ -477,7 +477,7 @@ public class JsonSerializableTutorsPetTest {
                 dataFromFile::toModelType);
     }
 
-    // Participation-related tests
+    // participation-related tests
     @Test
     public void toModelType_invalidParticipationValue_throwsIllegalValueException() throws Exception {
         JsonSerializableTutorsPet dataFromFile = JsonUtil.readJsonFile(INVALID_PARTICIPATION_VALUE_FILE,
