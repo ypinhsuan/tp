@@ -31,7 +31,7 @@ public class ColorCycle<T> {
         }
     }
 
-    private final static Color[] COLORS = Color.values();
+    private static final Color[] COLORS = Color.values();
     private int pointer = 0;
     private final Map<T, Color> colorMap = new HashMap<>();
 
