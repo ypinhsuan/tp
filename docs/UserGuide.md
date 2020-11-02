@@ -715,7 +715,7 @@ Hence, you type in the command `add-lesson c\1 d\TUESDAY st\10:00 et\11:00 v\COM
   * You are not allowed to type in overnight lessons. For example, a lesson cannot start at `23:59` and end at `00:01`.
   * The `Number of Weeks` displayed refers to the total number of weeks you will be teaching the lesson.
     It does not follow the week numbers of a semester.
-    For example, if a semester has 13 weeks and your lessons begin from week 3 and end at week 13,
+    For example, if a semester has 13 weeks and your lessons begin in week 3 and end in week 13,
     you should type in `11` for `NO_OF_TIMES`, i.e `add-lesson c\1 d\TUESDAY st\10:00 et\11:00 v\COM2 #02-02 r\11`.
 
 </div>

@@ -1,8 +1,6 @@
 package tutorspet.ui;
 
-import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.List;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -17,9 +15,7 @@ import tutorspet.model.student.Student;
  */
 public class StudentCard extends UiPart<Region> {
 
-    private static final List<Tag> listOfTags = new ArrayList<>();
-    private static final Color[] colors = Color.values();
-    private static final int NUMBER_OF_COLORS = colors.length;
+    private static final ColorCycle<Tag> colorCycle = new ColorCycle<>();
     private static final String FXML = "StudentListCard.fxml";
     private static final String TELEGRAM_PREFIX = "@";
 
@@ -65,17 +61,9 @@ public class StudentCard extends UiPart<Region> {
      * Creates a {@code Label} with the given {@code Tag} details.
      */
     public Label createTag(Tag tag) {
-        Color color;
-        if (listOfTags.contains(tag)) {
-            int index = listOfTags.indexOf(tag);
-            color = colors[index % NUMBER_OF_COLORS];
-        } else {
-            listOfTags.add(tag);
-            color = colors[(listOfTags.size() - 1) % NUMBER_OF_COLORS];
-        }
-
         Label label = new Label(tag.tagName);
-        label.setStyle("-fx-background-color:" + color.getHexValue() + ";");
+        String hexValue = colorCycle.getColorHexValue(tag);
+        label.setStyle("-fx-background-color:" + hexValue + ";");
         return label;
     }
 
