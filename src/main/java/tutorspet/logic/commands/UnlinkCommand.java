@@ -28,7 +28,7 @@ public class UnlinkCommand extends Command {
     public static final String COMMAND_WORD = "unlink";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Unlinks the student identified by the index number used in the displayed student list from "
+            + ": Removes the student identified by the index number used in the displayed student list from "
             + "the class identified by the index number used in the displayed class list.\n"
             + "Parameters: "
             + PREFIX_STUDENT_INDEX + "STUDENT_INDEX (must be a positive integer) "
@@ -37,7 +37,7 @@ public class UnlinkCommand extends Command {
             + PREFIX_STUDENT_INDEX + "1"
             + PREFIX_CLASS_INDEX + "1";
 
-    public static final String MESSAGE_SUCCESS = "Unlinked %1$s from %2$s.";
+    public static final String MESSAGE_SUCCESS = "Removed %1$s from %2$s.";
 
     private final Index moduleClassIndex;
     private final Index studentIndex;
