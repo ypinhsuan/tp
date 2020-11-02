@@ -450,7 +450,7 @@ the relevant results without knowing the low level implementations.
        responsibilities. Violates the Single Responsibility Principle.
 
 ### Add Attendance Feature
-The add attendance feature allows users to record a student's attendance and participation score for a specific 
+The add attendance feature allows users to record a student's attendance and participation score for a specific
 week's lesson.
 
 This section explains the implementation of the add attendance mechanism and highlights the design considerations
@@ -1361,7 +1361,7 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete-student`, `delete-student x` (where x is larger than the
       size of student list)<br>
       Expected: No student is deleted. Error details shown in the status message.
-  
+
 ### Editing a class
 
 1. Editing a class
@@ -1461,10 +1461,10 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `find-attendance c\1 l\1 s\1 w\3`<br>
       Expected: Attendance not found. Reason stated in the status message.
-      
+
    1. Test case: `find-attendance c\1 l\1 s\4 w\3`<br>
       Expected: Attendance not found. Reason stated in the status message.
-      
+
    1. Other incorrect find commands to try: `find-attendance c\1 l\1 s\4 w\54`, `find-attendance c\x l\1 s\4 w\54`
       (where x is larger than the size of class list)<br>
       Expected: Attendance not found. Error details shown in the status message.
