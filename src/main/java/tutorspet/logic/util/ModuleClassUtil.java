@@ -5,6 +5,7 @@ import static tutorspet.commons.core.Messages.MESSAGE_INVALID_LESSON_DISPLAYED_I
 import static tutorspet.commons.core.Messages.MESSAGE_MISSING_LINK;
 import static tutorspet.commons.core.Messages.MESSAGE_NO_LESSONS_IN_MODULE_CLASS;
 import static tutorspet.commons.core.Messages.MESSAGE_NO_LESSON_ATTENDED;
+import static tutorspet.commons.core.Messages.MESSAGE_OVERLAP_LESSON;
 import static tutorspet.commons.util.CollectionUtil.requireAllNonNull;
 import static tutorspet.logic.util.LessonUtil.addAttendanceToLesson;
 import static tutorspet.logic.util.LessonUtil.deleteAllStudentsFromLesson;
@@ -80,7 +81,8 @@ public class ModuleClassUtil {
      * Adds {@code lessonToAdd} to {@code moduleClassToAddTo}.
      * All existing {@code Lesson}s in {@code moduleClassToAddTo} are copied to the new {@code ModuleClass}.
      *
-     * @throws CommandException if the {@code lessonToAdd} already exists.
+     * @throws CommandException if the {@code lessonToAdd} already exists or if the {@code lessonToAdd} overlaps with
+     * another lesson in the {@code targetModuleClass}.
      */
     public static ModuleClass addLessonToModuleClass(
             ModuleClass targetModuleClass, Lesson lessonToAdd)
@@ -89,6 +91,10 @@ public class ModuleClassUtil {
 
         if (targetModuleClass.hasLesson(lessonToAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_LESSON);
+        }
+
+        if (targetModuleClass.hasOverlapLesson(lessonToAdd, null)) {
+            throw new CommandException(MESSAGE_OVERLAP_LESSON);
         }
 
         Name moduleClassName = targetModuleClass.getName();
@@ -112,6 +118,10 @@ public class ModuleClassUtil {
 
         if (!lessonToEdit.isSameLesson(editedLesson) && targetModuleClass.hasLesson(editedLesson)) {
             throw new CommandException(MESSAGE_DUPLICATE_LESSON);
+        }
+
+        if (targetModuleClass.hasOverlapLesson(editedLesson, lessonToEdit)) {
+            throw new CommandException(MESSAGE_OVERLAP_LESSON);
         }
 
         Name moduleClassName = targetModuleClass.getName();

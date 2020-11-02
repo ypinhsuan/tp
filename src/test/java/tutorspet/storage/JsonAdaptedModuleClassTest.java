@@ -2,9 +2,12 @@ package tutorspet.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_PARTICIPATION_SCORE_33;
+import static tutorspet.logic.commands.CommandTestUtil.VALID_START_TIME_0900;
+import static tutorspet.storage.JsonAdaptedModuleClass.DUPLICATE_LESSON_MESSAGE_FORMAT;
 import static tutorspet.storage.JsonAdaptedModuleClass.INVALID_FIELD_MESSAGE_FORMAT;
 import static tutorspet.storage.JsonAdaptedModuleClass.MESSAGE_INVALID_STUDENTS_IN_LESSON;
 import static tutorspet.storage.JsonAdaptedModuleClass.MISSING_FIELD_MESSAGE_FORMAT;
+import static tutorspet.storage.JsonAdaptedModuleClass.OVERLAP_LESSON_MESSAGE_FORMAT;
 import static tutorspet.testutil.Assert.assertThrows;
 import static tutorspet.testutil.LessonBuilder.insertAttendanceRecords;
 import static tutorspet.testutil.TypicalLesson.LESSON_THU_10_TO_11;
@@ -12,6 +15,7 @@ import static tutorspet.testutil.TypicalLesson.LESSON_WED_2_TO_4;
 import static tutorspet.testutil.TypicalModuleClass.CS2103T_TUTORIAL;
 import static tutorspet.testutil.TypicalStudent.CARL;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -25,7 +29,9 @@ import tutorspet.model.attendance.Attendance;
 import tutorspet.model.attendance.AttendanceRecord;
 import tutorspet.model.components.name.Name;
 import tutorspet.model.lesson.Lesson;
+import tutorspet.model.moduleclass.ModuleClass;
 import tutorspet.storage.attendance.JsonAdaptedAttendanceRecordList;
+import tutorspet.testutil.LessonBuilder;
 
 public class JsonAdaptedModuleClassTest {
 
@@ -136,5 +142,31 @@ public class JsonAdaptedModuleClassTest {
                 VALID_CLASS_JSON_ADAPTED_NAME, VALID_JSON_ADAPTED_UUIDS, jsonAdaptedLessons);
         assertThrows(IllegalValueException.class, MESSAGE_INVALID_STUDENTS_IN_LESSON,
                 moduleClass::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidDuplicateLesson_throwsIllegalValueException() {
+        List<JsonAdaptedLesson> invalidLessons = new ArrayList<>(VALID_JSON_ADAPTED_LESSONS);
+        JsonAdaptedLesson duplicateJsonAdaptedLesson = invalidLessons.get(0);
+        invalidLessons.add(duplicateJsonAdaptedLesson);
+        JsonAdaptedModuleClass moduleClass = new JsonAdaptedModuleClass(
+                VALID_CLASS_JSON_ADAPTED_NAME, VALID_JSON_ADAPTED_UUIDS, invalidLessons);
+        String expectedMessage = String.format(
+                DUPLICATE_LESSON_MESSAGE_FORMAT, ModuleClass.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, moduleClass::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidOverlapLesson_throwsIllegalValueException() {
+        List<JsonAdaptedLesson> invalidLessons = new ArrayList<>(VALID_JSON_ADAPTED_LESSONS);
+        Lesson lesson = CS2103T_TUTORIAL.getLessons().get(0);
+        Lesson overlapLesson = new LessonBuilder(lesson).withStartTime(LocalTime.parse(VALID_START_TIME_0900)).build();
+        JsonAdaptedLesson overlapJsonAdaptedLesson = new JsonAdaptedLesson(overlapLesson);
+        invalidLessons.add(overlapJsonAdaptedLesson);
+        JsonAdaptedModuleClass moduleClass = new JsonAdaptedModuleClass(
+                VALID_CLASS_JSON_ADAPTED_NAME, VALID_JSON_ADAPTED_UUIDS, invalidLessons);
+        String expectedMessage = String.format(
+                OVERLAP_LESSON_MESSAGE_FORMAT, ModuleClass.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, moduleClass::toModelType);
     }
 }

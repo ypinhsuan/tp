@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tutorspet.commons.core.Messages.MESSAGE_DUPLICATE_LESSON;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX;
+import static tutorspet.commons.core.Messages.MESSAGE_OVERLAP_LESSON;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static tutorspet.logic.commands.lesson.AddLessonCommand.MESSAGE_COMMIT;
@@ -13,6 +14,8 @@ import static tutorspet.testutil.Assert.assertThrows;
 import static tutorspet.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 import static tutorspet.testutil.TypicalTutorsPet.getOnlyModuleClassTutorsPet;
 
+import java.time.LocalTime;
+
 import org.junit.jupiter.api.Test;
 
 import tutorspet.commons.core.index.Index;
@@ -20,6 +23,7 @@ import tutorspet.logic.commands.exceptions.CommandException;
 import tutorspet.model.Model;
 import tutorspet.model.ModelManager;
 import tutorspet.model.UserPrefs;
+import tutorspet.model.lesson.Day;
 import tutorspet.model.lesson.Lesson;
 import tutorspet.model.moduleclass.ModuleClass;
 import tutorspet.testutil.LessonBuilder;
@@ -71,6 +75,17 @@ public class AddLessonCommandTest {
         AddLessonCommand addLessonCommand = new AddLessonCommand(moduleClassIndex, lesson);
 
         assertCommandFailure(addLessonCommand, model, MESSAGE_DUPLICATE_LESSON);
+    }
+
+    @Test
+    public void execute_overlapLesson_failure() {
+        Index moduleClassIndex = INDEX_FIRST_ITEM;
+        Lesson lesson = new LessonBuilder().withStartTime(LocalTime.of(9, 0))
+                .withEndTime(LocalTime.of(12, 0))
+                .withDay(Day.THURSDAY).build();
+        AddLessonCommand addLessonCommand = new AddLessonCommand(moduleClassIndex, lesson);
+
+        assertCommandFailure(addLessonCommand, model, MESSAGE_OVERLAP_LESSON);
     }
 
     @Test
