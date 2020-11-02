@@ -66,13 +66,12 @@ public class StudentCard extends UiPart<Region> {
      */
     public Label createTag(Tag tag) {
         Color color;
-
         if (listOfTags.contains(tag)) {
             int index = listOfTags.indexOf(tag);
             color = colors[index % NUMBER_OF_COLORS];
         } else {
             listOfTags.add(tag);
-            color = colors[listOfTags.size() % NUMBER_OF_COLORS];
+            color = colors[(listOfTags.size() - 1) % NUMBER_OF_COLORS];
         }
 
         Label label = new Label(tag.tagName);
