@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Jun Long's Project Portfolio Page (PPP)
+title: Jun Long's Project Portfolio Page
 ---
 
 ## Project: Tutor's Pet
