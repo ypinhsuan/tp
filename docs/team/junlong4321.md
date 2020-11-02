@@ -42,8 +42,8 @@ This section documents both major and minor enhancements I have made to Tutor's 
   * Introduced ModuleClass to Storage. [#75](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/75)
     * Introduced the Java classes `JsonAdaptedUuid` and `JsonAdaptedModuleClass` into Storage. The two Java classes were
       required in Tutor's Pet so that we could allocate `Student`s to the respective tutorial classes that they were
-      enrolled in. Integration of these 2 Java classes into Storage and writing test cases for them took quite
-      some time.
+      enrolled in. Time was spent integrating the two Java classes into Storage and writing test cases for these 2
+      classes.
   * Introduced `Add Lesson` and `Delete AttendanceRecord` commands.
   [#129](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/129)
   [#152](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/152)
@@ -53,27 +53,31 @@ This section documents both major and minor enhancements I have made to Tutor's 
   * Cascade Deletion of `Student`s. [#182](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/185)
     * Fixed a major bug where a `Student`'s data could still be found in `Lesson`s and `AttendanceRecord`s even after
       the `Student` had been deleted from the application. There was a need to refactor a large part of the deletion
-      code to introduce the behaviour.
+      code to introduce the behaviour of cascading deletion.
 * **Minor Enhancements**
   * Change Token Delimiter.
   [#167](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/167)
     * Fixed a minor bug by changing token delimiter from backward to forward slash so that the parsing of
     command was not rendered faulty when a URL was added to `Lesson` venue. It was simple to fix actual code
-    but quite some time and effort had to be allocated to fix test cases. This was because there was a need to
+    but much time and effort had to be allocated to fix test cases. This was because there was a need to
     abstract all the existing test case command `String`s out into variables to prevent test cases
     from breaking in the event that the delimiter was changed again.
+  * Fix Null Storage bug.
+  [#260](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/260)
+    * Partially contributed to resolving an Address Book (Level 3) inherited bug where `tutorspet.json` threw
+    `NullPointerException`s when the application user tampered with `tutorspet.json` using `null` values.
 
 
 ## 4. User Guide Contributions
 * Reformatted User Guide and tailored it to Tutor's Pet Project
-(Changed addressbook address entries to students, /t to /tag, Changed tag description, Removed AB3 address,
-Add cover page).
+(Changed Address Book address entries to students, \t to \tag, Changed tag description, Removed AB3 address,
+Added cover page).
 
 * Refined documentation for `list-students` and `clear-class` commands.
 
 * Added documentation for `add-lesson` and `delete attendance` commands.
 
-* Consolidated and organised all commands in lexicographical order.
+* Consolidated and organised all commands in lexicographical ordering.
 
 
 ## 5. Developer Guide Contributions
@@ -85,7 +89,8 @@ with the use of Java UUIDs.
 
 * Added use cases `find`, `clear`, `lesson`, `attendance`-related commands - UC04, UC06, UC10, UC12, UC17 to UC23.
 
-* Consolidated and organised all use cases and user stories.
+* Consolidated and organised all use cases and user stories. User stories were organised into `Implemented` and
+`Not Implemented` categories.
 
 
 ## 6. Contributions to Team-Based Tasks
