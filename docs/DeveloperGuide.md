@@ -1,5 +1,6 @@
 ---
 layout: page
+style: guide
 title: Developer Guide
 ---
 1. Table of Contents
