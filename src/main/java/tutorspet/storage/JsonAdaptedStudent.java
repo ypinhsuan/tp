@@ -1,6 +1,5 @@
 package tutorspet.storage;
 
-import static java.util.Objects.isNull;
 import static java.util.UUID.fromString;
 import static tutorspet.model.student.Email.isValidEmail;
 import static tutorspet.model.student.Telegram.isValidTelegram;
