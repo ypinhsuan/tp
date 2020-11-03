@@ -390,8 +390,10 @@ public class ModuleClassUtilTest {
 
     @Test
     public void getParticipationScore_validParameter_success() throws CommandException {
-        double avgParticipationScoreAlice = 65.5;
-        assertEquals(avgParticipationScoreAlice,
+        Map<Lesson, List<Integer>> result = new HashMap<>();
+        result.put(CS2103T_TUTORIAL.getLessons().get(0),
+                new ArrayList<>(Arrays.asList(80, 51)));
+        assertEquals(result,
                 getParticipationScore(CS2103T_TUTORIAL, ALICE));
     }
 

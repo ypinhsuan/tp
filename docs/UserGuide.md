@@ -333,7 +333,7 @@ For example:
 * You would like to add a new student, `Joel Lee` to Tutor's Pet.
   Type in `add-student n\Joel Lee t\joeleee e\jlee@example.com`
 
-  ![AddStudentBefore](images/ugimages/AddStudentBefore.png)  
+  ![AddStudentBefore](images/ugimages/AddStudentBefore.png)
 
 * Scrolling down the list of students, you will see that `Joel Lee` has been added to Tutor's Pet.
 
@@ -495,7 +495,7 @@ For example:
  the two classes. Hence you decide to edit the `CS2103T Tutorial` class to `CS2103T Tutorial T10`. You type the
  command `edit-class 1 n\CS2103T Tutorial T10` and press <kbd>Enter</kbd>.
 
-  ![Edit class before](images/ugimages/EditClassBefore.png) 
+  ![Edit class before](images/ugimages/EditClassBefore.png)
 
 * The class has been renamed from `CS2103T Tutorial` to `CS2103T Tutorial 10`.
 
@@ -767,7 +767,7 @@ For example:
   in the form of zoom links. Your lesson is starting in 10 minutes and it is time to start the session. Hence, you
   input the command `display-venue c\2 l\1` and press <kbd>Enter</kbd>.
 
-  ![Display venue before](images/ugimages/DisplayVenueBefore.png)  
+  ![Display venue before](images/ugimages/DisplayVenueBefore.png)
 
 * You can now proceed to copy the link to that zoom session from the command result box.
 
@@ -853,7 +853,7 @@ For example:
  out if Alex attended week 1 lesson and hence you type in the command `find-attendance c\1 l\1 s\1 w\1` and press
  <kbd>Enter</kbd>.
 
-  ![Find attendance before](images/ugimages/FindAttendanceBefore.png) 
+  ![Find attendance before](images/ugimages/FindAttendanceBefore.png)
 
 * Now you can find out if Alex attended the first lesson and how participative he was in week 1.
 

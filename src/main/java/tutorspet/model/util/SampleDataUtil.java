@@ -31,7 +31,7 @@ import tutorspet.model.student.Telegram;
  */
 public class SampleDataUtil {
 
-    private static final Student ALEX_YEOH = new Student(new Name("Alex Yeoh"), new Telegram("41ex_Yo"),
+    private static final Student ALEX_YEOH = new Student(new Name("Alex Yeoh"), new Telegram("A1ex_Yo"),
             new Email("alexyeoh@example.com"), getTagSet("Average"));
     private static final Student BERNICE_YU = new Student(new Name("Bernice Yu"), new Telegram("b3rnice"),
             new Email("berniceyu@example.com"), getTagSet("Good", "Experienced"));
