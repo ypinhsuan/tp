@@ -111,7 +111,7 @@ public class JsonAdaptedStudent {
         final List<Tag> studentTags = new ArrayList<>();
 
         for (JsonAdaptedTag tag : tagged) {
-            if (isNull(tag)) {
+            if (tag == null) {
                 throw new IllegalValueException(Tag.MESSAGE_CONSTRAINTS);
             }
 

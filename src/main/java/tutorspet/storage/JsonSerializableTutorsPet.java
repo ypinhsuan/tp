@@ -1,7 +1,5 @@
 package tutorspet.storage;
 
-import static java.util.Objects.isNull;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -64,7 +62,7 @@ class JsonSerializableTutorsPet {
      */
     private void studentsToModelType(TutorsPet tutorsPet) throws IllegalValueException {
         for (JsonAdaptedStudent jsonAdaptedStudent : students) {
-            if (isNull(jsonAdaptedStudent)) {
+            if (jsonAdaptedStudent == null) {
                 throw new IllegalValueException(MESSAGE_INVALID_STUDENT);
             }
 
@@ -90,7 +88,7 @@ class JsonSerializableTutorsPet {
         }
 
         for (JsonAdaptedModuleClass jsonAdaptedModuleClass : classes) {
-            if (isNull(jsonAdaptedModuleClass)) {
+            if (jsonAdaptedModuleClass == null) {
                 throw new IllegalValueException(MESSAGE_INVALID_MODULE_CLASS);
             }
 
