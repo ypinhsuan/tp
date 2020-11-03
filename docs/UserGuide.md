@@ -28,9 +28,7 @@ This user guide provides documentation on the installation and usage of Tutor's 
 It also provides a comprehensive description of features available to you and
 includes a [quick-start](#quick-start) section that helps you get started.
 
-### Using this guide
-
-The following features are used in this guide to make it easier for you to navigate around:
+The guide uses the following features to make it easier for you to navigate around:
 
 * Words that look like [this](#using-this-guide) can be clicked to jump to the related section.
 * Words that look like `this` refer to keywords used as part of commands or responses from your Tutor's Pet.
@@ -38,7 +36,7 @@ The following features are used in this guide to make it easier for you to navig
 
 <div markdown="block" class="alert alert-info">
 
-:information_source: Boxes wi the :information_source: icon contain additional useful information.
+:information_source: Boxes with the :information_source: icon contain additional useful information.
 
 </div>
 
@@ -63,7 +61,7 @@ Here are a few steps to get you started on Tutor's Pet:
 
 1. Ensure you have **Java 11** or above installed in your Computer.
 
-2. Download the latest **tutorspet.jar** [here](https://github.com/AY2021S1-CS2103T-T10-4/tp/releases).
+2. Download the latest version of **tutorspet** [here](https://github.com/AY2021S1-CS2103T-T10-4/tp/releases).
 
 3. Copy the file to the folder you want to use as the home folder for your Tutor's Pet.
 
@@ -167,6 +165,9 @@ This section details the format of the commands available in Tutor's Pet. We wil
 * The `CLASS_INDEX` refers to the index number shown in the displayed class list.
 
 * The `LESSON_INDEX` refers to the index number of a lesson shown in its class.
+
+* Time must be input in the format, `hh:mm`. <br>
+  e.g. `13:00` is allowed, but not `1300`.
 
 </div>
 
@@ -339,7 +340,7 @@ For example:
 * You would like to add a new student, `Joel Lee` to Tutor's Pet.
   Type in `add-student n\Joel Lee t\joeleee e\jlee@example.com`
 
-  ![AddStudentBefore](images/ugimages/AddStudentBefore.png)  
+  ![AddStudentBefore](images/ugimages/AddStudentBefore.png)
 
 * Scrolling down the list of students, you will see that `Joel Lee` has been added to Tutor's Pet.
 
@@ -377,10 +378,15 @@ For example:
 
   ![EditStudentAfter](images/ugimages/EditStudentAfter.png)
 
-Constraints:
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the command:**<br>
+
 * You must provide at least one of the optional fields.
 * When editing tags, the existing tags of the student will be removed and replaced by the newly typed in tags.
 * You can remove all the tags of a student by typing `tag\` without specifying any tags after it.
+
+</div>
 
 Other examples:
 *  `edit-student 1 t\smartlex e\yeohalex@example.com` \
@@ -405,12 +411,17 @@ You want to email him these notes.
 
   ![FindStudentAfter](images/ugimages/FindStudentAfter.png)
 
-Constraints:
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the command:**<br>
+
 * The search is case-insensitive. You will receive `Roy` if you type in `roy`.
 * The order of the keywords does not matter. You will receive `Alex Yeoh` if you type in `Yeoh Alex`.
 * Only the name is searched.
 * Only full words will be matched. You will not receive `Irfan` if you only typed in `Irfa`.
 * Students matching at least one keyword will be returned. You will receive both `Alex Yeoh` and `David Li` if you type in `Alex Li`.
+
+</div>
 
 #### Deleting a student : `delete-student`
 
@@ -477,7 +488,7 @@ If you would like to see a list of all students in a particular class, make use 
 
 For example:
 * You want to send an email to students in your `CS2103T Tutorial` and hence would want to see a list of students in
-this class. You type in the command `list-student c\1` and and press <kbd>Enter</kbd>.
+this class. You type in the command `list-student c\1` and press <kbd>Enter</kbd>.
 
   ![List students in class before](images/ugimages/ListStudentsInClassBefore.png)
 
@@ -498,7 +509,7 @@ If you entered the wrong class name or would like to change the name of a class,
 
 For example:
 1. Your module coordinator decides to allocate another class to you and you want to be able to distinguish between
-   the two classes. Hence you decide to edit the `CS2103T Tutorial` class to `CS2103T Tutorial T10`. 
+   the two classes. Hence you decide to edit the `CS2103T Tutorial` class to `CS2103T Tutorial T10`.
 1. You type the command `edit-class 1 n\CS2103T Tutorial T10` and press <kbd>Enter</kbd>.
 
    ![Edit class before](images/ugimages/EditClassBefore.png)
@@ -507,8 +518,13 @@ For example:
 
    ![Edit class after](images/ugimages/EditClassAfter.png)
 
-Constraints:
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the command:**<br>
+
 * A new class name must be provided.
+
+</div>
 
 Other examples:
 * `find-class CS2030 lab`<br>
@@ -698,10 +714,17 @@ Hence, you type in the command `add-lesson c\1 d\TUESDAY st\10:00 et\11:00 v\COM
 
   ![Add lesson after](images/ugimages/AddLessonAfter.png)
 
-Constraints:
-* You must type out the day in full.
-* When typing the start and end times, you must follow the form `hh:mm`. For example, `11:00` is allowed, but not `1100`.
-* Overnight lessons are not allowed. For example, a lesson cannot start at `23:59` and end at `00:01`.
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the command:**<br>
+  * You must type out the day in full.
+  * You are not allowed to type in overnight lessons. For example, a lesson cannot start at `23:59` and end at `00:01`.
+  * The `Number of Weeks` displayed refers to the total number of weeks you will be teaching the lesson.
+    It does not follow the week numbers of a semester.
+    For example, if a semester has 13 weeks and your lessons begin in week 3 and end in week 13,
+    you should type in `11` for `NO_OF_TIMES`, i.e `add-lesson c\1 d\TUESDAY st\10:00 et\11:00 v\COM2 #02-02 r\11`.
+
+</div>
 
 #### Editing a lesson : `edit-lesson`
 
@@ -719,12 +742,16 @@ For example:
 
   ![Edit lesson after](images/ugimages/EditLessonAfter.png)
 
-Constraints:
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the command:**<br>
+
 * You must type out the day in full.
-* When typing the start and end times, you must follow the form `hh:mm`. For example, `11:00` is allowed, but not `1100`.
-* Overnight lessons are not allowed. For example, a lesson cannot start at `23:59` and end at `00:01`.
+* You are not allowed to type in overnight lessons. For example, a lesson cannot start at `23:59` and end at `00:01`.
 * You must specify at least one field (DAY, START_TIME, END_TIME, VENUE) to be changed.
-* You are not able to change the Number of occurrences.
+* You are not able to change the `Number of Weeks`.
+
+</div>
 
 Other examples:
 *  `find-class CS2100 lab`\
@@ -772,7 +799,7 @@ For example:
 1. Your online lesson is starting in 10 minutes and it is time to start the session. You wish to find out the link
    to that section and hence, you input the command `display-venue c\2 l\1` and press <kbd>Enter</kbd>.
 
-   ![Display venue before](images/ugimages/DisplayVenueBefore.png)  
+   ![Display venue before](images/ugimages/DisplayVenueBefore.png)
 
 1. You can now proceed to copy the link to that zoom session from the command result box.
 
@@ -788,7 +815,7 @@ If you would like to record a new attendance for a student, you can make use of 
 
 For example:
 1. Your `CS2103T Tutorial` lesson in week 10 has just ended and you would like to give participation scores to the
-   students. You enter the command `list-student c\1` to see the students in your `CS2103T Tutorial` class.  
+   students. You enter the command `list-student c\1` to see the students in your `CS2103T Tutorial` class.
 1. You decide to start with Alex. Hence, you type in the command `add-attendance c\1 l\1 s\1 w\10 p\80` and
    press <kbd>Enter</kbd>.
 
@@ -855,12 +882,12 @@ If you need to find out a specific student's attendance for a specific week, mak
 * Finds the attendance record at the specified `CLASS_INDEX` + `LESSON_INDEX` + `STUDENT_INDEX` + `WEEK`.
 
 For example:
-1. It is the end of a semester and it's time to key in your students' attendance into luminus. You enter the 
-   command `list-student c\1` to see the students in your `CS2103T Tutorial` class.  
-1. You would like to find out if Alex attended week 1 lesson and hence you type in the command 
+1. It is the end of a semester and it's time to key in your students' attendance into luminus. You enter the
+   command `list-student c\1` to see the students in your `CS2103T Tutorial` class.
+1. You would like to find out if Alex attended week 1 lesson and hence you type in the command
    `find-attendance c\1 l\1 s\1 w\1` and press <kbd>Enter</kbd>.
 
-   ![Find attendance before](images/ugimages/FindAttendanceBefore.png) 
+   ![Find attendance before](images/ugimages/FindAttendanceBefore.png)
 
 1. Now you can find out if Alex attended the first lesson and how participative he was in week 1.
 
@@ -910,8 +937,8 @@ Gives you an overall summary of a student's attendance and participation scores.
 * Gives a summary of the student's attendance at the specified `CLASS_INDEX` + `STUDENT_INDEX`.
 
 For example:
-1. It is the end of the semester and time for you to grade your students overall class participation. You enter the 
-   command `list-student c\1` to see the students in your `CS2103T Tutorial` class.  
+1. It is the end of the semester and time for you to grade your students overall class participation. You enter the
+   command `list-student c\1` to see the students in your `CS2103T Tutorial` class.
 1. You would like to find out if Alex has been participative throughout the semester and hence you type in the
    command `stats c\1 s\1` and press <kbd>Enter</kbd>.
 

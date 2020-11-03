@@ -49,15 +49,15 @@ Here is a summary of my personal contributions to the team project. All my code 
   * `add-attendance` command: Record the attendance of a specific student for a specific week's lesson.
     [#142](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/142)
   * `display-venue` command: Obtains the venue of a specific lesson from the command result box. It was
-    implemented because we notice that users are unable to copy venues directly from the displayed class list. 
+    implemented because we notice that users are unable to copy venues directly from the displayed class list.
     [#166](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/166)
-    
+
 * Changed help window popup. [#94](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/94)
   * Address a bug that results in help window not appearing when minimised.
-  
+
 * Fix UI scaling. [#126](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/126)
   * Address a bug that results in UI not scailing equally when the window is being resized.
-  
+
 * Renamed base package. [#165](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/165)
   * Renamed the base package from `seedu.address` to `tutorspet`.
 
