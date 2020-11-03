@@ -88,7 +88,7 @@ public class JsonAdaptedModuleClass {
 
     /**
      * Checks if a {@code lesson} already exists in a list.
-     * Duplicates are detected by calling {@code isSameLesson} method in {@code Lesson}.
+     * Duplicates are detected by calling {@code isSameLesson} method in {@code Lesson} class.
      * Returns true if there is a duplicate.
      */
     private boolean hasDuplicateLessons(List<Lesson> lessons, Lesson lessonToCheck) {
@@ -97,7 +97,7 @@ public class JsonAdaptedModuleClass {
 
     /**
      * Checks if a {@code lesson} timing overlaps with another {@code Lesson} in the list.
-     * Overlapping lessons are detected by calling the {@code isOverlapLesson} method in {@code Lesson}.
+     * Overlapping lessons are detected by calling the {@code isOverlapLesson} method in {@code Lesson} class.
      * Returns true if there is an overlap.
      */
     private boolean hasOverlapLessons(List<Lesson> lessons, Lesson lessonToCheck) {
