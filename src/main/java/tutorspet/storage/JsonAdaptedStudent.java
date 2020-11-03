@@ -1,5 +1,6 @@
 package tutorspet.storage;
 
+import static java.util.Objects.isNull;
 import static java.util.UUID.fromString;
 import static tutorspet.model.student.Email.isValidEmail;
 import static tutorspet.model.student.Telegram.isValidTelegram;
@@ -8,7 +9,6 @@ import static tutorspet.storage.JsonAdaptedUuid.MESSAGE_INVALID_UUID;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -110,11 +110,11 @@ public class JsonAdaptedStudent {
 
         final List<Tag> studentTags = new ArrayList<>();
 
-        if (tagged.stream().anyMatch(Objects::isNull)) {
-            throw new IllegalValueException(Tag.MESSAGE_CONSTRAINTS);
-        }
-
         for (JsonAdaptedTag tag : tagged) {
+            if (isNull(tag)) {
+                throw new IllegalValueException(Tag.MESSAGE_CONSTRAINTS);
+            }
+
             studentTags.add(tag.toModelType());
         }
         final Set<Tag> modelTags = new HashSet<>(studentTags);

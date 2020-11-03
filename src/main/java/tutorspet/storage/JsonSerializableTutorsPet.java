@@ -1,9 +1,10 @@
 package tutorspet.storage;
 
+import static java.util.Objects.isNull;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -18,6 +19,7 @@ import tutorspet.model.ReadOnlyTutorsPet;
 import tutorspet.model.TutorsPet;
 import tutorspet.model.moduleclass.ModuleClass;
 import tutorspet.model.student.Student;
+
 
 /**
  * An Immutable TutorsPet that is serializable to JSON format.
@@ -61,11 +63,11 @@ class JsonSerializableTutorsPet {
      * @throws IllegalValueException if there were any data constraints violated.
      */
     private void studentsToModelType(TutorsPet tutorsPet) throws IllegalValueException {
-        if (students.stream().anyMatch(Objects::isNull)) {
-            throw new IllegalValueException(MESSAGE_INVALID_STUDENT);
-        }
-
         for (JsonAdaptedStudent jsonAdaptedStudent : students) {
+            if (isNull(jsonAdaptedStudent)) {
+                throw new IllegalValueException(MESSAGE_INVALID_STUDENT);
+            }
+
             Student student = jsonAdaptedStudent.toModelType();
             if (tutorsPet.hasStudent(student) || tutorsPet.hasStudentUuid(student)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_STUDENT);
@@ -80,10 +82,6 @@ class JsonSerializableTutorsPet {
      * @throws IllegalValueException if there were any data constraints violated.
      */
     private void classesToModelType(TutorsPet tutorsPet) throws IllegalValueException {
-        if (classes.stream().anyMatch(Objects::isNull)) {
-            throw new IllegalValueException(MESSAGE_INVALID_MODULE_CLASS);
-        }
-
         // Get all UUIDs under "students" field in tutorspet.json.
         ObservableList<Student> students = tutorsPet.getStudentList();
         Set<UUID> uniqueStudentUuids = new HashSet<>();
@@ -92,6 +90,10 @@ class JsonSerializableTutorsPet {
         }
 
         for (JsonAdaptedModuleClass jsonAdaptedModuleClass : classes) {
+            if (isNull(jsonAdaptedModuleClass)) {
+                throw new IllegalValueException(MESSAGE_INVALID_MODULE_CLASS);
+            }
+
             ModuleClass moduleClass = jsonAdaptedModuleClass.toModelType();
             if (tutorsPet.hasModuleClass(moduleClass)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_MODULE_CLASS);
