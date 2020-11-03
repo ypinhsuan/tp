@@ -5,10 +5,9 @@ title: Samantha Low's Project Portfolio Page
 
 ## Project: Tutor's Pet
 
-## 1. Overview
+## Overview
 Tutor's Pet is a **desktop application for managing students and classes**, designed for teaching assistants in NUS
-School of Computing. Tutor's Pet aims to reduce the amount of time tutors spend on administrative tasks and it is
-a one stop solution for users to keep track of all their classes, students, and their student's progress.
+School of Computing.
 
 Tutor's Pet is morphed from an existing desktop Java application
 [Address Book (Level 3)](https://se-education.org/addressbook-level3/) and several enhancements was made to it by my
@@ -16,14 +15,11 @@ team of 5 NUS Computer Science students over a period of 6 weeks.
 
 The following sections document all the contributions that I have made to Tutor's Pet.
 
-Given below are my contributions to the project.
-
-
-## 2. Summary of Contributions
+## Summary of Contributions
 Here is a summary of my personal contributions to the team project. All my code contributions can be found
 [here](https://nus-cs2103-ay2021s1.github.io/tp-dashboard/#breakdown=true&search=samlsm).
 
-### 2.1. Major Enhancements:
+### Major Enhancements:
 * Designed a new UI for tutors pet. [#108](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/108)
   * What it does: Display all information that a user would require in a clear and concise format.
   * Justification: The change in design was essential for Tutor's Pet because the original address book design was
@@ -43,37 +39,29 @@ Here is a summary of my personal contributions to the team project. All my code 
   * Highlights: Implementation of this enhancement was challenging because the direct implementation of it would
     break the law of demeter. Hence a more in-depth analysis of its implementations was necessary.
 
-### 2.2. Minor Enhancements:
-* Added a `edit-class` command. [#63](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/63)
-  * This command allows users to edit the details of a class.
-
-* Added a `find-class` command. [#92](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/92)
-  * This command allows users to find classes which contains the specified keyword(s).
-
+### Minor Enhancements:
+* Some of the notable commands added:
+  * `edit-class` command: Edit the details of a class. [#63](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/63)
+  * `find-class` command: Find classes which contains the specified keyword(s).
+    [#92](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/92)
+  * `delete-lesson` command: Delete a lesson and all its relevant data.
+    [#124](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/124)
+  * `add-attendance` command: Record the attendance of a specific student for a specific week's lesson.
+    [#142](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/142)
+  * `display-venue` command: Obtains the venue of a specific lesson from the command result box. It was
+    implemented because we notice that users are unable to copy venues directly from the displayed class list. 
+    [#166](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/166)
+    
 * Changed help window popup. [#94](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/94)
   * Address a bug that results in help window not appearing when minimised.
-
-* Added a `delete-lesson` command. [#124](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/124)
-  * This command allows users to delete a lesson and all its relevant data.
-
+  
 * Fix UI scaling. [#126](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/126)
   * Address a bug that results in UI not scailing equally when the window is being resized.
-
-* Added a `add-attendance` command. [#142](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/142)
-  * This command allows users to record the attendance of a specific student for a specific week's lesson.
-
-* Added a `find-attendance` command. [#155](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/155)
-  * This command allows users to search for a student's attendance in a specific week's lesson.
-
+  
 * Renamed base package. [#165](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/165)
   * Renamed the base package from `seedu.address` to `tutorspet`.
 
-* Added a `display-venue` command. [#166](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/166)
-  * This command allows users to obtain the venue of a specific lesson from the command result box. It was
-    implemented because we notice that users are unable to copy venues directly from the displayed class list.
-
-
-## 3. User Guide Contributions
+## User Guide Contributions
 Given below are sections I contributed to the User Guide. It illustrates my ability to write documentations
 targeting end-users.
 
