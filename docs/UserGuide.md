@@ -505,7 +505,7 @@ For example:
 
 1. The class has been renamed from `CS2103T Tutorial` to `CS2103T Tutorial 10`.
 
-   ![Edit class after](images/ugimages/EditClassAfter.png)
+   ![Edit class before](images/ugimages/EditClassBefore.png) 
 
 Constraints:
 * A new class name must be provided.

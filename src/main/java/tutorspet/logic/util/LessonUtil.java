@@ -173,8 +173,7 @@ public class LessonUtil {
      * Returns {@code targetStudent}'s average participation score for a lesson.
      * @return
      */
-    public static int getParticipationScoreFromLesson(Lesson targetLesson, Student targetStudent)
-            throws CommandException {
+    public static List<Integer> getParticipationScoreFromLesson(Lesson targetLesson, Student targetStudent) {
         requireAllNonNull(targetLesson, targetStudent);
 
         AttendanceRecordList targetAttendanceRecordList = targetLesson.getAttendanceRecordList();

@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static tutorspet.commons.core.Messages.MESSAGE_DUPLICATE_ATTENDANCE;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_WEEK;
 import static tutorspet.commons.core.Messages.MESSAGE_MISSING_STUDENT_ATTENDANCE;
-import static tutorspet.commons.core.Messages.MESSAGE_NO_LESSON_ATTENDED;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_ATTENDANCE_33;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_PARTICIPATION_SCORE_80;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_WEEK_1;
@@ -177,19 +176,20 @@ public class LessonUtilTest {
     }
 
     @Test
-    public void getParticipationScoreFromLesson_validParameter_success() throws CommandException {
-        double avgParticipationScoreAlice = 51.0;
-        assertEquals(avgParticipationScoreAlice,
-                getParticipationScoreFromLesson(DEFAULT_LESSON, ALICE));
+    public void getParticipationScoreFromLesson_validParameter_success() {
+        Integer participationScoreAlice = 51;
+        List<Integer> result = new ArrayList<>(Collections.singletonList(participationScoreAlice));
+        assertEquals(result, getParticipationScoreFromLesson(DEFAULT_LESSON, ALICE));
     }
 
     @Test
-    public void getParticipationScore_invalidStudentAttendance_throwsCommandException() {
+    public void getParticipationScore_invalidStudentAttendance_success() {
         Lesson lesson =
                 insertAttendanceRecords(new LessonBuilder().withNumberOfOccurrences(2).build(),
                         RECORD_EMPTY, RECORD_EMPTY);
-        assertThrows(CommandException.class, MESSAGE_NO_LESSON_ATTENDED, () ->
-                getParticipationScoreFromLesson(lesson, CARL));
+        List<Integer> result = new ArrayList<>();
+
+        assertEquals(result, getParticipationScoreFromLesson(lesson, CARL));
     }
 
     @Test

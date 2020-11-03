@@ -25,7 +25,7 @@ public class TypicalStudent {
     public static final Student ALICE = new StudentBuilder().withUuid("0c527a3f-8a6f-4c16-b57d-563a9c43cf6b")
             .withName("Alice Pauline")
             .withEmail("alice@example.com")
-            .withTelegram("4Lice_P")
+            .withTelegram("A1ice_P")
             .withTags("Average").build();
     public static final Student BENSON = new StudentBuilder().withUuid("5c09bbdc-b89c-482a-a4b0-32ede6d679e7")
             .withName("Benson Meier")
@@ -38,7 +38,7 @@ public class TypicalStudent {
             .withName("Daniel Meier").withTelegram("danielmeier")
             .withEmail("cornelia@example.com").withTags("Weak").build();
     public static final Student ELLE = new StudentBuilder().withUuid("abb96663-589f-4553-bc25-fa93fed7459c")
-            .withName("Elle Meyer").withTelegram("4114_my")
+            .withName("Elle Meyer").withTelegram("E114_my")
             .withEmail("werner@example.com").build();
     public static final Student FIONA = new StudentBuilder().withUuid("2be53daa-e18d-4de1-828b-31ad891ff7fc")
             .withName("Fiona Kunz").withTelegram("kunz_F")

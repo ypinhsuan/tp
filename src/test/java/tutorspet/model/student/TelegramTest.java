@@ -29,6 +29,7 @@ public class TelegramTest {
         assertFalse(Telegram.isValidTelegram("tEle")); // less than 4 characters
         assertFalse(Telegram.isValidTelegram("te1e-gram")); // usage of special character
         assertFalse(Telegram.isValidTelegram("Tele Gram")); // usage of white space
+        assertFalse(Telegram.isValidTelegram("1abcde")); // starts with a number
 
         // valid Telegram handles
         assertTrue(Telegram.isValidTelegram("Tel3g")); // exactly 5 characters
