@@ -1,5 +1,5 @@
 {
-  "_comment" : "Duplicate lesson Friday 8 to 10 lesson",
+  "_comment" : "Overlap lessons on Tuesday",
   "students" : [ ],
   "classes" : [ {
     "name" : "CS2100 Lab",
@@ -7,7 +7,7 @@
     "lessons" : [ {
       "startTime" : "08:00",
       "endTime" : "10:00",
-      "day" : "FRIDAY",
+      "day" : "TUESDAY",
       "numberOfOccurrences" : 3,
       "venue" : "S17-0302",
       "attendanceRecordList" : {
@@ -23,7 +23,7 @@
         } ]
       }
     }, {
-      "startTime" : "10:30",
+      "startTime" : "07:00",
       "endTime" : "11:30",
       "day" : "TUESDAY",
       "numberOfOccurrences" : 3,

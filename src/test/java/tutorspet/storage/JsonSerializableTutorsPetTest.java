@@ -57,6 +57,8 @@ public class JsonSerializableTutorsPetTest {
 
     private static final Path DUPLICATE_LESSON_FILE =
             LESSON_TEST_DATA_FOLDER.resolve("duplicateLessonTutorsPet.json");
+    private static final Path OVERLAP_LESSON_FILE =
+            LESSON_TEST_DATA_FOLDER.resolve("overlapLessonTutorsPet.json");
     private static final Path INVALID_LESSON_FILE =
             LESSON_TEST_DATA_FOLDER.resolve("invalidLessonTutorsPet.json");
     private static final Path NULL_LESSON_FILE =
@@ -217,6 +219,16 @@ public class JsonSerializableTutorsPetTest {
     @Test
     public void toModelType_nullLesson_throwsIllegalValueException() throws Exception {
         JsonSerializableTutorsPet dataFromFile = JsonUtil.readJsonFile(NULL_LESSON_FILE,
+                JsonSerializableTutorsPet.class).get();
+        assertThrows(IllegalValueException.class, dataFromFile::toModelType);
+    }
+
+    /**
+     * Ensures that Tutor's Pet will not be able to boot up given overlap {@code Lesson}s.
+     */
+    @Test
+    public void toModelType_overlapLesson_throwsIllegalValueException() throws Exception {
+        JsonSerializableTutorsPet dataFromFile = JsonUtil.readJsonFile(OVERLAP_LESSON_FILE,
                 JsonSerializableTutorsPet.class).get();
         assertThrows(IllegalValueException.class, dataFromFile::toModelType);
     }

@@ -8,8 +8,20 @@
       "startTime" : "1000",
       "endTime" : "11:00",
       "day" : "THURSDAY",
-      "numberOfOccurrences" : 10,
-      "venue" : "AS6-0211"
+      "numberOfOccurrences" : 3,
+      "venue" : "AS6-0211",
+      "attendanceRecordList" : {
+        "recordList" : [ {
+          "week" : 1,
+          "attendances" : [ ]
+        }, {
+          "week" : 2,
+          "attendances" : [ ]
+        }, {
+          "week" : 3,
+          "attendances" : [ ]
+        } ]
+      }
     } ]
   } ]
 }

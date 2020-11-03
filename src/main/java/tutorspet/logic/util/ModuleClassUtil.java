@@ -93,7 +93,7 @@ public class ModuleClassUtil {
             throw new CommandException(MESSAGE_DUPLICATE_LESSON);
         }
 
-        if (targetModuleClass.hasOverlapLesson(lessonToAdd, null)) {
+        if (targetModuleClass.hasOverlapLesson(lessonToAdd)) {
             throw new CommandException(MESSAGE_OVERLAP_LESSON);
         }
 
