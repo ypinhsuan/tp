@@ -18,6 +18,7 @@ import tutorspet.model.TutorsPet;
 import tutorspet.model.moduleclass.ModuleClass;
 import tutorspet.model.student.Student;
 
+
 /**
  * An Immutable TutorsPet that is serializable to JSON format.
  */
@@ -26,6 +27,8 @@ class JsonSerializableTutorsPet {
 
     public static final String MESSAGE_DUPLICATE_STUDENT = "Students list contains duplicate student(s).";
     public static final String MESSAGE_DUPLICATE_MODULE_CLASS = "Class list contains duplicate class(es).";
+    public static final String MESSAGE_INVALID_STUDENT = "Invalid student.";
+    public static final String MESSAGE_INVALID_MODULE_CLASS = "Invalid class.";
     public static final String MESSAGE_INVALID_STUDENTS_IN_CLASS = "Invalid student(s) found in class(es).";
 
     private final List<JsonAdaptedStudent> students = new ArrayList<>();
@@ -59,6 +62,10 @@ class JsonSerializableTutorsPet {
      */
     private void studentsToModelType(TutorsPet tutorsPet) throws IllegalValueException {
         for (JsonAdaptedStudent jsonAdaptedStudent : students) {
+            if (jsonAdaptedStudent == null) {
+                throw new IllegalValueException(MESSAGE_INVALID_STUDENT);
+            }
+
             Student student = jsonAdaptedStudent.toModelType();
             if (tutorsPet.hasStudent(student) || tutorsPet.hasStudentUuid(student)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_STUDENT);
@@ -81,6 +88,10 @@ class JsonSerializableTutorsPet {
         }
 
         for (JsonAdaptedModuleClass jsonAdaptedModuleClass : classes) {
+            if (jsonAdaptedModuleClass == null) {
+                throw new IllegalValueException(MESSAGE_INVALID_MODULE_CLASS);
+            }
+
             ModuleClass moduleClass = jsonAdaptedModuleClass.toModelType();
             if (tutorsPet.hasModuleClass(moduleClass)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_MODULE_CLASS);
