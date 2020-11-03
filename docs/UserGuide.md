@@ -498,14 +498,14 @@ If you entered the wrong class name or would like to change the name of a class,
 
 For example:
 1. Your module coordinator decides to allocate another class to you and you want to be able to distinguish between
-   the two classes. Hence you decide to edit the `CS2103T Tutorial` class to `CS2103T Tutorial T10`. You type the
-   command `edit-class 1 n\CS2103T Tutorial T10` and press <kbd>Enter</kbd>.
+   the two classes. Hence you decide to edit the `CS2103T Tutorial` class to `CS2103T Tutorial T10`. 
+1. You type the command `edit-class 1 n\CS2103T Tutorial T10` and press <kbd>Enter</kbd>.
 
-   ![Edit class before](images/ugimages/EditClassBefore.png) 
+   ![Edit class before](images/ugimages/EditClassBefore.png)
 
 1. The class has been renamed from `CS2103T Tutorial` to `CS2103T Tutorial 10`.
 
-   ![Edit class before](images/ugimages/EditClassBefore.png) 
+   ![Edit class after](images/ugimages/EditClassAfter.png)
 
 Constraints:
 * A new class name must be provided.
