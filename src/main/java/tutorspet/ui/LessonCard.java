@@ -46,7 +46,7 @@ public class LessonCard extends UiPart<Region> {
 
         dayAndTime.setText(builder.toString());
         venue.setText("Venue: " + lesson.getVenue().toString());
-        occurrence.setText("Number of Occurrences: " + lesson.getNumberOfOccurrences().toString());
+        occurrence.setText("Number of Weeks: " + lesson.getNumberOfOccurrences().toString());
         setStyle(displayedIndex);
     }
 
