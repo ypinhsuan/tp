@@ -30,12 +30,12 @@ public class TelegramTest {
         assertFalse(Telegram.isValidTelegram("te1e-gram")); // usage of special character
         assertFalse(Telegram.isValidTelegram("Tele Gram")); // usage of white space
         assertFalse(Telegram.isValidTelegram("1abcde")); // starts with a number
-        assertFalse(Telegram.isValidTelegram("Tel3ggggggggggggggggggggggggggggg"));
+        assertFalse(Telegram.isValidTelegram("Tel3ggggggggggggggggggggggggggggg")); // more than 32 characters
 
         // valid Telegram handles
         assertTrue(Telegram.isValidTelegram("Tel3g")); // exactly 5 characters
         assertTrue(Telegram.isValidTelegram("gR4MYeLe_pK8")); // special and upper case alphanumeric characters
         assertTrue(Telegram.isValidTelegram("alex_merier3471")); // typical telegram handle
-        assertTrue(Telegram.isValidTelegram("Tel3gggggggggggggggggggggggggggg"));
+        assertTrue(Telegram.isValidTelegram("Tel3gggggggggggggggggggggggggggg")); // exactly 32 characters
     }
 }
