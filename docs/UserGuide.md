@@ -1,5 +1,6 @@
 ---
 layout: page
+style: guide
 title: User Guide
 ---
 ![Logo](images/Logo.png)
