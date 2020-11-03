@@ -58,7 +58,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 
 The sections below give more details of each component.
 
-### UI component
+### UI Component
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
@@ -77,7 +77,7 @@ The `UI` component,
 * Executes user commands using the `Logic` component.
 * Listens for changes to `Model` data so that the UI can be updated with the modified data.
 
-### Logic component
+### Logic Component
 
 ![Structure of the Logic Component](images/LogicClassDiagram.png)
 
@@ -132,7 +132,7 @@ The class diagram below shows the design of the `Student` and `ModuleClass` pack
 
 ![Structure of Student Class Model](images/ClassStudentClassDiagram.png)
 
-### Storage component
+### Storage Component
 
 ![Structure of the Storage Component](images/StorageClassDiagram.png)
 
@@ -142,7 +142,7 @@ The `Storage` component,
 * can save `UserPref` objects in json format and read it back.
 * can save the data in json format and read it back.
 
-### Common classes
+### Common Classes
 
 Classes used by multiple components are in the `tutorspet.commons` package.
 
@@ -738,7 +738,7 @@ that our target users were familiar with.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Documentation, logging, testing, configuration, dev-ops
+## Documentation, Logging, Testing, Configuration, Dev-Ops
 
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
@@ -750,7 +750,7 @@ that our target users were familiar with.
 
 ## Appendix: Requirements
 
-### Product scope
+### Product Scope
 
 **Target user profile**:
 
@@ -763,7 +763,7 @@ that our target users were familiar with.
 **Value proposition**: Manage students and classes faster than a typical mouse/GUI driven app
 
 
-### User stories (Completed)
+### User Stories (Completed)
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
@@ -786,7 +786,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | * *      | Careless Tutor           | Redo my undone actions                              | Easily reverse my accidental undos.                            | COMPLETED |
 | *        | Caring tutor             | Take note of student's special needs, if any        | Cater my teaching toward them                                  | COMPLETED |
 
-### User stories (Not Implemented)
+### User Stories (Not Implemented)
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
@@ -810,7 +810,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | *        | Tutor                                                        | Keep track of the hours I have spent teaching/preparing for class | Be aware of how much time I have spent on teaching                              | NOT IMPLEMENTED |
 | *        | Tutor for many semesters                                     | Archive my past semesters                                         | Avoid cluttering the app                                                        | NOT IMPLEMENTED |
 
-### Use cases
+### Use Cases
 
 | Use Case ID | Description                               |
 |-------------|-------------------------------------------|
@@ -1321,7 +1321,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Appendix: Instructions for manual testing
+## Appendix: Instructions for Manual Testing
 
 Given below are instructions to test the app manually.
 
@@ -1330,7 +1330,9 @@ testers are expected to do more *exploratory* testing.
 
 </div>
 
-### Launch and shutdown
+### General
+
+#### Launch and shutdown
 
 1. Initial launch
 
@@ -1347,7 +1349,112 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a student
+#### Undoing previous commands
+
+1. Undoing the most recent command
+
+   1. Prerequisites: List all students and classes using the `list` command.
+      There exists at least one class in the displayed class list.
+
+   1. Test case: `delete-class 1` followed by `undo`
+      Expected: The first class is deleted after the first command.
+      The deleted class reappears in the displayed class list after the second command.
+      Details of the `delete` change shown in the status message.
+
+1. Undoing commands that cannot be undone
+
+   1. Prerequisites: No commands executed beforehand since application launch.
+
+   1. Test case: `list` followed by `undo`
+      Expected: No change is undone. Error details shown in the status message.
+
+   1. Test case: `undo`
+      Expected: No change is undone. Error details shown in the status message.
+
+#### Redoing previously undone commands
+
+1. Redoing the most recently undone command
+
+   1. Prerequisites: List all students and classes using the `list` command.
+      There exists at least one class in the displayed class list.
+
+   1. Test case: `delete-class 1` followed by `undo` then `redo`
+      Expected: The first class is deleted after the first command.
+      The deleted class reappears in the displayed class list after the second command.
+      The first class is deleted again after the third command.
+      Details of the `delete` change shown in the status message.
+
+1. Redoing when there is no change history
+
+   1. Prerequisites: No commands executed beforehand since application launch.
+
+   1. Test case: `redo`
+      Expected: No change is redone. Error details shown in the status message.
+
+#### Viewing change history
+
+1. Viewing change history
+
+   1. Prerequisites: No commands executed beforehand since application launch.
+      There exists at least one class in the displayed class list.
+
+   1. Test case: `view-history`
+      Expected: A single entry with the description: "Loaded save data." appears.
+
+   1. Test case: `delete-class 1` followed by `view-history`
+      Expected: Two entries are shown in the status message.
+      The first being a brief description of the delete class action with the `>` indicator beside it.
+      The second being the "Loaded save data." entry.
+
+   1. Test case: `delete-class 1` followed by `undo` and then `view-history`
+      Expected: Two entries are shown in the status message.
+      The first being a brief description of the delete class action.
+      The second being the "Loaded save data." entry with the `>` indicator beside it.
+
+#### Recalling previously entered commands
+
+1. Recalling previously entered commands
+
+   1. Prerequisites: None.
+
+   1. Test case: `list` followed by pressing the <kbd>↑</kbd> key.
+      Expected: `list` appears in the command box.
+
+   1. Test case: `list` followed by `list-student` followed by pressing the <kbd>↑</kbd> key twice.
+      Expected: `list-student` appears in the command box after the first key press.
+      `list` appears in the command box after the second key press.
+
+   1. Test case: `list` followed by typing `delete-student 1` without execution, then pressing the <kbd>↑</kbd> and then <kbd>↓</kbd> key.
+      Expected: `list` appears after the <kbd>↑</kbd> key press.
+      `delete-student 1` restored after the <kbd>↓</kbd> key press.
+
+1. Recalling with no commands previously entered
+
+   1. Prerequisites: No commands executed beforehand since application launch.
+
+   1. Test case: Press the <kbd>↑</kbd> key.
+      Expected: No change to the command box text. No status message shown.
+
+   1. Test case: Press the <kbd>↓</kbd> key.
+      Expected: No change to the command box text. No status message shown.
+
+   1. Test case: Type `delete-student 1` without executing and press the <kbd>↑</kbd> key.
+      Expected: No change to the command box text. No status message shown.
+
+   1. Test case: Type `delete-student 1` without executing and press the <kbd>↓</kbd> key.
+      Expected: No change to the command box text. No status message shown.
+
+#### Saving data
+
+1. Dealing with missing/corrupted data files
+
+   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+
+1. _{ more test cases …​ }_
+
+### Managing Students
+
+#### Deleting a student
 
 1. Deleting a student while all students are being shown
 
@@ -1363,7 +1470,35 @@ testers are expected to do more *exploratory* testing.
       size of student list)<br>
       Expected: No student is deleted. Error details shown in the status message.
 
-### Editing a class
+### Managing Classes
+
+#### Adding a class
+
+1. Adding a new class
+   1. Prerequisites: A class named ST2334 does not exist in Tutor's Pet.
+
+   1. Test case: `add-class n\ST2334`
+      Expected: Class `ST2334` is successfully added into the displayed class list.
+
+   1. Test case: `add-class 1 n\ST2334`
+      Expected: No class is added. Error details shown in the status message.
+
+   1. Test case: `add-class n\ST2334 @ 1200`
+      Expected: No class is added. Error details shown in the status message.
+
+   1. Test case: `add-class n\`
+      Expected: No class is added. Error details shown in the status message.
+
+   1. Test case: `add-class`
+      Expected: No class is added. Error details shown in the status message.
+
+1. Adding an existing class
+   1. Prerequisites: At least one class exists in Tutor's Pet. Let the name of this class be `NAME`.
+
+   1. Test case: `add-class n\NAME`<br/>
+      Expected: No class is added. Error details shown in the status message.
+
+#### Editing a class
 
 1. Editing a class
 
@@ -1380,7 +1515,7 @@ testers are expected to do more *exploratory* testing.
       (where x is larger than the size of class list)<br>
       Expected: No class is edited. Error details shown in the status message.
 
-### Finding a class
+#### Finding a class
 
 1. Find a class
 
@@ -1393,7 +1528,7 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `find-class 2103T`<br>
       Expected: No class displayed.
 
-### Clearing all classes
+#### Clearing all classes
 
 1. Clearing all classes
 
@@ -1402,7 +1537,9 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `clear-class`<br>
       Expected: All classes cleared.
 
-### Deleting a lesson
+### Managing Lessons
+
+#### Deleting a lesson
 
 1. Deleting a lesson while all lessons are being shown
 
@@ -1435,7 +1572,9 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect display venue commands to try: `display-venue c\1 l\a`<br>
       Expected: Venue not found. Error details shown in the status message.
 
-### Adding an attendance
+### Managing Attendance Records
+
+#### Adding an attendance
 
 1. Adding an attendance
 
@@ -1451,7 +1590,7 @@ testers are expected to do more *exploratory* testing.
       p\70` (where x is larger than the size of class list)<br>
       Expected: No attendance added. Error details shown in the status message.
 
-### Finding an attendance
+#### Finding an attendance
 
 1. Find an attendance
 
@@ -1470,7 +1609,7 @@ testers are expected to do more *exploratory* testing.
       (where x is larger than the size of class list)<br>
       Expected: Attendance not found. Error details shown in the status message.
 
-### Displaying a student's statistics
+#### Displaying a student's statistics
 
 1. Displaying a student's statistics
 
@@ -1486,11 +1625,3 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect display stats commands to try: `stats c\1 s\a`, `stats c\1 s\x`, `...` (where x is larger than the
       size of student list)<br>
       Expected: Statistics not found. Error details shown in the status message.
-
-### Saving data
-
-1. Dealing with missing/corrupted data files
-
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_

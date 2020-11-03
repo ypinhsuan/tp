@@ -55,7 +55,7 @@ The guide uses the following features to make it easier for you to navigate arou
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## Quick Start
 ### Installing Tutor's Pet
 
 Here are a few steps to get you started on Tutor's Pet:
@@ -139,7 +139,16 @@ The utility area consists of three tabs: **File**, **Theme**, **Help**.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command format
+## Commands
+
+Commands are the main way you interact with your Tutor's Pet.
+
+This section provides information about the [command format](#command-format), an [overview](#command-overview) of available commands,
+and detailed instructions on how to use each command.
+
+### Command Format
+
+This section highlights information about the command format that is common across all commands.
 
 <div markdown="block" class="alert alert-info">
 
@@ -172,7 +181,8 @@ This section details the format of the commands available in Tutor's Pet. We wil
 
 </div>
 
-## Command overview
+### Command Overview
+
 This section provides an overview of all commands in Tutor's Pet and illustrates the usage of each command in detail.
 
 | Action                            | Format                                                                                      | Example (if applicable)                                            |
@@ -230,15 +240,15 @@ you can use this command to undo the changes.
 
 For example:
 
-* You want to delete Alex from your Tutor's Pet, however you accidentally deleted Bernice instead of Alex.
+1. You want to delete Alex from your Tutor's Pet, however you accidentally deleted Bernice instead of Alex.
 
-* You type in the command `undo` and press <kbd>Enter</kbd>.
+1. You type in the command `undo` and press <kbd>Enter</kbd>.
 
-  ![Undo before](images/ugimages/UndoBefore.png)
+   ![Undo before](images/ugimages/UndoBefore.png)
 
-* Bernice has been undeleted and now you can [delete](#deleting-a-student--delete-student) Alex.
+1. Bernice has been undeleted and now you can [delete](#deleting-a-student--delete-student) Alex.
 
-  ![Undo after](images/ugimages/UndoAfter.png)
+   ![Undo after](images/ugimages/UndoAfter.png)
 
 <div markdown="block" class="alert alert-primary">
 
@@ -253,7 +263,7 @@ this command to redo the changes.
 
 **Format** : `redo`
 
-#### View change history : `view-history`
+#### Viewing change history : `view-history`
 
 You can use this command to see a list of changes that can be undone and redone.
 
@@ -261,15 +271,15 @@ You can use this command to see a list of changes that can be undone and redone.
 
 For example:
 
-* You are marking the attendance of your students but accidentally lost track of which student you were at.
+1. You are [marking the attendance](#adding-an-attendance-record--add-attendance) of your students but accidentally lost track of which student you were at.
 
-* Type `view-history` into the command box and press <kbd>Enter</kbd>.
+1. Type `view-history` into the command box and press <kbd>Enter</kbd>.
 
-  ![View History After](images/ugimages/ViewHistoryBefore.png)
+   ![View History After](images/ugimages/ViewHistoryBefore.png)
 
-* The result box will display a list of changes with the latest shown at the top.
+1. The result box will display a list of changes with the latest shown at the top.
 
-  ![View History After](images/ugimages/ViewHistoryAfter.png)
+   ![View History After](images/ugimages/ViewHistoryAfter.png)
 
 <div markdown="block" class="alert alert-primary">
 
@@ -315,21 +325,21 @@ When the [command box](#using-tutors-pet) is selected, press the <kbd>↑</kbd> 
 
 For example:
 
-* You are taking the attendance for one of your lessons, CS2103T Tutorial.
-  You have just [recorded the attendance](#adding-an-attendance-record--add-attendance) of the first student.
+1. You are taking the attendance for one of your lessons, CS2103T Tutorial.
+   You have just [recorded the attendance](#adding-an-attendance-record--add-attendance) of the first student.
 
-* Instead of typing the whole command from the beginning, you can **press** the <kbd>↑</kbd> key.
+1. Instead of typing the whole command from the beginning, you can **press** the <kbd>↑</kbd> key.
 
-* The previous command will be displayed in the command box.
+1. The previous command will be displayed in the command box.
 
-* Now you can edit the command to record the attendance of other students.
+1. Now you can edit the command to record the attendance of other students.
 
 #### Saving the data
 
 Tutor's Pet automatically saves your data to your home folder after any changes are made.
 There is no need for you to save manually.
 
-### Managing students
+### Managing Students
 
 #### Adding a student : `add-student`
 
@@ -447,7 +457,7 @@ If you would like to delete all students in the application, you can use this co
 
 **Format**: `clear-student`
 
-### Managing classes
+### Managing Classes
 
 #### Adding a class : `add-class`
 
@@ -457,15 +467,15 @@ If you would like to add a new class, you can make use of this command.
 * Adds a class with the specified `CLASS_NAME`.
 
 For example:
-* You have just been allocated to teach a tutorial class, Tutorial 3, in the module CS1231.
-Hence, you decide to add this new tutorial class to your Tutor's Pet.
-You type `add-class n\CS1231 Tutorial 3` and press <kbd>Enter</kbd>.
+1. You have just been allocated to teach a tutorial class, Tutorial 3, in the module CS1231.
+   Hence, you decide to add this new tutorial class to your Tutor's Pet.
+1. You type `add-class n\CS1231 Tutorial 3` and press <kbd>Enter</kbd>.
 
-  ![AddClassBefore](images/ugimages/AddClassBefore.png)
+   ![AddClassBefore](images/ugimages/AddClassBefore.png)
 
-* The class has been added, and you can see it in the displayed class list.
+1. The class has been added, and you can see it in the displayed class list.
 
-  ![AddClassAfter](images/ugimages/AddClassAfter.png)
+   ![AddClassAfter](images/ugimages/AddClassAfter.png)
 
 <div markdown="block" class="alert alert-info">
 
@@ -586,15 +596,16 @@ If you would like to delete a class, you can make use of this command.
 * Deletes the class at the specified `INDEX`.
 
 For example:
-* You have just received news that one of your classes, CS2100 Lab, has been permanently removed due to low enrollment.
-Hence, you want to delete the class from your Tutor's Pet.
-You type the command `delete-class 2` and press <kbd>Enter</kbd>.
+1. You have just received news that one of your classes, CS2100 Lab, has been permanently removed due to low enrollment.
+   Hence, you want to delete the class from your Tutor's Pet.
 
-  ![DeleteClassBefore](images/ugimages/DeleteClassBefore.png)
+1. Type the command `delete-class 2` and press <kbd>Enter</kbd>.
 
-* The class has been successfully deleted.
+   ![DeleteClassBefore](images/ugimages/DeleteClassBefore.png)
 
-  ![DeleteClassAfter](images/ugimages/DeleteClassAfter.png)
+1. The class has been successfully deleted.
+
+   ![DeleteClassAfter](images/ugimages/DeleteClassAfter.png)
 
 Other examples:
 * `find-class CS2030 lab`<br/>
@@ -641,18 +652,17 @@ You can add students into their classes using this command.
 * Adds the student at the specified `STUDENT_INDEX` to the class at the specified `CLASS_INDEX`.
 
 For example:
-* You have a new student, David Li, who has transferred into one of your classes, CS2103T Tutorial.
-  You have already [added](#adding-a-student--add-student) him to your Tutor's Pet, and want
-  to add him to the class.
+1. You have a new student, David Li, who has transferred into one of your classes, CS2103T Tutorial.
+   You have already [added](#adding-a-student--add-student) him to your Tutor's Pet, and want
+   to add him to the class.
+1. Type in the command `link s\4 c\1` and press <kbd>Enter</kbd>.
 
-* Type in the command `link s\4 c\1` and press <kbd>Enter</kbd>.
+   ![Link before](images/ugimages/LinkBefore.png)
 
-  ![Link before](images/ugimages/LinkBefore.png)
+1. Your Tutor's Pet displays the students in CS2103T Tutorial to confirm that you have successfully added
+   David to the class.
 
-* Your Tutor's Pet displays the students in CS2103T Tutorial to confirm that you have successfully added
-  David to the class.
-
-  ![Link after](images/ugimages/LinkAfter.png)
+   ![Link after](images/ugimages/LinkAfter.png)
 
 <div markdown="block" class="alert alert-primary">
 
@@ -674,16 +684,15 @@ You can remove students from their classes using this command.
 * Removes the student at the specified `STUDENT_INDEX` from the class at the specified `CLASS_INDEX`.
 
 For example:
-* One of your students, Alex Yeoh, has transferred out of your class, CS2103T Tutorial, and you decide to remove him from the class.
+1. One of your students, Alex Yeoh, has transferred out of your class, CS2103T Tutorial, and you decide to remove him from the class.
+1. Type in the command `unlink s\1 c\1` and press <kbd>Enter</kbd>.
 
-* Type in the command `unlink s\1 c\1` and press <kbd>Enter</kbd>.
+   ![Unlink before](images/ugimages/UnlinkAfter.png)
 
-  ![Unlink before](images/ugimages/UnlinkBefore.png)
+1. Your Tutor's Pet displays the remaining students in CS2103T Tutorial to confirm that you have successfully removed
+   Alex from the class.
 
-* Your Tutor's Pet displays the remaining students in CS2103T Tutorial to confirm that you have successfully removed
-  Alex from the class.
-
-  ![Unlink after](images/ugimages/UnlinkAfter.png)
+  ![Unlink after](images/ugimages/UnlinkBefore.png)
 
 <div markdown="block" class="alert alert-warning">
 
@@ -696,7 +705,7 @@ Other examples:
   `unlink s\1 c\1`<br/>
   [Lists the students](#listing-all-students-within-a-class--list-student) of the 2nd class in the displayed class list, and removes the 2nd student of that class.
 
-### Managing lessons
+### Managing Lessons
 
 #### Adding a lesson : `add-lesson`
 
@@ -789,7 +798,7 @@ the `undo` command. However, you cannot `undo` once you exit the application!
 
 </div>
 
-#### Display venue : `display-venue`
+#### Displaying lesson venue : `display-venue`
 
 Gives you the venue of a lesson.
 
@@ -806,7 +815,7 @@ For example:
 
    ![Display venue after](images/ugimages/DisplayVenueAfter.png)
 
-### Managing attendance records
+### Managing Attendance Records
 
 #### Adding an attendance record : `add-attendance`
 
@@ -930,7 +939,7 @@ in Week 1. Hence, you type in the command `delete-attendance c\1 l\1 s\1 w\1` an
 
   ![Delete attendance after](images/ugimages/DeleteAttendanceAfter.png)
 
-#### Display statistics : `stats`
+#### Displaying attendance statistics : `stats`
 
 Gives you an overall summary of a student's attendance and participation scores.
 
