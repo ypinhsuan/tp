@@ -5,10 +5,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tutorspet.commons.core.Messages.MESSAGE_DUPLICATE_LESSON;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_MODULE_CLASS_DISPLAYED_INDEX;
+import static tutorspet.commons.core.Messages.MESSAGE_OVERLAP_LESSON;
 import static tutorspet.logic.commands.CommandTestUtil.DESC_LESSON_FRI_8_TO_10;
 import static tutorspet.logic.commands.CommandTestUtil.DESC_LESSON_WED_2_TO_4;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_DAY_FRI_LESSON_FRI_8_TO_10;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_END_TIME_1000_LESSON_FRI_8_TO_10;
+import static tutorspet.logic.commands.CommandTestUtil.VALID_START_TIME_0900;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_START_TIME_1400_LESSON_WED_2_TO_4;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_VENUE_S17_0302_LESSON_FRI_8_TO_10;
 import static tutorspet.logic.commands.CommandTestUtil.assertCommandFailure;
@@ -182,6 +184,19 @@ public class EditLessonCommandTest {
         EditLessonCommand editLessonCommand = new EditLessonCommand(moduleClassIndex, lessonIndex, descriptor);
 
         assertCommandFailure(editLessonCommand, model, MESSAGE_DUPLICATE_LESSON);
+    }
+
+    @Test
+    public void execute_overlapLesson_failure() {
+        Index moduleClassIndex = INDEX_SECOND_ITEM;
+        Index lessonIndex = INDEX_SECOND_ITEM;
+
+        EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder()
+                .withDay(VALID_DAY_FRI_LESSON_FRI_8_TO_10.toString())
+                .withStartTime(VALID_START_TIME_0900).build();
+        EditLessonCommand editLessonCommand = new EditLessonCommand(moduleClassIndex, lessonIndex, descriptor);
+
+        assertCommandFailure(editLessonCommand, model, MESSAGE_OVERLAP_LESSON);
     }
 
     @Test

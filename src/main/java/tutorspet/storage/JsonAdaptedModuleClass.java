@@ -27,6 +27,7 @@ public class JsonAdaptedModuleClass {
     public static final String MESSAGE_INVALID_STUDENTS_IN_LESSON = "Invalid student(s) found in lesson(s).";
     public static final String INVALID_FIELD_MESSAGE_FORMAT = "Class' %s field is invalid!";
     public static final String DUPLICATE_LESSON_MESSAGE_FORMAT = "%s contains duplicate lesson(s).";
+    public static final String OVERLAP_LESSON_MESSAGE_FORMAT = "%s contains overlapping lesson(s).";
 
     private final JsonAdaptedName name;
     private final List<JsonAdaptedUuid> studentUuids = new ArrayList<>();
@@ -87,7 +88,7 @@ public class JsonAdaptedModuleClass {
 
     /**
      * Checks if a {@code lesson} already exists in a list.
-     * Duplicates are detected by calling {@code isSameLesson} method in {@code Lesson}.
+     * Duplicates are detected by calling {@code isSameLesson} method in {@code Lesson} class.
      * Returns true if there is a duplicate.
      */
     private boolean hasDuplicateLessons(List<Lesson> lessons, Lesson lessonToCheck) {
@@ -95,9 +96,18 @@ public class JsonAdaptedModuleClass {
     }
 
     /**
+     * Checks if a {@code lesson} timing overlaps with another {@code Lesson} in the list.
+     * Overlapping lessons are detected by calling the {@code isOverlapLesson} method in {@code Lesson} class.
+     * Returns true if there is an overlap.
+     */
+    private boolean hasOverlapLessons(List<Lesson> lessons, Lesson lessonToCheck) {
+        return lessons.stream().anyMatch(lessonToCheck::isOverlapLesson);
+    }
+
+    /**
      * Converts the contained {@code List<JsonAdaptedLesson> lessons} to a {@code List<Lesson>}.
      *
-     * @throws IllegalValueException if any of the {@code Lesson}s are null or duplicate.
+     * @throws IllegalValueException if any of the {@code Lesson}s are null, duplicate or overlap.
      */
     private List<Lesson> getLessonList() throws IllegalValueException {
         List<Lesson> lessonList = new ArrayList<>();
@@ -108,7 +118,11 @@ public class JsonAdaptedModuleClass {
             }
 
             if (hasDuplicateLessons(lessonList, jsonLesson.toModelType())) {
-                throw new IllegalValueException(String.format(DUPLICATE_LESSON_MESSAGE_FORMAT, name));
+                throw new IllegalValueException(String.format(DUPLICATE_LESSON_MESSAGE_FORMAT,
+                        ModuleClass.class.getSimpleName()));
+            } else if (hasOverlapLessons(lessonList, jsonLesson.toModelType())) {
+                throw new IllegalValueException(String.format(OVERLAP_LESSON_MESSAGE_FORMAT,
+                        ModuleClass.class.getSimpleName()));
             } else {
                 lessonList.add(jsonLesson.toModelType());
             }

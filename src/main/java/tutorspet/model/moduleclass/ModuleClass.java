@@ -94,6 +94,25 @@ public class ModuleClass implements HasName {
     }
 
     /**
+     * Returns true if the class contains a {@code Lesson} that overlaps with the given {@code lesson}.
+     *
+     * @throws NullPointerException if the given {@code lesson} is null.
+     */
+    public boolean hasOverlapLesson(Lesson lesson) {
+        return lessons.stream().anyMatch(lesson::isOverlapLesson);
+    }
+
+    /**
+     * Returns true if the class contains a {@code Lesson} that overlaps with the given {@code lesson}
+     * after removing {@code toRemove} from the list of lessons.
+     *
+     * @throws NullPointerException if the given {@code lesson} is null.
+     */
+    public boolean hasOverlapLesson(Lesson lesson, Lesson toRemove) {
+        return lessons.stream().filter(l -> !l.equals(toRemove)).anyMatch(lesson::isOverlapLesson);
+    }
+
+    /**
      * Returns true if both classes have the same name.
      * This defines a weaker notion of equality between two classes.
      */

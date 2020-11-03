@@ -96,7 +96,7 @@ public class Lesson {
     }
 
     /**
-     * Returns true if both lessons have the same start time, end time, day and venue.
+     * Returns true if both lessons have the same start time, end time and day.
      * This defines a weaker notion of equality between two lessons.
      */
     public boolean isSameLesson(Lesson otherLesson) {
@@ -107,8 +107,16 @@ public class Lesson {
         return otherLesson != null
                 && otherLesson.getStartTime().equals(getStartTime())
                 && otherLesson.getEndTime().equals(getEndTime())
-                && otherLesson.getDay().equals(getDay())
-                && otherLesson.getVenue().equals(getVenue());
+                && otherLesson.getDay().equals(getDay());
+    }
+
+    /**
+     * Returns true if the timing of both lessons overlap.
+     */
+    public boolean isOverlapLesson(Lesson otherLesson) {
+        return getDay().equals(otherLesson.getDay())
+                && getStartTime().compareTo(otherLesson.getEndTime()) < 0
+                && getEndTime().compareTo(otherLesson.getStartTime()) > 0;
     }
 
     /**

@@ -5,6 +5,7 @@ import static java.util.UUID.fromString;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static tutorspet.logic.commands.CommandTestUtil.VALID_DAY_FRI_LESSON_FRI_8_TO_10;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_DAY_WED_LESSON_WED_2_TO_4;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_END_TIME_1600_LESSON_WED_2_TO_4;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_NUMBER_OF_OCCURRENCES_7_LESSON_WED_2_TO_4;
@@ -24,7 +25,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import tutorspet.model.attendance.Attendance;
@@ -38,6 +38,12 @@ public class LessonTest {
             parse(VALID_START_TIME_1400_LESSON_WED_2_TO_4);
     private static final LocalTime VALID_END_TIME =
             parse(VALID_END_TIME_1600_LESSON_WED_2_TO_4);
+    private static final LocalTime VALID_TIME_0900 = LocalTime.of(9, 0);
+    private static final LocalTime VALID_TIME_1000 = LocalTime.of(10, 0);
+    private static final LocalTime VALID_TIME_1159 = LocalTime.of(11, 59);
+    private static final LocalTime VALID_TIME_1200 = LocalTime.of(12, 0);
+    private static final LocalTime VALID_TIME_1201 = LocalTime.of(12, 1);
+    private static final LocalTime VALID_TIME_1400 = LocalTime.of(14, 0);
     private static final Venue VALID_VENUE = new Venue(VALID_VENUE_COM1_B111_LESSON_WED_2_TO_4);
     private static final NumberOfOccurrences VALID_NUMBER_OF_OCCURRENCES =
             new NumberOfOccurrences(1);
@@ -120,11 +126,6 @@ public class LessonTest {
                 .withDay(VALID_DAY_WED_LESSON_WED_2_TO_4).build();
         assertFalse(LESSON_FRI_8_TO_10.isSameLesson(editedLesson));
 
-        // different venue -> returns false
-        editedLesson = new LessonBuilder(LESSON_FRI_8_TO_10)
-                .withVenue(VALID_VENUE_COM1_B111_LESSON_WED_2_TO_4).build();
-        Assertions.assertFalse(LESSON_FRI_8_TO_10.isSameLesson(editedLesson));
-
         // different number of occurrences -> returns true
         editedLesson = new LessonBuilder(LESSON_FRI_8_TO_10)
                 .withNumberOfOccurrences(VALID_NUMBER_OF_OCCURRENCES_7_LESSON_WED_2_TO_4).build();
@@ -136,6 +137,35 @@ public class LessonTest {
         editedLesson = new LessonBuilder(LESSON_FRI_8_TO_10)
                 .withAttendanceRecordList(new AttendanceRecordList(records)).build();
         assertTrue(LESSON_FRI_8_TO_10.isSameLesson(editedLesson));
+    }
+
+    @Test
+    public void isOverlapLesson() {
+        Lesson lessonWed0900To1200 = new Lesson(VALID_TIME_0900, VALID_TIME_1200, VALID_DAY_WED_LESSON_WED_2_TO_4,
+                VALID_NUMBER_OF_OCCURRENCES, VALID_VENUE, VALID_ATTENDANCE_RECORD_LIST);
+        Lesson lessonWed1000To1200 = new Lesson(VALID_TIME_1000, VALID_TIME_1200, VALID_DAY_WED_LESSON_WED_2_TO_4,
+                VALID_NUMBER_OF_OCCURRENCES, VALID_VENUE, VALID_ATTENDANCE_RECORD_LIST);
+        Lesson lessonWed1000to1400 = new Lesson(VALID_TIME_1000, VALID_TIME_1400, VALID_DAY_WED_LESSON_WED_2_TO_4,
+                VALID_NUMBER_OF_OCCURRENCES, VALID_VENUE, VALID_ATTENDANCE_RECORD_LIST);
+        Lesson lessonWed1200To1400 = new Lesson(VALID_TIME_1200, VALID_TIME_1400, VALID_DAY_WED_LESSON_WED_2_TO_4,
+                VALID_NUMBER_OF_OCCURRENCES, VALID_VENUE, VALID_ATTENDANCE_RECORD_LIST);
+        Lesson lessonWed1000To1201 = new Lesson(VALID_TIME_1000, VALID_TIME_1201, VALID_DAY_WED_LESSON_WED_2_TO_4,
+                VALID_NUMBER_OF_OCCURRENCES, VALID_VENUE, VALID_ATTENDANCE_RECORD_LIST);
+        Lesson lessonWed1000To1159 = new Lesson(VALID_TIME_1000, VALID_TIME_1159, VALID_DAY_WED_LESSON_WED_2_TO_4,
+                VALID_NUMBER_OF_OCCURRENCES, VALID_VENUE, VALID_ATTENDANCE_RECORD_LIST);
+        Lesson lessonFri1000To1200 = new Lesson(VALID_TIME_1000, VALID_TIME_1200, VALID_DAY_FRI_LESSON_FRI_8_TO_10,
+                VALID_NUMBER_OF_OCCURRENCES, VALID_VENUE, VALID_ATTENDANCE_RECORD_LIST);
+
+        // same day
+        assertTrue(lessonWed1000To1200.isOverlapLesson(lessonWed1000To1200));
+        assertTrue(lessonWed0900To1200.isOverlapLesson(lessonWed1000To1200));
+        assertTrue(lessonWed1000to1400.isOverlapLesson(lessonWed1000To1200));
+        assertTrue(lessonWed1000To1201.isOverlapLesson(lessonWed1200To1400));
+        assertFalse(lessonWed1200To1400.isOverlapLesson(lessonWed1000To1200));
+        assertFalse(lessonWed1200To1400.isOverlapLesson(lessonWed1000To1159));
+
+        // different day
+        assertFalse(lessonWed1000To1200.isOverlapLesson(lessonFri1000To1200));
     }
 
     @Test

@@ -5,8 +5,10 @@ import static tutorspet.commons.core.Messages.MESSAGE_DUPLICATE_LESSON;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX;
 import static tutorspet.commons.core.Messages.MESSAGE_MISSING_LINK;
 import static tutorspet.commons.core.Messages.MESSAGE_NO_LESSONS_IN_MODULE_CLASS;
+import static tutorspet.commons.core.Messages.MESSAGE_OVERLAP_LESSON;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_ATTENDANCE;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_PARTICIPATION_SCORE_80;
+import static tutorspet.logic.commands.CommandTestUtil.VALID_START_TIME_0900;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_WEEK_1;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_WEEK_5;
 import static tutorspet.logic.util.LessonUtil.addAttendanceToLesson;
@@ -33,6 +35,7 @@ import static tutorspet.testutil.TypicalModuleClass.CS2103T_TUTORIAL;
 import static tutorspet.testutil.TypicalStudent.ALICE;
 import static tutorspet.testutil.TypicalStudent.CARL;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -113,6 +116,16 @@ public class ModuleClassUtilTest {
     }
 
     @Test
+    public void addLessonToModuleClass_overlapLesson_throwsCommandException() {
+        Lesson lesson = CS2103T_TUTORIAL.getLessons().get(0);
+        Lesson lessonToAdd = new Lesson(LocalTime.parse(VALID_START_TIME_0900), lesson.getEndTime(), lesson.getDay(),
+                lesson.getNumberOfOccurrences(), lesson.getVenue());
+
+        assertThrows(CommandException.class, MESSAGE_OVERLAP_LESSON, () ->
+                addLessonToModuleClass(CS2103T_TUTORIAL, lessonToAdd));
+    }
+
+    @Test
     public void addLessonToModuleClass_nullParameters_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> addLessonToModuleClass(null, DEFAULT_LESSON));
         assertThrows(NullPointerException.class, () -> addLessonToModuleClass(CS2103T_TUTORIAL, null));
@@ -141,6 +154,20 @@ public class ModuleClassUtilTest {
 
         assertThrows(CommandException.class, MESSAGE_DUPLICATE_LESSON, () ->
                 editLessonInModuleClass(updatedModuleClass, lessonToEdit, DEFAULT_LESSON));
+    }
+
+    @Test
+    public void editLessonInModuleClass_overlapLesson_throwsCommandException() {
+        List<Lesson> updatedLessons = new ArrayList<>(CS2103T_TUTORIAL.getLessons());
+        updatedLessons.add(DEFAULT_LESSON);
+        Lesson lessonToEdit = updatedLessons.get(0);
+        Lesson editedLesson = new LessonBuilder().withStartTime(LocalTime.parse(VALID_START_TIME_0900)).build();
+
+        ModuleClass updatedModuleClass = new ModuleClassBuilder(CS2103T_TUTORIAL)
+                .withLessons(updatedLessons.toArray(new Lesson[updatedLessons.size()])).build();
+
+        assertThrows(CommandException.class, MESSAGE_OVERLAP_LESSON, () ->
+                editLessonInModuleClass(updatedModuleClass, lessonToEdit, editedLesson));
     }
 
     @Test
