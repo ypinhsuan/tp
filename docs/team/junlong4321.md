@@ -25,10 +25,9 @@ This section documents both major and minor enhancements I have made to Tutor's 
 * **Major Enhancements**
   * Introduced Student Universally Unique Identifier (UUID) into Student model.
   [#58](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/58)
-    * In Tutor’s Pet, every `Student` is assigned a randomly generated `UUID`. It is used to
-      ensure referential integrity of `Student` data across different models when `Student` data is modified 
-      by the user. It was challenging to introduce a `UUID` fields as it broke many existing test cases.
-      Time and effort had to be allocated to fix these test cases.
+    * In Tutor’s Pet, every `Student` is assigned a randomly generated `UUID` to ensure referential integrity of
+    `Student` data across different models. It was challenging to introduce a `UUID` fields as it broke many existing
+    test cases. Time had to be allocated to fix these test cases.
   * Introduced ModuleClass to Storage. [#75](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/75)
     * Introduced the Java classes `JsonAdaptedUuid` and `JsonAdaptedModuleClass` into Storage. The two Java classes were
       required in Tutor's Pet so that we could allocate `Student`s to the respective tutorial classes that they were
@@ -47,17 +46,17 @@ This section documents both major and minor enhancements I have made to Tutor's 
 * **Minor Enhancements**
   * Change Token Delimiter.
   [#167](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/167)
-    * Fixed a minor bug by changing token delimiter so that the parsing of command was not rendered faulty when a URL
-    was added to `Lesson` venue. It was simple to fix actual code but time had to be allocated to fix test cases.
-    Existing test case commands `String`s had to be abstracted into variables to prevent test cases
-    from breaking in the event that the delimiter was changed again.
+    * Fixed a bug by changing token delimiter so that the parsing of command was not rendered faulty when a URL
+    was added to `Lesson` venue. Time had to be allocated to fix test cases. Existing test case commands `String`s
+    had to be abstracted into variables to prevent test cases from breaking in the event that the delimiter was
+    changed again.
 
-## 4. User Guide Contributions
+## User Guide Contributions
 * Refined documentation for `list-students` and `clear-class` commands.
 * Added documentation for `add-lesson` and `delete attendance` commands.
 * Consolidated and organised all commands in lexicographical ordering.
 
-## 5. Developer Guide Contributions
+## Developer Guide Contributions
 * Refined storage class diagram in Section 2.5 - Storage Component.
 * Documented Section 3.1 - Student Model and Student Universally Unique Identifier (UUID) and
 Section 3.2 - ModuleClass Model. These sections detail how the team implemented Student and ModuleClass models
