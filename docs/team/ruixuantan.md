@@ -41,7 +41,7 @@ My code contribution can be found [here](https://nus-cs2103-ay2021s1.github.io/t
 * Remove code duplication in test cases. [#190](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/190)
 * Fix tag color bug and improve testability. [#253](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/253)
 
-## Other contributions
+## Other Contributions
 * Create application logo. [#220](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/220)
 * Record video demonstration for v1.2.
 
@@ -62,4 +62,4 @@ My code contribution can be found [here](https://nus-cs2103-ay2021s1.github.io/t
   [#152](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/152),
   [#184](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/184).
 
-* A list of all PRs I have reviewed can be found [here](https://github.com/AY2021S1-CS2103T-T10-4/tp/pulls?q=is%3Apr+reviewed-by%3Aruixuantan)
+* A list of all PRs I have reviewed can be found [here](https://github.com/AY2021S1-CS2103T-T10-4/tp/pulls?q=is%3Apr+reviewed-by%3Aruixuantan).
