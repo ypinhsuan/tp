@@ -84,7 +84,7 @@ documentations and the technical depth of my contributions to the project.
 * Added documentations for the add attendance feature in **Section 6**. This section explains the implementation
   details of the `add-attendance` command and design considerations taken into account when implementing it.
 
-* Added use cases `UC010` and `UC15`.
+* Added use cases `UC10` and `UC15`.
 
 * Added instructions for manual testing of in **Section 6**.
   * This includes the manual testing of `delete-student`, `edit-class`, `find-class`, `clear-class`, `delete-lesson`,
