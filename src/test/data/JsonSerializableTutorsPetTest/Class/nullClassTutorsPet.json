@@ -6,9 +6,5 @@
     "email" : "alice@example.com",
     "tagged" : [ "Average" ]
   } ],
-  "classes" : [ {
-    "name" : "CS2100 Lab",
-    "studentUuids" : [ null ],
-    "lessons" : [ ]
-  }]
+  "classes" : [ null ]
 }

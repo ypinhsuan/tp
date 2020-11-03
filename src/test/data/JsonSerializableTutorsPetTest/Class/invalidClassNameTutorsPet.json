@@ -2,17 +2,13 @@
   "students" : [ {
     "uuid" : "0c527a3f-8a6f-4c16-b57d-563a9c43cf6b",
     "name" : "Alice Pauline",
-    "telegram" : "A1ice_P",
+    "telegram" : "4Lice_P",
     "email" : "alice@example.com",
     "tagged" : [ "Average" ]
   } ],
   "classes" : [ {
-    "name" : "Duplicate CS2100 Lab",
+    "name" : "Inv@lid Class Name",
     "studentUuids" : [ ],
     "lessons" : [ ]
-  }, {
-    "name" : "Duplicate CS2100 Lab",
-    "studentUuids" : [ ],
-    "lessons" : [ ]
-  }]
+  } ]
 }

@@ -1,6 +1,8 @@
 package tutorspet.logic.parser.student;
 
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static tutorspet.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
+import static tutorspet.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static tutorspet.logic.commands.student.ListStudentInClassCommand.MESSAGE_USAGE;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_CLASS_INDEX;
 import static tutorspet.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -33,6 +35,15 @@ public class ListStudentCommandParserTest {
                 + PREFIX_CLASS_INDEX + "2" + " "
                 + PREFIX_CLASS_INDEX + "1",
                 new ListStudentInClassCommand(INDEX_FIRST_ITEM));
+    }
+
+    @Test
+    public void parse_withPreamble_throwsParseException() {
+        assertParseFailure(parser, PREAMBLE_NON_EMPTY + PREFIX_CLASS_INDEX + "2",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
+
+        assertParseFailure(parser, PREAMBLE_WHITESPACE + "2",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
     }
 
     @Test

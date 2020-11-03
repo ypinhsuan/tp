@@ -9,7 +9,8 @@
     "uuid": "f0e9b309-48fc-4142-9f4d-bbb99f3bb3fe",
     "name": "Duplicate Name",
     "telegram": "duplicatetelegram",
-    "email": "pauline@example.com"
+    "email": "pauline@example.com",
+    "tagged": [ ]
   } ],
   "classes" : [ ]
 }

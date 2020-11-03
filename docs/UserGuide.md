@@ -160,6 +160,12 @@ This section details the format of the commands available in Tutor's Pet. We wil
 
 * Indexes **must be a positive whole number** 1, 2, 3, …
 
+* The `STUDENT_INDEX` refers to the index number shown in the displayed student list.
+
+* The `CLASS_INDEX` refers to the index number shown in the displayed class list.
+
+* The `LESSON_INDEX` refers to the index number of a lesson shown in its class.
+
 * Time must be input in the format, `hh:mm`. <br>
   e.g. `13:00` is allowed, but not `1300`.
 
@@ -502,15 +508,15 @@ If you entered the wrong class name or would like to change the name of a class,
 * Edits the class at the specified `INDEX`.
 
 For example:
-* Your module coordinator decides to allocate another class to you and you want to be able to distinguish between
- the two classes. Hence you decide to edit the `CS2103T Tutorial` class to `CS2103T Tutorial T10`. You type the
- command `edit-class 1 n\CS2103T Tutorial T10` and press <kbd>Enter</kbd>.
+1. Your module coordinator decides to allocate another class to you and you want to be able to distinguish between
+   the two classes. Hence you decide to edit the `CS2103T Tutorial` class to `CS2103T Tutorial T10`. 
+1. You type the command `edit-class 1 n\CS2103T Tutorial T10` and press <kbd>Enter</kbd>.
 
-  ![Edit class before](images/ugimages/EditClassBefore.png)
+   ![Edit class before](images/ugimages/EditClassBefore.png)
 
-* The class has been renamed from `CS2103T Tutorial` to `CS2103T Tutorial 10`.
+1. The class has been renamed from `CS2103T Tutorial` to `CS2103T Tutorial 10`.
 
-  ![Edit class after](images/ugimages/EditClassAfter.png)
+   ![Edit class after](images/ugimages/EditClassAfter.png)
 
 <div markdown="block" class="alert alert-info">
 
@@ -539,14 +545,14 @@ If you would like to find classes that contain any of the given keywords in thei
 **Format**: `find-class KEYWORD [MORE_KEYWORDS]`
 
 For example:
-* You would like to find out how many `Tutorial` classes you are currently teaching. You type the command
- `find-class Tutorial` and press <kbd>Enter</kbd>.
+1. You would like to find out how many `Tutorial` classes you are currently teaching. You type the command
+   `find-class Tutorial` and press <kbd>Enter</kbd>.
 
-  ![Find class before](images/ugimages/FindClassBefore.png)
+   ![Find class before](images/ugimages/FindClassBefore.png)
 
-* You find out that you are only teaching 2 tutorials this semester and hence decide to accept more classes.
+1. You find out that you are only teaching 2 tutorials this semester and hence decide to accept more classes.
 
-  ![Find class after](images/ugimages/FindClassAfter.png)
+   ![Find class after](images/ugimages/FindClassAfter.png)
 
 Other examples:
 * `find-class CS2100`<br>
@@ -601,14 +607,14 @@ If you would like to delete all the classes in Tutor's Pet, make use of this com
 **Format**: `clear-class`
 
 For example:
-* It is the start of a new semester. You would like to delete all information of all the classes you taught last
- semester to start anew. You type the command `clear-class` and press <kbd>Enter</kbd>.
+1. It is the start of a new semester. You would like to delete all information of all the classes you taught last
+   semester to start anew. You type the command `clear-class` and press <kbd>Enter</kbd>.
 
-  ![Clear class before](images/ugimages/ClearClassBefore.png)
+   ![Clear class before](images/ugimages/ClearClassBefore.png)
 
-* All classes have been cleared. You can start managing your new classes.
+1. All classes have been cleared. You can start managing your new classes.
 
-  ![Clear class after](images/ugimages/ClearClassAfter.png)
+   ![Clear class after](images/ugimages/ClearClassAfter.png)
 
 #### Listing all students and classes : `list`
 
@@ -760,15 +766,15 @@ If you would like to delete a lesson in a class, you can make use of this comman
 * Deletes the lesson at the specified `CLASS_INDEX` + `LESSON_INDEX`.
 
 For example:
-* You receive news that the `Tuesday 10:00-11:00` `CS2103T Tutorial` would be cancelled permanently. You decide to
- remove that lesson from your Tutor's Pet and hence you type in the command `delete-lesson c\1 l\2` and press
- <kbd>Enter</kbd>.
+1. You receive news that the `Tuesday 10:00-11:00` `CS2103T Tutorial` would be cancelled permanently. You decide to
+   remove that lesson from your Tutor's Pet and hence you type in the command `delete-lesson c\1 l\2` and press
+   <kbd>Enter</kbd>.
 
-  ![Delete lesson before](images/ugimages/DeleteLessonBefore.png)
+   ![Delete lesson before](images/ugimages/DeleteLessonBefore.png)
 
-* You have one less lesson to teach now.
+1. You have one less lesson to teach now.
 
-  ![Delete lesson after](images/ugimages/DeleteLessonAfter.png)
+   ![Delete lesson after](images/ugimages/DeleteLessonAfter.png)
 
 Other examples:
 * `find-class CS2030 lab`<br>
@@ -790,15 +796,14 @@ Gives you the venue of a lesson.
 * Gives the venue of the lesson specified at `CLASS_INDEX` + `LESSON_INDEX`.
 
 For example:
-* Due to covid, most of your physical lessons have been converted to zoom lessons and thus all the venues are
-  in the form of zoom links. Your lesson is starting in 10 minutes and it is time to start the session. Hence, you
-  input the command `display-venue c\2 l\1` and press <kbd>Enter</kbd>.
+1. Your online lesson is starting in 10 minutes and it is time to start the session. You wish to find out the link
+   to that section and hence, you input the command `display-venue c\2 l\1` and press <kbd>Enter</kbd>.
 
-  ![Display venue before](images/ugimages/DisplayVenueBefore.png)
+   ![Display venue before](images/ugimages/DisplayVenueBefore.png)  
 
-* You can now proceed to copy the link to that zoom session from the command result box.
+1. You can now proceed to copy the link to that zoom session from the command result box.
 
-  ![Display venue after](images/ugimages/DisplayVenueAfter.png)
+   ![Display venue after](images/ugimages/DisplayVenueAfter.png)
 
 ### Managing attendance records
 
@@ -809,15 +814,16 @@ If you would like to record a new attendance for a student, you can make use of 
 **Format**: `add-attendance c\CLASS_INDEX l\LESSON_INDEX s\STUDENT_INDEX w\WEEK p\PARTICIPATION_SCORE`
 
 For example:
-* Your `CS2103T Tutorial` lesson in week 10 has just ended and you would like to give participation scores to the
-  students. You decide to start with Alex. Hence, you type in the command `add-attendance c\1 l\1 s\1 w\10 p\80` and
-  press <kbd>Enter</kbd>.
+1. Your `CS2103T Tutorial` lesson in week 10 has just ended and you would like to give participation scores to the
+   students. You enter the command `list-student c\1` to see the students in your `CS2103T Tutorial` class.  
+1. You decide to start with Alex. Hence, you type in the command `add-attendance c\1 l\1 s\1 w\10 p\80` and
+   press <kbd>Enter</kbd>.
 
-  ![Add attendance before](images/ugimages/AddAttendanceBefore.png)
+   ![Add attendance before](images/ugimages/AddAttendanceBefore.png)
 
-* You have successfully recorded Alex's attendance. You have another 2 more students' attendance to record.
+1. You have successfully recorded Alex's attendance. You have another 2 more students' attendance to record.
 
-  ![Add attendance after](images/ugimages/AddAttendanceAfter.png)
+   ![Add attendance after](images/ugimages/AddAttendanceAfter.png)
 
 Other Examples:
 * `find-class CS2100 lab`<br>
@@ -876,15 +882,16 @@ If you need to find out a specific student's attendance for a specific week, mak
 * Finds the attendance record at the specified `CLASS_INDEX` + `LESSON_INDEX` + `STUDENT_INDEX` + `WEEK`.
 
 For example:
-* It is the end of a semester and it's time to key in your students' attendance into luminus. You would like to find
- out if Alex attended week 1 lesson and hence you type in the command `find-attendance c\1 l\1 s\1 w\1` and press
- <kbd>Enter</kbd>.
+1. It is the end of a semester and it's time to key in your students' attendance into luminus. You enter the 
+   command `list-student c\1` to see the students in your `CS2103T Tutorial` class.  
+1. You would like to find out if Alex attended week 1 lesson and hence you type in the command 
+   `find-attendance c\1 l\1 s\1 w\1` and press <kbd>Enter</kbd>.
 
-  ![Find attendance before](images/ugimages/FindAttendanceBefore.png)
+   ![Find attendance before](images/ugimages/FindAttendanceBefore.png) 
 
-* Now you can find out if Alex attended the first lesson and how participative he was in week 1.
+1. Now you can find out if Alex attended the first lesson and how participative he was in week 1.
 
-  ![Find attendance after](images/ugimages/FindAttendanceAfter.png)
+   ![Find attendance after](images/ugimages/FindAttendanceAfter.png)
 
 Other Examples:
 * `find-class CS2100 lab`<br>
@@ -930,15 +937,16 @@ Gives you an overall summary of a student's attendance and participation scores.
 * Gives a summary of the student's attendance at the specified `CLASS_INDEX` + `STUDENT_INDEX`.
 
 For example:
-* It is the end of the semester and time for you to grade a student's class participation. You would like to find out
- if Alex has been participative throughout the semester and hence you type in the command `stats c\1 s\1` and press
- <kbd>Enter</kbd>.
+1. It is the end of the semester and time for you to grade your students overall class participation. You enter the 
+   command `list-student c\1` to see the students in your `CS2103T Tutorial` class.  
+1. You would like to find out if Alex has been participative throughout the semester and hence you type in the
+   command `stats c\1 s\1` and press <kbd>Enter</kbd>.
 
-  ![Display_stats before](images/ugimages/DisplayStatsBefore.png)
+   ![Display_stats before](images/ugimages/DisplayStatsBefore.png)
 
-* Now you can see his average participation score and overall attendance to give a corresponding grade.
+1. Now you can see his average participation score and overall attendance to give a corresponding grade.
 
-  ![Display_stats after](images/ugimages/DisplayStatsAfter.png)
+   ![Display_stats after](images/ugimages/DisplayStatsAfter.png)
 
 <div markdown="block" class="alert alert-info">
 
@@ -960,9 +968,5 @@ For example:
 ## Glossary
 
 This glossary provides definitions for the special terms used in this user guide.
-
-* The `STUDENT_INDEX` refers to the index number shown in the displayed student list.
-* The `CLASS_INDEX` refers to the index number shown in the displayed class list.
-* The `LESSON_INDEX` refers to the index number of a lesson shown in its class.
 
 --------------------------------------------------------------------------------------------------------------------

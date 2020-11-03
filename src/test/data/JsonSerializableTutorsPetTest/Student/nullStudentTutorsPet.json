@@ -1,0 +1,5 @@
+{
+  "comment" : "Added an empty class list here so that NullPointerException is thrown rather than JsonMappingException",
+  "students" : [ null ],
+  "classes" : [ ]
+}
