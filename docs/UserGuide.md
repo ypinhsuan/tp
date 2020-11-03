@@ -509,7 +509,7 @@ If you entered the wrong class name or would like to change the name of a class,
 
 For example:
 1. Your module coordinator decides to allocate another class to you and you want to be able to distinguish between
-   the two classes. Hence you decide to edit the `CS2103T Tutorial` class to `CS2103T Tutorial T10`. 
+   the two classes. Hence you decide to edit the `CS2103T Tutorial` class to `CS2103T Tutorial T10`.
 1. You type the command `edit-class 1 n\CS2103T Tutorial T10` and press <kbd>Enter</kbd>.
 
    ![Edit class before](images/ugimages/EditClassBefore.png)
@@ -799,7 +799,7 @@ For example:
 1. Your online lesson is starting in 10 minutes and it is time to start the session. You wish to find out the link
    to that section and hence, you input the command `display-venue c\2 l\1` and press <kbd>Enter</kbd>.
 
-   ![Display venue before](images/ugimages/DisplayVenueBefore.png)  
+   ![Display venue before](images/ugimages/DisplayVenueBefore.png)
 
 1. You can now proceed to copy the link to that zoom session from the command result box.
 
@@ -815,7 +815,7 @@ If you would like to record a new attendance for a student, you can make use of 
 
 For example:
 1. Your `CS2103T Tutorial` lesson in week 10 has just ended and you would like to give participation scores to the
-   students. You enter the command `list-student c\1` to see the students in your `CS2103T Tutorial` class.  
+   students. You enter the command `list-student c\1` to see the students in your `CS2103T Tutorial` class.
 1. You decide to start with Alex. Hence, you type in the command `add-attendance c\1 l\1 s\1 w\10 p\80` and
    press <kbd>Enter</kbd>.
 
@@ -882,12 +882,12 @@ If you need to find out a specific student's attendance for a specific week, mak
 * Finds the attendance record at the specified `CLASS_INDEX` + `LESSON_INDEX` + `STUDENT_INDEX` + `WEEK`.
 
 For example:
-1. It is the end of a semester and it's time to key in your students' attendance into luminus. You enter the 
-   command `list-student c\1` to see the students in your `CS2103T Tutorial` class.  
-1. You would like to find out if Alex attended week 1 lesson and hence you type in the command 
+1. It is the end of a semester and it's time to key in your students' attendance into luminus. You enter the
+   command `list-student c\1` to see the students in your `CS2103T Tutorial` class.
+1. You would like to find out if Alex attended week 1 lesson and hence you type in the command
    `find-attendance c\1 l\1 s\1 w\1` and press <kbd>Enter</kbd>.
 
-   ![Find attendance before](images/ugimages/FindAttendanceBefore.png) 
+   ![Find attendance before](images/ugimages/FindAttendanceBefore.png)
 
 1. Now you can find out if Alex attended the first lesson and how participative he was in week 1.
 
@@ -937,8 +937,8 @@ Gives you an overall summary of a student's attendance and participation scores.
 * Gives a summary of the student's attendance at the specified `CLASS_INDEX` + `STUDENT_INDEX`.
 
 For example:
-1. It is the end of the semester and time for you to grade your students overall class participation. You enter the 
-   command `list-student c\1` to see the students in your `CS2103T Tutorial` class.  
+1. It is the end of the semester and time for you to grade your students overall class participation. You enter the
+   command `list-student c\1` to see the students in your `CS2103T Tutorial` class.
 1. You would like to find out if Alex has been participative throughout the semester and hence you type in the
    command `stats c\1 s\1` and press <kbd>Enter</kbd>.
 
