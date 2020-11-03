@@ -90,7 +90,6 @@ public class Student implements HasName {
         }
 
         return otherStudent != null
-                && otherStudent.getName().equals(getName())
                 && (otherStudent.getTelegram().equals(getTelegram()) || otherStudent.getEmail().equals(getEmail()));
     }
 

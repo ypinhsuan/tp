@@ -78,6 +78,11 @@ public class EditStudentCommand extends Command {
         Student studentToEdit = lastShownList.get(index.getZeroBased());
         Student editedStudent = createEditedStudent(studentToEdit, editStudentDescriptor);
 
+        // Filter list to get a list without the studentToEdit, then check if the editedStudent already exist in list.
+        if (lastShownList.stream().filter(s -> !s.equals(studentToEdit)).anyMatch(editedStudent::isSameStudent)) {
+            throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
+        }
+
         if (!studentToEdit.isSameStudent(editedStudent) && model.hasStudent(editedStudent)) {
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
         }
