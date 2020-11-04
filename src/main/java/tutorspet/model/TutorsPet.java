@@ -1,6 +1,7 @@
 package tutorspet.model;
 
 import static java.util.Objects.requireNonNull;
+import static tutorspet.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
 import java.util.Objects;
@@ -73,6 +74,15 @@ public class TutorsPet implements ReadOnlyTutorsPet {
         requireNonNull(student);
 
         return students.contains(student);
+    }
+
+    /**
+     * Returns true if an {@code editedStudent} with the same identity as {@code student} exists.
+     */
+    public boolean hasStudent(Student student, Student editedStudent) {
+        requireAllNonNull(student, editedStudent);
+
+        return students.contains(student, editedStudent);
     }
 
     /**

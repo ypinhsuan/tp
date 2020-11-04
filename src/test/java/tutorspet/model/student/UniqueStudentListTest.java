@@ -4,7 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static tutorspet.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static tutorspet.logic.commands.CommandTestUtil.VALID_TAG_AVERAGE;
+import static tutorspet.logic.commands.CommandTestUtil.VALID_TELEGRAM_BOB;
 import static tutorspet.testutil.Assert.assertThrows;
 import static tutorspet.testutil.TypicalStudent.ALICE;
 import static tutorspet.testutil.TypicalStudent.BENSON;
@@ -45,6 +47,43 @@ public class UniqueStudentListTest {
         uniqueStudentList.add(ALICE);
         Student editedAlice = new StudentBuilder(ALICE).withTags(VALID_TAG_AVERAGE).build();
         assertTrue(uniqueStudentList.contains(editedAlice));
+    }
+
+    @Test
+    public void containsReplacement_nullStudent_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueStudentList.contains(ALICE, null));
+        assertThrows(NullPointerException.class, () -> uniqueStudentList.contains(null, ALICE));
+    }
+
+    @Test
+    public void containsReplacement_studentNotInList_returnsFalse() {
+        assertFalse(uniqueStudentList.contains(ALICE, ALICE));
+    }
+
+    @Test
+    public void containsReplacement_studentInList_returnsTrue() {
+        uniqueStudentList.add(ALICE);
+        assertTrue(uniqueStudentList.contains(BOB, ALICE));
+    }
+
+    @Test
+    public void containsReplacement_studentInList_returnsFalse() {
+        uniqueStudentList.add(ALICE);
+        assertFalse(uniqueStudentList.contains(ALICE, ALICE));
+    }
+
+    @Test
+    public void contains_studentWithSameEmailInList_returnsTrue() {
+        uniqueStudentList.add(ALICE);
+        Student editedAlice = new StudentBuilder(ALICE).withTelegram(VALID_TELEGRAM_BOB).build();
+        assertTrue(uniqueStudentList.contains(BOB, editedAlice));
+    }
+
+    @Test
+    public void contains_studentWithSameTelegramInList_returnsTrue() {
+        uniqueStudentList.add(ALICE);
+        Student editedAlice = new StudentBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
+        assertTrue(uniqueStudentList.contains(BOB, editedAlice));
     }
 
     @Test
