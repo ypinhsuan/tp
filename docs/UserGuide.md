@@ -20,9 +20,6 @@ As a teaching assistant, administrative chores such as attendance taking and gra
 can be troublesome with existing solutions such as spreadsheets. This is why we have created _Tutor's Pet, a
 solution for teaching assistants, by students._
 
-   ![Ui](images/Ui.png)
-   Figure 1. Tutor's Pet application.
-
 ## About
 
 This user guide provides documentation on the installation and usage of Tutor's Pet.
@@ -70,7 +67,7 @@ Here are a few steps to get you started on Tutor's Pet:
    seconds.<br>
 
    ![Ui](images/Ui.png)
-   Figure 2. Tutor's Pet application.
+   Figure 1. Tutor's Pet application.
 
 ### Using Tutor's Pet
 
@@ -88,7 +85,7 @@ The command box is the area for you to enter your commands. The result of each c
 display box, which is located immediately below the command box.
 
    ![Command box and result display box](images/ugimages/CommandAndDisplayBox.png)
-   <br>Figure 3. The command box and result display box.
+   <br>Figure 2. The command box and result display box.
 
 * Type a command in the command box and press <kbd>Enter</kbd> to execute it.<br>
    e.g. Type **`help`** and press <kbd>Enter</kbd> to open the help window.<br>
@@ -114,17 +111,17 @@ The main viewing area consists of two sections: **Classes** and **Students**.
 classes in Tutor's Pet.
 
     ![Class_section](images/ugimages/ClassPanel.png)
-    <br>Figure 4. The class section.
+    <br>Figure 3. The class section.
 
 * The **Students** section displays contains information about students in Tutor's Pet. Use the **`list-student`** command to view the list of all students in Tutor's Pet.
 
     ![Student_section](images/ugimages/StudentPanel.png)
-    <br>Figure 5. The student section.
+    <br>Figure 4. The student section.
 
 The utility area consists of three tabs: **File**, **Theme**, **Help**.
 
   ![Utility area](images/ugimages/UtilityArea.png)
-  <br>Figure 6. The utility area.
+  <br>Figure 5. The utility area.
 
 * The **File** tab consists of an exit button. To exit Tutor's Pet, click on the exit button. Alternatively, use the `exit` command to exit the application.
 
@@ -132,7 +129,7 @@ The utility area consists of three tabs: **File**, **Theme**, **Help**.
  your Tutor's Pet, click on one of these buttons.
 
      ![Theme tab](images/ugimages/ThemeTab.png)
-     <br>Figure 7. The theme tab.
+     <br>Figure 6. The theme tab.
 
 * The **Help** tab consists of a help button. If you require any assistance, click on the help button, copy the link
  given and paste it into any web browser. Alternatively, press <kbd>F1</kbd> to bring up the help window.
@@ -931,12 +928,12 @@ If you would like to delete a specific student's attendance from a lesson, you c
 * Deletes the attendance record at the specified `CLASS_INDEX` + `LESSON_INDEX` + `STUDENT_INDEX` + `WEEK`.
 
 For example:
-* You would like to delete Alice's attendance for the Thursday 10.00am to 11.00am lesson of CS2103T Tutorial
+* You would like to delete Alex's attendance for the Thursday 10.00am to 11.00am lesson of CS2103T Tutorial
 in Week 1. Hence, you type in the command `delete-attendance c\1 l\1 s\1 w\1` and press <kbd>Enter</kbd>.
 
   ![Delete attendance before](images/ugimages/DeleteAttendanceBefore.png)
 
-* Alice's attendance for week 1 has been deleted.
+* Alex's attendance for week 1 has been deleted.
 
   ![Delete attendance after](images/ugimages/DeleteAttendanceAfter.png)
 
