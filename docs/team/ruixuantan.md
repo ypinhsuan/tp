@@ -25,7 +25,7 @@ My code contribution can be found [here](https://nus-cs2103-ay2021s1.github.io/t
 * Add `edit-lesson` command. [#143](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/143)
     * **What it does**: Allows the editing of lessons.
     * **Highlights**: There are multiple fields that can be edited in the lesson model.
-      There are also fields that should not be edited, and effort was made to ensure that these fields are copied properly.
+      There are also fields that should not be edited, and effort was made to ensure that these fields are re-instantiated properly.
       
 * Implement the toggle theme feature. [#109](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/109)
     * **What it does**: Allows users to switch between light, alternate and dark mode.
