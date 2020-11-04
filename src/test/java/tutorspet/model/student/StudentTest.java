@@ -39,12 +39,12 @@ public class StudentTest {
         editedAlice = new StudentBuilder(ALICE).withName(VALID_NAME_BOB).build();
         assertTrue(ALICE.isSameStudent(editedAlice));
 
-        // same name, same telegram, different attributes -> returns true
+        // same name, same telegram, different email -> returns true
         editedAlice = new StudentBuilder(ALICE).withEmail(VALID_EMAIL_BOB)
                 .withTags(VALID_TAG_AVERAGE).build();
         assertTrue(ALICE.isSameStudent(editedAlice));
 
-        // same name, same email, different attributes -> returns true
+        // same name, same email, different telegram -> returns true
         editedAlice = new StudentBuilder(ALICE).withTelegram(VALID_TELEGRAM_BOB)
                 .withTags(VALID_TAG_AVERAGE).build();
         assertTrue(ALICE.isSameStudent(editedAlice));
