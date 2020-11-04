@@ -63,5 +63,3 @@ Here is a summary of my personal contributions to the team project. All my code 
 
   * A list of all PRs I have reviewed can be found
     [here](https://github.com/AY2021S1-CS2103T-T10-4/tp/pulls?q=is%3Apr+is%3Aclosed+reviewed-by%3Aypinhsuan).
-
-
