@@ -133,6 +133,13 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasStudent(Student student, Student editedStudent) {
+        requireAllNonNull(student, editedStudent);
+
+        return versionedTutorsPet.hasStudent(student, editedStudent);
+    }
+
+    @Override
     public void addStudent(Student student) {
         versionedTutorsPet.addStudent(student);
         updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);

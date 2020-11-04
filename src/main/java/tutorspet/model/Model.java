@@ -90,6 +90,11 @@ public interface Model {
     boolean hasStudent(Student student);
 
     /**
+     * Returns true if an  {@code editedStudent} with the same identity as {@code student} exists in the application.
+     */
+    boolean hasStudent(Student student, Student editedStudent);
+
+    /**
      * Deletes the given {@code Student} and the {@code Student}'s {@code UUID} in all {@code ModuleClass}es.
      * The student must exist in the application.
      */

@@ -93,6 +93,11 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public boolean hasStudent(Student student, Student editedStudent) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
     public void addStudent(Student student) {
         throw new AssertionError("This method should not be called.");
     }
