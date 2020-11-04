@@ -38,7 +38,7 @@ public class StatisticsCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "%1$s attendance summary for %2$s:\n"
             + "Average participation: %3$.2f\n"
-            + "Lesson(s) not attended:\n"
+            + "Lesson(s) not attended:"
             + "%4$s";
 
     private final Index moduleClassIndex;
@@ -115,14 +115,13 @@ public class StatisticsCommand extends Command {
         StringBuilder weeksNotPresent = new StringBuilder();
 
         for (Lesson lesson : attendances.keySet()) {
+            weeksNotPresent.append("\n");
             weeksNotPresent.append(lesson.printLesson()).append(": Weeks");
             List<Integer> absentWeeks = attendances.get(lesson);
 
             for (Integer weekNo : absentWeeks) {
                 weeksNotPresent.append(" ").append(weekNo);
             }
-
-            weeksNotPresent.append("\n");
         }
 
         return weeksNotPresent.toString();
