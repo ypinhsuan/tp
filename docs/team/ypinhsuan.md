@@ -20,13 +20,13 @@ Here is a summary of my personal contributions to the team project. All my code 
   * **What it does:** Supports organising lessons into classes.
   * **Justification:** This feature allows us to implement commands for lessons.
   * **Highlights:** This feature required addition of a new component to the model of the application. There were 2 designs considered:
-    * Store `Lesson` objects directly in `ModueCass`.
+    * Store `Lesson` objects directly in `ModueClass`.
     * Create `UUID` field for `Lesson` and store uuid in `ModuleClass`.
 * `edit-attendace` command feature [#157](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/157)
   * **What it does:** This feature allows users to edit the attendance of a student.
   * **Justification:** Users do not have to delete the attendance and re-add a new one if they made any errors when inputting attendance.
   * **Highlights:** Implementation of this feature was complicated as retrieving `attendance` in the `edit-attendance` command will break the law of demeter.
-  Hence the utility methods for editing attendance `Attendance` are `ModuleClassUtil`, `LessonUtil` and `AttendanceRecordListUtil`.
+  Hence the utility methods for editing attendance `Attendance` are in `ModuleClassUtil`, `LessonUtil` and `AttendanceRecordListUtil`.
   This is also to avoid handling logic in `Model` component.
 
 ### Minor Enhancements:

@@ -39,10 +39,16 @@ public class TypicalLesson {
             .withDay(TUESDAY).withNumberOfOccurrences(3)
             .withVenue("https://zoom/j/95317249?)pwd=Ulld2tWY3MwMkRibjQyUkdZZz09").build();
 
+    public static final Lesson ONLINE_LESSON_WED_1_TO_3 = new LessonBuilder()
+            .withStartTime(parse("13:00", TIME_FORMATTER))
+            .withEndTime(parse("15:00", TIME_FORMATTER))
+            .withDay(WEDNESDAY).withNumberOfOccurrences(3)
+            .withVenue("zoom").build();
+
     private TypicalLesson() {} // prevents instantiation
 
     public static List<Lesson> getTypicalLessons() {
-        return new ArrayList<>(Arrays.asList(
-                LESSON_WED_2_TO_4, LESSON_FRI_8_TO_10, LESSON_THU_10_TO_11, ONLINE_LESSON_TUE_1030_1130));
+        return new ArrayList<>(Arrays.asList(LESSON_WED_2_TO_4, LESSON_FRI_8_TO_10, LESSON_THU_10_TO_11,
+                ONLINE_LESSON_TUE_1030_1130, ONLINE_LESSON_WED_1_TO_3));
     }
 }

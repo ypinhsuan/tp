@@ -8,6 +8,7 @@ import static tutorspet.logic.commands.CommandTestUtil.VALID_NAME_CS2100_LAB;
 import static tutorspet.testutil.TypicalLesson.LESSON_FRI_8_TO_10;
 import static tutorspet.testutil.TypicalLesson.LESSON_THU_10_TO_11;
 import static tutorspet.testutil.TypicalLesson.LESSON_WED_2_TO_4;
+import static tutorspet.testutil.TypicalLesson.ONLINE_LESSON_WED_1_TO_3;
 import static tutorspet.testutil.TypicalModuleClass.CS2100_LAB;
 import static tutorspet.testutil.TypicalModuleClass.CS2103T_TUTORIAL;
 import static tutorspet.testutil.TypicalStudent.ALICE;
@@ -113,6 +114,24 @@ public class ModuleClassTest {
     public void hasLesson_lessonNotInModuleClass_returnsFalse() {
         ModuleClass moduleClass = new ModuleClassBuilder().withLessons(LESSON_FRI_8_TO_10).build();
         assertFalse(moduleClass.hasLesson(LESSON_WED_2_TO_4));
+    }
+
+    @Test
+    public void hasOverlapLesson_nullLesson_throwsNullPointerException() {
+        ModuleClass moduleClass = new ModuleClassBuilder().build();
+        assertThrows(NullPointerException.class, () -> moduleClass.hasOverlapLesson(null));
+    }
+
+    @Test
+    public void hasOverlapLesson_noOverlapLessonInModuleClass_returnsFalse() {
+        ModuleClass moduleClass = new ModuleClassBuilder().withLessons(LESSON_FRI_8_TO_10).build();
+        assertFalse(moduleClass.hasOverlapLesson(LESSON_WED_2_TO_4));
+    }
+
+    @Test
+    public void hasOverlapLesson_overlapLessonInModuleClass_returnsTrue() {
+        ModuleClass moduleClass = new ModuleClassBuilder().withLessons(LESSON_FRI_8_TO_10, LESSON_WED_2_TO_4).build();
+        assertTrue(moduleClass.hasOverlapLesson(ONLINE_LESSON_WED_1_TO_3));
     }
 
     @Test
