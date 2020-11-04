@@ -3,44 +3,63 @@ layout: page
 title: Rui Xuan's Project Portfolio Page
 ---
 
-## Project: AddressBook Level 3
+## Overview
+Tutor's Pet is a **desktop application for managing students and classes**, designed for teaching assistants in NUS
+School of Computing.
+Tutor's Pet is adapted from an existing desktop Java application
+[Address Book (Level 3)](https://se-education.org/addressbook-level3/).
+My team, consisting of 5 NUS Computer Science students, developed this application over the course of 6 weeks.
 
-AddressBook - Level 3 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+## Summary of Contributions
+Here is a summary of my personal contributions to the project.
+My code contribution can be found [here](https://nus-cs2103-ay2021s1.github.io/tp-dashboard/#breakdown=true&search=ruixuantan).
 
-Given below are my contributions to the project.
+## Major Enhancements
+* Implement Attendance model. [#118](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/118)
+  * **What it does**: Supports the tracking of student's attendance and participation points in class.
+  * **Highlights**: There were choices to make regarding the data structures that were implemented.
+    Consideration was given to:
+      * the time complexity of operations in the data structures,
+      * how the attendance records are to be retrieved and updated.
+      
+* Add `edit-lesson` command. [#143](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/143)
+    * **What it does**: Allows the editing of lessons.
+    * **Highlights**: There are multiple fields that can be edited in the lesson model.
+      There are also fields that should not be edited, and effort was made to ensure that these fields are re-instantiated properly.
+      
+* Implement the toggle theme feature. [#109](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/109)
+    * **What it does**: Allows users to switch between light, alternate and dark mode.
+    * **Highlights**: There was a need to understand the css stylesheets to abstract out the common components and differentiate the colors between themes. 
+      Analysis of the color choices was also required to design aesthetically pleasing themes.
+    * **Extension**: I made a separate PR to ensure that the themes are saved into the `preferences.json` file upon exit of the application.
+      [#195](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/195)
+      
+## Minor Enhancements
+* Remove initial address field. [#20](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/20)
+* Refactor phone to telegram field. [#53](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/53)
+* Add lesson storage support. [#127](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/127)
+* Remove code duplication in test cases. [#190](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/190)
+* Fix tag color bug and improve testability. [#253](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/253)
 
-* **New Feature**: Added the ability to undo/redo previous commands.
-  * What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-  * Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-  * Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-  * Credits: *{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}*
+## Other Contributions
+* Create application logo. [#220](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/220)
+* Record video demonstration for v1.2.
 
-* **New Feature**: Added a history command that allows the user to navigate to previous commands using up/down keys.
+* User Guide
+  * Update sections on all student related commands.
+  * Add section on `edit-lesson` command.
 
-* **Code contributed**: [RepoSense link]()
+* Developer Guide
+  * Update diagrams in Logic Component section.
+  * Add implementation details for Attendance Model.
+  * Add table of user stories.
+  * Include use cases: UC03, UC05, UC12.
+  
+* PRs reviewed (with non trivial comments):
+  [#75](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/75),
+  [#95](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/95),
+  [#112](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/112),
+  [#152](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/152),
+  [#184](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/184).
 
-* **Project management**:
-  * Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
-
-* **Enhancements to existing features**:
-  * Updated the GUI color scheme (Pull requests [\#33](), [\#34]())
-  * Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests [\#36](), [\#38]())
-
-* **Documentation**:
-  * User Guide:
-    * Added documentation for the features `delete` and `find` [\#72]()
-    * Did cosmetic tweaks to existing documentation of features `clear`, `exit`: [\#74]()
-  * Developer Guide:
-    * Added implementation details of the `delete` feature.
-
-* **Community**:
-  * PRs reviewed (with non-trivial review comments): [\#12](), [\#32](), [\#19](), [\#42]()
-  * Contributed to forum discussions (examples: [1](), [2](), [3](), [4]())
-  * Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3]())
-  * Some parts of the history feature I added was adopted by several other class mates ([1](), [2]())
-
-* **Tools**:
-  * Integrated a third party library (Natty) to the project ([\#42]())
-  * Integrated a new Github plugin (CircleCI) to the team repo
-
-* _{you can add/remove categories in the list above}_
+* A list of all PRs I have reviewed can be found [here](https://github.com/AY2021S1-CS2103T-T10-4/tp/pulls?q=is%3Apr+reviewed-by%3Aruixuantan).
