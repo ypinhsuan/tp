@@ -83,7 +83,9 @@ There are three main areas in Tutor's Pet:
 The command box is the area for you to enter your commands. The result of each command would be shown in the result
 display box, which is located immediately below the command box.
 <br/>
+
    ![Command box and result display box](images/ugimages/CommandAndDisplayBox.png)
+
 <br/>
 
 * Type a command in the command box and press <kbd>Enter</kbd> to execute it.<br>
@@ -111,19 +113,25 @@ The main viewing area consists of two sections: **Classes** and **Students**.
 * The **Classes** section contains information about classes and lessons in Tutor's Pet. Use the **`list-class`** command to view the list of all
 classes in Tutor's Pet.
 <br/>
+
     ![Class_section](images/ugimages/ClassPanel.png)
+
 <br/>
 
 <a name="displayed-student-list"/>
 
 * The **Students** section displays contains information about students in Tutor's Pet. Use the **`list-student`** command to view the list of all students in Tutor's Pet.
 <br/>
+
     ![Student_section](images/ugimages/StudentPanel.png)
+
 <br/>
 
 The utility area consists of three tabs: **File**, **Theme**, **Help**.
 <br/>
+
    ![Utility area](images/ugimages/UtilityArea.png)
+
 <br/>
 
 * The **File** tab consists of an exit button. To exit Tutor's Pet, click on the exit button. Alternatively, use the `exit` command to exit the application.
@@ -131,7 +139,9 @@ The utility area consists of three tabs: **File**, **Theme**, **Help**.
 * The **Theme** tab consist of 3 different themes: **Light**, **Alternate** and **Dark**. To change the theme of
  your Tutor's Pet, click on one of these buttons.
 <br/>
+
      ![Theme tab](images/ugimages/ThemeTab.png)
+
 <br/>
 
 * The **Help** tab consists of a help button. If you require any assistance, click on the help button, copy the link
