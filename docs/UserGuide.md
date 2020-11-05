@@ -20,9 +20,6 @@ As a teaching assistant, administrative chores such as attendance taking and gra
 can be troublesome with existing solutions such as spreadsheets. This is why we have created _Tutor's Pet, a
 solution for teaching assistants, by students._
 
-   ![Ui](images/Ui.png)
-   Figure 1. Tutor's Pet application.
-
 ## About
 
 This user guide provides documentation on the installation and usage of Tutor's Pet.
@@ -70,7 +67,6 @@ Here are a few steps to get you started on Tutor's Pet:
    seconds.<br>
 
    ![Ui](images/Ui.png)
-   Figure 2. Tutor's Pet application.
 
 ### Using Tutor's Pet
 
@@ -86,9 +82,11 @@ There are three main areas in Tutor's Pet:
 
 The command box is the area for you to enter your commands. The result of each command would be shown in the result
 display box, which is located immediately below the command box.
+<br/>
 
    ![Command box and result display box](images/ugimages/CommandAndDisplayBox.png)
-   <br>Figure 3. The command box and result display box.
+
+<br/>
 
 * Type a command in the command box and press <kbd>Enter</kbd> to execute it.<br>
    e.g. Type **`help`** and press <kbd>Enter</kbd> to open the help window.<br>
@@ -110,29 +108,41 @@ display box, which is located immediately below the command box.
 
 The main viewing area consists of two sections: **Classes** and **Students**.
 
+<a name="displayed-class-list"/>
+
 * The **Classes** section contains information about classes and lessons in Tutor's Pet. Use the **`list-class`** command to view the list of all
 classes in Tutor's Pet.
+<br/>
 
     ![Class_section](images/ugimages/ClassPanel.png)
-    <br>Figure 4. The class section.
+
+<br/>
+
+<a name="displayed-student-list"/>
 
 * The **Students** section displays contains information about students in Tutor's Pet. Use the **`list-student`** command to view the list of all students in Tutor's Pet.
+<br/>
 
     ![Student_section](images/ugimages/StudentPanel.png)
-    <br>Figure 5. The student section.
+
+<br/>
 
 The utility area consists of three tabs: **File**, **Theme**, **Help**.
+<br/>
 
-  ![Utility area](images/ugimages/UtilityArea.png)
-  <br>Figure 6. The utility area.
+   ![Utility area](images/ugimages/UtilityArea.png)
+
+<br/>
 
 * The **File** tab consists of an exit button. To exit Tutor's Pet, click on the exit button. Alternatively, use the `exit` command to exit the application.
 
 * The **Theme** tab consist of 3 different themes: **Light**, **Alternate** and **Dark**. To change the theme of
  your Tutor's Pet, click on one of these buttons.
+<br/>
 
      ![Theme tab](images/ugimages/ThemeTab.png)
-     <br>Figure 7. The theme tab.
+
+<br/>
 
 * The **Help** tab consists of a help button. If you require any assistance, click on the help button, copy the link
  given and paste it into any web browser. Alternatively, press <kbd>F1</kbd> to bring up the help window.
@@ -170,9 +180,9 @@ This section details the format of the commands available in Tutor's Pet. We wil
 
 * Indexes **must be a positive whole number** 1, 2, 3, …
 
-* The `STUDENT_INDEX` refers to the index number shown in the displayed student list.
+* The `STUDENT_INDEX` refers to the index number shown in the [displayed student list](#displayed-student-list).
 
-* The `CLASS_INDEX` refers to the index number shown in the displayed class list.
+* The `CLASS_INDEX` refers to the index number shown in the [displayed class list](#displayed-class-list).
 
 * The `LESSON_INDEX` refers to the index number of a lesson shown in its class.
 
@@ -187,37 +197,37 @@ This section provides an overview of all commands in Tutor's Pet and illustrates
 
 | Action                            | Format                                                                                      | Example (if applicable)                                            |
 |-----------------------------------|---------------------------------------------------------------------------------------------|--------------------------------------------------------------------|
-| **Add Attendance Record**         | `add-attendance c\CLASS_INDEX l\LESSON_INDEX s\STUDENT_INDEX w\WEEK p\PARTICIPATION_SCORE`  | `add-attendance c\1 l\1 s\1 w\1 p\1`                               |
-| **Add Class**                     | `add-class n\CLASS_NAME`                                                                    | `add-class n\CS2103T Tutorial T10`                                 |
-| **Add Lesson**                    | `add-lesson c\CLASS_INDEX d\DAY st\START_TIME et\END_TIME v\VENUE r\NO_OF_TIMES`            | `add-lesson c\1 d\MONDAY st\08:00 et\10:00 v\COM1 #01-01 r\13`     |
-| **Add Student**                   | `add-student n\NAME t\TELEGRAM_USERNAME e\EMAIL [tag\TAG]…`                                 | `add-student n\John Doe t\johndoe e\johnd@example.com tag\student` |
-| **Add Student To A Class**        | `link s\STUDENT_INDEX c\CLASS_INDEX`                                                        | `link s\1 c\2`                                                     |
-| **Clear All Classes**             | `clear-class`                                                                               |                                                                    |
-| **Clear All Students**            | `clear-student`                                                                             |                                                                    |
-| **Delete Attendance Record**      | `delete-attendance c\CLASS_INDEX l\LESSON_INDEX s\STUDENT_INDEX w\WEEK`                     | `delete-attendance c\1 l\1 s\1 w\1`                                |
-| **Delete Class**                  | `delete-class CLASS_INDEX`                                                                  | `delete-class 2`                                                   |
-| **Delete Lesson**                 | `delete-lesson c\CLASS_INDEX l\LESSON_INDEX`                                                | `delete-lesson c\1 l\1`                                            |
-| **Delete Student**                | `delete-student STUDENT_INDEX`                                                              | `delete-student 3`                                                 |
-| **Display Statistics**            | `stats c\CLASS_INDEX s\STUDENT_INDEX`                                                       | `stats c\1 s\1`                                                    |
-| **Display Venue**                 | `display-venue c\CLASS_INDEX l\LESSON_INDEX`                                                | `display-venue c\1 l\1`                                            |
-| **Edit Attendance Record**        | `edit-attendance c\CLASS_INDEX l\LESSON_INDEX s\STUDENT_INDEX w\WEEK p\PARTICIPATION_SCORE` | `edit-attendance c\1 l\1 s\1 w\1 p\10`                             |
-| **Edit Class**                    | `edit-class CLASS_INDEX n\CLASS_NAME`                                                       | `edit-class 1 n\CS2103T Tutorial T10`                              |
-| **Edit Lesson**                   | `edit-lesson c\CLASS_INDEX l\LESSON_INDEX [d\DAY] [st\START_TIME] [et\END_TIME] [v\VENUE]`  | `edit-lesson c\1 l\1 d\TUESDAY st\10:00 et\12:00 v\COM2 #02-02`    |
-| **Edit Student**                  | `edit-student STUDENT_INDEX [n\NAME] [t\TELEGRAM_USERNAME] [e\EMAIL] [tag\TAG]…`            | `edit-student 2 n\James Lee e\jameslee@example.com`                |
+| **Add attendance record**         | `add-attendance c\CLASS_INDEX l\LESSON_INDEX s\STUDENT_INDEX w\WEEK p\PARTICIPATION_SCORE`  | `add-attendance c\1 l\1 s\1 w\1 p\1`                               |
+| **Add class**                     | `add-class n\CLASS_NAME`                                                                    | `add-class n\CS2103T Tutorial T10`                                 |
+| **Add lesson**                    | `add-lesson c\CLASS_INDEX d\DAY st\START_TIME et\END_TIME v\VENUE r\NO_OF_TIMES`            | `add-lesson c\1 d\MONDAY st\08:00 et\10:00 v\COM1 #01-01 r\13`     |
+| **Add student**                   | `add-student n\NAME t\TELEGRAM_USERNAME e\EMAIL [tag\TAG]…`                                 | `add-student n\John Doe t\johndoe e\johnd@example.com tag\student` |
+| **Add student to a class**        | `link s\STUDENT_INDEX c\CLASS_INDEX`                                                        | `link s\1 c\2`                                                     |
+| **Clear all classes**             | `clear-class`                                                                               |                                                                    |
+| **Clear all students**            | `clear-student`                                                                             |                                                                    |
+| **Delete attendance record**      | `delete-attendance c\CLASS_INDEX l\LESSON_INDEX s\STUDENT_INDEX w\WEEK`                     | `delete-attendance c\1 l\1 s\1 w\1`                                |
+| **Delete class**                  | `delete-class CLASS_INDEX`                                                                  | `delete-class 2`                                                   |
+| **Delete lesson**                 | `delete-lesson c\CLASS_INDEX l\LESSON_INDEX`                                                | `delete-lesson c\1 l\1`                                            |
+| **Delete student**                | `delete-student STUDENT_INDEX`                                                              | `delete-student 3`                                                 |
+| **Display statistics**            | `stats c\CLASS_INDEX s\STUDENT_INDEX`                                                       | `stats c\1 s\1`                                                    |
+| **Display venue**                 | `display-venue c\CLASS_INDEX l\LESSON_INDEX`                                                | `display-venue c\1 l\1`                                            |
+| **Edit attendance record**        | `edit-attendance c\CLASS_INDEX l\LESSON_INDEX s\STUDENT_INDEX w\WEEK p\PARTICIPATION_SCORE` | `edit-attendance c\1 l\1 s\1 w\1 p\10`                             |
+| **Edit class**                    | `edit-class CLASS_INDEX n\CLASS_NAME`                                                       | `edit-class 1 n\CS2103T Tutorial T10`                              |
+| **Edit lesson**                   | `edit-lesson c\CLASS_INDEX l\LESSON_INDEX [d\DAY] [st\START_TIME] [et\END_TIME] [v\VENUE]`  | `edit-lesson c\1 l\1 d\TUESDAY st\10:00 et\12:00 v\COM2 #02-02`    |
+| **Edit student**                  | `edit-student STUDENT_INDEX [n\NAME] [t\TELEGRAM_USERNAME] [e\EMAIL] [tag\TAG]…`            | `edit-student 2 n\James Lee e\jameslee@example.com`                |
 | **Exit**                          | `exit`                                                                                      |                                                                    |
-| **Find Attendance Record**        | `find-attendance c\CLASS_INDEX l\LESSON_INDEX s\STUDENT_INDEX w\WEEK`                       | `find-attendance c\1 l\1 s\1 w\1`                                  |
-| **Find Class**                    | `find-class KEYWORD [MORE_KEYWORDS]`                                                        | `find-class CS2103T`                                               |
-| **Find Student**                  | `find-student KEYWORD [MORE_KEYWORDS]`                                                      | `find-student James Jake`                                          |
+| **Find attendance record**        | `find-attendance c\CLASS_INDEX l\LESSON_INDEX s\STUDENT_INDEX w\WEEK`                       | `find-attendance c\1 l\1 s\1 w\1`                                  |
+| **Find class**                    | `find-class KEYWORD [MORE_KEYWORDS]`                                                        | `find-class CS2103T`                                               |
+| **Find student**                  | `find-student KEYWORD [MORE_KEYWORDS]`                                                      | `find-student James Jake`                                          |
 | **Help**                          | `help`                                                                                      |                                                                    |
-| **List All Classes**              | `list-class`                                                                                |                                                                    |
-| **List All Students**             | `list-student`                                                                              |                                                                    |
-| **List All Students And Classes** | `list`                                                                                      |                                                                    |
-| **List Students In A Class**      | `list-student c\CLASS_INDEX`                                                                | `list-student c\3`                                                 |
+| **List all classes**              | `list-class`                                                                                |                                                                    |
+| **List all students**             | `list-student`                                                                              |                                                                    |
+| **List all students and classes** | `list`                                                                                      |                                                                    |
+| **List students in a class**      | `list-student c\CLASS_INDEX`                                                                | `list-student c\3`                                                 |
 | **Redo**                          | `redo`                                                                                      |                                                                    |
-| **Remove Student From A Class**   | `unlink s\STUDENT_INDEX c\CLASS_INDEX`                                                      | `unlink s\1 c\2`                                                   |
+| **Remove student from a class**   | `unlink s\STUDENT_INDEX c\CLASS_INDEX`                                                      | `unlink s\1 c\2`                                                   |
 | **Reset**                         | `reset`                                                                                     |                                                                    |
 | **Undo**                          | `undo`                                                                                      |                                                                    |
-| **View Change History**           | `view-history`                                                                              |                                                                    |
+| **View change history**           | `view-history`                                                                              |                                                                    |
 
 The following subsections will elaborate on the specific details of each Tutor's Pet command.
 
@@ -521,8 +531,8 @@ If you entered the wrong class name or would like to change the name of a class,
 
 For example:
 1. Your module coordinator decides to allocate another class to you and you want to be able to distinguish between
-   the two classes. Hence you decide to edit the `CS2103T Tutorial` class to `CS2103T Tutorial T10`.
-1. You type the command `edit-class 1 n\CS2103T Tutorial T10` and press <kbd>Enter</kbd>.
+   the two classes. Hence you decide to edit the `CS2103T Tutorial` class to `CS2103T Tutorial T10`.<br>
+   You type the command `edit-class 1 n\CS2103T Tutorial T10` and press <kbd>Enter</kbd>.
 
    ![Edit class before](images/ugimages/EditClassBefore.png)
 
@@ -827,6 +837,7 @@ If you would like to record a new attendance for a student, you can make use of 
 For example:
 1. Your `CS2103T Tutorial` lesson in week 10 has just ended and you would like to give participation scores to the
    students. You enter the command `list-student c\1` to see the students in your `CS2103T Tutorial` class.
+
 1. You decide to start with Alex. Hence, you type in the command `add-attendance c\1 l\1 s\1 w\10 p\80` and
    press <kbd>Enter</kbd>.
 
@@ -885,7 +896,7 @@ Other examples:
 
 </div>
 
-#### Finding attendance record by indexes: `find-attendance`
+#### Finding an attendance record: `find-attendance`
 
 If you need to find out a specific student's attendance for a specific week, make use of this command.
 
@@ -895,6 +906,7 @@ If you need to find out a specific student's attendance for a specific week, mak
 For example:
 1. It is the end of a semester and it's time to key in your students' attendance into luminus. You enter the
    command `list-student c\1` to see the students in your `CS2103T Tutorial` class.
+
 1. You would like to find out if Alex attended week 1 lesson and hence you type in the command
    `find-attendance c\1 l\1 s\1 w\1` and press <kbd>Enter</kbd>.
 
@@ -911,9 +923,9 @@ Other Examples:
   Shows the attendance of the 1st student in the 1st lesson of the first class in the results of the find command.<br>
   Attendance shown is for week 10.
 
-* `list-student c\1`
-  `find-attendance c\1 l\1 s\2 w\5`
-  Shows the attendance of the 2nd student in the 1st lesson of the first class in the results of the list command.
+* `list-student c\1`<br>
+  `find-attendance c\1 l\1 s\2 w\5`<br>
+  Shows the attendance of the 2nd student in the 1st lesson of the first class in the results of the list command.<br>
   Attendance shown is for week 5.
 
 <div markdown="block" class="alert alert-info">
@@ -931,12 +943,12 @@ If you would like to delete a specific student's attendance from a lesson, you c
 * Deletes the attendance record at the specified `CLASS_INDEX` + `LESSON_INDEX` + `STUDENT_INDEX` + `WEEK`.
 
 For example:
-* You would like to delete Alice's attendance for the Thursday 10.00am to 11.00am lesson of CS2103T Tutorial
+* You would like to delete Alex's attendance for the Thursday 10.00am to 11.00am lesson of CS2103T Tutorial
 in Week 1. Hence, you type in the command `delete-attendance c\1 l\1 s\1 w\1` and press <kbd>Enter</kbd>.
 
   ![Delete attendance before](images/ugimages/DeleteAttendanceBefore.png)
 
-* Alice's attendance for week 1 has been deleted.
+* Alex's attendance for week 1 has been deleted.
 
   ![Delete attendance after](images/ugimages/DeleteAttendanceAfter.png)
 
@@ -950,7 +962,8 @@ Gives you an overall summary of a student's attendance and participation scores.
 For example:
 1. It is the end of the semester and time for you to grade your students overall class participation. You enter the
    command `list-student c\1` to see the students in your `CS2103T Tutorial` class.
-1. You would like to find out if Alex has been participative throughout the semester and hence you type in the
+
+1. You would like to find out if Alex has been participating actively throughout the semester and hence you type in the
    command `stats c\1 s\1` and press <kbd>Enter</kbd>.
 
    ![Display_stats before](images/ugimages/DisplayStatsBefore.png)
