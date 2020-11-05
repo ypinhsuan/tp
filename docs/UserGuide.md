@@ -318,12 +318,13 @@ You can use this command to reset Tutor's Pet and all data will be cleared.
 **Format**: `reset`
 
 For example:
-* It is the start of a new semester and you want to delete all students and classes.
-  You can type in the command `reset` and press <kbd>Enter</kbd>.
+1. It is the start of a new semester and you want to delete all students and classes.
+
+1. You can type in the command `reset` and press <kbd>Enter</kbd>.
 
   ![Reset before](images/ugimages/ResetBefore.png)
 
-* You can see that all students and classes have been deleted.
+1. You can see that all students and classes have been deleted.
 
   ![Reset after](images/ugimages/ResetAfter.png)
 
@@ -509,12 +510,14 @@ If you would like to see a list of all students in a particular class, make use 
 **Format**: `list-student c\CLASS_INDEX`
 
 For example:
-* You want to send an email to students in your `CS2103T Tutorial` and hence would want to see a list of students in
-this class. You type in the command `list-student c\1` and press <kbd>Enter</kbd>.
+1. You want to send an email to students in your `CS2100 Lab` and hence would want to see a list of students in
+   this class. 
+
+1. You type in the command `list-student c\2` and press <kbd>Enter</kbd>.
 
   ![List students in class before](images/ugimages/ListStudentsInClassBefore.png)
 
-* You can see that the 3 students in your `CS2103T Tutorial` have been listed.
+1. You can see that the 2 students in your `CS2100 Lab` have been listed.
 
   ![List students in class after](images/ugimages/ListStudentsInClassAfter.png)
 
@@ -631,7 +634,9 @@ If you would like to delete all the classes in Tutor's Pet, make use of this com
 
 For example:
 1. It is the start of a new semester. You would like to delete all information of all the classes you taught last
-   semester to start anew. You type the command `clear-class` and press <kbd>Enter</kbd>.
+   semester to start anew. 
+
+1. You type the command `clear-class` and press <kbd>Enter</kbd>.
 
    ![Clear class before](images/ugimages/ClearClassBefore.png)
 
@@ -646,12 +651,13 @@ You can use this command to see the entire list of students and classes.
 **Format**: `list`
 
 For example:
-* After finding the class CS2103T and student Alex, you wish to view all your students and classes.
-Hence, you can type in the command `list` and and press <kbd>Enter</kbd>.
+1. After finding the class CS2103T and student Alex, you wish to view all your students and classes.
+
+1. You can type in the command `list` and and press <kbd>Enter</kbd>.
 
   ![List before](images/ugimages/ListBefore.png)
 
-* Now you can see all your students and classes.
+1. Now you can see all your students and classes.
 
   ![List after](images/ugimages/ListAfter.png)
 
@@ -869,18 +875,20 @@ inputs your most recent command into the command box allowing you to type less!
 
 #### Editing an attendance record : `edit-attendance`
 
-You can use this command to edit the attendance of a student.
+You can use this command to edit the attendance and participation score of a student.
 
 **Format**: `edit-attendance c\CLASS_INDEX l\LESSON_INDEX s\STUDENT_INDEX w\WEEK p\PARTICIPATION_SCORE`
 * Edits the attendance record at the specified `CLASS_INDEX` + `LESSON_INDEX` + `STUDENT_INDEX` + `WEEK`.
 
 For example:
-* Alex is a student in your CS2103T class. After your lesson in week 1, you wish to give him a participation score of 45.
-  However, you accidentally gave him 35 instead. Hence, you can type in the command `edit-attendance c\1 l\1 s\1 w\1 p\45` and press <kbd>Enter</kbd>.
+1. Alex is a student in your CS2103T class. After your lesson in week 1, you wish to give him a participation score of 45.
+   However, you accidentally gave him 35 instead. 
+
+1. You can type in the command `edit-attendance c\1 l\1 s\1 w\1 p\45` and press <kbd>Enter</kbd>.
 
   ![Edit attendance before](images/ugimages/EditAttendanceBefore.png)
 
-* Now you have successfully edited Alex's participation score from 35 to 45 points.
+1. Now you have successfully edited Alex's participation score from 35 to 45 points.
 
   ![Edit attendance after](images/ugimages/EditAttendanceAfter.png)
 
