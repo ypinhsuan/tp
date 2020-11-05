@@ -734,14 +734,14 @@ If you would like to add a lesson to a class, you can make use of this command.
 * Adds a lesson at a specified `CLASS_INDEX`+ `DAY` + `START_TIME` + `END_TIME` + `VENUE` + `NO_OF_TIMES`.
 
 For example:
-* You receive news that you will be teaching `CS2103T Tutorial` on `Tuesday 10:00-11:00` at `COM2 #02-02` from week 1 to 13.
-Hence, you type in the command `add-lesson c\1 d\TUESDAY st\10:00 et\11:00 v\COM2 #02-02 r\13` and press <kbd>Enter</kbd>.
+1. You receive news that you will be teaching `CS2103T Tutorial` on `Tuesday 10:00-11:00` at `COM2 #02-02` from week 1 to 13.
+   Hence, you type in the command `add-lesson c\1 d\TUESDAY st\10:00 et\11:00 v\COM2 #02-02 r\13` and press <kbd>Enter</kbd>.
 
-  ![Add lesson before](images/ugimages/AddLessonBefore.png)
+   ![Add lesson before](images/ugimages/AddLessonBefore.png)
 
-* You have added a lesson to teach.
+1. You have added a lesson to teach.
 
-  ![Add lesson after](images/ugimages/AddLessonAfter.png)
+   ![Add lesson after](images/ugimages/AddLessonAfter.png)
 
 <div markdown="block" class="alert alert-info">
 
@@ -951,14 +951,14 @@ If you would like to delete a specific student's attendance from a lesson, you c
 * Deletes the attendance record at the specified `CLASS_INDEX` + `LESSON_INDEX` + `STUDENT_INDEX` + `WEEK`.
 
 For example:
-* You would like to delete Alex's attendance for the Thursday 10.00am to 11.00am lesson of CS2103T Tutorial
-in Week 1. Hence, you type in the command `delete-attendance c\1 l\1 s\1 w\1` and press <kbd>Enter</kbd>.
+1. You would like to delete Alex's attendance for the Thursday 10.00am to 11.00am lesson of CS2103T Tutorial
+   in Week 1. Hence, you type in the command `delete-attendance c\1 l\1 s\1 w\1` and press <kbd>Enter</kbd>.
 
-  ![Delete attendance before](images/ugimages/DeleteAttendanceBefore.png)
+   ![Delete attendance before](images/ugimages/DeleteAttendanceBefore.png)
 
-* Alex's attendance for week 1 has been deleted.
+1. Alex's attendance for week 1 has been deleted.
 
-  ![Delete attendance after](images/ugimages/DeleteAttendanceAfter.png)
+   ![Delete attendance after](images/ugimages/DeleteAttendanceAfter.png)
 
 #### Displaying attendance statistics : `stats`
 
