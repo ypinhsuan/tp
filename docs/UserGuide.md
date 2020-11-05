@@ -113,15 +113,19 @@ classes in Tutor's Pet.
     ![Class_section](images/ugimages/ClassPanel.png)
     <br>Figure 3. The class section.
 
+<a name="displayedClassList"/>
+
 * The **Students** section displays contains information about students in Tutor's Pet. Use the **`list-student`** command to view the list of all students in Tutor's Pet.
 
     ![Student_section](images/ugimages/StudentPanel.png)
     <br>Figure 4. The student section.
 
+<a name="displayedStudentList"/>
+
 The utility area consists of three tabs: **File**, **Theme**, **Help**.
 
-  ![Utility area](images/ugimages/UtilityArea.png)
-  <br>Figure 5. The utility area.
+   ![Utility area](images/ugimages/UtilityArea.png)
+   <br>Figure 5. The utility area.
 
 * The **File** tab consists of an exit button. To exit Tutor's Pet, click on the exit button. Alternatively, use the `exit` command to exit the application.
 
@@ -167,9 +171,9 @@ This section details the format of the commands available in Tutor's Pet. We wil
 
 * Indexes **must be a positive whole number** 1, 2, 3, …
 
-* The `STUDENT_INDEX` refers to the index number shown in the displayed student list.
+* The `STUDENT_INDEX` refers to the index number shown in the [displayed student list](#displayedStudentList).
 
-* The `CLASS_INDEX` refers to the index number shown in the displayed class list.
+* The `CLASS_INDEX` refers to the index number shown in the [displayed class list](#displayedClassList).
 
 * The `LESSON_INDEX` refers to the index number of a lesson shown in its class.
 
@@ -518,8 +522,8 @@ If you entered the wrong class name or would like to change the name of a class,
 
 For example:
 1. Your module coordinator decides to allocate another class to you and you want to be able to distinguish between
-   the two classes. Hence you decide to edit the `CS2103T Tutorial` class to `CS2103T Tutorial T10`.
-1. You type the command `edit-class 1 n\CS2103T Tutorial T10` and press <kbd>Enter</kbd>.
+   the two classes. Hence you decide to edit the `CS2103T Tutorial` class to `CS2103T Tutorial T10`.<br>
+   You type the command `edit-class 1 n\CS2103T Tutorial T10` and press <kbd>Enter</kbd>.
 
    ![Edit class before](images/ugimages/EditClassBefore.png)
 
@@ -824,6 +828,7 @@ If you would like to record a new attendance for a student, you can make use of 
 For example:
 1. Your `CS2103T Tutorial` lesson in week 10 has just ended and you would like to give participation scores to the
    students. You enter the command `list-student c\1` to see the students in your `CS2103T Tutorial` class.
+
 1. You decide to start with Alex. Hence, you type in the command `add-attendance c\1 l\1 s\1 w\10 p\80` and
    press <kbd>Enter</kbd>.
 
@@ -882,7 +887,7 @@ Other examples:
 
 </div>
 
-#### Finding attendance record by indexes: `find-attendance`
+#### Finding an attendance record: `find-attendance`
 
 If you need to find out a specific student's attendance for a specific week, make use of this command.
 
@@ -892,6 +897,7 @@ If you need to find out a specific student's attendance for a specific week, mak
 For example:
 1. It is the end of a semester and it's time to key in your students' attendance into luminus. You enter the
    command `list-student c\1` to see the students in your `CS2103T Tutorial` class.
+
 1. You would like to find out if Alex attended week 1 lesson and hence you type in the command
    `find-attendance c\1 l\1 s\1 w\1` and press <kbd>Enter</kbd>.
 
@@ -908,9 +914,9 @@ Other Examples:
   Shows the attendance of the 1st student in the 1st lesson of the first class in the results of the find command.<br>
   Attendance shown is for week 10.
 
-* `list-student c\1`
-  `find-attendance c\1 l\1 s\2 w\5`
-  Shows the attendance of the 2nd student in the 1st lesson of the first class in the results of the list command.
+* `list-student c\1`<br>
+  `find-attendance c\1 l\1 s\2 w\5`<br>
+  Shows the attendance of the 2nd student in the 1st lesson of the first class in the results of the list command.<br>
   Attendance shown is for week 5.
 
 <div markdown="block" class="alert alert-info">
@@ -947,7 +953,8 @@ Gives you an overall summary of a student's attendance and participation scores.
 For example:
 1. It is the end of the semester and time for you to grade your students overall class participation. You enter the
    command `list-student c\1` to see the students in your `CS2103T Tutorial` class.
-1. You would like to find out if Alex has been participative throughout the semester and hence you type in the
+
+1. You would like to find out if Alex has been participating actively throughout the semester and hence you type in the
    command `stats c\1 s\1` and press <kbd>Enter</kbd>.
 
    ![Display_stats before](images/ugimages/DisplayStatsBefore.png)
