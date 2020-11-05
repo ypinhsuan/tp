@@ -480,6 +480,7 @@ If you would like to add a new class, you can make use of this command.
 For example:
 1. You have just been allocated to teach a tutorial class, Tutorial 3, in the module CS1231.
    Hence, you decide to add this new tutorial class to your Tutor's Pet.
+
 1. You type `add-class n\CS1231 Tutorial 3` and press <kbd>Enter</kbd>.
 
    ![AddClassBefore](images/ugimages/AddClassBefore.png)
@@ -666,6 +667,7 @@ For example:
 1. You have a new student, David Li, who has transferred into one of your classes, CS2103T Tutorial.
    You have already [added](#adding-a-student--add-student) him to your Tutor's Pet, and want
    to add him to the class.
+
 1. You type `link s\4 c\1` and press <kbd>Enter</kbd>.
 
    ![Link before](images/ugimages/LinkBefore.png)
@@ -696,6 +698,7 @@ You can remove students from their classes using this command.
 
 For example:
 1. One of your students, Alex Yeoh, has transferred out of your class, CS2103T Tutorial, and you decide to remove him from the class.
+
 1. You type `unlink s\1 c\1` and press <kbd>Enter</kbd>.
 
    ![Unlink before](images/ugimages/UnlinkAfter.png)
@@ -992,5 +995,23 @@ For example:
 ## Glossary
 
 This glossary provides definitions for the special terms used in this user guide.
+
+**Attendance Record:** The attendance and participation score of a student in a particular week of a particular lesson.
+
+**Case-insensitive:** Uppercase and lowercase letters are treated in the same way.
+
+**Class:** A group of students that attend the same lessons.
+
+**Command:** A text input entered by the user as an instruction for Tutor's Pet.
+
+**Index:** The number beside the corresponding entry in the displayed lists.
+
+**Lesson:** The timeslot, venue, and number of times a lesson takes place.
+
+**Tag:** A phrase that describes a student.
+
+**Telegram:** A popular social messaging application.
+
+**Venue:** The location or an online meeting room link where a lesson is held.
 
 --------------------------------------------------------------------------------------------------------------------
