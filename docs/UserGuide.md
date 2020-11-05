@@ -28,7 +28,7 @@ includes a [quick-start](#quick-start) section that helps you get started.
 
 The guide uses the following features to make it easier for you to navigate around:
 
-* Words that look like [this](#using-this-guide) can be clicked to jump to the related section.
+* Words that look like [this](#about) can be clicked to jump to the related section.
 * Words that look like `this` refer to keywords used as part of commands or responses from your Tutor's Pet.
 * Words that look like <kbd>this</kbd> refer to keyboard keys that you can press.
 
@@ -82,6 +82,7 @@ There are three main areas in Tutor's Pet:
 
 The command box is the area for you to enter your commands. The result of each command would be shown in the result
 display box, which is located immediately below the command box.
+
 <br/>
 
    ![Command box and result display box](images/ugimages/CommandAndDisplayBox.png)
@@ -104,7 +105,7 @@ display box, which is located immediately below the command box.
 
    * **`exit`** : Exits the app.
 
-* Refer to the [Features](#features) below for details of each command.
+* Refer to the [Commands](#commands) section below for details of each command.
 
 The main viewing area consists of two sections: **Classes** and **Students**.
 
@@ -112,35 +113,31 @@ The main viewing area consists of two sections: **Classes** and **Students**.
 
 * The **Classes** section contains information about classes and lessons in Tutor's Pet. Use the **`list-class`** command to view the list of all
 classes in Tutor's Pet.
-<br/>
 
-    ![Class_section](images/ugimages/ClassPanel.png)
+  ![Class_section](images/ugimages/ClassPanel.png)
 
 <br/>
 
 <a name="displayed-student-list"/>
 
-* The **Students** section displays contains information about students in Tutor's Pet. Use the **`list-student`** command to view the list of all students in Tutor's Pet.
-<br/>
+* The **Students** section contains information about students in Tutor's Pet. Use the **`list-student`** command to view the list of all students in Tutor's Pet.
 
-    ![Student_section](images/ugimages/StudentPanel.png)
+  ![Student_section](images/ugimages/StudentPanel.png)
 
 <br/>
 
 The utility area consists of three tabs: **File**, **Theme**, **Help**.
-<br/>
 
-   ![Utility area](images/ugimages/UtilityArea.png)
+  ![Utility area](images/ugimages/UtilityArea.png)
 
 <br/>
 
 * The **File** tab consists of an exit button. To exit Tutor's Pet, click on the exit button. Alternatively, use the `exit` command to exit the application.
 
 * The **Theme** tab consist of 3 different themes: **Light**, **Alternate** and **Dark**. To change the theme of
- your Tutor's Pet, click on one of these buttons.
-<br/>
+  your Tutor's Pet, click on one of these buttons.
 
-     ![Theme tab](images/ugimages/ThemeTab.png)
+  ![Theme tab](images/ugimages/ThemeTab.png)
 
 <br/>
 
@@ -272,6 +269,14 @@ If you decide that you did not need to undo a command, instead of typing out the
 this command to redo the changes.
 
 **Format** : `redo`
+
+For example:
+
+1. You want to [undo](#undoing-previous-changes--undo) the last four changes in your Tutor's pet, however you accidentally undid the last five changes instead.
+
+1. You type `redo` and press <kbd>Enter</kbd>.
+
+1. The accidentally undone change has been restored.
 
 #### Viewing change history : `view-history`
 
@@ -480,6 +485,7 @@ If you would like to add a new class, you can make use of this command.
 For example:
 1. You have just been allocated to teach a tutorial class, Tutorial 3, in the module CS1231.
    Hence, you decide to add this new tutorial class to your Tutor's Pet.
+
 1. You type `add-class n\CS1231 Tutorial 3` and press <kbd>Enter</kbd>.
 
    ![AddClassBefore](images/ugimages/AddClassBefore.png)
@@ -527,7 +533,7 @@ Other examples:
 If you entered the wrong class name or would like to change the name of a class, you can make use of this command.
 
 **Format**: `edit-class CLASS_INDEX n\CLASS_NAME`
-* Edits the class at the specified `INDEX`.
+* Edits the class at the specified `CLASS_INDEX`.
 
 For example:
 1. Your module coordinator decides to allocate another class to you and you want to be able to distinguish between
@@ -555,7 +561,7 @@ Other examples:
 
 <div markdown="block" class="alert alert-primary">
 
-:bulb: **Tip:** Make use of the find-class command to filter the displayed student class list to your
+:bulb: **Tip:** Make use of the find-class command to filter the displayed class list to your
 desired class. You can now type in index 1 directly to edit the name of that class.
 
 </div>
@@ -666,6 +672,7 @@ For example:
 1. You have a new student, David Li, who has transferred into one of your classes, CS2103T Tutorial.
    You have already [added](#adding-a-student--add-student) him to your Tutor's Pet, and want
    to add him to the class.
+
 1. You type `link s\4 c\1` and press <kbd>Enter</kbd>.
 
    ![Link before](images/ugimages/LinkBefore.png)
@@ -696,6 +703,7 @@ You can remove students from their classes using this command.
 
 For example:
 1. One of your students, Alex Yeoh, has transferred out of your class, CS2103T Tutorial, and you decide to remove him from the class.
+
 1. You type `unlink s\1 c\1` and press <kbd>Enter</kbd>.
 
    ![Unlink before](images/ugimages/UnlinkAfter.png)
@@ -811,7 +819,7 @@ the `undo` command. However, you cannot `undo` once you exit the application!
 
 #### Displaying lesson venue : `display-venue`
 
-Gives you the venue of a lesson.
+If you would like to find out the venue for a specific lesson, make use of this command.
 
 **Format**: `display-venue c\CLASS_INDEX l\LESSON_INDEX`
 * Gives the venue of the lesson specified at `CLASS_INDEX` + `LESSON_INDEX`.
@@ -992,5 +1000,23 @@ For example:
 ## Glossary
 
 This glossary provides definitions for the special terms used in this user guide.
+
+**Attendance Record:** The attendance and participation score of a student in a particular week of a particular lesson.
+
+**Case-insensitive:** The treatment of uppercase and lowercase letters in the same way.
+
+**Class:** A group of students that attend the same lessons.
+
+**Command:** The text typed in by the user as an instruction for Tutor's Pet.
+
+**Index:** The number beside the corresponding entry in a list.
+
+**Lesson:** The timeslot, venue, and number of times a lesson takes place.
+
+**Tag:** A word or phrase that labels a student.
+
+**Telegram:** A popular social messaging application.
+
+**Venue:** The location or an online meeting room link where a lesson is held.
 
 --------------------------------------------------------------------------------------------------------------------
