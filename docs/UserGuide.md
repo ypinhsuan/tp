@@ -221,7 +221,7 @@ This section provides an overview of all commands in Tutor's Pet and illustrates
 | **Help**                          | `help`                                                                                      |                                                                    |
 | **List all classes**              | `list-class`                                                                                |                                                                    |
 | **List all students**             | `list-student`                                                                              |                                                                    |
-| **List all students And classes** | `list`                                                                                      |                                                                    |
+| **List all students and classes** | `list`                                                                                      |                                                                    |
 | **List students in a class**      | `list-student c\CLASS_INDEX`                                                                | `list-student c\3`                                                 |
 | **Redo**                          | `redo`                                                                                      |                                                                    |
 | **Remove student from a class**   | `unlink s\STUDENT_INDEX c\CLASS_INDEX`                                                      | `unlink s\1 c\2`                                                   |
