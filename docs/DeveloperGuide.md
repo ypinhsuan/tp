@@ -1545,7 +1545,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all classes using the `list-class` command.
 
-   1. Test case: <br>
+   1. Test case: `add-lesson c\1 d\Tuesday st\08:00 et\10:00 v\COM1-0211 r\13`<br>
       Expected: Lesson added. Details of the added lesson shown in the status message.
 
    1. Test case: `add-lesson c\1 d\Tuesday st\08:00 et\10:00 v\COM1-0211 r\0`<br>
