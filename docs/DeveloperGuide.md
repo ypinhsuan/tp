@@ -1456,7 +1456,7 @@ testers are expected to do more *exploratory* testing.
 
 #### Adding a student
 
-1. Adding a student.
+1. Adding a student
 
    1. Prerequisites: None.
 
@@ -1473,7 +1473,7 @@ testers are expected to do more *exploratory* testing.
 
 #### Editing a student
 
-1. Editing a student.
+1. Editing a student
 
    1. Prerequisites: There are at least 2 student currently displayed.
 
@@ -1490,7 +1490,7 @@ testers are expected to do more *exploratory* testing.
 
 #### Deleting a student
 
-1. Deleting a student while all students are being shown.
+1. Deleting a student while all students are being shown
 
    1. Prerequisites: List all students using the `list-student` command. Multiple students in the list.
 
@@ -1506,7 +1506,7 @@ testers are expected to do more *exploratory* testing.
 
 #### Finding a student
 
-1. Finding a student.
+1. Finding a student
 
    1. Prerequisites: Student names that contain `Alex` and `Yu`. The sample data of Tutor's Pet contains such names and can be used.
 
@@ -1516,7 +1516,8 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `find-student alex yu` \
       Expected: All students whose name contains `alex` or `yu` (case-insensitive) should be displayed.
 
-   1. Incorrect find command to try: `find-student`. \
+   1. Other incorrect commands to try:
+      * `find-student`. \
       Expected: The displayed student list does not get updated. Error details shown in the status message.
 
 ### Managing Classes

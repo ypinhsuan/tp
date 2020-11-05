@@ -395,7 +395,7 @@ If you would like to change a student's particulars, use this command.
 For example:
 1. `Charlotte Oliveiro` gave you the wrong email address on the first day of class. You need to replace her email address.
 
-1. Type in `edit-student 3 e\charlotteolive@example.com` and press <kbd>Enter</kbd>.
+1. You type `edit-student 3 e\charlotteolive@example.com` and press <kbd>Enter</kbd>.
 
     ![EditStudentBefore](images/ugimages/EditStudentBefore.png)
 
@@ -429,7 +429,7 @@ For example:
 1. `Roy` requested for supplementary notes in class today.
 You want to email him these notes.
 
-1. Type `find-student roy` and press <kbd>Enter</kbd>.
+1. You type `find-student roy` and press <kbd>Enter</kbd>.
 
     ![FindStudentBefore](images/ugimages/FindStudentBefore.png)
 
@@ -766,7 +766,7 @@ If you entered wrong details pertaining to your lesson and would like to change 
 For example:
 1. You made an error while entering the `CS2103T Tutorial` lesson. It should be `Tuesday` and not `Thursday`.
 
-1. Type the command `edit-lesson c\1 l\1 d\Tuesday` and press <kbd>Enter</kbd>.
+1. You type the command `edit-lesson c\1 l\1 d\Tuesday` and press <kbd>Enter</kbd>.
 
     ![Edit lesson before](images/ugimages/EditLessonBefore.png)
 
