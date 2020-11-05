@@ -1003,17 +1003,17 @@ This glossary provides definitions for the special terms used in this user guide
 
 **Attendance Record:** The attendance and participation score of a student in a particular week of a particular lesson.
 
-**Case-insensitive:** Uppercase and lowercase letters are treated in the same way.
+**Case-insensitive:** The treatment of uppercase and lowercase letters in the same way.
 
 **Class:** A group of students that attend the same lessons.
 
-**Command:** A text input entered by the user as an instruction for Tutor's Pet.
+**Command:** The text typed in by the user as an instruction for Tutor's Pet.
 
 **Index:** The number beside the corresponding entry in a list.
 
 **Lesson:** The timeslot, venue, and number of times a lesson takes place.
 
-**Tag:** A phrase that describes a student.
+**Tag:** A word or phrase that labels a student.
 
 **Telegram:** A popular social messaging application.
 
