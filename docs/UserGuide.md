@@ -67,7 +67,6 @@ Here are a few steps to get you started on Tutor's Pet:
    seconds.<br>
 
    ![Ui](images/Ui.png)
-   Figure 1. Tutor's Pet application.
 
 ### Using Tutor's Pet
 
@@ -83,9 +82,9 @@ There are three main areas in Tutor's Pet:
 
 The command box is the area for you to enter your commands. The result of each command would be shown in the result
 display box, which is located immediately below the command box.
-
+<br/>
    ![Command box and result display box](images/ugimages/CommandAndDisplayBox.png)
-   <br>Figure 2. The command box and result display box.
+<br/>
 
 * Type a command in the command box and press <kbd>Enter</kbd> to execute it.<br>
    e.g. Type **`help`** and press <kbd>Enter</kbd> to open the help window.<br>
@@ -107,33 +106,33 @@ display box, which is located immediately below the command box.
 
 The main viewing area consists of two sections: **Classes** and **Students**.
 
-<a name="displayedClassList"/>
+<a name="displayed-class-list"/>
 
 * The **Classes** section contains information about classes and lessons in Tutor's Pet. Use the **`list-class`** command to view the list of all
 classes in Tutor's Pet.
-
+<br/>
     ![Class_section](images/ugimages/ClassPanel.png)
-    <br>Figure 3. The class section.
+<br/>
 
-<a name="displayedStudentList"/>
+<a name="displayed-student-list"/>
 
 * The **Students** section displays contains information about students in Tutor's Pet. Use the **`list-student`** command to view the list of all students in Tutor's Pet.
-
+<br/>
     ![Student_section](images/ugimages/StudentPanel.png)
-    <br>Figure 4. The student section.
+<br/>
 
 The utility area consists of three tabs: **File**, **Theme**, **Help**.
-
+<br/>
    ![Utility area](images/ugimages/UtilityArea.png)
-   <br>Figure 5. The utility area.
+<br/>
 
 * The **File** tab consists of an exit button. To exit Tutor's Pet, click on the exit button. Alternatively, use the `exit` command to exit the application.
 
 * The **Theme** tab consist of 3 different themes: **Light**, **Alternate** and **Dark**. To change the theme of
  your Tutor's Pet, click on one of these buttons.
-
+<br/>
      ![Theme tab](images/ugimages/ThemeTab.png)
-     <br>Figure 6. The theme tab.
+<br/>
 
 * The **Help** tab consists of a help button. If you require any assistance, click on the help button, copy the link
  given and paste it into any web browser. Alternatively, press <kbd>F1</kbd> to bring up the help window.
@@ -171,9 +170,9 @@ This section details the format of the commands available in Tutor's Pet. We wil
 
 * Indexes **must be a positive whole number** 1, 2, 3, …
 
-* The `STUDENT_INDEX` refers to the index number shown in the [displayed student list](#displayedStudentList).
+* The `STUDENT_INDEX` refers to the index number shown in the [displayed student list](#displayed-student-list).
 
-* The `CLASS_INDEX` refers to the index number shown in the [displayed class list](#displayedClassList).
+* The `CLASS_INDEX` refers to the index number shown in the [displayed class list](#displayed-class-list).
 
 * The `LESSON_INDEX` refers to the index number of a lesson shown in its class.
 
