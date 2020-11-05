@@ -21,19 +21,19 @@ My code contribution can be found [here](https://nus-cs2103-ay2021s1.github.io/t
     Consideration was given to:
       * the time complexity of operations in the data structures,
       * how the attendance records are to be retrieved and updated.
-      
+
 * Add `edit-lesson` command. [#143](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/143)
     * **What it does**: Allows the editing of lessons.
     * **Highlights**: There are multiple fields that can be edited in the lesson model.
       There are also fields that should not be edited, and effort was made to ensure that these fields are re-instantiated properly.
-      
+
 * Implement the toggle theme feature. [#109](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/109)
     * **What it does**: Allows users to switch between light, alternate and dark mode.
-    * **Highlights**: There was a need to understand the css stylesheets to abstract out the common components and differentiate the colors between themes. 
+    * **Highlights**: There was a need to understand the css stylesheets to abstract out the common components and differentiate the colors between themes.
       Analysis of the color choices was also required to design aesthetically pleasing themes.
     * **Extension**: I made a separate PR to ensure that the themes are saved into the `preferences.json` file upon exit of the application.
       [#195](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/195)
-      
+
 ## Minor Enhancements
 * Remove initial address field. [#20](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/20)
 * Refactor phone to telegram field. [#53](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/53)
@@ -54,7 +54,7 @@ My code contribution can be found [here](https://nus-cs2103-ay2021s1.github.io/t
   * Add implementation details for Attendance Model.
   * Add table of user stories.
   * Include use cases: UC03, UC05, UC12.
-  
+
 * PRs reviewed (with non trivial comments):
   [#75](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/75),
   [#95](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/95),
