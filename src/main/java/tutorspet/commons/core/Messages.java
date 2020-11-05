@@ -20,10 +20,10 @@ public class Messages {
     public static final String MESSAGE_DUPLICATE_LESSON = "This lesson already exists.";
     public static final String MESSAGE_OVERLAP_LESSON = "This lesson overlaps with another lesson in the same class.";
     public static final String MESSAGE_INVALID_LESSON_DISPLAYED_INDEX = "The lesson index provided is invalid.";
-    public static final String MESSAGE_NO_LESSONS_IN_MODULE_CLASS = "There is no lesson in this class.";
+    public static final String MESSAGE_NO_LESSONS_IN_MODULE_CLASS = "There are no lessons in this class.";
 
-    public static final String MESSAGE_EXISTING_LINK = "The student already exists in this class.";
-    public static final String MESSAGE_MISSING_LINK = "The student does not exist in this class.";
+    public static final String MESSAGE_EXISTING_LINK = "This student already exists in this class.";
+    public static final String MESSAGE_MISSING_LINK = "This student does not exist in this class.";
 
     public static final String MESSAGE_INVALID_WEEK = "The week provided is invalid.";
 
