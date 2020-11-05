@@ -53,7 +53,7 @@ The guide uses the following features to make it easier for you to navigate arou
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick Start
-This section provides information on how to quickly start using Tutor's Pet. 
+This section provides information on how to quickly start using Tutor's Pet.
 
 ### Installing Tutor's Pet
 
@@ -394,7 +394,7 @@ If you would like to change a student's particulars, use this command.
 
 For example:
 1. `Charlotte Oliveiro` gave you the wrong email address on the first day of class. You need to replace her email address.
-  
+
 1. Type in `edit-student 3 e\charlotteolive@example.com` and press <kbd>Enter</kbd>.
 
     ![EditStudentBefore](images/ugimages/EditStudentBefore.png)

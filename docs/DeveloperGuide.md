@@ -1466,7 +1466,7 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `add-student n\Eddie Davis t\davis_ed e\eddie@basie.com` \
      Expected: The student with the fields entered should be added into the displayed student list. There should be no tags rendered.
 
-   1. Other incorrect commands to try: 
+   1. Other incorrect commands to try:
       * `add-student`
       * `add-student n\Hendrix`
       Expected: No student is added. Error details shown in the status message.
@@ -1508,7 +1508,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Finding a student.
 
-   1. Prerequisites: Student names that contain `Alex` and `Yu`. The    sample data of Tutor's Pet contains such names and can be used. 
+   1. Prerequisites: Student names that contain `Alex` and `Yu`. The sample data of Tutor's Pet contains such names and can be used.
 
    1. Test case: `find-student alex` \
       Expected: All students whose name contains `alex` (case-insensitive) should be displayed.
@@ -1517,7 +1517,7 @@ testers are expected to do more *exploratory* testing.
       Expected: All students whose name contains `alex` or `yu` (case-insensitive) should be displayed.
 
    1. Incorrect find command to try: `find-student`. \
-      Expected: The displayed student list does not get updated. Error details shown in the status message. 
+      Expected: The displayed student list does not get updated. Error details shown in the status message.
 
 ### Managing Classes
 
