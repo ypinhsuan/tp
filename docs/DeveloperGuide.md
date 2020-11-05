@@ -1517,7 +1517,7 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `list-student c\3` \
       Expected: No student is displayed.
   
-   1. Other incorrect list student command to try: `list-student c\x` (where x is larger than the size of class list) \
+   1. Other incorrect list student commands to try: `list-student c\x` (where x is larger than the size of class list) \
       Expected: No student is listed. Error details shown in the status message.
 
 #### Editing a class
@@ -1624,7 +1624,7 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `edit-attendance c\1 l\1 s\1 w\10 p\70`<br>
       Expected: Attendance not edited. Reason stated in the status message.
 
-   1. Other incorrect add commands to try: `edit-attendance c\1 l\1 s\1 w\3 p\101`, `add-attendance c\x l\1 s\1 w\3
+   1. Other incorrect edit commands to try: `edit-attendance c\1 l\1 s\1 w\3 p\101`, `edit-attendance c\x l\1 s\1 w\3
       p\70` (where x is larger than the size of class list)<br>
       Expected: Attendance not edited. Error details shown in the status message.
 
