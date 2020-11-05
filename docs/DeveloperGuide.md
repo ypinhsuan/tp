@@ -1454,9 +1454,43 @@ testers are expected to do more *exploratory* testing.
 
 ### Managing Students
 
+#### Adding a student
+
+1. Adding a student.
+
+   1. Prerequisites: None.
+
+   1. Test case: `add-student n\Nancy Drew t\nancydrew e\nancy@drew.com tag\A star tag\student` \
+      Expected: The student with the fields entered should be added into the displayed student list. The tags `A star` and `student` should be rendered.
+
+   1. Test case: `add-student n\Eddie Davis t\davis_ed e\eddie@basie.com` \
+     Expected: The student with the fields entered should be added into the displayed student list. There should be no tags rendered.
+
+   1. Other incorrect commands to try: 
+      * `add-student`
+      * `add-student n\Hendrix`
+      Expected: No student is added. Error details shown in the status message.
+
+#### Editing a student
+
+1. Editing a student.
+
+   1. Prerequisites: There are at least 2 student currently displayed.
+
+   1. Test case: `edit-student 1 n\Jim Hetfield` \
+      Expected: The name of the first student is changed to `Jim Hetfield`.
+
+   1. Test case: `edit-student 2 tag\` \
+      Expected: All tags of the second student are deleted.
+
+   1. Other incorrect commands to try:
+      * `edit-student`
+      * `edit-student 0 n\Fiona Orange`
+      Expected: No student is edited. Error details shown in the status message.
+
 #### Deleting a student
 
-1. Deleting a student while all students are being shown
+1. Deleting a student while all students are being shown.
 
    1. Prerequisites: List all students using the `list-student` command. Multiple students in the list.
 
@@ -1469,6 +1503,21 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete-student`, `delete-student x` (where x is larger than the
       size of student list)<br>
       Expected: No student is deleted. Error details shown in the status message.
+
+#### Finding a student
+
+1. Finding a student.
+
+   1. Prerequisites: Student names that contain `Alex` and `Yu`. The    sample data of Tutor's Pet contains such names and can be used. 
+
+   1. Test case: `find-student alex` \
+      Expected: All students whose name contains `alex` (case-insensitive) should be displayed.
+
+   1. Test case: `find-student alex yu` \
+      Expected: All students whose name contains `alex` or `yu` (case-insensitive) should be displayed.
+
+   1. Incorrect find command to try: `find-student`. \
+      Expected: The displayed student list does not get updated. Error details shown in the status message. 
 
 ### Managing Classes
 
@@ -1539,9 +1588,28 @@ testers are expected to do more *exploratory* testing.
 
 ### Managing Lessons
 
+#### Editing a lesson
+
+1. Editing a lesson while all lessons are displayed
+
+   1. Prerequisites: List all classes using the `list-class` command.
+   The first class contains at least two lessons.
+
+   1. Test case: `edit-lesson c\1 l\1 d\sunday et\23:00` \
+     Expected: The day and end time of the first lesson in the first class will be changed to Sunday and 23:00 respectively.
+
+   1. Test case: `edit-lesson c\1 l\1 st\01:00` \
+     Expected: The start time of the second lesson in the first class will be changed to 01:00.
+
+   1. Other incorrect edit commands to try:
+      * `edit-lesson c\0 l\3`
+      * `edit-lesson c\1 l\10000`
+      * `edit-lesson c\1 l\1 st\13:00 et\11:00` \
+      Expected: No lesson is edited. Error details shown in the status message.
+
 #### Deleting a lesson
 
-1. Deleting a lesson while all lessons are being shown
+1. Deleting a lesson while all lessons are displayed
 
    1. Prerequisites: List all classes using the `list-class` command. The first class contains at least one lesson.
 
