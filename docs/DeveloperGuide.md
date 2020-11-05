@@ -1589,23 +1589,37 @@ testers are expected to do more *exploratory* testing.
 
 ### Managing Lessons
 
+#### Adding a lesson
+
+1. Adding a lesson while all lessons are displayed
+
+   1. Prerequisites: List all classes using the `list-class` command.
+
+   1. Test case: `add-lesson c\1 d\Tuesday st\08:00 et\10:00 v\COM1-0211 r\13`<br>
+      Expected: Lesson added. Details of the added lesson shown in the status message.
+
+   1. Test case: `add-lesson c\1 d\Tuesday st\08:00 et\10:00 v\COM1-0211 r\0`<br>
+      Expected: No lesson is added. Error details shown in the status message.
+
+   1. Other incorrect add commands to try: `add-lesson c\1 d\TUESDAY st\08:00 et\10:00 v\COM1-0211 r\13`,
+      `add-lesson c\1 d\Tuesday st\10:00 et\09:00 v\COM1-0211 r\13`<br>
+      Expected: No lesson is added. Error details shown in the status message.
+
 #### Editing a lesson
 
 1. Editing a lesson while all lessons are displayed
 
    1. Prerequisites: List all classes using the `list-class` command.
-   The first class contains at least two lessons.
+      The first class contains at least two lessons.
 
-   1. Test case: `edit-lesson c\1 l\1 d\sunday et\23:00` \
+   1. Test case: `edit-lesson c\1 l\1 d\sunday et\23:00` <br>
      Expected: The day and end time of the first lesson in the first class will be changed to Sunday and 23:00 respectively.
 
-   1. Test case: `edit-lesson c\1 l\1 st\01:00` \
+   1. Test case: `edit-lesson c\1 l\1 st\01:00` <br>
      Expected: The start time of the second lesson in the first class will be changed to 01:00.
 
-   1. Other incorrect edit commands to try:
-      * `edit-lesson c\0 l\3`
-      * `edit-lesson c\1 l\10000`
-      * `edit-lesson c\1 l\1 st\13:00 et\11:00` \
+   1. Other incorrect edit commands to try: `edit-lesson c\0 l\3`, `edit-lesson c\1 l\10000`,
+      `edit-lesson c\1 l\1 st\13:00 et\11:00` <br>
       Expected: No lesson is edited. Error details shown in the status message.
 
 #### Deleting a lesson
@@ -1677,6 +1691,22 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect find commands to try: `find-attendance c\1 l\1 s\4 w\54`, `find-attendance c\x l\1 s\4 w\54`
       (where x is larger than the size of class list)<br>
       Expected: Attendance not found. Error details shown in the status message.
+
+#### Deleting an attendance
+
+1. Delete an attendance
+
+   1. Prerequisites: List all classes and students using the `list` command. Uses default tutor's pet data.
+
+   1. Test case: `delete-attendance c\1 l\1 s\1 w\1`<br>
+      Expected: Attendance deleted. Attendance details of the student shown in the status message.
+
+   1. Test case: `delete-attendance c\1 l\1 s\1 w\3`<br>
+      Expected: No attendance deleted. Reason stated in the status message.
+
+   1. Other incorrect add commands to try: `delete-attendance c\1 l\1 s\1 w\54`, `delete-attendance c\x l\1 s\1 w\1`
+      (where x is larger than the size of class list)<br>
+      Expected: No attendance deleted. Error details shown in the status message.
 
 #### Displaying a student's statistics
 
