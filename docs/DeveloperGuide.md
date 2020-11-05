@@ -1539,6 +1539,22 @@ testers are expected to do more *exploratory* testing.
 
 ### Managing Lessons
 
+#### Adding a lesson
+
+1. Adding a lesson
+
+   1. Prerequisites: List all classes using the `list-class` command.
+
+   1. Test case: <br>
+      Expected: Lesson added. Details of the added lesson shown in the status message.
+
+   1. Test case: `add-lesson c\1 d\Tuesday st\08:00 et\10:00 v\COM1-0211 r\0`<br>
+      Expected: No lesson is added. Error details shown in the status message.
+
+   1. Other incorrect add commands to try: `add-lesson c\1 d\TUESDAY st\08:00 et\10:00 v\COM1-0211 r\13`,
+      `add-lesson c\1 d\Tuesday st\10:00 et\09:00 v\COM1-0211 r\13`<br>
+      Expected: No lesson is added. Error details shown in the status message.
+
 #### Deleting a lesson
 
 1. Deleting a lesson while all lessons are being shown
@@ -1608,6 +1624,22 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect find commands to try: `find-attendance c\1 l\1 s\4 w\54`, `find-attendance c\x l\1 s\4 w\54`
       (where x is larger than the size of class list)<br>
       Expected: Attendance not found. Error details shown in the status message.
+
+#### Deleting an attendance
+
+1. Delete an attendance
+
+   1. Prerequisites: List all classes and students using the `list` command. Uses default tutor's pet data.
+
+   1. Test case: `delete-attendance c\1 l\1 s\1 w\1`<br>
+      Expected: Attendance deleted. Attendance details of the student shown in the status message.
+
+   1. Test case: `delete-attendance c\1 l\1 s\1 w\3`<br>
+      Expected: No attendance deleted. Reason stated in the status message.
+
+   1. Other incorrect add commands to try: `delete-attendance c\1 l\1 s\1 w\54`, `delete-attendance c\x l\1 s\1 w\1`
+      (where x is larger than the size of class list)<br>
+      Expected: No attendance deleted. Error details shown in the status message.
 
 #### Displaying a student's statistics
 
