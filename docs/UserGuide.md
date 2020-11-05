@@ -273,6 +273,14 @@ this command to redo the changes.
 
 **Format** : `redo`
 
+For example:
+
+1. You want to [undo](#undoing-previous-changes--undo) the last four changes in your Tutor's pet, however you accidentally undid the last five changes instead.
+
+1. You type `redo` and press <kbd>Enter</kbd>.
+
+1. The accidentally undone change has been restored.
+
 #### Viewing change history : `view-history`
 
 You can use this command to see a list of changes that can be undone and redone.
