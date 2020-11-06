@@ -85,9 +85,7 @@ There are three main areas in Tutor's Pet:
 The command box is the area for you to enter your commands. The result of each command would be shown in the result
 display box, which is located immediately below the command box.
 
-<br/>
-
-   ![Command box and result display box](images/ugimages/CommandAndDisplayBox.png)
+![Command box and result display box](images/ugimages/CommandAndDisplayBox.png)
 
 <br/>
 
@@ -261,7 +259,7 @@ For example:
 
 <div markdown="block" class="alert alert-primary">
 
-:bulb: **Tip:** To view a list of changes that can be undone, use the [`view-history` command](#view-change-history--view-history).
+:bulb: **Tip:** To view a list of changes that can be undone, use the [`view-history` command](#viewing-change-history--view-history).
 
 </div>
 
