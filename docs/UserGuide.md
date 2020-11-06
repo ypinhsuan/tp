@@ -610,8 +610,8 @@ Other examples:
 
 * Only full words will be matched e.g. `CS` will not match `CS2100`.
 
-* Students matching at least one keyword will be returned (i.e. **OR** search).
-    e.g. `CS2103T lab` will return `CS2103T tut`, `CS2100 lab`.
+* Classes matching at least one keyword will be returned.
+  e.g. `CS2103T lab` will return both `CS2103T tut` and `CS2100 lab`.
 
 </div>
 
