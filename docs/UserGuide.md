@@ -53,6 +53,8 @@ The guide uses the following features to make it easier for you to navigate arou
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick Start
+This section provides information on how to quickly start using Tutor's Pet.
+
 ### Installing Tutor's Pet
 
 Here are a few steps to get you started on Tutor's Pet:
@@ -364,14 +366,14 @@ If you would like to add a student to Tutor's Pet, use this command.
 **Format**: `add-student n\NAME t\TELEGRAM_USERNAME e\EMAIL [tag\TAG]…​`
 
 For example:
-* You would like to add a new student, `Joel Lee` to Tutor's Pet.
+1. You would like to add a new student, `Joel Lee` to Tutor's Pet.
   Type in `add-student n\Joel Lee t\joeleee e\jlee@example.com`
 
-  ![AddStudentBefore](images/ugimages/AddStudentBefore.png)
+    ![AddStudentBefore](images/ugimages/AddStudentBefore.png)
 
-* Scrolling down the list of students, you will see that `Joel Lee` has been added to Tutor's Pet.
+1. Scrolling down the list of students, you will see that `Joel Lee` has been added to Tutor's Pet.
 
-  ![AddStudentAfter](images/ugimages/AddStudentAfter.png)
+    ![AddStudentAfter](images/ugimages/AddStudentAfter.png)
 
 Other examples:
 * `add-student n\Betsy Crowe t\betsycrowe e\betsycrowe@example.com tag\excellent` \
@@ -396,14 +398,15 @@ If you would like to change a student's particulars, use this command.
 **Format**: `edit-student STUDENT_INDEX [n\NAME] [t\TELEGRAM_USERNAME] [e\EMAIL] [tag\TAG]…​`
 
 For example:
-* `Charlotte Oliveiro` gave you the wrong email address on the first day of class. You need to replace her email address.
-  Type in `edit-student 3 e\charlotteolive@example.com` and press <kbd>Enter</kbd>.
+1. `Charlotte Oliveiro` gave you the wrong email address on the first day of class. You need to replace her email address.
 
-  ![EditStudentBefore](images/ugimages/EditStudentBefore.png)
+1. You type `edit-student 3 e\charlotteolive@example.com` and press <kbd>Enter</kbd>.
 
-* Scrolling down the list of students, you can see that `Charlotte`'s email has changed to `charlotteolive@example.com`.
+    ![EditStudentBefore](images/ugimages/EditStudentBefore.png)
 
-  ![EditStudentAfter](images/ugimages/EditStudentAfter.png)
+1. Scrolling down the list of students, you can see that `Charlotte`'s email has changed to `charlotteolive@example.com`.
+
+    ![EditStudentAfter](images/ugimages/EditStudentAfter.png)
 
 <div markdown="block" class="alert alert-info">
 
@@ -428,25 +431,30 @@ If you would like to search for a student by name, use this command.
 **Format**: `find-student KEYWORD [MORE_KEYWORDS]`
 
 For example:
-* `Roy` requested for supplementary notes in class today.
+1. `Roy` requested for supplementary notes in class today.
 You want to email him these notes.
-  Type `find-student roy` and press <kbd>Enter</kbd>.
 
-  ![FindStudentBefore](images/ugimages/FindStudentBefore.png)
+1. You type `find-student roy` and press <kbd>Enter</kbd>.
 
-* You can now retrieve `Roy`'s email and send him the notes.
+    ![FindStudentBefore](images/ugimages/FindStudentBefore.png)
 
-  ![FindStudentAfter](images/ugimages/FindStudentAfter.png)
+1. You can now retrieve `Roy`'s email and send him the notes.
+
+    ![FindStudentAfter](images/ugimages/FindStudentAfter.png)
 
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command:**<br>
 
-* The search is case-insensitive. You will receive `Roy` if you type in `roy`.
-* The order of the keywords does not matter. You will receive `Alex Yeoh` if you type in `Yeoh Alex`.
+* The search is case-insensitive. \
+  e.g you will receive `Roy` if you type in `roy`.
+* The order of the keywords does not matter.\
+  e.g. you will receive `Alex Yeoh` if you type in `Yeoh Alex`.
 * Only the name is searched.
-* Only full words will be matched. You will not receive `Irfan` if you only typed in `Irfa`.
-* Students matching at least one keyword will be returned. You will receive both `Alex Yeoh` and `David Li` if you type in `Alex Li`.
+* Only full words will be matched. \
+  e.g. you will not receive `Irfan` if you only type in `Irfa`.
+* Students matching at least one keyword will be returned. \
+  e.g. you will receive both `Alex Yeoh` and `David Li` if you type in `Alex Li`.
 
 </div>
 
@@ -457,15 +465,17 @@ If you would like to delete a student, you can make use of this command.
 **Format**: `delete-student STUDENT_INDEX`
 
 For example:
-* `Bernice`, the 2nd student displayed in Tutor's Pet, has swapped `CS2103T Tutorial` slots and you no longer teach her.
-Hence, you want to delete her entry from Tutor's Pet.
-  You type in `delete-student 2` and press <kbd>Enter</kbd>.
+1. `Bernice`, the 2nd student displayed in Tutor's Pet, has swapped `CS2103T Tutorial` slots and you no longer teach her.
 
-  ![DeleteStudentBefore](images/ugimages/DeleteStudentBefore.png)
+1. You want to delete her entry from Tutor's Pet.
 
-* Notice that the number of students in `CS2103T Tutorial` decreases to 2.
+1. You type in `delete-student 2` and press <kbd>Enter</kbd>.
 
-  ![DeleteStudentAfter](images/ugimages/DeleteStudentAfter.png)
+    ![DeleteStudentBefore](images/ugimages/DeleteStudentBefore.png)
+
+1. Notice that the number of students in `CS2103T Tutorial` decreases to 2.
+
+    ![DeleteStudentAfter](images/ugimages/DeleteStudentAfter.png)
 
 #### Clearing all students : `clear-student`
 
@@ -734,14 +744,14 @@ If you would like to add a lesson to a class, you can make use of this command.
 * Adds a lesson at a specified `CLASS_INDEX`+ `DAY` + `START_TIME` + `END_TIME` + `VENUE` + `NO_OF_TIMES`.
 
 For example:
-* You receive news that you will be teaching `CS2103T Tutorial` on `Tuesday 10:00-11:00` at `COM2 #02-02` from week 1 to 13.
-Hence, you type in the command `add-lesson c\1 d\TUESDAY st\10:00 et\11:00 v\COM2 #02-02 r\13` and press <kbd>Enter</kbd>.
+1. You receive news that you will be teaching `CS2103T Tutorial` on `Tuesday 10:00-11:00` at `COM2 #02-02` from week 1 to 13.
+   Hence, you type in the command `add-lesson c\1 d\TUESDAY st\10:00 et\11:00 v\COM2 #02-02 r\13` and press <kbd>Enter</kbd>.
 
-  ![Add lesson before](images/ugimages/AddLessonBefore.png)
+   ![Add lesson before](images/ugimages/AddLessonBefore.png)
 
-* You have added a lesson to teach.
+1. You have added a lesson to teach.
 
-  ![Add lesson after](images/ugimages/AddLessonAfter.png)
+   ![Add lesson after](images/ugimages/AddLessonAfter.png)
 
 <div markdown="block" class="alert alert-info">
 
@@ -762,14 +772,15 @@ If you entered wrong details pertaining to your lesson and would like to change 
 **Format**: `edit-lesson c\CLASS_INDEX l\LESSON_INDEX [d\DAY] [st\START_TIME] [et\END_TIME] [v\VENUE]`
 
 For example:
-* You made an error while entering the `CS2103T Tutorial` lesson. It should be `Tuesday` and not `Thursday`.
-* Type the command `edit-lesson c\1 l\1 d\Tuesday` and press <kbd>Enter</kbd>.
+1. You made an error while entering the `CS2103T Tutorial` lesson. It should be `Tuesday` and not `Thursday`.
 
-  ![Edit lesson before](images/ugimages/EditLessonBefore.png)
+1. You type the command `edit-lesson c\1 l\1 d\Tuesday` and press <kbd>Enter</kbd>.
 
-* The day of the lesson has been changed to `Tuesday`.
+    ![Edit lesson before](images/ugimages/EditLessonBefore.png)
 
-  ![Edit lesson after](images/ugimages/EditLessonAfter.png)
+1. The day of the lesson has been changed to `Tuesday`.
+
+    ![Edit lesson after](images/ugimages/EditLessonAfter.png)
 
 <div markdown="block" class="alert alert-info">
 
@@ -785,7 +796,7 @@ For example:
 Other examples:
 *  `find-class CS2100 lab`\
 `edit-lesson c\1 l\1 d\TUESDAY st\10:00 et\12:00 v\COM2 #02-02`\
-Edits the 1st lesson of the CS2100 lab to be held on Tuesdays, 10.00AM to 12.00PM at COM2 #02-02.
+Edits the 1st lesson of the CS2100 lab to be held on Tuesdays, 10:00AM to 12:00PM at COM2 #02-02.
 
 #### Deleting a lesson : `delete-lesson`
 
@@ -951,14 +962,14 @@ If you would like to delete a specific student's attendance from a lesson, you c
 * Deletes the attendance record at the specified `CLASS_INDEX` + `LESSON_INDEX` + `STUDENT_INDEX` + `WEEK`.
 
 For example:
-* You would like to delete Alex's attendance for the Thursday 10.00am to 11.00am lesson of CS2103T Tutorial
-in Week 1. Hence, you type in the command `delete-attendance c\1 l\1 s\1 w\1` and press <kbd>Enter</kbd>.
+1. You would like to delete Alex's attendance for the Thursday 10.00am to 11.00am lesson of CS2103T Tutorial
+   in Week 1. Hence, you type in the command `delete-attendance c\1 l\1 s\1 w\1` and press <kbd>Enter</kbd>.
 
-  ![Delete attendance before](images/ugimages/DeleteAttendanceBefore.png)
+   ![Delete attendance before](images/ugimages/DeleteAttendanceBefore.png)
 
-* Alex's attendance for week 1 has been deleted.
+1. Alex's attendance for week 1 has been deleted.
 
-  ![Delete attendance after](images/ugimages/DeleteAttendanceAfter.png)
+   ![Delete attendance after](images/ugimages/DeleteAttendanceAfter.png)
 
 #### Displaying attendance statistics : `stats`
 
