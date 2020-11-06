@@ -246,8 +246,9 @@ attendance of students. The implementation of `Attendance` model is explained in
 **Note:** All classes in the `Lesson` package are designed to be immutable.
 </div>
 
-A `ModuleClass` can contain any number of `Lesson` objects, but cannot contain duplicate `Lesson`s.
-`Lesson`s are considered duplicate if they have the same start time, end time, day and venue.<br>
+A `ModuleClass` can contain any number of `Lesson` objects, but cannot contain duplicate `Lesson`s or `Lesson`s
+with overlapping time.
+`Lesson`s are considered duplicate if they have the same start time, end time and day.<br>
 
 The sequence diagram below shows the interaction between `Logic` and `Model` when a `Lesson` is added to `ModuleClass`.
 The utility methods for modifying `Lesson` in `ModuleClass` are in `ModuleClassUtil` to avoid handling add, edit and
@@ -261,10 +262,16 @@ limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 1. The `AddLessonCommand` execution will call static methods from `ModuleClassUtil`.
-1. `ModuleClassUtil` will check whether `lesson` already exists in `targetModuleClass` by calling
-   `ModuleClass#hasLesson(lesson)`. (This part is omitted in the diagram for brevity)
-1. If `lesson` does not exists in `targetModuleClass`, a new `ModuleClass` with `lesson` will be created. Otherwise,
-   a `CommandException` will be thrown.
+
+1. `ModuleClassUtil` will check whether `lessonToAdd` already exists in `targetModuleClass` by calling
+   `hasLesson(lessonToAdd)`. For each `Lesson` in the `targetModuleClass`, this method will call `Lesson#isSameLesson(lessonToAdd)`.
+   (This part is omitted from diagram for brevity)
+   
+1. It will also check whether there is a `Lesson` with overlapping time in `targetModuleClass` by calling `hasOverlapLesson(lessonToAdd)`,
+   which then calls `Lesson#isOverlapLesson(lesson)`. (The latter part is omitted from diagram for brevity)
+
+1. If `lessonToAdd` does not exists in `targetModuleClass` and the timing does not overlap with any existing `Lesson`s, a new
+   `ModuleClass` with `lessonToAdd` will be created. Otherwise, a `CommandException` will be thrown.
 
 #### Design Considerations
 
@@ -1548,6 +1555,21 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `add-class n\NAME`<br/>
       Expected: No class is added. Error details shown in the status message.
 
+#### Listing all students within a class
+
+1. List all students within a class
+
+   1. Prerequisites: List all classes using the `list-class` command. Uses default tutor's pet data.
+  
+   1. Test case: `list-student c\1` \
+      Expected: Displays the students in the first class of the class list.
+      
+   1. Test case: `list-student c\3` \
+      Expected: No student is displayed.
+  
+   1. Other incorrect list student commands to try: `list-student c\x` (where x is larger than the size of class list) \
+      Expected: No student is listed. Error details shown in the status message.
+
 #### Editing a class
 
 1. Editing a class
@@ -1672,6 +1694,22 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect add commands to try: `add-attendance c\1 l\1 s\1 w\3 p\100`, `add-attendance c\x l\1 s\1 w\3
       p\70` (where x is larger than the size of class list)<br>
       Expected: No attendance added. Error details shown in the status message.
+      
+#### Editing an attendance
+
+1. Edit an attendance
+
+   1. Prerequisites: List all classes and students using the `list` command. Uses default tutor's pet data.
+
+   1. Test case: `edit-attendance c\1 l\1 s\1 w\2 p\60`<br>
+      Expected: Attendance edited. Details of the edited attendance shown in the status message.
+
+   1. Test case: `edit-attendance c\1 l\1 s\1 w\10 p\70`<br>
+      Expected: Attendance not edited. Reason stated in the status message.
+
+   1. Other incorrect edit commands to try: `edit-attendance c\1 l\1 s\1 w\3 p\101`, `edit-attendance c\x l\1 s\1 w\3
+      p\70` (where x is larger than the size of class list)<br>
+      Expected: Attendance not edited. Error details shown in the status message.
 
 #### Finding an attendance
 
