@@ -1532,6 +1532,7 @@ testers are expected to do more *exploratory* testing.
 #### Adding a class
 
 1. Adding a new class
+
    1. Prerequisites: A class named ST2334 does not exist in Tutor's Pet.
 
    1. Test case: `add-class n\ST2334`
@@ -1550,6 +1551,7 @@ testers are expected to do more *exploratory* testing.
       Expected: No class is added. Error details shown in the status message.
 
 1. Adding an existing class
+
    1. Prerequisites: At least one class exists in Tutor's Pet. Let the name of this class be `NAME`.
 
    1. Test case: `add-class n\NAME`<br/>
