@@ -14,15 +14,15 @@ end box
 [-> AddLessonCommand : execute()
 activate AddLessonCommand
 
-AddLessonCommand -> ModuleClassUtil : addLessonToModuleClass(targetModuleClass, lesson)
+AddLessonCommand -> ModuleClassUtil : addLessonToModuleClass(targetModuleClass, lessonToAdd)
 activate ModuleClassUtil
 
-ModuleClassUtil -> ModuleClass : hasLesson(lesson)
+ModuleClassUtil -> ModuleClass : hasLesson(lessonToAdd)
 activate ModuleClass
 ModuleClass --> ModuleClassUtil
 deactivate ModuleClass
 
-ModuleClassUtil -> ModuleClass : hasOverlapLesson(lesson)
+ModuleClassUtil -> ModuleClass : hasOverlapLesson(lessonToAdd)
 activate ModuleClass
 ModuleClass --> ModuleClassUtil
 deactivate ModuleClass

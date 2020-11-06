@@ -322,11 +322,11 @@ For example:
 
 1. You can type in the command `reset` and press <kbd>Enter</kbd>.
 
-  ![Reset before](images/ugimages/ResetBefore.png)
+   ![Reset before](images/ugimages/ResetBefore.png)
 
 1. You can see that all students and classes have been deleted.
 
-  ![Reset after](images/ugimages/ResetAfter.png)
+   ![Reset after](images/ugimages/ResetAfter.png)
 
 #### Recalling previously entered commands
 
@@ -515,11 +515,11 @@ For example:
 
 1. You type in the command `list-student c\2` and press <kbd>Enter</kbd>.
 
-  ![List students in class before](images/ugimages/ListStudentsInClassBefore.png)
+   ![List students in class before](images/ugimages/ListStudentsInClassBefore.png)
 
 1. You can see that the 2 students in your `CS2100 Lab` have been listed.
 
-  ![List students in class after](images/ugimages/ListStudentsInClassAfter.png)
+   ![List students in class after](images/ugimages/ListStudentsInClassAfter.png)
 
 Other examples:
 * `list-student c\3` <br>
@@ -655,11 +655,11 @@ For example:
 
 1. You can type in the command `list` and and press <kbd>Enter</kbd>.
 
-  ![List before](images/ugimages/ListBefore.png)
+   ![List before](images/ugimages/ListBefore.png)
 
 1. Now you can see all your students and classes.
 
-  ![List after](images/ugimages/ListAfter.png)
+   ![List after](images/ugimages/ListAfter.png)
 
 #### Adding a student to a class : `link`
 
@@ -886,11 +886,11 @@ For example:
 
 1. You can type in the command `edit-attendance c\1 l\1 s\1 w\1 p\45` and press <kbd>Enter</kbd>.
 
-  ![Edit attendance before](images/ugimages/EditAttendanceBefore.png)
+   ![Edit attendance before](images/ugimages/EditAttendanceBefore.png)
 
 1. Now you have successfully edited Alex's participation score from 35 to 45 points.
 
-  ![Edit attendance after](images/ugimages/EditAttendanceAfter.png)
+   ![Edit attendance after](images/ugimages/EditAttendanceAfter.png)
 
 Other examples:
 * `edit-attendance c\1 l\1 s\1 w\1 p\10` <br>

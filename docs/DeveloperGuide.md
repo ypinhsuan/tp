@@ -263,15 +263,15 @@ limitation of PlantUML, the lifeline reaches the end of diagram.
 
 1. The `AddLessonCommand` execution will call static methods from `ModuleClassUtil`.
 
-1. `ModuleClassUtil` will check whether `lesson` already exists in `targetModuleClass` by calling
-   `hasLesson(lesson)`. For each `Lesson` in the `targetModuleClass`, this method will call `Lesson#isSameLesson(lesson)`.
+1. `ModuleClassUtil` will check whether `lessonToAdd` already exists in `targetModuleClass` by calling
+   `hasLesson(lessonToAdd)`. For each `Lesson` in the `targetModuleClass`, this method will call `Lesson#isSameLesson(lessonToAdd)`.
    (This part is omitted from diagram for brevity)
    
-1. It will also check whether there is a `Lesson` with overlapping time in `targetModuleClass` by calling `hasOverlapLesson(lesson)`,
+1. It will also check whether there is a `Lesson` with overlapping time in `targetModuleClass` by calling `hasOverlapLesson(lessonToAdd)`,
    which then calls `Lesson#isOverlapLesson(lesson)`. (The latter part is omitted from diagram for brevity)
 
-1. If `lesson` does not exists in `targetModuleClass` and the timing does not overlap with any existing `Lesosn`s, a new
-   `ModuleClass` with `lesson` will be created. Otherwise, a `CommandException` will be thrown.
+1. If `lessonToAdd` does not exists in `targetModuleClass` and the timing does not overlap with any existing `Lesson`s, a new
+   `ModuleClass` with `lessonToAdd` will be created. Otherwise, a `CommandException` will be thrown.
 
 #### Design Considerations
 
