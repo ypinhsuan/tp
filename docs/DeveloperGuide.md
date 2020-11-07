@@ -468,25 +468,24 @@ taken into account when implementing this feature.
 The add attendance mechanism is facilitated by `AddAttendanceCommand`. It extends `Command`.
 
 * `AddAttendanceCommand#execute()`: Performs a validity check and adds a student's attendance for a particular week's
- lesson if
- all validations passed.
+  lesson if all validations passed.
 
 The following sequence diagram shows the interactions between the `Model` and `Logic` components during the execution
- of a `AddAttendanceCommand` with user input `add-attendance c\1 l\1 s\1`:
+of an `AddAttendanceCommand` with user input `add-attendance c\1 l\1 s\1`:
 
 ![AddAttendanceSequenceDiagram](images/AddAttendanceSequenceDiagram.png)
 
 1. `Logic` uses the `TutorsPetParser` class to parse the user command.
-1. A new instance of a `AddAttendanceCommand` object would be created by the `AddAttendanceCommandParser` and returns
- to `TutorsPetParser`.
+1. A new instance of an `AddAttendanceCommand` object would be created by the `AddAttendanceCommandParser` and returned
+   to `TutorsPetParser`.
 1. `TutorsPetParser` encapsulates the `AddAttendanceCommand` object as a `Command` object which is executed by
- the `LogicManager`.
+   the `LogicManager`.
 1. The command execution calls `getFilteredStudentList` and `getFilteredModuleClassList` to get the `targetStudent` and
- `targetModuleClass` respectively using indexes from the user input.
+   `targetModuleClass` respectively using indexes from the user input.
 1. As seen from the diagram above, `ModuleClassUtil#addAttendanceToModuleClass()` is then called. Execution of that
- method returns a new `ModuleClass` object with the new attendance of the `targetStudent` added.
+   method returns a new `ModuleClass` object with the new attendance of the `targetStudent` added.
 1. The `targetModuleClass` in the `model` is then updated with the new `ModuleClass` object.
-1. The results of the command execution is committed using `commit()` method for `undo/redo` functionalities.
+1. The change resulting from the command's execution is saved using the `commit(...)` method for the `undo`/`redo` feature.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 
 The following activity diagram shows how the `add attendance` operation works.
@@ -505,11 +504,10 @@ The following activity diagram shows how the `add attendance` operation works.
     * Less convenient for users as they would have to add attendances for the whole class one at a time.
 
 <div markdown="span" class="alert alert-info">
-:information_source: **Note:** Users can make use of the command recall feature to speed up the recording of
- attendances.
+:information_source: **Note:** Users can make use of the recall feature to speed up the recording of attendances.
 </div>
 
-* **Alternative 2:** User can add multiple student's attendances for a specific week's lesson at the same time.
+* **Alternative 2:** User can add multiple students' attendances for a specific week's lesson at the same time.
 
   * Pros:
     * Provides greater convenience for users as they can add attendances for the whole class in a single command.
@@ -521,7 +519,7 @@ The following activity diagram shows how the `add attendance` operation works.
 
 Alternative 1 was chosen because the cons of implementing alternative 2 outweighs the benefits derived from it. It is
 unlikely for multiple students to have the same participation score and hence the use of this command with multiple
-students is expected to be low. In addition, users can make use of the `recall` feature to speed up the process of
+students is likely to be low. In addition, users can make use of the `recall` feature to speed up the process of
 recording attendances.
 
 ### Undo/Redo Feature
