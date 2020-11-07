@@ -441,15 +441,11 @@ You want to email him these notes.
 
 **:information_source: Notes about the command:**<br>
 
-* The search is case-insensitive. \
-  e.g you will receive `Roy` if you type in `roy`.
-* The order of the keywords does not matter.\
-  e.g. you will receive `Alex Yeoh` if you type in `Yeoh Alex`.
+* The search is case-insensitive. e.g you will receive `Roy` if you type in `roy`.
+* The order of the keywords does not matter. e.g. you will receive `Alex Yeoh` if you type in `Yeoh Alex`.
 * Only the name is searched.
-* Only full words will be matched. \
-  e.g. you will not receive `Irfan` if you only type in `Irfa`.
-* Students matching at least one keyword will be returned. \
-  e.g. you will receive both `Alex Yeoh` and `David Li` if you type in `Alex Li`.
+* Only full words will be matched. e.g. you will not receive `Irfan` if you only type in `Irfa`.
+* Students matching at least one keyword will be returned. e.g. you will receive both `Alex Yeoh` and `David Li` if you type in `Alex Li`.
 
 </div>
 
