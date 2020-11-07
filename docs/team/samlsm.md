@@ -34,7 +34,7 @@ Here is a summary of my personal contributions to the team project. All my code 
   * What it does: This feature allows the user to see the overall performance of a student in a class. It computes the
     student's average participation score and attendance for the entire semester.
   * Justification: This feature is important because it allows users to see the overall performance of a student
-    without the hassle of having to compute these statistics themselves. It satisfies one of Tutor's Pet goal which
+    without the hassle of having to compute it themselves. It satisfies one of Tutor's Pet goal which
     is to help tutors track a student's progress over time.
   * Highlights: Implementation of this enhancement was challenging because the direct implementation of it would
     break the law of demeter. Hence a more in-depth analysis of its implementations was necessary.
@@ -52,11 +52,11 @@ Here is a summary of my personal contributions to the team project. All my code 
     implemented because we notice that users are unable to copy venues directly from the displayed class list.
     [#166](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/166)
 
-* Changed help window popup. [#94](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/94)
+* Fix help window bug. [#94](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/94)
   * Address a bug that results in help window not appearing when minimised.
 
 * Fix UI scaling. [#126](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/126)
-  * Address a bug that results in UI not scailing equally when the window is being resized.
+  * Address a bug that results in UI not scaling equally when the window is being resized.
 
 * Renamed base package. [#165](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/165)
   * Renamed the base package from `seedu.address` to `tutorspet`.
