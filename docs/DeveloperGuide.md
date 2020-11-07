@@ -266,7 +266,7 @@ limitation of PlantUML, the lifeline reaches the end of diagram.
 1. `ModuleClassUtil` will check whether `lessonToAdd` already exists in `targetModuleClass` by calling
    `hasLesson(lessonToAdd)`. For each `Lesson` in the `targetModuleClass`, this method will call `Lesson#isSameLesson(lessonToAdd)`.
    (This part is omitted from diagram for brevity)
-   
+
 1. It will also check whether there is a `Lesson` with overlapping time in `targetModuleClass` by calling `hasOverlapLesson(lessonToAdd)`,
    which then calls `Lesson#isOverlapLesson(lesson)`. (The latter part is omitted from diagram for brevity)
 
@@ -1544,10 +1544,7 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `add-class n\ST2334 @ 1200`
       Expected: No class is added. Error details shown in the status message.
 
-   1. Test case: `add-class n\`
-      Expected: No class is added. Error details shown in the status message.
-
-   1. Test case: `add-class`
+   1. Other incorrect add commands to try: `add-class`, `add-class n\`
       Expected: No class is added. Error details shown in the status message.
 
 1. Adding an existing class
@@ -1562,13 +1559,13 @@ testers are expected to do more *exploratory* testing.
 1. List all students within a class
 
    1. Prerequisites: List all classes using the `list-class` command. Uses default tutor's pet data.
-  
+
    1. Test case: `list-student c\1` \
       Expected: Displays the students in the first class of the class list.
-      
+
    1. Test case: `list-student c\3` \
       Expected: No student is displayed.
-  
+
    1. Other incorrect list student commands to try: `list-student c\x` (where x is larger than the size of class list) \
       Expected: No student is listed. Error details shown in the status message.
 
@@ -1602,6 +1599,22 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `find-class 2103T`<br>
       Expected: No class displayed.
 
+#### Deleting a class
+
+1. Deleting a class while all classes are being shown
+
+   1. Prerequisites: List all classes using the `list-class` command. Multiple classes in the list.
+
+   1. Test case: `delete-class 1`<br/>
+      Expected: First class is deleted from the list. Details of the deleted class shown in the status message.
+
+   1. Test case: `delete-class 0`<br/>
+      Expected: No class is deleted. Error details shown in the status message.
+
+   1. Other incorrect delete commands to try: `delete-class`, `delete-class x`
+      (where x is larger than the size of class list)<br/>
+      Expected: No class is deleted. Error details shown in the status message.
+
 #### Clearing all classes
 
 1. Clearing all classes
@@ -1610,6 +1623,38 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `clear-class`<br>
       Expected: All classes cleared.
+
+#### Adding a student to a class
+
+1. Adding a student to a class
+
+   1. Prerequisites: List all students and classes using the `list` command. Uses default tutor's pet data.
+
+   1. Test case: `link c\1 s\4`
+      Expected: Student added to class. Details of added student and class shown in status message.
+      Class list filters to show only the involved class. Student list filters to show only students of the class.
+
+   1. Test case: `link c\1 s\1`
+      Expected: No student is added to any class. Error details shown in status message.
+
+   1. Other incorrect link commands to try: `link c\1`, `link s\1`, `link c\0 s\0`
+      Expected: No student is added to any class. Error details shown in status message.
+
+#### Removing a student from a class
+
+1. Removing a student from a class
+
+   1. Prerequisites: List all students and classes using the `list` command. Uses default tutor's pet data.
+
+   1. Test case: `unlink c\1 s\1`
+      Expected: Student removed from class. Details of removed student and class shown in status message.
+      Class list filters to show only the involved class. Student list filters to show only remaining students of the class.
+
+   1. Test case: `unlink c\1 s\4`
+      Expected: No student is removed from any class. Error details shown in status message.
+
+   1. Other incorrect unlink commands to try: `unlink c\1`, `unlink s\1`, `unlink c\0 s\0`
+      Expected: No student is removed from any class. Error details shown in status message.
 
 ### Managing Lessons
 
@@ -1637,10 +1682,10 @@ testers are expected to do more *exploratory* testing.
       The first class contains at least two lessons.
 
    1. Test case: `edit-lesson c\1 l\1 d\sunday et\23:00` <br>
-     Expected: The day and end time of the first lesson in the first class will be changed to Sunday and 23:00 respectively.
+      Expected: The day and end time of the first lesson in the first class will be changed to Sunday and 23:00 respectively.
 
    1. Test case: `edit-lesson c\1 l\1 st\01:00` <br>
-     Expected: The start time of the second lesson in the first class will be changed to 01:00.
+      Expected: The start time of the second lesson in the first class will be changed to 01:00.
 
    1. Other incorrect edit commands to try: `edit-lesson c\0 l\3`, `edit-lesson c\1 l\10000`,
       `edit-lesson c\1 l\1 st\13:00 et\11:00` <br>
@@ -1696,7 +1741,7 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect add commands to try: `add-attendance c\1 l\1 s\1 w\3 p\100`, `add-attendance c\x l\1 s\1 w\3
       p\70` (where x is larger than the size of class list)<br>
       Expected: No attendance added. Error details shown in the status message.
-      
+
 #### Editing an attendance
 
 1. Edit an attendance
