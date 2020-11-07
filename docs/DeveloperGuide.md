@@ -476,7 +476,7 @@ of an `AddAttendanceCommand` with user input `add-attendance c\1 l\1 s\1`:
 ![AddAttendanceSequenceDiagram](images/AddAttendanceSequenceDiagram.png)
 
 1. `Logic` uses the `TutorsPetParser` class to parse the user command.
-1. A new instance of an `AddAttendanceCommand` object would be created by the `AddAttendanceCommandParser` and returns
+1. A new instance of an `AddAttendanceCommand` object would be created by the `AddAttendanceCommandParser` and returned
    to `TutorsPetParser`.
 1. `TutorsPetParser` encapsulates the `AddAttendanceCommand` object as a `Command` object which is executed by
    the `LogicManager`.
@@ -485,7 +485,7 @@ of an `AddAttendanceCommand` with user input `add-attendance c\1 l\1 s\1`:
 1. As seen from the diagram above, `ModuleClassUtil#addAttendanceToModuleClass()` is then called. Execution of that
    method returns a new `ModuleClass` object with the new attendance of the `targetStudent` added.
 1. The `targetModuleClass` in the `model` is then updated with the new `ModuleClass` object.
-1. The results of the command execution is committed using the `commit()` method for `undo/redo` functionalities.
+1. The change resulting from the command's execution is saved using the `commit(...)` method for the `undo`/`redo` feature.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 
 The following activity diagram shows how the `add attendance` operation works.

@@ -34,7 +34,7 @@ Here is a summary of my personal contributions to the team project. All my code 
   * What it does: This feature allows the user to see the overall performance of a student in a class. It computes the
     student's average participation score and attendance for the entire semester.
   * Justification: This feature is important because it allows users to see the overall performance of a student
-    without the hassle of having to compute it themselves. It satisfies one of Tutor's Pet goal which
+    without the hassle of having to compute it themselves. It satisfies one of Tutor's Pet goals which
     is to help tutors track a student's progress over time.
   * Highlights: Implementation of this enhancement was challenging because the direct implementation of it would
     break the law of demeter. Hence a more in-depth analysis of its implementations was necessary.

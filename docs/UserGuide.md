@@ -799,7 +799,7 @@ Edits the 1st lesson of the CS2100 lab to be held on Tuesdays, 10:00AM to 12:00P
 
 #### Deleting a lesson : `delete-lesson`
 
-If you would like to delete a lesson in a specific class, you can make use of this command.
+If you would like to delete a lesson in a class, you can make use of this command.
 
 **Format**: `delete-lesson c\CLASS_INDEX l\LESSON_INDEX`
 * Deletes the lesson at the specified `CLASS_INDEX` + `LESSON_INDEX`.
@@ -829,7 +829,7 @@ the `undo` command. However, you cannot `undo` once you exit the application!
 
 #### Displaying lesson venue : `display-venue`
 
-If you would like to find out the venue for a specific lesson, you can make use of this command.
+If you would like to find out the venue for a lesson, you can make use of this command.
 
 **Format**: `display-venue c\CLASS_INDEX l\LESSON_INDEX`
 * Gives the venue of the lesson specified at `CLASS_INDEX` + `LESSON_INDEX`.
@@ -848,7 +848,7 @@ For example:
 
 #### Adding an attendance record : `add-attendance`
 
-If you would like to record a new attendance for a specific student, you can make use of this command.
+If you would like to record a new attendance for a student, you can make use of this command.
 
 **Format**: `add-attendance c\CLASS_INDEX l\LESSON_INDEX s\STUDENT_INDEX w\WEEK p\PARTICIPATION_SCORE`
 
@@ -918,13 +918,13 @@ Other examples:
 
 #### Finding an attendance record: `find-attendance`
 
-If you need to find out a specific student's attendance for a specific week, you can make use of this command.
+If you need to find out a student's attendance for a specific week, you can make use of this command.
 
 **Format**: `find-attendance c\CLASS_INDEX l\LESSON_INDEX s\STUDENT_INDEX w\WEEK`
 * Finds the attendance record at the specified `CLASS_INDEX` + `LESSON_INDEX` + `STUDENT_INDEX` + `WEEK`.
 
 For example:
-1. It is the end of the semester and you wish to key in your students' attendance into luminus. You enter the
+1. It is the end of the semester and you wish to key in your students' attendance into LumiNUS. You enter the
    command `list-student c\1` to see the students in your `CS2103T Tutorial` class.
 
 1. You would like to find out if Alex attended week 1 lesson and hence you type in the command
@@ -974,7 +974,7 @@ For example:
 
 #### Displaying attendance statistics : `stats`
 
-If you would like to find out how your student is performing in a specific class, you can make use of this command.
+If you would like to find out how your student is performing in class, you can make use of this command.
 
 **Format**: `stats c\CLASS_INDEX s\STUDENT_INDEX`
 * Gives a summary of the student's attendance at the specified `CLASS_INDEX` + `STUDENT_INDEX`.
