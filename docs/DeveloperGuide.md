@@ -1586,7 +1586,7 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `edit-class`<br>
       Expected: No class is edited. Error details shown in the status message.
 
-   1. Other incorrect edit commands to try: `edit-class 1 n\!`, `edit-class x`
+   1. Other incorrect edit commands to try: `edit-class 1 n\!`, `edit-class x n\New Name`
       (where x is larger than the size of class list)<br>
       Expected: No class is edited. Error details shown in the status message.
 
@@ -1708,7 +1708,7 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `delete-lesson c\1 l\0`<br>
       Expected: No lesson is deleted. Error details shown in the status message.
 
-   1. Other incorrect delete commands to try: `delete-lesson`, `delete-lesson x` (where x is larger than the
+   1. Other incorrect delete commands to try: `delete-lesson`, `delete-lesson c\x l\1` (where x is larger than the
       number of lesson in a specific class)<br>
       Expected: No lesson is deleted. Error details shown in the status message.
 
@@ -1742,7 +1742,7 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `add-attendance c\1 l\1 s\1 w\2 p\70`<br>
       Expected: No attendance added. Reason stated in the status message.
 
-   1. Other incorrect add commands to try: `add-attendance c\1 l\1 s\1 w\3 p\100`, `add-attendance c\x l\1 s\1 w\3
+   1. Other incorrect add commands to try: `add-attendance c\1 l\1 s\1 w\3 p\101`, `add-attendance c\x l\1 s\1 w\3
       p\70` (where x is larger than the size of class list)<br>
       Expected: No attendance added. Error details shown in the status message.
 
@@ -1777,7 +1777,7 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `find-attendance c\1 l\1 s\4 w\3`<br>
       Expected: Attendance not found. Reason stated in the status message.
 
-   1. Other incorrect find commands to try: `find-attendance c\1 l\1 s\4 w\54`, `find-attendance c\x l\1 s\4 w\54`
+   1. Other incorrect find commands to try: `find-attendance c\1 l\1 s\4 w\54`, `find-attendance c\x l\1 s\4 w\3`
       (where x is larger than the size of class list)<br>
       Expected: Attendance not found. Error details shown in the status message.
 
@@ -1810,6 +1810,6 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `stats c\1 s\4`<br>
       Expected: Statistics not found. Reason stated in the status message.
 
-   1. Other incorrect display stats commands to try: `stats c\1 s\a`, `stats c\1 s\x`, `...` (where x is larger than the
+   1. Other incorrect display stats commands to try: `stats c\1 s\a`, `stats c\1 s\x` (where x is larger than the
       size of student list)<br>
       Expected: Statistics not found. Error details shown in the status message.
