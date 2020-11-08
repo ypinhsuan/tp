@@ -256,6 +256,13 @@ For example:
 1. Bernice has been undeleted and now you can [delete](#deleting-a-student--delete-student) Alex.
 
    ![Undo after](images/ugimages/UndoAfter.png)
+   
+<div markdown="block" class="alert alert-info">
+
+:information_source: **Notes about undoable changes:** Changes that can be undone include those from the
+`add-`, `edit-`, `delete-`, `clear-`, `link`, `unlink`, and `reset` commands. 
+
+</div>
 
 <div markdown="block" class="alert alert-primary">
 

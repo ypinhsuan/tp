@@ -3,14 +3,14 @@
 
 start
 
-:User presses the UP
-or DOWN arrow key in
+:User presses the ↑
+or ↓ key while in
 the command box;
 
 'Since the beta syntax does not support placing the condition outside the
 'diamond we place it as the true branch instead.
 
-if () then ([UP arrow key])
+if () then ([↑ key])
     if () then ( [has previous\n command]\n)
         if () then ( [pointer at\n default\n position]\n)
             : Save the current
@@ -25,7 +25,7 @@ if () then ([UP arrow key])
         previous command ;
     else ([else])
     endif
-else ([DOWN arrow key])
+else ([↓ key])
     if () then ([has next command])
         : Set pointer to
         next command ;

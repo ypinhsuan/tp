@@ -20,7 +20,7 @@ package "Before" {
     class Pointer as "  Pointer  " #FFFFFF
 }
 
-package "After" <<Rectangle>>{
+package "After pressing ↓" <<Rectangle>>{
     note "The cached value\nis returned" as N1
     note "The pointer was\nset to the\ndefault position" as N2
     class Hidden2
