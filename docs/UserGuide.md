@@ -852,7 +852,7 @@ If you would like to record a new attendance for a student, you can make use of 
 
 **Format**: `add-attendance c\CLASS_INDEX l\LESSON_INDEX s\STUDENT_INDEX w\WEEK p\PARTICIPATION_SCORE`
 
-* Adds the attendance of the student at the specified `CLASS_INDEX` + `LESSON_INDEX` + `STUDENT_INDEX`.
+* Adds the attendance of the student at the specified `STUDENT_INDEX` to the specified `CLASS_INDEX` + `LESSON_INDEX`.
 
 For example:
 1. Your `CS2103T Tutorial` lesson in week 10 just ended and you would like to give participation scores to the

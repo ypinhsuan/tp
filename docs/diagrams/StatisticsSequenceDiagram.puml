@@ -4,8 +4,8 @@
 box Logic LOGIC_COLOR_T1
 participant ":StatisticsCommand" as StatisticsCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
-participant "<<Class>>\nModuleClassUtil" as ModuleClassUtil LOGIC_COLOR
-participant "<<Class>>\nLessonUtil" as LessonUtil LOGIC_COLOR
+participant "<<class>>\n:ModuleClassUtil" as ModuleClassUtil LOGIC_COLOR
+participant "<<class>>\n:LessonUtil" as LessonUtil LOGIC_COLOR
 end box
 
 -> StatisticsCommand : execute()

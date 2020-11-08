@@ -7,7 +7,7 @@ participant ":TutorsPetParser" as TutorsPetParser LOGIC_COLOR
 participant ":AddAttendanceCommandParser" as AddAttendanceCommandParser LOGIC_COLOR
 participant ":AddAttendanceCommand" as AddAttendanceCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
-participant "<<Class>>\nModuleClassUtil" as ModuleClassUtil LOGIC_COLOR
+participant "<<class>>\n:ModuleClassUtil" as ModuleClassUtil LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
