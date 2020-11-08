@@ -2,7 +2,7 @@
 layout: page
 title: Jun Long's Project Portfolio Page
 ---
-### Overview - Project : Tutor's Pet
+### Overview - Project: Tutor's Pet
 Tutor's Pet is a **student management application** for teaching assistants in NUS Computing.
 It is a one stop solution to keep track of your classes, students, and their progress.
 
@@ -24,13 +24,11 @@ This section documents both major and minor enhancements I have made to Tutor's 
   * Introduced Student Universally Unique Identifier (UUID) into Student model.
   [#58](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/58)
     * In Tutor’s Pet, every `Student` is assigned a randomly generated `UUID` to ensure referential integrity of
-    `Student` data across different models. It was challenging to introduce a `UUID` fields as it broke many existing
-    test cases. Time had to be allocated to fix these test cases.
+      `Student` data across different models. Time was spent on `UUID` integration and fixing broken test cases.
   * Introduced ModuleClass to Storage. [#75](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/75)
-    * Introduced the Java classes `JsonAdaptedUuid` and `JsonAdaptedModuleClass` into Storage. The two Java classes were
-      required in Tutor's Pet so that we could allocate `Student`s to the respective tutorial classes that they were
-      enrolled in. Time was spent integrating the two Java classes into Storage and writing test cases for these 2
-      classes.
+    * Introduced the Java classes `JsonAdaptedUuid` and `JsonAdaptedModuleClass` into Storage so that we could
+      allocate `Student`s to the respective tutorial classes that they were enrolled in. Time was spent integrating
+      the two Java classes into Storage and writing test cases for these 2 classes.
   * Introduced `Add Lesson` and `Delete AttendanceRecord` commands.
   [#129](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/129)
   [#152](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/152)
