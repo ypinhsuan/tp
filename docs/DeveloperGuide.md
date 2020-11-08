@@ -1455,9 +1455,13 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
+   1. Prerequisites: There exists a data file.
+   
+   1. Test case: Delete the data file and launch the application.<br/>
+      Expected: The application launches with sample data.
+      
+   2. Test case: Modify the data file by removing a field in a json object.<br/>
+      Expected: The application launches with no data.
 
 ### Managing Students
 
