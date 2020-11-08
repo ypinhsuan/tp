@@ -10,7 +10,7 @@ hide empty members
 Class TutorsPetState {
     {field} commitMessage: String
 }
-Interface ReadOnlyTutorsPet <<Interface>>
+Interface ReadOnlyTutorsPet <<interface>>
 Class TutorsPet
 Class VersionedTutorsPet {
     {field} statePointer: int
