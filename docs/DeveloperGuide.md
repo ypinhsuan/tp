@@ -402,15 +402,10 @@ The following class diagram shows the relationship between classes during the ex
 ![StatisticsClassDiagram](images/StatisticsClassDiagram.png)
 
 The following sequence diagram shows the interactions within the `Logic` component during the execution
-of a `StatisticsCommand` with user input `stats c\1 s\1`:
+of a `StatisticsCommand`:
 
 ![StatisticsSequenceDiagram](images/StatisticsSequenceDiagram.png)
 
-1. `Logic` uses the `TutorsPetParser` class to parse the user command.
-1. A new instance of a `StatisticsCommand` object would be created by the `StatisticsCommandParser` and returns to
-   `TutorsPetParser`.
-1. `TutorsPetParser` encapsulates the `StatisticsCommand` object as a `Command` object which is executed by
-   the `LogicManager`.
 1. The command execution calls static methods from the `ModuleClassUtil` and `LessonUtil` classes.
 1. As seen above, `ModuleClassUtil` then iterates through the list of lessons to calculate the student's participation
    score and absent weeks by using `LessonUtil#getParticipationScoreFromLesson(lesson, student)` and
@@ -471,7 +466,7 @@ The add attendance mechanism is facilitated by `AddAttendanceCommand`. It extend
   lesson if all validations passed.
 
 The following sequence diagram shows the interactions between the `Model` and `Logic` components during the execution
-of an `AddAttendanceCommand` with user input `add-attendance c\1 l\1 s\1`:
+of an `AddAttendanceCommand` with user input `add-attendance c\1 l\1 s\1` represented by `...`:
 
 ![AddAttendanceSequenceDiagram](images/AddAttendanceSequenceDiagram.png)
 
@@ -497,7 +492,6 @@ The following activity diagram shows how the `add attendance` operation works.
 ##### Aspect 1: How `add attendance` feature executes
 
 * **Alternative 1 (current choice):** User can only add one attendance at a time.
-
   * Pros:
     * Less complex code reduces the possibility of bugs.
   * Cons:
@@ -508,14 +502,11 @@ The following activity diagram shows how the `add attendance` operation works.
 </div>
 
 * **Alternative 2:** User can add multiple students' attendances for a specific week's lesson at the same time.
-
   * Pros:
     * Provides greater convenience for users as they can add attendances for the whole class in a single command.
     * Greater flexibility as users can choose whether to key in attendance one at a time or all at once.
   * Cons:
     * More complex code leading to higher possibility of bugs.
-
-**Justification**
 
 Alternative 1 was chosen because the cons of implementing alternative 2 outweighs the benefits derived from it. It is
 unlikely for multiple students to have the same participation score and hence the use of this command with multiple
@@ -773,7 +764,8 @@ that our target users were familiar with.
 
 **Target user profile**:
 
-* Has a need to manage students enrolled in classes
+* Has a need to manage students enrolled in one or more classes
+* Has a need to record students' attendance and participation scores
 * Prefer desktop apps over other types
 * Can type fast
 * Prefers typing to mouse interactions
@@ -1332,8 +1324,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  Should be able to hold up to 1000 students and classes without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
-*{More to be added}*
-
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
@@ -1364,9 +1354,7 @@ testers are expected to do more *exploratory* testing.
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
    1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
-
-1. _{ more test cases …​ }_
+      Expected: The most recent window size and location is retained.
 
 #### Undoing previous commands
 

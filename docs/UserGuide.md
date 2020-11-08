@@ -26,7 +26,7 @@ This user guide provides documentation on the installation and usage of Tutor's 
 It also provides a comprehensive description of features available to you and
 includes a [quick-start](#quick-start) section that helps you get started.
 
-The guide uses the following features to make it easier for you to navigate around:
+This guide uses the following features to make it easier for you to navigate around:
 
 * Words that look like [this](#about) can be clicked to jump to the related section.
 * Words that look like `this` refer to keywords used as part of commands or responses from your Tutor's Pet.
@@ -103,7 +103,7 @@ display box, which is located immediately below the command box.
 
    * **`clear-student`** : Deletes all students.
 
-   * **`exit`** : Exits the app.
+   * **`exit`** : Exits the application.
 
 * Refer to the [Commands](#commands) section below for details of each command.
 
@@ -238,6 +238,23 @@ If you require any assistance, you can use this command which shows you the link
 
 **Format**: `help`
 
+#### Listing all students and classes : `list`
+
+You can use this command to see the entire list of students and classes.
+
+**Format**: `list`
+
+For example:
+1. After finding the class CS2103T and student Alex, you wish to view all your students and classes.
+
+1. You can type in the command `list` and press <kbd>Enter</kbd>.
+
+   ![List before](images/ugimages/ListBefore.png)
+
+1. Now you can see all your students and classes.
+
+   ![List after](images/ugimages/ListAfter.png)
+
 #### Undoing previous changes : `undo`
 
 If you have accidentally entered a command that permanently changes the data in your Tutor's Pet,
@@ -272,18 +289,17 @@ For example:
 
 #### Redoing previously undone changes : `redo`
 
-If you decide that you did not need to undo a command, instead of typing out the command again, you can use
-this command to redo the changes.
+If you decide that you did not need to undo a change, you can use this command to redo the change.
 
 **Format** : `redo`
 
 For example:
 
-1. You want to [undo](#undoing-previous-changes--undo) the last four changes in your Tutor's pet, however you accidentally undid the last five changes instead.
+1. You want to [undo](#undoing-previous-changes--undo) the last four changes in your Tutor's Pet, however you accidentally undid the last five changes instead.
 
 1. You type `redo` and press <kbd>Enter</kbd>.
 
-1. The accidentally undone change has been restored.
+1. The undone change has been restored.
 
 #### Viewing change history : `view-history`
 
@@ -312,7 +328,7 @@ You can use this feature to check if there are any changes that you can undo or 
 The diagram below shows an example where the last change has been undone.<br/>
 *Notice how the `>` indicator now points to the second change listed.*
 
-  ![View History After Undo](images/ugimages/ViewHistoryAfterUndo.png)
+![View History After Undo](images/ugimages/ViewHistoryAfterUndo.png)
 
 </div>
 
@@ -344,7 +360,7 @@ For example:
 
 If you have to enter a similar command repeatedly, you can use this feature to type less.
 
-When the [command box](#using-tutors-pet) is selected, press the <kbd>↑</kbd> and <kbd>↓</kbd> keys to cycle through previously entered commands.
+When the [command box](#using-tutors-pet) is selected, press the <kbd>↑</kbd> or <kbd>↓</kbd> key to cycle through previously entered commands.
 
 For example:
 
@@ -373,7 +389,7 @@ If you would like to add a student to Tutor's Pet, use this command.
 
 For example:
 1. You would like to add a new student, `Joel Lee` to Tutor's Pet.
-  Type in `add-student n\Joel Lee t\joeleee e\jlee@example.com`
+   Type in `add-student n\Joel Lee t\joeleee e\jlee@example.com`
 
     ![AddStudentBefore](images/ugimages/AddStudentBefore.png)
 
@@ -387,7 +403,7 @@ Adds `Betsy` to Tutor's Pet along with an `excellent` tag.
 
 <div markdown="block" class="alert alert-primary">
 
-:bulb: **Tip:** A student can have any number of tags (including 0)
+:bulb: **Tip:** A student can have any number of tags (including 0).
 
 </div>
 
@@ -419,7 +435,9 @@ For example:
 **:information_source: Notes about the command:**<br>
 
 * You must provide at least one of the optional fields.
+
 * When editing tags, the existing tags of the student will be removed and replaced by the newly typed in tags.
+
 * You can remove all the tags of a student by typing `tag\` without specifying any tags after it.
 
 </div>
@@ -453,9 +471,13 @@ You want to email him these notes.
 **:information_source: Notes about the command:**<br>
 
 * The search is case-insensitive. e.g you will receive `Roy` if you type in `roy`.
+
 * The order of the keywords does not matter. e.g. you will receive `Alex Yeoh` if you type in `Yeoh Alex`.
+
 * Only the name is searched.
+
 * Only full words will be matched. e.g. you will not receive `Irfan` if you only type in `Irfa`.
+
 * Students matching at least one keyword will be returned. e.g. you will receive both `Alex Yeoh` and `David Li` if you type in `Alex Li`.
 
 </div>
@@ -509,10 +531,17 @@ For example:
 <div markdown="block" class="alert alert-info">
 
 :information_source: **Notes about the command:**
+
 * The class name can only contain alphabets, numbers and spaces.
+
 * The class name cannot be the same as an existing class in your Tutor's Pet.
 
 </div>
+
+Other examples:
+
+* `add-class n\CS1101S T02D`<br/>
+  Adds `CS1101S T02D` to your Tutor's Pet.
 
 #### Listing all classes : `list-class`
 
@@ -525,6 +554,7 @@ If you would like to see a list of all classes in your Tutor's Pet, make use of 
 If you would like to see a list of all students in a particular class, make use of this command.
 
 **Format**: `list-student c\CLASS_INDEX`
+* Lists the students in the class at the specified `CLASS_INDEX`.
 
 For example:
 1. You want to send an email to students in your `CS2100 Lab` and hence would want to see a list of students in
@@ -599,9 +629,9 @@ For example:
 
 Other examples:
 * `find-class CS2100`<br>
-    Returns `CS2100 tut` and `CS2100 lab`
+  Displays `CS2100 tut` and `CS2100 lab`.
 * `find-class tut CS2030`<br>
-    Returns `CS2103T tut`, `CS2030 lab`
+  Displays `CS2103T tut`and `CS2030 lab`.
 
 <div markdown="block" class="alert alert-info">
 
@@ -660,23 +690,6 @@ For example:
 
    ![Clear class after](images/ugimages/ClearClassAfter.png)
 
-#### Listing all students and classes : `list`
-
-You can use this command to see the entire list of students and classes.
-
-**Format**: `list`
-
-For example:
-1. After finding the class CS2103T and student Alex, you wish to view all your students and classes.
-
-1. You can type in the command `list` and and press <kbd>Enter</kbd>.
-
-   ![List before](images/ugimages/ListBefore.png)
-
-1. Now you can see all your students and classes.
-
-   ![List after](images/ugimages/ListAfter.png)
-
 #### Adding a student to a class : `link`
 
 You can add students into their classes using this command.
@@ -722,12 +735,12 @@ For example:
 
 1. You type `unlink s\1 c\1` and press <kbd>Enter</kbd>.
 
-   ![Unlink before](images/ugimages/UnlinkAfter.png)
+   ![Unlink before](images/ugimages/UnlinkBefore.png)
 
 1. Your Tutor's Pet displays the remaining students in CS2103T Tutorial to confirm that you have successfully removed
    Alex from the class.
 
-  ![Unlink after](images/ugimages/UnlinkBefore.png)
+  ![Unlink after](images/ugimages/UnlinkAfter.png)
 
 <div markdown="block" class="alert alert-warning">
 
@@ -762,8 +775,11 @@ For example:
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command:**<br>
+
   * You must type out the day in full.
+  
   * You are not allowed to type in overnight lessons. For example, a lesson cannot start at `23:59` and end at `00:01`.
+  
   * The `Number of Weeks` displayed refers to the total number of weeks you will be teaching the lesson.
     It does not follow the week numbers of a semester.
     For example, if a semester has 13 weeks and your lessons begin in week 3 and end in week 13,
@@ -793,8 +809,11 @@ For example:
 **:information_source: Notes about the command:**<br>
 
 * You must type out the day in full.
+
 * You are not allowed to type in overnight lessons. For example, a lesson cannot start at `23:59` and end at `00:01`.
+
 * You must specify at least one field (DAY, START_TIME, END_TIME, VENUE) to be changed.
+
 * You are not able to change the `Number of Weeks`.
 
 </div>
@@ -812,8 +831,8 @@ If you would like to delete a lesson in a class, you can make use of this comman
 * Deletes the lesson at the specified `CLASS_INDEX` + `LESSON_INDEX`.
 
 For example:
-1. You receive news that the `Tuesday 10:00-11:00` `CS2103T Tutorial` would be cancelled permanently. You decide to
-   remove that lesson from your Tutor's Pet and hence you type in the command `delete-lesson c\1 l\2` and press
+1. You receive news that the `Tuesday 10:00-11:00` `CS2103T Tutorial` will be cancelled permanently. You decide to
+   remove this lesson from your Tutor's Pet and hence you type in the command `delete-lesson c\1 l\2` and press
    <kbd>Enter</kbd>.
 
    ![Delete lesson before](images/ugimages/DeleteLessonBefore.png)
@@ -839,7 +858,7 @@ the `undo` command. However, you cannot `undo` once you exit the application!
 If you would like to find out the venue for a lesson, you can make use of this command.
 
 **Format**: `display-venue c\CLASS_INDEX l\LESSON_INDEX`
-* Gives the venue of the lesson specified at `CLASS_INDEX` + `LESSON_INDEX`.
+* Displays the venue of the lesson at the specified `CLASS_INDEX` + `LESSON_INDEX`.
 
 For example:
 1. Your online lesson is starting in 10 minutes and it is time to start the session. You wish to find out the link
@@ -872,7 +891,7 @@ For example:
 
    ![Add attendance after](images/ugimages/AddAttendanceAfter.png)
 
-Other Examples:
+Other examples:
 * `find-class CS2100 lab`<br>
   `find-student bernice yu`<br>
   `add-attendance c\1 l\1 s\1 w\10 p\70`<br>
@@ -918,8 +937,10 @@ Other examples:
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command:**<br>
-  * The `WEEK` **must be a positive whole number** 1, 2, 3, …​
-  * The `PARTICIPATION_SCORE` **must be a non-negative whole number** 0, 1, 2, …​
+
+  * The `WEEK` **must be a positive whole number** 1, 2, 3, …
+  
+  * The `PARTICIPATION_SCORE` **must be a non-negative whole number** 0, 1, 2, …
 
 </div>
 
@@ -931,7 +952,7 @@ If you need to find out a student's attendance for a specific week, you can make
 * Finds the attendance record at the specified `CLASS_INDEX` + `LESSON_INDEX` + `STUDENT_INDEX` + `WEEK`.
 
 For example:
-1. It is the end of the semester and you wish to key in your students' attendance into LumiNUS. You enter the
+1. It is the end of the semester and you wish to submit your students' attendance. You enter the
    command `list-student c\1` to see the students in your `CS2103T Tutorial` class.
 
 1. You would like to find out if Alex attended week 1 lesson and hence you type in the command
@@ -943,7 +964,7 @@ For example:
 
    ![Find attendance after](images/ugimages/FindAttendanceAfter.png)
 
-Other Examples:
+Other examples:
 * `find-class CS2100 lab`<br>
   `find-student bernice yu`<br>
   `find-attendance c\1 l\1 s\1 w\10`<br>
@@ -958,7 +979,8 @@ Other Examples:
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command:**<br>
-  * The `WEEK` **must be a positive whole number** 1, 2, 3, …​
+
+  * The `WEEK` **must be a positive whole number** 1, 2, 3, …
 
 </div>
 
@@ -987,7 +1009,7 @@ If you would like to find out how your student is performing in class, you can m
 * Gives a summary of the student's attendance at the specified `CLASS_INDEX` + `STUDENT_INDEX`.
 
 For example:
-1. It is the end of the semester and time for you to grade your students overall class participation. You enter the
+1. It is the end of the semester and time for you to grade your students' overall class participation. You enter the
    command `list-student c\1` to see the students in your `CS2103T Tutorial` class.
 
 1. You would like to find out if Alex has been participating actively throughout the semester and hence you type in the
@@ -1002,6 +1024,7 @@ For example:
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command:**<br>
+
   * `Lesson(s) not attended` displays all lessons that the student did not attend. This means that future lessons
     are also displayed.
 
@@ -1012,7 +1035,8 @@ For example:
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Tutor's Pet home folder.
+**A**: Download Tutor's Pet in the other computer. Overwrite the empty data file it creates with the file that
+contains data from your previous Tutor's Pet home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
