@@ -19,7 +19,6 @@ You can find samples of code I have written
 [here](https://nus-cs2103-ay2021s1.github.io/tp-dashboard/#breakdown=true&search=junlong4321).
 
 ### Enhancements Implemented
-This section documents both major and minor enhancements I have made to Tutor's Pet.
 * **Major Enhancements**
   * Introduced Student Universally Unique Identifier (UUID) into Student model.
   [#58](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/58)
@@ -33,12 +32,12 @@ This section documents both major and minor enhancements I have made to Tutor's 
   [#129](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/129)
   [#152](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/152)
     * These commands were required so that we could add lessons to tutorial classes and delete attendance records of
-      students. It was a big enhancement as it involved the creation of many new Java classes, and because
-      a lot of test cases had to be written to thoroughly test these two commands.
+      students. It involved the creation of many new Java classes, and also a lot of test cases had to be written to
+      thoroughly test these two commands.
   * Cascade Deletion of `Student`s. [#182](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/185)
     * Fixed a major bug where a `Student`'s data could still be found in `Lesson`s and `AttendanceRecord`s even after
       the `Student` had been deleted from the application. There was a need to refactor a large part of the deletion
-      code to introduce the behaviour of cascading deletion.
+      code.
 * **Minor Enhancements**
   * Change Token Delimiter.
   [#167](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/167)
@@ -70,8 +69,6 @@ with the use of Java UUIDs.
 [here](https://github.com/AY2021S1-CS2103T-T10-4/tp/pulls?q=is%3Apr+is%3Aclosed+reviewed-by%3Ajunlong4321).
 
 ### Contributions Beyond the Team Project
-This section showcases my contributions to CS2103T beyond the team project.
-
 * Assisted in module bug hunting in issue [#356](https://github.com/nus-cs2103-AY2021S1/forum/issues/356).
 * Publicly clarified conceptual questions covered in the module topics in issues
 [#162](https://github.com/nus-cs2103-AY2021S1/forum/issues/162)
