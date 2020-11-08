@@ -38,6 +38,10 @@
     -fx-text-fill: -style-placeholder-color;
 }
 
+.list-cell:filled:selected #dayAndTime, #venue, #occurrence {
+    -fx-text-fill: black;
+}
+
 .cell_big_label {
     -fx-font-family: "Segoe UI Semibold";
     -fx-font-size: 16px;

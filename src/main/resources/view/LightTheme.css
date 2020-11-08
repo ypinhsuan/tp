@@ -65,7 +65,6 @@
      -fx-border-color: #C9D3EE;
      -fx-background-color: #C9D3EE;
      -fx-background-radius: 8;
-     -fx-text-fill: black;
 }
 
 .cell_lesson_label_even {
@@ -75,5 +74,4 @@
     -fx-border-color: #B5C7F5;
     -fx-background-color: #B5C7F5;
     -fx-background-radius: 8;
-    -fx-text-fill: black;
 }
