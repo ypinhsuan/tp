@@ -5,9 +5,9 @@ skinparam arrowColor STORAGE_COLOR
 skinparam classBackgroundColor STORAGE_COLOR
 
 package Storage <<Rectangle>> {
-Interface Storage <<Interface>>
-Interface UserPrefsStorage <<Interface>>
-Interface TutorsPetStorage <<Interface>>
+Interface Storage <<interface>>
+Interface UserPrefsStorage <<interface>>
+Interface TutorsPetStorage <<interface>>
 class StorageManager
 class JsonUserPrefsStorage
 class JsonTutorsPetStorage

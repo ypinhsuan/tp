@@ -7,17 +7,17 @@ participant ":TutorsPetParser" as TutorsPetParser LOGIC_COLOR
 participant ":AddAttendanceCommandParser" as AddAttendanceCommandParser LOGIC_COLOR
 participant ":AddAttendanceCommand" as AddAttendanceCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
-participant "<<Class>>\nModuleClassUtil" as ModuleClassUtil LOGIC_COLOR
+participant "<<class>>\n:ModuleClassUtil" as ModuleClassUtil LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("add-attendance c\1 l\1 s\1")
+[-> LogicManager : execute(...)
 activate LogicManager
 
-LogicManager -> TutorsPetParser : parseCommand("add-attendance c\1 l\1 s\1")
+LogicManager -> TutorsPetParser : parseCommand(...)
 activate TutorsPetParser
 
 create AddAttendanceCommandParser
@@ -27,7 +27,7 @@ activate AddAttendanceCommandParser
 AddAttendanceCommandParser --> TutorsPetParser
 deactivate AddAttendanceCommandParser
 
-TutorsPetParser -> AddAttendanceCommandParser: parse("c\1 l\1 s\1")
+TutorsPetParser -> AddAttendanceCommandParser: parse(...)
 activate AddAttendanceCommandParser
 
 create AddAttendanceCommand
@@ -60,7 +60,7 @@ deactivate Model
 AddAttendanceCommand -> ModuleClassUtil : addAttendanceToModuleClass()
 activate ModuleClassUtil
 
-ModuleClassUtil -> AddAttendanceCommand : updatedModuleClass
+ModuleClassUtil --> AddAttendanceCommand : updatedModuleClass
 deactivate ModuleClassUtil
 
 AddAttendanceCommand -> Model : setModuleClass(moduleClass, updatedModuleClass)
