@@ -72,7 +72,7 @@ targeting end-users.
 
 * Refined documentations in **Section 3 Quick Start**.
 
-## 4. Developer Guide Contributions
+## Developer Guide Contributions
 Given below are sections I contributed to the Developer Guide. It illustrates my ability to write technical
 documentations and the technical depth of my contributions to the project.
 
@@ -91,7 +91,7 @@ documentations and the technical depth of my contributions to the project.
     `display-venue`, `add-attendance`, `find-attendance` and `stats`.
 
 
-## 5. Contributions to Team-Based Tasks
+## Contributions to Team-Based Tasks
 * A list of all PRs I have reviewed can be found
   [here](https://github.com/AY2021S1-CS2103T-T10-4/tp/pulls?q=is%3Apr+is%3Aclosed+reviewed-by%3Asamlsm).
 

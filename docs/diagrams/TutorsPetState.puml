@@ -8,15 +8,17 @@ show members
 hide empty members
 
 Class TutorsPetState {
-    {field} String commitMessage
+    {field} commitMessage: String
 }
-Interface ReadOnlyTutorsPet <<Interface>>
+Interface ReadOnlyTutorsPet <<interface>>
 Class TutorsPet
-Class VersionedTutorsPet
+Class VersionedTutorsPet {
+    {field} statePointer: int
+}
 
-TutorsPetState -up-> ReadOnlyTutorsPet
+TutorsPetState -up-> "1" ReadOnlyTutorsPet
 TutorsPet -right[hidden]- TutorsPetState
 TutorsPet .up.|> ReadOnlyTutorsPet
 VersionedTutorsPet -up-|> TutorsPet
-VersionedTutorsPet *-up-> TutorsPetState
+VersionedTutorsPet *-up-> "*" TutorsPetState
 @enduml

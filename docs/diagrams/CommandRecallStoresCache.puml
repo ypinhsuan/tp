@@ -20,7 +20,7 @@ package "Before" {
     class Pointer as "  Pointer  " #FFFFFF
 }
 
-package "After" <<Rectangle>>{
+package "After pressing ↑" <<Rectangle>>{
     note "The current text is cached" as N1
     note "The previous command\nwas retrieved and\nreturned" as N2
     class Hidden2
