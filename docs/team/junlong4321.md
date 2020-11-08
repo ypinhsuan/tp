@@ -2,9 +2,7 @@
 layout: page
 title: Jun Long's Project Portfolio Page
 ---
-## Project: Tutor's Pet
-
-## Overview
+### Overview - Project: Tutor's Pet
 Tutor's Pet is a **student management application** for teaching assistants in NUS Computing.
 It is a one stop solution to keep track of your classes, students, and their progress.
 
@@ -16,33 +14,30 @@ My team comprised of 5 NUS Computer Science students. We developed Tutor's Pet f
 You can find out more about Tutor's Pet functionalities
 [here](https://ay2021s1-cs2103t-t10-4.github.io/tp/UserGuide.html). Given below are my contributions to Tutor's Pet.
 
-## Code Contributions
+### Code Contributions
 You can find samples of code I have written
 [here](https://nus-cs2103-ay2021s1.github.io/tp-dashboard/#breakdown=true&search=junlong4321).
 
-## Enhancements Implemented
-This section documents both major and minor enhancements I have made to Tutor's Pet.
+### Enhancements Implemented
 * **Major Enhancements**
   * Introduced Student Universally Unique Identifier (UUID) into Student model.
   [#58](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/58)
     * In Tutor’s Pet, every `Student` is assigned a randomly generated `UUID` to ensure referential integrity of
-    `Student` data across different models. It was challenging to introduce a `UUID` fields as it broke many existing
-    test cases. Time had to be allocated to fix these test cases.
+      `Student` data across different models. Time was spent on `UUID` integration and fixing broken test cases.
   * Introduced ModuleClass to Storage. [#75](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/75)
-    * Introduced the Java classes `JsonAdaptedUuid` and `JsonAdaptedModuleClass` into Storage. The two Java classes were
-      required in Tutor's Pet so that we could allocate `Student`s to the respective tutorial classes that they were
-      enrolled in. Time was spent integrating the two Java classes into Storage and writing test cases for these 2
-      classes.
+    * Introduced the Java classes `JsonAdaptedUuid` and `JsonAdaptedModuleClass` into Storage so that we could
+      allocate `Student`s to the respective tutorial classes that they were enrolled in. Time was spent integrating
+      the two Java classes into Storage and writing test cases for these 2 classes.
   * Introduced `Add Lesson` and `Delete AttendanceRecord` commands.
   [#129](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/129)
   [#152](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/152)
     * These commands were required so that we could add lessons to tutorial classes and delete attendance records of
-      students. It was a big enhancement as it involved the creation of many new Java classes, and because
-      a lot of test cases had to be written to thoroughly test these two commands.
+      students. It involved the creation of many new Java classes, and also a lot of test cases had to be written to
+      thoroughly test these two commands.
   * Cascade Deletion of `Student`s. [#182](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/185)
     * Fixed a major bug where a `Student`'s data could still be found in `Lesson`s and `AttendanceRecord`s even after
       the `Student` had been deleted from the application. There was a need to refactor a large part of the deletion
-      code to introduce the behaviour of cascading deletion.
+      code.
 * **Minor Enhancements**
   * Change Token Delimiter.
   [#167](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/167)
@@ -51,19 +46,19 @@ This section documents both major and minor enhancements I have made to Tutor's 
     had to be abstracted into variables to prevent test cases from breaking in the event that the delimiter was
     changed again.
 
-## User Guide Contributions
+### User Guide Contributions
 * Refined documentation for `list-students` and `clear-class` commands.
 * Added documentation for `add-lesson` and `delete attendance` commands.
 * Consolidated and organised all commands in lexicographical ordering.
 
-## Developer Guide Contributions
+### Developer Guide Contributions
 * Refined storage class diagram in Section 2.5 - Storage Component.
 * Documented Section 3.1 - Student Model and Student Universally Unique Identifier (UUID) and
 Section 3.2 - ModuleClass Model. These sections detail how the team implemented Student and ModuleClass models
 with the use of Java UUIDs.
 * Added use cases `find`, `clear`, `lesson`, `attendance`-related commands - UC04, UC06, UC10, UC12, UC17 to UC23.
 
-## Contributions to Team-Based Tasks
+### Contributions to Team-Based Tasks
 * PRs reviewed (with non-trivial review comments):
 [#53](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/53)
 [#57](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/57)
@@ -73,9 +68,7 @@ with the use of Java UUIDs.
 * A list of all PRs I have reviewed can be found
 [here](https://github.com/AY2021S1-CS2103T-T10-4/tp/pulls?q=is%3Apr+is%3Aclosed+reviewed-by%3Ajunlong4321).
 
-## Contributions Beyond the Team Project
-This section showcases my contributions to CS2103T beyond the team project.
-
+### Contributions Beyond the Team Project
 * Assisted in module bug hunting in issue [#356](https://github.com/nus-cs2103-AY2021S1/forum/issues/356).
 * Publicly clarified conceptual questions covered in the module topics in issues
 [#162](https://github.com/nus-cs2103-AY2021S1/forum/issues/162)
