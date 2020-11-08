@@ -751,7 +751,7 @@ For example:
 Other examples:
 * `list-student c\2`<br/>
   `unlink s\1 c\1`<br/>
-  [Lists the students](#listing-all-students-within-a-class--list-student) of the 2nd class in the displayed class list, and removes the 2nd student of that class.
+  [Lists the students](#listing-all-students-within-a-class--list-student) of the 2nd class in the displayed class list, and removes the 1st student of that class.
 
 ### Managing Lessons
 
