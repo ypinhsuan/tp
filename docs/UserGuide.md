@@ -14,10 +14,10 @@ title: User Guide
 
 Tutor's Pet is a **student management application** for teaching assistants in NUS Computing.
 Tutor's Pet reduces the amount of time you spend on administrative tasks as a teaching assistant.
-It is a one stop solution to keep track of your classes, students, and their progress.
+It is a one stop solution to keep track of your classes and students.
 
 As a teaching assistant, administrative chores such as attendance taking and grading students' participation
-can be troublesome with existing solutions such as spreadsheets. This is why we have created _Tutor's Pet, a
+can be troublesome with existing solutions such as spreadsheets. This is why we have created Tutor's Pet, _a
 solution for teaching assistants, by students._
 
 ## About
@@ -46,41 +46,43 @@ This guide uses the following features to make it easier for you to navigate aro
 
 <div markdown="block" class="alert alert-warning">
 
-:warning: Boxes with the :warning: icon contain important information about how to keep your Tutor's Pet data safe.
+:warning: Boxes with the :warning: icon contain important information on how to keep your Tutor's Pet data safe.
 
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick Start
-This section provides information on how to start using Tutor's Pet.
+This section provides information on how to quickly start using Tutor's Pet.
 
 ### Installing Tutor's Pet
 
 Here are a few steps to get you started on Tutor's Pet:
 
-1. Ensure you have **Java 11** or above installed in your Computer.
+1. Ensure you have **Java 11** or above installed in your computer.
 
-2. Download the latest version of **tutorspet** [here](https://github.com/AY2021S1-CS2103T-T10-4/tp/releases).
+1. Download the latest version of Tutor's Pet [here](https://github.com/AY2021S1-CS2103T-T10-4/tp/releases).
 
-3. Copy the file to the folder you want to use as the home folder for your Tutor's Pet.
+1. Copy the downloaded Tutor's Pet to a folder of your choosing. This shall be known as the home folder of your Tutor's Pet.
 
-4. Double-click the file to start the application. An application similar to the one below should appear in a few
+1. Double-click the file to start the application. An application similar to the one below should appear in a few
    seconds.<br>
 
    ![Ui](images/Ui.png)
 
 ### Using Tutor's Pet
 
-This section offers an overview of Tutor's Pet layout.
+This section offers an overview of the layout in Tutor's Pet.
 
-There are three main areas in Tutor's Pet:
+There are four main areas in Tutor's Pet:
 
-1. A command box and result display box.
+1. command box,
 
-2. A main viewing area.
+1. result display box,
 
-3. A utility area.
+1. main viewing area,
+
+1. utility area.
 
 The command box is the area for you to enter your commands. The result of each command would be shown in the result
 display box, which is located immediately below the command box.
@@ -99,7 +101,7 @@ display box, which is located immediately below the command box.
    * **`add-student`**`n\John Doe t\johndoe e\johnd@example.com tag\student` : Adds a student named `John Doe`
    to the application.
 
-   * **`delete-student`**`3` : Deletes the 3rd student shown in the current list.
+   * **`delete-student`**`3` : Deletes the 3rd student shown in the current [displayed student list](#displayed-student-list).
 
    * **`clear-student`** : Deletes all students.
 
@@ -109,18 +111,18 @@ display box, which is located immediately below the command box.
 
 The main viewing area consists of two sections: **Classes** and **Students**.
 
-<a name="displayed-class-list"/>
+<a name="displayed-class-list"></a>
 
-* The **Classes** section contains information about classes and lessons in Tutor's Pet. Use the **`list-class`** command to view the list of all
+* The **Classes** section contains information on classes and lessons in Tutor's Pet. Use the **`list-class`** command to view the list of all
 classes in Tutor's Pet.
 
   ![Class_section](images/ugimages/ClassPanel.png)
 
 <br/>
 
-<a name="displayed-student-list"/>
+<a name="displayed-student-list"></a>
 
-* The **Students** section contains information about students in Tutor's Pet. Use the **`list-student`** command to view the list of all students in Tutor's Pet.
+* The **Students** section contains information on students in Tutor's Pet. Use the **`list-student`** command to view the list of all students in Tutor's Pet.
 
   ![Student_section](images/ugimages/StudentPanel.png)
 
@@ -142,7 +144,7 @@ The utility area consists of three tabs: **File**, **Theme**, **Help**.
 <br/>
 
 * The **Help** tab consists of a help button. If you require any assistance, click on the help button, copy the link
- given and paste it into any web browser. Alternatively, press <kbd>F1</kbd> to bring up the help window.
+ displayed and paste it into any web browser. Alternatively, press <kbd>F1</kbd> to bring up the help window.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -150,7 +152,7 @@ The utility area consists of three tabs: **File**, **Theme**, **Help**.
 
 Commands are the main way you interact with your Tutor's Pet.
 
-This section provides information about the [command format](#command-format), an [overview](#command-overview) of available commands,
+This section provides information about the [command format](#command-format), [overview](#command-overview) of available commands,
 and detailed instructions on how to use each command.
 
 ### Command Format
@@ -164,16 +166,16 @@ This section highlights information about the command format that is common acro
 This section details the format of the commands available in Tutor's Pet. We will adhere to the following:
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add-student n\NAME`, `NAME` is a parameter which can be used as `add-student n\John Doe`.
+  e.g. In `add-student n\NAME`, `NAME` is a parameter which can be used as `add-student n\John Doe`.
 
 * Items in square brackets are optional.<br>
   e.g `n\NAME [tag\TAG]` can be used as `n\John Doe tag\student` or as `n\John Doe`.
 
-* Items with `…` after them can be used multiple times including zero times.<br>
+* Items with `…` after them can be used multiple or zero times.<br>
   e.g. `[tag\TAG]…` can be used as ` ` (i.e. 0 times), `tag\student`, `tag\average tag\TA candidate` etc.
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `n\NAME t\TELEGRAM_USERNAME`, `t\TELEGRAM_USERNAME n\NAME` is also acceptable.
+  e.g. If the command specifies `n\NAME t\TELEGRAM_USERNAME`, typing `t\TELEGRAM_USERNAME n\NAME` is also acceptable.
 
 * Indexes **must be a positive whole number** 1, 2, 3, …
 
@@ -232,7 +234,7 @@ The following subsections will elaborate on the specific details of each Tutor's
 
 #### Viewing help : `help`
 
-If you require any assistance, you can use this command which shows you the link to user guide.
+If you require any assistance, you can use this command. The link to this user guide will be displayed.
 
   ![Help window](images/ugimages/Help.png)
 
@@ -247,11 +249,11 @@ You can use this command to see the entire list of students and classes.
 For example:
 1. After finding the class CS2103T and student Alex, you wish to view all your students and classes.
 
-1. You can type in the command `list` and press <kbd>Enter</kbd>.
+1. You type in the command `list` and press <kbd>Enter</kbd>.
 
    ![List before](images/ugimages/ListBefore.png)
 
-1. Now you can see all your students and classes.
+1. Now, you can see all your students and classes.
 
    ![List after](images/ugimages/ListAfter.png)
 
@@ -264,13 +266,13 @@ you can use this command to undo the changes.
 
 For example:
 
-1. You want to delete Alex from your Tutor's Pet, however you accidentally deleted Bernice instead of Alex.
+1. You want to [delete](#deleting-a-student--delete-student) Alex from your Tutor's Pet. However you accidentally deleted Bernice instead of Alex.
 
 1. You type `undo` and press <kbd>Enter</kbd>.
 
    ![Undo before](images/ugimages/UndoBefore.png)
 
-1. Bernice has been undeleted and now you can [delete](#deleting-a-student--delete-student) Alex.
+1. Bernice has been undeleted and now you can delete Alex.
 
    ![Undo after](images/ugimages/UndoAfter.png)
    
@@ -295,11 +297,11 @@ If you decide that you did not need to undo a change, you can use this command t
 
 For example:
 
-1. You want to [undo](#undoing-previous-changes--undo) the last four changes in your Tutor's Pet, however you accidentally undid the last five changes instead.
+1. You want to [undo](#undoing-previous-changes--undo) the last four changes in your Tutor's Pet. However, you accidentally undid the last five changes instead.
 
 1. You type `redo` and press <kbd>Enter</kbd>.
 
-1. The undone change has been restored.
+1. The undone change will be restored.
 
 #### Viewing change history : `view-history`
 
@@ -335,20 +337,20 @@ The diagram below shows an example where the last change has been undone.<br/>
 #### Exiting the program : `exit`
 
 You can exit Tutor's Pet by typing this command.
-All changes you have made to your Tutor's Pet would have been saved.
+All changes you have made to your Tutor's Pet will be saved.
 
 **Format**: `exit`
 
 #### Resetting the program : `reset`
 
-You can use this command to reset Tutor's Pet and all data will be cleared.
+You can use this command to reset Tutor's Pet. All existing data will be deleted.
 
 **Format**: `reset`
 
 For example:
 1. It is the start of a new semester and you want to delete all students and classes.
 
-1. You can type in the command `reset` and press <kbd>Enter</kbd>.
+1. You type in the command `reset` and press <kbd>Enter</kbd>.
 
    ![Reset before](images/ugimages/ResetBefore.png)
 
@@ -360,7 +362,7 @@ For example:
 
 If you have to enter a similar command repeatedly, you can use this feature to type less.
 
-When the [command box](#using-tutors-pet) is selected, press the <kbd>↑</kbd> or <kbd>↓</kbd> key to cycle through previously entered commands.
+When the [command box](#using-tutors-pet) is selected, press the <kbd>↑</kbd> or <kbd>↓</kbd> key to navigate around previously entered commands.
 
 For example:
 
@@ -372,7 +374,7 @@ For example:
 
 1. The previous command will be displayed in the command box.
 
-1. Now you can edit and reuse the command to record the attendance of other students.
+1. Now, you can edit and reuse the command to record the attendance of other students.
 
 #### Saving the data
 
@@ -400,7 +402,7 @@ For example:
 
 Other examples:
 * `add-student n\Betsy Crowe t\betsycrowe e\betsycrowe@example.com tag\excellent` \
-Adds `Betsy` to Tutor's Pet along with an `excellent` tag.
+Adds `Betsy Crowe` to Tutor's Pet along with an `excellent` tag.
 
 <div markdown="block" class="alert alert-primary">
 
@@ -448,7 +450,7 @@ Other examples:
 *  `edit-student 1 t\smartlex e\yeohalex@example.com` \
 Edits the telegram username and email address of the 1st student to `smartlex` and `yeohalex@example.com` respectively.
 *  `edit-student 2 n\Betsy Yu tag\` \
-Edits the name of the 2nd student to `Betsy Yu` and deletes all existing tags.
+Edits the name of the 2nd student to `Betsy Yu` and deletes all of her existing tags.
 
 #### Finding student by name : `find-student`
 
@@ -472,15 +474,19 @@ You want to email him these notes.
 
 **:information_source: Notes about the command:**<br>
 
-* The search is case-insensitive. e.g you will receive `Roy` if you type in `roy`.
+* The search is case-insensitive.<br/>
+  e.g You will receive `Roy` if you type in `roy`.
 
-* The order of the keywords does not matter. e.g. you will receive `Alex Yeoh` if you type in `Yeoh Alex`.
+* The order of the keywords does not matter.<br/>
+  e.g. You will receive `Alex Yeoh` if you type in `Yeoh Alex`.
 
 * Only the name is searched.
 
-* Only full words will be matched. e.g. you will not receive `Irfan` if you only type in `Irfa`.
+* Only full words will be matched.<br/>
+  e.g. You will not receive `Irfan` if you only type in `Irfa`.
 
-* Students matching at least one keyword will be returned. e.g. you will receive both `Alex Yeoh` and `David Li` if you type in `Alex Li`.
+* Students matching at least one keyword will be returned.<br/>
+  e.g. You will receive both `Alex Yeoh` and `David Li` if you type in `Alex Li`.
 
 </div>
 
@@ -520,7 +526,7 @@ If you would like to add a new class, you can make use of this command.
 * Adds a class with the specified `CLASS_NAME`.
 
 For example:
-1. You have just been allocated to teach a tutorial class, Tutorial 3, in the module CS1231.
+1. You have just been assigned to teach a tutorial class, Tutorial 3, of module CS1231.
    Hence, you decide to add this new tutorial class to your Tutor's Pet.
 
 1. You type `add-class n\CS1231 Tutorial 3` and press <kbd>Enter</kbd>.
@@ -573,7 +579,7 @@ For example:
 
 Other examples:
 * `list-student c\3` <br>
-  Lists all students in 3rd class.
+  Lists all students in the 3rd class.
 
 #### Editing a class : `edit-class`
 
@@ -584,8 +590,9 @@ If you entered the wrong class name or would like to change the name of a class,
 
 For example:
 1. Your module coordinator decides to allocate another class to you and you want to be able to distinguish between
-   the two classes. Hence you decide to edit the `CS2103T Tutorial` class to `CS2103T Tutorial T10`.<br>
-   You type the command `edit-class 1 n\CS2103T Tutorial T10` and press <kbd>Enter</kbd>.
+   the two classes. Hence you decide to edit the `CS2103T Tutorial` class to `CS2103T Tutorial T10`.
+
+1. You type the command `edit-class 1 n\CS2103T Tutorial T10` and press <kbd>Enter</kbd>.
 
    ![Edit class before](images/ugimages/EditClassBefore.png)
 
@@ -604,11 +611,11 @@ For example:
 Other examples:
 * `find-class CS2030 lab`<br>
   `edit-class 1 n\CS2030 lab L05`<br>
-  Edits the name of the 1st class in the results of the find command.
+  Edits the name of the 1st class in the result of the find command.
 
 <div markdown="block" class="alert alert-primary">
 
-:bulb: **Tip:** Make use of the find-class command to filter the displayed class list to your
+:bulb: **Tip:** Make use of the `find-class` command to filter the displayed class list to your
 desired class. You can now type in index 1 directly to edit the name of that class.
 
 </div>
@@ -640,15 +647,18 @@ Other examples:
 
 **:information_source: Notes about the command:**<br>
 
-* The search is case-insensitive. e.g `cs2103t` will match `CS2103T`.
+* The search is case-insensitive.<br /> 
+  e.g `cs2103t` will match `CS2103T`.
 
-* The order of the keywords does not matter. e.g. `lab CS2100` will match `CS2100 lab`.
+* The order of the keywords does not matter.<br />
+  e.g. `lab CS2100` will match `CS2100 lab`.
 
 * Only the name is searched.
 
-* Only full words will be matched e.g. `CS` will not match `CS2100`.
+* Only full words will be matched.<br />
+  e.g. `CS` will not match `CS2100`.
 
-* Classes matching at least one keyword will be returned.
+* Classes matching at least one keyword will be returned.<br />
   e.g. `CS2103T lab` will return both `CS2103T tut` and `CS2100 lab`.
 
 </div>
@@ -675,7 +685,7 @@ For example:
 Other examples:
 * `find-class CS2030 lab`<br/>
   `delete-class 1`<br/>
-  Deletes the 1st class in the results of the find class command.
+  Deletes the 1st class in the result of the `find-class` command.
 
 #### Clearing all classes : `clear-class`
 
@@ -767,7 +777,8 @@ If you would like to add a lesson to a class, you can make use of this command.
 
 For example:
 1. You receive news that you will be teaching `CS2103T Tutorial` on `Tuesday 10:00-11:00` at `COM2 #02-02` from week 1 to 13.
-   Hence, you type in the command `add-lesson c\1 d\TUESDAY st\10:00 et\11:00 v\COM2 #02-02 r\13` and press <kbd>Enter</kbd>.
+
+1. You type in the command `add-lesson c\1 d\TUESDAY st\10:00 et\11:00 v\COM2 #02-02 r\13` and press <kbd>Enter</kbd>.
 
    ![Add lesson before](images/ugimages/AddLessonBefore.png)
 
@@ -825,7 +836,7 @@ For example:
 Other examples:
 *  `find-class CS2100 lab`\
 `edit-lesson c\1 l\1 d\TUESDAY st\10:00 et\12:00 v\COM2 #02-02`\
-Edits the 1st lesson of the CS2100 lab to be held on Tuesdays, 10:00AM to 12:00PM at COM2 #02-02.
+Edits the 1st lesson of the CS2100 lab. The lesson will now be held on Tuesdays, 10:00AM to 12:00PM at COM2 #02-02.
 
 #### Deleting a lesson : `delete-lesson`
 
@@ -836,7 +847,9 @@ If you would like to delete a lesson in a class, you can make use of this comman
 
 For example:
 1. You receive news that the `Tuesday 10:00-11:00` `CS2103T Tutorial` will be cancelled permanently. You decide to
-   remove this lesson from your Tutor's Pet and hence you type in the command `delete-lesson c\1 l\2` and press
+   remove this lesson from your Tutor's Pet.
+
+1. You type in the command `delete-lesson c\1 l\2` and press
    <kbd>Enter</kbd>.
 
    ![Delete lesson before](images/ugimages/DeleteLessonBefore.png)
@@ -866,7 +879,9 @@ If you would like to find out the venue for a lesson, you can make use of this c
 
 For example:
 1. Your online lesson is starting in 10 minutes and it is time to start the session. You wish to find out the link
-   to that session and hence, you input the command `display-venue c\2 l\1` and press <kbd>Enter</kbd>.
+   to that session.
+   
+1. You type the command `display-venue c\2 l\1` and press <kbd>Enter</kbd>.
 
    ![Display venue before](images/ugimages/DisplayVenueBefore.png)
 
@@ -893,7 +908,7 @@ For example:
 
    ![Add attendance before](images/ugimages/AddAttendanceBefore.png)
 
-1. You have successfully recorded Alex's attendance. You have another 2 more students' attendance to record.
+1. You have successfully recorded Alex's attendance.
 
    ![Add attendance after](images/ugimages/AddAttendanceAfter.png)
 
@@ -928,11 +943,11 @@ For example:
 1. Alex is a student in your CS2103T class. After your lesson in week 1, you wish to give him a participation score of 45.
    However, you accidentally gave him 35 instead. 
 
-1. You can type in the command `edit-attendance c\1 l\1 s\1 w\1 p\45` and press <kbd>Enter</kbd>.
+1. You type in the command `edit-attendance c\1 l\1 s\1 w\1 p\45` and press <kbd>Enter</kbd>.
 
    ![Edit attendance before](images/ugimages/EditAttendanceBefore.png)
 
-1. Now you have successfully edited Alex's participation score from 35 to 45 points.
+1. Now, you have successfully edited Alex's participation score from 35 to 45 points.
 
    ![Edit attendance after](images/ugimages/EditAttendanceAfter.png)
 
@@ -958,15 +973,17 @@ If you need to find out a student's attendance for a specific week, you can make
 * Finds the attendance record at the specified `CLASS_INDEX` + `LESSON_INDEX` + `STUDENT_INDEX` + `WEEK`.
 
 For example:
-1. It is the end of the semester and you wish to submit your students' attendance. You enter the
-   command `list-student c\1` to see the students in your `CS2103T Tutorial` class.
+1. It is the end of the semester and you wish to submit your students' attendance. 
 
-1. You would like to find out if Alex attended week 1 lesson and hence you type in the command
-   `find-attendance c\1 l\1 s\1 w\1` and press <kbd>Enter</kbd>.
+1. You type the command `list-student c\1` to see the students in your `CS2103T Tutorial` class.
+
+1. Next, you would like to find out if Alex attended the lesson in week 1.
+
+1. You type in `find-attendance c\1 l\1 s\1 w\1` and press <kbd>Enter</kbd>.
 
    ![Find attendance before](images/ugimages/FindAttendanceBefore.png)
 
-1. Now you can find out if Alex attended the first lesson and how participative he was in week 1.
+1. Now, you can find out if Alex attended the first lesson and how participative he was in week 1.
 
    ![Find attendance after](images/ugimages/FindAttendanceAfter.png)
 
@@ -998,8 +1015,10 @@ If you would like to delete a specific student's attendance from a lesson, you c
 * Deletes the attendance record at the specified `CLASS_INDEX` + `LESSON_INDEX` + `STUDENT_INDEX` + `WEEK`.
 
 For example:
-1. You would like to delete Alex's attendance for the Thursday 10.00am to 11.00am lesson of CS2103T Tutorial
-   in Week 1. Hence, you type in the command `delete-attendance c\1 l\1 s\1 w\1` and press <kbd>Enter</kbd>.
+1. You would like to delete Alex's attendance for the Thursday 10:00AM to 11:00AM lesson of CS2103T Tutorial
+   in Week 1. 
+   
+1. You type in the command `delete-attendance c\1 l\1 s\1 w\1` and press <kbd>Enter</kbd>.
 
    ![Delete attendance before](images/ugimages/DeleteAttendanceBefore.png)
 
@@ -1015,15 +1034,18 @@ If you would like to find out how your student is performing in class, you can m
 * Gives a summary of the student's attendance at the specified `CLASS_INDEX` + `STUDENT_INDEX`.
 
 For example:
-1. It is the end of the semester and time for you to grade your students' overall class participation. You enter the
+1. It is the end of the semester and time for you to grade your students' overall class participation. 
+
+1. You type in the
    command `list-student c\1` to see the students in your `CS2103T Tutorial` class.
 
-1. You would like to find out if Alex has been participating actively throughout the semester and hence you type in the
-   command `stats c\1 s\1` and press <kbd>Enter</kbd>.
+1. Next, you would like to find out if Alex has been participating actively throughout the semester
+
+1. You type in the command `stats c\1 s\1` and press <kbd>Enter</kbd>.
 
    ![Display_stats before](images/ugimages/DisplayStatsBefore.png)
 
-1. Now you can see his average participation score and overall attendance to give a corresponding grade.
+1. Now, you can see his average participation score and overall attendance to give a corresponding grade.
 
    ![Display_stats after](images/ugimages/DisplayStatsAfter.png)
 
@@ -1040,8 +1062,8 @@ For example:
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Download Tutor's Pet in the other computer. Overwrite the empty data file it creates with the file that
+**Q**: How do I transfer my data to another computer?<br>
+**A**: Download Tutor's Pet in the other computer. Replace the empty data file it creates with the file that
 contains data from your previous Tutor's Pet home folder.
 
 --------------------------------------------------------------------------------------------------------------------
