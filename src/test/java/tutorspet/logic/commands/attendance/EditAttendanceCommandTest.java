@@ -180,8 +180,9 @@ public class EditAttendanceCommandTest {
                 editedModuleClass.getName(), lesson.printLesson(), targetWeek, editedAttendance);
 
         Model expectedModel = new ModelManager(new TutorsPet(model.getTutorsPet()), new UserPrefs());
-        expectedModel.updateFilteredStudentList(s -> s.equals(studentInFilteredList));
         expectedModel.setModuleClass(moduleClassInFilteredList, editedModuleClass);
+        expectedModel.updateFilteredStudentList(s -> s.equals(studentInFilteredList));
+        expectedModel.updateFilteredModuleClassList(c -> c.equals(moduleClassInFilteredList));
         expectedModel.commit(commitMessage);
 
         assertCommandSuccess(editAttendanceCommand, model, expectedMessage, expectedModel);
