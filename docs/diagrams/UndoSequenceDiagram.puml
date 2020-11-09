@@ -38,6 +38,10 @@ Model -> VersionedTutorsPet : undo()
 activate VersionedTutorsPet
 
 VersionedTutorsPet -> VersionedTutorsPet : resetData(ReadOnlyTutorsPet)
+activate VersionedTutorsPet
+VersionedTutorsPet --> VersionedTutorsPet
+deactivate VersionedTutorsPet
+
 VersionedTutorsPet --> Model
 deactivate VersionedTutorsPet
 

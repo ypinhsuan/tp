@@ -20,7 +20,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <img src="images/ArchitectureDiagram.png" width="450" />
 
-The ***Architecture Diagram*** given above explains the high-level design of the App. Given below is a quick overview of each component.
+The ***architecture diagram*** given above explains the high-level design of the application. Given below is a quick overview of each component.
 
 <div markdown="span" class="alert alert-primary">
 
@@ -34,11 +34,11 @@ The ***Architecture Diagram*** given above explains the high-level design of the
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
-The rest of the App consists of four components:
+The rest of the application consists of four components:
 
-* [**`UI`**](#ui-component): The UI of the App.
+* [**`UI`**](#ui-component): The UI of the application.
 * [**`Logic`**](#logic-component): The command executor.
-* [**`Model`**](#model-component): Holds the data of the App in memory.
+* [**`Model`**](#model-component): Holds the data of the application in memory.
 * [**`Storage`**](#storage-component): Reads and writes data to the hard disk.
 
 Each of the four components
@@ -106,7 +106,7 @@ The `Model` stores:
 * a `UserPref` object that represents the user’s preferences.
 * a `VersionedTutorsPet` object that contains Tutor's Pet data.
 
-There are four packages in the component, each representing a corresponding 'physical' entity:
+There are four main packages in the component, each representing a corresponding 'physical' entity:
 * the `Student` package contains classes that represent a student.
 * the `ModuleClass` package contains classes that represent a class (a group of students that attend the same lessons).<br/>
   *The package name `ModuleClass` was chosen as `class` is a reserved keyword in Java.*
@@ -239,7 +239,7 @@ The class diagram below shows the current implementation of `Lesson` model.
 ![Lesson Model](images/LessonModelClassDiagram.png)
 
 Every `Lesson` contains `startTime`, `endTime`, `Day`, `NumberOfOccurrences`, `Venue` and `AttendanceRecordList`.
-The `NumberOfOccurrences` represents the number of weeks the lesson last and the `AttendanceRecordList` stores the
+The `NumberOfOccurrences` represents the number of weeks the lesson takes place and the `AttendanceRecordList` stores the
 attendance of students. The implementation of [Attendance](#attendance-model) model is explained in the next section.
 
 <div markdown="span" class="alert alert-primary">:information_source:
@@ -283,15 +283,14 @@ the immutability of `Lesson`.
 
 Two possible implementations were considered.
 
-* **Alternative 1 (current choice):** Store `Lesson` object in `ModuleClass`
-
+* **Alternative 1 (current choice):** Store `Lesson` object in `ModuleClass`. <br/>
   This implementation allows duplicate lessons in different classes.
   * Pros:
     * Easy to implement.
   * Cons:
     * Difficult to check for duplicate lessons when adding or editing lessons as we will need to iterate through all classes.
 
-* **Alternative 2:** Implement UUID field for `Lesson`, while `ModuleClass` stores UUID
+* **Alternative 2:** Implement UUID field for `Lesson`, while `ModuleClass` stores UUID.
 
   This is similar to how `Student` is implemented. It would be a better alternative if we want all lessons to be unique
   as we can have a `UniqueLessonList` to store all lessons as shown below.
@@ -391,7 +390,8 @@ taken into account when implementing this feature.
 
 #### Implementation
 
-The display statistics mechanism is facilitated by `StatisticsCommand`. It extends `Command`. The method, `DisplayStatisticsCommand#execute()` performs a validity check and returns a specific student's statistics if all validations pass.
+The display statistics mechanism is facilitated by `StatisticsCommand`. It extends `Command`.
+The method, `DisplayStatisticsCommand#execute()` performs a validity check and returns a specific student's statistics if all validations pass.
 
 The following class diagram shows the relationship between classes during the execution of a `StatisticsCommand`:
 
@@ -456,7 +456,8 @@ This section explains the implementation of the add attendance mechanism and hig
 taken into account when implementing this feature.
 
 #### Implementation
-The add attendance mechanism is facilitated by `AddAttendanceCommand`. It extends `Command`. The method, `AddAttendanceCommand#execute()`, performs a validity check and adds a student's attendance for a particular week's lesson if all validations pass.
+The add attendance mechanism is facilitated by `AddAttendanceCommand`. It extends `Command`.
+The method, `AddAttendanceCommand#execute()`, performs a validity check and adds a student's attendance for a particular week's lesson if all validations pass.
 
 The following sequence diagram shows the interactions between the `Model` and `Logic` components during the execution
 of an `AddAttendanceCommand` with user input `add-attendance c\1 l\1 s\1` represented by `...`:
@@ -510,7 +511,7 @@ recording attendances.
 
 The undo/redo feature allows users to revert wrongly executed commands.
 
-This section explains the implementation of the Undo and Redo mechanism and highlights the design considerations taken into account when implementing this feature.
+This section explains the implementation of the undo and redo mechanism and highlights the design considerations taken into account when implementing this feature.
 
 #### Implementation
 
@@ -626,7 +627,7 @@ Two possible implementations of the undo/redo mechanism were considered.
 
 * **Alternative 2:** Commands are designed such that they can reverse the result of their execution.
   * Pros:
-    * Will use less memory (e.g. for `delete-student`, save only the student deleted, so that it can be restored when undo is called).
+    * Will use less memory (e.g. for `delete-student`, save only the student deleted, so that it can be restored when `undo` is called).
   * Cons:
     * We must ensure that the implementation of each individual command are correct.
 
@@ -1366,7 +1367,7 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all students and classes using the `list` command.
       There exists at least one class in the displayed class list.
 
-   1. Test case: `delete-class 1` followed by `undo`. \
+   1. Test case: `delete-class 1` followed by `undo`. <br/>
       Expected: The first class is deleted after the first command.
       The deleted class reappears in the displayed class list after the second command.
       Details of the `delete` change shown in the status message.
@@ -1375,10 +1376,10 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: No commands executed beforehand since application launch.
 
-   1. Test case: `list` followed by `undo`. \
+   1. Test case: `list` followed by `undo`. <br/>
       Expected: No change is undone. Error details shown in the status message.
 
-   1. Test case: `undo`. \
+   1. Test case: `undo`. <br/>
       Expected: No change is undone. Error details shown in the status message.
 
 #### Redoing previously undone commands
@@ -1388,7 +1389,7 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all students and classes using the `list` command.
       There exists at least one class in the displayed class list.
 
-   1. Test case: `delete-class 1` followed by `undo` then `redo`. \
+   1. Test case: `delete-class 1` followed by `undo` then `redo`. <br/>
       Expected: The first class is deleted after the first command.
       The deleted class reappears in the displayed class list after the second command.
       The first class is deleted again after the third command.
@@ -1398,7 +1399,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: No commands executed beforehand since application launch.
 
-   1. Test case: `redo`. \
+   1. Test case: `redo`. <br/>
       Expected: No change is redone. Error details shown in the status message.
 
 #### Viewing change history
@@ -1408,15 +1409,15 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: No commands executed beforehand since application launch.
       There exists at least one class in the displayed class list.
 
-   1. Test case: `view-history`. \
+   1. Test case: `view-history`. <br/>
       Expected: A single entry with the description: "Loaded save data." appears.
 
-   1. Test case: `delete-class 1` followed by `view-history`. \
+   1. Test case: `delete-class 1` followed by `view-history`. <br/>
       Expected: Two entries are shown in the status message.
       The first being a brief description of the delete class action with the `>` indicator beside it.
       The second being the "Loaded save data." entry.
 
-   1. Test case: `delete-class 1` followed by `undo` and then `view-history`. \
+   1. Test case: `delete-class 1` followed by `undo` and then `view-history`. <br/>
       Expected: Two entries are shown in the status message.
       The first being a brief description of the delete class action.
       The second being the "Loaded save data." entry with the `>` indicator beside it.
@@ -1427,14 +1428,14 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: None.
 
-   1. Test case: `list` followed by pressing the <kbd>↑</kbd> key.
+   1. Test case: `list` followed by pressing the <kbd>↑</kbd> key. <br/>
       Expected: `list` appears in the command box.
 
-   1. Test case: `list` followed by `list-student` followed by pressing the <kbd>↑</kbd> key twice. \
+   1. Test case: `list` followed by `list-student` followed by pressing the <kbd>↑</kbd> key twice. <br/>
       Expected: `list-student` appears in the command box after the first key press.
       `list` appears in the command box after the second key press.
 
-   1. Test case: `list` followed by typing `delete-student 1` without execution, then pressing the <kbd>↑</kbd> and then <kbd>↓</kbd> key. \
+   1. Test case: `list` followed by typing `delete-student 1` without execution, then pressing the <kbd>↑</kbd> and then <kbd>↓</kbd> key. <br/>
       Expected: `list` appears after the <kbd>↑</kbd> key press.
       `delete-student 1` restored after the <kbd>↓</kbd> key press.
 
@@ -1442,16 +1443,16 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: No commands executed beforehand since application launch.
 
-   1. Test case: Press the <kbd>↑</kbd> key. \
+   1. Test case: Press the <kbd>↑</kbd> key. <br/>
       Expected: No change to the command box text. No status message shown.
 
-   1. Test case: Press the <kbd>↓</kbd> key. \
+   1. Test case: Press the <kbd>↓</kbd> key. <br/>
       Expected: No change to the command box text. No status message shown.
 
-   1. Test case: Type `delete-student 1` without executing and press the <kbd>↑</kbd> key. \
+   1. Test case: Type `delete-student 1` without executing and press the <kbd>↑</kbd> key. <br/>
       Expected: No change to the command box text. No status message shown.
 
-   1. Test case: Type `delete-student 1` without executing and press the <kbd>↓</kbd> key. \
+   1. Test case: Type `delete-student 1` without executing and press the <kbd>↓</kbd> key. <br/>
       Expected: No change to the command box text. No status message shown.
 
 #### Saving data
@@ -1537,16 +1538,16 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: A class named ST2334 does not exist in Tutor's Pet.
 
-   1. Test case: `add-class n\ST2334` \
+   1. Test case: `add-class n\ST2334` <br/>
       Expected: Class `ST2334` is successfully added into the displayed class list.
 
-   1. Test case: `add-class 1 n\ST2334` \
+   1. Test case: `add-class 1 n\ST2334` <br/>
       Expected: No class is added. Error details shown in the status message.
 
-   1. Test case: `add-class n\ST2334 @ 1200` \
+   1. Test case: `add-class n\ST2334 @ 1200` <br/>
       Expected: No class is added. Error details shown in the status message.
 
-   1. Other incorrect add commands to try: `add-class`, `add-class n\` \
+   1. Other incorrect add commands to try: `add-class`, `add-class n\` <br/>
       Expected: No class is added. Error details shown in the status message.
 
 1. Adding an existing class
@@ -1595,10 +1596,10 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all classes using the `list-class` command. Has class(es) with the name `CS2103T` but not
       `2103T`.
 
-   1. Test case: `find-class CS2103T`<br>
+   1. Test case: `find-class CS2103T` <br>
       Expected: All classes with the name `CS2103T Tutorial` is displayed.
 
-   1. Test case: `find-class 2103T`<br>
+   1. Test case: `find-class 2103T` <br>
       Expected: No class displayed.
 
 #### Deleting a class
@@ -1623,7 +1624,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all classes using the `list-class` command. At least one class in the class list.
 
-   1. Test case: `clear-class`<br>
+   1. Test case: `clear-class` <br>
       Expected: All classes cleared.
 
 #### Adding a student to a class
@@ -1632,14 +1633,14 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all students and classes using the `list` command. Uses default tutor's pet data.
 
-   1. Test case: `link c\1 s\4` \
+   1. Test case: `link c\1 s\4` <br/>
       Expected: Student added to class. Details of added student and class shown in status message.
       Class list filters to show only the involved class. Student list filters to show only students of the class.
 
-   1. Test case: `link c\1 s\1` \
+   1. Test case: `link c\1 s\1` <br/>
       Expected: No student is added to any class. Error details shown in status message.
 
-   1. Other incorrect link commands to try: `link c\1`, `link s\1`, `link c\0 s\0` \
+   1. Other incorrect link commands to try: `link c\1`, `link s\1`, `link c\0 s\0` <br/>
       Expected: No student is added to any class. Error details shown in status message.
 
 #### Removing a student from a class
@@ -1648,14 +1649,14 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all students and classes using the `list` command. Uses default tutor's pet data.
 
-   1. Test case: `unlink c\1 s\1` \
+   1. Test case: `unlink c\1 s\1` <br/>
       Expected: Student removed from class. Details of removed student and class shown in status message.
       Class list filters to show only the involved class. Student list filters to show only remaining students of the class.
 
-   1. Test case: `unlink c\1 s\4` \
+   1. Test case: `unlink c\1 s\4` <br/>
       Expected: No student is removed from any class. Error details shown in status message.
 
-   1. Other incorrect unlink commands to try: `unlink c\1`, `unlink s\1`, `unlink c\0 s\0` \
+   1. Other incorrect unlink commands to try: `unlink c\1`, `unlink s\1`, `unlink c\0 s\0` <br/>
       Expected: No student is removed from any class. Error details shown in status message.
 
 ### Managing Lessons
