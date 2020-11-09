@@ -5,13 +5,11 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 Package "Model (Overview)" <<Rectangle>>{
-Interface ReadOnlyTutorsPet <<interface>>
+Interface "ReadOnlyTutorsPet" <<interface>>
 Interface Model <<interface>>
 Interface ObservableList <<interface>>
 Class TutorsPet
 Class VersionedTutorsPet
-Class ReadOnlyTutorsPet
-Class Model
 Class ModelManager
 Class UserPrefs
 Class ReadOnlyUserPrefs
@@ -66,7 +64,7 @@ Lesson *-down-> Attendance
 
 Attendance -[hidden]left-> Components
 
-ModelManager --> Student : filtered\nstudent list
-ModelManager --> ModuleClass : filtered\nclass list
+ModelManager --> Student : filtered       \nstudent list\n
+ModelManager --> ModuleClass : filtered\n  class list
 
 @enduml

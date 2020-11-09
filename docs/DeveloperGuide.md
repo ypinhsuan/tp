@@ -106,7 +106,7 @@ The `Model` stores:
 * a `UserPref` object that represents the user’s preferences.
 * a `VersionedTutorsPet` object that contains Tutor's Pet data.
 
-There are four packages in the component, each representing a corresponding 'physical' entity:
+There are four main packages in the component, each representing a corresponding 'physical' entity:
 * the `Student` package contains classes that represent a student.
 * the `ModuleClass` package contains classes that represent a class (a group of students that attend the same lessons).<br/>
   *The package name `ModuleClass` was chosen as `class` is a reserved keyword in Java.*
