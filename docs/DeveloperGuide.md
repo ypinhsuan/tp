@@ -267,7 +267,7 @@ limitation of PlantUML, the lifeline reaches the end of diagram.
    (This part is omitted from diagram for brevity)
 
 1. It will also check whether there is a `Lesson` with overlapping time in `targetModuleClass` by calling `hasOverlapLesson(lessonToAdd)`,
-   which then calls `Lesson#isOverlapLesson(lesson)`. (The latter part is omitted from diagram for brevity)
+   which then calls `Lesson#isOverlapLesson(lessonToAdd)`. (The latter part is omitted from diagram for brevity)
 
 1. If `lessonToAdd` does not exist in `targetModuleClass` and the timing does not overlap with any existing `Lesson`s, a new
    `ModuleClass` with `lessonToAdd` will be created. Otherwise, a `CommandException` will be thrown.
