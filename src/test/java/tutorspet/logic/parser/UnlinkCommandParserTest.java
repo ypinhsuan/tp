@@ -1,6 +1,7 @@
 package tutorspet.logic.parser;
 
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static tutorspet.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static tutorspet.logic.commands.UnlinkCommand.MESSAGE_USAGE;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_CLASS_INDEX;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_STUDENT_INDEX;
@@ -83,6 +84,15 @@ public class UnlinkCommandParserTest {
         assertParseFailure(parser, " "
                 + PREFIX_STUDENT_INDEX + "1" + " "
                 + PREFIX_CLASS_INDEX,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_nonEmptyPreamble_throwsParseException() {
+        assertParseFailure(parser, " "
+                        + PREAMBLE_NON_EMPTY + " "
+                        + PREFIX_STUDENT_INDEX + "1" + " "
+                        + PREFIX_CLASS_INDEX + "1",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
     }
 
