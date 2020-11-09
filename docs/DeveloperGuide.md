@@ -863,6 +863,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
+* 3a. The student already exists.
+
+    * 3a1. Tutor's Pet shows an error message.
+
+      Use case resumes at step 1.
+
 **Use case: UC02 - List students**
 
 **MSS**
@@ -1166,9 +1172,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 4.
 
-* 5b. The specified student is not linked to the specified class.
+* 6a. The specified student is not linked to the specified class.
 
-    * 5b1. Tutor's Pet shows an error message.
+    * 6a1. Tutor's Pet shows an error message.
 
       Use case ends.
 

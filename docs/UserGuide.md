@@ -74,15 +74,13 @@ Here are a few steps to get you started on Tutor's Pet:
 
 This section offers an overview of the layout in Tutor's Pet.
 
-There are four main areas in Tutor's Pet:
+There are three main areas in Tutor's Pet:
 
-1. command box,
+1. the command box and result display box,
 
-1. result display box,
+1. the main viewing area,
 
-1. main viewing area,
-
-1. utility area.
+1. the utility area.
 
 The command box is the area for you to enter your commands. The result of each command will be shown in the result
 display box, which is located immediately below the command box.
