@@ -12,7 +12,6 @@ import static tutorspet.logic.parser.CliSyntax.PREFIX_WEEK;
 import static tutorspet.logic.util.ModuleClassUtil.editAttendanceInModuleClass;
 import static tutorspet.logic.util.ModuleClassUtil.getAttendanceFromModuleClass;
 import static tutorspet.logic.util.ModuleClassUtil.getLessonFromModuleClass;
-import static tutorspet.model.Model.PREDICATE_SHOW_ALL_MODULE_CLASS;
 
 import java.util.List;
 import java.util.Optional;
