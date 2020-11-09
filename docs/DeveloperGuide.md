@@ -933,8 +933,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  User requests to list students.
 2.  Tutor's Pet shows a list of students.
 3.  User requests to delete a specific student in the list.
-4.  Tutor's Pet removes the student from its associated class.
-5.  Tutor's Pet deletes the student.
+4.  Tutor's Pet deletes the student.
 
     Use case ends.
 
@@ -950,19 +949,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-* 4a. The student is not in a class.
+* 3b. The student is associated to class(es).
 
-  Use case skips to step 5.
+    * 3b1. Tutor's Pet removes the student from the associated class(es).
+
+      Use case resumes at step 4.
 
 **Use case: UC06 - Clear all students**
 
 **MSS**
 
 1. User requests to clear all students.
-2. Tutor's Pet removes all students from their associated classes.
-3. Tutor's Pet deletes all students.
+2. Tutor's Pet deletes all students.
 
     Use case ends.
+
+**Extensions**
+
+* 1a. Some or all students are associated to class(es).
+
+    * 1a1. Tutor's Pet removes all student entries in all class(es)
+
+      Use case resumes at step 2.
 
 **Use case: UC07 - Add a class**
 
