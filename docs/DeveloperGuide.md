@@ -8,7 +8,7 @@ title: Developer Guide
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Setting up, getting started
+## Setting Up, Getting Started
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
@@ -861,7 +861,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 2a1. Tutor's Pet shows an error message.
 
-      Use case ends.
+      Use case resumes at step 1.
+
+* 3a. The student already exists.
+
+    * 3a1. Tutor's Pet shows an error message.
+
+      Use case resumes at step 1.
 
 **Use case: UC02 - List students**
 
@@ -1166,9 +1172,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 4.
 
-* 5b. The specified student is not linked to the specified class.
+* 6a. The specified student is not linked to the specified class.
 
-    * 5b1. Tutor's Pet shows an error message.
+    * 6a1. Tutor's Pet shows an error message.
 
       Use case ends.
 
@@ -1360,9 +1366,9 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
       Expected: The most recent window size and location is retained.
 
-#### Undoing previous commands
+#### Undoing a previous change
 
-1. Undoing the most recent command
+1. Undoing the most recent change
 
    1. Prerequisites: List all students and classes using the `list` command.
       There exists at least one class in the displayed class list.
@@ -1382,9 +1388,9 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `undo`. <br/>
       Expected: No change is undone. Error details shown in the status message.
 
-#### Redoing previously undone commands
+#### Redoing an undone change
 
-1. Redoing the most recently undone command
+1. Redoing the most recently undone change
 
    1. Prerequisites: List all students and classes using the `list` command.
       There exists at least one class in the displayed class list.

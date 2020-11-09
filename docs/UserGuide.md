@@ -74,15 +74,13 @@ Here are a few steps to get you started on Tutor's Pet:
 
 This section offers an overview of the layout in Tutor's Pet.
 
-There are four main areas in Tutor's Pet:
+There are three main areas in Tutor's Pet:
 
-1. command box,
+1. the command box and result display box,
 
-1. result display box,
+1. the main viewing area,
 
-1. main viewing area,
-
-1. utility area.
+1. the utility area.
 
 The command box is the area for you to enter your commands. The result of each command will be shown in the result
 display box, which is located immediately below the command box.
@@ -1005,12 +1003,12 @@ Other examples:
 * `find-class CS2100 lab`<br>
   `find-student bernice yu`<br>
   `find-attendance c\1 l\1 s\1 w\10`<br>
-  Shows the attendance of the 1st student in the 1st lesson of the first class in the results of the find command.<br>
+  Shows the attendance of the 1st student in the 1st lesson of the 1st class in the results of the find command.<br>
   Attendance shown is for week 10.
 
 * `list-student c\1`<br>
   `find-attendance c\1 l\1 s\2 w\5`<br>
-  Shows the attendance of the 2nd student in the 1st lesson of the first class in the results of the list command.<br>
+  Shows the attendance of the 2nd student in the 1st lesson of the 1st class in the results of the list command.<br>
   Attendance shown is for week 5.
 
 <div markdown="block" class="alert alert-info">

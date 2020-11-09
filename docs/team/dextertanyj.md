@@ -70,6 +70,7 @@ All my code contributions can be found [here](https://nus-cs2103-ay2021s1.github
     * Added implementation details for Undo/Redo feature.
     * Added implementation details for Command Recall feature.
     * Updated documentation and diagram for Model component design.
+    * Added instructions for manual testing of the following features: `undo`, `redo`, `view-history`, `link`, `unlink`, `add-class`, `delete-class` commands and Command Recall feature.
 
 * Team-Based Tasks & Community:
   * PRs reviewed (with non-trivial review comments):
@@ -82,7 +83,6 @@ All my code contributions can be found [here](https://nus-cs2103-ay2021s1.github
     [\#127](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/127)
     [\#142](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/142)
     [\#152](https://github.com/AY2021S1-CS2103T-T10-4/tp/pull/152)
-
   * The full list of PRs I have reviewed can be found [here](https://github.com/AY2021S1-CS2103T-T10-4/tp/pulls?q=is%3Apr+reviewed-by%3Adextertanyj).
 
 * Tools:
