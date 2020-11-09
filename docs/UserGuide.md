@@ -94,7 +94,7 @@ display box, which is located immediately below the command box.
 * Type a command in the command box and press <kbd>Enter</kbd> to execute it.<br>
    e.g. Type **`help`** and press <kbd>Enter</kbd> to open the help window.<br>
 
-   Some example commands you can try:
+   Here are some example commands you can try:
 
    * **`list`** : Lists all students and classes.
 
@@ -255,7 +255,7 @@ For example:
 
    ![List after](images/ugimages/ListAfter.png)
 
-#### Undoing previous changes : `undo`
+#### Undoing a previous change : `undo`
 
 If you have accidentally entered a command that permanently changes the data in your Tutor's Pet,
 you can use this command to undo the change.
@@ -276,7 +276,7 @@ For example:
 
 <div markdown="block" class="alert alert-info">
 
-:information_source: **Notes about undoable changes:** Changes that can be undone include those from the
+:information_source: **Notes about the command:** Changes that can be undone include those from the
 `add-`, `edit-`, `delete-`, `clear-`, `link`, `unlink`, and `reset` commands.
 
 </div>
@@ -287,7 +287,7 @@ For example:
 
 </div>
 
-#### Redoing previously undone changes : `redo`
+#### Redoing an undone change : `redo`
 
 If you decide that you do not need to undo a change, you can use this command to redo it.
 
@@ -303,7 +303,7 @@ For example:
 
 #### Viewing change history : `view-history`
 
-You can use this command to see a list of changes that can be undone and redone.
+You can use this command to see a list of changes that can be undone or redone.
 
 **Format** : `view-history`
 
@@ -364,7 +364,7 @@ When the [command box](#using-tutors-pet) is selected, press the <kbd>↑</kbd> 
 
 For example:
 
-1. You are taking the attendance for one of your lessons, CS2103T Tutorial.
+1. You are taking the attendance for one of your lessons in CS2103T Tutorial.
    You have just [recorded the attendance](#adding-an-attendance-record--add-attendance) of the first student.
    You now want to record the attendance of the second student.
 
@@ -518,7 +518,7 @@ If you would like to delete all students in the application, you can use this co
 
 #### Adding a class : `add-class`
 
-If you would like to add a new class, you can make use of this command.
+If you would like to add a new class, you can use this command.
 
 **Format**: `add-class n\CLASS_NAME`
 * Adds a class with the specified `CLASS_NAME`.
@@ -662,7 +662,7 @@ Other examples:
 
 #### Deleting a class : `delete-class`
 
-If you would like to delete a class, you can make use of this command.
+If you would like to delete a class, you can use this command.
 
 **Format**: `delete-class INDEX`
 * Deletes the class at the specified `INDEX`.
@@ -751,6 +751,13 @@ For example:
    Alex from the class.
 
   ![Unlink after](images/ugimages/UnlinkAfter.png)
+
+<div markdown="block" class="alert alert-primary">
+
+:bulb: **Tip:** Make use of the [`list-student`](#listing-all-students-within-a-class--list-student) command to display students
+of a particular class. Now it is easier for you to find the student to remove.
+
+</div>
 
 <div markdown="block" class="alert alert-warning">
 
