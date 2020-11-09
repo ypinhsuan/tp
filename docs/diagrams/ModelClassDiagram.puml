@@ -5,7 +5,7 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 Package "Model (Overview)" <<Rectangle>>{
-Interface "ReadOnlyTutorsPet" <<interface>>
+Interface ReadOnlyTutorsPet <<interface>>
 Interface Model <<interface>>
 Interface ObservableList <<interface>>
 Class TutorsPet
