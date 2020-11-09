@@ -861,7 +861,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 2a1. Tutor's Pet shows an error message.
 
-      Use case ends.
+      Use case resumes at step 1.
 
 * 3a. The student already exists.
 
