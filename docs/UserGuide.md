@@ -1043,8 +1043,7 @@ If you would like to find out how your student is performing in class, you can m
 For example:
 1. It is the end of the semester and time for you to grade your students' overall class participation.
 
-1. You type in the
-   command `list-student c\1` to see the students in your `CS2103T Tutorial` class.
+1. You type in the command `list-student c\1` to see the students in your `CS2103T Tutorial` class.
 
 1. Next, you would like to find out if Alex has been participating actively throughout the semester
 
