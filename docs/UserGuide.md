@@ -264,7 +264,7 @@ you can use this command to undo the change.
 
 For example:
 
-1. You want to [delete](#deleting-a-student--delete-student) Alex from your Tutor's Pet. However you accidentally deleted Bernice instead of Alex.
+1. You want to [delete](#deleting-a-student--delete-student) Alex from your Tutor's Pet. However, you accidentally deleted Bernice instead of Alex.
 
 1. You type `undo` and press <kbd>Enter</kbd>.
 
