@@ -65,7 +65,7 @@ The sections below give more details of each component.
 **API** :
 [`Ui.java`](https://github.com/AY2021S1-CS2103T-T10-4/tp/tree/master/src/main/java/tutorspet/ui/Ui.java)
 
-The UI consists of a `MainWindow` that is made up of parts.For example, `CommandBox`, `ResultDisplay`, `StudentListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `MainWindow` that is made up of parts. For example, `CommandBox`, `ResultDisplay`, `StudentListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that
  are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2021S1-CS2103T-T10-4/tp/tree/master/src/main/java/tutorspet/ui/MainWindow.java) is specified in [`MainWindow.fxml
@@ -742,7 +742,7 @@ Two possible behaviours were considered when designing the recall command featur
   * Cons:
     * The user looses any partially typed commands.
 
-Alternative 1 was chosen as it followed the behaviour of common tools, such as the Unix Terminal and Windows Command Prompt,
+Alternative 1 was chosen as it followed the behaviour of common tools, such as the Unix Shell and Windows Command Prompt,
 that our target users were familiar with.
 
 --------------------------------------------------------------------------------------------------------------------

@@ -63,7 +63,7 @@ Here are a few steps to get you started on Tutor's Pet:
 
 1. Download the latest version of Tutor's Pet [here](https://github.com/AY2021S1-CS2103T-T10-4/tp/releases).
 
-1. Copy the downloaded Tutor's Pet to a folder of your choosing. This shall be known as the home folder of your Tutor's Pet.
+1. Copy the downloaded Tutor's Pet to a folder of your choice. This is known as the home folder of your Tutor's Pet.
 
 1. Double-click the file to start the application. An application similar to the one below should appear in a few
    seconds.<br>
@@ -169,7 +169,7 @@ This section details the format of the commands available in Tutor's Pet. We wil
 * Items in square brackets are optional.<br>
   e.g `n\NAME [tag\TAG]` can be used as `n\John Doe tag\student` or as `n\John Doe`.
 
-* Items with `…` after them can be used multiple or zero times.<br>
+* Items with `…` after them can be used zero or more times.<br>
   e.g. `[tag\TAG]…` can be used as ` ` (i.e. 0 times), `tag\student`, `tag\average tag\TA candidate` etc.
 
 * Parameters can be in any order.<br>
@@ -789,7 +789,7 @@ For example:
 
   * You must type out the day in full.
 
-  * You are not allowed to type in overnight lessons. For example, a lesson cannot start at `23:59` and end at `00:01`.
+  * You are not allowed to add overnight lessons. For example, a lesson cannot start at `23:59` and end at `00:01`.
 
   * The `Number of Weeks` displayed refers to the total number of weeks you will be teaching the lesson.
     It does not follow the week numbers of a semester.
