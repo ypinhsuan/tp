@@ -275,11 +275,11 @@ For example:
 1. Bernice has been undeleted and now you can delete Alex.
 
    ![Undo after](images/ugimages/UndoAfter.png)
-   
+
 <div markdown="block" class="alert alert-info">
 
 :information_source: **Notes about undoable changes:** Changes that can be undone include those from the
-`add-`, `edit-`, `delete-`, `clear-`, `link`, `unlink`, and `reset` commands. 
+`add-`, `edit-`, `delete-`, `clear-`, `link`, `unlink`, and `reset` commands.
 
 </div>
 
@@ -388,7 +388,7 @@ There is no need for you to save manually.
 If you would like to add a student to Tutor's Pet, use this command.
 
 **Format**: `add-student n\NAME t\TELEGRAM_USERNAME e\EMAIL [tag\TAG]…​`
-  * Adds a student with the specified `NAME` + `TELEGRAM_USERNAME` + `EMAIL` + `TAG`. 
+  * Adds a student with the specified `NAME` + `TELEGRAM_USERNAME` + `EMAIL` + `TAG`.
 
 For example:
 1. You would like to add a new student, `Joel Lee` to Tutor's Pet.
@@ -566,8 +566,7 @@ If you would like to see a list of all students in a particular class, make use 
 * Lists the students in the class at the specified `CLASS_INDEX`.
 
 For example:
-1. You want to send an email to students in your `CS2100 Lab` and hence would want to see a list of students in
-   this class. 
+1. You want to send an email to students in your `CS2100 Lab` and hence would want to see a list of students in this class.
 
 1. You type in the command `list-student c\2` and press <kbd>Enter</kbd>.
 
@@ -647,7 +646,7 @@ Other examples:
 
 **:information_source: Notes about the command:**<br>
 
-* The search is case-insensitive.<br /> 
+* The search is case-insensitive.<br />
   e.g `cs2103t` will match `CS2103T`.
 
 * The order of the keywords does not matter.<br />
@@ -791,9 +790,9 @@ For example:
 **:information_source: Notes about the command:**<br>
 
   * You must type out the day in full.
-  
+
   * You are not allowed to type in overnight lessons. For example, a lesson cannot start at `23:59` and end at `00:01`.
-  
+
   * The `Number of Weeks` displayed refers to the total number of weeks you will be teaching the lesson.
     It does not follow the week numbers of a semester.
     For example, if a semester has 13 weeks and your lessons begin in week 3 and end in week 13,
@@ -880,7 +879,7 @@ If you would like to find out the venue for a lesson, you can make use of this c
 For example:
 1. Your online lesson is starting in 10 minutes and it is time to start the session. You wish to find out the link
    to that session.
-   
+
 1. You type the command `display-venue c\2 l\1` and press <kbd>Enter</kbd>.
 
    ![Display venue before](images/ugimages/DisplayVenueBefore.png)
@@ -941,7 +940,7 @@ You can use this command to edit the attendance and participation score of a stu
 
 For example:
 1. Alex is a student in your CS2103T class. After your lesson in week 1, you wish to give him a participation score of 45.
-   However, you accidentally gave him 35 instead. 
+   However, you accidentally gave him 35 instead.
 
 1. You type in the command `edit-attendance c\1 l\1 s\1 w\1 p\45` and press <kbd>Enter</kbd>.
 
@@ -960,7 +959,7 @@ Other examples:
 **:information_source: Notes about the command:**<br>
 
   * The `WEEK` **must be a positive whole number** 1, 2, 3, …
-  
+
   * The `PARTICIPATION_SCORE` **must be a non-negative whole number** 0, 1, 2, …
 
 </div>
@@ -973,7 +972,7 @@ If you need to find out a student's attendance for a specific week, you can make
 * Finds the attendance record at the specified `CLASS_INDEX` + `LESSON_INDEX` + `STUDENT_INDEX` + `WEEK`.
 
 For example:
-1. It is the end of the semester and you wish to submit your students' attendance. 
+1. It is the end of the semester and you wish to submit your students' attendance.
 
 1. You type the command `list-student c\1` to see the students in your `CS2103T Tutorial` class.
 
@@ -1016,8 +1015,8 @@ If you would like to delete a specific student's attendance from a lesson, you c
 
 For example:
 1. You would like to delete Alex's attendance for the Thursday 10:00AM to 11:00AM lesson of CS2103T Tutorial
-   in Week 1. 
-   
+   in Week 1.
+
 1. You type in the command `delete-attendance c\1 l\1 s\1 w\1` and press <kbd>Enter</kbd>.
 
    ![Delete attendance before](images/ugimages/DeleteAttendanceBefore.png)
@@ -1034,7 +1033,7 @@ If you would like to find out how your student is performing in class, you can m
 * Gives a summary of the student's attendance at the specified `CLASS_INDEX` + `STUDENT_INDEX`.
 
 For example:
-1. It is the end of the semester and time for you to grade your students' overall class participation. 
+1. It is the end of the semester and time for you to grade your students' overall class participation.
 
 1. You type in the
    command `list-student c\1` to see the students in your `CS2103T Tutorial` class.

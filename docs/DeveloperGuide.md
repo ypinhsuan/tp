@@ -527,7 +527,7 @@ stored internally as a list of `TutorsPetState`. It also maintains a `statePoint
 
 A `TutorsPetState` object contains a Tutor's Pet state, represented as a `ReadOnlyTutorsPet`, along with a message that describes the changes relevant to this state.
 
-The class diagram below summarizes the relationships between the key classes used for the undo/redo feature: 
+The class diagram below summarizes the relationships between the key classes used for the undo/redo feature:
 
 ![TutorsPetState](images/TutorsPetState.png)
 
@@ -1457,10 +1457,10 @@ testers are expected to do more *exploratory* testing.
 1. Dealing with missing/corrupted data files
 
    1. Prerequisites: There exists a data file.
-   
+
    1. Test case: Delete the data file and launch the application.<br/>
       Expected: The application launches with sample data.
-      
+
    2. Test case: Modify the data file by removing a field in a json object.<br/>
       Expected: The application launches with no data.
 
