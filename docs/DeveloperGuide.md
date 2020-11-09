@@ -43,7 +43,7 @@ The rest of the App consists of four components:
 
 Each of the four components
 
-* defines its *API* in an `interface` with the same name as the Component.
+* defines its *API* in an `interface` with the same name as the component,
 * exposes its functionality using a concrete `{Component Name}Manager` class (which implements the corresponding API `interface` mentioned in the previous point).
 
 For example, the `Logic` component (see the class diagram given below) defines its API in the `Logic.java` interface and exposes its functionality using the `LogicManager.java` class which implements the `Logic` interface.
@@ -52,7 +52,7 @@ For example, the `Logic` component (see the class diagram given below) defines i
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other when the user issues the command `delete-student 1`.
+The *sequence diagram* below shows how the components interact with each other when the user issues the command `delete-student 1`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
@@ -73,7 +73,7 @@ The `UI` component uses JavaFx UI framework. The layout of these UI parts are de
 
 The `UI` component
 
-* executes user commands using the `Logic` component.
+* executes user commands using the `Logic` component,
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 
 ### Logic Component
@@ -138,8 +138,9 @@ The class diagram below shows the design of the `Student` and `ModuleClass` pack
 **API** : [`Storage.java`](https://github.com/AY2021S1-CS2103T-T10-4/tp/tree/master/src/main/java/tutorspet/storage/Storage.java)
 
 The `Storage` component
-* can save `UserPref` objects in json format and read it back.
-* can save the data in json format and read it back.
+
+* saves `UserPref` objects in json format and reads it back,
+* saves the data in json format and reads it back.
 
 ### Common Classes
 
@@ -213,8 +214,8 @@ A `ModuleClass` can also contain any number of `Lesson` objects.
 
 ##### Aspect 1: Student storage
 
-* **Alternative 1 (current choice):** Store `Student` `UUID` object in `ModuleClass` as a Set.
-  This implementation ensures that there are no duplicate students found in a class.
+* **Alternative 1 (current choice):** Store `Student` `UUID` object in `ModuleClass` as a `Set`.
+  This implementation ensures that there are no duplicate students in a class.
   * Pros:
     * Ensures that all students within a class are unique.
   * Cons:
@@ -239,7 +240,7 @@ The class diagram below shows the current implementation of `Lesson` model.
 
 Every `Lesson` contains `startTime`, `endTime`, `Day`, `NumberOfOccurrences`, `Venue` and `AttendanceRecordList`.
 The `NumberOfOccurrences` represents the number of weeks the lesson last and the `AttendanceRecordList` stores the
-attendance of students. The implementation of `Attendance` model is explained in the next section.
+attendance of students. The implementation of [Attendance](#attendance-model) model is explained in the next section.
 
 <div markdown="span" class="alert alert-primary">:information_source:
 **Note:** All classes in the `Lesson` package are designed to be immutable.
@@ -251,7 +252,7 @@ with overlapping time.
 
 The sequence diagram below shows the interaction between `Logic` and `Model` when a `Lesson` is added to `ModuleClass`.
 The utility methods for modifying `Lesson` in `ModuleClass` are in `ModuleClassUtil` to avoid handling add, edit and
-delete in the `Model` component.
+delete operations in the `Model` component.
 
 ![Add Lesson Sequence Diagram](images/AddLessonSequenceDiagram.png)
 
@@ -288,8 +289,7 @@ Two possible implementations were considered.
   * Pros:
     * Easy to implement.
   * Cons:
-    * Difficult to check for duplicate lessons when adding or editing lessons as we will need to iterate through all
-      classes.
+    * Difficult to check for duplicate lessons when adding or editing lessons as we will need to iterate through all classes.
 
 * **Alternative 2:** Implement UUID field for `Lesson`, while `ModuleClass` stores UUID
 
@@ -323,7 +323,7 @@ The `Attendance`, `AttendanceRecord` and `AttendanceRecordList` models are imple
 It contains the `Attendance`s of all `Student`s who have attended the particular lesson.
 These information are stored as a `Map` with `Student` `UUID` as keys.
 `AttendanceRecordList` refers to the list of all `AttendanceRecord` instances.
-The size of this list is fixed and is determined by the `NumberOfOccurences` in `Lesson`.
+The size of this list is fixed and is determined by the `NumberOfOccurences` in the `Lesson`.
 
 <div markdown="span" class="alert alert-primary">:information_source:
 **Note:** All classes in the `Attendance` package are designed to be immutable.
@@ -337,7 +337,7 @@ Therefore, the `Attendance` class does not have, for example, a `boolean hasAtte
 It only has a `participationScore` attribute.
 
 ##### Aspect 2: Maintaining immutability and optimising `AttendanceRecord`
-* **Alternative 1 (current choice):** Dynamically updating `AttendanceRecord` whenever there is a change to attendance.
+* **Alternative 1 (current choice):** Updating `AttendanceRecord` whenever there is a change to attendance.
   * Pros:
     * Guarantees immutability.
   * Cons:
@@ -391,10 +391,7 @@ taken into account when implementing this feature.
 
 #### Implementation
 
-The display statistics mechanism is facilitated by `StatisticsCommand`. It extends `Command`.
-
-* `DisplayStatisticsCommand#execute()`: Performs a validity check and returns a specific student's statistics if all
- validations passed.
+The display statistics mechanism is facilitated by `StatisticsCommand`. It extends `Command`. The method, `DisplayStatisticsCommand#execute()` performs a validity check and returns a specific student's statistics if all validations pass.
 
 The following class diagram shows the relationship between classes during the execution of a `StatisticsCommand`:
 
@@ -446,7 +443,7 @@ the relevant results without knowing the low level implementations.
 `ModuleClassUtil#getAbsentWeek` to return a `String` representation directly.
   * Pros:
     * Easy, straightforward to implement.
-    * Do not need to iterate through scores and weeks in `StatisticsCommand`.
+    * Does not need to iterate through scores and weeks in `StatisticsCommand`.
   * Cons:
     * `ModuleClassUtil#getParticipationScore` and `ModuleClassUtil#getAbsentWeek` would have too many
        responsibilities. Violates the Single Responsibility Principle.
@@ -459,10 +456,7 @@ This section explains the implementation of the add attendance mechanism and hig
 taken into account when implementing this feature.
 
 #### Implementation
-The add attendance mechanism is facilitated by `AddAttendanceCommand`. It extends `Command`.
-
-* `AddAttendanceCommand#execute()`: Performs a validity check and adds a student's attendance for a particular week's
-  lesson if all validations passed.
+The add attendance mechanism is facilitated by `AddAttendanceCommand`. It extends `Command`. The method, `AddAttendanceCommand#execute()`, performs a validity check and adds a student's attendance for a particular week's lesson if all validations pass.
 
 The following sequence diagram shows the interactions between the `Model` and `Logic` components during the execution
 of an `AddAttendanceCommand` with user input `add-attendance c\1 l\1 s\1` represented by `...`:
@@ -474,7 +468,7 @@ of an `AddAttendanceCommand` with user input `add-attendance c\1 l\1 s\1` repres
    to `TutorsPetParser`.
 1. `TutorsPetParser` encapsulates the `AddAttendanceCommand` object as a `Command` object which is executed by
    the `LogicManager`.
-1. The command execution calls `getFilteredStudentList` and `getFilteredModuleClassList` to get the `targetStudent` and
+1. The command execution calls `getFilteredStudentList()` and `getFilteredModuleClassList()` to get the `targetStudent` and
    `targetModuleClass` respectively using indexes from the user input.
 1. As seen from the diagram above, `ModuleClassUtil#addAttendanceToModuleClass()` is then called. Execution of that
    method returns a new `ModuleClass` object with the new attendance of the `targetStudent` added.

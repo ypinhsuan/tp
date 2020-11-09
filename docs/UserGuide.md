@@ -84,7 +84,7 @@ There are four main areas in Tutor's Pet:
 
 1. utility area.
 
-The command box is the area for you to enter your commands. The result of each command would be shown in the result
+The command box is the area for you to enter your commands. The result of each command will be shown in the result
 display box, which is located immediately below the command box.
 
 ![Command box and result display box](images/ugimages/CommandAndDisplayBox.png)
@@ -128,7 +128,7 @@ classes in Tutor's Pet.
 
 <br/>
 
-The utility area consists of three tabs: **File**, **Theme**, **Help**.
+The utility area consists of three tabs: **File**, **Theme** and **Help**.
 
   ![Utility area](images/ugimages/UtilityArea.png)
 
@@ -175,7 +175,7 @@ This section details the format of the commands available in Tutor's Pet. We wil
 * Parameters can be in any order.<br>
   e.g. If the command specifies `n\NAME t\TELEGRAM_USERNAME`, typing `t\TELEGRAM_USERNAME n\NAME` is also acceptable.
 
-* Indexes **must be a positive whole number** 1, 2, 3, …
+* Indexes **must be positive whole numbers** 1, 2, 3, …
 
 * The `STUDENT_INDEX` refers to the index number shown in the [displayed student list](#displayed-student-list).
 
@@ -257,8 +257,8 @@ For example:
 
 #### Undoing previous changes : `undo`
 
-If you have accidentally entered a command that permanently modifies the data in your Tutor's Pet,
-you can use this command to undo the modification.
+If you have accidentally entered a command that permanently changes the data in your Tutor's Pet,
+you can use this command to undo the change.
 
 **Format**: `undo`
 
@@ -289,7 +289,7 @@ For example:
 
 #### Redoing previously undone changes : `redo`
 
-If you decide that you do not need to undo a command, you can use `redo` to restore the command.
+If you decide that you do not need to undo a change, you can use this command to redo it.
 
 **Format** : `redo`
 
@@ -524,7 +524,7 @@ If you would like to add a new class, you can make use of this command.
 * Adds a class with the specified `CLASS_NAME`.
 
 For example:
-1. You have just been assigned to teach a tutorial class, Tutorial 3, of module CS1231.
+1. You have just been assigned to teach a tutorial class - Tutorial 3 of module CS1231.
    Hence, you decide to add this new tutorial class to your Tutor's Pet.
 
 1. You type `add-class n\CS1231 Tutorial 3` and press <kbd>Enter</kbd>.
@@ -612,7 +612,7 @@ Other examples:
 
 <div markdown="block" class="alert alert-primary">
 
-:bulb: **Tip:** Make use of the `find-class` command to filter the displayed class list to your
+:bulb: **Tip:** Make use of the  [find class](#finding-a-class-by-name--find-class) command to filter the displayed class list to your
 desired class. You can now type in index 1 directly to edit the name of that class.
 
 </div>
