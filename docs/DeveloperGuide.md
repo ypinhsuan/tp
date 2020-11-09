@@ -8,7 +8,7 @@ title: Developer Guide
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Setting up, getting started
+## Setting Up, Getting Started
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
@@ -1360,9 +1360,9 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
       Expected: The most recent window size and location is retained.
 
-#### Undoing previous commands
+#### Undoing a previous change
 
-1. Undoing the most recent command
+1. Undoing the most recent change
 
    1. Prerequisites: List all students and classes using the `list` command.
       There exists at least one class in the displayed class list.
@@ -1382,9 +1382,9 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `undo`. <br/>
       Expected: No change is undone. Error details shown in the status message.
 
-#### Redoing previously undone commands
+#### Redoing an undone change
 
-1. Redoing the most recently undone command
+1. Redoing the most recently undone change
 
    1. Prerequisites: List all students and classes using the `list` command.
       There exists at least one class in the displayed class list.
