@@ -157,8 +157,6 @@ and detailed instructions on how to use each command.
 
 ### Command Format
 
-This section highlights information about the command format that is common across all commands.
-
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command format:**<br>
@@ -259,8 +257,8 @@ For example:
 
 #### Undoing previous changes : `undo`
 
-If you have accidentally entered a command that permanently changes the data in your Tutor's Pet,
-you can use this command to undo the changes.
+If you have accidentally entered a command that permanently modifies the data in your Tutor's Pet,
+you can use this command to undo the modification.
 
 **Format**: `undo`
 
@@ -291,7 +289,7 @@ For example:
 
 #### Redoing previously undone changes : `redo`
 
-If you decide that you did not need to undo a change, you can use this command to redo the change.
+If you decide that you do not need to undo a command, you can use `redo` to restore the command.
 
 **Format** : `redo`
 
@@ -343,7 +341,7 @@ All changes you have made to your Tutor's Pet will be saved.
 
 #### Resetting the program : `reset`
 
-You can use this command to reset Tutor's Pet. All existing data will be deleted.
+You can use this command to reset Tutor's Pet. All existing classes and students will be deleted.
 
 **Format**: `reset`
 
@@ -452,7 +450,7 @@ Edits the telegram username and email address of the 1st student to `smartlex` a
 *  `edit-student 2 n\Betsy Yu tag\` \
 Edits the name of the 2nd student to `Betsy Yu` and deletes all of her existing tags.
 
-#### Finding student by name : `find-student`
+#### Finding a student by name : `find-student`
 
 If you would like to search for a student by name, use this command.
 
@@ -619,7 +617,7 @@ desired class. You can now type in index 1 directly to edit the name of that cla
 
 </div>
 
-#### Finding class by name : `find-class`
+#### Finding a class by name : `find-class`
 
 If you would like to find classes that contain any of the given keywords in their name, you can make use of this
 command.
@@ -923,6 +921,16 @@ Other examples:
   Adds the attendance of the 2nd student in the results of the list command to the 1st lesson of the 1st class.<br>
   Attendance recorded is for week 5 and student's participation score is 50.
 
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the command:**<br>
+
+  * The `WEEK` **must be a positive whole number** 1, 2, 3, …
+
+  * The `PARTICIPATION_SCORE` **must be a non-negative whole number** 0, 1, 2, …
+
+</div>
+
 <div markdown="block" class="alert alert-primary">
 
 :bulb: **Tip:** If you are planning to add multiple attendances consecutively, click on the command
@@ -982,7 +990,7 @@ For example:
 
    ![Find attendance before](images/ugimages/FindAttendanceBefore.png)
 
-1. Now, you can find out if Alex attended the first lesson and how participative he was in week 1.
+1. Now, you can find out if Alex attended the first lesson and his participation score in week 1.
 
    ![Find attendance after](images/ugimages/FindAttendanceAfter.png)
 
