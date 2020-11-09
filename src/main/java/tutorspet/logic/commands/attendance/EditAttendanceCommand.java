@@ -12,7 +12,6 @@ import static tutorspet.logic.parser.CliSyntax.PREFIX_WEEK;
 import static tutorspet.logic.util.ModuleClassUtil.editAttendanceInModuleClass;
 import static tutorspet.logic.util.ModuleClassUtil.getAttendanceFromModuleClass;
 import static tutorspet.logic.util.ModuleClassUtil.getLessonFromModuleClass;
-import static tutorspet.model.Model.PREDICATE_SHOW_ALL_MODULE_CLASS;
 
 import java.util.List;
 import java.util.Optional;
@@ -108,7 +107,6 @@ public class EditAttendanceCommand extends Command {
                 editAttendanceInModuleClass(targetModuleClass, lessonIndex, week, targetStudent, editedAttendance);
 
         model.setModuleClass(targetModuleClass, modifiedModuleClass);
-        model.updateFilteredModuleClassList(PREDICATE_SHOW_ALL_MODULE_CLASS);
 
         model.commit(String.format(MESSAGE_COMMIT, targetStudent.getName(), modifiedModuleClass.getName(),
                 targetLesson.printLesson(), week));

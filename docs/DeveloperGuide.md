@@ -34,17 +34,17 @@ The ***Architecture Diagram*** given above explains the high-level design of the
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
-The rest of the App consists of four components.
+The rest of the App consists of four components:
 
 * [**`UI`**](#ui-component): The UI of the App.
 * [**`Logic`**](#logic-component): The command executor.
 * [**`Model`**](#model-component): Holds the data of the App in memory.
-* [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
+* [**`Storage`**](#storage-component): Reads and writes data to the hard disk.
 
-Each of the four components,
+Each of the four components
 
-* defines its *API* in an `interface` with the same name as the Component.
-* exposes its functionality using a concrete `{Component Name}Manager` class (which implements the corresponding API `interface` mentioned in the previous point.
+* defines its *API* in an `interface` with the same name as the component,
+* exposes its functionality using a concrete `{Component Name}Manager` class (which implements the corresponding API `interface` mentioned in the previous point).
 
 For example, the `Logic` component (see the class diagram given below) defines its API in the `Logic.java` interface and exposes its functionality using the `LogicManager.java` class which implements the `Logic` interface.
 
@@ -52,7 +52,7 @@ For example, the `Logic` component (see the class diagram given below) defines i
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete-student 1`.
+The *sequence diagram* below shows how the components interact with each other when the user issues the command `delete-student 1`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
@@ -65,17 +65,16 @@ The sections below give more details of each component.
 **API** :
 [`Ui.java`](https://github.com/AY2021S1-CS2103T-T10-4/tp/tree/master/src/main/java/tutorspet/ui/Ui.java)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `StudentListPanel
-`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `MainWindow` that is made up of parts. For example, `CommandBox`, `ResultDisplay`, `StudentListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that
  are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2021S1-CS2103T-T10-4/tp/tree/master/src/main/java/tutorspet/ui/MainWindow.java) is specified in [`MainWindow.fxml
  `](https://github.com/AY2021S1-CS2103T-T10-4/tp/tree/master/src/main/resources/view/MainWindow.fxml)
 
-The `UI` component,
+The `UI` component
 
-* Executes user commands using the `Logic` component.
-* Listens for changes to `Model` data so that the UI can be updated with the modified data.
+* executes user commands using the `Logic` component,
+* listens for changes to `Model` data so that the UI can be updated with the modified data.
 
 ### Logic Component
 
@@ -108,13 +107,13 @@ The `Model` stores:
 * a `VersionedTutorsPet` object that contains Tutor's Pet data.
 
 There are four packages in the component, each representing a corresponding 'physical' entity:
-* The `Student` package contains classes that represent a student.
-* The `ModuleClass` package contains classes that represent a class (a group of students that attend the same lessons).<br/>
+* the `Student` package contains classes that represent a student.
+* the `ModuleClass` package contains classes that represent a class (a group of students that attend the same lessons).<br/>
   *The package name `ModuleClass` was chosen as `class` is a reserved keyword in Java.*
-* The `Lesson` package contains classes that represent a series of lessons.
-* The `Attendance` package contains classes that represent the attendance and participation records of students.
+* the `Lesson` package contains classes that represent a series of lessons.
+* the `Attendance` package contains classes that represent the attendance and participation records of students.
 
-It also exposes two unmodifiable `ObservableList<>`, one each for `Student` and `ModuleClass`, that can be 'observed'.
+`Model` also exposes two unmodifiable `ObservableList<>`, one each for `Student` and `ModuleClass`, that can be 'observed'.
 This allows the UI component to automatically update when the data in these lists change.
 
 The class diagram below gives an overview of the model package.<br/>
@@ -138,9 +137,10 @@ The class diagram below shows the design of the `Student` and `ModuleClass` pack
 
 **API** : [`Storage.java`](https://github.com/AY2021S1-CS2103T-T10-4/tp/tree/master/src/main/java/tutorspet/storage/Storage.java)
 
-The `Storage` component,
-* can save `UserPref` objects in json format and read it back.
-* can save the data in json format and read it back.
+The `Storage` component
+
+* saves `UserPref` objects in json format and reads it back,
+* saves the data in json format and reads it back.
 
 ### Common Classes
 
@@ -155,9 +155,9 @@ This section describes some noteworthy details on how certain features are imple
 ### Student Model and Student Universally Unique Identifier (UUID)
 
 A `UUID` is a unique 128-bit number to identify a unique `Student` within Tutor’s Pet.
-In Tutor’s Pet, every `Student` upon construction is assigned a randomly generated `UUID` that is used to
+In Tutor’s Pet, every `Student` upon construction, is assigned a randomly generated `UUID`. It is used to
 uniquely identify a `Student` across `Classes` and `Lessons`. This is important because we are dealing with
-`Student` data not just in the `Student` model itself, but also `Classes` and `Lessons`. Using a
+`Student` data not just in the `Student` model, but also in the `Class`es and `Lesson`s model. Using a
 `Student` `UUID` will help to ensure referential integrity of `Student` data across different models when
 `Student` data is modified by the user.
 
@@ -172,27 +172,27 @@ Every `Student` contains a `UUID`, `Name`, `Telegram`, `Email`, and a set of `Ta
 ![StudentUUID](images/StudentUUID.png)
 
 From the object diagram above, we have designed the `Student` model such that every `Student` like `Alice`
-has a unique 128 bit `UUID` tagged to him/her, in addition to the `Name`, `Telegram`, `Email`, and `Tags`
-fields providing information of the `Student`.
+has a unique 128 bit `UUID` tagged to her. In addition, the `Name`, `Telegram`, `Email`, and `Tags`
+fields are also implemented to define a `Student`.
 
 #### Design Considerations
 
-This section elaborates further on the reason why we eventually chose to adopt a `UUID` over other potential
+This section elaborates further on why we chose to adopt a `UUID` over other potential
 solutions.
 
 ##### Aspect 1: How to uniquely identify Students across models.
 
-* **Alternative 1 (current choice):** Assign a `UUID` tag to each `Student`
+* **Alternative 1 (current choice):** Assign a `UUID` attribute to each `Student`
   * Pros:
-    * Convenient to generate `UUID` in Java as Java has a `UUID` package to support `UUID`s.
+    * Convenient to generate `UUID` in Java. Java has a `UUID` package to support `UUID`s.
     * `UUID` is non-editable.
   * Cons:
-    * Implementation is slightly more complicated as caution must be taken in integrating the `UUID` field into
-      `Student` model, and enforce `Student` equality checks using `UUID` in Tutor’s Pet.
+    * Implementation is slightly more complicated. Caution must be taken when integrating the `UUID` field into
+      `Student` model, and enforcing `Student` equality checks using `UUID` in Tutor’s Pet.
     * Although the chances are low, it is possible that generating random `UUID`s present a risk of `UUID` collisions
       when we deal with large amounts of student data.
 
-* **Alternative 2:** Enforce that each `Student` must have a unique `Email`
+* **Alternative 2:** Ensure that each `Student` must have a unique `Email`
   * Pros:
     * Easier to implement as the original AB3 already has an `Email` field integrated into it.
   * Cons:
@@ -214,14 +214,14 @@ A `ModuleClass` can also contain any number of `Lesson` objects.
 
 ##### Aspect 1: Student storage
 
-* **Alternative 1 (current choice):** Stores `Student` `UUID` object in `ModuleClass` as a Set.
-  This implementation ensures that there are no duplicate students found in a class.
+* **Alternative 1 (current choice):** Store `Student` `UUID` object in `ModuleClass` as a `Set`.
+  This implementation ensures that there are no duplicate students in a class.
   * Pros:
     * Ensures that all students within a class are unique.
   * Cons:
     * There is a possibility of UUID collision, even though the probability is very low.
 
-* **Alternative 2:** Stores `Student` object in `ModuleClass`.
+* **Alternative 2:** Store `Student` object in `ModuleClass`.
    * Pros:
      * Easy to implement.
    * Cons:
@@ -232,7 +232,7 @@ This section explains the design considerations of the `Lesson` model.
 
 #### Implementation
 
-<a name="lesson-class-diagram"/>
+<a name="lesson-class-diagram"></a>
 
 The class diagram below shows the current implementation of `Lesson` model.
 
@@ -240,7 +240,7 @@ The class diagram below shows the current implementation of `Lesson` model.
 
 Every `Lesson` contains `startTime`, `endTime`, `Day`, `NumberOfOccurrences`, `Venue` and `AttendanceRecordList`.
 The `NumberOfOccurrences` represents the number of weeks the lesson last and the `AttendanceRecordList` stores the
-attendance of students. The implementation of `Attendance` model is explained in the next section.
+attendance of students. The implementation of [Attendance](#attendance-model) model is explained in the next section.
 
 <div markdown="span" class="alert alert-primary">:information_source:
 **Note:** All classes in the `Lesson` package are designed to be immutable.
@@ -252,7 +252,7 @@ with overlapping time.
 
 The sequence diagram below shows the interaction between `Logic` and `Model` when a `Lesson` is added to `ModuleClass`.
 The utility methods for modifying `Lesson` in `ModuleClass` are in `ModuleClassUtil` to avoid handling add, edit and
-delete in the `Model` component.
+delete operations in the `Model` component.
 
 ![Add Lesson Sequence Diagram](images/AddLessonSequenceDiagram.png)
 
@@ -270,7 +270,7 @@ limitation of PlantUML, the lifeline reaches the end of diagram.
 1. It will also check whether there is a `Lesson` with overlapping time in `targetModuleClass` by calling `hasOverlapLesson(lessonToAdd)`,
    which then calls `Lesson#isOverlapLesson(lessonToAdd)`. (The latter part is omitted from diagram for brevity)
 
-1. If `lessonToAdd` does not exists in `targetModuleClass` and the timing does not overlap with any existing `Lesson`s, a new
+1. If `lessonToAdd` does not exist in `targetModuleClass` and the timing does not overlap with any existing `Lesson`s, a new
    `ModuleClass` with `lessonToAdd` will be created. Otherwise, a `CommandException` will be thrown.
 
 #### Design Considerations
@@ -283,16 +283,15 @@ the immutability of `Lesson`.
 
 Two possible implementations were considered.
 
-* **Alternative 1 (current choice):** Stores `Lesson` object in `ModuleClass`
+* **Alternative 1 (current choice):** Store `Lesson` object in `ModuleClass`
 
   This implementation allows duplicate lessons in different classes.
   * Pros:
     * Easy to implement.
   * Cons:
-    * Difficult to check for duplicate lessons when adding or editing lessons as we will need to iterate through all
-      classes.
+    * Difficult to check for duplicate lessons when adding or editing lessons as we will need to iterate through all classes.
 
-* **Alternative 2:** Have UUID field for `Lesson` and `ModuleClass` stores UUID
+* **Alternative 2:** Implement UUID field for `Lesson`, while `ModuleClass` stores UUID
 
   This is similar to how `Student` is implemented. It would be a better alternative if we want all lessons to be unique
   as we can have a `UniqueLessonList` to store all lessons as shown below.
@@ -306,7 +305,7 @@ Two possible implementations were considered.
     * Harder to implement.
 
 Alternative 1 was chosen because it is possible to have the same lesson in different classes if users do not delete
-the data for previous semesters. Hence, we want to allow duplicate lessons only in different classes. Furthermore,
+the data for previous semesters. Hence, we allowed for duplicate lessons in different classes. Furthermore,
 since users need to specify the class index when editing or deleting lessons, it makes alternative 1 easier to implement.
 
 ### Attendance Model
@@ -315,7 +314,7 @@ This section explains the design considerations of the `Attendance` model.
 #### Implementation
 The `Attendance`, `AttendanceRecord` and `AttendanceRecordList` models are implemented as follows:
 
-<a name="attendance-class-diagram"/>
+<a name="attendance-class-diagram"></a>
 
 ![AttendanceClassDiagram](images/AttendanceClassDiagram.png)
 
@@ -324,7 +323,7 @@ The `Attendance`, `AttendanceRecord` and `AttendanceRecordList` models are imple
 It contains the `Attendance`s of all `Student`s who have attended the particular lesson.
 These information are stored as a `Map` with `Student` `UUID` as keys.
 `AttendanceRecordList` refers to the list of all `AttendanceRecord` instances.
-The size of this list is fixed and is determined by the `NumberOfOccurences` in `Lesson`.
+The size of this list is fixed and is determined by the `NumberOfOccurences` in the `Lesson`.
 
 <div markdown="span" class="alert alert-primary">:information_source:
 **Note:** All classes in the `Attendance` package are designed to be immutable.
@@ -338,7 +337,7 @@ Therefore, the `Attendance` class does not have, for example, a `boolean hasAtte
 It only has a `participationScore` attribute.
 
 ##### Aspect 2: Maintaining immutability and optimising `AttendanceRecord`
-* **Alternative 1 (current choice):** Dynamically updating `AttendanceRecord` whenever there is a change to attendance.
+* **Alternative 1 (current choice):** Updating `AttendanceRecord` whenever there is a change to attendance.
   * Pros:
     * Guarantees immutability.
   * Cons:
@@ -353,7 +352,7 @@ This would mean each `Attendance` is set to a particular value, whenever there i
     * Incurs greater memory use.
 
 Alternative 1 was chosen as we prioritized immutability.
-The main benefit of Alternative 2 is that the entire `Map` object need not be copied every time everytime a user adds/edits/deletes an `Attendance`.
+The main benefit of Alternative 2 is that the entire `Map` object need not be copied everytime a user adds/edits/deletes an `Attendance`.
 However, this would violate immutability of the `Attendance` package.
 So, we have decided to implement Alternative 1.
 
@@ -374,13 +373,13 @@ So, we have decided to implement Alternative 1.
     * More difficult to implement as each `Week` number must be checked to ensure it does not exceed `NumberOfOccurrences` in `Lesson`.
 
 Alternative 1 was chosen as it was easier to check for invalid week numbers.
-To check for invalid week numbers in Alternative 2, additional checks have to be done within the `AttendanceRecordList` class to ensure the week numbers do not exceed the `NumberOfOccurrences`.
+To check for invalid week numbers in Alternative 2, additional checks have to be performed within the `AttendanceRecordList` class to ensure the week numbers do not exceed the `NumberOfOccurrences`.
 
 The sequence diagram below shows how an `Attendance` instance is retrieved.
 
 ![AttendanceRetrievalSequenceDiagram](images/AttendanceRetrievalSequenceDiagram.png)
 
-To avoid implementing add, edit and delete methods in the `Attendance` package, we created utility classes instead to handle these operations.
+To avoid implementing add, edit and delete methods in the `Attendance` package, we created utility classes to handle these operations instead.
 These utility classes are `ModuleClassUtil`, `LessonUtil` and `AttendanceRecordListUtil`.
 
 ### Display Statistics Feature
@@ -392,10 +391,7 @@ taken into account when implementing this feature.
 
 #### Implementation
 
-The display statistics mechanism is facilitated by `StatisticsCommand`. It extends `Command`.
-
-* `DisplayStatisticsCommand#execute()`: Performs a validity check and returns a specific student's statistics if all
- validations passed.
+The display statistics mechanism is facilitated by `StatisticsCommand`. It extends `Command`. The method, `DisplayStatisticsCommand#execute()` performs a validity check and returns a specific student's statistics if all validations pass.
 
 The following class diagram shows the relationship between classes during the execution of a `StatisticsCommand`:
 
@@ -447,7 +443,7 @@ the relevant results without knowing the low level implementations.
 `ModuleClassUtil#getAbsentWeek` to return a `String` representation directly.
   * Pros:
     * Easy, straightforward to implement.
-    * Do not need to iterate through scores and weeks in `StatisticsCommand`.
+    * Does not need to iterate through scores and weeks in `StatisticsCommand`.
   * Cons:
     * `ModuleClassUtil#getParticipationScore` and `ModuleClassUtil#getAbsentWeek` would have too many
        responsibilities. Violates the Single Responsibility Principle.
@@ -460,10 +456,7 @@ This section explains the implementation of the add attendance mechanism and hig
 taken into account when implementing this feature.
 
 #### Implementation
-The add attendance mechanism is facilitated by `AddAttendanceCommand`. It extends `Command`.
-
-* `AddAttendanceCommand#execute()`: Performs a validity check and adds a student's attendance for a particular week's
-  lesson if all validations passed.
+The add attendance mechanism is facilitated by `AddAttendanceCommand`. It extends `Command`. The method, `AddAttendanceCommand#execute()`, performs a validity check and adds a student's attendance for a particular week's lesson if all validations pass.
 
 The following sequence diagram shows the interactions between the `Model` and `Logic` components during the execution
 of an `AddAttendanceCommand` with user input `add-attendance c\1 l\1 s\1` represented by `...`:
@@ -475,7 +468,7 @@ of an `AddAttendanceCommand` with user input `add-attendance c\1 l\1 s\1` repres
    to `TutorsPetParser`.
 1. `TutorsPetParser` encapsulates the `AddAttendanceCommand` object as a `Command` object which is executed by
    the `LogicManager`.
-1. The command execution calls `getFilteredStudentList` and `getFilteredModuleClassList` to get the `targetStudent` and
+1. The command execution calls `getFilteredStudentList()` and `getFilteredModuleClassList()` to get the `targetStudent` and
    `targetModuleClass` respectively using indexes from the user input.
 1. As seen from the diagram above, `ModuleClassUtil#addAttendanceToModuleClass()` is then called. Execution of that
    method returns a new `ModuleClass` object with the new attendance of the `targetStudent` added.
@@ -528,7 +521,7 @@ stored internally as a list of `TutorsPetState`. It also maintains a `statePoint
 
 A `TutorsPetState` object contains a Tutor's Pet state, represented as a `ReadOnlyTutorsPet`, along with a message that describes the changes relevant to this state.
 
-The class diagram below summarizes the relationships between the key classes used for the undo/redo feature: 
+The class diagram below summarizes the relationships between the key classes used for the undo/redo feature:
 
 ![TutorsPetState](images/TutorsPetState.png)
 
@@ -623,7 +616,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ##### Aspect 1: How undo & redo executes
 
-Two possible implementations the undo/redo mechanism were considered.
+Two possible implementations of the undo/redo mechanism were considered.
 
 * **Alternative 1 (current choice):** Save all data stored in Tutor's Pet at a given state.
   * Pros:
@@ -647,7 +640,7 @@ In addition, the immutable property of the data within the application made it s
 
 A key purpose of the undo/redo feature is to prevent the accidental loss of data due to wrongly executed commands.
 
-As such, it was decided that only commands that alter the data in Tutor's Pet would have their state saved, since commands
+As such, it was decided, only commands that alter the data in Tutor's Pet would have their state saved, since commands
 that do not alter the data of Tutor's Pet would not have any data that would be irrecoverable from an earlier state.
 
 ### Command Recall Feature
@@ -694,7 +687,7 @@ This makes it easier to identify when the current text should be cached.
 
 When the user presses the <kbd>↑</kbd> key, a check is performed to determine if there is a next available command to recall.
 If there is a previous command available, `CommandHistory` next checks if the `pointer` is currently pointing to an entry in its list.
-If the `pointer` is not currently pointing to an entry in the list, i.e. it is in its default position,
+If the `pointer` is not currently pointing to an entry in the list, i.e. in its default position,
 the current text in the command box is stored in the cache.
 
 ![CommandRecallStoresCache](images/CommandRecallStoresCache.png)
@@ -743,7 +736,7 @@ Two possible behaviours were considered when designing the recall command featur
   * Cons:
     * The user looses any partially typed commands.
 
-Alternative 1 was chosen as it followed the behaviour of common tools, such as the unix terminal and Windows Command Prompt,
+Alternative 1 was chosen as it followed the behaviour of common tools, such as the Unix Shell and Windows Command Prompt,
 that our target users were familiar with.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -934,8 +927,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  User requests to list students.
 2.  Tutor's Pet shows a list of students.
 3.  User requests to delete a specific student in the list.
-4.  Tutor's Pet removes the student from its associated class.
-5.  Tutor's Pet deletes the student.
+4.  Tutor's Pet deletes the student.
 
     Use case ends.
 
@@ -951,18 +943,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-* 4a. The student is not in a class.
+* 3b. The student is associated to class(es).
 
-  Use case skips to step 5.
+    * 3b1. Tutor's Pet removes the student from the associated class(es).
+
+      Use case resumes at step 4.
 
 **Use case: UC06 - Clear all students**
 
 **MSS**
 
 1. User requests to clear all students.
-2. Tutor's Pet clears all students.
+2. Tutor's Pet deletes all students.
 
     Use case ends.
+
+**Extensions**
+
+* 1a. Some or all students are associated to class(es).
+
+    * 1a1. Tutor's Pet removes all student entries in all class(es)
+
+      Use case resumes at step 2.
 
 **Use case: UC07 - Add a class**
 
@@ -1345,9 +1347,10 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the jar file and copy into an empty folder.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Double-click the jar file. \
+   Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
@@ -1363,7 +1366,7 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all students and classes using the `list` command.
       There exists at least one class in the displayed class list.
 
-   1. Test case: `delete-class 1` followed by `undo`
+   1. Test case: `delete-class 1` followed by `undo`. \
       Expected: The first class is deleted after the first command.
       The deleted class reappears in the displayed class list after the second command.
       Details of the `delete` change shown in the status message.
@@ -1372,10 +1375,10 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: No commands executed beforehand since application launch.
 
-   1. Test case: `list` followed by `undo`
+   1. Test case: `list` followed by `undo`. \
       Expected: No change is undone. Error details shown in the status message.
 
-   1. Test case: `undo`
+   1. Test case: `undo`. \
       Expected: No change is undone. Error details shown in the status message.
 
 #### Redoing previously undone commands
@@ -1385,7 +1388,7 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all students and classes using the `list` command.
       There exists at least one class in the displayed class list.
 
-   1. Test case: `delete-class 1` followed by `undo` then `redo`
+   1. Test case: `delete-class 1` followed by `undo` then `redo`. \
       Expected: The first class is deleted after the first command.
       The deleted class reappears in the displayed class list after the second command.
       The first class is deleted again after the third command.
@@ -1395,7 +1398,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: No commands executed beforehand since application launch.
 
-   1. Test case: `redo`
+   1. Test case: `redo`. \
       Expected: No change is redone. Error details shown in the status message.
 
 #### Viewing change history
@@ -1405,15 +1408,15 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: No commands executed beforehand since application launch.
       There exists at least one class in the displayed class list.
 
-   1. Test case: `view-history`
+   1. Test case: `view-history`. \
       Expected: A single entry with the description: "Loaded save data." appears.
 
-   1. Test case: `delete-class 1` followed by `view-history`
+   1. Test case: `delete-class 1` followed by `view-history`. \
       Expected: Two entries are shown in the status message.
       The first being a brief description of the delete class action with the `>` indicator beside it.
       The second being the "Loaded save data." entry.
 
-   1. Test case: `delete-class 1` followed by `undo` and then `view-history`
+   1. Test case: `delete-class 1` followed by `undo` and then `view-history`. \
       Expected: Two entries are shown in the status message.
       The first being a brief description of the delete class action.
       The second being the "Loaded save data." entry with the `>` indicator beside it.
@@ -1427,11 +1430,11 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `list` followed by pressing the <kbd>↑</kbd> key.
       Expected: `list` appears in the command box.
 
-   1. Test case: `list` followed by `list-student` followed by pressing the <kbd>↑</kbd> key twice.
+   1. Test case: `list` followed by `list-student` followed by pressing the <kbd>↑</kbd> key twice. \
       Expected: `list-student` appears in the command box after the first key press.
       `list` appears in the command box after the second key press.
 
-   1. Test case: `list` followed by typing `delete-student 1` without execution, then pressing the <kbd>↑</kbd> and then <kbd>↓</kbd> key.
+   1. Test case: `list` followed by typing `delete-student 1` without execution, then pressing the <kbd>↑</kbd> and then <kbd>↓</kbd> key. \
       Expected: `list` appears after the <kbd>↑</kbd> key press.
       `delete-student 1` restored after the <kbd>↓</kbd> key press.
 
@@ -1439,16 +1442,16 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: No commands executed beforehand since application launch.
 
-   1. Test case: Press the <kbd>↑</kbd> key.
+   1. Test case: Press the <kbd>↑</kbd> key. \
       Expected: No change to the command box text. No status message shown.
 
-   1. Test case: Press the <kbd>↓</kbd> key.
+   1. Test case: Press the <kbd>↓</kbd> key. \
       Expected: No change to the command box text. No status message shown.
 
-   1. Test case: Type `delete-student 1` without executing and press the <kbd>↑</kbd> key.
+   1. Test case: Type `delete-student 1` without executing and press the <kbd>↑</kbd> key. \
       Expected: No change to the command box text. No status message shown.
 
-   1. Test case: Type `delete-student 1` without executing and press the <kbd>↓</kbd> key.
+   1. Test case: Type `delete-student 1` without executing and press the <kbd>↓</kbd> key. \
       Expected: No change to the command box text. No status message shown.
 
 #### Saving data
@@ -1456,10 +1459,10 @@ testers are expected to do more *exploratory* testing.
 1. Dealing with missing/corrupted data files
 
    1. Prerequisites: There exists a data file.
-   
+
    1. Test case: Delete the data file and launch the application.<br/>
       Expected: The application launches with sample data.
-      
+
    2. Test case: Modify the data file by removing a field in a json object.<br/>
       Expected: The application launches with no data.
 
@@ -1477,9 +1480,7 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `add-student n\Eddie Davis t\davis_ed e\eddie@basie.com` \
      Expected: The student with the fields entered should be added into the displayed student list. There should be no tags rendered.
 
-   1. Other incorrect commands to try:
-      * `add-student`
-      * `add-student n\Hendrix`
+   1. Other incorrect commands to try: `add-student`, `add-student n\Ahmed Jamal` \
       Expected: No student is added. Error details shown in the status message.
 
 #### Editing a student
@@ -1494,9 +1495,7 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `edit-student 2 tag\` \
       Expected: All tags of the second student are deleted.
 
-   1. Other incorrect commands to try:
-      * `edit-student`
-      * `edit-student 0 n\Fiona Orange`
+   1. Other incorrect commands to try: `edit-student`, `edit-student 0 n\Fiona Orange` \
       Expected: No student is edited. Error details shown in the status message.
 
 #### Deleting a student
@@ -1512,7 +1511,7 @@ testers are expected to do more *exploratory* testing.
       Expected: No student is deleted. Error details shown in the status message.
 
    1. Other incorrect delete commands to try: `delete-student`, `delete-student x` (where x is larger than the
-      size of student list)<br>
+      size of student list) <br />
       Expected: No student is deleted. Error details shown in the status message.
 
 #### Finding a student
@@ -1527,8 +1526,7 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `find-student alex yu` \
       Expected: All students whose name contains `alex` or `yu` (case-insensitive) should be displayed.
 
-   1. Other incorrect commands to try:
-      * `find-student`. \
+   1. Other incorrect commands to try: `find-student`. \
       Expected: The displayed student list does not get updated. Error details shown in the status message.
 
 ### Managing Classes
@@ -1539,16 +1537,16 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: A class named ST2334 does not exist in Tutor's Pet.
 
-   1. Test case: `add-class n\ST2334`
+   1. Test case: `add-class n\ST2334` \
       Expected: Class `ST2334` is successfully added into the displayed class list.
 
-   1. Test case: `add-class 1 n\ST2334`
+   1. Test case: `add-class 1 n\ST2334` \
       Expected: No class is added. Error details shown in the status message.
 
-   1. Test case: `add-class n\ST2334 @ 1200`
+   1. Test case: `add-class n\ST2334 @ 1200` \
       Expected: No class is added. Error details shown in the status message.
 
-   1. Other incorrect add commands to try: `add-class`, `add-class n\`
+   1. Other incorrect add commands to try: `add-class`, `add-class n\` \
       Expected: No class is added. Error details shown in the status message.
 
 1. Adding an existing class
@@ -1634,14 +1632,14 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all students and classes using the `list` command. Uses default tutor's pet data.
 
-   1. Test case: `link c\1 s\4`
+   1. Test case: `link c\1 s\4` \
       Expected: Student added to class. Details of added student and class shown in status message.
       Class list filters to show only the involved class. Student list filters to show only students of the class.
 
-   1. Test case: `link c\1 s\1`
+   1. Test case: `link c\1 s\1` \
       Expected: No student is added to any class. Error details shown in status message.
 
-   1. Other incorrect link commands to try: `link c\1`, `link s\1`, `link c\0 s\0`
+   1. Other incorrect link commands to try: `link c\1`, `link s\1`, `link c\0 s\0` \
       Expected: No student is added to any class. Error details shown in status message.
 
 #### Removing a student from a class
@@ -1650,14 +1648,14 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all students and classes using the `list` command. Uses default tutor's pet data.
 
-   1. Test case: `unlink c\1 s\1`
+   1. Test case: `unlink c\1 s\1` \
       Expected: Student removed from class. Details of removed student and class shown in status message.
       Class list filters to show only the involved class. Student list filters to show only remaining students of the class.
 
-   1. Test case: `unlink c\1 s\4`
+   1. Test case: `unlink c\1 s\4` \
       Expected: No student is removed from any class. Error details shown in status message.
 
-   1. Other incorrect unlink commands to try: `unlink c\1`, `unlink s\1`, `unlink c\0 s\0`
+   1. Other incorrect unlink commands to try: `unlink c\1`, `unlink s\1`, `unlink c\0 s\0` \
       Expected: No student is removed from any class. Error details shown in status message.
 
 ### Managing Lessons
@@ -1685,14 +1683,13 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all classes using the `list-class` command.
       The first class contains at least two lessons.
 
-   1. Test case: `edit-lesson c\1 l\1 d\sunday et\23:00` <br>
-      Expected: The day and end time of the first lesson in the first class will be changed to Sunday and 23:00 respectively.
+   1. Test case: `edit-lesson c\1 l\1 d\sunday et\x` (where x is a time later than the lesson's start time) <br>
+      Expected: The day and end time of the first lesson in the first class will be changed to Sunday and x respectively.
 
-   1. Test case: `edit-lesson c\1 l\1 st\01:00` <br>
-      Expected: The start time of the second lesson in the first class will be changed to 01:00.
+   1. Test case: `edit-lesson c\1 l\2 st\x` (where x is a time earlier than the lesson's end time) <br>
+      Expected: The start time of the second lesson in the first class will be changed to x.
 
-   1. Other incorrect edit commands to try: `edit-lesson c\0 l\3`, `edit-lesson c\1 l\10000`,
-      `edit-lesson c\1 l\1 st\13:00 et\11:00` <br>
+   1. Other incorrect edit commands to try: `edit-lesson c\0 l\3`, `edit-lesson c\1 l\1 st\13:00 et\11:00`, `edit-lesson c\1 l\x` (where x is larger than the total number of lessons in the class)<br>
       Expected: No lesson is edited. Error details shown in the status message.
 
 #### Deleting a lesson

@@ -181,6 +181,7 @@ public class EditAttendanceCommandTest {
 
         Model expectedModel = new ModelManager(new TutorsPet(model.getTutorsPet()), new UserPrefs());
         expectedModel.updateFilteredStudentList(s -> s.equals(studentInFilteredList));
+        expectedModel.updateFilteredModuleClassList(c -> c.equals(moduleClassInFilteredList));
         expectedModel.setModuleClass(moduleClassInFilteredList, editedModuleClass);
         expectedModel.commit(commitMessage);
 

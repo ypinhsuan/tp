@@ -21,7 +21,9 @@ package Components <<Rectangle>> {
     }
 }
 
-class Lesson
+package Lesson <<Rectangle>> {
+    class Lesson
+}
 
 ModuleClass *-down->"1" Name
 ModuleClass *-down->"*" Lesson
