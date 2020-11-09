@@ -7,7 +7,7 @@ skinparam classBackgroundColor LOGIC_COLOR
 package Logic {
 
 package Parser {
-Interface Parser <<Interface>>
+Interface Parser <<interface>>
 Class TutorsPetParser
 Class XYZCommandParser
 Class CliSyntax
@@ -23,7 +23,7 @@ Class CommandResult
 Class "{abstract}\nCommand" as Command
 }
 
-Interface Logic <<Interface>>
+Interface Logic <<interface>>
 Class LogicManager
 }
 

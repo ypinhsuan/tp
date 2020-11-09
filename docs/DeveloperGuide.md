@@ -1477,9 +1477,7 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `add-student n\Eddie Davis t\davis_ed e\eddie@basie.com` \
      Expected: The student with the fields entered should be added into the displayed student list. There should be no tags rendered.
 
-   1. Other incorrect commands to try:
-      * `add-student`
-      * `add-student n\Hendrix`
+   1. Other incorrect commands to try: `add-student`, `add-student n\Hendrix` \
       Expected: No student is added. Error details shown in the status message.
 
 #### Editing a student
@@ -1494,9 +1492,7 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `edit-student 2 tag\` \
       Expected: All tags of the second student are deleted.
 
-   1. Other incorrect commands to try:
-      * `edit-student`
-      * `edit-student 0 n\Fiona Orange`
+   1. Other incorrect commands to try: `edit-student`, `edit-student 0 n\Fiona Orange` \
       Expected: No student is edited. Error details shown in the status message.
 
 #### Deleting a student
@@ -1527,8 +1523,7 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `find-student alex yu` \
       Expected: All students whose name contains `alex` or `yu` (case-insensitive) should be displayed.
 
-   1. Other incorrect commands to try:
-      * `find-student`. \
+   1. Other incorrect commands to try: `find-student`. \
       Expected: The displayed student list does not get updated. Error details shown in the status message.
 
 ### Managing Classes
@@ -1685,14 +1680,13 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all classes using the `list-class` command.
       The first class contains at least two lessons.
 
-   1. Test case: `edit-lesson c\1 l\1 d\sunday et\23:00` <br>
-      Expected: The day and end time of the first lesson in the first class will be changed to Sunday and 23:00 respectively.
+   1. Test case: `edit-lesson c\1 l\1 d\sunday et\x` (where x is a time later than the lesson's start time) <br>
+      Expected: The day and end time of the first lesson in the first class will be changed to Sunday and x respectively.
 
-   1. Test case: `edit-lesson c\1 l\1 st\01:00` <br>
-      Expected: The start time of the second lesson in the first class will be changed to 01:00.
+   1. Test case: `edit-lesson c\1 l\2 st\x` (where x is a time earlier than the lesson's end time) <br>
+      Expected: The start time of the second lesson in the first class will be changed to x.
 
-   1. Other incorrect edit commands to try: `edit-lesson c\0 l\3`, `edit-lesson c\1 l\10000`,
-      `edit-lesson c\1 l\1 st\13:00 et\11:00` <br>
+   1. Other incorrect edit commands to try: `edit-lesson c\0 l\3`, `edit-lesson c\1 l\1 st\13:00 et\11:00`, `edit-lesson c\1 l\x` (where x is larger than the total number of lessons in the class)<br>
       Expected: No lesson is edited. Error details shown in the status message.
 
 #### Deleting a lesson

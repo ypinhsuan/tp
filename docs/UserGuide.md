@@ -386,10 +386,11 @@ There is no need for you to save manually.
 If you would like to add a student to Tutor's Pet, use this command.
 
 **Format**: `add-student n\NAME t\TELEGRAM_USERNAME e\EMAIL [tag\TAG]…​`
+  * Adds a student with the specified `NAME` + `TELEGRAM_USERNAME` + `EMAIL` + `TAG`. 
 
 For example:
 1. You would like to add a new student, `Joel Lee` to Tutor's Pet.
-   Type in `add-student n\Joel Lee t\joeleee e\jlee@example.com`
+   Type in `add-student n\Joel Lee t\joeleee e\jlee@example.com` and press <kbd>Enter</kbd>.
 
     ![AddStudentBefore](images/ugimages/AddStudentBefore.png)
 
@@ -418,6 +419,7 @@ If you would like to view all students you teach, use this command.
 If you would like to change a student's particulars, use this command.
 
 **Format**: `edit-student STUDENT_INDEX [n\NAME] [t\TELEGRAM_USERNAME] [e\EMAIL] [tag\TAG]…​`
+  * Edits the student at the specified `STUDENT_INDEX`.
 
 For example:
 1. `Charlotte Oliveiro` gave you the wrong email address on the first day of class. You need to replace her email address.
@@ -487,6 +489,7 @@ You want to email him these notes.
 If you would like to delete a student, you can make use of this command.
 
 **Format**: `delete-student STUDENT_INDEX`
+  * Deletes the student at the specified `STUDENT_INDEX`.
 
 For example:
 1. `Bernice`, the 2nd student displayed in Tutor's Pet, has swapped `CS2103T Tutorial` slots and you no longer teach her.
@@ -792,6 +795,7 @@ For example:
 If you entered wrong details pertaining to your lesson and would like to change it, you can make use of this command.
 
 **Format**: `edit-lesson c\CLASS_INDEX l\LESSON_INDEX [d\DAY] [st\START_TIME] [et\END_TIME] [v\VENUE]`
+  * Edits the lesson at the specified `CLASS_INDEX` + `LESSON_INDEX`.
 
 For example:
 1. You made an error while entering the `CS2103T Tutorial` lesson. It should be `Tuesday` and not `Thursday`.
