@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static tutorspet.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_CLASS_INDEX;
 import static tutorspet.logic.parser.CliSyntax.PREFIX_STUDENT_INDEX;
+import static tutorspet.logic.parser.ParserUtil.arePrefixesPresent;
 
 import tutorspet.commons.core.index.Index;
 import tutorspet.logic.commands.UnlinkCommand;
@@ -29,9 +30,8 @@ public class UnlinkCommandParser implements Parser<UnlinkCommand> {
         Index studentIndex;
         Index moduleClassIndex;
 
-        boolean isStudentIndexPresent = argMultimap.getValue(PREFIX_STUDENT_INDEX).isPresent();
-        boolean isModuleClassIndexPresent = argMultimap.getValue(PREFIX_CLASS_INDEX).isPresent();
-        if (!isStudentIndexPresent || !isModuleClassIndexPresent) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_STUDENT_INDEX, PREFIX_CLASS_INDEX)
+                || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnlinkCommand.MESSAGE_USAGE));
         }
 
